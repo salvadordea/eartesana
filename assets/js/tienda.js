@@ -697,15 +697,17 @@ class EstudioArtesanaTienda {
         
         let html = '';
         this.categories.forEach(category => {
-            const image = category.image ? category.image.src : 'assets/images/category-placeholder.jpg';
-            const description = category.description || `Explora nuestra colección de ${category.name.toLowerCase()}`;
+            // Use Cloudinary image system
+            const imageData = window.CategoryImages ? 
+                window.CategoryImages.getCategoryImage(category.slug, category) : 
+                { url: 'assets/images/category-placeholder.jpg', alt: category.name };
             
             html += `
                 <div class="category-card" data-category-id="${category.id}" data-category-slug="${category.slug}">
                     <div class="category-image">
-                        <img src="${image}" alt="${category.name}" loading="lazy">
+                        <img src="${imageData.url}" alt="${imageData.alt}" loading="lazy" onerror="this.src='${imageData.fallback}'">
                         <div class="category-overlay">
-                            <a href="../tienda/index.html?categoria=${category.slug}" class="category-button"></a>
+                            <a href="index.html?categoria=${category.slug}" class="category-button"></a>
                         </div>
                     </div>
                     <div class="category-info">
@@ -730,7 +732,7 @@ class EstudioArtesanaTienda {
             card.addEventListener('click', (e) => {
                 if (!e.target.closest('.category-button')) {
                     const categorySlug = card.dataset.categorySlug;
-                    window.location.href = `../tienda/index.html?categoria=${categorySlug}`;
+                    window.location.href = `index.html?categoria=${categorySlug}`;
                 }
             });
         });
