@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug WooCommerce - Estudio Artesana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .debug-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 WooCommerce API Debug - Estudio Artesana</h1>
+    
+    <div class="debug-container">
+        <h2>📋 Configuración</h2>
+        <div id="config-status"></div>
+        <pre id="config-data"></pre>
+    </div>
+
+    <div class="debug-container">
+        <h2>🧪 Pruebas de Conexión</h2>
+        <button onclick="testConnection()">🔗 Probar Conexión</button>
+        <button onclick="testCategories()">📦 Probar Categorías</button>
+        <button onclick="testProducts()">🛍️ Probar Productos</button>
+        <div id="test-results"></div>
+    </div>
+
+    <div class="debug-container">
+        <h2>📊 Resultados</h2>
+        <div id="results"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/woocommerce-api.js"></script>
+
+    <script>
+        // Initialize API
+        let api;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            displayConfig();
+            initializeAPI();
+        });
+
+        function displayConfig() {
+            const configStatus = document.getElementById('config-status');
+            const configData = document.getElementById('config-data');
+            
+            if (typeof EstudioArtesanaConfig !== 'undefined' && EstudioArtesanaConfig.woocommerce) {
+                configStatus.innerHTML = '<div class="status success">✅ Configuración cargada correctamente</div>';
+                
+                // Mask sensitive data
+                const config = { ...EstudioArtesanaConfig.woocommerce };
+                config.consumerKey = config.consumerKey ? config.consumerKey.substr(0, 8) + '...' : 'No configurado';
+                config.consumerSecret = config.consumerSecret ? config.consumerSecret.substr(0, 8) + '...' : 'No configurado';
+                
+                configData.textContent = JSON.stringify(config, null, 2);
+            } else {
+                configStatus.innerHTML = '<div class="status error">❌ Error: Configuración no encontrada</div>';
+            }
+        }
+
+        function initializeAPI() {
+            try {
+                if (EstudioArtesanaConfig && EstudioArtesanaConfig.woocommerce) {
+                    const config = EstudioArtesanaConfig.woocommerce;
+                    api = new WooCommerceAPI({
+                        baseURL: config.baseURL,
+                        apiPath: '/wp-json/wc/v3'
+                    });
+                    api.setCredentials(config.consumerKey, config.consumerSecret);
+                    
+                    document.getElementById('config-status').innerHTML += 
+                        '<div class="status success">✅ API inicializada correctamente</div>';
+                } else {
+                    throw new Error('Configuración WooCommerce no encontrada');
+                }
+            } catch (error) {
+                document.getElementById('config-status').innerHTML += 
+                    `<div class="status error">❌ Error inicializando API: ${error.message}</div>`;
+            }
+        }
+
+        async function testConnection() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '<div class="status info">🔄 Probando conexión...</div>';
+            
+            try {
+                // Test basic connection
+                const url = `${EstudioArtesanaConfig.woocommerce.baseURL}/wp-json/wc/v3/products`;
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Basic ${btoa(EstudioArtesanaConfig.woocommerce.consumerKey + ':' + EstudioArtesanaConfig.woocommerce.consumerSecret)}`
+                    }
+                });
+                
+                if (response.ok) {
+                    results.innerHTML = '<div class="status success">✅ Conexión exitosa!</div>';
+                } else {
+                    results.innerHTML = `<div class="status error">❌ Error de conexión: ${response.status} - ${response.statusText}</div>`;
+                }
+            } catch (error) {
+                results.innerHTML = `<div class="status error">❌ Error de red: ${error.message}</div>`;
+            }
+        }
+
+        async function testCategories() {
+            const results = document.getElementById('results');
+            results.innerHTML = '<div class="status info">🔄 Cargando categorías...</div>';
+            
+            try {
+                const categories = await api.getCategories();
+                results.innerHTML = `
+                    <div class="status success">✅ ${categories.length} categorías cargadas</div>
+                    <pre>${JSON.stringify(categories.slice(0, 3), null, 2)}</pre>
+                `;
+            } catch (error) {
+                results.innerHTML = `<div class="status error">❌ Error cargando categorías: ${error.message}</div>`;
+            }
+        }
+
+        async function testProducts() {
+            const results = document.getElementById('results');
+            results.innerHTML = '<div class="status info">🔄 Cargando productos...</div>';
+            
+            try {
+                const products = await api.getProducts({ per_page: 5 });
+                results.innerHTML = `
+                    <div class="status success">✅ ${products.length} productos cargados</div>
+                    <pre>${JSON.stringify(products.map(p => ({
+                        id: p.id,
+                        name: p.name,
+                        price: p.price,
+                        status: p.status
+                    })), null, 2)}</pre>
+                `;
+            } catch (error) {
+                results.innerHTML = `<div class="status error">❌ Error cargando productos: ${error.message}</div>`;
+            }
+        }
+
+        // Auto-test on load
+        setTimeout(() => {
+            if (api) {
+                testConnection();
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
