@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio Artesana - Legado ancestral transformado en diseño</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <img src="assets/images/logo.png" alt="Estudio Artesana" class="logo-img">
+                    <span class="logo-text">ESTUDIO ARTESANA</span>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#inicio" class="nav-link active">INICIO</a></li>
+                        <li class="nav-item">
+                            <a href="pages/tienda/index.html" class="nav-link">TIENDA</a>
+                            <i class="fas fa-chevron-down nav-arrow"></i>
+                        </li>
+                        <li class="nav-item"><a href="#nosotros" class="nav-link">SOBRE NOSOTROS</a></li>
+                        <li class="nav-item"><a href="#mayoristas" class="nav-link">MAYORISTAS</a></li>
+                        <li class="nav-item"><a href="#contacto" class="nav-link">CONTACTO</a></li>
+                        <li class="nav-item"><a href="#registro" class="nav-link">REGISTRO DE CLIENTES</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Header Icons -->
+                <div class="header-icons">
+                    <a href="#carrito" class="header-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <button class="search-toggle header-icon">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-left">
+                <div class="hero-image">
+                    <img src="assets/images/hero-bag.jpg" alt="Bolsa artesanal" class="hero-product">
+                </div>
+            </div>
+            
+            <div class="hero-right">
+                <div class="hero-brand">
+                    <div class="hero-logo" id="heroLogoContainer">
+                        <!-- Logo will be loaded dynamically -->
+                        <img src="assets/images/logo-white.png" alt="Estudio Artesana" class="hero-logo-img" id="heroLogoImg">
+                    </div>
+                    <h1 class="hero-title">ESTUDIO ARTESANA</h1>
+                    <p class="hero-tagline">Legado ancestral transformado en diseño</p>
+                </div>
+                
+                <div class="hero-carousel">
+                    <div class="carousel-container">
+                        <div class="carousel-track">
+                            <div class="carousel-slide active">
+                                <img src="assets/images/product-1.jpg" alt="Producto artesanal 1">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/images/product-2.jpg" alt="Producto artesanal 2">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/images/product-3.jpg" alt="Producto artesanal 3">
+                            </div>
+                        </div>
+                        <div class="carousel-dots">
+                            <button class="carousel-dot active" data-slide="0"></button>
+                            <button class="carousel-dot" data-slide="1"></button>
+                            <button class="carousel-dot" data-slide="2"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotional Banner -->
+    <section class="promo-banner" id="promoBanner">
+        <div class="container">
+            <div class="promo-content">
+                <div class="promo-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="promo-info">
+                    <h2 class="promo-title" id="promoTitle">¡OFERTA ESPECIAL!</h2>
+                    <p class="promo-description" id="promoDescription">20% de descuento en tu primera compra</p>
+                    <div class="promo-details">
+                        <span class="promo-code" id="promoCode">Código: PRIMERA20</span>
+                        <span class="promo-expiry" id="promoExpiry">Válido hasta fin de mes</span>
+                    </div>
+                </div>
+                <div class="promo-cta">
+                    <a href="pages/tienda/index.html" class="promo-btn" id="promoBtn">¡Compra Ahora!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nuestras Categorías</h2>
+                <p class="section-description">Descubre nuestra amplia gama de productos artesanales únicos</p>
+            </div>
+            
+            <!-- Loading State -->
+            <div class="categories-loading" id="homeCategoriesLoading">
+                <div class="loading-spinner"></div>
+                <p>Cargando categorías...</p>
+            </div>
+
+            <!-- Categories Grid -->
+            <div class="home-categories-grid" id="homeCategoriesGrid">
+                <!-- Categories will be inserted here dynamically -->
+            </div>
+
+            <!-- View All Categories Button -->
+            <div class="section-footer">
+                <a href="pages/categorias/index.html" class="view-all-btn">
+                    Ver todas las categorías
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>Email: info@estudioartesana.com</p>
+                    <p>Teléfono: +52 123 456 7890</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Estudio Artesana. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WooCommerce API Scripts -->
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/woocommerce-api.js"></script>
+    
+    <!-- Logo Management -->
+    <script src="assets/js/logo-manager.js"></script>
+    
+    <!-- Categories System -->
+    <script src="assets/js/home-categories.js"></script>
+    <script src="assets/js/categories-preloader.js"></script>
+    
+    <!-- Promotional System -->
+    <script src="assets/js/promo-manager.js"></script>
+    
+    <!-- Dynamic Carousel System -->
+    <script src="assets/js/dynamic-carousel.js"></script>
+    
+    <!-- Main Site JavaScript -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
