@@ -1,0 +1,16 @@
+# Documentación
+README.md
+*.md
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Archivos de desarrollo
+config.js
+test-api.html
+
+# Archivos temporales
+*.tmp
+*.log
