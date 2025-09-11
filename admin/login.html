@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Estudio Artesana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .login-header {
+            margin-bottom: 30px;
+        }
+
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+        }
+
+        .login-title {
+            color: #2c2c2c;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .login-subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .login-form {
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c2c2c;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .loading {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .loading.active {
+            display: flex;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #D4AF37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .forgot-password {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .forgot-password a {
+            color: #D4AF37;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="login-logo">
+                <i class="fas fa-palette"></i>
+            </div>
+            <h1 class="login-title">Admin Panel</h1>
+            <p class="login-subtitle">Estudio Artesana</p>
+        </div>
+
+        <div id="alert-container"></div>
+
+        <form class="login-form" id="loginForm">
+            <div class="form-group">
+                <label class="form-label" for="username">Usuario</label>
+                <input type="text" class="form-control" id="username" name="username" required autocomplete="username">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="password">Contraseña</label>
+                <input type="password" class="form-control" id="password" name="password" required autocomplete="current-password">
+            </div>
+
+            <button type="submit" class="btn" id="loginBtn">
+                <span id="loginText">Iniciar Sesión</span>
+                <div class="loading" id="loginLoading">
+                    <div class="spinner"></div>
+                    <span>Verificando...</span>
+                </div>
+            </button>
+        </form>
+
+        <div class="forgot-password">
+            <a href="https://estudioartesana.com/wp-admin/admin.php?action=lostpassword" target="_blank">
+                ¿Olvidaste tu contraseña?
+            </a>
+        </div>
+    </div>
+
+    <script src="../assets/js/config.js"></script>
+    <script>
+        class AdminAuth {
+            constructor() {
+                this.wpBaseURL = EstudioArtesanaConfig.woocommerce.baseURL;
+                this.init();
+            }
+
+            init() {
+                // Check if already logged in
+                if (this.isLoggedIn()) {
+                    window.location.href = 'index.html';
+                    return;
+                }
+
+                document.getElementById('loginForm').addEventListener('submit', (e) => this.handleLogin(e));
+            }
+
+            async handleLogin(event) {
+                event.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (!username || !password) {
+                    this.showAlert('Por favor ingresa usuario y contraseña', 'danger');
+                    return;
+                }
+
+                this.setLoading(true);
+
+                try {
+                    const success = await this.authenticateWithWordPress(username, password);
+                    
+                    if (success) {
+                        this.showAlert('¡Login exitoso! Redirigiendo...', 'success');
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 1500);
+                    } else {
+                        this.showAlert('Usuario o contraseña incorrectos', 'danger');
+                    }
+                } catch (error) {
+                    console.error('Login error:', error);
+                    this.showAlert('Error de conexión. Verifica tu internet.', 'danger');
+                } finally {
+                    this.setLoading(false);
+                }
+            }
+
+            async authenticateWithWordPress(username, password) {
+                try {
+                    // Método 1: Intentar con JWT Auth (si está instalado)
+                    try {
+                        const jwtResponse = await fetch(`${this.wpBaseURL}/wp-json/jwt-auth/v1/token`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                username: username,
+                                password: password
+                            })
+                        });
+
+                        if (jwtResponse.ok) {
+                            const data = await jwtResponse.json();
+                            this.saveSession(data);
+                            return true;
+                        }
+                    } catch (jwtError) {
+                        console.log('JWT not available, trying alternative method');
+                    }
+
+                    // Método 2: Verificación básica con WP REST API
+                    const basicAuth = btoa(username + ':' + password);
+                    const response = await fetch(`${this.wpBaseURL}/wp-json/wp/v2/users/me`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Basic ${basicAuth}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        const userData = await response.json();
+                        
+                        // Verificar que el usuario tenga permisos de administración
+                        if (userData.capabilities && 
+                            (userData.capabilities.manage_options || 
+                             userData.capabilities.edit_posts ||
+                             userData.roles?.includes('administrator') ||
+                             userData.roles?.includes('editor'))) {
+                            
+                            this.saveSession({
+                                token: basicAuth,
+                                user: userData,
+                                method: 'basic'
+                            });
+                            return true;
+                        } else {
+                            this.showAlert('No tienes permisos de administrador', 'danger');
+                            return false;
+                        }
+                    }
+
+                    return false;
+
+                } catch (error) {
+                    console.error('Authentication error:', error);
+                    throw error;
+                }
+            }
+
+            saveSession(data) {
+                const session = {
+                    token: data.token,
+                    user: data.user || { username: data.user_display_name },
+                    method: data.method || 'jwt',
+                    timestamp: Date.now(),
+                    expires: Date.now() + (24 * 60 * 60 * 1000) // 24 horas
+                };
+
+                localStorage.setItem('adminSession', JSON.stringify(session));
+            }
+
+            isLoggedIn() {
+                const session = localStorage.getItem('adminSession');
+                if (!session) return false;
+
+                try {
+                    const data = JSON.parse(session);
+                    return data.expires > Date.now();
+                } catch {
+                    return false;
+                }
+            }
+
+            setLoading(loading) {
+                const btn = document.getElementById('loginBtn');
+                const text = document.getElementById('loginText');
+                const spinner = document.getElementById('loginLoading');
+                
+                btn.disabled = loading;
+                text.style.display = loading ? 'none' : 'inline';
+                spinner.classList.toggle('active', loading);
+            }
+
+            showAlert(message, type) {
+                const container = document.getElementById('alert-container');
+                container.innerHTML = `
+                    <div class="alert alert-${type}">
+                        ${message}
+                    </div>
+                `;
+
+                setTimeout(() => {
+                    container.innerHTML = '';
+                }, 5000);
+            }
+        }
+
+        // Initialize admin auth
+        new AdminAuth();
+    </script>
+</body>
+</html>
