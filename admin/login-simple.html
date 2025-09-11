@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login Simple - Estudio Artesana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .login-header {
+            margin-bottom: 30px;
+        }
+
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+        }
+
+        .login-title {
+            color: #2c2c2c;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .login-subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .login-form {
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c2c2c;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            margin-bottom: 0;
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(108, 117, 125, 0.4);
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .debug-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .debug-info h4 {
+            margin-bottom: 10px;
+            color: #495057;
+        }
+
+        .loading {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .loading.active {
+            display: flex;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #D4AF37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="login-logo">
+                <i class="fas fa-tools"></i>
+            </div>
+            <h1 class="login-title">Admin Panel</h1>
+            <p class="login-subtitle">Acceso Simplificado</p>
+        </div>
+
+        <div id="alert-container"></div>
+
+        <!-- Debug Info -->
+        <div class="debug-info">
+            <h4>🔍 Estado de la Conexión</h4>
+            <div id="debugStatus">Verificando...</div>
+        </div>
+
+        <form class="login-form" id="loginForm">
+            <div class="form-group">
+                <label class="form-label" for="username">Usuario WordPress</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="password">Contraseña</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btn" id="loginBtn">
+                <span id="loginText">Iniciar Sesión</span>
+                <div class="loading" id="loginLoading">
+                    <div class="spinner"></div>
+                    <span>Conectando...</span>
+                </div>
+            </button>
+
+            <button type="button" class="btn btn-secondary" onclick="bypassLogin()">
+                🚀 Acceso Temporal (Solo para pruebas)
+            </button>
+        </form>
+
+        <div style="margin-top: 20px; font-size: 12px; color: #666;">
+            <strong>Problemas de conexión:</strong><br>
+            • Verifica que WordPress REST API esté habilitado<br>
+            • Asegúrate de tener permisos de administrador<br>
+            • Revisa la consola del navegador (F12) para errores
+        </div>
+    </div>
+
+    <script src="../assets/js/config.js"></script>
+    <script>
+        class SimpleAdminAuth {
+            constructor() {
+                this.wpBaseURL = EstudioArtesanaConfig.woocommerce.baseURL;
+                this.init();
+            }
+
+            init() {
+                // Check if already logged in
+                if (this.isLoggedIn()) {
+                    window.location.href = 'index.html';
+                    return;
+                }
+
+                this.checkWordPressAPI();
+                document.getElementById('loginForm').addEventListener('submit', (e) => this.handleLogin(e));
+            }
+
+            async checkWordPressAPI() {
+                const debugStatus = document.getElementById('debugStatus');
+                
+                try {
+                    // Test 1: Basic WordPress REST API
+                    const response = await fetch(`${this.wpBaseURL}/wp-json/wp/v2/`, {
+                        method: 'GET',
+                        mode: 'cors'
+                    });
+                    
+                    if (response.ok) {
+                        debugStatus.innerHTML = '✅ WordPress REST API: Activo<br>🔗 Base URL: ' + this.wpBaseURL;
+                    } else {
+                        debugStatus.innerHTML = `❌ WordPress REST API: Error ${response.status}<br>🔗 Base URL: ${this.wpBaseURL}`;
+                    }
+
+                    // Test 2: WooCommerce API (if available)
+                    try {
+                        const wcResponse = await fetch(`${this.wpBaseURL}/wp-json/wc/v3/products?per_page=1`, {
+                            method: 'GET',
+                            mode: 'cors'
+                        });
+                        
+                        if (wcResponse.status === 401) {
+                            debugStatus.innerHTML += '<br>✅ WooCommerce API: Disponible (requiere auth)';
+                        } else if (wcResponse.ok) {
+                            debugStatus.innerHTML += '<br>✅ WooCommerce API: Público activo';
+                        } else {
+                            debugStatus.innerHTML += '<br>⚠️ WooCommerce API: Estado incierto';
+                        }
+                    } catch (wcError) {
+                        debugStatus.innerHTML += '<br>❌ WooCommerce API: No accesible';
+                    }
+
+                } catch (error) {
+                    debugStatus.innerHTML = `❌ Error de conexión: ${error.message}<br>🔗 Verificar CORS en: ${this.wpBaseURL}`;
+                    console.error('WordPress API check failed:', error);
+                }
+            }
+
+            async handleLogin(event) {
+                event.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (!username || !password) {
+                    this.showAlert('Por favor ingresa usuario y contraseña', 'danger');
+                    return;
+                }
+
+                this.setLoading(true);
+
+                try {
+                    const success = await this.authenticateWordPress(username, password);
+                    
+                    if (success) {
+                        this.showAlert('¡Login exitoso! Redirigiendo...', 'success');
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 1500);
+                    } else {
+                        this.showAlert('Credenciales incorrectas o sin permisos de admin', 'danger');
+                    }
+                } catch (error) {
+                    console.error('Login error:', error);
+                    
+                    if (error.message.includes('CORS')) {
+                        this.showAlert('Error CORS: WordPress bloquea conexiones externas. Usa "Acceso Temporal" por ahora.', 'warning');
+                    } else {
+                        this.showAlert(`Error: ${error.message}`, 'danger');
+                    }
+                } finally {
+                    this.setLoading(false);
+                }
+            }
+
+            async authenticateWordPress(username, password) {
+                const basicAuth = btoa(username + ':' + password);
+                
+                try {
+                    // Try to get user data
+                    const response = await fetch(`${this.wpBaseURL}/wp-json/wp/v2/users/me`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Basic ${basicAuth}`,
+                            'Content-Type': 'application/json'
+                        },
+                        mode: 'cors'
+                    });
+
+                    if (response.ok) {
+                        const userData = await response.json();
+                        console.log('User data:', userData);
+                        
+                        // Check admin permissions
+                        const isAdmin = userData.capabilities && 
+                            (userData.capabilities.manage_options || 
+                             userData.capabilities.edit_posts ||
+                             userData.roles?.includes('administrator') ||
+                             userData.roles?.includes('editor'));
+
+                        if (isAdmin) {
+                            this.saveSession({
+                                token: basicAuth,
+                                user: userData,
+                                method: 'basic'
+                            });
+                            return true;
+                        } else {
+                            this.showAlert('Tu usuario no tiene permisos de administrador', 'warning');
+                            return false;
+                        }
+                    }
+
+                    return false;
+
+                } catch (error) {
+                    if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                        throw new Error('CORS: WordPress no permite conexiones desde este dominio');
+                    }
+                    throw error;
+                }
+            }
+
+            saveSession(data) {
+                const session = {
+                    token: data.token,
+                    user: data.user || { username: data.user_display_name || 'Admin' },
+                    method: data.method || 'basic',
+                    timestamp: Date.now(),
+                    expires: Date.now() + (24 * 60 * 60 * 1000) // 24 horas
+                };
+
+                localStorage.setItem('adminSession', JSON.stringify(session));
+            }
+
+            isLoggedIn() {
+                const session = localStorage.getItem('adminSession');
+                if (!session) return false;
+
+                try {
+                    const data = JSON.parse(session);
+                    return data.expires > Date.now();
+                } catch {
+                    return false;
+                }
+            }
+
+            setLoading(loading) {
+                const btn = document.getElementById('loginBtn');
+                const text = document.getElementById('loginText');
+                const spinner = document.getElementById('loginLoading');
+                
+                btn.disabled = loading;
+                text.style.display = loading ? 'none' : 'inline';
+                spinner.classList.toggle('active', loading);
+            }
+
+            showAlert(message, type) {
+                const container = document.getElementById('alert-container');
+                container.innerHTML = `
+                    <div class="alert alert-${type}">
+                        ${message}
+                    </div>
+                `;
+
+                setTimeout(() => {
+                    if (type !== 'success') {
+                        container.innerHTML = '';
+                    }
+                }, 5000);
+            }
+        }
+
+        // Bypass login for testing (temporary)
+        function bypassLogin() {
+            if (confirm('⚠️ Esto es solo para pruebas. ¿Continuar con acceso temporal?')) {
+                const tempSession = {
+                    token: 'temp',
+                    user: { username: 'Admin Temporal', display_name: 'Admin' },
+                    method: 'bypass',
+                    timestamp: Date.now(),
+                    expires: Date.now() + (2 * 60 * 60 * 1000) // 2 horas
+                };
+
+                localStorage.setItem('adminSession', JSON.stringify(tempSession));
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Initialize
+        new SimpleAdminAuth();
+    </script>
+</body>
+</html>
