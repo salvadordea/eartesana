@@ -1,6 +1,6 @@
 /**
  * Sobre Nosotros JavaScript - Estudio Artesana
- * Manages the 9-image collage and About Us page functionality
+ * Manages the 6-image collage and About Us page functionality
  */
 
 class AboutUsManager {
@@ -59,24 +59,6 @@ class AboutUsManager {
                 src: 'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=386&q=80',
                 alt: 'Selección de colores - Paleta artesanal',
                 title: 'Paleta de Colores'
-            },
-            {
-                id: 'about-7',
-                src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
-                alt: 'Productos terminados - Calidad artesanal',
-                title: 'Productos Terminados'
-            },
-            {
-                id: 'about-8',
-                src: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=420&q=80',
-                alt: 'Equipo de artesanos - Trabajo colaborativo',
-                title: 'Nuestro Equipo'
-            },
-            {
-                id: 'about-9',
-                src: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=386&q=80',
-                alt: 'Control de calidad - Revisión detallada',
-                title: 'Control de Calidad'
             }
         ];
     }
@@ -87,7 +69,7 @@ class AboutUsManager {
             if (stored) {
                 const parsed = JSON.parse(stored);
                 // Validate stored images
-                if (Array.isArray(parsed) && parsed.length === 9) {
+                if (Array.isArray(parsed) && parsed.length === 6) {
                     this.images = parsed;
                 } else {
                     this.images = this.defaultImages;
@@ -263,7 +245,7 @@ class AboutUsManager {
     
     // Admin methods for updating images
     updateImage(index, imageData) {
-        if (index >= 0 && index < 9) {
+        if (index >= 0 && index < 6) {
             this.images[index] = {
                 ...this.images[index],
                 ...imageData
@@ -297,7 +279,7 @@ class AboutUsManager {
     
     importConfiguration(configData) {
         try {
-            if (configData.images && Array.isArray(configData.images) && configData.images.length === 9) {
+            if (configData.images && Array.isArray(configData.images) && configData.images.length === 6) {
                 this.images = configData.images;
                 this.saveImages();
                 this.renderImages();
