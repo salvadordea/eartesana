@@ -9,6 +9,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Promotional Ribbon Banner -->
+    <div class="promotional-ribbon" id="promotionalRibbon">
+        <div class="ribbon-content">
+            <div class="ribbon-text">
+                <span class="ribbon-title" id="ribbonTitle">OFERTA</span>
+                <span class="ribbon-discount" id="ribbonDiscount">20% OFF</span>
+            </div>
+        </div>
+        <button class="ribbon-close" onclick="closeRibbon()">&times;</button>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -23,9 +34,16 @@
                 <nav class="nav">
                     <ul class="nav-list">
                         <li class="nav-item"><a href="#inicio" class="nav-link active">INICIO</a></li>
-                        <li class="nav-item">
+                        <li class="nav-item dropdown">
                             <a href="pages/tienda/index.html" class="nav-link">TIENDA</a>
                             <i class="fas fa-chevron-down nav-arrow"></i>
+                            <div class="dropdown-menu" id="tiendaDropdown">
+                                <a href="pages/tienda/index.html" class="dropdown-link">Todos los productos</a>
+                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-categories" id="dropdownCategories">
+                                    <!-- Categories will be loaded here -->
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item"><a href="#nosotros" class="nav-link">SOBRE NOSOTROS</a></li>
                         <li class="nav-item"><a href="#mayoristas" class="nav-link">MAYORISTAS</a></li>
@@ -55,11 +73,11 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero compact">
         <div class="hero-content">
             <div class="hero-left">
                 <div class="hero-image">
-                    <img src="assets/images/hero-bag.jpg" alt="Bolsa artesanal" class="hero-product">
+                    <img src="assets/images/hero-bag.jpg" alt="Bolsa artesanal" class="hero-product" id="mainHeroImage">
                 </div>
             </div>
             
@@ -73,59 +91,28 @@
                     <p class="hero-tagline">Legado ancestral transformado en diseño</p>
                 </div>
                 
-                <div class="hero-carousel">
-                    <div class="carousel-container">
-                        <div class="carousel-track">
-                            <div class="carousel-slide active">
-                                <img src="assets/images/product-1.jpg" alt="Producto artesanal 1">
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="assets/images/product-2.jpg" alt="Producto artesanal 2">
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="assets/images/product-3.jpg" alt="Producto artesanal 3">
-                            </div>
+                <div class="hero-carousel compact">
+                    <div class="carousel-container" id="heroCarouselContainer">
+                        <div class="carousel-track" id="heroCarouselTrack">
+                            <!-- Slides will be loaded dynamically from config -->
                         </div>
-                        <div class="carousel-dots">
-                            <button class="carousel-dot active" data-slide="0"></button>
-                            <button class="carousel-dot" data-slide="1"></button>
-                            <button class="carousel-dot" data-slide="2"></button>
+                        <div class="carousel-dots" id="heroCarouselDots">
+                            <!-- Dots will be generated dynamically -->
+                        </div>
+                        <div class="carousel-nav">
+                            <button class="carousel-prev" id="carouselPrev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="carousel-next" id="carouselNext"><i class="fas fa-chevron-right"></i></button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Promotional Banner -->
-    <section class="promo-banner" id="promoBanner">
-        <div class="container">
-            <div class="promo-content">
-                <div class="promo-icon">
-                    <i class="fas fa-gift"></i>
-                </div>
-                <div class="promo-info">
-                    <h2 class="promo-title" id="promoTitle">¡OFERTA ESPECIAL!</h2>
-                    <p class="promo-description" id="promoDescription">20% de descuento en tu primera compra</p>
-                    <div class="promo-details">
-                        <span class="promo-code" id="promoCode">Código: PRIMERA20</span>
-                        <span class="promo-expiry" id="promoExpiry">Válido hasta fin de mes</span>
-                    </div>
-                </div>
-                <div class="promo-cta">
-                    <a href="pages/tienda/index.html" class="promo-btn" id="promoBtn">¡Compra Ahora!</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Categories Section -->
-    <section class="categories-section">
+    <section class="categories-section visible">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Nuestras Categorías</h2>
-                <p class="section-description">Descubre nuestra amplia gama de productos artesanales únicos</p>
-            </div>
+            <!-- Removing section header to make categories immediately visible -->
             
             <!-- Loading State -->
             <div class="categories-loading" id="homeCategoriesLoading">
@@ -172,8 +159,11 @@
         </div>
     </footer>
 
-    <!-- WooCommerce API Scripts -->
+    <!-- Configuration Scripts -->
     <script src="assets/js/config.js"></script>
+    <script src="assets/js/cloudinary-config.js"></script>
+    
+    <!-- WooCommerce API Scripts -->
     <script src="assets/js/woocommerce-api.js"></script>
     <script src="assets/js/woo-init.js"></script>
     
@@ -183,12 +173,15 @@
     <!-- Categories System -->
     <script src="assets/js/home-categories.js"></script>
     <script src="assets/js/categories-preloader.js"></script>
+    <script src="assets/js/dropdown-categories.js"></script>
     
     <!-- Promotional System -->
     <script src="assets/js/promo-manager.js"></script>
+    <script src="assets/js/ribbon-banner.js"></script>
     
     <!-- Dynamic Carousel System -->
     <script src="assets/js/dynamic-carousel.js"></script>
+    <script src="assets/js/hero-carousel.js"></script>
     
     <!-- Main Site JavaScript -->
     <script src="assets/js/main.js"></script>

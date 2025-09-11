@@ -47,25 +47,92 @@ const EstudioArtesanaConfig = {
         debounceTime: 300
     },
     
+    // Carousel Images (múltiples imágenes para el carrusel)
+    carouselImages: [
+        {
+            id: 'hero1',
+            cloudinaryId: 'hero-bag-main', // ID de imagen en Cloudinary
+            localFallback: 'assets/images/hero-bag.jpg',
+            title: 'Bolsas Artesanales Únicas',
+            subtitle: 'Hechas a mano con técnicas ancestrales',
+            ctaText: 'Ver Colección',
+            ctaLink: 'pages/tienda/index.html?category=bolsas'
+        },
+        {
+            id: 'hero2', 
+            cloudinaryId: 'hero-accessories',
+            localFallback: 'assets/images/hero-accessories.jpg',
+            title: 'Accesorios de Diseño',
+            subtitle: 'Collares y aretes con identidad propia',
+            ctaText: 'Explorar',
+            ctaLink: 'pages/tienda/index.html?category=accesorios'
+        },
+        {
+            id: 'hero3',
+            cloudinaryId: 'hero-notebooks',
+            localFallback: 'assets/images/hero-notebooks.jpg', 
+            title: 'Cuadernos Artesanales',
+            subtitle: 'Para tus ideas más creativas',
+            ctaText: 'Descubrir',
+            ctaLink: 'pages/tienda/index.html?category=cuadernos'
+        },
+        {
+            id: 'hero4',
+            cloudinaryId: 'hero-workshop',
+            localFallback: 'assets/images/hero-workshop.jpg',
+            title: 'Proceso Artesanal',
+            subtitle: 'Cada pieza cuenta una historia',
+            ctaText: 'Conocer Más',
+            ctaLink: 'pages/tienda/index.html'
+        }
+    ],
+
     // Product Categories
     categories: {
         accessories: {
             name: 'Accesorios',
             description: 'Collares, aretes y accesorios únicos',
             slug: 'accesorios',
-            image: 'accessories-category.jpg'
+            image: 'accessories-category.jpg',
+            cloudinaryId: 'category-accessories',
+            visible: true,
+            order: 1
         },
         notebooks: {
             name: 'Cuadernos',
             description: 'Cuadernos y libretas hechos a mano',
             slug: 'cuadernos',
-            image: 'notebooks-category.jpg'
+            image: 'notebooks-category.jpg',
+            cloudinaryId: 'category-notebooks',
+            visible: true,
+            order: 2
         },
         bags: {
             name: 'Bolsas',
             description: 'Bolsas y carteras de diseño único',
             slug: 'bolsas',
-            image: 'bags-category.jpg'
+            image: 'bags-category.jpg',
+            cloudinaryId: 'category-bags',
+            visible: true,
+            order: 3
+        },
+        jewelry: {
+            name: 'Joyería',
+            description: 'Piezas únicas de joyería artesanal',
+            slug: 'joyeria',
+            image: 'jewelry-category.jpg',
+            cloudinaryId: 'category-jewelry',
+            visible: true,
+            order: 4
+        },
+        textiles: {
+            name: 'Textiles',
+            description: 'Textiles y bordados tradicionales',
+            slug: 'textiles',
+            image: 'textiles-category.jpg',
+            cloudinaryId: 'category-textiles',
+            visible: false,
+            order: 5
         }
     },
     
