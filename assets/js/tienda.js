@@ -59,6 +59,11 @@ class EstudioArtesanaTienda {
         this.inStockFilter = document.getElementById('inStockFilter');
         this.clearFilters = document.getElementById('clearFilters');
         
+        // Categories section elements
+        this.categoriesGrid = document.getElementById('categoriesGrid');
+        this.categoriesLoading = document.getElementById('categoriesLoading');
+        this.categoriesError = document.getElementById('categoriesError');
+        
         // Control elements
         this.sortProducts = document.getElementById('sortProducts');
         this.viewBtns = document.querySelectorAll('.view-btn');
@@ -131,9 +136,11 @@ class EstudioArtesanaTienda {
                 per_page: 50
             });
             this.renderCategories();
+            this.renderCategoriesSection();
         } catch (error) {
             console.error('Error loading categories:', error);
             this.categoryFilters.innerHTML = '<div class="filter-loading">Error cargando categorías</div>';
+            this.showCategoriesError();
         }
     }
     
@@ -674,6 +681,93 @@ class EstudioArtesanaTienda {
                 document.body.removeChild(messageDiv);
             }, 300);
         }, 3000);
+    }
+    
+    // Categories Section Methods
+    
+    renderCategoriesSection() {
+        if (!this.categoriesGrid) return;
+        
+        if (!this.categories || this.categories.length === 0) {
+            this.showCategoriesError();
+            return;
+        }
+        
+        this.hideCategoriesStates();
+        
+        let html = '';
+        this.categories.forEach(category => {
+            const image = category.image ? category.image.src : 'assets/images/category-placeholder.jpg';
+            const description = category.description || `Explora nuestra colección de ${category.name.toLowerCase()}`;
+            
+            html += `
+                <div class="category-card" data-category-id="${category.id}" data-category-slug="${category.slug}">
+                    <div class="category-image">
+                        <img src="${image}" alt="${category.name}" loading="lazy">
+                        <div class="category-overlay">
+                            <a href="../tienda/index.html?categoria=${category.slug}" class="category-button">Ver Productos</a>
+                        </div>
+                    </div>
+                    <div class="category-info">
+                        <h3 class="category-name">${category.name}</h3>
+                        <p class="category-count">${category.count || 0} productos</p>
+                        <p class="category-description">${description}</p>
+                    </div>
+                    ${category.count > 10 ? '<div class="category-badge">Popular</div>' : ''}
+                </div>
+            `;
+        });
+        
+        this.categoriesGrid.innerHTML = html;
+        
+        // Bind category card events
+        this.bindCategoryEvents();
+    }
+    
+    bindCategoryEvents() {
+        if (!this.categoriesGrid) return;
+        
+        this.categoriesGrid.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (!e.target.closest('.category-button')) {
+                    const categorySlug = card.dataset.categorySlug;
+                    window.location.href = `../tienda/index.html?categoria=${categorySlug}`;
+                }
+            });
+        });
+    }
+    
+    showCategoriesLoading() {
+        if (this.categoriesLoading) {
+            this.categoriesLoading.style.display = 'flex';
+        }
+        this.hideCategoriesStates();
+    }
+    
+    hideCategoriesLoading() {
+        if (this.categoriesLoading) {
+            this.categoriesLoading.style.display = 'none';
+        }
+    }
+    
+    showCategoriesError() {
+        if (this.categoriesError) {
+            this.categoriesError.style.display = 'block';
+        }
+        this.hideCategoriesLoading();
+        if (this.categoriesGrid) {
+            this.categoriesGrid.style.display = 'none';
+        }
+    }
+    
+    hideCategoriesStates() {
+        this.hideCategoriesLoading();
+        if (this.categoriesError) {
+            this.categoriesError.style.display = 'none';
+        }
+        if (this.categoriesGrid) {
+            this.categoriesGrid.style.display = 'grid';
+        }
     }
 }
 
