@@ -201,7 +201,7 @@ class ProductDetailPage {
         if (this.product.categories && this.product.categories.length > 0) {
             const category = this.product.categories[0];
             this.breadcrumbCategory.textContent = category.name;
-            this.breadcrumbCategory.href = `../tienda/index.html?categoria=${category.slug}`;
+            this.breadcrumbCategory.href = `${this.getTiendaPath()}?categoria=${category.slug}`;
         }
         
         // Update product breadcrumb
@@ -561,7 +561,7 @@ class ProductDetailPage {
         this.relatedProductsGrid.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('click', () => {
                 const productId = card.dataset.productId;
-                window.location.href = `index.html?id=${productId}`;
+                window.location.href = `${this.getProductPath()}?id=${productId}`;
             });
         });
     }
@@ -871,6 +871,42 @@ class ProductDetailPage {
                 </text>
             </svg>
         `)}`;
+    }
+    
+    // Helper method to get correct path to tienda based on current location
+    getTiendaPath() {
+        const currentPath = window.location.pathname;
+        
+        // If we're in the root directory
+        if (currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/EstArtesana/') || currentPath.endsWith('/EstArtesana/index.html')) {
+            return 'pages/tienda/index.html';
+        }
+        
+        // If we're in a pages subdirectory (tienda, sobre-nosotros, categorias, producto)
+        if (currentPath.includes('/pages/')) {
+            return '../tienda/index.html';
+        }
+        
+        // Default fallback - assume we're in root
+        return 'pages/tienda/index.html';
+    }
+    
+    // Helper method to get correct path to product based on current location
+    getProductPath() {
+        const currentPath = window.location.pathname;
+        
+        // If we're in the root directory
+        if (currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/EstArtesana/') || currentPath.endsWith('/EstArtesana/index.html')) {
+            return 'pages/producto/index.html';
+        }
+        
+        // If we're in a pages subdirectory (tienda, sobre-nosotros, categorias, producto)
+        if (currentPath.includes('/pages/')) {
+            return 'index.html'; // Current producto page
+        }
+        
+        // Default fallback - assume we're in root
+        return 'pages/producto/index.html';
     }
 }
 

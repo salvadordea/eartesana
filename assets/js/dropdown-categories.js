@@ -123,7 +123,7 @@ class DropdownCategories {
             // Skip uncategorized and empty categories for dropdown
             if (category.slug === 'uncategorized' || category.count === 0) return;
             
-            const categoryUrl = `pages/tienda/index.html?category=${category.slug}`;
+            const categoryUrl = this.getTiendaPath() + `?category=${category.slug}`;
             html += `
                 <a href="${categoryUrl}" class="dropdown-link category-link" data-category-id="${category.id}">
                     <span class="category-name">${category.name}</span>
@@ -246,6 +246,24 @@ class DropdownCategories {
     
     getCategoryBySlug(slug) {
         return this.categories.find(cat => cat.slug === slug);
+    }
+    
+    // Helper method to get correct path to tienda based on current location
+    getTiendaPath() {
+        const currentPath = window.location.pathname;
+        
+        // If we're in the root directory
+        if (currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/EstArtesana/') || currentPath.endsWith('/EstArtesana/index.html')) {
+            return 'pages/tienda/index.html';
+        }
+        
+        // If we're in a pages subdirectory (tienda, sobre-nosotros, categorias, producto)
+        if (currentPath.includes('/pages/')) {
+            return '../tienda/index.html';
+        }
+        
+        // Default fallback - assume we're in root
+        return 'pages/tienda/index.html';
     }
 }
 

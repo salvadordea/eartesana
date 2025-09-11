@@ -36,7 +36,12 @@ class EstudioArtesanaTienda {
         this.readInitialFiltersFromURL();
         this.bindEvents();
         this.loadCategories();
-        this.loadProducts();
+        // Only load products if there are initial filters from URL
+        if (this.checkFiltersActive()) {
+            this.loadProducts();
+        } else {
+            this.showCategoriesOnly();
+        }
         this.updateCartCount();
     }
     
@@ -321,7 +326,7 @@ class EstudioArtesanaTienda {
                 <div class="product-info">
                     <div class="product-category">${categoryName}</div>
                     <h3 class="product-title">
-                        <a href="../producto/index.html?id=${product.id}" data-product-id="${product.id}">${product.name}</a>
+                        <a href="${this.getProductPath()}?id=${product.id}" data-product-id="${product.id}">${product.name}</a>
                     </h3>
                     <div class="product-rating">
                         <div class="stars">${starsHtml}</div>
@@ -517,7 +522,8 @@ class EstudioArtesanaTienda {
         
         this.currentPage = 1;
         this.updateCategoriesVisibility();
-        this.loadProducts();
+        // Show categories instead of loading products when no filters
+        this.showCategoriesOnly();
     }
     
     handleSort() {
@@ -607,7 +613,7 @@ class EstudioArtesanaTienda {
     // Navigate to product detail page
     
     viewProduct(productId) {
-        window.location.href = `../producto/index.html?id=${productId}`;
+        window.location.href = `${this.getProductPath()}?id=${productId}`;
     }
     
     quickView(productId) {
@@ -798,7 +804,7 @@ class EstudioArtesanaTienda {
                     <div class="category-image">
                         <img src="${imageData.url}" alt="${imageData.alt}" loading="lazy" onerror="this.src='${imageData.fallback}'">
                         <div class="category-overlay">
-                            <a href="index.html?categoria=${category.slug}" class="category-button"></a>
+                            <a href="${this.getTiendaPath()}?categoria=${category.slug}" class="category-button"></a>
                         </div>
                     </div>
                     <div class="category-info">
@@ -823,7 +829,7 @@ class EstudioArtesanaTienda {
             card.addEventListener('click', (e) => {
                 if (!e.target.closest('.category-button')) {
                     const categorySlug = card.dataset.categorySlug;
-                    window.location.href = `index.html?categoria=${categorySlug}`;
+                    window.location.href = `${this.getTiendaPath()}?categoria=${categorySlug}`;
                 }
             });
         });
@@ -861,6 +867,72 @@ class EstudioArtesanaTienda {
             this.categoriesGrid.style.display = 'grid';
         }
     }
+    
+    // Show categories and hide products section
+    showCategoriesOnly() {
+        // Clear products grid
+        this.productsGrid.innerHTML = '';
+        
+        // Hide products-related UI elements
+        this.hideStates();
+        this.pagination.innerHTML = '';
+        
+        // Hide product results info
+        if (this.productsResults) {
+            this.productsResults.style.display = 'none';
+        }
+        
+        // Show welcome message in products grid area
+        this.productsGrid.innerHTML = `
+            <div class="categories-welcome">
+                <div class="welcome-content">
+                    <h2>Explora Nuestras Categorías</h2>
+                    <p>Selecciona una categoría o utiliza los filtros para encontrar productos específicos.</p>
+                    <div class="welcome-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Ensure categories are visible
+        this.showCategoriesWithAnimation();
+    }
+    
+    // Helper methods to get correct paths based on current location
+    getProductPath() {
+        const currentPath = window.location.pathname;
+        
+        // If we're in the root directory
+        if (currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/EstArtesana/') || currentPath.endsWith('/EstArtesana/index.html')) {
+            return 'pages/producto/index.html';
+        }
+        
+        // If we're in a pages subdirectory (tienda, sobre-nosotros, categorias, producto)
+        if (currentPath.includes('/pages/')) {
+            return '../producto/index.html';
+        }
+        
+        // Default fallback - assume we're in root
+        return 'pages/producto/index.html';
+    }
+    
+    getTiendaPath() {
+        const currentPath = window.location.pathname;
+        
+        // If we're in the root directory
+        if (currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/EstArtesana/') || currentPath.endsWith('/EstArtesana/index.html')) {
+            return 'pages/tienda/index.html';
+        }
+        
+        // If we're in a pages subdirectory (tienda, sobre-nosotros, categorias, producto)
+        if (currentPath.includes('/pages/')) {
+            return 'index.html'; // Current tienda page
+        }
+        
+        // Default fallback - assume we're in root
+        return 'pages/tienda/index.html';
+    }
 }
 
 // Initialize when DOM is loaded
@@ -880,7 +952,7 @@ document.addEventListener('DOMContentLoaded', function() {
     new EstudioArtesanaTienda();
 });
 
-// Add CSS animations for cart messages
+// Add CSS animations for cart messages and categories welcome
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideInRight {
@@ -908,6 +980,79 @@ style.textContent = `
     .pagination-ellipsis {
         padding: 10px 5px;
         color: var(--light-text);
+    }
+    
+    .categories-welcome {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 300px;
+        padding: 40px 20px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border: 2px dashed #dee2e6;
+        border-radius: 15px;
+        margin: 20px 0;
+    }
+    
+    .welcome-content {
+        text-align: center;
+        max-width: 500px;
+    }
+    
+    .welcome-content h2 {
+        color: #495057;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+    
+    .welcome-content p {
+        color: #6c757d;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+    
+    .welcome-icon {
+        font-size: 3rem;
+        color: #adb5bd;
+        opacity: 0.7;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% {
+            opacity: 0.7;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        100% {
+            opacity: 0.7;
+            transform: scale(1);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .categories-welcome {
+            min-height: 200px;
+            padding: 30px 15px;
+        }
+        
+        .welcome-content h2 {
+            font-size: 1.5rem;
+        }
+        
+        .welcome-content p {
+            font-size: 1rem;
+        }
+        
+        .welcome-icon {
+            font-size: 2.5rem;
+        }
     }
 `;
 document.head.appendChild(style);

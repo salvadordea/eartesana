@@ -125,7 +125,7 @@ class EstudioArtesanaCategorias {
                 <div class="category-overlay">
                     <h3 class="category-name">${category.name}</h3>
                     <p class="category-description">${description}</p>
-                    <a href="../tienda/index.html?category=${category.id}" class="category-button">
+                    <a href="${this.getTiendaPath()}?category=${category.id}" class="category-button">
                         Ver ${category.count} producto${category.count !== 1 ? 's' : ''}
                     </a>
                 </div>
@@ -303,6 +303,24 @@ class EstudioArtesanaCategorias {
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
         };
+    }
+    
+    // Helper method to get correct path to tienda based on current location
+    getTiendaPath() {
+        const currentPath = window.location.pathname;
+        
+        // If we're in the root directory
+        if (currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/EstArtesana/') || currentPath.endsWith('/EstArtesana/index.html')) {
+            return 'pages/tienda/index.html';
+        }
+        
+        // If we're in a pages subdirectory (tienda, sobre-nosotros, categorias, producto)
+        if (currentPath.includes('/pages/')) {
+            return '../tienda/index.html';
+        }
+        
+        // Default fallback - assume we're in root
+        return 'pages/tienda/index.html';
     }
 }
 
