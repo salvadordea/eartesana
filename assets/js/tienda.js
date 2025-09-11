@@ -6,7 +6,7 @@
 class EstudioArtesanaTienda {
     constructor() {
         this.currentPage = 1;
-        this.productsPerPage = 12;
+        this.productsPerPage = 100; // Show all products
         this.totalProducts = 0;
         this.totalPages = 1;
         this.isLoading = false;
@@ -18,8 +18,8 @@ class EstudioArtesanaTienda {
             onSale: false,
             featured: false,
             inStock: true,
-            orderby: 'date',
-            order: 'desc'
+            orderby: 'title',
+            order: 'asc'
         };
         
         this.products = [];
@@ -482,8 +482,8 @@ class EstudioArtesanaTienda {
             onSale: false,
             featured: false,
             inStock: true,
-            orderby: 'date',
-            order: 'desc'
+            orderby: 'title',
+            order: 'asc'
         };
         
         // Reset UI
@@ -493,7 +493,7 @@ class EstudioArtesanaTienda {
         this.onSaleFilter.checked = false;
         this.featuredFilter.checked = false;
         this.inStockFilter.checked = true;
-        this.sortProducts.value = 'date-desc';
+        this.sortProducts.value = 'title-asc';
         
         // Reset category filters
         this.categoryFilters.querySelectorAll('.category-filter').forEach(f => {
