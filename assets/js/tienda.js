@@ -311,7 +311,7 @@ class EstudioArtesanaTienda {
                 <div class="product-info">
                     <div class="product-category">${categoryName}</div>
                     <h3 class="product-title">
-                        <a href="#" data-product-id="${product.id}">${product.name}</a>
+                        <a href="../producto/index.html?id=${product.id}" data-product-id="${product.id}">${product.name}</a>
                     </h3>
                     <div class="product-rating">
                         <div class="stars">${starsHtml}</div>
@@ -589,11 +589,10 @@ class EstudioArtesanaTienda {
         }
     }
     
-    // Placeholder methods for future implementation
+    // Navigate to product detail page
     
     viewProduct(productId) {
-        console.log('View product:', productId);
-        // TODO: Navigate to product page or show product details
+        window.location.href = `../producto/index.html?id=${productId}`;
     }
     
     quickView(productId) {
