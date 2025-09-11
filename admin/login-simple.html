@@ -343,49 +343,145 @@
             async authenticateWordPress(username, password) {
                 const basicAuth = btoa(username + ':' + password);
                 
-                try {
-                    // Try to get user data
-                    const response = await fetch(`${this.wpBaseURL}/wp-json/wp/v2/users/me`, {
+                // Try multiple authentication methods
+                const methods = [
+                    { name: 'Basic Auth', func: () => this.tryBasicAuth(username, password, basicAuth) },
+                    { name: 'Application Password', func: () => this.tryApplicationPassword(username, password) },
+                    { name: 'Cookie Auth', func: () => this.tryCookieAuth(username, password) }
+                ];
+
+                for (const method of methods) {
+                    try {
+                        console.log(`Trying ${method.name}...`);
+                        const result = await method.func();
+                        if (result) {
+                            console.log(`✅ ${method.name} successful`);
+                            return true;
+                        }
+                        console.log(`❌ ${method.name} failed`);
+                    } catch (error) {
+                        console.log(`❌ ${method.name} error:`, error.message);
+                        continue;
+                    }
+                }
+
+                return false;
+            }
+
+            async tryBasicAuth(username, password, basicAuth) {
+                const response = await fetch(`${this.wpBaseURL}/wp-json/wp/v2/users/me`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Basic ${basicAuth}`,
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'cors',
+                    credentials: 'include'
+                });
+
+                if (response.ok) {
+                    const userData = await response.json();
+                    console.log('Basic Auth - User data:', userData);
+                    
+                    if (this.checkAdminPermissions(userData)) {
+                        this.saveSession({
+                            token: basicAuth,
+                            user: userData,
+                            method: 'basic'
+                        });
+                        return true;
+                    }
+                } else {
+                    const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
+                    console.log('Basic Auth failed:', response.status, errorData);
+                }
+                
+                return false;
+            }
+
+            async tryApplicationPassword(username, password) {
+                // Application Passwords use Basic Auth but with special app password format
+                const appAuth = btoa(username + ':' + password);
+                
+                const response = await fetch(`${this.wpBaseURL}/wp-json/wp/v2/users/me`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Basic ${appAuth}`,
+                        'Content-Type': 'application/json',
+                        'X-WP-Application-Password': 'true'
+                    },
+                    mode: 'cors',
+                    credentials: 'include'
+                });
+
+                if (response.ok) {
+                    const userData = await response.json();
+                    console.log('App Password - User data:', userData);
+                    
+                    if (this.checkAdminPermissions(userData)) {
+                        this.saveSession({
+                            token: appAuth,
+                            user: userData,
+                            method: 'app_password'
+                        });
+                        return true;
+                    }
+                }
+                
+                return false;
+            }
+
+            async tryCookieAuth(username, password) {
+                // Try cookie-based authentication
+                const loginResponse = await fetch(`${this.wpBaseURL}/wp-login.php`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `log=${encodeURIComponent(username)}&pwd=${encodeURIComponent(password)}&wp-submit=Log+In`,
+                    mode: 'cors',
+                    credentials: 'include'
+                });
+
+                if (loginResponse.ok || loginResponse.redirected) {
+                    // Try to access user data with cookies
+                    const userResponse = await fetch(`${this.wpBaseURL}/wp-json/wp/v2/users/me`, {
                         method: 'GET',
-                        headers: {
-                            'Authorization': `Basic ${basicAuth}`,
-                            'Content-Type': 'application/json'
-                        },
-                        mode: 'cors'
+                        mode: 'cors',
+                        credentials: 'include'
                     });
 
-                    if (response.ok) {
-                        const userData = await response.json();
-                        console.log('User data:', userData);
+                    if (userResponse.ok) {
+                        const userData = await userResponse.json();
+                        console.log('Cookie Auth - User data:', userData);
                         
-                        // Check admin permissions
-                        const isAdmin = userData.capabilities && 
-                            (userData.capabilities.manage_options || 
-                             userData.capabilities.edit_posts ||
-                             userData.roles?.includes('administrator') ||
-                             userData.roles?.includes('editor'));
-
-                        if (isAdmin) {
+                        if (this.checkAdminPermissions(userData)) {
                             this.saveSession({
-                                token: basicAuth,
+                                token: 'cookie_based',
                                 user: userData,
-                                method: 'basic'
+                                method: 'cookie'
                             });
                             return true;
-                        } else {
-                            this.showAlert('Tu usuario no tiene permisos de administrador', 'warning');
-                            return false;
                         }
                     }
-
-                    return false;
-
-                } catch (error) {
-                    if (error.name === 'TypeError' && error.message.includes('fetch')) {
-                        throw new Error('CORS: WordPress no permite conexiones desde este dominio');
-                    }
-                    throw error;
                 }
+                
+                return false;
+            }
+
+            checkAdminPermissions(userData) {
+                const isAdmin = userData.capabilities && 
+                    (userData.capabilities.manage_options || 
+                     userData.capabilities.edit_posts ||
+                     userData.roles?.includes('administrator') ||
+                     userData.roles?.includes('editor') ||
+                     userData.roles?.includes('shop_manager'));
+
+                if (!isAdmin) {
+                    this.showAlert('Tu usuario no tiene permisos de administrador', 'warning');
+                }
+                
+                return isAdmin;
             }
 
             saveSession(data) {

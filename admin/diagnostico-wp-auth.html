@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <title>Diagnóstico WordPress Auth - Estudio Artesana</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #D4AF37;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .test-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .test-result {
+            font-family: monospace;
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 10px;
+            border-radius: 3px;
+            margin: 10px 0;
+            white-space: pre-wrap;
+        }
+        .success { color: #27ae60; }
+        .error { color: #e74c3c; }
+        .warning { color: #f39c12; }
+        .info { color: #3498db; }
+        button {
+            background: #D4AF37;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #B8941F;
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 200px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Diagnóstico WordPress Authentication</h1>
+        
+        <div class="form-group">
+            <label for="wpUrl">WordPress Base URL:</label>
+            <input type="url" id="wpUrl" value="https://estudioartesana.com" />
+        </div>
+
+        <div class="form-group">
+            <label for="testUser">Usuario de prueba:</label>
+            <input type="text" id="testUser" placeholder="admin" />
+        </div>
+
+        <div class="form-group">
+            <label for="testPass">Contraseña de prueba:</label>
+            <input type="password" id="testPass" />
+        </div>
+
+        <button onclick="runAllTests()">🚀 Ejecutar Todos los Tests</button>
+        <button onclick="clearResults()">🧹 Limpiar Resultados</button>
+        
+        <div class="test-section">
+            <div class="test-title">1. WordPress REST API Status</div>
+            <button onclick="testWordPressAPI()">Test API Base</button>
+            <div id="wp-api-result" class="test-result"></div>
+        </div>
+
+        <div class="test-section">
+            <div class="test-title">2. Authentication Methods Available</div>
+            <button onclick="testAuthMethods()">Detectar Métodos</button>
+            <div id="auth-methods-result" class="test-result"></div>
+        </div>
+
+        <div class="test-section">
+            <div class="test-title">3. Basic Authentication Test</div>
+            <button onclick="testBasicAuth()">Test Basic Auth</button>
+            <div id="basic-auth-result" class="test-result"></div>
+        </div>
+
+        <div class="test-section">
+            <div class="test-title">4. Application Passwords Test</div>
+            <button onclick="testApplicationPasswords()">Test App Passwords</button>
+            <div id="app-pass-result" class="test-result"></div>
+        </div>
+
+        <div class="test-section">
+            <div class="test-title">5. JWT Authentication Test</div>
+            <button onclick="testJWTAuth()">Test JWT</button>
+            <div id="jwt-result" class="test-result"></div>
+        </div>
+
+        <div class="test-section">
+            <div class="test-title">6. Cookie Authentication Test</div>
+            <button onclick="testCookieAuth()">Test Cookies</button>
+            <div id="cookie-result" class="test-result"></div>
+        </div>
+
+        <div class="test-section">
+            <div class="test-title">7. CORS Configuration</div>
+            <button onclick="testCORS()">Test CORS</button>
+            <div id="cors-result" class="test-result"></div>
+        </div>
+    </div>
+
+    <script>
+        let wpBaseURL = 'https://estudioartesana.com';
+
+        function updateBaseURL() {
+            wpBaseURL = document.getElementById('wpUrl').value.replace(/\/$/, '');
+        }
+
+        function log(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            const colorClass = type === 'success' ? 'success' : 
+                             type === 'error' ? 'error' : 
+                             type === 'warning' ? 'warning' : 'info';
+            
+            element.innerHTML += `[${timestamp}] ${message}\n`;
+            element.scrollTop = element.scrollHeight;
+        }
+
+        function clearResults() {
+            const results = document.querySelectorAll('.test-result');
+            results.forEach(result => result.innerHTML = '');
+        }
+
+        async function runAllTests() {
+            updateBaseURL();
+            clearResults();
+            
+            log('wp-api-result', '🚀 Iniciando diagnóstico completo...', 'info');
+            
+            await testWordPressAPI();
+            await testAuthMethods();
+            await testBasicAuth();
+            await testApplicationPasswords();
+            await testJWTAuth();
+            await testCookieAuth();
+            await testCORS();
+            
+            log('wp-api-result', '✅ Diagnóstico completado', 'success');
+        }
+
+        async function testWordPressAPI() {
+            updateBaseURL();
+            log('wp-api-result', 'Verificando WordPress REST API...', 'info');
+            
+            try {
+                const response = await fetch(`${wpBaseURL}/wp-json/wp/v2/`, {
+                    method: 'GET',
+                    mode: 'cors'
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    log('wp-api-result', '✅ WordPress REST API activo', 'success');
+                    log('wp-api-result', `📋 Namespace: ${data.namespaces?.join(', ')}`, 'info');
+                    log('wp-api-result', `🔗 URL: ${wpBaseURL}/wp-json/wp/v2/`, 'info');
+                } else {
+                    log('wp-api-result', `❌ Error ${response.status}: ${response.statusText}`, 'error');
+                }
+            } catch (error) {
+                log('wp-api-result', `❌ Error de conexión: ${error.message}`, 'error');
+            }
+        }
+
+        async function testAuthMethods() {
+            updateBaseURL();
+            log('auth-methods-result', 'Detectando métodos de autenticación...', 'info');
+            
+            // Test users/me endpoint without auth
+            try {
+                const response = await fetch(`${wpBaseURL}/wp-json/wp/v2/users/me`, {
+                    method: 'GET',
+                    mode: 'cors'
+                });
+
+                const responseText = await response.text();
+                log('auth-methods-result', `📡 Response Status: ${response.status}`, 'info');
+                
+                if (response.status === 401) {
+                    log('auth-methods-result', '✅ Endpoint /users/me requiere autenticación (correcto)', 'success');
+                    
+                    try {
+                        const errorData = JSON.parse(responseText);
+                        log('auth-methods-result', `📋 Error Code: ${errorData.code}`, 'info');
+                        log('auth-methods-result', `💬 Message: ${errorData.message}`, 'info');
+                    } catch (e) {
+                        log('auth-methods-result', '📋 Respuesta no es JSON válido', 'warning');
+                    }
+                } else {
+                    log('auth-methods-result', '⚠️ Endpoint accesible sin auth (posible configuración insegura)', 'warning');
+                }
+            } catch (error) {
+                log('auth-methods-result', `❌ Error: ${error.message}`, 'error');
+            }
+
+            // Check for JWT endpoint
+            try {
+                const jwtResponse = await fetch(`${wpBaseURL}/wp-json/jwt-auth/v1/token/validate`, {
+                    method: 'POST',
+                    mode: 'cors'
+                });
+                
+                log('auth-methods-result', `🔐 JWT endpoint status: ${jwtResponse.status}`, 'info');
+                
+                if (jwtResponse.status !== 404) {
+                    log('auth-methods-result', '✅ JWT Authentication plugin detectado', 'success');
+                } else {
+                    log('auth-methods-result', '❌ JWT Authentication plugin no encontrado', 'warning');
+                }
+            } catch (error) {
+                log('auth-methods-result', '❌ JWT plugin no disponible', 'warning');
+            }
+        }
+
+        async function testBasicAuth() {
+            const username = document.getElementById('testUser').value;
+            const password = document.getElementById('testPass').value;
+            
+            if (!username || !password) {
+                log('basic-auth-result', '⚠️ Introduce usuario y contraseña para probar', 'warning');
+                return;
+            }
+            
+            updateBaseURL();
+            log('basic-auth-result', 'Probando Basic Authentication...', 'info');
+            
+            const basicAuth = btoa(username + ':' + password);
+            
+            try {
+                const response = await fetch(`${wpBaseURL}/wp-json/wp/v2/users/me`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Basic ${basicAuth}`,
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'cors',
+                    credentials: 'include'
+                });
+
+                const responseText = await response.text();
+                log('basic-auth-result', `📡 Status: ${response.status}`, 'info');
+
+                if (response.ok) {
+                    const userData = JSON.parse(responseText);
+                    log('basic-auth-result', '✅ Basic Auth EXITOSO', 'success');
+                    log('basic-auth-result', `👤 Usuario: ${userData.name}`, 'success');
+                    log('basic-auth-result', `🔑 Roles: ${userData.roles?.join(', ')}`, 'success');
+                    log('basic-auth-result', `📧 Email: ${userData.email}`, 'info');
+                } else {
+                    log('basic-auth-result', '❌ Basic Auth FALLÓ', 'error');
+                    try {
+                        const errorData = JSON.parse(responseText);
+                        log('basic-auth-result', `📋 Error: ${errorData.message}`, 'error');
+                        log('basic-auth-result', `🔍 Code: ${errorData.code}`, 'error');
+                    } catch (e) {
+                        log('basic-auth-result', `📋 Response: ${responseText}`, 'error');
+                    }
+                }
+            } catch (error) {
+                log('basic-auth-result', `❌ Error: ${error.message}`, 'error');
+                if (error.message.includes('CORS')) {
+                    log('basic-auth-result', '🚨 Posible problema de CORS', 'warning');
+                }
+            }
+        }
+
+        async function testApplicationPasswords() {
+            const username = document.getElementById('testUser').value;
+            const password = document.getElementById('testPass').value;
+            
+            if (!username || !password) {
+                log('app-pass-result', '⚠️ Introduce usuario y contraseña para probar', 'warning');
+                return;
+            }
+            
+            updateBaseURL();
+            log('app-pass-result', 'Probando Application Passwords...', 'info');
+            
+            const appAuth = btoa(username + ':' + password);
+            
+            try {
+                const response = await fetch(`${wpBaseURL}/wp-json/wp/v2/users/me`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Basic ${appAuth}`,
+                        'Content-Type': 'application/json',
+                        'X-WP-Application-Password': 'true'
+                    },
+                    mode: 'cors',
+                    credentials: 'include'
+                });
+
+                const responseText = await response.text();
+                log('app-pass-result', `📡 Status: ${response.status}`, 'info');
+
+                if (response.ok) {
+                    const userData = JSON.parse(responseText);
+                    log('app-pass-result', '✅ Application Password EXITOSO', 'success');
+                    log('app-pass-result', `👤 Usuario: ${userData.name}`, 'success');
+                    log('app-pass-result', `🔑 Roles: ${userData.roles?.join(', ')}`, 'success');
+                } else {
+                    log('app-pass-result', '❌ Application Password FALLÓ', 'error');
+                    try {
+                        const errorData = JSON.parse(responseText);
+                        log('app-pass-result', `📋 Error: ${errorData.message}`, 'error');
+                    } catch (e) {
+                        log('app-pass-result', `📋 Response: ${responseText}`, 'error');
+                    }
+                }
+            } catch (error) {
+                log('app-pass-result', `❌ Error: ${error.message}`, 'error');
+            }
+        }
+
+        async function testJWTAuth() {
+            const username = document.getElementById('testUser').value;
+            const password = document.getElementById('testPass').value;
+            
+            if (!username || !password) {
+                log('jwt-result', '⚠️ Introduce usuario y contraseña para probar', 'warning');
+                return;
+            }
+            
+            updateBaseURL();
+            log('jwt-result', 'Probando JWT Authentication...', 'info');
+            
+            try {
+                // Step 1: Get JWT token
+                const tokenResponse = await fetch(`${wpBaseURL}/wp-json/jwt-auth/v1/token`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    }),
+                    mode: 'cors'
+                });
+
+                const tokenText = await tokenResponse.text();
+                log('jwt-result', `📡 Token request status: ${tokenResponse.status}`, 'info');
+
+                if (tokenResponse.ok) {
+                    const tokenData = JSON.parse(tokenText);
+                    log('jwt-result', '✅ JWT Token obtenido', 'success');
+                    
+                    // Step 2: Use token to access protected endpoint
+                    const userResponse = await fetch(`${wpBaseURL}/wp-json/wp/v2/users/me`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${tokenData.token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        mode: 'cors'
+                    });
+
+                    if (userResponse.ok) {
+                        const userData = await userResponse.json();
+                        log('jwt-result', '✅ JWT Auth EXITOSO', 'success');
+                        log('jwt-result', `👤 Usuario: ${userData.name}`, 'success');
+                    } else {
+                        log('jwt-result', '❌ JWT token válido pero acceso falló', 'error');
+                    }
+                } else {
+                    log('jwt-result', '❌ JWT plugin no disponible o credenciales incorrectas', 'error');
+                    log('jwt-result', `📋 Response: ${tokenText}`, 'error');
+                }
+            } catch (error) {
+                log('jwt-result', `❌ Error: ${error.message}`, 'error');
+                log('jwt-result', '💡 Probablemente JWT plugin no está instalado', 'warning');
+            }
+        }
+
+        async function testCookieAuth() {
+            const username = document.getElementById('testUser').value;
+            const password = document.getElementById('testPass').value;
+            
+            if (!username || !password) {
+                log('cookie-result', '⚠️ Introduce usuario y contraseña para probar', 'warning');
+                return;
+            }
+            
+            updateBaseURL();
+            log('cookie-result', 'Probando Cookie Authentication...', 'info');
+            
+            try {
+                // Step 1: Login via wp-login.php
+                const loginResponse = await fetch(`${wpBaseURL}/wp-login.php`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `log=${encodeURIComponent(username)}&pwd=${encodeURIComponent(password)}&wp-submit=Log+In&redirect_to=${encodeURIComponent(wpBaseURL)}/wp-admin/`,
+                    mode: 'cors',
+                    credentials: 'include',
+                    redirect: 'manual'
+                });
+
+                log('cookie-result', `📡 Login status: ${loginResponse.status}`, 'info');
+
+                if (loginResponse.status === 0 || loginResponse.type === 'opaqueredirect') {
+                    // CORS blocked the response, but might have set cookies
+                    log('cookie-result', '⚠️ Login response bloqueado por CORS', 'warning');
+                } else if (loginResponse.redirected || loginResponse.status === 302) {
+                    log('cookie-result', '✅ Login redirect detectado', 'success');
+                }
+
+                // Step 2: Try to access protected endpoint with cookies
+                const userResponse = await fetch(`${wpBaseURL}/wp-json/wp/v2/users/me`, {
+                    method: 'GET',
+                    mode: 'cors',
+                    credentials: 'include'
+                });
+
+                if (userResponse.ok) {
+                    const userData = await userResponse.json();
+                    log('cookie-result', '✅ Cookie Auth EXITOSO', 'success');
+                    log('cookie-result', `👤 Usuario: ${userData.name}`, 'success');
+                } else {
+                    log('cookie-result', '❌ Cookie Auth falló o CORS bloqueó cookies', 'error');
+                    const errorText = await userResponse.text();
+                    try {
+                        const errorData = JSON.parse(errorText);
+                        log('cookie-result', `📋 Error: ${errorData.message}`, 'error');
+                    } catch (e) {
+                        log('cookie-result', `📋 Response: ${errorText}`, 'error');
+                    }
+                }
+            } catch (error) {
+                log('cookie-result', `❌ Error: ${error.message}`, 'error');
+                if (error.message.includes('CORS') || error.message.includes('fetch')) {
+                    log('cookie-result', '🚨 CORS está bloqueando la autenticación por cookies', 'warning');
+                }
+            }
+        }
+
+        async function testCORS() {
+            updateBaseURL();
+            log('cors-result', 'Analizando configuración CORS...', 'info');
+            
+            try {
+                const response = await fetch(`${wpBaseURL}/wp-json/wp/v2/`, {
+                    method: 'GET',
+                    mode: 'cors'
+                });
+
+                const headers = response.headers;
+                log('cors-result', '📋 Headers CORS encontrados:', 'info');
+                
+                const corsHeaders = [
+                    'Access-Control-Allow-Origin',
+                    'Access-Control-Allow-Methods',
+                    'Access-Control-Allow-Headers',
+                    'Access-Control-Allow-Credentials',
+                    'Access-Control-Max-Age'
+                ];
+
+                let corsFound = false;
+                corsHeaders.forEach(header => {
+                    const value = headers.get(header);
+                    if (value) {
+                        corsFound = true;
+                        log('cors-result', `✅ ${header}: ${value}`, 'success');
+                    } else {
+                        log('cors-result', `❌ ${header}: No presente`, 'error');
+                    }
+                });
+
+                if (!corsFound) {
+                    log('cors-result', '🚨 PROBLEMA: No se detectaron headers CORS', 'error');
+                    log('cors-result', '💡 Solución: Instalar plugin de CORS en WordPress', 'warning');
+                    log('cors-result', '🔧 Plugin recomendado: "CORS" by WP CORS', 'info');
+                } else {
+                    log('cors-result', '✅ CORS configurado', 'success');
+                }
+
+                // Test preflight request
+                try {
+                    const preflightResponse = await fetch(`${wpBaseURL}/wp-json/wp/v2/users/me`, {
+                        method: 'OPTIONS',
+                        headers: {
+                            'Access-Control-Request-Method': 'GET',
+                            'Access-Control-Request-Headers': 'authorization,content-type'
+                        },
+                        mode: 'cors'
+                    });
+
+                    log('cors-result', `📡 Preflight status: ${preflightResponse.status}`, 'info');
+                    
+                    if (preflightResponse.ok) {
+                        log('cors-result', '✅ Preflight request exitoso', 'success');
+                    } else {
+                        log('cors-result', '❌ Preflight request falló', 'error');
+                    }
+                } catch (preflightError) {
+                    log('cors-result', `❌ Preflight error: ${preflightError.message}`, 'error');
+                }
+
+            } catch (error) {
+                log('cors-result', `❌ Error CORS: ${error.message}`, 'error');
+                log('cors-result', '🚨 WordPress está bloqueando todas las requests desde este origen', 'error');
+            }
+        }
+    </script>
+</body>
+</html>
