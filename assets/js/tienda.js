@@ -31,6 +31,7 @@ class EstudioArtesanaTienda {
     
     init() {
         this.initializeElements();
+        this.readInitialFiltersFromURL();
         this.bindEvents();
         this.loadCategories();
         this.loadProducts();
@@ -101,6 +102,26 @@ class EstudioArtesanaTienda {
         this.retryLoad?.addEventListener('click', () => this.loadProducts());
     }
     
+    readInitialFiltersFromURL() {
+        try {
+            const params = new URLSearchParams(window.location.search);
+            // Accept both 'categoria' (slug) and 'category' (slug or id) for flexibility
+            const slugParam = params.get('categoria');
+            const genericParam = params.get('category');
+            
+            // If an id was passed, store it directly; if a slug was passed, store as pending slug
+            if (genericParam && /^\d+$/.test(genericParam)) {
+                this.currentFilters.category = parseInt(genericParam, 10);
+            } else if (slugParam) {
+                this.pendingCategorySlug = slugParam;
+            } else if (genericParam) {
+                this.pendingCategorySlug = genericParam;
+            }
+        } catch (e) {
+            console.warn('Could not parse URL params for filters');
+        }
+    }
+
     // API Integration Methods
     
     async loadCategories() {
@@ -193,6 +214,22 @@ class EstudioArtesanaTienda {
         });
         
         this.categoryFilters.innerHTML = html;
+        
+        // If there is a pending category slug from URL, map it to ID now and apply
+        if (this.pendingCategorySlug && !this.currentFilters.category) {
+            const match = this.categories.find(c => c.slug === this.pendingCategorySlug);
+            if (match) {
+                this.currentFilters.category = match.id;
+                // Update active class
+                this.categoryFilters.querySelectorAll('.category-filter').forEach(f => f.classList.remove('active'));
+                const activeEl = this.categoryFilters.querySelector(`.category-filter[data-category="${match.id}"]`);
+                activeEl?.classList.add('active');
+                // Load products for this category
+                this.currentPage = 1;
+                this.loadProducts();
+            }
+            this.pendingCategorySlug = null;
+        }
         
         // Bind category filter events
         this.categoryFilters.querySelectorAll('.category-filter').forEach(filter => {

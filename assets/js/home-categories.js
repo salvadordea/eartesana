@@ -176,8 +176,24 @@ class HomeCategoriesLoader {
         this.categoriesGrid.querySelectorAll('.home-category-card').forEach(card => {
             card.addEventListener('click', () => {
                 const categoryId = card.dataset.categoryId;
-                // Navigate to shop with category filter
-                window.location.href = `pages/tienda/index.html?category=${categoryId}`;
+                const category = this.categories.find(cat => cat.id == categoryId);
+                
+                if (category) {
+                    // Navigate to shop with category filter using slug for better SEO
+                    window.location.href = `pages/tienda/index.html?categoria=${category.slug}&nombre=${encodeURIComponent(category.name)}`;
+                } else {
+                    // Fallback to general shop page
+                    window.location.href = 'pages/tienda/index.html';
+                }
+            });
+            
+            // Add hover effects
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
             });
         });
     }

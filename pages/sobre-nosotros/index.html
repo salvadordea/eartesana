@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros - Estudio Artesana</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Conoce la historia de Estudio Artesana, nuestros valores y el proceso artesanal detrás de cada producto único.">
+    <meta name="keywords" content="estudio artesana, sobre nosotros, artesanía, historia, valores, proceso artesanal">
+    <meta name="author" content="Estudio Artesana">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Sobre Nosotros - Estudio Artesana">
+    <meta property="og:description" content="Conoce la historia y valores de Estudio Artesana">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://estudioartesana.com/pages/sobre-nosotros/">
+    <meta property="og:image" content="../../assets/images/og-image.jpg">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/sobre-nosotros.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="../../index.html">
+                        <img src="../../assets/images/logo.png" alt="Estudio Artesana Logo" class="logo-img">
+                        <span class="logo-text">ESTUDIO ARTESANA</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="../../index.html" class="nav-link">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../tienda/index.html" class="nav-link">Tienda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../categorias/index.html" class="nav-link">Categorías</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link active">Sobre Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../contacto/index.html" class="nav-link">Contacto</a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <button class="search-btn" aria-label="Buscar">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a href="../tienda/carrito.html" class="cart-btn" aria-label="Carrito">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <button class="menu-toggle" aria-label="Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-background"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Nuestra Historia</h1>
+                    <p class="hero-subtitle">Tradición, arte y pasión en cada creación</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Content -->
+        <section class="about-content">
+            <div class="container">
+                <div class="about-grid">
+                    <!-- Story Section -->
+                    <div class="story-section">
+                        <div class="text-content">
+                            <h2 class="section-title">Nuestra Pasión por la Artesanía</h2>
+                            <div class="story-text">
+                                <p>En <strong>Estudio Artesana</strong>, creemos que cada pieza cuenta una historia. Somos una empresa familiar dedicada a la creación de productos artesanales únicos, donde la tradición y la innovación se encuentran para dar vida a piezas excepcionales.</p>
+
+                                <p>Nuestro viaje comenzó hace más de una década, cuando decidimos combinar técnicas tradicionales heredadas de generaciones anteriores con un diseño contemporáneo que refleje la esencia del arte mexicano.</p>
+
+                                <blockquote class="quote">
+                                    "Cada hilo, cada puntada, cada detalle está pensado para crear no solo un producto, sino una experiencia única que conecte con quienes valoran la autenticidad y la belleza del trabajo hecho a mano."
+                                </blockquote>
+
+                                <p>Trabajamos con artesanos locales, promoviendo el comercio justo y preservando las técnicas tradicionales. Cada bolsa, cada accesorio, cada cuaderno que sale de nuestro taller lleva consigo el amor y la dedicación de manos expertas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image Collage -->
+                    <div class="image-collage">
+                        <h3 class="collage-title">Nuestro Proceso Artesanal</h3>
+                        <div class="collage-grid" id="aboutImagesCollage">
+                            <!-- Images will be loaded dynamically -->
+                            <div class="collage-item loading-placeholder">
+                                <div class="placeholder-content">
+                                    <i class="fas fa-image"></i>
+                                    <span>Cargando...</span>
+                                </div>
+                            </div>
+                            <div class="collage-item loading-placeholder">
+                                <div class="placeholder-content">
+                                    <i class="fas fa-image"></i>
+                                    <span>Cargando...</span>
+                                </div>
+                            </div>
+                            <div class="collage-item loading-placeholder">
+                                <div class="placeholder-content">
+                                    <i class="fas fa-image"></i>
+                                    <span>Cargando...</span>
+                                </div>
+                            </div>
+                            <div class="collage-item loading-placeholder">
+                                <div class="placeholder-content">
+                                    <i class="fas fa-image"></i>
+                                    <span>Cargando...</span>
+                                </div>
+                            </div>
+                            <div class="collage-item loading-placeholder">
+                                <div class="placeholder-content">
+                                    <i class="fas fa-image"></i>
+                                    <span>Cargando...</span>
+                                </div>
+                            </div>
+                            <div class="collage-item loading-placeholder">
+                                <div class="placeholder-content">
+                                    <i class="fas fa-image"></i>
+                                    <span>Cargando...</span>
+                                </div>
+                            </div>
+                            <div class="collage-item loading-placeholder">
+                                <div class="placeholder-content">
+                                    <i class="fas fa-image"></i>
+                                    <span>Cargando...</span>
+                                </div>
+                            </div>
+                            <div class="collage-item loading-placeholder">
+                                <div class="placeholder-content">
+                                    <i class="fas fa-image"></i>
+                                    <span>Cargando...</span>
+                                </div>
+                            </div>
+                            <div class="collage-item loading-placeholder">
+                                <div class="placeholder-content">
+                                    <i class="fas fa-image"></i>
+                                    <span>Cargando...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values-section">
+            <div class="container">
+                <h2 class="section-title center">Nuestros Valores</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-hands"></i>
+                        </div>
+                        <h3>Trabajo Artesanal</h3>
+                        <p>Cada pieza es creada a mano con técnicas tradicionales, garantizando la unicidad y calidad en cada producto.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Comercio Justo</h3>
+                        <p>Trabajamos directamente con artesanos locales, asegurando condiciones laborales justas y precios equitativos.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Sostenibilidad</h3>
+                        <p>Utilizamos materiales naturales y procesos eco-amigables, minimizando nuestro impacto ambiental.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3>Calidad Premium</h3>
+                        <p>Seleccionamos cuidadosamente cada material y supervisamos cada etapa del proceso productivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Descubre Nuestras Creaciones</h2>
+                    <p>Explora nuestra colección de productos únicos, hechos con amor y dedicación para ti.</p>
+                    <a href="../tienda/index.html" class="cta-btn">
+                        <i class="fas fa-shopping-bag"></i>
+                        Visitar Tienda
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../../assets/images/logo.png" alt="Estudio Artesana">
+                        <span>ESTUDIO ARTESANA</span>
+                    </div>
+                    <p class="footer-description">
+                        Creamos productos artesanales únicos que combinan la tradición con el diseño contemporáneo.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Pinterest">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="../../index.html">Inicio</a></li>
+                        <li><a href="../tienda/index.html">Tienda</a></li>
+                        <li><a href="../categorias/index.html">Categorías</a></li>
+                        <li><a href="index.html">Sobre Nosotros</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Categorías</h4>
+                    <ul class="footer-links">
+                        <li><a href="../tienda/index.html?categoria=bolsas">Bolsas</a></li>
+                        <li><a href="../tienda/index.html?categoria=accesorios">Accesorios</a></li>
+                        <li><a href="../tienda/index.html?categoria=joyeria">Joyería</a></li>
+                        <li><a href="../tienda/index.html?categoria=cuadernos">Cuadernos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> info@estudioartesana.com</p>
+                        <p><i class="fas fa-phone"></i> +52 555 123 4567</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Ciudad de México, México</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Estudio Artesana. Todos los derechos reservados.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos y Condiciones</a>
+                    <a href="#">Envíos y Devoluciones</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/sobre-nosotros.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

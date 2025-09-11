@@ -1,0 +1,174 @@
+/* Sobre Nosotros Styles - Estudio Artesana */
+
+.hero-section {
+  position: relative;
+  padding: 120px 0 80px;
+  color: var(--white);
+  background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+}
+
+.hero-content {
+  text-align: center;
+}
+
+.hero-title {
+  font-family: var(--font-primary);
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #cccccc;
+}
+
+.about-content {
+  padding: 60px 0;
+  background: var(--white);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+}
+
+.story-section .section-title {
+  font-family: var(--font-primary);
+  font-size: 2rem;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+.story-text p {
+  color: var(--text-color);
+  margin-bottom: 16px;
+}
+
+.story-text .quote {
+  padding: 20px;
+  background: #f9fafb;
+  border-left: 4px solid var(--secondary-color);
+  margin: 20px 0;
+  color: var(--light-text);
+  font-style: italic;
+}
+
+.image-collage .collage-title {
+  font-family: var(--font-primary);
+  font-size: 1.4rem;
+  color: var(--text-color);
+  margin-bottom: 15px;
+}
+
+.collage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.collage-item {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%; /* 1:1 aspect ratio */
+  background: #f3f4f6;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.collage-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.loading-placeholder .placeholder-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--light-text);
+  gap: 8px;
+}
+
+.values-section {
+  padding: 60px 0;
+  background: var(--background-light);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.value-card {
+  background: var(--white);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.value-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.cta-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #f8f4e1 0%, #fff 100%);
+}
+
+.cta-content {
+  text-align: center;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+  background: var(--secondary-color);
+  color: var(--white);
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.cta-btn:hover {
+  background: var(--accent-color);
+}
+
+@media (max-width: 1024px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
