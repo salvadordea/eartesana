@@ -8,8 +8,10 @@ README.md
 .gitattributes
 
 # Archivos de desarrollo
-config.js
-test-api.html
+# ¡No ignorar config.js! Se necesita para producción
+#config.js
+# Puedes ignorar archivos de pruebas locales si no los usas en producción
+# test-api.html
 
 # Archivos temporales
 *.tmp
