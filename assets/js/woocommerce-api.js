@@ -15,9 +15,16 @@ class WooCommerceAPI {
             timeout: config.timeout || 30000
         };
         
-        // Initialize from global config if available
-        if (window.EstudioArtesanaConfig && window.EstudioArtesanaConfig.api) {
-            this.config.baseURL = window.EstudioArtesanaConfig.api.baseUrl || this.config.baseURL;
+        // Initialize from global config if available (prefer WooCommerce settings)
+        if (window.EstudioArtesanaConfig && window.EstudioArtesanaConfig.woocommerce) {
+            const wc = window.EstudioArtesanaConfig.woocommerce;
+            this.config.baseURL = wc.baseURL || this.config.baseURL;
+            this.config.apiPath = '/wp-json/wc/v3';
+            // If credentials exist in global config, set them
+            if (wc.consumerKey && wc.consumerSecret) {
+                this.config.consumerKey = wc.consumerKey;
+                this.config.consumerSecret = wc.consumerSecret;
+            }
         }
         
         this.cache = new Map();

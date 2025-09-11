@@ -66,11 +66,33 @@
         <div id="results"></div>
     </div>
 
-    <!-- Scripts -->
-    <script src="assets/js/config.js"></script>
-    <script src="assets/js/woocommerce-api.js"></script>
-
+    <!-- Scripts (loaded dynamically for robustness) -->
     <script>
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                const s = document.createElement('script');
+                s.src = src;
+                s.async = false;
+                s.onload = resolve;
+                s.onerror = () => reject(new Error('No se pudo cargar: ' + src));
+                document.head.appendChild(s);
+            });
+        }
+
+        async function loadCoreScripts() {
+            const errors = [];
+            try {
+                await loadScript('assets/js/config.js');
+            } catch (e1) {
+                errors.push(e1.message);
+                try { await loadScript('config.js'); } catch (e2) { errors.push(e2.message); }
+            }
+            try {
+                await loadScript('assets/js/woocommerce-api.js');
+            } catch (e3) { errors.push(e3.message); }
+            return errors;
+        }
+
         // Wait for config to load
         function waitForConfig() {
             return new Promise((resolve) => {
@@ -81,10 +103,16 @@
                 }
             });
         }
+
         // Initialize API
         let api;
 
         document.addEventListener('DOMContentLoaded', async function() {
+            const loadErrors = await loadCoreScripts();
+            if (loadErrors.length) {
+                const configStatus = document.getElementById('config-status');
+                configStatus.innerHTML += `<div class="status error">⚠️ Problemas cargando scripts: <pre>${loadErrors.join('\n')}</pre></div>`;
+            }
             await waitForConfig();
             displayConfig();
             initializeAPI();
