@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Categorías - Admin Estudio Artesana</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/categorias.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.css">
+</head>
+<body class="admin-body">
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-container">
+            <div class="admin-header-content">
+                <div class="admin-logo">
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.png" alt="Estudio Artesana" class="admin-logo-img">
+                        <span class="admin-logo-text">ESTUDIO ARTESANA</span>
+                    </a>
+                </div>
+                
+                <nav class="admin-nav">
+                    <ul class="admin-nav-list">
+                        <li><a href="index.html" class="admin-nav-link">Dashboard</a></li>
+                        <li><a href="categorias.html" class="admin-nav-link active">Categorías</a></li>
+                        <li><a href="../pages/tienda/index.html" class="admin-nav-link" target="_blank">Ver Tienda</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Admin Content -->
+    <main class="admin-main">
+        <div class="admin-container">
+            <!-- Page Header -->
+            <div class="admin-page-header">
+                <div class="page-title-section">
+                    <h1 class="page-title">
+                        <i class="fas fa-tags"></i>
+                        Gestión de Categorías
+                    </h1>
+                    <p class="page-description">
+                        Administra las categorías de productos: organiza, actualiza imágenes y controla la visibilidad
+                    </p>
+                </div>
+                
+                <div class="page-actions">
+                    <button class="btn btn-secondary" id="exportBtn">
+                        <i class="fas fa-download"></i>
+                        Exportar Configuración
+                    </button>
+                    <button class="btn btn-outline" id="importBtn">
+                        <i class="fas fa-upload"></i>
+                        Importar Configuración
+                    </button>
+                    <input type="file" id="importFile" accept=".json" style="display: none;">
+                    <button class="btn btn-primary" id="refreshBtn">
+                        <i class="fas fa-sync"></i>
+                        Actualizar desde WooCommerce
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalCategories">-</div>
+                        <div class="stat-label">Total Categorías</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon visible">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="visibleCategories">-</div>
+                        <div class="stat-label">Visibles</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon hidden">
+                        <i class="fas fa-eye-slash"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="hiddenCategories">-</div>
+                        <div class="stat-label">Ocultas</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon images">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="categoriesWithImages">-</div>
+                        <div class="stat-label">Con Imágenes</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Management -->
+            <div class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-list"></i>
+                        Lista de Categorías
+                    </h2>
+                    <div class="section-actions">
+                        <div class="view-options">
+                            <button class="view-btn active" data-view="grid">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="view-btn" data-view="list">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                        <div class="bulk-actions">
+                            <select id="bulkAction">
+                                <option value="">Acciones en lote...</option>
+                                <option value="show">Mostrar seleccionadas</option>
+                                <option value="hide">Ocultar seleccionadas</option>
+                                <option value="reset-images">Resetear imágenes</option>
+                            </select>
+                            <button class="btn btn-sm btn-outline" id="applyBulkAction">
+                                Aplicar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div class="loading-state" id="categoriesLoading">
+                    <div class="loading-spinner"></div>
+                    <p>Cargando categorías...</p>
+                </div>
+
+                <!-- Categories Grid -->
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Categories will be loaded here dynamically -->
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>No hay categorías</h3>
+                    <p>Las categorías se cargarán desde WooCommerce automáticamente.</p>
+                    <button class="btn btn-primary" onclick="window.categoryManager.refreshCategories()">
+                        <i class="fas fa-sync"></i>
+                        Cargar Categorías
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cloudinary Configuration -->
+            <div class="admin-section">
+                <div class="section-header">
+                    <h3 class="section-title">
+                        <i class="fas fa-cloud"></i>
+                        Configuración de Cloudinary
+                    </h3>
+                    <button class="btn btn-sm btn-outline" id="toggleCloudinaryConfig">
+                        <i class="fas fa-cog"></i>
+                        Configurar
+                    </button>
+                </div>
+                
+                <div class="cloudinary-status" id="cloudinaryStatus">
+                    <div class="status-item">
+                        <span class="status-label">Estado:</span>
+                        <span class="status-value" id="cloudinaryStatusValue">
+                            <i class="fas fa-circle status-indicator"></i>
+                            <span id="statusText">No configurado</span>
+                        </span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Cloud Name:</span>
+                        <span class="status-value" id="cloudinaryCloudName">-</span>
+                    </div>
+                </div>
+                
+                <div class="cloudinary-config" id="cloudinaryConfig" style="display: none;">
+                    <div class="config-form">
+                        <div class="form-group">
+                            <label for="cloudName">Cloud Name *</label>
+                            <input type="text" id="cloudName" placeholder="tu-cloud-name" required>
+                            <small>Encuentra tu Cloud Name en el Dashboard de Cloudinary</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="uploadPreset">Upload Preset *</label>
+                            <input type="text" id="uploadPreset" placeholder="unsigned-preset" required>
+                            <small>Crea un upload preset "unsigned" en Cloudinary Settings > Upload</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="apiKey">API Key (opcional)</label>
+                            <input type="text" id="apiKey" placeholder="123456789012345">
+                            <small>Solo necesario para eliminar imágenes. Encuentra en API Keys section.</small>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button class="btn btn-outline" id="cancelCloudinaryConfig">
+                                Cancelar
+                            </button>
+                            <button class="btn btn-primary" id="saveCloudinaryConfig">
+                                <i class="fas fa-save"></i>
+                                Guardar Configuración
+                            </button>
+                            <button class="btn btn-secondary" id="testCloudinaryConfig">
+                                <i class="fas fa-vial"></i>
+                                Probar Conexión
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cloudinary-help">
+                    <details>
+                        <summary>¿Cómo obtener las credenciales de Cloudinary?</summary>
+                        <div class="help-content">
+                            <ol>
+                                <li><strong>Cloud Name:</strong> Ve a tu dashboard de Cloudinary, está en la parte superior.</li>
+                                <li><strong>Upload Preset:</strong>
+                                    <ul>
+                                        <li>Ve a Settings > Upload</li>
+                                        <li>Scroll hasta "Upload presets"</li>
+                                        <li>Crea uno nuevo con modo "Unsigned"</li>
+                                        <li>Configura la carpeta como "categories" (opcional)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>API Key:</strong> En Settings > API Keys, copia la API Key (no el API Secret).</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Cache Info -->
+            <div class="admin-section">
+                <div class="section-header">
+                    <h3 class="section-title">
+                        <i class="fas fa-database"></i>
+                        Información de Cache
+                    </h3>
+                </div>
+                
+                <div class="cache-info">
+                    <div class="cache-item">
+                        <span class="cache-label">Última actualización:</span>
+                        <span class="cache-value" id="lastUpdate">-</span>
+                    </div>
+                    <div class="cache-item">
+                        <span class="cache-label">Cache expira en:</span>
+                        <span class="cache-value" id="cacheExpires">-</span>
+                    </div>
+                    <div class="cache-actions">
+                        <button class="btn btn-sm btn-outline" id="clearCacheBtn">
+                            <i class="fas fa-trash"></i>
+                            Limpiar Cache
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Image Upload Modal -->
+    <div class="modal-overlay" id="imageModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-image"></i>
+                    Actualizar Imagen de Categoría
+                </h3>
+                <button class="modal-close" id="closeImageModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="category-info">
+                    <h4 id="modalCategoryName">Categoría</h4>
+                    <p id="modalCategoryDescription">Selecciona una nueva imagen para esta categoría</p>
+                </div>
+                
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Arrastra una imagen aquí o haz clic para seleccionar</p>
+                        <p class="upload-hint">Formatos soportados: JPG, PNG, WEBP (máximo 5MB)</p>
+                    </div>
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                </div>
+                
+                <div class="current-image" id="currentImageSection">
+                    <label>Imagen actual:</label>
+                    <div class="current-image-preview">
+                        <img id="currentImage" src="" alt="Imagen actual">
+                        <button class="btn btn-sm btn-danger" id="removeImageBtn">
+                            <i class="fas fa-trash"></i>
+                            Remover imagen
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="image-preview" id="imagePreview" style="display: none;">
+                    <label>Vista previa:</label>
+                    <img id="previewImage" src="" alt="Vista previa">
+                </div>
+                
+                <div class="upload-progress" id="uploadProgress" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="progress-text" id="progressText">Subiendo... 0%</span>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelImageBtn">
+                    Cancelar
+                </button>
+                <button class="btn btn-primary" id="saveImageBtn" disabled>
+                    <i class="fas fa-save"></i>
+                    Guardar Imagen
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/cloudinary-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    
+    <!-- Admin Scripts -->
+    <script src="admin-manager.js"></script>
+    <script src="cloudinary-service.js"></script>
+    
+    <!-- Categories Management -->
+    <script>
+        // Initialize category management when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            window.categoryManager = new CategoryManager();
+        });
+    </script>
+</body>
+</html>
