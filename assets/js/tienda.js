@@ -25,6 +25,8 @@ class EstudioArtesanaTienda {
         this.products = [];
         this.categories = [];
         this.cartItems = this.loadCartFromStorage();
+        this.filtersActive = false; // Track if any filter is applied
+        this.categoriesSection = null; // Will store categories section reference
         
         this.init();
     }
@@ -63,6 +65,7 @@ class EstudioArtesanaTienda {
         this.categoriesGrid = document.getElementById('categoriesGrid');
         this.categoriesLoading = document.getElementById('categoriesLoading');
         this.categoriesError = document.getElementById('categoriesError');
+        this.categoriesSection = document.querySelector('.categories-section');
         
         // Control elements
         this.sortProducts = document.getElementById('sortProducts');
@@ -442,6 +445,7 @@ class EstudioArtesanaTienda {
     handleSearch() {
         this.currentFilters.search = this.productSearch.value.trim();
         this.currentPage = 1;
+        this.updateCategoriesVisibility();
         this.loadProducts();
     }
     
@@ -458,6 +462,7 @@ class EstudioArtesanaTienda {
         const categoryId = filterElement.dataset.category;
         this.currentFilters.category = categoryId || null;
         this.currentPage = 1;
+        this.updateCategoriesVisibility();
         this.loadProducts();
     }
     
@@ -468,6 +473,7 @@ class EstudioArtesanaTienda {
         this.currentFilters.minPrice = min;
         this.currentFilters.maxPrice = max;
         this.currentPage = 1;
+        this.updateCategoriesVisibility();
         this.loadProducts();
     }
     
@@ -476,6 +482,7 @@ class EstudioArtesanaTienda {
         this.currentFilters.featured = this.featuredFilter.checked;
         this.currentFilters.inStock = this.inStockFilter.checked;
         this.currentPage = 1;
+        this.updateCategoriesVisibility();
         this.loadProducts();
     }
     
@@ -509,6 +516,7 @@ class EstudioArtesanaTienda {
         this.categoryFilters.querySelector('[data-category=""]')?.classList.add('active');
         
         this.currentPage = 1;
+        this.updateCategoriesVisibility();
         this.loadProducts();
     }
     
@@ -681,6 +689,89 @@ class EstudioArtesanaTienda {
                 document.body.removeChild(messageDiv);
             }, 300);
         }, 3000);
+    }
+    
+    // Filter Detection and Category Animation Methods
+    
+    checkFiltersActive() {
+        const hasSearch = this.currentFilters.search && this.currentFilters.search.trim() !== '';
+        const hasCategory = this.currentFilters.category && this.currentFilters.category !== null;
+        const hasPrice = this.currentFilters.minPrice !== null || this.currentFilters.maxPrice !== null;
+        const hasSpecialFilters = this.currentFilters.onSale || this.currentFilters.featured || !this.currentFilters.inStock;
+        
+        return hasSearch || hasCategory || hasPrice || hasSpecialFilters;
+    }
+    
+    updateCategoriesVisibility() {
+        if (!this.categoriesSection) return;
+        
+        const shouldHide = this.checkFiltersActive();
+        
+        if (shouldHide && !this.filtersActive) {
+            // Hide categories with animation
+            this.hideCategoriesWithAnimation();
+            this.filtersActive = true;
+        } else if (!shouldHide && this.filtersActive) {
+            // Show categories with animation
+            this.showCategoriesWithAnimation();
+            this.filtersActive = false;
+        }
+    }
+    
+    hideCategoriesWithAnimation() {
+        if (!this.categoriesSection) return;
+        
+        this.categoriesSection.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        this.categoriesSection.style.transform = 'translateY(-20px)';
+        this.categoriesSection.style.opacity = '0';
+        this.categoriesSection.style.maxHeight = this.categoriesSection.scrollHeight + 'px';
+        
+        // Force reflow
+        this.categoriesSection.offsetHeight;
+        
+        setTimeout(() => {
+            this.categoriesSection.style.maxHeight = '0';
+            this.categoriesSection.style.marginBottom = '0';
+            this.categoriesSection.style.paddingTop = '0';
+            this.categoriesSection.style.paddingBottom = '0';
+        }, 50);
+        
+        setTimeout(() => {
+            this.categoriesSection.style.display = 'none';
+        }, 500);
+    }
+    
+    showCategoriesWithAnimation() {
+        if (!this.categoriesSection) return;
+        
+        // Reset display and get natural height
+        this.categoriesSection.style.display = 'block';
+        this.categoriesSection.style.maxHeight = 'none';
+        this.categoriesSection.style.marginBottom = '';
+        this.categoriesSection.style.paddingTop = '';
+        this.categoriesSection.style.paddingBottom = '';
+        
+        const naturalHeight = this.categoriesSection.scrollHeight;
+        
+        // Start animation from collapsed state
+        this.categoriesSection.style.maxHeight = '0';
+        this.categoriesSection.style.opacity = '0';
+        this.categoriesSection.style.transform = 'translateY(-20px)';
+        this.categoriesSection.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        
+        // Force reflow
+        this.categoriesSection.offsetHeight;
+        
+        setTimeout(() => {
+            this.categoriesSection.style.maxHeight = naturalHeight + 'px';
+            this.categoriesSection.style.opacity = '1';
+            this.categoriesSection.style.transform = 'translateY(0)';
+        }, 50);
+        
+        setTimeout(() => {
+            this.categoriesSection.style.maxHeight = 'none';
+            this.categoriesSection.style.transition = '';
+        }, 550);
     }
     
     // Categories Section Methods
