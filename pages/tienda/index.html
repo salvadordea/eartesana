@@ -29,14 +29,21 @@
                 <nav class="nav">
                     <ul class="nav-list">
                         <li class="nav-item"><a href="../../index.html" class="nav-link">INICIO</a></li>
-                        <li class="nav-item">
-                            <a href="../tienda/index.html" class="nav-link active">TIENDA</a>
+                        <li class="nav-item dropdown">
+                            <a href="index.html" class="nav-link active">TIENDA</a>
                             <i class="fas fa-chevron-down nav-arrow"></i>
+                            <div class="dropdown-menu" id="tiendaDropdown">
+                                <a href="index.html" class="dropdown-link">Todos los productos</a>
+                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-categories" id="dropdownCategories">
+                                    <!-- Categories will be loaded here -->
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item"><a href="../sobre-nosotros/index.html" class="nav-link">SOBRE NOSOTROS</a></li>
-                        <li class="nav-item"><a href="#mayoristas" class="nav-link">MAYORISTAS</a></li>
-                        <li class="nav-item"><a href="#contacto" class="nav-link">CONTACTO</a></li>
-                        <li class="nav-item"><a href="#registro" class="nav-link">REGISTRO DE CLIENTES</a></li>
+                        <li class="nav-item"><a href="../../index.html#mayoristas" class="nav-link">MAYORISTAS</a></li>
+                        <li class="nav-item"><a href="../../index.html#contacto" class="nav-link">CONTACTO</a></li>
+                        <li class="nav-item"><a href="../../index.html#registro" class="nav-link">REGISTRO DE CLIENTES</a></li>
                     </ul>
                 </nav>
 
@@ -276,8 +283,20 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="../../config.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/cloudinary-config.js"></script>
+    
+    <!-- WooCommerce API Scripts -->
     <script src="../../assets/js/woocommerce-api.js"></script>
+    <script src="../../assets/js/woo-init.js"></script>
+    
+    <!-- Category Images System -->
+    <script src="../../assets/js/category-images.js"></script>
+    
+    <!-- Categories System -->
+    <script src="../../assets/js/dropdown-categories.js"></script>
+    
+    <!-- Main Scripts -->
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/tienda.js"></script>
 </body>
