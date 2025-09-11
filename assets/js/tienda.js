@@ -705,13 +705,12 @@ class EstudioArtesanaTienda {
                     <div class="category-image">
                         <img src="${image}" alt="${category.name}" loading="lazy">
                         <div class="category-overlay">
-                            <a href="../tienda/index.html?categoria=${category.slug}" class="category-button">Ver Productos</a>
+                            <a href="../tienda/index.html?categoria=${category.slug}" class="category-button"></a>
                         </div>
                     </div>
                     <div class="category-info">
                         <h3 class="category-name">${category.name}</h3>
                         <p class="category-count">${category.count || 0} productos</p>
-                        <p class="category-description">${description}</p>
                     </div>
                     ${category.count > 10 ? '<div class="category-badge">Popular</div>' : ''}
                 </div>
