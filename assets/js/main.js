@@ -195,7 +195,7 @@ function initSmoothScrolling() {
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const targetId = link.getAttribute('href');
-            if (targetId === '#') return;
+            if (targetId === '#' || targetId.length <= 1) return;
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
