@@ -136,6 +136,15 @@ const EstudioArtesanaConfig = {
         }
     },
     
+    // Cloudinary Configuration (para manejo de imágenes)
+    cloudinary: {
+        cloudName: 'dnnwltoob', // Tu Cloud Name de Cloudinary
+        uploadPreset: 'unsigned', // Upload preset configurado como 'unsigned'
+        apiKey: 'ms_ATx2d6jS-uLXKS1pRwuGitJg', // API Key (opcional, solo para eliminar imágenes)
+        maxFileSize: 10 * 1024 * 1024, // 10MB máximo
+        allowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'webp']
+    },
+    
     // WooCommerce API Configuration
     // USANDO SITIO EN LÍNEA: https://estudioartesana.com
     woocommerce: {

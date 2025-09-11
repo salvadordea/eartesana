@@ -29,6 +29,14 @@ class CloudinaryService {
             } catch (error) {
                 console.error('Error loading Cloudinary config:', error);
             }
+        } else if (window.EstudioArtesanaConfig && window.EstudioArtesanaConfig.cloudinary) {
+            // Auto-configure from main config
+            const cloudinaryConfig = window.EstudioArtesanaConfig.cloudinary;
+            this.config = { ...this.config, ...cloudinaryConfig };
+            this.isConfigured = !!(cloudinaryConfig.cloudName && cloudinaryConfig.uploadPreset);
+            // Save to localStorage for future use
+            localStorage.setItem('cloudinaryConfig', JSON.stringify(cloudinaryConfig));
+            console.log('✅ Cloudinary auto-configured from main config');
         }
     }
 
