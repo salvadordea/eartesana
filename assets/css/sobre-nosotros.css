@@ -98,14 +98,14 @@ body {
 }
 
 .story-text .quote {
-  padding: 25px;
-  background: rgba(212, 175, 55, 0.1);
-  border-left: 4px solid var(--secondary-color);
-  margin: 30px 0;
-  color: #fff;
-  font-style: italic;
-  font-size: 1.15rem;
-  border-radius: 0 8px 8px 0;
+    padding: 25px;
+    background: rgba(192, 192, 192, 0.1);
+    border-left: 4px solid var(--secondary-color);
+    margin: 30px 0;
+    color: #fff;
+    font-style: italic;
+    font-size: 1.15rem;
+    border-radius: 0 8px 8px 0;
 }
 
 .collage-item img {
@@ -143,23 +143,25 @@ body {
 
 .values-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .value-card {
-  background: rgba(212, 175, 55, 0.05);
-  border: 1px solid #333;
-  border-radius: 12px;
-  padding: 30px 20px;
-  text-align: center;
-  transition: all 0.3s ease;
+    background: rgba(192, 192, 192, 0.05);
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
 }
 
 .value-card:hover {
-  border-color: var(--secondary-color);
-  background: rgba(212, 175, 55, 0.1);
-  transform: translateY(-5px);
+    border-color: var(--secondary-color);
+    background: rgba(192, 192, 192, 0.1);
+    transform: translateY(-5px);
 }
 
 .value-card h3 {
@@ -186,9 +188,9 @@ body {
 }
 
 .cta-section {
-  padding: 80px 0;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, #000 100%);
-  border-top: 1px solid #333;
+    padding: 80px 0;
+    background: linear-gradient(135deg, rgba(192, 192, 192, 0.1) 0%, #000 100%);
+    border-top: 1px solid #333;
 }
 
 .cta-content {
@@ -228,9 +230,6 @@ body {
   .about-grid {
     grid-template-columns: 1fr;
   }
-  .values-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 600px) {
@@ -239,6 +238,7 @@ body {
   }
   .values-grid {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
 }
 

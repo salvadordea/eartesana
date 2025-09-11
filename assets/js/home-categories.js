@@ -153,7 +153,7 @@ class HomeCategoriesLoader {
                     </linearGradient>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#bg)"/>
-                <text x="50%" y="40%" font-family="Arial, sans-serif" font-size="14" fill="#D4AF37" text-anchor="middle" font-weight="bold">
+                <text x="50%" y="40%" font-family="Arial, sans-serif" font-size="14" fill="#C0C0C0" text-anchor="middle" font-weight="bold">
                     ESTUDIO ARTESANA
                 </text>
                 <text x="50%" y="60%" font-family="Arial, sans-serif" font-size="20" fill="#ffffff" text-anchor="middle" font-weight="bold">
