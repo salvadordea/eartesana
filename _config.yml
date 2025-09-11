@@ -1,7 +1,7 @@
 # Configuración de GitHub Pages para Estudio Artesana
 title: Estudio Artesana
 description: Homepage profesional con panel de administración para Estudio Artesana
-baseurl: "/EstudioArtesana" # Nombre del repositorio
+baseurl: "/eartesana" # Nombre del repositorio
 url: "https://salvadordea.github.io" # URL base de GitHub Pages
 
 # Build settings
