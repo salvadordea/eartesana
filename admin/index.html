@@ -700,12 +700,17 @@
                 return;
             }
 
-            const success = window.CloudinaryUtils.setupCloudinary(cloudName, uploadPreset);
-            if (success) {
-                alert('¡Cloudinary configurado correctamente!');
-                closeCloudinaryModal();
-            } else {
-                alert('Error configurando Cloudinary');
+            try {
+                const success = window.CloudinaryUtils.setupCloudinary(cloudName, uploadPreset);
+                if (success) {
+                    alert('¡Cloudinary configurado correctamente!');
+                    closeCloudinaryModal();
+                } else {
+                    alert('Error configurando Cloudinary');
+                }
+            } catch (error) {
+                console.error('Error saving Cloudinary config:', error);
+                alert('Error configurando Cloudinary: ' + error.message);
             }
         }
 

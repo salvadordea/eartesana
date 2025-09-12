@@ -189,7 +189,7 @@ window.CloudinaryService = new CloudinaryService();
 // Funciones de utilidad para el admin panel
 window.CloudinaryUtils = {
     
-    async setupCloudinary(cloudName, uploadPreset, apiKey = '') {
+    setupCloudinary(cloudName, uploadPreset, apiKey = '') {
         const config = { cloudName, uploadPreset, apiKey };
         const success = window.CloudinaryService.saveConfig(config);
         
