@@ -8,40 +8,86 @@ const CLOUDINARY_BASE_URL = 'https://res.cloudinary.com/your-cloud-name/image/up
 
 // Category image mappings - update these URLs with your actual Cloudinary images
 const CATEGORY_IMAGES = {
-    // Main categories
-    'aretes-de-piel': {
-        url: `${CLOUDINARY_BASE_URL}c_fill,w_400,h_300/v1/categories/aretes-de-piel`,
-        fallback: 'assets/images/categories/aretes-de-piel.jpg',
-        alt: 'Aretes de piel artesanales'
+    // Main categories - Map to physical files in assets/images/categories/
+    'backpacks': {
+        url: 'assets/images/categories/backpacks.jpg',
+        fallback: 'assets/images/categories/backpacks.jpg',
+        alt: 'Mochilas artesanales'
     },
-    'bolsas': {
-        url: `${CLOUDINARY_BASE_URL}c_fill,w_400,h_300/v1/categories/bolsas`,
-        fallback: 'assets/images/categories/bolsas.jpg',
-        alt: 'Bolsas de piel artesanales'
+    'bolsas-cruzadas': {
+        url: 'assets/images/categories/bolsas-cruzadas.jpg',
+        fallback: 'assets/images/categories/bolsas-cruzadas.jpg',
+        alt: 'Bolsas cruzadas de piel'
     },
-    'accesorios': {
-        url: `${CLOUDINARY_BASE_URL}c_fill,w_400,h_300/v1/categories/accesorios`,
-        fallback: 'assets/images/categories/accesorios.jpg',
-        alt: 'Accesorios de piel'
+    'bolsas-grandes': {
+        url: 'assets/images/categories/bolsas-grandes.jpg',
+        fallback: 'assets/images/categories/bolsas-grandes.jpg',
+        alt: 'Bolsas grandes de piel'
+    },
+    'bolsas-de-mano': {
+        url: 'assets/images/categories/bolsas-de-mano.jpg',
+        fallback: 'assets/images/categories/bolsas-de-mano.jpg',
+        alt: 'Bolsas de mano artesanales'
+    },
+    'bolsas-textil': {
+        url: 'assets/images/categories/bolsas-textil.jpg',
+        fallback: 'assets/images/categories/bolsas-textil.jpg',
+        alt: 'Bolsas de textil'
+    },
+    'botelleras': {
+        url: 'assets/images/categories/botelleras.jpg',
+        fallback: 'assets/images/categories/botelleras.jpg',
+        alt: 'Botelleras de piel'
+    },
+    'hogar': {
+        url: 'assets/images/categories/hogar.jpg',
+        fallback: 'assets/images/categories/hogar.jpg',
+        alt: 'Artículos para el hogar'
     },
     'joyeria': {
-        url: `${CLOUDINARY_BASE_URL}c_fill,w_400,h_300/v1/categories/joyeria`,
+        url: 'assets/images/categories/joyeria.jpg',
         fallback: 'assets/images/categories/joyeria.jpg',
         alt: 'Joyería artesanal'
     },
+    'portacel': {
+        url: 'assets/images/categories/portacel.jpg',
+        fallback: 'assets/images/categories/portacel.jpg',
+        alt: 'Porta celulares de piel'
+    },
+    'vestimenta': {
+        url: 'assets/images/categories/vestimenta.jpg',
+        fallback: 'assets/images/categories/vestimenta.jpg',
+        alt: 'Vestimenta artesanal'
+    },
+    // Legacy mappings for backward compatibility
+    'aretes-de-piel': {
+        url: 'assets/images/categories/joyeria.jpg',
+        fallback: 'assets/images/categories/joyeria.jpg',
+        alt: 'Aretes de piel artesanales'
+    },
+    'bolsas': {
+        url: 'assets/images/categories/bolsas-grandes.jpg',
+        fallback: 'assets/images/categories/bolsas-grandes.jpg',
+        alt: 'Bolsas de piel artesanales'
+    },
+    'accesorios': {
+        url: 'assets/images/categories/portacel.jpg',
+        fallback: 'assets/images/categories/portacel.jpg',
+        alt: 'Accesorios de piel'
+    },
     'cuadernos': {
-        url: `${CLOUDINARY_BASE_URL}c_fill,w_400,h_300/v1/categories/cuadernos`,
-        fallback: 'assets/images/categories/cuadernos.jpg',
+        url: 'assets/images/categories/hogar.jpg',
+        fallback: 'assets/images/categories/hogar.jpg',
         alt: 'Cuadernos de piel'
     },
     'carteras': {
-        url: `${CLOUDINARY_BASE_URL}c_fill,w_400,h_300/v1/categories/carteras`,
-        fallback: 'assets/images/categories/carteras.jpg',
+        url: 'assets/images/categories/bolsas-de-mano.jpg',
+        fallback: 'assets/images/categories/bolsas-de-mano.jpg',
         alt: 'Carteras de piel'
     },
     'cinturones': {
-        url: `${CLOUDINARY_BASE_URL}c_fill,w_400,h_300/v1/categories/cinturones`,
-        fallback: 'assets/images/categories/cinturones.jpg',
+        url: 'assets/images/categories/vestimenta.jpg',
+        fallback: 'assets/images/categories/vestimenta.jpg',
         alt: 'Cinturones de piel'
     }
 };

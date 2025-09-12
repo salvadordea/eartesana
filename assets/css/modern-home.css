@@ -18,7 +18,7 @@
 
 /* Dark Background Theme for Homepage */
 body {
-    background: var(--gradient-primary);
+    background: #000000;
     position: relative;
     overflow-x: hidden;
 }
@@ -339,8 +339,14 @@ body::after {
 }
 
 .modern-category-content {
-    padding: var(--spacing-md);
-    position: relative;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--white);
+    padding: 15px 20px;
+    text-align: left;
     z-index: 2;
 }
 
