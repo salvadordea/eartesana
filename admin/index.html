@@ -700,6 +700,16 @@
                 return;
             }
 
+            // Debug logging
+            console.log('CloudinaryService available:', !!window.CloudinaryService);
+            console.log('CloudinaryUtils available:', !!window.CloudinaryUtils);
+            
+            if (!window.CloudinaryUtils) {
+                console.error('CloudinaryUtils no está disponible');
+                alert('Error: Los scripts de Cloudinary no se cargaron correctamente. Refresca la página.');
+                return;
+            }
+
             try {
                 const success = window.CloudinaryUtils.setupCloudinary(cloudName, uploadPreset);
                 if (success) {
@@ -718,8 +728,44 @@
             document.getElementById('cloudinaryModal').style.display = 'none';
         }
 
+        // Fallback CloudinaryUtils if external script fails
+        function initializeFallbackCloudinary() {
+            if (!window.CloudinaryService) {
+                window.CloudinaryService = {
+                    config: { cloudName: '', uploadPreset: '', apiKey: '' },
+                    isConfigured: false,
+                    saveConfig: function(config) {
+                        this.config = { ...this.config, ...config };
+                        localStorage.setItem('cloudinaryConfig', JSON.stringify(config));
+                        this.isConfigured = !!(config.cloudName && config.uploadPreset);
+                        return this.isConfigured;
+                    }
+                };
+            }
+            
+            if (!window.CloudinaryUtils) {
+                window.CloudinaryUtils = {
+                    setupCloudinary: function(cloudName, uploadPreset, apiKey = '') {
+                        const config = { cloudName, uploadPreset, apiKey };
+                        const success = window.CloudinaryService.saveConfig(config);
+                        
+                        if (success) {
+                            console.log('✅ Cloudinary configurado correctamente (fallback)');
+                            return true;
+                        } else {
+                            console.error('❌ Error configurando Cloudinary (fallback)');
+                            return false;
+                        }
+                    }
+                };
+            }
+        }
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize fallback if needed
+            setTimeout(initializeFallbackCloudinary, 500);
+            
             // Hide auth check overlay
             const authCheck = document.getElementById('authCheck');
             if (authCheck) authCheck.style.display = 'none';
