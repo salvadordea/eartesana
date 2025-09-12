@@ -138,7 +138,7 @@ class ProductDetailPage {
             }
             
             // Process product data
-            this.processProductData();
+            await this.processProductData();
             this.renderProduct();
             
             // Load related products
@@ -153,7 +153,7 @@ class ProductDetailPage {
         }
     }
     
-    processProductData() {
+    async processProductData() {
         // Process images
         this.images = [];
         
@@ -172,10 +172,29 @@ class ProductDetailPage {
             }];
         }
         
-        // Set initial variant if product has variations
+        // Load complete variation data if product has variations
         if (this.product.variations && this.product.variations.length > 0) {
-            // Try to find default variation or use first available
-            this.selectedVariant = this.product.variations.find(v => v.default) || this.product.variations[0];
+            try {
+                console.log('Loading variation details for IDs:', this.product.variations);
+                
+                // If variations are just IDs, load the complete data
+                if (typeof this.product.variations[0] === 'number') {
+                    const variationPromises = this.product.variations.map(variationId => 
+                        window.WooAPI.getProductVariation(this.product.id, variationId)
+                    );
+                    
+                    this.product.variations = await Promise.all(variationPromises);
+                    console.log('Loaded complete variations:', this.product.variations);
+                }
+                
+                // Set initial variant
+                this.selectedVariant = this.product.variations.find(v => v && v.default) || this.product.variations[0];
+                
+            } catch (error) {
+                console.error('Error loading variation details:', error);
+                // Continue without variations if they fail to load
+                this.product.variations = [];
+            }
         }
     }
     

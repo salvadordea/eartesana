@@ -177,6 +177,13 @@ class WooCommerceAPI {
         return await this.makeRequest(`/products/${productId}/variations`);
     }
     
+    /**
+     * Get single product variation
+     */
+    async getProductVariation(productId, variationId) {
+        return await this.makeRequest(`/products/${productId}/variations/${variationId}`);
+    }
+    
     // CATEGORIES API
     
     /**
