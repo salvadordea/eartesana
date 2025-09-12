@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estudio Artesana - Legado ancestral transformado en diseño</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/modern-home.css">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -72,34 +73,39 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero compact">
-        <div class="hero-content">
-            <div class="hero-left">
-                <div class="hero-image">
-                    <img src="assets/images/hero-bag.jpg" alt="Bolsa artesanal" class="hero-product" id="mainHeroImage">
-                </div>
-            </div>
-            
-            <div class="hero-right">
-                <div class="hero-brand">
-                    <div class="hero-logo" id="heroLogoContainer">
-                        <!-- Logo hardcoded -->
-                        <img src="assets/images/logo-hero.webp" alt="Estudio Artesana" class="hero-logo-img" id="heroLogoImg">
+    <section class="hero modern">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-brand">
+                        <div class="hero-logo" id="heroLogoContainer">
+                            <img src="assets/images/logo-hero.webp" alt="Estudio Artesana" class="hero-logo-img" id="heroLogoImg">
+                        </div>
+                        <h1 class="hero-title">Legado ancestral transformado en diseño</h1>
+                        <p class="hero-subtitle">Descubre piezas únicas que honran la tradición artesanal mexicana con un enfoque contemporáneo y elegante.</p>
+                        <div class="hero-actions">
+                            <a href="pages/tienda/index.html" class="btn-primary hero-cta">Explorar Colección</a>
+                            <a href="pages/sobre-nosotros/index.html" class="btn-secondary hero-cta">Nuestra Historia</a>
+                        </div>
                     </div>
-                    <p class="hero-tagline">Legado ancestral transformado en diseño</p>
                 </div>
                 
-                <div class="hero-carousel compact">
-                    <div class="carousel-container" id="heroCarouselContainer">
-                        <div class="carousel-track" id="heroCarouselTrack">
-                            <!-- Slides will be loaded dynamically from config -->
-                        </div>
-                        <div class="carousel-dots" id="heroCarouselDots">
-                            <!-- Dots will be generated dynamically -->
-                        </div>
-                        <div class="carousel-nav">
-                            <button class="carousel-prev" id="carouselPrev"><i class="fas fa-chevron-left"></i></button>
-                            <button class="carousel-next" id="carouselNext"><i class="fas fa-chevron-right"></i></button>
+                <div class="hero-visual">
+                    <div class="hero-carousel modern">
+                        <div class="carousel-container" id="heroCarouselContainer">
+                            <div class="carousel-track" id="heroCarouselTrack">
+                                <!-- Slides will be loaded dynamically from config -->
+                            </div>
+                            <div class="carousel-dots" id="heroCarouselDots">
+                                <!-- Dots will be generated dynamically -->
+                            </div>
+                            <div class="carousel-nav">
+                                <button class="carousel-prev" id="carouselPrev"><i class="fas fa-chevron-left"></i></button>
+                                <button class="carousel-next" id="carouselNext"><i class="fas fa-chevron-right"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -108,9 +114,12 @@
     </section>
 
     <!-- Categories Section -->
-    <section class="categories-section visible">
+    <section class="categories-section modern">
         <div class="container">
-            <!-- Removing section header to make categories immediately visible -->
+            <div class="section-header centered">
+                <h2 class="section-title">Nuestras Categorías</h2>
+                <p class="section-subtitle">Explora nuestra colección de artesanías mexicanas contemporáneas</p>
+            </div>
             
             <!-- Loading State -->
             <div class="categories-loading" id="homeCategoriesLoading">
@@ -119,16 +128,88 @@
             </div>
 
             <!-- Categories Grid -->
-            <div class="home-categories-grid" id="homeCategoriesGrid">
+            <div class="modern-categories-grid" id="homeCategoriesGrid">
                 <!-- Categories will be inserted here dynamically -->
             </div>
 
             <!-- View All Categories Button -->
-            <div class="section-footer">
-                <a href="pages/categorias/index.html" class="view-all-btn">
+            <div class="section-footer centered">
+                <a href="pages/categorias/index.html" class="view-all-btn modern">
                     Ver todas las categorías
                     <i class="fas fa-arrow-right"></i>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="featured-products-section">
+        <div class="container">
+            <div class="section-header centered">
+                <h2 class="section-title">Productos Destacados</h2>
+                <p class="section-subtitle">Descubre nuestras piezas más especiales</p>
+            </div>
+
+            <!-- Loading State -->
+            <div class="featured-loading" id="featuredProductsLoading">
+                <div class="loading-spinner"></div>
+                <p>Cargando productos...</p>
+            </div>
+
+            <!-- Featured Products Grid -->
+            <div class="featured-products-grid" id="featuredProductsGrid">
+                <!-- Featured products will be loaded here -->
+            </div>
+
+            <div class="section-footer centered">
+                <a href="pages/tienda/index.html" class="view-all-btn modern">
+                    Ver toda la tienda
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Values Section -->
+    <section class="brand-values-section">
+        <div class="container">
+            <div class="section-header centered">
+                <h2 class="section-title">Por Qué Elegir Estudio Artesana</h2>
+                <p class="section-subtitle">Comprometidos con la excelencia y la tradición artesanal</p>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3 class="value-title">Hecho a Mano</h3>
+                    <p class="value-description">Cada pieza es única, creada con técnicas tradicionales por maestros artesanos mexicanos.</p>
+                </div>
+
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="value-title">Sostenible</h3>
+                    <p class="value-description">Materiales naturales y procesos respetuosos con el medio ambiente.</p>
+                </div>
+
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="value-title">Calidad Premium</h3>
+                    <p class="value-description">Estándares de calidad excepcionales en cada detalle y acabado.</p>
+                </div>
+
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3 class="value-title">Tradición</h3>
+                    <p class="value-description">Preservamos y honramos las técnicas ancestrales de la artesanía mexicana.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -172,6 +253,9 @@
     <script src="assets/js/home-categories.js"></script>
     <script src="assets/js/categories-preloader.js"></script>
     <script src="assets/js/dropdown-categories.js"></script>
+    
+    <!-- Featured Products -->
+    <script src="assets/js/featured-products.js"></script>
     
     <!-- Promotional System -->
     <script src="assets/js/promo-manager.js"></script>

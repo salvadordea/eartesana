@@ -81,16 +81,21 @@ class HomeCategoriesLoader {
     createHomeCategoryCard(category, index) {
         const image = this.getCategoryImage(category);
         const badgeText = this.getBadgeText(category.count);
+        const description = this.getCategoryDescription(category);
         
         return `
-            <div class="home-category-card" data-category-id="${category.id}">
-                <div class="home-category-image">
+            <div class="modern-category-card fade-in delay-${Math.min(index + 1, 4)}" data-category-id="${category.id}">
+                <div class="modern-category-image">
                     <img src="${image}" alt="${category.name}" loading="lazy">
-                    ${badgeText ? `<div class="home-category-badge">${badgeText}</div>` : ''}
+                    ${badgeText ? `<div class="category-badge">${badgeText}</div>` : ''}
                 </div>
-                <div class="home-category-info">
-                    <h3 class="home-category-name">${category.name}</h3>
-                    <p class="home-category-count">${category.count} producto${category.count !== 1 ? 's' : ''}</p>
+                <div class="modern-category-content">
+                    <h3 class="modern-category-title">${category.name}</h3>
+                    ${description ? `<p class="modern-category-description">${description}</p>` : ''}
+                    <div class="modern-category-count">
+                        <i class="fas fa-box"></i>
+                        ${category.count} producto${category.count !== 1 ? 's' : ''}
+                    </div>
                 </div>
             </div>
         `;
@@ -172,8 +177,27 @@ class HomeCategoriesLoader {
         return null;
     }
     
+    getCategoryDescription(category) {
+        // Generate descriptive text based on category name
+        const descriptions = {
+            'joyeria': 'Piezas únicas de joyería artesanal mexicana',
+            'joyería': 'Piezas únicas de joyería artesanal mexicana',
+            'accesorios': 'Complementos elegantes con diseño contemporáneo',
+            'bolsas': 'Bolsas artesanales de alta calidad',
+            'bolsas de mano': 'Bolsas de mano elegantes y funcionales',
+            'bolsas textil y piel': 'Combinación perfecta de textil y piel',
+            'bolsas cruzadas': 'Comodidad y estilo para el día a día',
+            'portacel': 'Fundas y accesorios para dispositivos móviles',
+            'cuadernos': 'Libretas y cuadernos artesanales',
+            'libretas': 'Libretas y cuadernos artesanales'
+        };
+        
+        const categoryName = category.name.toLowerCase();
+        return descriptions[categoryName] || `Descubre nuestra colección de ${category.name.toLowerCase()}`;
+    }
+    
     bindCategoryEvents() {
-        this.categoriesGrid.querySelectorAll('.home-category-card').forEach(card => {
+        this.categoriesGrid.querySelectorAll('.modern-category-card').forEach(card => {
             card.addEventListener('click', () => {
                 const categoryId = card.dataset.categoryId;
                 const category = this.categories.find(cat => cat.id == categoryId);
