@@ -696,19 +696,24 @@ body {
 
 /* Monthly Promotion Banner */
 .monthly-promo-banner {
-    position: relative;
+    position: fixed;
+    top: 20px;
+    right: 20px;
     background: var(--gradient-secondary);
     color: var(--white);
     padding: 15px 25px;
-    text-align: center;
+    border-radius: 8px;
+    transform: rotate(5deg);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
     font-family: var(--font-secondary);
     font-weight: 600;
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    animation: slideDown 0.5s ease-out;
-    margin-bottom: 0;
-    z-index: 100;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+    animation: subtle-bounce 3s infinite;
 }
 
 .monthly-promo-banner:hover {
@@ -791,17 +796,6 @@ body {
 .fade-in.delay-4 { animation-delay: 0.4s; }
 
 @keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-100%);
-    }
     to {
         opacity: 1;
         transform: translateY(0);
