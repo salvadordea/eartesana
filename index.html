@@ -21,6 +21,13 @@
         <button class="ribbon-close" onclick="closeRibbon()">&times;</button>
     </div>
 
+    <!-- Monthly Promotion Banner -->
+    <div class="monthly-promo-banner" id="monthlyPromoBanner">
+        <span class="promo-text">Enero 2025</span>
+        <span class="promo-discount">25% OFF</span>
+        <button class="promo-close" onclick="closePromoBanner()">&times;</button>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -89,7 +96,7 @@
                     <div class="trust-elements">
                         <div class="trust-item">
                             <i class="fas fa-truck"></i>
-                            <span>Envío Gratis</span>
+                            <span>Envío Gratis*</span>
                         </div>
                         <div class="trust-item">
                             <i class="fas fa-hand-holding-heart"></i>
@@ -99,6 +106,11 @@
                             <i class="fas fa-shield-alt"></i>
                             <span>Calidad Premium</span>
                         </div>
+                    </div>
+                    
+                    <!-- Shipping Disclaimer -->
+                    <div class="shipping-disclaimer">
+                        <small>*En compras superiores a $2,000.00</small>
                     </div>
                     
                     <!-- Social Media -->
@@ -228,21 +240,62 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>Contacto</h4>
-                    <p>Email: info@estudioartesana.com</p>
-                    <p>Teléfono: +52 123 456 7890</p>
+                    <h4>Navegación</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="pages/tienda/index.html">Tienda</a></li>
+                        <li><a href="pages/sobre-nosotros/index.html">Sobre Nosotros</a></li>
+                        <li><a href="pages/contacto/index.html">Contacto</a></li>
+                        <li><a href="#mayoristas">Mayoristas</a></li>
+                    </ul>
                 </div>
+                
                 <div class="footer-section">
-                    <h4>Síguenos</h4>
+                    <h4>Categorías</h4>
+                    <ul class="footer-links">
+                        <li><a href="pages/tienda/index.html?categoria=bolsas-de-mano">Bolsas de Mano</a></li>
+                        <li><a href="pages/tienda/index.html?categoria=joyeria">Joyería</a></li>
+                        <li><a href="pages/tienda/index.html?categoria=backpacks">Mochilas</a></li>
+                        <li><a href="pages/tienda/index.html?categoria=hogar">Hogar</a></li>
+                        <li><a href="pages/tienda/index.html?categoria=vestimenta">Vestimenta</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Atención al Cliente</h4>
+                    <ul class="footer-links">
+                        <li><a href="pages/politicas/envios.html">Información de Envíos</a></li>
+                        <li><a href="pages/politicas/devoluciones.html">Devoluciones</a></li>
+                        <li><a href="pages/politicas/garantia.html">Garantía</a></li>
+                        <li><a href="pages/politicas/cuidados.html">Cuidado de Productos</a></li>
+                        <li><a href="pages/politicas/faq.html">Preguntas Frecuentes</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-envelope"></i> info@estudioartesana.com</p>
+                    <p><i class="fas fa-phone"></i> +52 123 456 7890</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Ciudad de México, México</p>
+                    
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
                     </div>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2025 Estudio Artesana. Todos los derechos reservados.</p>
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Estudio Artesana. Todos los derechos reservados.</p>
+                    <div class="footer-legal">
+                        <a href="pages/politicas/privacidad.html">Aviso de Privacidad</a>
+                        <a href="pages/politicas/terminos.html">Términos y Condiciones</a>
+                        <a href="pages/politicas/cookies.html">Política de Cookies</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
@@ -276,5 +329,32 @@
     
     <!-- Main Site JavaScript -->
     <script src="assets/js/main.js"></script>
+    
+    <!-- Promo Banner Script -->
+    <script>
+        function closePromoBanner() {
+            const banner = document.getElementById('monthlyPromoBanner');
+            if (banner) {
+                banner.style.transform = 'rotate(45deg) scale(0)';
+                banner.style.opacity = '0';
+                setTimeout(() => {
+                    banner.remove();
+                }, 300);
+                
+                // Remember user closed it (optional)
+                localStorage.setItem('monthlyPromoClosed', 'true');
+            }
+        }
+        
+        // Show banner after page load if not previously closed
+        document.addEventListener('DOMContentLoaded', function() {
+            const banner = document.getElementById('monthlyPromoBanner');
+            const wasClosed = localStorage.getItem('monthlyPromoClosed');
+            
+            if (banner && wasClosed === 'true') {
+                banner.remove();
+            }
+        });
+    </script>
 </body>
 </html>
