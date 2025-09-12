@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Estudio Artesana</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Admin - Estudio Artesana</title>
     <style>
         * {
             margin: 0;
@@ -12,880 +11,159 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #2c2c2c;
-            --secondary: #D4AF37;
-            --accent: #1a1a1a;
-            --light: #f8f9fa;
-            --white: #ffffff;
-            --success: #28a745;
-            --warning: #ffc107;
-            --danger: #dc3545;
-            --info: #17a2b8;
-        }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #333;
         }
 
-        .admin-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .admin-header {
-            background: var(--white);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .admin-title {
-            color: var(--primary);
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .admin-subtitle {
-            color: var(--secondary);
-            font-size: 1.2rem;
-            font-weight: 500;
-        }
-
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .admin-card {
-            background: var(--white);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .admin-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #eee;
-        }
-
-        .card-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--secondary), #B8941F);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 1.5rem;
-        }
-
-        .card-title {
-            font-size: 1.4rem;
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--secondary), #B8941F);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-        }
-
-        .btn-success {
-            background: var(--success);
-            color: var(--white);
-        }
-
-        .btn-danger {
-            background: var(--danger);
-            color: var(--white);
-        }
-
-        .btn-info {
-            background: var(--info);
-            color: var(--white);
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .preview-area {
-            background: #f8f9fa;
-            border: 2px dashed #dee2e6;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            min-height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .preview-image {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: 8px;
-        }
-
-        .status-indicator {
-            padding: 8px 15px;
+        .redirect-container {
+            background: white;
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .status-success {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status-warning {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .status-danger {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .actions-bar {
-            background: var(--white);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .file-label {
-            display: inline-block;
-            padding: 12px 25px;
-            background: #6c757d;
-            color: white;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .file-label:hover {
-            background: #545b62;
-        }
-
-        .promo-themes {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-        }
-
-        .theme-option {
-            flex: 1;
-            min-width: 120px;
-            height: 40px;
-            border: 2px solid #dee2e6;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .theme-default { background: linear-gradient(135deg, #D4AF37, #B8941F); color: white; }
-        .theme-valentine { background: linear-gradient(135deg, #e91e63, #ad1457); color: white; }
-        .theme-mother { background: linear-gradient(135deg, #f06292, #c2185b); color: white; }
-        .theme-christmas { background: linear-gradient(135deg, #c62828 0%, #2e7d32 50%, #c62828 100%); color: white; }
-        .theme-summer { background: linear-gradient(135deg, #ff9800, #f57c00); color: white; }
-
-        .theme-option.active {
-            border-color: var(--secondary);
-            transform: scale(1.05);
-        }
-
-        .modal {
-            position: fixed;
-            z-index: 10001;
-            left: 0;
-            top: 0;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            max-width: 400px;
             width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background-color: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-
-        .modal-content h2 {
-            color: var(--primary);
-            margin-bottom: 20px;
             text-align: center;
         }
 
-        .btn-secondary {
-            background: #6c757d;
-            color: var(--white);
+        .loading-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 auto 20px;
+            animation: pulse 2s infinite;
         }
 
-        @media (max-width: 768px) {
-            .admin-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .admin-title {
-                font-size: 2rem;
-            }
-            
-            .btn-group {
-                justify-content: center;
-            }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            color: #2c2c2c;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .loading-text {
+            color: #D4AF37;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .manual-link {
+            margin-top: 30px;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+        }
+
+        .manual-link a {
+            color: #D4AF37;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .manual-link a:hover {
+            color: #B8941F;
+            text-decoration: underline;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #D4AF37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <!-- Auth Check and Setup -->
-    <div id="authCheck" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; display: flex; align-items: center; justify-content: center;">
-        <div style="color: white; text-align: center;">
-            <div style="font-size: 2rem; margin-bottom: 20px;">🔐</div>
-            <div>Verificando autenticación...</div>
+    <div class="redirect-container">
+        <div class="loading-icon">
+            <i class="fas fa-cogs"></i>
+        </div>
+        <h1>Estudio Artesana</h1>
+        <p>Acceso al Panel de Administración</p>
+        
+        <div class="spinner"></div>
+        <div class="loading-text">Redirigiendo al login...</div>
+        
+        <div class="manual-link">
+            <p>Si no rediriges automáticamente:</p>
+            <a href="login-simple.html" id="manualLink">Hacer clic aquí para acceder</a>
         </div>
     </div>
 
-    <!-- Cloudinary Setup Modal -->
-    <div id="cloudinaryModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <h2>🌩️ Configurar Cloudinary</h2>
-            <p>Para subir imágenes, necesitas configurar Cloudinary (gratuito):</p>
-            <div class="form-group">
-                <label>Cloud Name:</label>
-                <input type="text" id="cloudinaryCloudName" class="form-control" placeholder="tu-cloud-name">
-            </div>
-            <div class="form-group">
-                <label>Upload Preset:</label>
-                <input type="text" id="cloudinaryUploadPreset" class="form-control" placeholder="unsigned-preset-name">
-            </div>
-            <div class="btn-group">
-                <button onclick="saveCloudinaryConfig()" class="btn btn-primary">Guardar</button>
-                <button onclick="closeCloudinaryModal()" class="btn btn-secondary">Cancelar</button>
-            </div>
-            <div style="margin-top: 15px; font-size: 12px; color: #666;">
-                <a href="https://cloudinary.com/documentation/upload_presets#unsigned_upload_presets" target="_blank">¿Cómo configurar un Upload Preset?</a>
-            </div>
-        </div>
-    </div>
-    <div class="admin-container">
-        <!-- Header -->
-        <div class="admin-header">
-            <h1 class="admin-title">
-                <i class="fas fa-cogs"></i>
-                Panel de Administración
-            </h1>
-            <p class="admin-subtitle">Estudio Artesana - Gestión del Sitio Web</p>
-        </div>
-
-        <!-- Main Admin Grid -->
-        <div class="admin-grid">
-            <!-- Logo Management -->
-            <div class="admin-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <h3 class="card-title">Gestión de Logo</h3>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Logo Principal (Header)</label>
-                    <div class="preview-area" id="headerLogoPreview">
-                        <i class="fas fa-image" style="font-size: 2rem; color: #ccc;"></i>
-                    </div>
-                    <input type="file" id="headerLogoInput" class="file-input" accept="image/*">
-                    <label for="headerLogoInput" class="file-label">
-                        <i class="fas fa-upload"></i> Seleccionar Logo Header
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Logo Hero (Inicio - Blanco)</label>
-                    <div class="preview-area" id="heroLogoPreview" style="background: #333;">
-                        <i class="fas fa-image" style="font-size: 2rem; color: #ccc;"></i>
-                    </div>
-                    <input type="file" id="heroLogoInput" class="file-input" accept="image/*">
-                    <label for="heroLogoInput" class="file-label">
-                        <i class="fas fa-upload"></i> Seleccionar Logo Hero
-                    </label>
-                </div>
-                <div class="btn-group">
-                    <button class="btn btn-primary" onclick="saveLogos()">
-                        <i class="fas fa-save"></i> Guardar Logos
-                    </button>
-                    <button class="btn btn-info" onclick="previewChanges()">
-                        <i class="fas fa-eye"></i> Vista Previa
-                    </button>
-                </div>
-            </div>
-
-            <!-- Hero Product Image -->
-            <div class="admin-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                    <h3 class="card-title">Imagen Producto Principal</h3>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Imagen Principal del Hero</label>
-                    <div class="preview-area" id="heroProductPreview">
-                        <i class="fas fa-shopping-bag" style="font-size: 2rem; color: #ccc;"></i>
-                    </div>
-                    <input type="file" id="heroProductInput" class="file-input" accept="image/*">
-                    <label for="heroProductInput" class="file-label">
-                        <i class="fas fa-upload"></i> Seleccionar Imagen
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Descripción del Producto</label>
-                    <input type="text" class="form-control" id="heroProductAlt" placeholder="Ej: Bolsa artesanal hecha a mano">
-                </div>
-                <div class="btn-group">
-                    <button class="btn btn-primary" onclick="saveHeroProduct()">
-                        <i class="fas fa-save"></i> Guardar Imagen
-                    </button>
-                    <button class="btn btn-success" onclick="loadRandomProduct()">
-                        <i class="fas fa-random"></i> Producto Aleatorio
-                    </button>
-                </div>
-            </div>
-
-            <!-- Promotional Banner -->
-            <div class="admin-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
-                    <h3 class="card-title">Promoción del Mes</h3>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Título de la Promoción</label>
-                    <input type="text" class="form-control" id="promoTitle" placeholder="¡OFERTA ESPECIAL!">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Descripción</label>
-                    <input type="text" class="form-control" id="promoDescription" placeholder="20% de descuento en tu primera compra">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Código de Descuento</label>
-                    <input type="text" class="form-control" id="promoCode" placeholder="PRIMERA20">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Fecha de Expiración</label>
-                    <input type="text" class="form-control" id="promoExpiry" placeholder="Válido hasta fin de mes">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Texto del Botón</label>
-                    <input type="text" class="form-control" id="promoButton" placeholder="¡Compra Ahora!">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Tema de Color</label>
-                    <div class="promo-themes" id="promoThemes">
-                        <div class="theme-option theme-default active" data-theme="default">Default</div>
-                        <div class="theme-option theme-valentine" data-theme="valentine">San Valentín</div>
-                        <div class="theme-option theme-mother" data-theme="mother">Día Madre</div>
-                        <div class="theme-option theme-christmas" data-theme="christmas">Navidad</div>
-                        <div class="theme-option theme-summer" data-theme="summer">Verano</div>
-                    </div>
-                </div>
-                <div class="btn-group">
-                    <button class="btn btn-primary" onclick="savePromotion()">
-                        <i class="fas fa-save"></i> Guardar Promoción
-                    </button>
-                    <button class="btn btn-warning" onclick="loadPromoTemplate()">
-                        <i class="fas fa-magic"></i> Plantillas
-                    </button>
-                </div>
-            </div>
-
-            <!-- Categories Management -->
-            <div class="admin-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-th-large"></i>
-                    </div>
-                    <h3 class="card-title">Gestión de Categorías</h3>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Mostrar en Homepage</label>
-                    <select class="form-control" id="categoriesDisplay">
-                        <option value="all">Todas las Categorías</option>
-                        <option value="6">Solo Top 6</option>
-                        <option value="12">Top 12</option>
-                        <option value="18">Top 18</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Ordenar Por</label>
-                    <select class="form-control" id="categoriesOrder">
-                        <option value="count">Por Cantidad de Productos</option>
-                        <option value="name">Por Nombre</option>
-                        <option value="id">Por ID</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <span class="status-indicator status-success" id="categoriesStatus">
-                        <i class="fas fa-check"></i> Categorías Cargadas
-                    </span>
-                </div>
-                <div class="btn-group">
-                    <button class="btn btn-primary" onclick="saveCategoriesSettings()">
-                        <i class="fas fa-save"></i> Aplicar Cambios
-                    </button>
-                    <button class="btn btn-info" onclick="refreshCategories()">
-                        <i class="fas fa-refresh"></i> Actualizar Cache
-                    </button>
-                </div>
-            </div>
-
-            <!-- Carousel Management -->
-            <div class="admin-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-images"></i>
-                    </div>
-                    <h3 class="card-title">Carrusel de Productos</h3>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Fuente de Imágenes</label>
-                    <select class="form-control" id="carouselSource">
-                        <option value="random">Productos Aleatorios de WooCommerce</option>
-                        <option value="featured">Solo Productos Destacados</option>
-                        <option value="recent">Productos Recientes</option>
-                        <option value="manual">Selección Manual</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Número de Imágenes</label>
-                    <select class="form-control" id="carouselCount">
-                        <option value="3">3 Imágenes</option>
-                        <option value="5">5 Imágenes</option>
-                        <option value="8">8 Imágenes</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Velocidad de Rotación</label>
-                    <select class="form-control" id="carouselSpeed">
-                        <option value="3000">Lenta (3 seg)</option>
-                        <option value="4000" selected>Normal (4 seg)</option>
-                        <option value="5000">Rápida (5 seg)</option>
-                    </select>
-                </div>
-                <div class="btn-group">
-                    <button class="btn btn-primary" onclick="saveCarouselSettings()">
-                        <i class="fas fa-save"></i> Aplicar Configuración
-                    </button>
-                    <button class="btn btn-success" onclick="generateCarousel()">
-                        <i class="fas fa-magic"></i> Generar Nuevo
-                    </button>
-                </div>
-            </div>
-
-            <!-- Site Actions -->
-            <div class="admin-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-cog"></i>
-                    </div>
-                    <h3 class="card-title">Acciones del Sitio</h3>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Estado del Sitio</label>
-                    <div class="btn-group" style="width: 100%;">
-                        <span class="status-indicator status-success" style="flex: 1;">
-                            <i class="fas fa-globe"></i> Sitio Online
-                        </span>
-                    </div>
-                </div>
-                <div class="btn-group">
-                    <button class="btn btn-info" onclick="previewSite()">
-                        <i class="fas fa-eye"></i> Ver Sitio
-                    </button>
-                    <button class="btn btn-warning" onclick="clearCache()">
-                        <i class="fas fa-broom"></i> Limpiar Cache
-                    </button>
-                    <button class="btn btn-success" onclick="exportConfig()">
-                        <i class="fas fa-download"></i> Backup Config
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Actions Bar -->
-        <div class="actions-bar">
-            <div class="btn-group">
-                <button class="btn btn-success" onclick="saveAllChanges()">
-                    <i class="fas fa-save"></i> Guardar Todos los Cambios
-                </button>
-                <button class="btn btn-info" onclick="previewAllChanges()">
-                    <i class="fas fa-eye"></i> Vista Previa General
-                </button>
-                <button class="btn btn-warning" onclick="resetToDefaults()">
-                    <i class="fas fa-undo"></i> Restaurar Valores por Defecto
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Admin Header with User Info -->
-    <div class="admin-header">
-        <div class="admin-title">
-            <i class="fas fa-palette"></i>
-            Panel de Administración
-        </div>
-        <div class="admin-subtitle">Estudio Artesana</div>
-        <div class="admin-user-info" id="userInfo" style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
-            <span id="welcomeMessage">Cargando...</span>
-            <button onclick="logout()" class="btn btn-danger" style="padding: 8px 15px; font-size: 12px;">Cerrar Sesión</button>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="../assets/js/config.js"></script>
-    <script src="cloudinary-service.js"></script>
-    <script src="admin-manager.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
-        // Auth check and initialization
-        function checkAuthentication() {
+        // Check if already logged in
+        function checkSession() {
             const session = localStorage.getItem('adminSession');
-            if (!session) {
-                window.location.href = 'login.html';
-                return false;
-            }
-
-            try {
-                const data = JSON.parse(session);
-                if (data.expires <= Date.now()) {
+            if (session) {
+                try {
+                    const data = JSON.parse(session);
+                    if (data.expires > Date.now()) {
+                        // User is logged in, redirect to panel
+                        window.location.href = 'panel.html';
+                        return true;
+                    } else {
+                        // Session expired, clean up
+                        localStorage.removeItem('adminSession');
+                    }
+                } catch (e) {
+                    // Invalid session data, clean up
                     localStorage.removeItem('adminSession');
-                    window.location.href = 'login.html';
-                    return false;
-                }
-                
-                // Update welcome message
-                const welcomeMsg = document.getElementById('welcomeMessage');
-                if (welcomeMsg) {
-                    welcomeMsg.textContent = `Bienvenido, ${data.user.username || data.user.display_name || 'Admin'}`;
-                }
-                
-                return true;
-            } catch {
-                localStorage.removeItem('adminSession');
-                window.location.href = 'login.html';
-                return false;
-            }
-        }
-
-        function logout() {
-            if (confirm('¿Estás seguro que quieres cerrar sesión?')) {
-                localStorage.removeItem('adminSession');
-                window.location.href = 'login.html';
-            }
-        }
-
-        function checkCloudinarySetup() {
-            if (window.CloudinaryService && !window.CloudinaryService.isConfigured) {
-                document.getElementById('cloudinaryModal').style.display = 'flex';
-            } else if (!window.CloudinaryService) {
-                console.warn('CloudinaryService no disponible - funciones de subida de imágenes deshabilitadas');
-                // Mostrar un mensaje al usuario
-                const modal = document.getElementById('cloudinaryModal');
-                if (modal) {
-                    modal.querySelector('h2').textContent = '⚠️ Error de Scripts';
-                    modal.querySelector('p').textContent = 'Los scripts de administración no se cargaron correctamente. Algunas funciones pueden no estar disponibles.';
-                    modal.style.display = 'flex';
                 }
             }
+            return false;
         }
 
-        function saveCloudinaryConfig() {
-            const cloudName = document.getElementById('cloudinaryCloudName').value;
-            const uploadPreset = document.getElementById('cloudinaryUploadPreset').value;
-            
-            if (!cloudName || !uploadPreset) {
-                alert('Por favor completa todos los campos');
-                return;
-            }
-
-            // Debug logging
-            console.log('CloudinaryService available:', !!window.CloudinaryService);
-            console.log('CloudinaryUtils available:', !!window.CloudinaryUtils);
-            
-            if (!window.CloudinaryUtils) {
-                console.error('CloudinaryUtils no está disponible');
-                alert('Error: Los scripts de Cloudinary no se cargaron correctamente. Refresca la página.');
-                return;
-            }
-
-            try {
-                const success = window.CloudinaryUtils.setupCloudinary(cloudName, uploadPreset);
-                if (success) {
-                    alert('¡Cloudinary configurado correctamente!');
-                    closeCloudinaryModal();
-                } else {
-                    alert('Error configurando Cloudinary');
-                }
-            } catch (error) {
-                console.error('Error saving Cloudinary config:', error);
-                alert('Error configurando Cloudinary: ' + error.message);
+        // Redirect logic
+        function redirect() {
+            if (!checkSession()) {
+                // Not logged in, redirect to login
+                setTimeout(() => {
+                    window.location.href = 'login-simple.html';
+                }, 2000);
             }
         }
 
-        function closeCloudinaryModal() {
-            document.getElementById('cloudinaryModal').style.display = 'none';
-        }
-
-        // Fallback CloudinaryUtils if external script fails
-        function initializeFallbackCloudinary() {
-            if (!window.CloudinaryService) {
-                window.CloudinaryService = {
-                    config: { cloudName: '', uploadPreset: '', apiKey: '' },
-                    isConfigured: false,
-                    saveConfig: function(config) {
-                        this.config = { ...this.config, ...config };
-                        localStorage.setItem('cloudinaryConfig', JSON.stringify(config));
-                        this.isConfigured = !!(config.cloudName && config.uploadPreset);
-                        return this.isConfigured;
-                    }
-                };
-            }
-            
-            if (!window.CloudinaryUtils) {
-                window.CloudinaryUtils = {
-                    setupCloudinary: function(cloudName, uploadPreset, apiKey = '') {
-                        const config = { cloudName, uploadPreset, apiKey };
-                        const success = window.CloudinaryService.saveConfig(config);
-                        
-                        if (success) {
-                            console.log('✅ Cloudinary configurado correctamente (fallback)');
-                            return true;
-                        } else {
-                            console.error('❌ Error configurando Cloudinary (fallback)');
-                            return false;
-                        }
-                    }
-                };
-            }
-        }
-
-        // Fallback functions for missing button handlers
-        function addMissingFunctions() {
-            // Define fallback functions if they don't exist
-            if (typeof window.saveLogos === 'undefined') {
-                window.saveLogos = function() {
-                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
-                };
-            }
-            
-            if (typeof window.previewChanges === 'undefined') {
-                window.previewChanges = function() {
-                    alert('Vista previa no disponible: Los archivos JavaScript no se cargaron correctamente.');
-                };
-            }
-            
-            if (typeof window.saveHeroProduct === 'undefined') {
-                window.saveHeroProduct = function() {
-                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
-                };
-            }
-            
-            if (typeof window.loadRandomProduct === 'undefined') {
-                window.loadRandomProduct = function() {
-                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
-                };
-            }
-            
-            if (typeof window.savePromotion === 'undefined') {
-                window.savePromotion = function() {
-                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
-                };
-            }
-            
-            if (typeof window.loadPromoTemplate === 'undefined') {
-                window.loadPromoTemplate = function() {
-                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
-                };
-            }
-            
-            if (typeof window.saveCategoriesSettings === 'undefined') {
-                window.saveCategoriesSettings = function() {
-                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
-                };
-            }
-            
-            if (typeof window.refreshCategories === 'undefined') {
-                window.refreshCategories = function() {
-                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
-                };
-            }
-            
-            if (typeof window.saveCarouselSettings === 'undefined') {
-                window.saveCarouselSettings = function() {
-                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
-                };
-            }
-            
-            if (typeof window.generateCarousel === 'undefined') {
-                window.generateCarousel = function() {
-                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
-                };
-            }
-            
-            if (typeof window.previewSite === 'undefined') {
-                window.previewSite = function() {
-                    window.open('../index.html', '_blank');
-                };
-            }
-            
-            if (typeof window.clearCache === 'undefined') {
-                window.clearCache = function() {
-                    if (confirm('¿Limpiar cache del navegador?')) {
-                        location.reload(true);
-                    }
-                };
-            }
-            
-            if (typeof window.exportConfig === 'undefined') {
-                window.exportConfig = function() {
-                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
-                };
-            }
-            
-            if (typeof window.saveAllChanges === 'undefined') {
-                window.saveAllChanges = function() {
-                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
-                };
-            }
-            
-            if (typeof window.previewAllChanges === 'undefined') {
-                window.previewAllChanges = function() {
-                    window.open('../index.html', '_blank');
-                };
-            }
-            
-            if (typeof window.resetToDefaults === 'undefined') {
-                window.resetToDefaults = function() {
-                    if (confirm('¿Restaurar valores por defecto? Esto eliminará todas las configuraciones.')) {
-                        localStorage.clear();
-                        location.reload();
-                    }
-                };
-            }
-        }
-
-        // Initialize on page load
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize fallback if needed
-            setTimeout(initializeFallbackCloudinary, 500);
+            redirect();
             
-            // Add missing functions
-            setTimeout(addMissingFunctions, 800);
-            
-            // Hide auth check overlay
-            const authCheck = document.getElementById('authCheck');
-            if (authCheck) authCheck.style.display = 'none';
-            
-            // Skip authentication for now (testing mode)
-            const welcomeMsg = document.getElementById('welcomeMessage');
-            if (welcomeMsg) {
-                welcomeMsg.textContent = 'Bienvenido, Admin (Modo Testing)';
-            }
-            
-            // Check Cloudinary setup
-            setTimeout(checkCloudinarySetup, 1000);
+            // Make manual link immediately available
+            document.getElementById('manualLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'login-simple.html';
+            });
         });
     </script>
 </body>

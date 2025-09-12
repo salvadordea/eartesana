@@ -255,7 +255,7 @@
             init() {
                 // Check if already logged in
                 if (this.isLoggedIn()) {
-                    window.location.href = 'index.html';
+                    window.location.href = 'panel.html';
                     return;
                 }
 
@@ -322,7 +322,7 @@
                     if (success) {
                         this.showAlert('¡Login exitoso! Redirigiendo...', 'success');
                         setTimeout(() => {
-                            window.location.href = 'index.html';
+                            window.location.href = 'panel.html';
                         }, 1500);
                     } else {
                         this.showAlert('Credenciales incorrectas o sin permisos de admin', 'danger');
@@ -546,7 +546,7 @@
                 };
 
                 localStorage.setItem('adminSession', JSON.stringify(tempSession));
-                window.location.href = 'index.html';
+                window.location.href = 'panel.html';
             }
         }
 
