@@ -91,11 +91,6 @@ class HomeCategoriesLoader {
                 </div>
                 <div class="modern-category-content">
                     <h3 class="modern-category-title">${category.name}</h3>
-                    ${description ? `<p class="modern-category-description">${description}</p>` : ''}
-                    <div class="modern-category-count">
-                        <i class="fas fa-box"></i>
-                        ${category.count} producto${category.count !== 1 ? 's' : ''}
-                    </div>
                 </div>
             </div>
         `;
@@ -135,7 +130,7 @@ class HomeCategoriesLoader {
             'aretes de piel': 'assets/images/categories/aretes-piel.jpg',
             'aretes del piel': 'assets/images/categories/aretes-piel.jpg',
             'bolsas': 'assets/images/categories/bolsas.jpg',
-            'bolsas de mano': 'assets/images/categories/bolsas-mano.jpg',
+            'bolsas de mano': 'assets/images/categories/bolsas-de-mano.jpg',
             'bolsas textil y piel': 'assets/images/categories/bolsas-textil.jpg',
             'bolsas cruzadas': 'assets/images/categories/bolsas-cruzadas.jpg',
             'bolsas grandes': 'assets/images/categories/bolsas-grandes.jpg',
