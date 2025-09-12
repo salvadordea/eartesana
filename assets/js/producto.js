@@ -379,36 +379,74 @@ class ProductDetailPage {
         if (isSelected) optionClass += ' selected';
         if (isColor) optionClass += ' color';
         
-        let style = '';
         if (isColor) {
             const colorValue = this.getColorValue(optionValue);
-            style = `style="--color: ${colorValue};"`;
+            return `
+                <button class="${optionClass}" 
+                        data-attribute="${attributeName}" 
+                        data-value="${optionValue}"
+                        style="background-color: ${colorValue};" 
+                        title="${optionValue}">
+                    <span class="color-name">${optionValue}</span>
+                </button>
+            `;
+        } else {
+            return `
+                <button class="${optionClass}" 
+                        data-attribute="${attributeName}" 
+                        data-value="${optionValue}">
+                    ${optionValue}
+                </button>
+            `;
         }
-        
-        return `
-            <div class="${optionClass}" 
-                 data-attribute="${attributeName}" 
-                 data-value="${optionValue}"
-                 ${style}>
-                ${isColor ? '' : optionValue}
-            </div>
-        `;
     }
     
     getColorValue(colorName) {
         const colorMap = {
+            // Basic colors
             'black': '#000000',
+            'negro': '#000000',
             'white': '#ffffff',
+            'blanco': '#ffffff',
             'red': '#e74c3c',
+            'rojo': '#e74c3c',
             'blue': '#3498db',
+            'azul': '#3498db',
             'green': '#27ae60',
+            'verde': '#27ae60',
             'yellow': '#f1c40f',
+            'amarillo': '#f1c40f',
             'purple': '#9b59b6',
+            'morado': '#9b59b6',
+            'violeta': '#9b59b6',
             'pink': '#e91e63',
+            'rosa': '#e91e63',
             'orange': '#ff9800',
+            'naranja': '#ff9800',
             'brown': '#795548',
+            'marron': '#795548',
+            'cafe': '#795548',
             'gray': '#9e9e9e',
-            'grey': '#9e9e9e'
+            'grey': '#9e9e9e',
+            'gris': '#9e9e9e',
+            
+            // Extended colors
+            'beige': '#f5f5dc',
+            'navy': '#001f3f',
+            'turquoise': '#1abc9c',
+            'turquesa': '#1abc9c',
+            'gold': '#ffd700',
+            'dorado': '#ffd700',
+            'silver': '#c0c0c0',
+            'plateado': '#c0c0c0',
+            'coral': '#ff7f50',
+            'lime': '#32cd32',
+            'mint': '#98fb98',
+            'menta': '#98fb98',
+            'cream': '#fffdd0',
+            'crema': '#fffdd0',
+            'ivory': '#fffff0',
+            'marfil': '#fffff0'
         };
         
         return colorMap[colorName.toLowerCase()] || '#cccccc';
@@ -489,15 +527,46 @@ class ProductDetailPage {
             specs.push({ label: 'Peso', value: `${this.product.weight} kg` });
         }
         
+        // Enhanced dimensions handling
         if (this.product.dimensions) {
             const dims = this.product.dimensions;
             if (dims.length || dims.width || dims.height) {
-                const dimStr = [dims.length, dims.width, dims.height]
-                    .filter(d => d && d !== '0')
-                    .join(' x ');
-                if (dimStr) {
-                    specs.push({ label: 'Dimensiones', value: `${dimStr} cm` });
+                const dimensions = [];
+                if (dims.length && dims.length !== '0') dimensions.push(`${dims.length} cm (largo)`);
+                if (dims.width && dims.width !== '0') dimensions.push(`${dims.width} cm (ancho)`);
+                if (dims.height && dims.height !== '0') dimensions.push(`${dims.height} cm (alto)`);
+                
+                if (dimensions.length > 0) {
+                    specs.push({ label: 'Dimensiones', value: dimensions.join(' × ') });
                 }
+            }
+        }
+        
+        // Material from attributes or custom fields
+        const materialAttr = this.product.attributes?.find(attr => 
+            attr.name.toLowerCase().includes('material') || 
+            attr.name.toLowerCase().includes('fabric')
+        );
+        if (materialAttr && materialAttr.options && materialAttr.options.length > 0) {
+            specs.push({ label: 'Material', value: materialAttr.options.join(', ') });
+        }
+        
+        // Colors from attributes
+        const colorAttr = this.product.attributes?.find(attr => 
+            attr.name.toLowerCase().includes('color') || 
+            attr.name.toLowerCase().includes('colour')
+        );
+        if (colorAttr && colorAttr.options && colorAttr.options.length > 0) {
+            specs.push({ label: 'Colores Disponibles', value: colorAttr.options.join(', ') });
+        }
+        
+        // Care instructions from custom fields
+        if (this.product.meta_data) {
+            const careInstructions = this.product.meta_data.find(meta => 
+                meta.key === 'care_instructions' || meta.key === '_care_instructions'
+            );
+            if (careInstructions && careInstructions.value) {
+                specs.push({ label: 'Instrucciones de Cuidado', value: careInstructions.value });
             }
         }
         
@@ -513,6 +582,14 @@ class ProductDetailPage {
                 label: 'Etiquetas', 
                 value: this.product.tags.map(t => t.name).join(', ')
             });
+        }
+        
+        // Stock status
+        if (this.product.stock_status) {
+            const stockText = this.product.stock_status === 'instock' ? 'En Stock' : 
+                           this.product.stock_status === 'outofstock' ? 'Agotado' : 
+                           this.product.stock_status === 'onbackorder' ? 'En Pedido' : 'No disponible';
+            specs.push({ label: 'Disponibilidad', value: stockText });
         }
         
         return specs;

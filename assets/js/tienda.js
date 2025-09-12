@@ -38,9 +38,11 @@ class EstudioArtesanaTienda {
         this.loadCategories();
         // Only load products if there are initial filters from URL
         if (this.checkFiltersActive()) {
+            this.hideCategoriesSection();
             this.loadProducts();
         } else {
             this.showCategoriesOnly();
+            this.hideProductsSection();
         }
         this.updateCartCount();
     }
@@ -258,6 +260,10 @@ class EstudioArtesanaTienda {
             return;
         }
         
+        // Hide categories and show products section
+        this.hideCategoriesSection();
+        this.showProductsSection();
+        
         const isListView = this.productsGrid.classList.contains('list-view');
         let html = '';
         
@@ -347,20 +353,36 @@ class EstudioArtesanaTienda {
     }
     
     bindProductEvents() {
+        // Make entire product card clickable (except for buttons)
+        this.productsGrid.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Don't trigger if clicking on buttons or interactive elements
+                if (!e.target.closest('.product-action, .add-to-cart-btn, button, a')) {
+                    const productId = card.dataset.productId;
+                    this.viewProduct(productId);
+                }
+            });
+            
+            // Add cursor pointer to show it's clickable
+            card.style.cursor = 'pointer';
+        });
+        
         // Add to cart buttons
         this.productsGrid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
             if (!btn.disabled) {
                 btn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent card click
                     const productId = e.target.closest('[data-product-id]').dataset.productId;
                     this.addToCart(productId);
                 });
             }
         });
         
-        // Product links
+        // Product title links (keep for accessibility)
         this.productsGrid.querySelectorAll('.product-title a').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
+                e.stopPropagation(); // Prevent card click
                 const productId = e.target.dataset.productId;
                 this.viewProduct(productId);
             });
@@ -369,6 +391,7 @@ class EstudioArtesanaTienda {
         // Quick view buttons
         this.productsGrid.querySelectorAll('.quick-view').forEach(btn => {
             btn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent card click
                 const productId = e.target.closest('[data-product-id]').dataset.productId;
                 this.quickView(productId);
             });
@@ -377,6 +400,7 @@ class EstudioArtesanaTienda {
         // Wishlist buttons
         this.productsGrid.querySelectorAll('.add-to-wishlist').forEach(btn => {
             btn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent card click
                 const productId = e.target.closest('[data-product-id]').dataset.productId;
                 this.addToWishlist(productId);
             });
@@ -876,11 +900,7 @@ class EstudioArtesanaTienda {
         // Hide products-related UI elements
         this.hideStates();
         this.pagination.innerHTML = '';
-        
-        // Hide product results info
-        if (this.productsResults) {
-            this.productsResults.style.display = 'none';
-        }
+        this.hideProductsSection();
         
         // Show welcome message in products grid area
         this.productsGrid.innerHTML = `
@@ -896,7 +916,38 @@ class EstudioArtesanaTienda {
         `;
         
         // Ensure categories are visible
-        this.showCategoriesWithAnimation();
+        this.showCategoriesSection();
+    }
+    
+    // Control categories section visibility
+    showCategoriesSection() {
+        if (this.categoriesSection) {
+            this.categoriesSection.style.display = 'block';
+        }
+    }
+    
+    hideCategoriesSection() {
+        if (this.categoriesSection) {
+            this.categoriesSection.style.display = 'none';
+        }
+    }
+    
+    // Control products section visibility
+    showProductsSection() {
+        const shopContent = document.querySelector('.shop-content');
+        if (shopContent) {
+            shopContent.style.display = 'block';
+        }
+        if (this.productsResults) {
+            this.productsResults.style.display = 'flex';
+        }
+    }
+    
+    hideProductsSection() {
+        if (this.productsResults) {
+            this.productsResults.style.display = 'none';
+        }
+        // Don't hide the entire shop-content, just the results info
     }
     
     // Helper methods to get correct paths based on current location
