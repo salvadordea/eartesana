@@ -936,3 +936,550 @@ body {
         justify-content: center;
     }
 }
+
+/* Mayoristas Section */
+.mayoristas-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    color: white;
+}
+
+.mayoristas-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.mayoristas-text .section-header {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.mayoristas-text .section-title {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-primary);
+    font-weight: 600;
+}
+
+.mayoristas-text .section-title::after {
+    display: none;
+}
+
+.mayoristas-text .section-subtitle {
+    color: #d1d5db;
+    font-size: 1.25rem;
+    font-family: var(--font-secondary);
+}
+
+.mayoristas-benefits {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.benefit-item i {
+    background: var(--secondary-color);
+    color: white;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.benefit-content h3 {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    font-family: var(--font-primary);
+}
+
+.benefit-content p {
+    color: #d1d5db;
+    margin: 0;
+    line-height: 1.5;
+    font-family: var(--font-secondary);
+}
+
+.mayoristas-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.mayoristas-image {
+    position: relative;
+}
+
+.mayoristas-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Contact Section Home */
+.contact-section-home {
+    padding: 4rem 0;
+    background: transparent;
+}
+
+.contact-home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.contact-form-home {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-medium);
+}
+
+.contact-form-home .section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.contact-form-home .section-title {
+    font-size: 1.875rem;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    font-family: var(--font-primary);
+    font-weight: 600;
+}
+
+.contact-form-home .section-title::after {
+    display: none;
+}
+
+.contact-form-home .section-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--font-secondary);
+}
+
+.home-contact-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.home-contact-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-contact-form input,
+.home-contact-form select,
+.home-contact-form textarea {
+    padding: 0.875rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    margin-bottom: 1rem;
+    backdrop-filter: blur(5px);
+}
+
+.home-contact-form input::placeholder,
+.home-contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.home-contact-form input:focus,
+.home-contact-form select:focus,
+.home-contact-form textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(192, 192, 192, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.submit-btn-home {
+    width: 100%;
+    background: var(--gradient-secondary);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-family: var(--font-secondary);
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: var(--transition-smooth);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.submit-btn-home:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-strong);
+}
+
+.submit-btn-home:disabled {
+    background: rgba(255, 255, 255, 0.3);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.contact-info-home {
+    padding: 1rem 0;
+}
+
+.info-cards-home {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.info-card-home {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: var(--transition-smooth);
+    backdrop-filter: blur(10px);
+}
+
+.info-card-home:hover {
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.info-icon-home {
+    background: var(--gradient-secondary);
+    color: var(--white);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.info-content-home h3 {
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+}
+
+.info-content-home p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin: 0;
+    font-family: var(--font-secondary);
+}
+
+.info-content-home a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.contact-cta {
+    text-align: center;
+}
+
+.full-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+}
+
+/* Registration Section */
+.registration-section {
+    padding: 4rem 0;
+    background: transparent;
+}
+
+.registration-content .section-header {
+    margin-bottom: 3rem;
+}
+
+.registration-benefits {
+    margin-bottom: 3rem;
+}
+
+.benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.benefit-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    transition: var(--transition-smooth);
+    backdrop-filter: blur(10px);
+}
+
+.benefit-card:hover {
+    border-color: var(--secondary-color);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.benefit-card i {
+    background: var(--gradient-secondary);
+    color: var(--white);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1.5rem;
+}
+
+.benefit-card h3 {
+    font-family: var(--font-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.benefit-card p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+    margin: 0;
+    font-family: var(--font-secondary);
+}
+
+.registration-form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-medium);
+}
+
+.registration-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.registration-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.registration-form input,
+.registration-form select {
+    padding: 0.875rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    margin-bottom: 1rem;
+    backdrop-filter: blur(5px);
+}
+
+.registration-form input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.registration-form input:focus,
+.registration-form select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(192, 192, 192, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.checkbox-group {
+    margin: 1.5rem 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--font-secondary);
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    flex-shrink: 0;
+    margin: 0;
+    backdrop-filter: blur(5px);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+    content: "\2713";
+    color: var(--white);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.submit-btn-reg {
+    width: 100%;
+    background: var(--gradient-secondary);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-family: var(--font-secondary);
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: var(--transition-smooth);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.submit-btn-reg:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-strong);
+}
+
+.submit-btn-reg:disabled {
+    background: rgba(255, 255, 255, 0.3);
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Responsive for new sections */
+@media (max-width: 1024px) {
+    .mayoristas-content,
+    .contact-home-grid {
+        gap: 3rem;
+    }
+    
+    .benefit-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .mayoristas-content,
+    .contact-home-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    
+    .mayoristas-text .section-title {
+        font-size: 2rem;
+    }
+    
+    .mayoristas-actions {
+        justify-content: center;
+    }
+    
+    .contact-form-home {
+        padding: 2rem;
+    }
+    
+    .home-contact-form .form-row,
+    .registration-form .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .benefit-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .registration-form-wrapper {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .mayoristas-section,
+    .contact-section-home,
+    .registration-section {
+        padding: 2.5rem 0;
+    }
+    
+    .mayoristas-text .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .contact-form-home .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .contact-form-home,
+    .registration-form-wrapper {
+        padding: 1.5rem;
+    }
+    
+    .benefit-card {
+        padding: 1.5rem;
+    }
+}
