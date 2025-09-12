@@ -89,6 +89,27 @@ const CATEGORY_IMAGES = {
         url: 'assets/images/categories/vestimenta.jpg',
         fallback: 'assets/images/categories/vestimenta.jpg',
         alt: 'Cinturones de piel'
+    },
+    // Additional mappings for common category variations
+    'backpack': {
+        url: 'assets/images/categories/backpacks.jpg',
+        fallback: 'assets/images/categories/backpacks.jpg',
+        alt: 'Mochilas artesanales'
+    },
+    'mochilas': {
+        url: 'assets/images/categories/backpacks.jpg',
+        fallback: 'assets/images/categories/backpacks.jpg',
+        alt: 'Mochilas artesanales'
+    },
+    'bolsas de textil': {
+        url: 'assets/images/categories/bolsas-textil.jpg',
+        fallback: 'assets/images/categories/bolsas-textil.jpg',
+        alt: 'Bolsas de textil'
+    },
+    'textil': {
+        url: 'assets/images/categories/bolsas-textil.jpg',
+        fallback: 'assets/images/categories/bolsas-textil.jpg',
+        alt: 'Productos de textil'
     }
 };
 
@@ -99,24 +120,43 @@ const CATEGORY_IMAGES = {
  * @returns {Object} Image data with url, fallback, and alt text
  */
 function getCategoryImage(categorySlug, category = null) {
+    // Helper function to resolve paths based on current location
+    function resolvePath(relativePath) {
+        const currentPath = window.location.pathname;
+        
+        // If we're in a pages subdirectory, adjust the path
+        if (currentPath.includes('/pages/')) {
+            return '../../' + relativePath;
+        }
+        
+        // If we're in root or index
+        return relativePath;
+    }
+    
     // Try to get mapped image first
     if (CATEGORY_IMAGES[categorySlug]) {
-        return CATEGORY_IMAGES[categorySlug];
+        const imageData = CATEGORY_IMAGES[categorySlug];
+        return {
+            url: resolvePath(imageData.url),
+            fallback: resolvePath(imageData.fallback),
+            alt: imageData.alt
+        };
     }
     
     // Try to use WordPress image if available
     if (category && category.image && category.image.src) {
         return {
             url: category.image.src,
-            fallback: 'assets/images/category-placeholder.jpg',
+            fallback: resolvePath('assets/images/category-placeholder.jpg'),
             alt: category.name || 'Categoría'
         };
     }
     
     // Default fallback
+    const placeholderPath = resolvePath('assets/images/category-placeholder.jpg');
     return {
-        url: 'assets/images/category-placeholder.jpg',
-        fallback: 'assets/images/category-placeholder.jpg',
+        url: placeholderPath,
+        fallback: placeholderPath,
         alt: category ? category.name : 'Categoría'
     };
 }
