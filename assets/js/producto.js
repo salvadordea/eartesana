@@ -115,12 +115,23 @@ class ProductDetailPage {
             const urlParams = new URLSearchParams(window.location.search);
             const productId = urlParams.get('id');
             
+            console.log('Product ID from URL:', productId);
+            
             if (!productId) {
                 throw new Error('No product ID provided');
             }
             
+            // Check if WooAPI is available
+            if (!window.WooAPI) {
+                throw new Error('WooCommerce API not available');
+            }
+            
+            console.log('Loading product from WooCommerce...');
+            
             // Load product from WooCommerce
             this.product = await window.WooAPI.getProduct(productId);
+            
+            console.log('Product loaded:', this.product);
             
             if (!this.product) {
                 throw new Error('Product not found');
@@ -181,18 +192,35 @@ class ProductDetailPage {
     }
     
     updatePageTitle() {
-        const title = `${this.product.name} - Estudio Artesana`;
+        const title = `${this.product?.name || 'Producto'} - Estudio Artesana`;
         document.title = title;
-        document.getElementById('productTitle').textContent = title;
         
-        // Update meta tags
-        document.getElementById('productDescription').setAttribute('content', this.product.short_description || this.product.description);
-        document.getElementById('ogTitle').setAttribute('content', title);
-        document.getElementById('ogDescription').setAttribute('content', this.product.short_description || this.product.description);
-        document.getElementById('ogUrl').setAttribute('content', window.location.href);
+        const productTitleEl = document.getElementById('productTitle');
+        if (productTitleEl) {
+            productTitleEl.textContent = title;
+        }
         
-        if (this.images.length > 0) {
-            document.getElementById('ogImage').setAttribute('content', this.images[0].src);
+        // Update meta tags safely
+        const productDescEl = document.getElementById('productDescription');
+        const ogTitleEl = document.getElementById('ogTitle');
+        const ogDescEl = document.getElementById('ogDescription');
+        const ogUrlEl = document.getElementById('ogUrl');
+        const ogImageEl = document.getElementById('ogImage');
+        
+        if (productDescEl) {
+            productDescEl.setAttribute('content', this.product?.short_description || this.product?.description || '');
+        }
+        if (ogTitleEl) {
+            ogTitleEl.setAttribute('content', title);
+        }
+        if (ogDescEl) {
+            ogDescEl.setAttribute('content', this.product?.short_description || this.product?.description || '');
+        }
+        if (ogUrlEl) {
+            ogUrlEl.setAttribute('content', window.location.href);
+        }
+        if (ogImageEl && this.images.length > 0) {
+            ogImageEl.setAttribute('content', this.images[0].src);
         }
     }
     
@@ -210,19 +238,21 @@ class ProductDetailPage {
     
     renderProductInfo() {
         // Category
-        if (this.product.categories && this.product.categories.length > 0) {
+        if (this.productCategory && this.product.categories && this.product.categories.length > 0) {
             this.productCategory.textContent = this.product.categories[0].name.toUpperCase();
         }
         
         // Product name
-        this.productName.textContent = this.product.name;
+        if (this.productName) {
+            this.productName.textContent = this.product.name;
+        }
         
         // Price
         this.updatePricing();
         
         // Description
         const shortDesc = this.product.short_description || this.product.description;
-        if (shortDesc) {
+        if (shortDesc && this.productDescription) {
             this.productDescription.innerHTML = this.cleanDescription(shortDesc);
         }
         
@@ -354,8 +384,20 @@ class ProductDetailPage {
     groupVariationsByAttribute() {
         const groups = {};
         
+        if (!this.product.variations || !Array.isArray(this.product.variations)) {
+            return groups;
+        }
+        
         this.product.variations.forEach(variation => {
+            if (!variation || !variation.attributes) {
+                return;
+            }
+            
             Object.entries(variation.attributes).forEach(([attr, value]) => {
+                if (!attr || !value) {
+                    return;
+                }
+                
                 if (!groups[attr]) {
                     groups[attr] = new Set();
                 }
