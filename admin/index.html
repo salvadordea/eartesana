@@ -636,8 +636,8 @@
 
     <!-- Scripts -->
     <script src="../assets/js/config.js"></script>
-    <script src="./cloudinary-service.js"></script>
-    <script src="./admin-manager.js"></script>
+    <script src="cloudinary-service.js"></script>
+    <script src="admin-manager.js"></script>
     <script>
         // Auth check and initialization
         function checkAuthentication() {
@@ -761,10 +761,118 @@
             }
         }
 
+        // Fallback functions for missing button handlers
+        function addMissingFunctions() {
+            // Define fallback functions if they don't exist
+            if (typeof window.saveLogos === 'undefined') {
+                window.saveLogos = function() {
+                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
+                };
+            }
+            
+            if (typeof window.previewChanges === 'undefined') {
+                window.previewChanges = function() {
+                    alert('Vista previa no disponible: Los archivos JavaScript no se cargaron correctamente.');
+                };
+            }
+            
+            if (typeof window.saveHeroProduct === 'undefined') {
+                window.saveHeroProduct = function() {
+                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
+                };
+            }
+            
+            if (typeof window.loadRandomProduct === 'undefined') {
+                window.loadRandomProduct = function() {
+                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
+                };
+            }
+            
+            if (typeof window.savePromotion === 'undefined') {
+                window.savePromotion = function() {
+                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
+                };
+            }
+            
+            if (typeof window.loadPromoTemplate === 'undefined') {
+                window.loadPromoTemplate = function() {
+                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
+                };
+            }
+            
+            if (typeof window.saveCategoriesSettings === 'undefined') {
+                window.saveCategoriesSettings = function() {
+                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
+                };
+            }
+            
+            if (typeof window.refreshCategories === 'undefined') {
+                window.refreshCategories = function() {
+                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
+                };
+            }
+            
+            if (typeof window.saveCarouselSettings === 'undefined') {
+                window.saveCarouselSettings = function() {
+                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
+                };
+            }
+            
+            if (typeof window.generateCarousel === 'undefined') {
+                window.generateCarousel = function() {
+                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
+                };
+            }
+            
+            if (typeof window.previewSite === 'undefined') {
+                window.previewSite = function() {
+                    window.open('../index.html', '_blank');
+                };
+            }
+            
+            if (typeof window.clearCache === 'undefined') {
+                window.clearCache = function() {
+                    if (confirm('¿Limpiar cache del navegador?')) {
+                        location.reload(true);
+                    }
+                };
+            }
+            
+            if (typeof window.exportConfig === 'undefined') {
+                window.exportConfig = function() {
+                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
+                };
+            }
+            
+            if (typeof window.saveAllChanges === 'undefined') {
+                window.saveAllChanges = function() {
+                    alert('Función no disponible: Los archivos JavaScript no se cargaron correctamente.');
+                };
+            }
+            
+            if (typeof window.previewAllChanges === 'undefined') {
+                window.previewAllChanges = function() {
+                    window.open('../index.html', '_blank');
+                };
+            }
+            
+            if (typeof window.resetToDefaults === 'undefined') {
+                window.resetToDefaults = function() {
+                    if (confirm('¿Restaurar valores por defecto? Esto eliminará todas las configuraciones.')) {
+                        localStorage.clear();
+                        location.reload();
+                    }
+                };
+            }
+        }
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize fallback if needed
             setTimeout(initializeFallbackCloudinary, 500);
+            
+            // Add missing functions
+            setTimeout(addMissingFunctions, 800);
             
             // Hide auth check overlay
             const authCheck = document.getElementById('authCheck');
