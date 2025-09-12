@@ -21,11 +21,9 @@
         <button class="ribbon-close" onclick="closeRibbon()">&times;</button>
     </div>
 
-    <!-- Monthly Promotion Banner -->
-    <div class="monthly-promo-banner" id="monthlyPromoBanner">
-        <span class="promo-text">Enero 2025</span>
-        <span class="promo-discount">25% OFF</span>
-        <button class="promo-close" onclick="closePromoBanner()">&times;</button>
+    <!-- Dynamic Promotion Banner -->
+    <div class="monthly-promo-banner" id="monthly-promo-banner" style="display: none;">
+        <!-- Content will be populated dynamically by promotions.js -->
     </div>
 
     <!-- Header -->
@@ -474,6 +472,12 @@
     <!-- Configuration Scripts -->
     <script src="assets/js/config.js"></script>
     <script src="assets/js/cloudinary-config.js"></script>
+    
+    <!-- Cache System -->
+    <script src="assets/js/categories-cache.js"></script>
+    
+    <!-- Promotions System -->
+    <script src="assets/js/promotions.js"></script>
     
     <!-- WooCommerce API Scripts -->
     <script src="assets/js/woocommerce-api.js"></script>

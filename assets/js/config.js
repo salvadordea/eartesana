@@ -243,3 +243,62 @@ if (typeof module !== 'undefined' && module.exports) {
 
 // Global access for vanilla JS
 window.EstudioArtesanaConfig = EstudioArtesanaConfig;
+
+// Nueva configuración moderna para el sistema integrado
+window.siteConfig = {
+    // Configuración de WooCommerce con formato moderno
+    woocommerce: {
+        apiUrl: 'https://estudioartesana.com/wp-json/wc/v3',
+        consumerKey: 'ck_80b6b30ea578209890fd8725ab30cc53402185bc',
+        consumerSecret: 'cs_b8a197caa4c8f71a9aa351ef867ee4b147f525a5'
+    },
+    
+    // Sistema de promociones dinámicas modernas
+    promotions: [
+        {
+            id: 'promo_enero_2024',
+            enabled: true,
+            text: 'PROMOCIÓN ESPECIAL DE ENERO',
+            discount: '30% OFF en toda la tienda',
+            backgroundColor: 'linear-gradient(135deg, #C0C0C0 0%, #A8A8A8 100%)',
+            textColor: '#ffffff',
+            startDate: '2024-01-01',
+            endDate: '2024-01-31',
+            link: '/tienda/',
+            animation: 'slideDown 0.5s ease-out'
+        },
+        {
+            id: 'promo_san_valentin_2024',
+            enabled: true,
+            text: 'ESPECIAL SAN VALENTÍN',
+            discount: '25% OFF en joyería',
+            backgroundColor: 'linear-gradient(135deg, #ff6b9d 0%, #c44569 100%)',
+            textColor: '#ffffff',
+            startDate: '2024-02-01',
+            endDate: '2024-02-14',
+            link: '/tienda/?categoria=joyeria',
+            animation: 'slideDown 0.5s ease-out'
+        },
+        {
+            id: 'promo_envio_gratis',
+            enabled: true,
+            text: 'ENVÍO GRATIS',
+            discount: 'En compras mayores a $800',
+            backgroundColor: 'linear-gradient(135deg, #2ecc71 0%, #27ae60 100%)',
+            textColor: '#ffffff',
+            // Sin fechas = siempre activa
+            link: '/tienda/',
+            animation: 'slideDown 0.5s ease-out'
+        },
+        {
+            id: 'promo_primera_compra',
+            enabled: false, // Deshabilitada por ahora
+            text: '¡PRIMERA COMPRA!',
+            discount: '20% OFF con código PRIMERA20',
+            backgroundColor: 'linear-gradient(135deg, #f39c12 0%, #e67e22 100%)',
+            textColor: '#ffffff',
+            link: '/tienda/',
+            animation: 'slideDown 0.5s ease-out'
+        }
+    ]
+};
