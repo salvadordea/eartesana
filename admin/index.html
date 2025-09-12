@@ -636,8 +636,8 @@
 
     <!-- Scripts -->
     <script src="../assets/js/config.js"></script>
-    <script src="./cloudinary-service.js"></script>
-    <script src="./admin-manager.js"></script>
+    <script src="/admin/cloudinary-service.js"></script>
+    <script src="/admin/admin-manager.js"></script>
     <script>
         // Auth check and initialization
         function checkAuthentication() {
@@ -677,8 +677,17 @@
         }
 
         function checkCloudinarySetup() {
-            if (!window.CloudinaryService.isConfigured) {
+            if (window.CloudinaryService && !window.CloudinaryService.isConfigured) {
                 document.getElementById('cloudinaryModal').style.display = 'flex';
+            } else if (!window.CloudinaryService) {
+                console.warn('CloudinaryService no disponible - funciones de subida de imágenes deshabilitadas');
+                // Mostrar un mensaje al usuario
+                const modal = document.getElementById('cloudinaryModal');
+                if (modal) {
+                    modal.querySelector('h2').textContent = '⚠️ Error de Scripts';
+                    modal.querySelector('p').textContent = 'Los scripts de administración no se cargaron correctamente. Algunas funciones pueden no estar disponibles.';
+                    modal.style.display = 'flex';
+                }
             }
         }
 
