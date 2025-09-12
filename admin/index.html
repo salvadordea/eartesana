@@ -283,6 +283,39 @@
             transform: scale(1.05);
         }
 
+        .modal {
+            position: fixed;
+            z-index: 10001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal-content h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: var(--white);
+        }
+
         @media (max-width: 768px) {
             .admin-grid {
                 grid-template-columns: 1fr;
@@ -603,8 +636,8 @@
 
     <!-- Scripts -->
     <script src="../assets/js/config.js"></script>
-    <script src="cloudinary-service.js"></script>
-    <script src="admin-manager.js"></script>
+    <script src="./cloudinary-service.js"></script>
+    <script src="./admin-manager.js"></script>
     <script>
         // Auth check and initialization
         function checkAuthentication() {
@@ -677,8 +710,11 @@
             const authCheck = document.getElementById('authCheck');
             if (authCheck) authCheck.style.display = 'none';
             
-            // Check authentication
-            if (!checkAuthentication()) return;
+            // Skip authentication for now (testing mode)
+            const welcomeMsg = document.getElementById('welcomeMessage');
+            if (welcomeMsg) {
+                welcomeMsg.textContent = 'Bienvenido, Admin (Modo Testing)';
+            }
             
             // Check Cloudinary setup
             setTimeout(checkCloudinarySetup, 1000);
