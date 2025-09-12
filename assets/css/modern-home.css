@@ -245,7 +245,7 @@ body::after {
     font-family: var(--font-primary);
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 600;
-    color: var(--primary-color);
+    color: var(--white);
     margin-bottom: var(--spacing-sm);
     letter-spacing: -0.01em;
     position: relative;
@@ -266,7 +266,7 @@ body::after {
 .section-subtitle {
     font-family: var(--font-secondary);
     font-size: 1.2rem;
-    color: var(--light-text);
+    color: rgba(255, 255, 255, 0.8);
     line-height: 1.6;
     max-width: 600px;
     margin: 0 auto;
@@ -275,7 +275,7 @@ body::after {
 /* Modern Categories Section */
 .categories-section.modern {
     padding: var(--spacing-xl) 0;
-    background: var(--gradient-subtle);
+    background: transparent;
 }
 
 .modern-categories-grid {
@@ -286,13 +286,15 @@ body::after {
 }
 
 .modern-category-card {
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius-modern);
     overflow: hidden;
-    box-shadow: var(--shadow-soft);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     transition: var(--transition-smooth);
     cursor: pointer;
     position: relative;
+    backdrop-filter: blur(10px);
 }
 
 .modern-category-card::before {
@@ -310,7 +312,9 @@ body::after {
 
 .modern-category-card:hover {
     transform: translateY(-8px);
-    box-shadow: var(--shadow-strong);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(192, 192, 192, 0.2);
 }
 
 .modern-category-card:hover::before {
@@ -344,7 +348,7 @@ body::after {
     font-family: var(--font-primary);
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--primary-color);
+    color: var(--white);
     margin-bottom: 8px;
     transition: var(--transition-smooth);
 }
@@ -356,14 +360,14 @@ body::after {
 .modern-category-description {
     font-family: var(--font-secondary);
     font-size: 0.95rem;
-    color: var(--light-text);
+    color: rgba(255, 255, 255, 0.8);
     line-height: 1.5;
     margin-bottom: var(--spacing-sm);
 }
 
 .modern-category-count {
     font-size: 0.85rem;
-    color: var(--accent-color);
+    color: var(--secondary-color);
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -373,7 +377,7 @@ body::after {
 /* Featured Products Section */
 .featured-products-section {
     padding: var(--spacing-xl) 0;
-    background: var(--white);
+    background: transparent;
 }
 
 .featured-products-grid {
@@ -384,18 +388,22 @@ body::after {
 }
 
 .featured-product-card {
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius-modern);
     overflow: hidden;
-    box-shadow: var(--shadow-soft);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     transition: var(--transition-smooth);
     cursor: pointer;
     position: relative;
+    backdrop-filter: blur(10px);
 }
 
 .featured-product-card:hover {
     transform: translateY(-6px);
-    box-shadow: var(--shadow-medium);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(192, 192, 192, 0.2);
 }
 
 .featured-product-image {
@@ -423,7 +431,7 @@ body::after {
     font-family: var(--font-primary);
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--primary-color);
+    color: var(--white);
     margin-bottom: 8px;
     line-height: 1.3;
 }
@@ -439,7 +447,7 @@ body::after {
 .featured-product-description {
     font-family: var(--font-secondary);
     font-size: 0.9rem;
-    color: var(--light-text);
+    color: rgba(255, 255, 255, 0.8);
     line-height: 1.4;
 }
 

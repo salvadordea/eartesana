@@ -653,12 +653,23 @@ class EstudioArtesanaTienda {
     // UI State Methods
     
     showLoading() {
-        this.productsLoading.style.display = 'flex';
+        // Hide the loading spinner - make it less intrusive
+        this.productsLoading.style.display = 'none';
         this.hideStates();
+        
+        // Optionally show a subtle loading state on the products grid instead
+        if (this.productsGrid) {
+            this.productsGrid.style.opacity = '0.6';
+        }
     }
     
     hideLoading() {
         this.productsLoading.style.display = 'none';
+        
+        // Restore opacity when loading is done
+        if (this.productsGrid) {
+            this.productsGrid.style.opacity = '1';
+        }
     }
     
     showNoResults() {

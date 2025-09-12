@@ -1,22 +1,27 @@
 /* Categories Page Styles - Estudio Artesana */
 
+/* Import gradient variable from main styles */
+:root {
+    --gradient-primary: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+}
+
 /* Categories Header */
 .categories-header {
     padding: 60px 0 40px;
-    background-color: var(--white);
+    background: var(--gradient-primary);
     text-align: center;
 }
 
 .categories-header-content h1 {
     font-family: var(--font-primary);
     font-size: 3rem;
-    color: var(--text-color);
+    color: var(--white);
     margin-bottom: 20px;
 }
 
 .categories-header-content p {
     font-size: 1.2rem;
-    color: var(--light-text);
+    color: rgba(255, 255, 255, 0.8);
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
@@ -25,7 +30,7 @@
 /* Categories Content */
 .categories-content {
     padding: 60px 0;
-    background-color: var(--background-light);
+    background: var(--gradient-primary);
 }
 
 /* Loading State */
@@ -50,18 +55,22 @@
 /* Category Card */
 .category-card {
     position: relative;
-    background-color: var(--white);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius);
     overflow: hidden;
-    box-shadow: var(--shadow);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     transition: var(--transition);
     aspect-ratio: 4/3;
     cursor: pointer;
+    backdrop-filter: blur(10px);
 }
 
 .category-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(192, 192, 192, 0.2);
 }
 
 /* Category Image */
