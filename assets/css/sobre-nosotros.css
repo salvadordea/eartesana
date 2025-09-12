@@ -38,7 +38,7 @@ body {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 80px;
-  align-items: start;
+  align-items: center;
 }
 
 /* Images on the left - take up 2/3 of the space */
@@ -57,10 +57,10 @@ body {
 .collage-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 200px);
+  grid-template-rows: repeat(4, 180px);
   gap: 15px;
   max-width: none;
-  height: 100%;
+  height: auto;
 }
 
 .collage-item {
@@ -74,7 +74,7 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Create varied sizes for more interesting layout - 9 images in 3x3 grid */
+/* Create varied sizes for more interesting layout - 9 images in 3x4 grid */
 .collage-item:nth-child(1) {
   grid-column: span 2;
   grid-row: span 1;
@@ -116,7 +116,7 @@ body {
 }
 
 .collage-item:nth-child(9) {
-  grid-column: span 1;
+  grid-column: span 2;
   grid-row: span 1;
 }
 
@@ -287,7 +287,7 @@ body {
   
   .collage-grid {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 180px);
+    grid-template-rows: repeat(5, 160px);
   }
   
   .collage-item:nth-child(1) {
@@ -320,9 +320,19 @@ body {
     grid-row: span 1;
   }
   
-  /* Show only 6 images on tablet view for better layout */
-  .collage-item:nth-child(n+7) {
-    display: none;
+  .collage-item:nth-child(7) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  
+  .collage-item:nth-child(8) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  
+  .collage-item:nth-child(9) {
+    grid-column: span 2;
+    grid-row: span 1;
   }
 }
 

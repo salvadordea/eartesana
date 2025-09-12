@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayoristas - Estudio Artesana</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Programa de Mayoristas de Estudio Artesana. Descuentos especiales para revendedores y empresas. Solicita información sobre precios mayoristas.">
+    <meta name="keywords" content="estudio artesana, mayoristas, ventas mayoreo, revendedores, distribuidores, precios especiales">
+    <meta name="author" content="Estudio Artesana">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Mayoristas - Estudio Artesana">
+    <meta property="og:description" content="Programa de Mayoristas con descuentos especiales para revendedores y empresas">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://estudioartesana.com/pages/mayoristas/">
+    <meta property="og:image" content="../../assets/images/mayoristas.jpg">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/mayoristas.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="../../index.html">
+                        <img src="../../assets/images/logo.webp" alt="Estudio Artesana Logo" class="logo-img">
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../../index.html" class="nav-link">INICIO</a></li>
+                        <li class="nav-item dropdown">
+                            <a href="../tienda/index.html" class="nav-link">TIENDA</a>
+                            <i class="fas fa-chevron-down nav-arrow"></i>
+                            <div class="dropdown-menu" id="tiendaDropdown">
+                                <a href="../tienda/index.html" class="dropdown-link">Todos los productos</a>
+                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-categories" id="dropdownCategories">
+                                    <!-- Categories will be loaded here -->
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a href="../sobre-nosotros/index.html" class="nav-link">SOBRE NOSOTROS</a></li>
+                        <li class="nav-item"><a href="index.html" class="nav-link active">MAYORISTAS</a></li>
+                        <li class="nav-item"><a href="#contacto" class="nav-link">CONTACTO</a></li>
+                        <li class="nav-item"><a href="../../index.html#registro" class="nav-link">REGISTRO DE CLIENTES</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Header Icons -->
+                <div class="header-icons">
+                    <a href="#carrito" class="header-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <button class="search-toggle header-icon">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="mayoristas-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-title">Programa de Mayoristas</h1>
+                        <p class="hero-subtitle">Únete a nuestra red de distribuidores y accede a precios especiales para hacer crecer tu negocio</p>
+                        
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">40%</div>
+                                <div class="stat-label">Descuento Máximo</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">10+</div>
+                                <div class="stat-label">Piezas Mínimas</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">Artesanal</div>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-actions">
+                            <a href="#solicitar-info" class="btn-primary">Solicitar Información</a>
+                            <a href="../tienda/index.html" class="btn-secondary">Ver Catálogo</a>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-image">
+                        <img src="../../assets/images/mayoristas.jpg" alt="Ventas Mayoristas - Estudio Artesana" class="hero-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits-section">
+            <div class="container">
+                <div class="section-header centered">
+                    <h2 class="section-title">Beneficios del Programa</h2>
+                    <p class="section-subtitle">Todo lo que necesitas para hacer crecer tu negocio con productos artesanales únicos</p>
+                </div>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <h3 class="benefit-title">Descuentos Especiales</h3>
+                        <p class="benefit-description">Hasta 40% de descuento en compras mayoristas según volumen</p>
+                        <ul class="benefit-list">
+                            <li>10-24 piezas: 20% descuento</li>
+                            <li>25-49 piezas: 30% descuento</li>
+                            <li>50+ piezas: 40% descuento</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3 class="benefit-title">Envío Gratuito</h3>
+                        <p class="benefit-description">Envío sin costo en todos los pedidos mayoristas</p>
+                        <ul class="benefit-list">
+                            <li>Envío gratuito a todo México</li>
+                            <li>Entrega de 5-7 días hábiles</li>
+                            <li>Embalaje especializado</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="benefit-title">Soporte Dedicado</h3>
+                        <p class="benefit-description">Atención personalizada y asesoría especializada</p>
+                        <ul class="benefit-list">
+                            <li>Ejecutivo de cuenta dedicado</li>
+                            <li>Asesoría en selección de productos</li>
+                            <li>Soporte post-venta especializado</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3 class="benefit-title">Términos Flexibles</h3>
+                        <p class="benefit-description">Condiciones de pago adaptadas a tu negocio</p>
+                        <ul class="benefit-list">
+                            <li>Crédito hasta 30 días</li>
+                            <li>Pedidos recurrentes programados</li>
+                            <li>Facturación empresarial</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Requirements Section -->
+        <section class="requirements-section">
+            <div class="container">
+                <div class="requirements-content">
+                    <div class="requirements-text">
+                        <h2 class="section-title">Requisitos para Mayoristas</h2>
+                        <p class="section-subtitle">Para formar parte de nuestra red de distribuidores, necesitas cumplir con los siguientes requisitos:</p>
+                        
+                        <div class="requirements-list">
+                            <div class="requirement-item">
+                                <div class="requirement-icon">
+                                    <i class="fas fa-store"></i>
+                                </div>
+                                <div class="requirement-content">
+                                    <h3>Negocio Establecido</h3>
+                                    <p>Contar con un negocio físico u online establecido en el sector retail</p>
+                                </div>
+                            </div>
+                            
+                            <div class="requirement-item">
+                                <div class="requirement-icon">
+                                    <i class="fas fa-file-invoice"></i>
+                                </div>
+                                <div class="requirement-content">
+                                    <h3>Documentación Legal</h3>
+                                    <p>RFC activo y documentación legal de la empresa al corriente</p>
+                                </div>
+                            </div>
+                            
+                            <div class="requirement-item">
+                                <div class="requirement-icon">
+                                    <i class="fas fa-boxes"></i>
+                                </div>
+                                <div class="requirement-content">
+                                    <h3>Pedido Mínimo</h3>
+                                    <p>Capacidad de realizar pedidos mínimos de 10 piezas por producto</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="requirements-image">
+                        <img src="../../assets/images/mayoristas-requisitos.jpg" alt="Requisitos Mayoristas" class="requirements-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="process-section">
+            <div class="container">
+                <div class="section-header centered">
+                    <h2 class="section-title">Proceso de Registro</h2>
+                    <p class="section-subtitle">En solo 3 pasos puedes formar parte de nuestra red de mayoristas</p>
+                </div>
+                
+                <div class="process-steps">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Solicita Información</h3>
+                            <p class="step-description">Llena nuestro formulario con la información de tu negocio</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Evaluación</h3>
+                            <p class="step-description">Nuestro equipo evaluará tu solicitud en 2-3 días hábiles</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Activación</h3>
+                            <p class="step-description">Una vez aprobado, podrás realizar tu primer pedido mayorista</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="contact-form-section" id="solicitar-info">
+            <div class="container">
+                <div class="form-content">
+                    <div class="form-header">
+                        <h2 class="section-title">Solicitar Información</h2>
+                        <p class="section-subtitle">Completa el siguiente formulario y nos pondremos en contacto contigo</p>
+                    </div>
+                    
+                    <form class="mayorista-form" id="mayoristaForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="empresaNombre">Nombre de la Empresa *</label>
+                                <input type="text" id="empresaNombre" name="empresa_nombre" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contactoNombre">Nombre del Contacto *</label>
+                                <input type="text" id="contactoNombre" name="contacto_nombre" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="telefono">Teléfono *</label>
+                                <input type="tel" id="telefono" name="telefono" required>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="direccion">Dirección de la Empresa *</label>
+                                <input type="text" id="direccion" name="direccion" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="rfc">RFC *</label>
+                                <input type="text" id="rfc" name="rfc" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="tipoNegocio">Tipo de Negocio *</label>
+                                <select id="tipoNegocio" name="tipo_negocio" required>
+                                    <option value="">Selecciona una opción</option>
+                                    <option value="tienda-fisica">Tienda Física</option>
+                                    <option value="tienda-online">Tienda Online</option>
+                                    <option value="boutique">Boutique</option>
+                                    <option value="galeria">Galería de Arte</option>
+                                    <option value="distribuidor">Distribuidor</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="experiencia">Experiencia Previa con Productos Artesanales</label>
+                                <textarea id="experiencia" name="experiencia" rows="3" placeholder="Describe tu experiencia con productos similares..."></textarea>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="volumenEstimado">Volumen de Compra Estimado Mensual *</label>
+                                <select id="volumenEstimado" name="volumen_estimado" required>
+                                    <option value="">Selecciona un rango</option>
+                                    <option value="10-25">10-25 piezas</option>
+                                    <option value="25-50">25-50 piezas</option>
+                                    <option value="50-100">50-100 piezas</option>
+                                    <option value="100+">Más de 100 piezas</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="mensaje">Mensaje Adicional</label>
+                                <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos más sobre tu negocio y tus necesidades..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                Solicitar Información
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <div class="section-header centered">
+                    <h2 class="section-title">Preguntas Frecuentes</h2>
+                    <p class="section-subtitle">Resolvemos las dudas más comunes sobre nuestro programa de mayoristas</p>
+                </div>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Cuál es el pedido mínimo?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>El pedido mínimo es de 10 piezas por producto. No hay mínimo de monto total, pero recomendamos pedidos de al menos $5,000 MXN para optimizar los costos de envío.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Qué documentos necesito?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Necesitas RFC activo, comprobante de domicilio fiscal, identificación oficial del representante legal, y constancia de situación fiscal actualizada.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Cuánto tiempo toma la aprobación?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>El proceso de evaluación toma de 2 a 3 días hábiles. Una vez aprobado, recibirás tu código de mayorista y podrás realizar pedidos inmediatamente.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Ofrecen exclusividad territorial?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No manejamos exclusividad territorial, pero sí limitamos la cantidad de distribuidores por zona para asegurar un mercado saludable para todos nuestros socios.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span>ESTUDIO ARTESANA</span>
+                    </div>
+                    <p class="footer-description">
+                        Creamos productos artesanales únicos que combinan la tradición con el diseño contemporáneo.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Pinterest">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="../../index.html">Inicio</a></li>
+                        <li><a href="../tienda/index.html">Tienda</a></li>
+                        <li><a href="../sobre-nosotros/index.html">Sobre Nosotros</a></li>
+                        <li><a href="index.html">Mayoristas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Categorías</h4>
+                    <ul class="footer-links">
+                        <li><a href="../tienda/index.html?categoria=bolsas">Bolsas</a></li>
+                        <li><a href="../tienda/index.html?categoria=accesorios">Accesorios</a></li>
+                        <li><a href="../tienda/index.html?categoria=joyeria">Joyería</a></li>
+                        <li><a href="../tienda/index.html?categoria=cuadernos">Cuadernos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> mayoristas@estudioartesana.com</p>
+                        <p><i class="fas fa-phone"></i> +52 555 123 4567</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Ciudad de México, México</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Estudio Artesana. Todos los derechos reservados.</p>
+                <div class="footer-bottom-links">
+                    <a href="../politicas/privacidad.html">Política de Privacidad</a>
+                    <a href="../politicas/terminos.html">Términos y Condiciones</a>
+                    <a href="../politicas/mayoristas.html">Términos Mayoristas</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/woocommerce-api.js"></script>
+    <script src="../../assets/js/dropdown-categories.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Accordion
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                
+                question.addEventListener('click', function() {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all FAQ items
+                    faqItems.forEach(faq => {
+                        faq.classList.remove('active');
+                        faq.querySelector('.faq-answer').style.maxHeight = null;
+                    });
+                    
+                    // Open clicked item if it wasn't active
+                    if (!isActive) {
+                        item.classList.add('active');
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                    }
+                });
+            });
+            
+            // Form submission
+            const mayoristaForm = document.getElementById('mayoristaForm');
+            if (mayoristaForm) {
+                mayoristaForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const submitBtn = e.target.querySelector('.submit-btn');
+                    const originalText = submitBtn.innerHTML;
+                    
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+                    submitBtn.disabled = true;
+                    
+                    // Simulate form submission
+                    setTimeout(() => {
+                        alert('¡Solicitud enviada correctamente! Nos pondremos en contacto contigo en las próximas 24-48 horas.');
+                        this.reset();
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 2000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
