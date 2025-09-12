@@ -74,7 +74,7 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Create varied sizes for more interesting layout */
+/* Create varied sizes for more interesting layout - 9 images in 3x3 grid */
 .collage-item:nth-child(1) {
   grid-column: span 2;
   grid-row: span 1;
@@ -105,9 +105,19 @@ body {
   grid-row: span 1;
 }
 
-/* Hide excess placeholders since we now have a more compact 3x3 grid */
-.collage-item:nth-child(n+7) {
-  display: none;
+.collage-item:nth-child(7) {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.collage-item:nth-child(8) {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.collage-item:nth-child(9) {
+  grid-column: span 1;
+  grid-row: span 1;
 }
 
 .collage-item:hover {
@@ -300,7 +310,18 @@ body {
     grid-row: span 1;
   }
   
-  .collage-item:nth-child(n+5) {
+  .collage-item:nth-child(5) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  
+  .collage-item:nth-child(6) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  
+  /* Show only 6 images on tablet view for better layout */
+  .collage-item:nth-child(n+7) {
     display: none;
   }
 }
@@ -344,15 +365,22 @@ body {
   
   .collage-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 200px);
+    grid-template-rows: repeat(6, 200px);
   }
   
   .collage-item:nth-child(1),
   .collage-item:nth-child(2),
   .collage-item:nth-child(3),
-  .collage-item:nth-child(4) {
+  .collage-item:nth-child(4),
+  .collage-item:nth-child(5),
+  .collage-item:nth-child(6) {
     grid-column: span 1;
     grid-row: span 1;
+  }
+  
+  /* Show only 6 images on mobile view for better performance */
+  .collage-item:nth-child(n+7) {
+    display: none;
   }
   
   .story-section .section-title {

@@ -717,12 +717,14 @@ class ProductDetailPage {
     
     renderRelatedProducts(products) {
         if (!products || products.length === 0) {
+            // Hide the section if no related products are found
+            this.relatedProducts.style.display = 'none';
             return;
         }
         
         const productsHTML = products.map(product => this.createProductCard(product)).join('');
         this.relatedProductsGrid.innerHTML = productsHTML;
-        this.relatedProducts.style.display = 'block';
+        // Section is already visible by default in HTML
         
         // Bind product card events
         this.relatedProductsGrid.querySelectorAll('.product-card').forEach(card => {

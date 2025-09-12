@@ -26,39 +26,57 @@ class AboutUsManager {
         return [
             {
                 id: 'about-1',
-                src: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-                alt: 'Proceso artesanal - Preparación de materiales',
-                title: 'Preparación de Materiales'
+                src: '../../assets/images/SobreNosotros/1.jpg',
+                alt: 'Estudio Artesana - Proceso artesanal',
+                title: 'Nuestro Proceso Artesanal'
             },
             {
                 id: 'about-2',
-                src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=358&q=80',
-                alt: 'Artesano trabajando - Técnicas tradicionales',
+                src: '../../assets/images/SobreNosotros/2.jpg',
+                alt: 'Estudio Artesana - Técnicas tradicionales',
                 title: 'Técnicas Tradicionales'
             },
             {
                 id: 'about-3',
-                src: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=447&q=80',
-                alt: 'Detalles de tejido - Precisión artesanal',
-                title: 'Precisión Artesanal'
+                src: '../../assets/images/SobreNosotros/3.jpg',
+                alt: 'Estudio Artesana - Materiales naturales',
+                title: 'Materiales 100% Naturales'
             },
             {
                 id: 'about-4',
-                src: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
-                alt: 'Herramientas artesanales tradicionales',
-                title: 'Herramientas Tradicionales'
+                src: '../../assets/images/SobreNosotros/4.jpg',
+                alt: 'Estudio Artesana - Artesanos mexicanos',
+                title: 'Artesanos Mexicanos'
             },
             {
                 id: 'about-5',
-                src: 'https://images.unsplash.com/photo-1582142306909-195724d75296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
-                alt: 'Taller artesanal - Espacio de creación',
+                src: '../../assets/images/SobreNosotros/5.jpg',
+                alt: 'Estudio Artesana - Taller y creación',
                 title: 'Nuestro Taller'
             },
             {
                 id: 'about-6',
-                src: 'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=386&q=80',
-                alt: 'Selección de colores - Paleta artesanal',
-                title: 'Paleta de Colores'
+                src: '../../assets/images/SobreNosotros/6.jpg',
+                alt: 'Estudio Artesana - Productos terminados',
+                title: 'Productos Únicos'
+            },
+            {
+                id: 'about-7',
+                src: '../../assets/images/SobreNosotros/7.jpg',
+                alt: 'Estudio Artesana - Diseño y creatividad',
+                title: 'Diseño y Creatividad'
+            },
+            {
+                id: 'about-8',
+                src: '../../assets/images/SobreNosotros/8.jpg',
+                alt: 'Estudio Artesana - Calidad y detalle',
+                title: 'Calidad y Detalle'
+            },
+            {
+                id: 'about-9',
+                src: '../../assets/images/SobreNosotros/9.jpg',
+                alt: 'Estudio Artesana - Tradición mexicana',
+                title: 'Tradición Mexicana'
             }
         ];
     }
@@ -69,7 +87,7 @@ class AboutUsManager {
             if (stored) {
                 const parsed = JSON.parse(stored);
                 // Validate stored images
-                if (Array.isArray(parsed) && parsed.length === 6) {
+                if (Array.isArray(parsed) && parsed.length === 9) {
                     this.images = parsed;
                 } else {
                     this.images = this.defaultImages;
@@ -245,7 +263,7 @@ class AboutUsManager {
     
     // Admin methods for updating images
     updateImage(index, imageData) {
-        if (index >= 0 && index < 6) {
+        if (index >= 0 && index < 9) {
             this.images[index] = {
                 ...this.images[index],
                 ...imageData
@@ -279,7 +297,7 @@ class AboutUsManager {
     
     importConfiguration(configData) {
         try {
-            if (configData.images && Array.isArray(configData.images) && configData.images.length === 6) {
+            if (configData.images && Array.isArray(configData.images) && configData.images.length === 9) {
                 this.images = configData.images;
                 this.saveImages();
                 this.renderImages();
