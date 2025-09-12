@@ -63,8 +63,8 @@ body {
 }
 
 .logo-img {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
 }
 
@@ -302,8 +302,8 @@ body {
 }
 
 .hero-logo-img {
-    max-width: 200px;
-    max-height: 80px;
+    max-width: 300px;
+    max-height: 120px;
     width: auto;
     height: auto;
     object-fit: contain;
