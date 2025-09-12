@@ -1,6 +1,7 @@
 /**
  * Logo Manager - Estudio Artesana
  * Manages dynamic logo loading from admin panel
+ * NOTE: Logos are now hardcoded in HTML for better reliability
  */
 
 class LogoManager {
@@ -12,6 +13,7 @@ class LogoManager {
     init() {
         document.addEventListener('DOMContentLoaded', () => {
             this.loadConfig();
+            // Logos are hardcoded, but keep this for admin panel override functionality
             this.loadLogos();
         });
     }
@@ -23,8 +25,13 @@ class LogoManager {
     }
     
     loadLogos() {
-        this.loadHeroLogo();
-        this.loadHeaderLogo();
+        // Only load if admin panel has overrides
+        if (this.config && this.config.assets && this.config.assets.logos) {
+            this.loadHeroLogo();
+            this.loadHeaderLogo();
+        } else {
+            console.log('✅ Using hardcoded logos (recommended)');
+        }
     }
     
     loadHeroLogo() {

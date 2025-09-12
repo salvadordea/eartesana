@@ -307,7 +307,7 @@ body {
     width: auto;
     height: auto;
     object-fit: contain;
-    filter: brightness(0) invert(1); /* Make logo white */
+    /* No filter needed - logo is already white */
     transition: all 0.3s ease;
 }
 

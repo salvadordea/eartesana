@@ -3,6 +3,24 @@
   "name": "estudio-artesana",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/pages",
+      "destination": "/pages/tienda",
+      "permanent": true
+    },
+    {
+      "source": "/pages/tienda/(.*)",
+      "destination": "/tienda/$1",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/tienda",
+      "destination": "/tienda/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)\\.js$",
