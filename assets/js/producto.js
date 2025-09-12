@@ -384,32 +384,61 @@ class ProductDetailPage {
     groupVariationsByAttribute() {
         const groups = {};
         
-        if (!this.product.variations || !Array.isArray(this.product.variations)) {
+        // More thorough validation
+        if (!this.product || 
+            !this.product.variations || 
+            !Array.isArray(this.product.variations) || 
+            this.product.variations.length === 0) {
+            console.log('No valid variations found');
             return groups;
         }
         
-        this.product.variations.forEach(variation => {
-            if (!variation || !variation.attributes) {
-                return;
-            }
-            
-            Object.entries(variation.attributes).forEach(([attr, value]) => {
-                if (!attr || !value) {
+        try {
+            this.product.variations.forEach((variation, index) => {
+                console.log(`Processing variation ${index}:`, variation);
+                
+                if (!variation || typeof variation !== 'object') {
+                    console.log(`Variation ${index} is invalid:`, variation);
                     return;
                 }
                 
-                if (!groups[attr]) {
-                    groups[attr] = new Set();
+                if (!variation.attributes || typeof variation.attributes !== 'object') {
+                    console.log(`Variation ${index} has no valid attributes:`, variation.attributes);
+                    return;
                 }
-                groups[attr].add(value);
+                
+                try {
+                    Object.entries(variation.attributes).forEach(([attr, value]) => {
+                        if (!attr || value === null || value === undefined || value === '') {
+                            console.log(`Invalid attribute pair: ${attr} = ${value}`);
+                            return;
+                        }
+                        
+                        if (!groups[attr]) {
+                            groups[attr] = new Set();
+                        }
+                        groups[attr].add(value);
+                    });
+                } catch (attrError) {
+                    console.error(`Error processing attributes for variation ${index}:`, attrError, variation);
+                }
             });
-        });
+        } catch (error) {
+            console.error('Error processing variations:', error);
+            return {};
+        }
         
         // Convert sets to arrays
-        Object.keys(groups).forEach(attr => {
-            groups[attr] = Array.from(groups[attr]);
-        });
+        try {
+            Object.keys(groups).forEach(attr => {
+                groups[attr] = Array.from(groups[attr]);
+            });
+        } catch (error) {
+            console.error('Error converting sets to arrays:', error);
+            return {};
+        }
         
+        console.log('Final groups:', groups);
         return groups;
     }
     
