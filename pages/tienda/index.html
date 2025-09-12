@@ -117,8 +117,9 @@
     <section class="filters-bar">
         <div class="container">
             <div class="filters-container">
-                <!-- Search Filter -->
+                <!-- Search Filter - Left Column -->
                 <div class="filter-group search-group">
+                    <label class="filter-label">Buscar productos:</label>
                     <div class="search-box">
                         <input type="text" id="productSearch" placeholder="Buscar productos...">
                         <button type="button" id="searchBtn">
@@ -127,54 +128,57 @@
                     </div>
                 </div>
 
-                <!-- Category Filter -->
-                <div class="filter-group category-group">
-                    <label class="filter-label">Categoría:</label>
-                    <div class="category-filters" id="categoryFilters">
-                        <div class="filter-loading">Cargando...</div>
-                    </div>
-                </div>
-
-                <!-- Price Filter -->
-                <div class="filter-group price-group">
-                    <label class="filter-label">Precio:</label>
-                    <div class="price-filter">
-                        <div class="price-inputs">
-                            <input type="number" id="minPrice" placeholder="Min" min="0">
-                            <span>-</span>
-                            <input type="number" id="maxPrice" placeholder="Max" min="0">
+                <!-- Other Filters - Right Column -->
+                <div class="filters-right">
+                    <!-- Category Filter -->
+                    <div class="filter-group category-group">
+                        <label class="filter-label">Categoría:</label>
+                        <div class="category-filters" id="categoryFilters">
+                            <div class="filter-loading">Cargando...</div>
                         </div>
-                        <button type="button" id="applyPriceFilter">Aplicar</button>
                     </div>
-                </div>
 
-                <!-- Special Filters -->
-                <div class="filter-group special-group">
-                    <div class="special-filters">
-                        <label class="filter-checkbox">
-                            <input type="checkbox" id="onSaleFilter">
-                            <span class="checkmark"></span>
-                            Oferta
-                        </label>
-                        <label class="filter-checkbox">
-                            <input type="checkbox" id="featuredFilter">
-                            <span class="checkmark"></span>
-                            Destacados
-                        </label>
-                        <label class="filter-checkbox">
-                            <input type="checkbox" id="inStockFilter" checked>
-                            <span class="checkmark"></span>
-                            En Stock
-                        </label>
+                    <!-- Price Filter -->
+                    <div class="filter-group price-group">
+                        <label class="filter-label">Precio:</label>
+                        <div class="price-filter">
+                            <div class="price-inputs">
+                                <input type="number" id="minPrice" placeholder="Min" min="0">
+                                <span>-</span>
+                                <input type="number" id="maxPrice" placeholder="Max" min="0">
+                            </div>
+                            <button type="button" id="applyPriceFilter">Aplicar</button>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Clear Filters -->
-                <div class="filter-group clear-group">
-                    <button type="button" id="clearFilters" class="clear-filters-btn">
-                        <i class="fas fa-times"></i>
-                        Limpiar
-                    </button>
+                    <!-- Special Filters -->
+                    <div class="filter-group special-group">
+                        <div class="special-filters">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" id="onSaleFilter">
+                                <span class="checkmark"></span>
+                                Oferta
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" id="featuredFilter">
+                                <span class="checkmark"></span>
+                                Destacados
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" id="inStockFilter" checked>
+                                <span class="checkmark"></span>
+                                En Stock
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Clear Filters -->
+                    <div class="filter-group clear-group">
+                        <button type="button" id="clearFilters" class="clear-filters-btn">
+                            <i class="fas fa-times"></i>
+                            Limpiar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
