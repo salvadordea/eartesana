@@ -694,92 +694,157 @@ body {
     }
 }
 
-/* Monthly Promotion Banner */
+/* Monthly Promotion Card - Elegant Circular Design */
 .monthly-promo-banner {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--gradient-secondary);
+    top: 140px; /* Más abajo del header fijo */
+    right: 25px;
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
     color: var(--white);
-    padding: 15px 25px;
-    border-radius: 8px;
-    transform: rotate(5deg);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+    border: 2px solid var(--secondary-color);
+    padding: 20px;
+    border-radius: 50%; /* Forma circular */
+    width: 120px;
+    height: 120px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+    z-index: 999; /* Debajo del header pero por encima del contenido */
     font-family: var(--font-secondary);
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: var(--transition-smooth);
+    font-weight: 500;
+    font-size: 0.8rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
-    animation: subtle-bounce 3s infinite;
+    backdrop-filter: blur(10px);
+    text-align: center;
+    opacity: 0;
+    transform: translateX(20px);
+    animation: slideInPromo 0.6s ease-out 1s forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .monthly-promo-banner:hover {
-    transform: rotate(0deg) scale(1.05);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35),
+                0 0 0 1px rgba(192, 192, 192, 0.2);
+    border-color: rgba(192, 192, 192, 0.8);
 }
 
 .monthly-promo-banner .promo-text {
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 400;
 }
 
 .monthly-promo-banner .promo-discount {
     display: block;
-    font-size: 1.2rem;
-    color: #FFD700;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    text-shadow: none;
+    margin: 4px 0;
+    background: linear-gradient(45deg, #C0C0C0, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .monthly-promo-banner .promo-close {
     position: absolute;
-    top: -8px;
-    right: -8px;
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
+    top: -6px;
+    right: -6px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--white);
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: 600;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: var(--transition-smooth);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
 }
 
 .monthly-promo-banner .promo-close:hover {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
     transform: scale(1.1);
 }
 
-@keyframes subtle-bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: rotate(5deg) translateY(0);
+/* Animación de entrada */
+@keyframes slideInPromo {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
     }
-    40% {
-        transform: rotate(5deg) translateY(-3px);
-    }
-    60% {
-        transform: rotate(5deg) translateY(-1px);
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
-/* Responsive adjustments for promo banner */
+/* Responsive adjustments for promo card */
 @media (max-width: 768px) {
     .monthly-promo-banner {
-        top: 10px;
+        top: 120px;
+        right: 15px;
+        padding: 16px;
+        font-size: 0.75rem;
+        width: 100px;
+        height: 100px;
+    }
+    
+    .monthly-promo-banner .promo-text {
+        font-size: 0.65rem;
+        margin-bottom: 4px;
+    }
+    
+    .monthly-promo-banner .promo-discount {
+        font-size: 1.1rem;
+    }
+    
+    .monthly-promo-banner .promo-close {
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+        top: -4px;
+        right: -4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .monthly-promo-banner {
+        top: 100px;
         right: 10px;
-        padding: 12px 18px;
-        font-size: 0.8rem;
-        transform: rotate(3deg);
+        padding: 14px;
+        width: 90px;
+        height: 90px;
+    }
+    
+    .monthly-promo-banner .promo-text {
+        font-size: 0.6rem;
     }
     
     .monthly-promo-banner .promo-discount {
         font-size: 1rem;
+    }
+    
+    .monthly-promo-banner .promo-close {
+        width: 16px;
+        height: 16px;
+        font-size: 9px;
+        top: -3px;
+        right: -3px;
     }
 }
 
