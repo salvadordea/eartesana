@@ -1,0 +1,25 @@
+{
+  "name": "Estudio Artesana",
+  "description": "Productos artesanales únicos hechos a mano",
+  "currency": "MXN",
+  "currencySymbol": "$",
+  "language": "es",
+  "country": "MX",
+  "contact": {
+    "email": "contacto@estudioartesana.com",
+    "phone": "+52 1 234 567 8900",
+    "address": "México"
+  },
+  "social": {
+    "instagram": "https://instagram.com/estudioartesana",
+    "facebook": "https://facebook.com/estudioartesana"
+  },
+  "shipping": {
+    "freeShippingMinimum": 500,
+    "shippingCost": 100
+  },
+  "mercadoPago": {
+    "publicKey": "",
+    "accessToken": ""
+  }
+}

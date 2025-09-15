@@ -1,0 +1,64 @@
+<!-- HEADER UNIVERSAL - ESTUDIO ARTESANA -->
+<!-- Este header se adapta automáticamente según la ubicación del archivo -->
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="{{HOMEPAGE_URL}}" id="logoLink">
+                    <img src="{{LOGO_URL}}" alt="Estudio Artesana" class="logo-img" id="logoImg">
+                </a>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="{{HOMEPAGE_URL}}" class="nav-link {{HOME_ACTIVE}}">INICIO</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="{{TIENDA_URL}}" class="nav-link {{TIENDA_ACTIVE}}">TIENDA</a>
+                        <i class="fas fa-chevron-down nav-arrow"></i>
+                        <div class="dropdown-menu" id="tiendaDropdown">
+                            <a href="{{TIENDA_URL}}" class="dropdown-link">Todos los productos</a>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-categories" id="dropdownCategories">
+                                <!-- Categories will be loaded here dynamically -->
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{SOBRE_NOSOTROS_URL}}" class="nav-link {{SOBRE_ACTIVE}}">SOBRE NOSOTROS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{MAYORISTAS_URL}}" class="nav-link {{MAYORISTAS_ACTIVE}}">MAYORISTAS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{CONTACTO_URL}}" class="nav-link {{CONTACTO_ACTIVE}}">CONTACTO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{REGISTRO_URL}}" class="nav-link {{REGISTRO_ACTIVE}}">REGISTRO DE CLIENTES</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Header Icons -->
+            <div class="header-icons">
+                <a href="#carrito" class="header-icon cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count cart-counter" id="cartCount">0</span>
+                </a>
+                <button class="search-toggle header-icon">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+</header>

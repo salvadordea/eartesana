@@ -1,0 +1,146 @@
+[
+  {
+    "id": 17,
+    "name": "Accesorios",
+    "slug": "accesorios",
+    "description": "",
+    "count": 12,
+    "image": null
+  },
+  {
+    "id": 82,
+    "name": "Aretes de Piel",
+    "slug": "aretes-de-piel",
+    "description": "Aretes de piel",
+    "count": 6,
+    "image": null
+  },
+  {
+    "id": 83,
+    "name": "Backpacks",
+    "slug": "backpacks",
+    "description": "",
+    "count": 1,
+    "image": null
+  },
+  {
+    "id": 19,
+    "name": "Bolsas Cruzadas",
+    "slug": "bolsas-cruzadas",
+    "description": "",
+    "count": 6,
+    "image": null
+  },
+  {
+    "id": 18,
+    "name": "Bolsas de mano",
+    "slug": "bolsas-de-mano",
+    "description": "",
+    "count": 2,
+    "image": null
+  },
+  {
+    "id": 148,
+    "name": "Bolsas de Textil y Piel",
+    "slug": "bolsas-de-textil-y-piel",
+    "description": "",
+    "count": 4,
+    "image": null
+  },
+  {
+    "id": 20,
+    "name": "Bolsas Grandes",
+    "slug": "bolsas-grandes",
+    "description": "",
+    "count": 5,
+    "image": null
+  },
+  {
+    "id": 22,
+    "name": "Botelleras",
+    "slug": "botelleras",
+    "description": "",
+    "count": 1,
+    "image": null
+  },
+  {
+    "id": 81,
+    "name": "Brazaletes",
+    "slug": "brazaletes",
+    "description": "Brazaletes de piel",
+    "count": 5,
+    "image": null
+  },
+  {
+    "id": 103,
+    "name": "Carteras",
+    "slug": "carteras",
+    "description": "",
+    "count": 4,
+    "image": null
+  },
+  {
+    "id": 23,
+    "name": "Hogar",
+    "slug": "hogar",
+    "description": "",
+    "count": 1,
+    "image": null
+  },
+  {
+    "id": 16,
+    "name": "Joyeria",
+    "slug": "joyeria",
+    "description": "",
+    "count": 11,
+    "image": null
+  },
+  {
+    "id": 104,
+    "name": "Llaveros",
+    "slug": "llaveros",
+    "description": "",
+    "count": 2,
+    "image": null
+  },
+  {
+    "id": 87,
+    "name": "Monederos",
+    "slug": "monederos",
+    "description": "",
+    "count": 3,
+    "image": null
+  },
+  {
+    "id": 84,
+    "name": "Ovaladas",
+    "slug": "ovaladas",
+    "description": "",
+    "count": 1,
+    "image": null
+  },
+  {
+    "id": 89,
+    "name": "Portacel",
+    "slug": "portacel",
+    "description": "",
+    "count": 4,
+    "image": null
+  },
+  {
+    "id": 15,
+    "name": "Uncategorized",
+    "slug": "uncategorized",
+    "description": "",
+    "count": 0,
+    "image": null
+  },
+  {
+    "id": 21,
+    "name": "Vestimenta",
+    "slug": "vestimenta",
+    "description": "",
+    "count": 0,
+    "image": null
+  }
+]

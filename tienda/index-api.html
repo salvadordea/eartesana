@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda - Estudio Artesana</title>
+    <meta name="description" content="Descubre nuestra colección completa de productos artesanales. Bolsas, accesorios y cuadernos únicos hechos a mano.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/tienda.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Los estilos de integración API se manejan desde tienda.css -->
+</head>
+<body>
+    <!-- Header Universal Container -->
+    <div id="universal-header-container">
+        <!-- El header se carga dinámicamente aquí -->
+    </div>
+
+    <!-- Breadcrumbs -->
+    <section class="breadcrumbs">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="../index.html">Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Tienda</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Shop Header -->
+    <section class="shop-header">
+        <div class="container">
+            <div class="shop-header-content">
+                <div class="shop-title">
+                    <h1>Nuestra Tienda</h1>
+                    <p>Productos artesanales únicos hechos con técnicas ancestrales</p>
+                </div>
+                
+                <div class="shop-controls">
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="sort-dropdown">
+                        <select id="sortProducts">
+                            <option value="date-desc">Más recientes</option>
+                            <option value="date-asc">Más antiguos</option>
+                            <option value="price-asc">Precio: menor a mayor</option>
+                            <option value="price-desc">Precio: mayor a menor</option>
+                            <option value="title-asc" selected>Nombre: A-Z</option>
+                            <option value="title-desc">Nombre: Z-A</option>
+                            <option value="popularity">Más populares</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Bar (Top) -->
+    <section class="search-bar">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-box-modern">
+                    <input type="text" id="productSearch" placeholder="Buscar productos...">
+                    <button type="button" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Shop Content -->
+    <section class="shop-content">
+        <div class="container">
+            <div class="shop-layout">
+                <!-- Filters Sidebar -->
+                <aside class="shop-sidebar">
+                    <!-- Price Filter -->
+                    <div class="filter-section">
+                        <h3>Precio</h3>
+                        <div class="price-filter">
+                            <div class="price-inputs">
+                                <input type="number" id="minPrice" placeholder="Mín" min="0">
+                                <span>-</span>
+                                <input type="number" id="maxPrice" placeholder="Máx" min="0">
+                            </div>
+                            <button type="button" id="applyPriceFilter">Aplicar</button>
+                        </div>
+                    </div>
+
+                    <!-- Special Filters -->
+                    <div class="filter-section">
+                        <h3>Filtros</h3>
+                        <div class="special-filters">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" id="onSaleFilter">
+                                <span class="checkmark"></span>
+                                En oferta
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" id="featuredFilter">
+                                <span class="checkmark"></span>
+                                Destacados
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" id="inStockFilter" checked>
+                                <span class="checkmark"></span>
+                                En stock
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Clear Filters -->
+                    <div class="filter-section">
+                        <button type="button" id="clearFilters" class="clear-filters-btn">
+                            <i class="fas fa-times"></i>
+                            Limpiar
+                        </button>
+                    </div>
+                </aside>
+
+                <!-- Main Area with Categories and Products -->
+                <main class="shop-main">
+                    <!-- Categories Section -->
+                    <div class="categories-section-inline">
+                        <!-- Categories Loading -->
+                        <div class="categories-loading" id="categoriesLoading">
+                            <div class="loading-spinner"></div>
+                            <p>Cargando categorías...</p>
+                        </div>
+
+                        <!-- Categories Grid -->
+                        <div class="categories-grid" id="categoriesGrid" style="display: none;">
+                            <!-- Categories will be inserted here dynamically -->
+                        </div>
+
+                        <!-- Categories Error -->
+                        <div class="categories-error" id="categoriesError" style="display: none;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Error cargando categorías</h3>
+                            <p>No se pudieron cargar las categorías.</p>
+                        </div>
+                    </div>
+
+                    <!-- Products Results Info -->
+                    <div class="products-results" id="productsResults">
+                        <span class="results-count">Cargando productos...</span>
+                        <div class="results-pagination">
+                            <span id="currentPage">1</span> de <span id="totalPages">1</span>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid Container -->
+                    <div class="products-container" id="productsContainer">
+                        <!-- Loading State -->
+                        <div class="products-loading" id="productsLoading">
+                            <div class="loading-spinner"></div>
+                            <p>Cargando productos...</p>
+                        </div>
+
+                        <!-- Products Grid -->
+                        <div class="products-grid" id="productsGrid" style="display: none;">
+                            <!-- Products will be inserted here dynamically -->
+                        </div>
+
+                        <!-- No Results -->
+                        <div class="no-results" id="noResults" style="display: none;">
+                            <i class="fas fa-search"></i>
+                            <h3>No se encontraron productos</h3>
+                            <p>Intenta ajustar tus filtros o buscar con otros términos.</p>
+                            <button type="button" id="resetSearch">Mostrar todos los productos</button>
+                        </div>
+
+                        <!-- API Error -->
+                        <div class="api-error" id="apiError" style="display: none;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Error de Conexión</h3>
+                            <p>No se pudieron cargar los productos. Por favor, verifica tu conexión.</p>
+                            <button type="button" id="retryLoad">Reintentar</button>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination" id="pagination">
+                        <!-- Pagination will be inserted here dynamically -->
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>Email: info@estudioartesana.com</p>
+                    <p>Teléfono: +52 123 456 7890</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Estudio Artesana. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/cloudinary-config.js"></script>
+    
+    <!-- Header Universal (DEBE CARGARSE PRIMERO) -->
+    <script src="../assets/js/universal-header.js"></script>
+    
+    <!-- API Backend Integration -->
+    <script src="../api/tienda-api-client.js"></script>
+    <script src="../api/tienda-integration.js"></script>
+    
+    <!-- Main Scripts (mantener solo los necesarios) -->
+    <script src="../assets/js/main.js"></script>
+    
+    <!-- Script específico para manejar API connection status -->
+    <script>
+        // Mostrar estado de conexión con el API
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎨 Tienda con integración API cargada');
+            
+            // Verificar conexión después de 3 segundos
+            setTimeout(() => {
+                if (window.artesanaAPI) {
+                    console.log('✅ Cliente API inicializado correctamente');
+                } else {
+                    console.error('❌ Error: Cliente API no disponible');
+                    
+                    // Mostrar mensaje de error al usuario
+                    const errorDiv = document.createElement('div');
+                    errorDiv.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: #ff4444;
+                        color: white;
+                        padding: 15px 25px;
+                        border-radius: 8px;
+                        z-index: 10000;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                    `;
+                    errorDiv.innerHTML = `
+                        <strong>⚠️ Error de Conexión</strong><br>
+                        No se puede conectar con el servidor API. Verifica que esté funcionando en puerto 3001.
+                    `;
+                    document.body.appendChild(errorDiv);
+                    
+                    setTimeout(() => errorDiv.remove(), 5000);
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

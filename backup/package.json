@@ -12,6 +12,8 @@
     "download:images:full": "node download-images-full.js",
     "backup:variations": "node backup-variations.js",
     "backup:variation-images": "node backup-variation-images.js",
+    "migrate:check": "node restore-to-new-site.js --check",
+    "migrate:run": "node restore-to-new-site.js --migrate",
     "restore:test": "node restore-test.js",
     "compare": "node compare-backups.js"
   },

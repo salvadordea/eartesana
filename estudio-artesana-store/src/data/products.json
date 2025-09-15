@@ -1,0 +1,5657 @@
+[
+  {
+    "id": 1779,
+    "name": "Arete polígono grande",
+    "slug": "arete-poligono-grande",
+    "description": "\n\n\nMedidas 6 cms. x 4 cms.\n\n\n\n",
+    "shortDescription": "",
+    "price": 390,
+    "type": "variable",
+    "categories": [
+      82
+    ],
+    "images": [
+      {
+        "id": 1778,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000149825-1-scaled.jpg",
+        "alt": "Arete polígono grande",
+        "localFileName": "1779_1778_Arete polígono grande.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1779-0",
+        "name": "Beige/oro pálido/negro",
+        "price": 390,
+        "stock": 10,
+        "image": {
+          "id": 1778,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000149825-1-scaled.jpg",
+          "alt": "Arete polígono grande",
+          "localFileName": "1779_1778_Arete polígono grande.jpg"
+        }
+      },
+      {
+        "id": "1779-1",
+        "name": "Gris metálico/cobre/oro pálido",
+        "price": 390,
+        "stock": 5,
+        "image": {
+          "id": 1778,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000149825-1-scaled.jpg",
+          "alt": "Arete polígono grande",
+          "localFileName": "1779_1778_Arete polígono grande.jpg"
+        }
+      },
+      {
+        "id": "1779-2",
+        "name": "Ladrillo/camel/perla",
+        "price": 390,
+        "stock": 8,
+        "image": {
+          "id": 1778,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000149825-1-scaled.jpg",
+          "alt": "Arete polígono grande",
+          "localFileName": "1779_1778_Arete polígono grande.jpg"
+        }
+      },
+      {
+        "id": "1779-3",
+        "name": "Negro/camel/oro pálido",
+        "price": 390,
+        "stock": 2,
+        "image": {
+          "id": 1778,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000149825-1-scaled.jpg",
+          "alt": "Arete polígono grande",
+          "localFileName": "1779_1778_Arete polígono grande.jpg"
+        }
+      },
+      {
+        "id": "1779-4",
+        "name": "Oro pálido/camel/cobre",
+        "price": 390,
+        "stock": 6,
+        "image": {
+          "id": 1778,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000149825-1-scaled.jpg",
+          "alt": "Arete polígono grande",
+          "localFileName": "1779_1778_Arete polígono grande.jpg"
+        }
+      },
+      {
+        "id": "1779-5",
+        "name": "Oro pálido/negro/perla",
+        "price": 390,
+        "stock": 8,
+        "image": {
+          "id": 1778,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000149825-1-scaled.jpg",
+          "alt": "Arete polígono grande",
+          "localFileName": "1779_1778_Arete polígono grande.jpg"
+        }
+      },
+      {
+        "id": "1779-6",
+        "name": "Oro pálido/perla/ladrillo",
+        "price": 390,
+        "stock": 10,
+        "image": {
+          "id": 1778,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000149825-1-scaled.jpg",
+          "alt": "Arete polígono grande",
+          "localFileName": "1779_1778_Arete polígono grande.jpg"
+        }
+      },
+      {
+        "id": "1779-7",
+        "name": "Perla/oro mate/negro",
+        "price": 390,
+        "stock": 3,
+        "image": {
+          "id": 1778,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000149825-1-scaled.jpg",
+          "alt": "Arete polígono grande",
+          "localFileName": "1779_1778_Arete polígono grande.jpg"
+        }
+      },
+      {
+        "id": "1779-8",
+        "name": "Perla/oro pálido/ladrillo",
+        "price": 390,
+        "stock": 7,
+        "image": {
+          "id": 1778,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000149825-1-scaled.jpg",
+          "alt": "Arete polígono grande",
+          "localFileName": "1779_1778_Arete polígono grande.jpg"
+        }
+      },
+      {
+        "id": "1779-9",
+        "name": "Rosado/beige/gris metálico",
+        "price": 390,
+        "stock": 3,
+        "image": {
+          "id": 1778,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000149825-1-scaled.jpg",
+          "alt": "Arete polígono grande",
+          "localFileName": "1779_1778_Arete polígono grande.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Beige/oro pálido/negro",
+          "Gris metálico/cobre/oro pálido",
+          "Ladrillo/camel/perla",
+          "Negro/camel/oro pálido",
+          "Oro pálido/camel/cobre",
+          "Oro pálido/negro/perla",
+          "Oro pálido/perla/ladrillo",
+          "Perla/oro mate/negro",
+          "Perla/oro pálido/ladrillo",
+          "Rosado/beige/gris metálico"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-08-16T21:29:24",
+    "updatedAt": "2025-08-26T17:51:22"
+  },
+  {
+    "id": 1753,
+    "name": "Bolsa Gigante vertical Pelo y Miel",
+    "slug": "bolsa-gigante-vertical-pelo-y-miel",
+    "description": "Bolsa Gigante vertical de piel con pelo tonos blanco y negro (los tonos pueden variar)\nmedidas 38 x 31 cm\n",
+    "shortDescription": "",
+    "price": 2750,
+    "type": "simple",
+    "categories": [
+      20
+    ],
+    "images": [
+      {
+        "id": 307,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/68.png",
+        "alt": "Bolsa Gigante vertical Pelo y Miel",
+        "localFileName": "1753_307_Bolsa Gigante vertical Pelo y Miel.png"
+      },
+      {
+        "id": 306,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/67.png",
+        "alt": "Bolsa Gigante vertical Pelo y Miel",
+        "localFileName": "1753_306_Bolsa Gigante vertical Pelo y Miel.png"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1753-0",
+        "name": "Estándar",
+        "price": 2750,
+        "stock": 4,
+        "image": {
+          "id": 307,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/68.png",
+          "alt": "Bolsa Gigante vertical Pelo y Miel",
+          "localFileName": "1753_307_Bolsa Gigante vertical Pelo y Miel.png"
+        }
+      }
+    ],
+    "attributes": [],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-08-08T19:51:39",
+    "updatedAt": "2025-08-15T02:37:20"
+  },
+  {
+    "id": 1747,
+    "name": "Clutch Grande con strap",
+    "slug": "clutch-grande-con-strap",
+    "description": "\n\n\nMedidas 20 cms alto x 27 cms de ancho con bolsillo interior de 13 cms de alto x 20 cms de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 1950,
+    "type": "variable",
+    "categories": [
+      19
+    ],
+    "images": [
+      {
+        "id": 1542,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/43-1.png",
+        "alt": "Clutch Grande con strap",
+        "localFileName": "1747_1542_Clutch Grande con strap.png"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1747-0",
+        "name": "Café Claro",
+        "price": 1950,
+        "stock": 1,
+        "image": {
+          "id": 1542,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/43-1.png",
+          "alt": "Clutch Grande con strap",
+          "localFileName": "1747_1542_Clutch Grande con strap.png"
+        }
+      },
+      {
+        "id": "1747-1",
+        "name": "Café Oscuro",
+        "price": 1950,
+        "stock": 9,
+        "image": {
+          "id": 1542,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/43-1.png",
+          "alt": "Clutch Grande con strap",
+          "localFileName": "1747_1542_Clutch Grande con strap.png"
+        }
+      },
+      {
+        "id": "1747-2",
+        "name": "Cobre Rosado",
+        "price": 1950,
+        "stock": 9,
+        "image": {
+          "id": 1542,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/43-1.png",
+          "alt": "Clutch Grande con strap",
+          "localFileName": "1747_1542_Clutch Grande con strap.png"
+        }
+      },
+      {
+        "id": "1747-3",
+        "name": "Negro",
+        "price": 1950,
+        "stock": 4,
+        "image": {
+          "id": 1542,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/43-1.png",
+          "alt": "Clutch Grande con strap",
+          "localFileName": "1747_1542_Clutch Grande con strap.png"
+        }
+      },
+      {
+        "id": "1747-4",
+        "name": "Oro Pálido",
+        "price": 1950,
+        "stock": 7,
+        "image": {
+          "id": 1542,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/43-1.png",
+          "alt": "Clutch Grande con strap",
+          "localFileName": "1747_1542_Clutch Grande con strap.png"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Café Claro",
+          "Café Oscuro",
+          "Cobre Rosado",
+          "Negro",
+          "Oro Pálido"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-08-08T19:41:03",
+    "updatedAt": "2025-08-26T18:34:19"
+  },
+  {
+    "id": 1727,
+    "name": "Bolsa Telar de pedal cruzada",
+    "slug": "bolsa-telar-de-pedal-cruzada",
+    "description": "Bolsa de tela resistente con correa de piel y boton para cerrar medidas 28 x 22 cm.\n",
+    "shortDescription": "",
+    "price": 1490,
+    "type": "variable",
+    "categories": [
+      148
+    ],
+    "images": [
+      {
+        "id": 819,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122432_Instagram.jpg",
+        "alt": "Bolsa Telar de pedal cruzada",
+        "localFileName": "1727_819_Bolsa Telar de pedal cruzada.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1727-0",
+        "name": "Camel y blanco delgado",
+        "price": 1490,
+        "stock": 5,
+        "image": {
+          "id": 819,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122432_Instagram.jpg",
+          "alt": "Bolsa Telar de pedal cruzada",
+          "localFileName": "1727_819_Bolsa Telar de pedal cruzada.jpg"
+        }
+      },
+      {
+        "id": "1727-1",
+        "name": "Camel y Blanco franjas",
+        "price": 1490,
+        "stock": 8,
+        "image": {
+          "id": 819,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122432_Instagram.jpg",
+          "alt": "Bolsa Telar de pedal cruzada",
+          "localFileName": "1727_819_Bolsa Telar de pedal cruzada.jpg"
+        }
+      },
+      {
+        "id": "1727-2",
+        "name": "Gris y azul franjas",
+        "price": 1490,
+        "stock": 2,
+        "image": {
+          "id": 819,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122432_Instagram.jpg",
+          "alt": "Bolsa Telar de pedal cruzada",
+          "localFileName": "1727_819_Bolsa Telar de pedal cruzada.jpg"
+        }
+      },
+      {
+        "id": "1727-3",
+        "name": "Gris y azul tupido",
+        "price": 1490,
+        "stock": 2,
+        "image": {
+          "id": 819,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122432_Instagram.jpg",
+          "alt": "Bolsa Telar de pedal cruzada",
+          "localFileName": "1727_819_Bolsa Telar de pedal cruzada.jpg"
+        }
+      },
+      {
+        "id": "1727-4",
+        "name": "Gris y blanco",
+        "price": 1490,
+        "stock": 6,
+        "image": {
+          "id": 819,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122432_Instagram.jpg",
+          "alt": "Bolsa Telar de pedal cruzada",
+          "localFileName": "1727_819_Bolsa Telar de pedal cruzada.jpg"
+        }
+      },
+      {
+        "id": "1727-5",
+        "name": "Gris y blanco franjas",
+        "price": 1490,
+        "stock": 7,
+        "image": {
+          "id": 819,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122432_Instagram.jpg",
+          "alt": "Bolsa Telar de pedal cruzada",
+          "localFileName": "1727_819_Bolsa Telar de pedal cruzada.jpg"
+        }
+      },
+      {
+        "id": "1727-6",
+        "name": "Gris y negro",
+        "price": 1490,
+        "stock": 10,
+        "image": {
+          "id": 819,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122432_Instagram.jpg",
+          "alt": "Bolsa Telar de pedal cruzada",
+          "localFileName": "1727_819_Bolsa Telar de pedal cruzada.jpg"
+        }
+      },
+      {
+        "id": "1727-7",
+        "name": "Negro y blanco delgado",
+        "price": 1490,
+        "stock": 2,
+        "image": {
+          "id": 819,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122432_Instagram.jpg",
+          "alt": "Bolsa Telar de pedal cruzada",
+          "localFileName": "1727_819_Bolsa Telar de pedal cruzada.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Camel y blanco delgado",
+          "Camel y Blanco franjas",
+          "Gris y azul franjas",
+          "Gris y azul tupido",
+          "Gris y blanco",
+          "Gris y blanco franjas",
+          "Gris y negro",
+          "Negro y blanco delgado"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-08-08T19:21:56",
+    "updatedAt": "2025-06-27T21:51:28"
+  },
+  {
+    "id": 1643,
+    "name": "Portacel grande",
+    "slug": "portacel-grande",
+    "description": "\n\n\nMedidas 20 cms altura x 15 cms de ancho bolsilo exterior de 13 cms de alto x 13.5 de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 1300,
+    "type": "variable",
+    "categories": [
+      89
+    ],
+    "images": [
+      {
+        "id": 1641,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163521-1-scaled.jpg",
+        "alt": "Portacel grande",
+        "localFileName": "1643_1641_Portacel grande.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1643-0",
+        "name": "Café Claro",
+        "price": 1300,
+        "stock": 3,
+        "image": {
+          "id": 1641,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163521-1-scaled.jpg",
+          "alt": "Portacel grande",
+          "localFileName": "1643_1641_Portacel grande.jpg"
+        }
+      },
+      {
+        "id": "1643-1",
+        "name": "Café Oscuro",
+        "price": 1300,
+        "stock": 6,
+        "image": {
+          "id": 1641,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163521-1-scaled.jpg",
+          "alt": "Portacel grande",
+          "localFileName": "1643_1641_Portacel grande.jpg"
+        }
+      },
+      {
+        "id": "1643-2",
+        "name": "Camel",
+        "price": 1300,
+        "stock": 7,
+        "image": {
+          "id": 1641,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163521-1-scaled.jpg",
+          "alt": "Portacel grande",
+          "localFileName": "1643_1641_Portacel grande.jpg"
+        }
+      },
+      {
+        "id": "1643-3",
+        "name": "Gris",
+        "price": 1300,
+        "stock": 1,
+        "image": {
+          "id": 1641,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163521-1-scaled.jpg",
+          "alt": "Portacel grande",
+          "localFileName": "1643_1641_Portacel grande.jpg"
+        }
+      },
+      {
+        "id": "1643-4",
+        "name": "Ladrillo",
+        "price": 1300,
+        "stock": 7,
+        "image": {
+          "id": 1641,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163521-1-scaled.jpg",
+          "alt": "Portacel grande",
+          "localFileName": "1643_1641_Portacel grande.jpg"
+        }
+      },
+      {
+        "id": "1643-5",
+        "name": "Negro",
+        "price": 1300,
+        "stock": 5,
+        "image": {
+          "id": 1641,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163521-1-scaled.jpg",
+          "alt": "Portacel grande",
+          "localFileName": "1643_1641_Portacel grande.jpg"
+        }
+      },
+      {
+        "id": "1643-6",
+        "name": "Tinta",
+        "price": 1300,
+        "stock": 3,
+        "image": {
+          "id": 1641,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163521-1-scaled.jpg",
+          "alt": "Portacel grande",
+          "localFileName": "1643_1641_Portacel grande.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Café Claro",
+          "Café Oscuro",
+          "Camel",
+          "Gris",
+          "Ladrillo",
+          "Negro",
+          "Tinta"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-08-03T08:02:44",
+    "updatedAt": "2025-08-26T18:09:11"
+  },
+  {
+    "id": 1328,
+    "name": "Portacel Pelo",
+    "slug": "portacel-pelo",
+    "description": "\n\n\nMedidas 20 cms altura x 15 cms de ancho bolsilo exterior de 13 cms de alto x 13.5 de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 980,
+    "type": "variable",
+    "categories": [
+      89
+    ],
+    "images": [
+      {
+        "id": 1806,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000166988-scaled.jpg",
+        "alt": "Portacel Pelo",
+        "localFileName": "1328_1806_Portacel Pelo.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1328-0",
+        "name": "Pelo tonos blancos",
+        "price": 980,
+        "stock": 4,
+        "image": {
+          "id": 1806,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000166988-scaled.jpg",
+          "alt": "Portacel Pelo",
+          "localFileName": "1328_1806_Portacel Pelo.jpg"
+        }
+      },
+      {
+        "id": "1328-1",
+        "name": "Pelo tonos negros",
+        "price": 980,
+        "stock": 7,
+        "image": {
+          "id": 1806,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000166988-scaled.jpg",
+          "alt": "Portacel Pelo",
+          "localFileName": "1328_1806_Portacel Pelo.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Pelo tonos blancos",
+          "Pelo tonos negros"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-15T19:14:37",
+    "updatedAt": "2025-08-26T18:10:15"
+  },
+  {
+    "id": 1322,
+    "name": "Portacel Piel Textil",
+    "slug": "portacel-piel-textil",
+    "description": "\n\n\nMedidas 20 cms altura x 15 cms de ancho bolsilo exterior de 13 cms de alto x 13.5 de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 980,
+    "type": "variable",
+    "categories": [
+      89
+    ],
+    "images": [
+      {
+        "id": 1807,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000166989-scaled.jpg",
+        "alt": "Portacel Piel Textil",
+        "localFileName": "1322_1807_Portacel Piel Textil.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1322-0",
+        "name": "Piel cafe textil beige y blanco lluvia",
+        "price": 980,
+        "stock": 10,
+        "image": {
+          "id": 1807,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000166989-scaled.jpg",
+          "alt": "Portacel Piel Textil",
+          "localFileName": "1322_1807_Portacel Piel Textil.jpg"
+        }
+      },
+      {
+        "id": "1322-1",
+        "name": "Piel ladrillo textil beige y blanco",
+        "price": 980,
+        "stock": 7,
+        "image": {
+          "id": 1807,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000166989-scaled.jpg",
+          "alt": "Portacel Piel Textil",
+          "localFileName": "1322_1807_Portacel Piel Textil.jpg"
+        }
+      },
+      {
+        "id": "1322-2",
+        "name": "Piel negra lineas negra sobre gris",
+        "price": 980,
+        "stock": 5,
+        "image": {
+          "id": 1807,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000166989-scaled.jpg",
+          "alt": "Portacel Piel Textil",
+          "localFileName": "1322_1807_Portacel Piel Textil.jpg"
+        }
+      },
+      {
+        "id": "1322-3",
+        "name": "Piel negra textil negro franja blanca",
+        "price": 980,
+        "stock": 2,
+        "image": {
+          "id": 1807,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000166989-scaled.jpg",
+          "alt": "Portacel Piel Textil",
+          "localFileName": "1322_1807_Portacel Piel Textil.jpg"
+        }
+      },
+      {
+        "id": "1322-4",
+        "name": "Piel negra, textil gris y blanco",
+        "price": 980,
+        "stock": 9,
+        "image": {
+          "id": 1807,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000166989-scaled.jpg",
+          "alt": "Portacel Piel Textil",
+          "localFileName": "1322_1807_Portacel Piel Textil.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Piel cafe textil beige y blanco lluvia",
+          "Piel ladrillo textil beige y blanco",
+          "Piel negra lineas negra sobre gris",
+          "Piel negra textil negro franja blanca",
+          "Piel negra, textil gris y blanco"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-15T19:11:00",
+    "updatedAt": "2025-08-26T18:07:24"
+  },
+  {
+    "id": 1315,
+    "name": "Bolsas Gigante Plana",
+    "slug": "bolsas-gigante-plana",
+    "description": "Bolsa gigante plana de piel de excelente calidad resistente y espaciosa medidas 29 x 39\n",
+    "shortDescription": "",
+    "price": 2400,
+    "type": "variable",
+    "categories": [
+      20
+    ],
+    "images": [
+      {
+        "id": 1321,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Planas-port.png",
+        "alt": "Bolsas Gigante Plana",
+        "localFileName": "1315_1321_Bolsas Gigante Plana.png"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1315-0",
+        "name": "Cafe chocolate",
+        "price": 2400,
+        "stock": 6,
+        "image": {
+          "id": 1321,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Planas-port.png",
+          "alt": "Bolsas Gigante Plana",
+          "localFileName": "1315_1321_Bolsas Gigante Plana.png"
+        }
+      },
+      {
+        "id": "1315-1",
+        "name": "Café Claro",
+        "price": 2400,
+        "stock": 10,
+        "image": {
+          "id": 1321,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Planas-port.png",
+          "alt": "Bolsas Gigante Plana",
+          "localFileName": "1315_1321_Bolsas Gigante Plana.png"
+        }
+      },
+      {
+        "id": "1315-2",
+        "name": "Camel",
+        "price": 2400,
+        "stock": 10,
+        "image": {
+          "id": 1321,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Planas-port.png",
+          "alt": "Bolsas Gigante Plana",
+          "localFileName": "1315_1321_Bolsas Gigante Plana.png"
+        }
+      },
+      {
+        "id": "1315-3",
+        "name": "Negro",
+        "price": 2400,
+        "stock": 9,
+        "image": {
+          "id": 1321,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Planas-port.png",
+          "alt": "Bolsas Gigante Plana",
+          "localFileName": "1315_1321_Bolsas Gigante Plana.png"
+        }
+      },
+      {
+        "id": "1315-4",
+        "name": "Tinta",
+        "price": 2400,
+        "stock": 2,
+        "image": {
+          "id": 1321,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Planas-port.png",
+          "alt": "Bolsas Gigante Plana",
+          "localFileName": "1315_1321_Bolsas Gigante Plana.png"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Cafe chocolate",
+          "Café Claro",
+          "Camel",
+          "Negro",
+          "Tinta"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-15T18:58:05",
+    "updatedAt": "2025-08-15T02:44:54"
+  },
+  {
+    "id": 1311,
+    "name": "Bolsa de Playa mediana",
+    "slug": "bolsa-de-playa-mediana",
+    "description": "Bolsa de tela de excelente calidad con correa de piel ideal pars llevar todo lo que necesitas en la playa medidas 35 x 45.\n",
+    "shortDescription": "",
+    "price": 1650,
+    "type": "variable",
+    "categories": [
+      148
+    ],
+    "images": [
+      {
+        "id": 1424,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/57.png",
+        "alt": "Bolsa de Playa mediana",
+        "localFileName": "1311_1424_Bolsa de Playa mediana.png"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1311-0",
+        "name": "Blanco y negro",
+        "price": 1650,
+        "stock": 5,
+        "image": {
+          "id": 1424,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/57.png",
+          "alt": "Bolsa de Playa mediana",
+          "localFileName": "1311_1424_Bolsa de Playa mediana.png"
+        }
+      },
+      {
+        "id": "1311-1",
+        "name": "Negro y blanco",
+        "price": 1650,
+        "stock": 10,
+        "image": {
+          "id": 1424,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/57.png",
+          "alt": "Bolsa de Playa mediana",
+          "localFileName": "1311_1424_Bolsa de Playa mediana.png"
+        }
+      },
+      {
+        "id": "1311-2",
+        "name": "Tinto y blanco",
+        "price": 1650,
+        "stock": 2,
+        "image": {
+          "id": 1424,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/57.png",
+          "alt": "Bolsa de Playa mediana",
+          "localFileName": "1311_1424_Bolsa de Playa mediana.png"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Blanco y negro",
+          "Negro y blanco",
+          "Tinto y blanco"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-15T18:40:00",
+    "updatedAt": "2025-08-15T02:32:51"
+  },
+  {
+    "id": 1301,
+    "name": "Bolsa botón madera",
+    "slug": "bolsa-boton-madera",
+    "description": "\n\n\nMedidas 29 cms.de  altura x 22 cms  de ancho y una base 14 cms x 10 cmx con bolsillo interior de 11.3cms x 14.5 cmx\n\n\n\n",
+    "shortDescription": "",
+    "price": 1800,
+    "type": "variable",
+    "categories": [
+      19
+    ],
+    "images": [
+      {
+        "id": 1627,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163469-scaled.jpg",
+        "alt": "Bolsa botón madera",
+        "localFileName": "1301_1627_Bolsa botón madera.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1301-0",
+        "name": "Café",
+        "price": 1800,
+        "stock": 3,
+        "image": {
+          "id": 1627,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163469-scaled.jpg",
+          "alt": "Bolsa botón madera",
+          "localFileName": "1301_1627_Bolsa botón madera.jpg"
+        }
+      },
+      {
+        "id": "1301-1",
+        "name": "Camel",
+        "price": 1800,
+        "stock": 9,
+        "image": {
+          "id": 1627,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163469-scaled.jpg",
+          "alt": "Bolsa botón madera",
+          "localFileName": "1301_1627_Bolsa botón madera.jpg"
+        }
+      },
+      {
+        "id": "1301-2",
+        "name": "Gris",
+        "price": 1800,
+        "stock": 10,
+        "image": {
+          "id": 1627,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163469-scaled.jpg",
+          "alt": "Bolsa botón madera",
+          "localFileName": "1301_1627_Bolsa botón madera.jpg"
+        }
+      },
+      {
+        "id": "1301-3",
+        "name": "Hueso",
+        "price": 1800,
+        "stock": 4,
+        "image": {
+          "id": 1627,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163469-scaled.jpg",
+          "alt": "Bolsa botón madera",
+          "localFileName": "1301_1627_Bolsa botón madera.jpg"
+        }
+      },
+      {
+        "id": "1301-4",
+        "name": "Negro",
+        "price": 1800,
+        "stock": 8,
+        "image": {
+          "id": 1627,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163469-scaled.jpg",
+          "alt": "Bolsa botón madera",
+          "localFileName": "1301_1627_Bolsa botón madera.jpg"
+        }
+      },
+      {
+        "id": "1301-5",
+        "name": "Rojo",
+        "price": 1800,
+        "stock": 6,
+        "image": {
+          "id": 1627,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163469-scaled.jpg",
+          "alt": "Bolsa botón madera",
+          "localFileName": "1301_1627_Bolsa botón madera.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Café",
+          "Camel",
+          "Gris",
+          "Hueso",
+          "Negro",
+          "Rojo"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-15T18:25:29",
+    "updatedAt": "2025-08-26T18:32:48"
+  },
+  {
+    "id": 1294,
+    "name": "Bolsa Mediana con bolsillo piel al frente",
+    "slug": "bolsa-mediana-con-bolsillo-piel-al-frente",
+    "description": "\n\n\nMedidas 29 cms.de  altura x 22 cms  de ancho y una base 14 cms x 10 cmx\n\n\n\n",
+    "shortDescription": "I I\n",
+    "price": 1950,
+    "type": "variable",
+    "categories": [
+      19
+    ],
+    "images": [
+      {
+        "id": 1451,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/27.png",
+        "alt": "Bolsa Mediana con bolsillo piel al frente",
+        "localFileName": "1294_1451_Bolsa Mediana con bolsillo piel al frente.png"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1294-0",
+        "name": "Azul y miel",
+        "price": 1950,
+        "stock": 9,
+        "image": {
+          "id": 1451,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/27.png",
+          "alt": "Bolsa Mediana con bolsillo piel al frente",
+          "localFileName": "1294_1451_Bolsa Mediana con bolsillo piel al frente.png"
+        }
+      },
+      {
+        "id": "1294-1",
+        "name": "Gris y Miel",
+        "price": 1950,
+        "stock": 2,
+        "image": {
+          "id": 1451,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/27.png",
+          "alt": "Bolsa Mediana con bolsillo piel al frente",
+          "localFileName": "1294_1451_Bolsa Mediana con bolsillo piel al frente.png"
+        }
+      },
+      {
+        "id": "1294-2",
+        "name": "Miel y gris",
+        "price": 1950,
+        "stock": 9,
+        "image": {
+          "id": 1451,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/27.png",
+          "alt": "Bolsa Mediana con bolsillo piel al frente",
+          "localFileName": "1294_1451_Bolsa Mediana con bolsillo piel al frente.png"
+        }
+      },
+      {
+        "id": "1294-3",
+        "name": "Negro y miel",
+        "price": 1950,
+        "stock": 5,
+        "image": {
+          "id": 1451,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/27.png",
+          "alt": "Bolsa Mediana con bolsillo piel al frente",
+          "localFileName": "1294_1451_Bolsa Mediana con bolsillo piel al frente.png"
+        }
+      },
+      {
+        "id": "1294-4",
+        "name": "Negro y Pelo",
+        "price": 1950,
+        "stock": 3,
+        "image": {
+          "id": 1451,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/27.png",
+          "alt": "Bolsa Mediana con bolsillo piel al frente",
+          "localFileName": "1294_1451_Bolsa Mediana con bolsillo piel al frente.png"
+        }
+      },
+      {
+        "id": "1294-5",
+        "name": "Tinto y miel",
+        "price": 1950,
+        "stock": 3,
+        "image": {
+          "id": 1451,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/27.png",
+          "alt": "Bolsa Mediana con bolsillo piel al frente",
+          "localFileName": "1294_1451_Bolsa Mediana con bolsillo piel al frente.png"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul y miel",
+          "Gris y Miel",
+          "Miel y gris",
+          "Negro y miel",
+          "Negro y Pelo",
+          "Tinto y miel"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-15T18:17:24",
+    "updatedAt": "2025-08-26T17:14:35"
+  },
+  {
+    "id": 1286,
+    "name": "Bolsa grande con Jareta",
+    "slug": "bolsa-grande-con-jareta",
+    "description": "Bolsa grande práctica y espaciosa de piel con jareta resistente color medidas 36 x 30 cm\n",
+    "shortDescription": "Bolsa grande práctica y espaciosa de piel con jareta\n",
+    "price": 2280,
+    "type": "variable",
+    "categories": [
+      20
+    ],
+    "images": [
+      {
+        "id": 1545,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/46-1.png",
+        "alt": "Bolsa grande con Jareta",
+        "localFileName": "1286_1545_Bolsa grande con Jareta.png"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1286-0",
+        "name": "Café",
+        "price": 2280,
+        "stock": 10,
+        "image": {
+          "id": 1545,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/46-1.png",
+          "alt": "Bolsa grande con Jareta",
+          "localFileName": "1286_1545_Bolsa grande con Jareta.png"
+        }
+      },
+      {
+        "id": "1286-1",
+        "name": "Cafe gamuza",
+        "price": 2280,
+        "stock": 5,
+        "image": {
+          "id": 1545,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/46-1.png",
+          "alt": "Bolsa grande con Jareta",
+          "localFileName": "1286_1545_Bolsa grande con Jareta.png"
+        }
+      },
+      {
+        "id": "1286-2",
+        "name": "Ladrillo",
+        "price": 2280,
+        "stock": 7,
+        "image": {
+          "id": 1545,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/46-1.png",
+          "alt": "Bolsa grande con Jareta",
+          "localFileName": "1286_1545_Bolsa grande con Jareta.png"
+        }
+      },
+      {
+        "id": "1286-3",
+        "name": "Mostaza",
+        "price": 2280,
+        "stock": 5,
+        "image": {
+          "id": 1545,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/46-1.png",
+          "alt": "Bolsa grande con Jareta",
+          "localFileName": "1286_1545_Bolsa grande con Jareta.png"
+        }
+      },
+      {
+        "id": "1286-4",
+        "name": "Negro",
+        "price": 2280,
+        "stock": 7,
+        "image": {
+          "id": 1545,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/46-1.png",
+          "alt": "Bolsa grande con Jareta",
+          "localFileName": "1286_1545_Bolsa grande con Jareta.png"
+        }
+      },
+      {
+        "id": "1286-5",
+        "name": "Tinta",
+        "price": 2280,
+        "stock": 6,
+        "image": {
+          "id": 1545,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/46-1.png",
+          "alt": "Bolsa grande con Jareta",
+          "localFileName": "1286_1545_Bolsa grande con Jareta.png"
+        }
+      },
+      {
+        "id": "1286-6",
+        "name": "Tinto gamuza",
+        "price": 2280,
+        "stock": 8,
+        "image": {
+          "id": 1545,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/46-1.png",
+          "alt": "Bolsa grande con Jareta",
+          "localFileName": "1286_1545_Bolsa grande con Jareta.png"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Café",
+          "Cafe gamuza",
+          "Ladrillo",
+          "Mostaza",
+          "Negro",
+          "Tinta",
+          "Tinto gamuza"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-15T17:12:57",
+    "updatedAt": "2025-08-15T02:40:46"
+  },
+  {
+    "id": 1282,
+    "name": "Backpack Mini",
+    "slug": "backpack-mini",
+    "description": "\n\n\nMedidas 29 cms.de  altura x 22 cms  de ancho y una base 14 cms x 10 cmx  bolsillo interior 11.3 cms x14.5 cms\n\n\n\n",
+    "shortDescription": "",
+    "price": 2150,
+    "type": "variable",
+    "categories": [
+      83
+    ],
+    "images": [
+      {
+        "id": 692,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20201020_140834-scaled.jpg",
+        "alt": "Backpack Mini",
+        "localFileName": "1282_692_Backpack Mini.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1282-0",
+        "name": "Gris y Miel",
+        "price": 2150,
+        "stock": 7,
+        "image": {
+          "id": 692,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20201020_140834-scaled.jpg",
+          "alt": "Backpack Mini",
+          "localFileName": "1282_692_Backpack Mini.jpg"
+        }
+      },
+      {
+        "id": "1282-1",
+        "name": "Miel y gris",
+        "price": 2150,
+        "stock": 8,
+        "image": {
+          "id": 692,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20201020_140834-scaled.jpg",
+          "alt": "Backpack Mini",
+          "localFileName": "1282_692_Backpack Mini.jpg"
+        }
+      },
+      {
+        "id": "1282-2",
+        "name": "Negro y miel",
+        "price": 2150,
+        "stock": 3,
+        "image": {
+          "id": 692,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20201020_140834-scaled.jpg",
+          "alt": "Backpack Mini",
+          "localFileName": "1282_692_Backpack Mini.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Gris y Miel",
+          "Miel y gris",
+          "Negro y miel"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-15T16:40:28",
+    "updatedAt": "2025-08-26T17:09:41"
+  },
+  {
+    "id": 1273,
+    "name": "Bolsa Gigante Vertical",
+    "slug": "bolsa-gigante-vertical",
+    "description": "Bolsa muy grande y alta de piel con correas resistentes medidas 41 x 30 cm\n",
+    "shortDescription": "",
+    "price": 2650,
+    "type": "variable",
+    "categories": [
+      20
+    ],
+    "images": [
+      {
+        "id": 305,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/66.png",
+        "alt": "Bolsa Gigante Vertical",
+        "localFileName": "1273_305_Bolsa Gigante Vertical.png"
+      },
+      {
+        "id": 312,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/73.png",
+        "alt": "Bolsa Gigante Vertical",
+        "localFileName": "1273_312_Bolsa Gigante Vertical.png"
+      },
+      {
+        "id": 309,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/70.png",
+        "alt": "Bolsa Gigante Vertical",
+        "localFileName": "1273_309_Bolsa Gigante Vertical.png"
+      },
+      {
+        "id": 308,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/69.png",
+        "alt": "Bolsa Gigante Vertical",
+        "localFileName": "1273_308_Bolsa Gigante Vertical.png"
+      },
+      {
+        "id": 315,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/76.png",
+        "alt": "Bolsa Gigante Vertical",
+        "localFileName": "1273_315_Bolsa Gigante Vertical.png"
+      },
+      {
+        "id": 304,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/65.png",
+        "alt": "Bolsa Gigante Vertical",
+        "localFileName": "1273_304_Bolsa Gigante Vertical.png"
+      },
+      {
+        "id": 317,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/78.png",
+        "alt": "Bolsa Gigante Vertical",
+        "localFileName": "1273_317_Bolsa Gigante Vertical.png"
+      },
+      {
+        "id": 319,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/80.png",
+        "alt": "Bolsa Gigante Vertical",
+        "localFileName": "1273_319_Bolsa Gigante Vertical.png"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1273-0",
+        "name": "Azul",
+        "price": 2650,
+        "stock": 1,
+        "image": {
+          "id": 305,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/66.png",
+          "alt": "Bolsa Gigante Vertical",
+          "localFileName": "1273_305_Bolsa Gigante Vertical.png"
+        }
+      },
+      {
+        "id": "1273-1",
+        "name": "Azul oscuro",
+        "price": 2650,
+        "stock": 10,
+        "image": {
+          "id": 312,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/73.png",
+          "alt": "Bolsa Gigante Vertical",
+          "localFileName": "1273_312_Bolsa Gigante Vertical.png"
+        }
+      },
+      {
+        "id": "1273-2",
+        "name": "Gris",
+        "price": 2650,
+        "stock": 6,
+        "image": {
+          "id": 309,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/70.png",
+          "alt": "Bolsa Gigante Vertical",
+          "localFileName": "1273_309_Bolsa Gigante Vertical.png"
+        }
+      },
+      {
+        "id": "1273-3",
+        "name": "Miel",
+        "price": 2650,
+        "stock": 5,
+        "image": {
+          "id": 308,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/69.png",
+          "alt": "Bolsa Gigante Vertical",
+          "localFileName": "1273_308_Bolsa Gigante Vertical.png"
+        }
+      },
+      {
+        "id": "1273-4",
+        "name": "Negro",
+        "price": 2650,
+        "stock": 1,
+        "image": {
+          "id": 315,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/76.png",
+          "alt": "Bolsa Gigante Vertical",
+          "localFileName": "1273_315_Bolsa Gigante Vertical.png"
+        }
+      },
+      {
+        "id": "1273-5",
+        "name": "Tinta",
+        "price": 2650,
+        "stock": 5,
+        "image": {
+          "id": 304,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/65.png",
+          "alt": "Bolsa Gigante Vertical",
+          "localFileName": "1273_304_Bolsa Gigante Vertical.png"
+        }
+      },
+      {
+        "id": "1273-6",
+        "name": "Verde",
+        "price": 2650,
+        "stock": 4,
+        "image": {
+          "id": 317,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/78.png",
+          "alt": "Bolsa Gigante Vertical",
+          "localFileName": "1273_317_Bolsa Gigante Vertical.png"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul",
+          "Azul oscuro",
+          "Gris",
+          "Miel",
+          "Negro",
+          "Tinta",
+          "Verde"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-15T15:10:01",
+    "updatedAt": "2025-08-15T02:36:53"
+  },
+  {
+    "id": 1072,
+    "name": "Bolsa Gigante horizontal",
+    "slug": "bolsa-gigante-horizontal",
+    "description": "Bolsa horizontal de piel gigante con buen espacio para todo tipo de cosas y correas de piel resistentes medidas 28 x 44 cm\n",
+    "shortDescription": "",
+    "price": 2950,
+    "type": "variable",
+    "categories": [
+      20
+    ],
+    "images": [
+      {
+        "id": 385,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/48-1.png",
+        "alt": "Bolsa Gigante horizontal",
+        "localFileName": "1072_385_Bolsa Gigante horizontal.png"
+      },
+      {
+        "id": 394,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/57-1.png",
+        "alt": "Bolsa Gigante horizontal",
+        "localFileName": "1072_394_Bolsa Gigante horizontal.png"
+      },
+      {
+        "id": 392,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/55-1.png",
+        "alt": "Bolsa Gigante horizontal",
+        "localFileName": "1072_392_Bolsa Gigante horizontal.png"
+      },
+      {
+        "id": 390,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/53-1.png",
+        "alt": "Bolsa Gigante horizontal",
+        "localFileName": "1072_390_Bolsa Gigante horizontal.png"
+      },
+      {
+        "id": 388,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/51-1.png",
+        "alt": "Bolsa Gigante horizontal",
+        "localFileName": "1072_388_Bolsa Gigante horizontal.png"
+      },
+      {
+        "id": 386,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/49-1.png",
+        "alt": "Bolsa Gigante horizontal",
+        "localFileName": "1072_386_Bolsa Gigante horizontal.png"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1072-0",
+        "name": "Azul Denim",
+        "price": 2950,
+        "stock": 6,
+        "image": {
+          "id": 385,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/48-1.png",
+          "alt": "Bolsa Gigante horizontal",
+          "localFileName": "1072_385_Bolsa Gigante horizontal.png"
+        }
+      },
+      {
+        "id": "1072-1",
+        "name": "Gris",
+        "price": 2950,
+        "stock": 5,
+        "image": {
+          "id": 394,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/57-1.png",
+          "alt": "Bolsa Gigante horizontal",
+          "localFileName": "1072_394_Bolsa Gigante horizontal.png"
+        }
+      },
+      {
+        "id": "1072-2",
+        "name": "Miel",
+        "price": 2950,
+        "stock": 9,
+        "image": {
+          "id": 392,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/55-1.png",
+          "alt": "Bolsa Gigante horizontal",
+          "localFileName": "1072_392_Bolsa Gigante horizontal.png"
+        }
+      },
+      {
+        "id": "1072-3",
+        "name": "Negro",
+        "price": 2950,
+        "stock": 3,
+        "image": {
+          "id": 390,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/53-1.png",
+          "alt": "Bolsa Gigante horizontal",
+          "localFileName": "1072_390_Bolsa Gigante horizontal.png"
+        }
+      },
+      {
+        "id": "1072-4",
+        "name": "Tinta",
+        "price": 2950,
+        "stock": 4,
+        "image": {
+          "id": 388,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/51-1.png",
+          "alt": "Bolsa Gigante horizontal",
+          "localFileName": "1072_388_Bolsa Gigante horizontal.png"
+        }
+      },
+      {
+        "id": "1072-5",
+        "name": "Verde",
+        "price": 2950,
+        "stock": 1,
+        "image": {
+          "id": 386,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/49-1.png",
+          "alt": "Bolsa Gigante horizontal",
+          "localFileName": "1072_386_Bolsa Gigante horizontal.png"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul Denim",
+          "Gris",
+          "Miel",
+          "Negro",
+          "Tinta",
+          "Verde"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-10T13:02:53",
+    "updatedAt": "2025-08-15T02:38:56"
+  },
+  {
+    "id": 1066,
+    "name": "Bolsa de Playa Gigante",
+    "slug": "bolsa-de-playa-gigante",
+    "description": "Bolsa de playa gigante ideal para llevar todo lo necesario a la playa ligera y resistente con asas de piel medidas 43 x 47 cm.\n",
+    "shortDescription": "",
+    "price": 1750,
+    "type": "variable",
+    "categories": [
+      148
+    ],
+    "images": [
+      {
+        "id": 1635,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163491-scaled.jpg",
+        "alt": "Bolsa de Playa Gigante",
+        "localFileName": "1066_1635_Bolsa de Playa Gigante.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1066-0",
+        "name": "Blanco y azul franjas delg.",
+        "price": 1750,
+        "stock": 1,
+        "image": {
+          "id": 1635,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163491-scaled.jpg",
+          "alt": "Bolsa de Playa Gigante",
+          "localFileName": "1066_1635_Bolsa de Playa Gigante.jpg"
+        }
+      },
+      {
+        "id": "1066-1",
+        "name": "Blanco y camel franjas",
+        "price": 1750,
+        "stock": 5,
+        "image": {
+          "id": 1635,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163491-scaled.jpg",
+          "alt": "Bolsa de Playa Gigante",
+          "localFileName": "1066_1635_Bolsa de Playa Gigante.jpg"
+        }
+      },
+      {
+        "id": "1066-2",
+        "name": "Blanco y gris franjas",
+        "price": 1750,
+        "stock": 2,
+        "image": {
+          "id": 1635,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163491-scaled.jpg",
+          "alt": "Bolsa de Playa Gigante",
+          "localFileName": "1066_1635_Bolsa de Playa Gigante.jpg"
+        }
+      },
+      {
+        "id": "1066-3",
+        "name": "Blanco y negro franjas",
+        "price": 1750,
+        "stock": 4,
+        "image": {
+          "id": 1635,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163491-scaled.jpg",
+          "alt": "Bolsa de Playa Gigante",
+          "localFileName": "1066_1635_Bolsa de Playa Gigante.jpg"
+        }
+      },
+      {
+        "id": "1066-4",
+        "name": "Gris y azul tupido",
+        "price": 1750,
+        "stock": 10,
+        "image": {
+          "id": 1635,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/08/1000163491-scaled.jpg",
+          "alt": "Bolsa de Playa Gigante",
+          "localFileName": "1066_1635_Bolsa de Playa Gigante.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Blanco y azul franjas delg.",
+          "Blanco y camel franjas",
+          "Blanco y gris franjas",
+          "Blanco y negro franjas",
+          "Gris y azul tupido"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-10T12:54:01",
+    "updatedAt": "2025-07-04T19:20:21"
+  },
+  {
+    "id": 1025,
+    "name": "Llavero Largo",
+    "slug": "llavero-largo",
+    "description": "\n\n\nMedidas 17.5 cm de largo x 2.5 cm de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 370,
+    "type": "variable",
+    "categories": [
+      104
+    ],
+    "images": [
+      {
+        "id": 545,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Llavero-largo-cat-scaled.jpg",
+        "alt": "Llavero Largo",
+        "localFileName": "1025_545_Llavero Largo.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1025-0",
+        "name": "Gris y Miel",
+        "price": 370,
+        "stock": 6,
+        "image": {
+          "id": 545,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Llavero-largo-cat-scaled.jpg",
+          "alt": "Llavero Largo",
+          "localFileName": "1025_545_Llavero Largo.jpg"
+        }
+      },
+      {
+        "id": "1025-1",
+        "name": "Miel y Azul",
+        "price": 370,
+        "stock": 3,
+        "image": {
+          "id": 545,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Llavero-largo-cat-scaled.jpg",
+          "alt": "Llavero Largo",
+          "localFileName": "1025_545_Llavero Largo.jpg"
+        }
+      },
+      {
+        "id": "1025-2",
+        "name": "Miel y gris",
+        "price": 370,
+        "stock": 7,
+        "image": {
+          "id": 545,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Llavero-largo-cat-scaled.jpg",
+          "alt": "Llavero Largo",
+          "localFileName": "1025_545_Llavero Largo.jpg"
+        }
+      },
+      {
+        "id": "1025-3",
+        "name": "Miel y Naranja",
+        "price": 370,
+        "stock": 1,
+        "image": {
+          "id": 545,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Llavero-largo-cat-scaled.jpg",
+          "alt": "Llavero Largo",
+          "localFileName": "1025_545_Llavero Largo.jpg"
+        }
+      },
+      {
+        "id": "1025-4",
+        "name": "Miel y Negro",
+        "price": 370,
+        "stock": 5,
+        "image": {
+          "id": 545,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Llavero-largo-cat-scaled.jpg",
+          "alt": "Llavero Largo",
+          "localFileName": "1025_545_Llavero Largo.jpg"
+        }
+      },
+      {
+        "id": "1025-5",
+        "name": "Miel y tinto",
+        "price": 370,
+        "stock": 3,
+        "image": {
+          "id": 545,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Llavero-largo-cat-scaled.jpg",
+          "alt": "Llavero Largo",
+          "localFileName": "1025_545_Llavero Largo.jpg"
+        }
+      },
+      {
+        "id": "1025-6",
+        "name": "Naranja y Cafe Oscuro",
+        "price": 370,
+        "stock": 4,
+        "image": {
+          "id": 545,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Llavero-largo-cat-scaled.jpg",
+          "alt": "Llavero Largo",
+          "localFileName": "1025_545_Llavero Largo.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Gris y Miel",
+          "Miel y Azul",
+          "Miel y gris",
+          "Miel y Naranja",
+          "Miel y Negro",
+          "Miel y tinto",
+          "Naranja y Cafe Oscuro"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-04T18:59:43",
+    "updatedAt": "2025-08-26T16:54:39"
+  },
+  {
+    "id": 1014,
+    "name": "Monedero Triángulo",
+    "slug": "monedero-triangulo",
+    "description": "\n\n\nMedidas 8 cm de largo por lado  1 cm. De espesor\n\n\n\n",
+    "shortDescription": "",
+    "price": 300,
+    "type": "variable",
+    "categories": [
+      17
+    ],
+    "images": [
+      {
+        "id": 772,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_185729-scaled.jpg",
+        "alt": "Monedero Triángulo",
+        "localFileName": "1014_772_Monedero Triángulo.jpg"
+      },
+      {
+        "id": 777,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_185600-scaled.jpg",
+        "alt": "Monedero Triángulo",
+        "localFileName": "1014_777_Monedero Triángulo.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1014-0",
+        "name": "Café Oscuro",
+        "price": 300,
+        "stock": 4,
+        "image": {
+          "id": 772,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_185729-scaled.jpg",
+          "alt": "Monedero Triángulo",
+          "localFileName": "1014_772_Monedero Triángulo.jpg"
+        }
+      },
+      {
+        "id": "1014-1",
+        "name": "Camel",
+        "price": 300,
+        "stock": 1,
+        "image": {
+          "id": 777,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_185600-scaled.jpg",
+          "alt": "Monedero Triángulo",
+          "localFileName": "1014_777_Monedero Triángulo.jpg"
+        }
+      },
+      {
+        "id": "1014-2",
+        "name": "Gris",
+        "price": 300,
+        "stock": 6,
+        "image": {
+          "id": 772,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_185729-scaled.jpg",
+          "alt": "Monedero Triángulo",
+          "localFileName": "1014_772_Monedero Triángulo.jpg"
+        }
+      },
+      {
+        "id": "1014-3",
+        "name": "Gris Oscuro",
+        "price": 300,
+        "stock": 9,
+        "image": {
+          "id": 772,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_185729-scaled.jpg",
+          "alt": "Monedero Triángulo",
+          "localFileName": "1014_772_Monedero Triángulo.jpg"
+        }
+      },
+      {
+        "id": "1014-4",
+        "name": "Ladrillo",
+        "price": 300,
+        "stock": 5,
+        "image": {
+          "id": 772,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_185729-scaled.jpg",
+          "alt": "Monedero Triángulo",
+          "localFileName": "1014_772_Monedero Triángulo.jpg"
+        }
+      },
+      {
+        "id": "1014-5",
+        "name": "Marron",
+        "price": 300,
+        "stock": 1,
+        "image": {
+          "id": 772,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_185729-scaled.jpg",
+          "alt": "Monedero Triángulo",
+          "localFileName": "1014_772_Monedero Triángulo.jpg"
+        }
+      },
+      {
+        "id": "1014-6",
+        "name": "Miel",
+        "price": 300,
+        "stock": 9,
+        "image": {
+          "id": 772,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_185729-scaled.jpg",
+          "alt": "Monedero Triángulo",
+          "localFileName": "1014_772_Monedero Triángulo.jpg"
+        }
+      },
+      {
+        "id": "1014-7",
+        "name": "Negro",
+        "price": 300,
+        "stock": 5,
+        "image": {
+          "id": 772,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_185729-scaled.jpg",
+          "alt": "Monedero Triángulo",
+          "localFileName": "1014_772_Monedero Triángulo.jpg"
+        }
+      },
+      {
+        "id": "1014-8",
+        "name": "Pelo Negro",
+        "price": 300,
+        "stock": 5,
+        "image": {
+          "id": 772,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_185729-scaled.jpg",
+          "alt": "Monedero Triángulo",
+          "localFileName": "1014_772_Monedero Triángulo.jpg"
+        }
+      },
+      {
+        "id": "1014-9",
+        "name": "Pelo tonos blancos",
+        "price": 300,
+        "stock": 4,
+        "image": {
+          "id": 772,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_185729-scaled.jpg",
+          "alt": "Monedero Triángulo",
+          "localFileName": "1014_772_Monedero Triángulo.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Café Oscuro",
+          "Camel",
+          "Gris",
+          "Gris Oscuro",
+          "Ladrillo",
+          "Marron",
+          "Miel",
+          "Negro",
+          "Pelo Negro",
+          "Pelo tonos blancos"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-04T18:46:51",
+    "updatedAt": "2025-08-26T16:50:57"
+  },
+  {
+    "id": 1009,
+    "name": "Cartera con Costura",
+    "slug": "cartera-con-costura",
+    "description": "\n\n\nMedidas 10 cm x 10 cm\n\n\n\n",
+    "shortDescription": "",
+    "price": 650,
+    "type": "variable",
+    "categories": [
+      103
+    ],
+    "images": [
+      {
+        "id": 1010,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/PRINCIPAL-SUBCATEGORIA-scaled.jpg",
+        "alt": "Cartera con Costura",
+        "localFileName": "1009_1010_Cartera con Costura.jpg"
+      },
+      {
+        "id": 742,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_123704-scaled.jpg",
+        "alt": "Cartera con Costura",
+        "localFileName": "1009_742_Cartera con Costura.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1009-0",
+        "name": "Gris",
+        "price": 650,
+        "stock": 4,
+        "image": {
+          "id": 1010,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/PRINCIPAL-SUBCATEGORIA-scaled.jpg",
+          "alt": "Cartera con Costura",
+          "localFileName": "1009_1010_Cartera con Costura.jpg"
+        }
+      },
+      {
+        "id": "1009-1",
+        "name": "Miel",
+        "price": 650,
+        "stock": 8,
+        "image": {
+          "id": 742,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_123704-scaled.jpg",
+          "alt": "Cartera con Costura",
+          "localFileName": "1009_742_Cartera con Costura.jpg"
+        }
+      },
+      {
+        "id": "1009-2",
+        "name": "Negro",
+        "price": 650,
+        "stock": 7,
+        "image": {
+          "id": 1010,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/PRINCIPAL-SUBCATEGORIA-scaled.jpg",
+          "alt": "Cartera con Costura",
+          "localFileName": "1009_1010_Cartera con Costura.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Gris",
+          "Miel",
+          "Negro"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-04T18:38:40",
+    "updatedAt": "2025-08-26T16:56:14"
+  },
+  {
+    "id": 1001,
+    "name": "Portacable Chico",
+    "slug": "portacable-chico",
+    "description": "\n\n\nMedidas 3.5 cm de alto x 2.5 cm  de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 80,
+    "type": "variable",
+    "categories": [
+      17
+    ],
+    "images": [
+      {
+        "id": 784,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_193914-scaled.jpg",
+        "alt": "Portacable Chico",
+        "localFileName": "1001_784_Portacable Chico.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "1001-0",
+        "name": "Azul",
+        "price": 80,
+        "stock": 3,
+        "image": {
+          "id": 784,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_193914-scaled.jpg",
+          "alt": "Portacable Chico",
+          "localFileName": "1001_784_Portacable Chico.jpg"
+        }
+      },
+      {
+        "id": "1001-1",
+        "name": "Café Oscuro",
+        "price": 80,
+        "stock": 1,
+        "image": {
+          "id": 784,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_193914-scaled.jpg",
+          "alt": "Portacable Chico",
+          "localFileName": "1001_784_Portacable Chico.jpg"
+        }
+      },
+      {
+        "id": "1001-2",
+        "name": "Camel",
+        "price": 80,
+        "stock": 8,
+        "image": {
+          "id": 784,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_193914-scaled.jpg",
+          "alt": "Portacable Chico",
+          "localFileName": "1001_784_Portacable Chico.jpg"
+        }
+      },
+      {
+        "id": "1001-3",
+        "name": "Gris",
+        "price": 80,
+        "stock": 1,
+        "image": {
+          "id": 784,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_193914-scaled.jpg",
+          "alt": "Portacable Chico",
+          "localFileName": "1001_784_Portacable Chico.jpg"
+        }
+      },
+      {
+        "id": "1001-4",
+        "name": "Ladrillo",
+        "price": 80,
+        "stock": 2,
+        "image": {
+          "id": 784,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_193914-scaled.jpg",
+          "alt": "Portacable Chico",
+          "localFileName": "1001_784_Portacable Chico.jpg"
+        }
+      },
+      {
+        "id": "1001-5",
+        "name": "Negro",
+        "price": 80,
+        "stock": 8,
+        "image": {
+          "id": 784,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_193914-scaled.jpg",
+          "alt": "Portacable Chico",
+          "localFileName": "1001_784_Portacable Chico.jpg"
+        }
+      },
+      {
+        "id": "1001-6",
+        "name": "Tinta",
+        "price": 80,
+        "stock": 8,
+        "image": {
+          "id": 784,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240624_193914-scaled.jpg",
+          "alt": "Portacable Chico",
+          "localFileName": "1001_784_Portacable Chico.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul",
+          "Café Oscuro",
+          "Camel",
+          "Gris",
+          "Ladrillo",
+          "Negro",
+          "Tinta"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-04T18:33:49",
+    "updatedAt": "2025-08-26T16:57:33"
+  },
+  {
+    "id": 990,
+    "name": "Cartera Liga",
+    "slug": "cartera-liga",
+    "description": "\n\n\nMedidas 8 cm de alto x 13 cm de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 480,
+    "type": "variable",
+    "categories": [
+      103
+    ],
+    "images": [
+      {
+        "id": 757,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_191935-scaled.jpg",
+        "alt": "Cartera Liga",
+        "localFileName": "990_757_Cartera Liga.jpg"
+      },
+      {
+        "id": 749,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_191840-scaled.jpg",
+        "alt": "Cartera Liga",
+        "localFileName": "990_749_Cartera Liga.jpg"
+      },
+      {
+        "id": 751,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_191819-scaled.jpg",
+        "alt": "Cartera Liga",
+        "localFileName": "990_751_Cartera Liga.jpg"
+      },
+      {
+        "id": 753,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_192146-scaled.jpg",
+        "alt": "Cartera Liga",
+        "localFileName": "990_753_Cartera Liga.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "990-0",
+        "name": "Azul",
+        "price": 480,
+        "stock": 6,
+        "image": {
+          "id": 757,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_191935-scaled.jpg",
+          "alt": "Cartera Liga",
+          "localFileName": "990_757_Cartera Liga.jpg"
+        }
+      },
+      {
+        "id": "990-1",
+        "name": "Café",
+        "price": 480,
+        "stock": 2,
+        "image": {
+          "id": 749,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_191840-scaled.jpg",
+          "alt": "Cartera Liga",
+          "localFileName": "990_749_Cartera Liga.jpg"
+        }
+      },
+      {
+        "id": "990-2",
+        "name": "Gris",
+        "price": 480,
+        "stock": 3,
+        "image": {
+          "id": 751,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_191819-scaled.jpg",
+          "alt": "Cartera Liga",
+          "localFileName": "990_751_Cartera Liga.jpg"
+        }
+      },
+      {
+        "id": "990-3",
+        "name": "Miel",
+        "price": 480,
+        "stock": 7,
+        "image": {
+          "id": 753,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_192146-scaled.jpg",
+          "alt": "Cartera Liga",
+          "localFileName": "990_753_Cartera Liga.jpg"
+        }
+      },
+      {
+        "id": "990-4",
+        "name": "Negro",
+        "price": 480,
+        "stock": 2,
+        "image": {
+          "id": 757,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_191935-scaled.jpg",
+          "alt": "Cartera Liga",
+          "localFileName": "990_757_Cartera Liga.jpg"
+        }
+      },
+      {
+        "id": "990-5",
+        "name": "Pelo Blanco y cafe",
+        "price": 480,
+        "stock": 3,
+        "image": {
+          "id": 757,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_191935-scaled.jpg",
+          "alt": "Cartera Liga",
+          "localFileName": "990_757_Cartera Liga.jpg"
+        }
+      },
+      {
+        "id": "990-6",
+        "name": "Pelo tonos blancos",
+        "price": 480,
+        "stock": 9,
+        "image": {
+          "id": 757,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_191935-scaled.jpg",
+          "alt": "Cartera Liga",
+          "localFileName": "990_757_Cartera Liga.jpg"
+        }
+      },
+      {
+        "id": "990-7",
+        "name": "Pelo tonos negros",
+        "price": 480,
+        "stock": 9,
+        "image": {
+          "id": 757,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_191935-scaled.jpg",
+          "alt": "Cartera Liga",
+          "localFileName": "990_757_Cartera Liga.jpg"
+        }
+      },
+      {
+        "id": "990-8",
+        "name": "Tinta",
+        "price": 480,
+        "stock": 10,
+        "image": {
+          "id": 757,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_191935-scaled.jpg",
+          "alt": "Cartera Liga",
+          "localFileName": "990_757_Cartera Liga.jpg"
+        }
+      },
+      {
+        "id": "990-9",
+        "name": "Verde",
+        "price": 480,
+        "stock": 9,
+        "image": {
+          "id": 757,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_191935-scaled.jpg",
+          "alt": "Cartera Liga",
+          "localFileName": "990_757_Cartera Liga.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul",
+          "Café",
+          "Gris",
+          "Miel",
+          "Negro",
+          "Pelo Blanco y cafe",
+          "Pelo tonos blancos",
+          "Pelo tonos negros",
+          "Tinta",
+          "Verde"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-04T18:28:03",
+    "updatedAt": "2025-09-02T23:59:47"
+  },
+  {
+    "id": 983,
+    "name": "Portacables Grande",
+    "slug": "portacables-grande",
+    "description": "\n\n\nMedidas 4 cms de alto x 3 cms de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 90,
+    "type": "variable",
+    "categories": [
+      17
+    ],
+    "images": [
+      {
+        "id": 795,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/PRINCIPAL-SUBCATEGORIA-scaled.jpg",
+        "alt": "Portacables Grande",
+        "localFileName": "983_795_Portacables Grande.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "983-0",
+        "name": "Azul",
+        "price": 90,
+        "stock": 4,
+        "image": {
+          "id": 795,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/PRINCIPAL-SUBCATEGORIA-scaled.jpg",
+          "alt": "Portacables Grande",
+          "localFileName": "983_795_Portacables Grande.jpg"
+        }
+      },
+      {
+        "id": "983-1",
+        "name": "Camel",
+        "price": 90,
+        "stock": 7,
+        "image": {
+          "id": 795,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/PRINCIPAL-SUBCATEGORIA-scaled.jpg",
+          "alt": "Portacables Grande",
+          "localFileName": "983_795_Portacables Grande.jpg"
+        }
+      },
+      {
+        "id": "983-2",
+        "name": "Gris Claro",
+        "price": 90,
+        "stock": 3,
+        "image": {
+          "id": 795,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/PRINCIPAL-SUBCATEGORIA-scaled.jpg",
+          "alt": "Portacables Grande",
+          "localFileName": "983_795_Portacables Grande.jpg"
+        }
+      },
+      {
+        "id": "983-3",
+        "name": "Ladrillo",
+        "price": 90,
+        "stock": 8,
+        "image": {
+          "id": 795,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/PRINCIPAL-SUBCATEGORIA-scaled.jpg",
+          "alt": "Portacables Grande",
+          "localFileName": "983_795_Portacables Grande.jpg"
+        }
+      },
+      {
+        "id": "983-4",
+        "name": "Negro",
+        "price": 90,
+        "stock": 4,
+        "image": {
+          "id": 795,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/PRINCIPAL-SUBCATEGORIA-scaled.jpg",
+          "alt": "Portacables Grande",
+          "localFileName": "983_795_Portacables Grande.jpg"
+        }
+      },
+      {
+        "id": "983-5",
+        "name": "Tinta",
+        "price": 90,
+        "stock": 9,
+        "image": {
+          "id": 795,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/PRINCIPAL-SUBCATEGORIA-scaled.jpg",
+          "alt": "Portacables Grande",
+          "localFileName": "983_795_Portacables Grande.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul",
+          "Camel",
+          "Gris Claro",
+          "Ladrillo",
+          "Negro",
+          "Tinta"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-04T18:16:36",
+    "updatedAt": "2025-08-26T17:01:26"
+  },
+  {
+    "id": 974,
+    "name": "Portapasaportes",
+    "slug": "portapasaportes",
+    "description": "\n\n\nMedidas 14.7 cms de alto x 9.5 cms. De ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 780,
+    "type": "variable",
+    "categories": [
+      103
+    ],
+    "images": [
+      {
+        "id": 799,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_184339-scaled.jpg",
+        "alt": "Portapasaportes",
+        "localFileName": "974_799_Portapasaportes.jpg"
+      },
+      {
+        "id": 800,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_184400-scaled.jpg",
+        "alt": "Portapasaportes",
+        "localFileName": "974_800_Portapasaportes.jpg"
+      },
+      {
+        "id": 806,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_184048-scaled.jpg",
+        "alt": "Portapasaportes",
+        "localFileName": "974_806_Portapasaportes.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "974-0",
+        "name": "Cafe y miel",
+        "price": 780,
+        "stock": 9,
+        "image": {
+          "id": 799,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_184339-scaled.jpg",
+          "alt": "Portapasaportes",
+          "localFileName": "974_799_Portapasaportes.jpg"
+        }
+      },
+      {
+        "id": "974-1",
+        "name": "Gris y Miel",
+        "price": 780,
+        "stock": 1,
+        "image": {
+          "id": 800,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_184400-scaled.jpg",
+          "alt": "Portapasaportes",
+          "localFileName": "974_800_Portapasaportes.jpg"
+        }
+      },
+      {
+        "id": "974-2",
+        "name": "Miel y gris",
+        "price": 780,
+        "stock": 5,
+        "image": {
+          "id": 806,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_184048-scaled.jpg",
+          "alt": "Portapasaportes",
+          "localFileName": "974_806_Portapasaportes.jpg"
+        }
+      },
+      {
+        "id": "974-3",
+        "name": "Miel y Naranja",
+        "price": 780,
+        "stock": 2,
+        "image": {
+          "id": 799,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_184339-scaled.jpg",
+          "alt": "Portapasaportes",
+          "localFileName": "974_799_Portapasaportes.jpg"
+        }
+      },
+      {
+        "id": "974-4",
+        "name": "Miel y Negro",
+        "price": 780,
+        "stock": 2,
+        "image": {
+          "id": 799,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_184339-scaled.jpg",
+          "alt": "Portapasaportes",
+          "localFileName": "974_799_Portapasaportes.jpg"
+        }
+      },
+      {
+        "id": "974-5",
+        "name": "Negro y miel",
+        "price": 780,
+        "stock": 3,
+        "image": {
+          "id": 799,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_184339-scaled.jpg",
+          "alt": "Portapasaportes",
+          "localFileName": "974_799_Portapasaportes.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Cafe y miel",
+          "Gris y Miel",
+          "Miel y gris",
+          "Miel y Naranja",
+          "Miel y Negro",
+          "Negro y miel"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-04T00:16:02",
+    "updatedAt": "2025-08-26T17:02:38"
+  },
+  {
+    "id": 964,
+    "name": "Llavero Corto",
+    "slug": "llavero-corto",
+    "description": "\n\n\nMedidas 11 cms. De largo x 3.2 cms de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 270,
+    "type": "variable",
+    "categories": [
+      104
+    ],
+    "images": [
+      {
+        "id": 765,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_152342-scaled.jpg",
+        "alt": "Llavero Corto",
+        "localFileName": "964_765_Llavero Corto.jpg"
+      },
+      {
+        "id": 767,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_152048-scaled.jpg",
+        "alt": "Llavero Corto",
+        "localFileName": "964_767_Llavero Corto.jpg"
+      },
+      {
+        "id": 766,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_151935-scaled.jpg",
+        "alt": "Llavero Corto",
+        "localFileName": "964_766_Llavero Corto.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "964-0",
+        "name": "Cafe Oscuro y negro",
+        "price": 270,
+        "stock": 6,
+        "image": {
+          "id": 765,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_152342-scaled.jpg",
+          "alt": "Llavero Corto",
+          "localFileName": "964_765_Llavero Corto.jpg"
+        }
+      },
+      {
+        "id": "964-1",
+        "name": "Cafe y miel",
+        "price": 270,
+        "stock": 9,
+        "image": {
+          "id": 767,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_152048-scaled.jpg",
+          "alt": "Llavero Corto",
+          "localFileName": "964_767_Llavero Corto.jpg"
+        }
+      },
+      {
+        "id": "964-2",
+        "name": "Gris y Miel",
+        "price": 270,
+        "stock": 10,
+        "image": {
+          "id": 766,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_151935-scaled.jpg",
+          "alt": "Llavero Corto",
+          "localFileName": "964_766_Llavero Corto.jpg"
+        }
+      },
+      {
+        "id": "964-3",
+        "name": "Ladrillo y miel",
+        "price": 270,
+        "stock": 10,
+        "image": {
+          "id": 765,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_152342-scaled.jpg",
+          "alt": "Llavero Corto",
+          "localFileName": "964_765_Llavero Corto.jpg"
+        }
+      },
+      {
+        "id": "964-4",
+        "name": "Miel y cafe",
+        "price": 270,
+        "stock": 5,
+        "image": {
+          "id": 765,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_152342-scaled.jpg",
+          "alt": "Llavero Corto",
+          "localFileName": "964_765_Llavero Corto.jpg"
+        }
+      },
+      {
+        "id": "964-5",
+        "name": "Miel y gris",
+        "price": 270,
+        "stock": 9,
+        "image": {
+          "id": 765,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_152342-scaled.jpg",
+          "alt": "Llavero Corto",
+          "localFileName": "964_765_Llavero Corto.jpg"
+        }
+      },
+      {
+        "id": "964-6",
+        "name": "Miel y tinto",
+        "price": 270,
+        "stock": 9,
+        "image": {
+          "id": 765,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_152342-scaled.jpg",
+          "alt": "Llavero Corto",
+          "localFileName": "964_765_Llavero Corto.jpg"
+        }
+      },
+      {
+        "id": "964-7",
+        "name": "Negro y cafe oscuro",
+        "price": 270,
+        "stock": 6,
+        "image": {
+          "id": 765,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_152342-scaled.jpg",
+          "alt": "Llavero Corto",
+          "localFileName": "964_765_Llavero Corto.jpg"
+        }
+      },
+      {
+        "id": "964-8",
+        "name": "Tinto y miel",
+        "price": 270,
+        "stock": 5,
+        "image": {
+          "id": 765,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_152342-scaled.jpg",
+          "alt": "Llavero Corto",
+          "localFileName": "964_765_Llavero Corto.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Cafe Oscuro y negro",
+          "Cafe y miel",
+          "Gris y Miel",
+          "Ladrillo y miel",
+          "Miel y cafe",
+          "Miel y gris",
+          "Miel y tinto",
+          "Negro y cafe oscuro",
+          "Tinto y miel"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-04T00:10:20",
+    "updatedAt": "2025-08-26T17:03:50"
+  },
+  {
+    "id": 956,
+    "name": "Tarjetero Boton",
+    "slug": "tarjetero-boton",
+    "description": "\n\n\nMedidas 11 cms de alto x 8 cms de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 350,
+    "type": "variable",
+    "categories": [
+      103
+    ],
+    "images": [
+      {
+        "id": 957,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Tarjetero-boton-scaled.jpg",
+        "alt": "Tarjetero Boton",
+        "localFileName": "956_957_Tarjetero Boton.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "956-0",
+        "name": "Azul",
+        "price": 350,
+        "stock": 1,
+        "image": {
+          "id": 957,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Tarjetero-boton-scaled.jpg",
+          "alt": "Tarjetero Boton",
+          "localFileName": "956_957_Tarjetero Boton.jpg"
+        }
+      },
+      {
+        "id": "956-1",
+        "name": "Camel",
+        "price": 350,
+        "stock": 3,
+        "image": {
+          "id": 957,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Tarjetero-boton-scaled.jpg",
+          "alt": "Tarjetero Boton",
+          "localFileName": "956_957_Tarjetero Boton.jpg"
+        }
+      },
+      {
+        "id": "956-2",
+        "name": "Gris",
+        "price": 350,
+        "stock": 10,
+        "image": {
+          "id": 957,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Tarjetero-boton-scaled.jpg",
+          "alt": "Tarjetero Boton",
+          "localFileName": "956_957_Tarjetero Boton.jpg"
+        }
+      },
+      {
+        "id": "956-3",
+        "name": "Ladrillo",
+        "price": 350,
+        "stock": 3,
+        "image": {
+          "id": 957,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Tarjetero-boton-scaled.jpg",
+          "alt": "Tarjetero Boton",
+          "localFileName": "956_957_Tarjetero Boton.jpg"
+        }
+      },
+      {
+        "id": "956-4",
+        "name": "Negro",
+        "price": 350,
+        "stock": 3,
+        "image": {
+          "id": 957,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Tarjetero-boton-scaled.jpg",
+          "alt": "Tarjetero Boton",
+          "localFileName": "956_957_Tarjetero Boton.jpg"
+        }
+      },
+      {
+        "id": "956-5",
+        "name": "Perla",
+        "price": 350,
+        "stock": 3,
+        "image": {
+          "id": 957,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Tarjetero-boton-scaled.jpg",
+          "alt": "Tarjetero Boton",
+          "localFileName": "956_957_Tarjetero Boton.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul",
+          "Camel",
+          "Gris",
+          "Ladrillo",
+          "Negro",
+          "Perla"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-03T23:59:30",
+    "updatedAt": "2025-08-26T17:05:14"
+  },
+  {
+    "id": 945,
+    "name": "Bolsa Cilindro Jareta",
+    "slug": "bolsa-cilindro-jareta",
+    "description": "Bolsa de calidad en forma de cilindro parte de abajo de piel y parte superior de tela con correa resistente de piel\n",
+    "shortDescription": "",
+    "price": 1890,
+    "type": "variable",
+    "categories": [
+      148
+    ],
+    "images": [
+      {
+        "id": 946,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/20201021_110909-1-scaled.jpg",
+        "alt": "Bolsa Cilindro Jareta",
+        "localFileName": "945_946_Bolsa Cilindro Jareta.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "945-0",
+        "name": "Azul marino y blanco grueso",
+        "price": 1890,
+        "stock": 4,
+        "image": {
+          "id": 946,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/20201021_110909-1-scaled.jpg",
+          "alt": "Bolsa Cilindro Jareta",
+          "localFileName": "945_946_Bolsa Cilindro Jareta.jpg"
+        }
+      },
+      {
+        "id": "945-1",
+        "name": "Camel y blanco",
+        "price": 1890,
+        "stock": 10,
+        "image": {
+          "id": 946,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/20201021_110909-1-scaled.jpg",
+          "alt": "Bolsa Cilindro Jareta",
+          "localFileName": "945_946_Bolsa Cilindro Jareta.jpg"
+        }
+      },
+      {
+        "id": "945-2",
+        "name": "Gris claro negro grueso",
+        "price": 1890,
+        "stock": 5,
+        "image": {
+          "id": 946,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/20201021_110909-1-scaled.jpg",
+          "alt": "Bolsa Cilindro Jareta",
+          "localFileName": "945_946_Bolsa Cilindro Jareta.jpg"
+        }
+      },
+      {
+        "id": "945-3",
+        "name": "Gris y blanco",
+        "price": 1890,
+        "stock": 7,
+        "image": {
+          "id": 946,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/20201021_110909-1-scaled.jpg",
+          "alt": "Bolsa Cilindro Jareta",
+          "localFileName": "945_946_Bolsa Cilindro Jareta.jpg"
+        }
+      },
+      {
+        "id": "945-4",
+        "name": "Marino y Blanco",
+        "price": 1890,
+        "stock": 2,
+        "image": {
+          "id": 946,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/20201021_110909-1-scaled.jpg",
+          "alt": "Bolsa Cilindro Jareta",
+          "localFileName": "945_946_Bolsa Cilindro Jareta.jpg"
+        }
+      },
+      {
+        "id": "945-5",
+        "name": "Negro y blanco",
+        "price": 1890,
+        "stock": 10,
+        "image": {
+          "id": 946,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/20201021_110909-1-scaled.jpg",
+          "alt": "Bolsa Cilindro Jareta",
+          "localFileName": "945_946_Bolsa Cilindro Jareta.jpg"
+        }
+      },
+      {
+        "id": "945-6",
+        "name": "Negro y blanco grueso",
+        "price": 1890,
+        "stock": 2,
+        "image": {
+          "id": 946,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/20201021_110909-1-scaled.jpg",
+          "alt": "Bolsa Cilindro Jareta",
+          "localFileName": "945_946_Bolsa Cilindro Jareta.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul marino y blanco grueso",
+          "Camel y blanco",
+          "Gris claro negro grueso",
+          "Gris y blanco",
+          "Marino y Blanco",
+          "Negro y blanco",
+          "Negro y blanco grueso"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-03T00:51:17",
+    "updatedAt": "2025-07-04T19:32:46"
+  },
+  {
+    "id": 937,
+    "name": "Monedero Cierre",
+    "slug": "monedero-cierre",
+    "description": "\n\n\nMedidas 13 cms. De altura x 13.5 de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 480,
+    "type": "variable",
+    "categories": [
+      87
+    ],
+    "images": [
+      {
+        "id": 701,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_141038-scaled.jpg",
+        "alt": "Monedero Cierre",
+        "localFileName": "937_701_Monedero Cierre.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "937-0",
+        "name": "Azul",
+        "price": 480,
+        "stock": 8,
+        "image": {
+          "id": 701,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_141038-scaled.jpg",
+          "alt": "Monedero Cierre",
+          "localFileName": "937_701_Monedero Cierre.jpg"
+        }
+      },
+      {
+        "id": "937-1",
+        "name": "Cafe chocolate",
+        "price": 480,
+        "stock": 8,
+        "image": {
+          "id": 701,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_141038-scaled.jpg",
+          "alt": "Monedero Cierre",
+          "localFileName": "937_701_Monedero Cierre.jpg"
+        }
+      },
+      {
+        "id": "937-2",
+        "name": "Gris",
+        "price": 480,
+        "stock": 4,
+        "image": {
+          "id": 701,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_141038-scaled.jpg",
+          "alt": "Monedero Cierre",
+          "localFileName": "937_701_Monedero Cierre.jpg"
+        }
+      },
+      {
+        "id": "937-3",
+        "name": "Ladrillo",
+        "price": 480,
+        "stock": 6,
+        "image": {
+          "id": 701,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_141038-scaled.jpg",
+          "alt": "Monedero Cierre",
+          "localFileName": "937_701_Monedero Cierre.jpg"
+        }
+      },
+      {
+        "id": "937-4",
+        "name": "Miel",
+        "price": 480,
+        "stock": 2,
+        "image": {
+          "id": 701,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_141038-scaled.jpg",
+          "alt": "Monedero Cierre",
+          "localFileName": "937_701_Monedero Cierre.jpg"
+        }
+      },
+      {
+        "id": "937-5",
+        "name": "Negro",
+        "price": 480,
+        "stock": 9,
+        "image": {
+          "id": 701,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_141038-scaled.jpg",
+          "alt": "Monedero Cierre",
+          "localFileName": "937_701_Monedero Cierre.jpg"
+        }
+      },
+      {
+        "id": "937-6",
+        "name": "Perla",
+        "price": 480,
+        "stock": 5,
+        "image": {
+          "id": 701,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_141038-scaled.jpg",
+          "alt": "Monedero Cierre",
+          "localFileName": "937_701_Monedero Cierre.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul",
+          "Cafe chocolate",
+          "Gris",
+          "Ladrillo",
+          "Miel",
+          "Negro",
+          "Perla"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-02T19:17:28",
+    "updatedAt": "2025-09-02T23:53:12"
+  },
+  {
+    "id": 877,
+    "name": "Monedero Clip",
+    "slug": "monedero-clip",
+    "description": "\n\n\nMedidas 11 cms de altura 9cms. De boca y 10 cms de base\n\n\n\n",
+    "shortDescription": "",
+    "price": 480,
+    "type": "variable",
+    "categories": [
+      87
+    ],
+    "images": [
+      {
+        "id": 529,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Monedero-clip-cat-scaled.jpg",
+        "alt": "Monedero Clip",
+        "localFileName": "877_529_Monedero Clip.jpg"
+      },
+      {
+        "id": 1309,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Clip-monedero-gal-1-scaled.jpg",
+        "alt": "Monedero Clip",
+        "localFileName": "877_1309_Monedero Clip.jpg"
+      },
+      {
+        "id": 1310,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Clip-monedero-gal-2-scaled.jpg",
+        "alt": "Monedero Clip",
+        "localFileName": "877_1310_Monedero Clip.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "877-0",
+        "name": "Azul",
+        "price": 480,
+        "stock": 2,
+        "image": {
+          "id": 529,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Monedero-clip-cat-scaled.jpg",
+          "alt": "Monedero Clip",
+          "localFileName": "877_529_Monedero Clip.jpg"
+        }
+      },
+      {
+        "id": "877-1",
+        "name": "Camel",
+        "price": 480,
+        "stock": 3,
+        "image": {
+          "id": 1309,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Clip-monedero-gal-1-scaled.jpg",
+          "alt": "Monedero Clip",
+          "localFileName": "877_1309_Monedero Clip.jpg"
+        }
+      },
+      {
+        "id": "877-2",
+        "name": "Dorado",
+        "price": 480,
+        "stock": 7,
+        "image": {
+          "id": 1310,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Clip-monedero-gal-2-scaled.jpg",
+          "alt": "Monedero Clip",
+          "localFileName": "877_1310_Monedero Clip.jpg"
+        }
+      },
+      {
+        "id": "877-3",
+        "name": "Gris",
+        "price": 480,
+        "stock": 2,
+        "image": {
+          "id": 529,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Monedero-clip-cat-scaled.jpg",
+          "alt": "Monedero Clip",
+          "localFileName": "877_529_Monedero Clip.jpg"
+        }
+      },
+      {
+        "id": "877-4",
+        "name": "Ladrillo",
+        "price": 480,
+        "stock": 9,
+        "image": {
+          "id": 529,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Monedero-clip-cat-scaled.jpg",
+          "alt": "Monedero Clip",
+          "localFileName": "877_529_Monedero Clip.jpg"
+        }
+      },
+      {
+        "id": "877-5",
+        "name": "Miel",
+        "price": 480,
+        "stock": 1,
+        "image": {
+          "id": 529,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Monedero-clip-cat-scaled.jpg",
+          "alt": "Monedero Clip",
+          "localFileName": "877_529_Monedero Clip.jpg"
+        }
+      },
+      {
+        "id": "877-6",
+        "name": "Perla",
+        "price": 480,
+        "stock": 7,
+        "image": {
+          "id": 529,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Monedero-clip-cat-scaled.jpg",
+          "alt": "Monedero Clip",
+          "localFileName": "877_529_Monedero Clip.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul",
+          "Camel",
+          "Dorado",
+          "Gris",
+          "Ladrillo",
+          "Miel",
+          "Perla"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-01T20:37:15",
+    "updatedAt": "2025-08-26T17:07:22"
+  },
+  {
+    "id": 865,
+    "name": "Monedero Motita",
+    "slug": "monedero-motita",
+    "description": "\n\n\nMedidas 10.5 cms.  de altura x 12 cms de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 480,
+    "type": "variable",
+    "categories": [
+      87
+    ],
+    "images": [
+      {
+        "id": 724,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_144116-scaled.jpg",
+        "alt": "Monedero Motita",
+        "localFileName": "865_724_Monedero Motita.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "865-0",
+        "name": "Beige",
+        "price": 480,
+        "stock": 10,
+        "image": {
+          "id": 724,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_144116-scaled.jpg",
+          "alt": "Monedero Motita",
+          "localFileName": "865_724_Monedero Motita.jpg"
+        }
+      },
+      {
+        "id": "865-1",
+        "name": "Café",
+        "price": 480,
+        "stock": 7,
+        "image": {
+          "id": 724,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_144116-scaled.jpg",
+          "alt": "Monedero Motita",
+          "localFileName": "865_724_Monedero Motita.jpg"
+        }
+      },
+      {
+        "id": "865-2",
+        "name": "Cafe chocolate",
+        "price": 480,
+        "stock": 7,
+        "image": {
+          "id": 724,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_144116-scaled.jpg",
+          "alt": "Monedero Motita",
+          "localFileName": "865_724_Monedero Motita.jpg"
+        }
+      },
+      {
+        "id": "865-3",
+        "name": "Café Oscuro",
+        "price": 480,
+        "stock": 4,
+        "image": {
+          "id": 724,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_144116-scaled.jpg",
+          "alt": "Monedero Motita",
+          "localFileName": "865_724_Monedero Motita.jpg"
+        }
+      },
+      {
+        "id": "865-4",
+        "name": "Camel",
+        "price": 480,
+        "stock": 3,
+        "image": {
+          "id": 724,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_144116-scaled.jpg",
+          "alt": "Monedero Motita",
+          "localFileName": "865_724_Monedero Motita.jpg"
+        }
+      },
+      {
+        "id": "865-5",
+        "name": "Ladrillo",
+        "price": 480,
+        "stock": 4,
+        "image": {
+          "id": 724,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_144116-scaled.jpg",
+          "alt": "Monedero Motita",
+          "localFileName": "865_724_Monedero Motita.jpg"
+        }
+      },
+      {
+        "id": "865-6",
+        "name": "Miel",
+        "price": 480,
+        "stock": 4,
+        "image": {
+          "id": 724,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_144116-scaled.jpg",
+          "alt": "Monedero Motita",
+          "localFileName": "865_724_Monedero Motita.jpg"
+        }
+      },
+      {
+        "id": "865-7",
+        "name": "Negro",
+        "price": 480,
+        "stock": 5,
+        "image": {
+          "id": 724,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_144116-scaled.jpg",
+          "alt": "Monedero Motita",
+          "localFileName": "865_724_Monedero Motita.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Beige",
+          "Café",
+          "Cafe chocolate",
+          "Café Oscuro",
+          "Camel",
+          "Ladrillo",
+          "Miel",
+          "Negro"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-01T19:34:17",
+    "updatedAt": "2025-08-26T17:08:18"
+  },
+  {
+    "id": 860,
+    "name": "Botelleras",
+    "slug": "botelleras",
+    "description": "Botellera de piel resistente y elegante para proteger tus botellas medidas 28 x 16 cm\n",
+    "shortDescription": "",
+    "price": 1100,
+    "type": "variable",
+    "categories": [
+      22
+    ],
+    "images": [
+      {
+        "id": 858,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/ppal-categoria-botelleras-scaled.jpg",
+        "alt": "Botelleras",
+        "localFileName": "860_858_Botelleras.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "860-0",
+        "name": "Café Oscuro",
+        "price": 1100,
+        "stock": 2,
+        "image": {
+          "id": 858,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/ppal-categoria-botelleras-scaled.jpg",
+          "alt": "Botelleras",
+          "localFileName": "860_858_Botelleras.jpg"
+        }
+      },
+      {
+        "id": "860-1",
+        "name": "Miel",
+        "price": 1100,
+        "stock": 7,
+        "image": {
+          "id": 858,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/ppal-categoria-botelleras-scaled.jpg",
+          "alt": "Botelleras",
+          "localFileName": "860_858_Botelleras.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 1,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Café Oscuro",
+          "Miel"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-01T19:22:24",
+    "updatedAt": "2025-07-04T20:06:06"
+  },
+  {
+    "id": 854,
+    "name": "Portavasos",
+    "slug": "portavasos",
+    "description": "Portavasos elegante textil con correa de piel para guardarlos set con 6 piezas\n",
+    "shortDescription": "",
+    "price": 650,
+    "type": "simple",
+    "categories": [
+      23
+    ],
+    "images": [
+      {
+        "id": 850,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/galeria-portavasos-1.jpg",
+        "alt": "Portavasos",
+        "localFileName": "854_850_Portavasos.jpg"
+      },
+      {
+        "id": 853,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/galeria-portavasos1-scaled.jpg",
+        "alt": "Portavasos",
+        "localFileName": "854_853_Portavasos.jpg"
+      },
+      {
+        "id": 852,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/producto-portavasos-scaled.jpg",
+        "alt": "Portavasos",
+        "localFileName": "854_852_Portavasos.jpg"
+      },
+      {
+        "id": 851,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/ppal-categoria-hogar-scaled.jpg",
+        "alt": "Portavasos",
+        "localFileName": "854_851_Portavasos.jpg"
+      },
+      {
+        "id": 850,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/galeria-portavasos-1.jpg",
+        "alt": "Portavasos",
+        "localFileName": "854_850_Portavasos.jpg"
+      },
+      {
+        "id": 849,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/galeria-portavasos-scaled.jpg",
+        "alt": "Portavasos",
+        "localFileName": "854_849_Portavasos.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "854-0",
+        "name": "Estándar",
+        "price": 650,
+        "stock": 10,
+        "image": {
+          "id": 850,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/07/galeria-portavasos-1.jpg",
+          "alt": "Portavasos",
+          "localFileName": "854_850_Portavasos.jpg"
+        }
+      }
+    ],
+    "attributes": [],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-01T19:10:13",
+    "updatedAt": "2025-07-04T20:07:23"
+  },
+  {
+    "id": 843,
+    "name": "Arete Piel Balancín Oval",
+    "slug": "arete-piel-balancin-oval",
+    "description": "\n\n\nMedidas 7 cms. de largo x 3.5 cms. de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 430,
+    "type": "variable",
+    "categories": [
+      82
+    ],
+    "images": [
+      {
+        "id": 672,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_141954-scaled.jpg",
+        "alt": "Arete Piel Balancín Oval",
+        "localFileName": "843_672_Arete Piel Balancín Oval.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "843-0",
+        "name": "Beige",
+        "price": 430,
+        "stock": 3,
+        "image": {
+          "id": 672,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_141954-scaled.jpg",
+          "alt": "Arete Piel Balancín Oval",
+          "localFileName": "843_672_Arete Piel Balancín Oval.jpg"
+        }
+      },
+      {
+        "id": "843-1",
+        "name": "cobre",
+        "price": 430,
+        "stock": 1,
+        "image": {
+          "id": 672,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_141954-scaled.jpg",
+          "alt": "Arete Piel Balancín Oval",
+          "localFileName": "843_672_Arete Piel Balancín Oval.jpg"
+        }
+      },
+      {
+        "id": "843-2",
+        "name": "Miel",
+        "price": 430,
+        "stock": 7,
+        "image": {
+          "id": 672,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_141954-scaled.jpg",
+          "alt": "Arete Piel Balancín Oval",
+          "localFileName": "843_672_Arete Piel Balancín Oval.jpg"
+        }
+      },
+      {
+        "id": "843-3",
+        "name": "Tinta",
+        "price": 430,
+        "stock": 2,
+        "image": {
+          "id": 672,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_141954-scaled.jpg",
+          "alt": "Arete Piel Balancín Oval",
+          "localFileName": "843_672_Arete Piel Balancín Oval.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Beige",
+          "cobre",
+          "Miel",
+          "Tinta"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-01T19:03:36",
+    "updatedAt": "2025-08-26T17:52:18"
+  },
+  {
+    "id": 834,
+    "name": "Arete Piel Gota",
+    "slug": "arete-piel-gota",
+    "description": "\n\n\nMedias 3.5 cms de alto x 3.5 cms de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 330,
+    "type": "variable",
+    "categories": [
+      82
+    ],
+    "images": [
+      {
+        "id": 680,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_121437-scaled.jpg",
+        "alt": "Arete Piel Gota",
+        "localFileName": "834_680_Arete Piel Gota.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "834-0",
+        "name": "Beige",
+        "price": 330,
+        "stock": 3,
+        "image": {
+          "id": 680,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_121437-scaled.jpg",
+          "alt": "Arete Piel Gota",
+          "localFileName": "834_680_Arete Piel Gota.jpg"
+        }
+      },
+      {
+        "id": "834-1",
+        "name": "Café",
+        "price": 330,
+        "stock": 7,
+        "image": {
+          "id": 680,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_121437-scaled.jpg",
+          "alt": "Arete Piel Gota",
+          "localFileName": "834_680_Arete Piel Gota.jpg"
+        }
+      },
+      {
+        "id": "834-2",
+        "name": "Café Oscuro",
+        "price": 330,
+        "stock": 5,
+        "image": {
+          "id": 680,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_121437-scaled.jpg",
+          "alt": "Arete Piel Gota",
+          "localFileName": "834_680_Arete Piel Gota.jpg"
+        }
+      },
+      {
+        "id": "834-3",
+        "name": "cobre",
+        "price": 330,
+        "stock": 6,
+        "image": {
+          "id": 680,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_121437-scaled.jpg",
+          "alt": "Arete Piel Gota",
+          "localFileName": "834_680_Arete Piel Gota.jpg"
+        }
+      },
+      {
+        "id": "834-4",
+        "name": "Ladrillo",
+        "price": 330,
+        "stock": 6,
+        "image": {
+          "id": 680,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_121437-scaled.jpg",
+          "alt": "Arete Piel Gota",
+          "localFileName": "834_680_Arete Piel Gota.jpg"
+        }
+      },
+      {
+        "id": "834-5",
+        "name": "Miel",
+        "price": 330,
+        "stock": 1,
+        "image": {
+          "id": 680,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_121437-scaled.jpg",
+          "alt": "Arete Piel Gota",
+          "localFileName": "834_680_Arete Piel Gota.jpg"
+        }
+      },
+      {
+        "id": "834-6",
+        "name": "Negro",
+        "price": 330,
+        "stock": 10,
+        "image": {
+          "id": 680,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_121437-scaled.jpg",
+          "alt": "Arete Piel Gota",
+          "localFileName": "834_680_Arete Piel Gota.jpg"
+        }
+      },
+      {
+        "id": "834-7",
+        "name": "Oro Mate",
+        "price": 330,
+        "stock": 4,
+        "image": {
+          "id": 680,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_121437-scaled.jpg",
+          "alt": "Arete Piel Gota",
+          "localFileName": "834_680_Arete Piel Gota.jpg"
+        }
+      },
+      {
+        "id": "834-8",
+        "name": "Oro Pálido",
+        "price": 330,
+        "stock": 9,
+        "image": {
+          "id": 680,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_121437-scaled.jpg",
+          "alt": "Arete Piel Gota",
+          "localFileName": "834_680_Arete Piel Gota.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Beige",
+          "Café",
+          "Café Oscuro",
+          "cobre",
+          "Ladrillo",
+          "Miel",
+          "Negro",
+          "Oro Mate",
+          "Oro Pálido"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-01T18:59:36",
+    "updatedAt": "2025-08-26T17:53:15"
+  },
+  {
+    "id": 827,
+    "name": "Arete Piel Péndulo",
+    "slug": "arete-piel-pendulo",
+    "description": "\n\n\nMedidas 7 cms. de largo x 2 cms. De ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 390,
+    "type": "variable",
+    "categories": [
+      82
+    ],
+    "images": [
+      {
+        "id": 689,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131640-1-scaled.jpg",
+        "alt": "Arete Piel Péndulo",
+        "localFileName": "827_689_Arete Piel Péndulo.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "827-0",
+        "name": "Beige",
+        "price": 390,
+        "stock": 3,
+        "image": {
+          "id": 689,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131640-1-scaled.jpg",
+          "alt": "Arete Piel Péndulo",
+          "localFileName": "827_689_Arete Piel Péndulo.jpg"
+        }
+      },
+      {
+        "id": "827-1",
+        "name": "Café Claro",
+        "price": 390,
+        "stock": 8,
+        "image": {
+          "id": 689,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131640-1-scaled.jpg",
+          "alt": "Arete Piel Péndulo",
+          "localFileName": "827_689_Arete Piel Péndulo.jpg"
+        }
+      },
+      {
+        "id": "827-2",
+        "name": "cobre",
+        "price": 390,
+        "stock": 9,
+        "image": {
+          "id": 689,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131640-1-scaled.jpg",
+          "alt": "Arete Piel Péndulo",
+          "localFileName": "827_689_Arete Piel Péndulo.jpg"
+        }
+      },
+      {
+        "id": "827-3",
+        "name": "Ladrillo",
+        "price": 390,
+        "stock": 5,
+        "image": {
+          "id": 689,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131640-1-scaled.jpg",
+          "alt": "Arete Piel Péndulo",
+          "localFileName": "827_689_Arete Piel Péndulo.jpg"
+        }
+      },
+      {
+        "id": "827-4",
+        "name": "Miel",
+        "price": 390,
+        "stock": 3,
+        "image": {
+          "id": 689,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131640-1-scaled.jpg",
+          "alt": "Arete Piel Péndulo",
+          "localFileName": "827_689_Arete Piel Péndulo.jpg"
+        }
+      },
+      {
+        "id": "827-5",
+        "name": "Negro",
+        "price": 390,
+        "stock": 9,
+        "image": {
+          "id": 689,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131640-1-scaled.jpg",
+          "alt": "Arete Piel Péndulo",
+          "localFileName": "827_689_Arete Piel Péndulo.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Beige",
+          "Café Claro",
+          "cobre",
+          "Ladrillo",
+          "Miel",
+          "Negro"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-07-01T18:52:36",
+    "updatedAt": "2025-08-26T17:54:07"
+  },
+  {
+    "id": 660,
+    "name": "Arete Geometrico Gigante",
+    "slug": "arete-geometrico-gigante",
+    "description": "\n\n\nMedidas 7 cms de largo x 3.50. cms de ancho\n\n\n\n",
+    "shortDescription": "",
+    "price": 430,
+    "type": "variable",
+    "categories": [
+      82
+    ],
+    "images": [
+      {
+        "id": 659,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_141635-scaled.jpg",
+        "alt": "Arete Geometrico Gigante",
+        "localFileName": "660_659_Arete Geometrico Gigante.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "660-0",
+        "name": "Blanco",
+        "price": 430,
+        "stock": 7,
+        "image": {
+          "id": 659,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_141635-scaled.jpg",
+          "alt": "Arete Geometrico Gigante",
+          "localFileName": "660_659_Arete Geometrico Gigante.jpg"
+        }
+      },
+      {
+        "id": "660-1",
+        "name": "Café",
+        "price": 430,
+        "stock": 2,
+        "image": {
+          "id": 659,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_141635-scaled.jpg",
+          "alt": "Arete Geometrico Gigante",
+          "localFileName": "660_659_Arete Geometrico Gigante.jpg"
+        }
+      },
+      {
+        "id": "660-2",
+        "name": "cobre",
+        "price": 430,
+        "stock": 3,
+        "image": {
+          "id": 659,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_141635-scaled.jpg",
+          "alt": "Arete Geometrico Gigante",
+          "localFileName": "660_659_Arete Geometrico Gigante.jpg"
+        }
+      },
+      {
+        "id": "660-3",
+        "name": "Negro",
+        "price": 430,
+        "stock": 2,
+        "image": {
+          "id": 659,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_141635-scaled.jpg",
+          "alt": "Arete Geometrico Gigante",
+          "localFileName": "660_659_Arete Geometrico Gigante.jpg"
+        }
+      },
+      {
+        "id": "660-4",
+        "name": "Tinta",
+        "price": 430,
+        "stock": 2,
+        "image": {
+          "id": 659,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_141635-scaled.jpg",
+          "alt": "Arete Geometrico Gigante",
+          "localFileName": "660_659_Arete Geometrico Gigante.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Blanco",
+          "Café",
+          "cobre",
+          "Negro",
+          "Tinta"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-06-28T22:26:34",
+    "updatedAt": "2025-08-26T17:55:00"
+  },
+  {
+    "id": 637,
+    "name": "Arete Piel Poligono Chico",
+    "slug": "arete-piel-poligono-chico",
+    "description": "\n\n\nMedidas 4.5 cms x 3 cms.\n\n\n\n",
+    "shortDescription": "",
+    "price": 330,
+    "type": "variable",
+    "categories": [
+      82
+    ],
+    "images": [
+      {
+        "id": 636,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+        "alt": "Arete Piel Poligono Chico",
+        "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "637-0",
+        "name": "Blanco y negro",
+        "price": 330,
+        "stock": 2,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-1",
+        "name": "Blanco y Plateado",
+        "price": 330,
+        "stock": 4,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-2",
+        "name": "Blanco y Rosado",
+        "price": 330,
+        "stock": 9,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-3",
+        "name": "Cafe gamuza y Camel",
+        "price": 330,
+        "stock": 9,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-4",
+        "name": "Cafe oscuro y Cobre",
+        "price": 330,
+        "stock": 2,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-5",
+        "name": "Cafe y beige",
+        "price": 330,
+        "stock": 7,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-6",
+        "name": "Cafe y oro",
+        "price": 330,
+        "stock": 2,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-7",
+        "name": "Cobre y oro",
+        "price": 330,
+        "stock": 3,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-8",
+        "name": "Gris y negro",
+        "price": 330,
+        "stock": 8,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-9",
+        "name": "Ladrillo y camel",
+        "price": 330,
+        "stock": 10,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-10",
+        "name": "Ladrillo y Perla",
+        "price": 330,
+        "stock": 2,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-11",
+        "name": "Negro y cobre",
+        "price": 330,
+        "stock": 10,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-12",
+        "name": "Negro y Gris",
+        "price": 330,
+        "stock": 7,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-13",
+        "name": "Oro mate y negro",
+        "price": 330,
+        "stock": 10,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-14",
+        "name": "Oro y cafe oscuro",
+        "price": 330,
+        "stock": 2,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      },
+      {
+        "id": "637-15",
+        "name": "Tinto y blanco",
+        "price": 330,
+        "stock": 1,
+        "image": {
+          "id": 636,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240625_131241-scaled.jpg",
+          "alt": "Arete Piel Poligono Chico",
+          "localFileName": "637_636_Arete Piel Poligono Chico.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Blanco y negro",
+          "Blanco y Plateado",
+          "Blanco y Rosado",
+          "Cafe gamuza y Camel",
+          "Cafe oscuro y Cobre",
+          "Cafe y beige",
+          "Cafe y oro",
+          "Cobre y oro",
+          "Gris y negro",
+          "Ladrillo y camel",
+          "Ladrillo y Perla",
+          "Negro y cobre",
+          "Negro y Gris",
+          "Oro mate y negro",
+          "Oro y cafe oscuro",
+          "Tinto y blanco"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-06-28T22:19:13",
+    "updatedAt": "2025-08-26T17:55:57"
+  },
+  {
+    "id": 617,
+    "name": "Brazalete dos Lineas",
+    "slug": "brazalete-dos-lineas",
+    "description": "\n\n\nMedidas 21 cms de largo x 4.2 cms. de ancho. Diámetro cerrado 5.5 cms.\n\n\n\n",
+    "shortDescription": "",
+    "price": 350,
+    "type": "variable",
+    "categories": [
+      81
+    ],
+    "images": [
+      {
+        "id": 613,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110708-scaled.jpg",
+        "alt": "Brazalete dos Lineas",
+        "localFileName": "617_613_Brazalete dos Lineas.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "617-0",
+        "name": "Blanco",
+        "price": 350,
+        "stock": 7,
+        "image": {
+          "id": 613,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110708-scaled.jpg",
+          "alt": "Brazalete dos Lineas",
+          "localFileName": "617_613_Brazalete dos Lineas.jpg"
+        }
+      },
+      {
+        "id": "617-1",
+        "name": "Gris",
+        "price": 350,
+        "stock": 7,
+        "image": {
+          "id": 613,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110708-scaled.jpg",
+          "alt": "Brazalete dos Lineas",
+          "localFileName": "617_613_Brazalete dos Lineas.jpg"
+        }
+      },
+      {
+        "id": "617-2",
+        "name": "Miel",
+        "price": 350,
+        "stock": 2,
+        "image": {
+          "id": 613,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110708-scaled.jpg",
+          "alt": "Brazalete dos Lineas",
+          "localFileName": "617_613_Brazalete dos Lineas.jpg"
+        }
+      },
+      {
+        "id": "617-3",
+        "name": "Negro",
+        "price": 350,
+        "stock": 10,
+        "image": {
+          "id": 613,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110708-scaled.jpg",
+          "alt": "Brazalete dos Lineas",
+          "localFileName": "617_613_Brazalete dos Lineas.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Blanco",
+          "Gris",
+          "Miel",
+          "Negro"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-06-28T21:48:33",
+    "updatedAt": "2025-08-26T17:57:20"
+  },
+  {
+    "id": 609,
+    "name": "Brazalete Hombre",
+    "slug": "brazalete-hombre",
+    "description": "\n\n\nMedidas 23.5 cms. X 4 cms.  Diámetro cerrado  6 cms.\n\n\n\n",
+    "shortDescription": "",
+    "price": 410,
+    "type": "variable",
+    "categories": [
+      81
+    ],
+    "images": [
+      {
+        "id": 608,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_121005-scaled.jpg",
+        "alt": "Brazalete Hombre",
+        "localFileName": "609_608_Brazalete Hombre.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "609-0",
+        "name": "Cafe chocolate",
+        "price": 410,
+        "stock": 3,
+        "image": {
+          "id": 608,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_121005-scaled.jpg",
+          "alt": "Brazalete Hombre",
+          "localFileName": "609_608_Brazalete Hombre.jpg"
+        }
+      },
+      {
+        "id": "609-1",
+        "name": "Gris",
+        "price": 410,
+        "stock": 4,
+        "image": {
+          "id": 608,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_121005-scaled.jpg",
+          "alt": "Brazalete Hombre",
+          "localFileName": "609_608_Brazalete Hombre.jpg"
+        }
+      },
+      {
+        "id": "609-2",
+        "name": "Miel",
+        "price": 410,
+        "stock": 9,
+        "image": {
+          "id": 608,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_121005-scaled.jpg",
+          "alt": "Brazalete Hombre",
+          "localFileName": "609_608_Brazalete Hombre.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Cafe chocolate",
+          "Gris",
+          "Miel"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-06-28T21:45:24",
+    "updatedAt": "2025-08-26T17:58:44"
+  },
+  {
+    "id": 602,
+    "name": "Brazalete Linea Ancha",
+    "slug": "brazalete-linea-ancha",
+    "description": "",
+    "shortDescription": "",
+    "price": 1175,
+    "type": "simple",
+    "categories": [
+      15
+    ],
+    "images": [],
+    "variations": [
+      {
+        "id": "602-0",
+        "name": "Estándar",
+        "price": 1563,
+        "stock": 10,
+        "image": null
+      }
+    ],
+    "attributes": [],
+    "featured": false,
+    "status": "inactive",
+    "createdAt": "2025-09-15T07:23:59.239Z",
+    "updatedAt": "2024-06-28T21:39:52"
+  },
+  {
+    "id": 575,
+    "name": "Brazalete lineas Delgadas",
+    "slug": "brazalete-lineas-delgadas",
+    "description": "\n\n\nMedidas 21 cms de largo x 4.2 cms. de ancho. Diámetro cerrado 5.5 cms.\n\n\n\n",
+    "shortDescription": "",
+    "price": 350,
+    "type": "variable",
+    "categories": [
+      81
+    ],
+    "images": [
+      {
+        "id": 579,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_115849-scaled.jpg",
+        "alt": "Brazalete lineas Delgadas",
+        "localFileName": "575_579_Brazalete lineas Delgadas.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "575-0",
+        "name": "Azul Denim",
+        "price": 350,
+        "stock": 9,
+        "image": {
+          "id": 579,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_115849-scaled.jpg",
+          "alt": "Brazalete lineas Delgadas",
+          "localFileName": "575_579_Brazalete lineas Delgadas.jpg"
+        }
+      },
+      {
+        "id": "575-1",
+        "name": "Beige",
+        "price": 350,
+        "stock": 3,
+        "image": {
+          "id": 579,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_115849-scaled.jpg",
+          "alt": "Brazalete lineas Delgadas",
+          "localFileName": "575_579_Brazalete lineas Delgadas.jpg"
+        }
+      },
+      {
+        "id": "575-2",
+        "name": "cobre",
+        "price": 350,
+        "stock": 6,
+        "image": {
+          "id": 579,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_115849-scaled.jpg",
+          "alt": "Brazalete lineas Delgadas",
+          "localFileName": "575_579_Brazalete lineas Delgadas.jpg"
+        }
+      },
+      {
+        "id": "575-3",
+        "name": "Ladrillo",
+        "price": 350,
+        "stock": 3,
+        "image": {
+          "id": 579,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_115849-scaled.jpg",
+          "alt": "Brazalete lineas Delgadas",
+          "localFileName": "575_579_Brazalete lineas Delgadas.jpg"
+        }
+      },
+      {
+        "id": "575-4",
+        "name": "Miel",
+        "price": 350,
+        "stock": 7,
+        "image": {
+          "id": 579,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_115849-scaled.jpg",
+          "alt": "Brazalete lineas Delgadas",
+          "localFileName": "575_579_Brazalete lineas Delgadas.jpg"
+        }
+      },
+      {
+        "id": "575-5",
+        "name": "Negro",
+        "price": 350,
+        "stock": 8,
+        "image": {
+          "id": 579,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_115849-scaled.jpg",
+          "alt": "Brazalete lineas Delgadas",
+          "localFileName": "575_579_Brazalete lineas Delgadas.jpg"
+        }
+      },
+      {
+        "id": "575-6",
+        "name": "Oro Mate",
+        "price": 350,
+        "stock": 4,
+        "image": {
+          "id": 579,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_115849-scaled.jpg",
+          "alt": "Brazalete lineas Delgadas",
+          "localFileName": "575_579_Brazalete lineas Delgadas.jpg"
+        }
+      },
+      {
+        "id": "575-7",
+        "name": "Oro Plata",
+        "price": 350,
+        "stock": 8,
+        "image": {
+          "id": 579,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_115849-scaled.jpg",
+          "alt": "Brazalete lineas Delgadas",
+          "localFileName": "575_579_Brazalete lineas Delgadas.jpg"
+        }
+      },
+      {
+        "id": "575-8",
+        "name": "Tinta",
+        "price": 350,
+        "stock": 1,
+        "image": {
+          "id": 579,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_115849-scaled.jpg",
+          "alt": "Brazalete lineas Delgadas",
+          "localFileName": "575_579_Brazalete lineas Delgadas.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul Denim",
+          "Beige",
+          "cobre",
+          "Ladrillo",
+          "Miel",
+          "Negro",
+          "Oro Mate",
+          "Oro Plata",
+          "Tinta"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-06-28T21:29:26",
+    "updatedAt": "2025-08-26T17:59:56"
+  },
+  {
+    "id": 550,
+    "name": "Brazalete Liso",
+    "slug": "brazalete-liso",
+    "description": "\n\n\nMedidas 20 cms de largo x 3.5 cms. De ancho  Diámetro cerrado 5 cms\n\n\n\n",
+    "shortDescription": "",
+    "price": 350,
+    "type": "variable",
+    "categories": [
+      81
+    ],
+    "images": [
+      {
+        "id": 551,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110135-scaled.jpg",
+        "alt": "Brazalete Liso",
+        "localFileName": "550_551_Brazalete Liso.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "550-0",
+        "name": "Azul",
+        "price": 350,
+        "stock": 8,
+        "image": {
+          "id": 551,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110135-scaled.jpg",
+          "alt": "Brazalete Liso",
+          "localFileName": "550_551_Brazalete Liso.jpg"
+        }
+      },
+      {
+        "id": "550-1",
+        "name": "Azul Denim",
+        "price": 350,
+        "stock": 7,
+        "image": {
+          "id": 551,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110135-scaled.jpg",
+          "alt": "Brazalete Liso",
+          "localFileName": "550_551_Brazalete Liso.jpg"
+        }
+      },
+      {
+        "id": "550-2",
+        "name": "Café Claro",
+        "price": 350,
+        "stock": 2,
+        "image": {
+          "id": 551,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110135-scaled.jpg",
+          "alt": "Brazalete Liso",
+          "localFileName": "550_551_Brazalete Liso.jpg"
+        }
+      },
+      {
+        "id": "550-3",
+        "name": "Gris",
+        "price": 350,
+        "stock": 1,
+        "image": {
+          "id": 551,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110135-scaled.jpg",
+          "alt": "Brazalete Liso",
+          "localFileName": "550_551_Brazalete Liso.jpg"
+        }
+      },
+      {
+        "id": "550-4",
+        "name": "Miel",
+        "price": 350,
+        "stock": 2,
+        "image": {
+          "id": 551,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110135-scaled.jpg",
+          "alt": "Brazalete Liso",
+          "localFileName": "550_551_Brazalete Liso.jpg"
+        }
+      },
+      {
+        "id": "550-5",
+        "name": "Negro",
+        "price": 350,
+        "stock": 3,
+        "image": {
+          "id": 551,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110135-scaled.jpg",
+          "alt": "Brazalete Liso",
+          "localFileName": "550_551_Brazalete Liso.jpg"
+        }
+      },
+      {
+        "id": "550-6",
+        "name": "Oro Mate",
+        "price": 350,
+        "stock": 5,
+        "image": {
+          "id": 551,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110135-scaled.jpg",
+          "alt": "Brazalete Liso",
+          "localFileName": "550_551_Brazalete Liso.jpg"
+        }
+      },
+      {
+        "id": "550-7",
+        "name": "Oro Pálido",
+        "price": 350,
+        "stock": 6,
+        "image": {
+          "id": 551,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110135-scaled.jpg",
+          "alt": "Brazalete Liso",
+          "localFileName": "550_551_Brazalete Liso.jpg"
+        }
+      },
+      {
+        "id": "550-8",
+        "name": "Tinta",
+        "price": 350,
+        "stock": 5,
+        "image": {
+          "id": 551,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110135-scaled.jpg",
+          "alt": "Brazalete Liso",
+          "localFileName": "550_551_Brazalete Liso.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul",
+          "Azul Denim",
+          "Café Claro",
+          "Gris",
+          "Miel",
+          "Negro",
+          "Oro Mate",
+          "Oro Pálido",
+          "Tinta"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-06-28T21:22:58",
+    "updatedAt": "2025-08-26T18:01:23"
+  },
+  {
+    "id": 546,
+    "name": "Brazalete Piel Pelo",
+    "slug": "brazalete-piel-pelo",
+    "description": "\n\n\nMedidas 20 cms de largo x 3.5 cms. De ancho  Diámetro cerrado 5 cms\n\n\n\n",
+    "shortDescription": "",
+    "price": 350,
+    "type": "variable",
+    "categories": [
+      81
+    ],
+    "images": [
+      {
+        "id": 547,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110911-scaled.jpg",
+        "alt": "Brazalete Piel Pelo",
+        "localFileName": "546_547_Brazalete Piel Pelo.jpg"
+      },
+      {
+        "id": 548,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110937-scaled.jpg",
+        "alt": "Brazalete Piel Pelo",
+        "localFileName": "546_548_Brazalete Piel Pelo.jpg"
+      },
+      {
+        "id": 549,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110947-scaled.jpg",
+        "alt": "Brazalete Piel Pelo",
+        "localFileName": "546_549_Brazalete Piel Pelo.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "546-0",
+        "name": "Tonos claros",
+        "price": 350,
+        "stock": 5,
+        "image": {
+          "id": 547,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110911-scaled.jpg",
+          "alt": "Brazalete Piel Pelo",
+          "localFileName": "546_547_Brazalete Piel Pelo.jpg"
+        }
+      },
+      {
+        "id": "546-1",
+        "name": "Tonos oscuros",
+        "price": 350,
+        "stock": 3,
+        "image": {
+          "id": 548,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240626_110937-scaled.jpg",
+          "alt": "Brazalete Piel Pelo",
+          "localFileName": "546_548_Brazalete Piel Pelo.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Tonos claros",
+          "Tonos oscuros"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-06-28T20:57:30",
+    "updatedAt": "2025-08-26T18:02:24"
+  },
+  {
+    "id": 485,
+    "name": "Portacel Piel liso",
+    "slug": "portacel-piel-liso",
+    "description": "Medidas 20 cms de altura x 13.5 cms de ancho\n",
+    "shortDescription": "Portacel piel liso Varios colores\n",
+    "price": 870,
+    "type": "variable",
+    "categories": [
+      89
+    ],
+    "images": [
+      {
+        "id": 820,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122017_Instagram.jpg",
+        "alt": "Portacel Piel liso",
+        "localFileName": "485_820_Portacel Piel liso.jpg"
+      }
+    ],
+    "variations": [
+      {
+        "id": "485-0",
+        "name": "Azul",
+        "price": 870,
+        "stock": 9,
+        "image": {
+          "id": 820,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122017_Instagram.jpg",
+          "alt": "Portacel Piel liso",
+          "localFileName": "485_820_Portacel Piel liso.jpg"
+        }
+      },
+      {
+        "id": "485-1",
+        "name": "Blanco",
+        "price": 870,
+        "stock": 4,
+        "image": {
+          "id": 820,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122017_Instagram.jpg",
+          "alt": "Portacel Piel liso",
+          "localFileName": "485_820_Portacel Piel liso.jpg"
+        }
+      },
+      {
+        "id": "485-2",
+        "name": "Café",
+        "price": 870,
+        "stock": 10,
+        "image": {
+          "id": 820,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122017_Instagram.jpg",
+          "alt": "Portacel Piel liso",
+          "localFileName": "485_820_Portacel Piel liso.jpg"
+        }
+      },
+      {
+        "id": "485-3",
+        "name": "Gris",
+        "price": 870,
+        "stock": 4,
+        "image": {
+          "id": 820,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122017_Instagram.jpg",
+          "alt": "Portacel Piel liso",
+          "localFileName": "485_820_Portacel Piel liso.jpg"
+        }
+      },
+      {
+        "id": "485-4",
+        "name": "Gris gamuza",
+        "price": 870,
+        "stock": 10,
+        "image": {
+          "id": 820,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122017_Instagram.jpg",
+          "alt": "Portacel Piel liso",
+          "localFileName": "485_820_Portacel Piel liso.jpg"
+        }
+      },
+      {
+        "id": "485-5",
+        "name": "Negro",
+        "price": 870,
+        "stock": 10,
+        "image": {
+          "id": 820,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122017_Instagram.jpg",
+          "alt": "Portacel Piel liso",
+          "localFileName": "485_820_Portacel Piel liso.jpg"
+        }
+      },
+      {
+        "id": "485-6",
+        "name": "Rojo",
+        "price": 870,
+        "stock": 4,
+        "image": {
+          "id": 820,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122017_Instagram.jpg",
+          "alt": "Portacel Piel liso",
+          "localFileName": "485_820_Portacel Piel liso.jpg"
+        }
+      },
+      {
+        "id": "485-7",
+        "name": "Verde gamuza",
+        "price": 870,
+        "stock": 6,
+        "image": {
+          "id": 820,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Screenshot_20231102_122017_Instagram.jpg",
+          "alt": "Portacel Piel liso",
+          "localFileName": "485_820_Portacel Piel liso.jpg"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul",
+          "Blanco",
+          "Café",
+          "Gris",
+          "Gris gamuza",
+          "Negro",
+          "Rojo",
+          "Verde gamuza"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-06-26T01:03:40",
+    "updatedAt": "2025-05-20T20:00:19"
+  },
+  {
+    "id": 476,
+    "name": "Bolsa Ovalada lisa",
+    "slug": "bolsa-ovalada-lisa",
+    "description": "\n\n\nMedida alto 32 cms base 22 cms\n\n\n\n",
+    "shortDescription": "Bolsa Ovalada Lisa\n",
+    "price": 1300,
+    "type": "variable",
+    "categories": [
+      18,
+      84
+    ],
+    "images": [
+      {
+        "id": 265,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/26.png",
+        "alt": "Bolsa Ovalada lisa",
+        "localFileName": "476_265_Bolsa Ovalada lisa.png"
+      }
+    ],
+    "variations": [
+      {
+        "id": "476-0",
+        "name": "Azul Denim",
+        "price": 1300,
+        "stock": 6,
+        "image": {
+          "id": 265,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/26.png",
+          "alt": "Bolsa Ovalada lisa",
+          "localFileName": "476_265_Bolsa Ovalada lisa.png"
+        }
+      },
+      {
+        "id": "476-1",
+        "name": "Gris",
+        "price": 1300,
+        "stock": 10,
+        "image": {
+          "id": 265,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/26.png",
+          "alt": "Bolsa Ovalada lisa",
+          "localFileName": "476_265_Bolsa Ovalada lisa.png"
+        }
+      },
+      {
+        "id": "476-2",
+        "name": "Ladrillo",
+        "price": 1300,
+        "stock": 3,
+        "image": {
+          "id": 265,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/26.png",
+          "alt": "Bolsa Ovalada lisa",
+          "localFileName": "476_265_Bolsa Ovalada lisa.png"
+        }
+      },
+      {
+        "id": "476-3",
+        "name": "Miel",
+        "price": 1300,
+        "stock": 5,
+        "image": {
+          "id": 265,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/26.png",
+          "alt": "Bolsa Ovalada lisa",
+          "localFileName": "476_265_Bolsa Ovalada lisa.png"
+        }
+      },
+      {
+        "id": "476-4",
+        "name": "Negro",
+        "price": 1300,
+        "stock": 8,
+        "image": {
+          "id": 265,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/26.png",
+          "alt": "Bolsa Ovalada lisa",
+          "localFileName": "476_265_Bolsa Ovalada lisa.png"
+        }
+      },
+      {
+        "id": "476-5",
+        "name": "Pelo (tono puede variar)",
+        "price": 1300,
+        "stock": 5,
+        "image": {
+          "id": 265,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/26.png",
+          "alt": "Bolsa Ovalada lisa",
+          "localFileName": "476_265_Bolsa Ovalada lisa.png"
+        }
+      },
+      {
+        "id": "476-6",
+        "name": "Tinta",
+        "price": 1300,
+        "stock": 9,
+        "image": {
+          "id": 265,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/26.png",
+          "alt": "Bolsa Ovalada lisa",
+          "localFileName": "476_265_Bolsa Ovalada lisa.png"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul Denim",
+          "Gris",
+          "Ladrillo",
+          "Miel",
+          "Negro",
+          "Pelo (tono puede variar)",
+          "Tinta"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-06-26T00:59:31",
+    "updatedAt": "2025-08-26T17:43:42"
+  },
+  {
+    "id": 469,
+    "name": "Cartera tipo Sobre",
+    "slug": "cartera-tipo-sobre",
+    "description": "\n\n\nMedidas 26 cms de largo x 13 cms de ancho\n\n\n\n",
+    "shortDescription": "Cartera tipo sobre con boton\n",
+    "price": 1100,
+    "type": "variable",
+    "categories": [
+      18
+    ],
+    "images": [
+      {
+        "id": 383,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/46-1.png",
+        "alt": "Cartera tipo Sobre",
+        "localFileName": "469_383_Cartera tipo Sobre.png"
+      }
+    ],
+    "variations": [
+      {
+        "id": "469-0",
+        "name": "Café",
+        "price": 1100,
+        "stock": 6,
+        "image": {
+          "id": 383,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/46-1.png",
+          "alt": "Cartera tipo Sobre",
+          "localFileName": "469_383_Cartera tipo Sobre.png"
+        }
+      },
+      {
+        "id": "469-1",
+        "name": "Cobre Rosado",
+        "price": 1100,
+        "stock": 9,
+        "image": {
+          "id": 383,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/46-1.png",
+          "alt": "Cartera tipo Sobre",
+          "localFileName": "469_383_Cartera tipo Sobre.png"
+        }
+      },
+      {
+        "id": "469-2",
+        "name": "Negro",
+        "price": 1100,
+        "stock": 10,
+        "image": {
+          "id": 383,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/46-1.png",
+          "alt": "Cartera tipo Sobre",
+          "localFileName": "469_383_Cartera tipo Sobre.png"
+        }
+      },
+      {
+        "id": "469-3",
+        "name": "Oro Mate",
+        "price": 1100,
+        "stock": 5,
+        "image": {
+          "id": 383,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/46-1.png",
+          "alt": "Cartera tipo Sobre",
+          "localFileName": "469_383_Cartera tipo Sobre.png"
+        }
+      },
+      {
+        "id": "469-4",
+        "name": "Oro Plata",
+        "price": 1100,
+        "stock": 5,
+        "image": {
+          "id": 383,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/46-1.png",
+          "alt": "Cartera tipo Sobre",
+          "localFileName": "469_383_Cartera tipo Sobre.png"
+        }
+      },
+      {
+        "id": "469-5",
+        "name": "Tinta",
+        "price": 1100,
+        "stock": 1,
+        "image": {
+          "id": 383,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/46-1.png",
+          "alt": "Cartera tipo Sobre",
+          "localFileName": "469_383_Cartera tipo Sobre.png"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Café",
+          "Cobre Rosado",
+          "Negro",
+          "Oro Mate",
+          "Oro Plata",
+          "Tinta"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-06-26T00:15:45",
+    "updatedAt": "2025-08-26T17:44:58"
+  },
+  {
+    "id": 463,
+    "name": "Cangurera",
+    "slug": "cangurera",
+    "description": "\n\n\nMedidas 20 cms de altura x 28 cms de ancho y bolsillo interior de 13 cms de altura x 22 cms de ancho\n\n\n\n",
+    "shortDescription": "Medidas 20 cms de altura x 28 cms de ancho y bolsillo\ninterior de 13 cms de altura x 22 cms de ancho\n",
+    "price": 1850,
+    "type": "variable",
+    "categories": [
+      19
+    ],
+    "images": [
+      {
+        "id": 332,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/93.png",
+        "alt": "Cangurera",
+        "localFileName": "463_332_Cangurera.png"
+      }
+    ],
+    "variations": [
+      {
+        "id": "463-0",
+        "name": "Café Claro",
+        "price": 1850,
+        "stock": 9,
+        "image": {
+          "id": 332,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/93.png",
+          "alt": "Cangurera",
+          "localFileName": "463_332_Cangurera.png"
+        }
+      },
+      {
+        "id": "463-1",
+        "name": "Café Oscuro",
+        "price": 1850,
+        "stock": 8,
+        "image": {
+          "id": 332,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/93.png",
+          "alt": "Cangurera",
+          "localFileName": "463_332_Cangurera.png"
+        }
+      },
+      {
+        "id": "463-2",
+        "name": "Cobre Rosado",
+        "price": 1850,
+        "stock": 4,
+        "image": {
+          "id": 332,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/93.png",
+          "alt": "Cangurera",
+          "localFileName": "463_332_Cangurera.png"
+        }
+      },
+      {
+        "id": "463-3",
+        "name": "Negro",
+        "price": 1850,
+        "stock": 7,
+        "image": {
+          "id": 332,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/93.png",
+          "alt": "Cangurera",
+          "localFileName": "463_332_Cangurera.png"
+        }
+      },
+      {
+        "id": "463-4",
+        "name": "Oro Pálido",
+        "price": 1850,
+        "stock": 8,
+        "image": {
+          "id": 332,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/93.png",
+          "alt": "Cangurera",
+          "localFileName": "463_332_Cangurera.png"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Café Claro",
+          "Café Oscuro",
+          "Cobre Rosado",
+          "Negro",
+          "Oro Pálido"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-06-26T00:06:14",
+    "updatedAt": "2025-08-26T18:27:24"
+  },
+  {
+    "id": 456,
+    "name": "Clutch Chica Plana",
+    "slug": "clutch-chica-plana",
+    "description": "\n\n\nMedidas 18.5 cms de  alto x 23.5cms de  ancho, con bolsillo interior de 13 cms de alto x 20 cms de ancho\n\n\n\n",
+    "shortDescription": "Clutch chica plana\n",
+    "price": 1750,
+    "type": "variable",
+    "categories": [
+      19
+    ],
+    "images": [
+      {
+        "id": 299,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/60.png",
+        "alt": "Clutch Chica Plana",
+        "localFileName": "456_299_Clutch Chica Plana.png"
+      }
+    ],
+    "variations": [
+      {
+        "id": "456-0",
+        "name": "Café",
+        "price": 1750,
+        "stock": 3,
+        "image": {
+          "id": 299,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/60.png",
+          "alt": "Clutch Chica Plana",
+          "localFileName": "456_299_Clutch Chica Plana.png"
+        }
+      },
+      {
+        "id": "456-1",
+        "name": "Cobre Rosado",
+        "price": 1750,
+        "stock": 8,
+        "image": {
+          "id": 299,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/60.png",
+          "alt": "Clutch Chica Plana",
+          "localFileName": "456_299_Clutch Chica Plana.png"
+        }
+      },
+      {
+        "id": "456-2",
+        "name": "Negro",
+        "price": 1750,
+        "stock": 7,
+        "image": {
+          "id": 299,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/60.png",
+          "alt": "Clutch Chica Plana",
+          "localFileName": "456_299_Clutch Chica Plana.png"
+        }
+      },
+      {
+        "id": "456-3",
+        "name": "Oro Plata",
+        "price": 1750,
+        "stock": 10,
+        "image": {
+          "id": 299,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/60.png",
+          "alt": "Clutch Chica Plana",
+          "localFileName": "456_299_Clutch Chica Plana.png"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Café",
+          "Cobre Rosado",
+          "Negro",
+          "Oro Plata"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-06-25T23:38:04",
+    "updatedAt": "2025-08-26T18:29:33"
+  },
+  {
+    "id": 397,
+    "name": "Clutch Chica con Base",
+    "slug": "clutch-chica-con-base",
+    "description": "\n\n\nMedidas 17 cms de  alto x 23.cms de  ancho, con base de 6cms x 17 cms. con bolsillo interior de 13 cms de alto x 20 cms de ancho\n\n\n\n",
+    "shortDescription": "Clutch pequeña con base\n",
+    "price": 1750,
+    "type": "variable",
+    "categories": [
+      19
+    ],
+    "images": [
+      {
+        "id": 296,
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/57.png",
+        "alt": "Clutch Chica con Base",
+        "localFileName": "397_296_Clutch Chica con Base.png"
+      }
+    ],
+    "variations": [
+      {
+        "id": "397-0",
+        "name": "Café",
+        "price": 1750,
+        "stock": 4,
+        "image": {
+          "id": 296,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/57.png",
+          "alt": "Clutch Chica con Base",
+          "localFileName": "397_296_Clutch Chica con Base.png"
+        }
+      },
+      {
+        "id": "397-1",
+        "name": "Cobre Rosado",
+        "price": 1750,
+        "stock": 9,
+        "image": {
+          "id": 296,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/57.png",
+          "alt": "Clutch Chica con Base",
+          "localFileName": "397_296_Clutch Chica con Base.png"
+        }
+      },
+      {
+        "id": "397-2",
+        "name": "Negro",
+        "price": 1750,
+        "stock": 10,
+        "image": {
+          "id": 296,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/57.png",
+          "alt": "Clutch Chica con Base",
+          "localFileName": "397_296_Clutch Chica con Base.png"
+        }
+      },
+      {
+        "id": "397-3",
+        "name": "Plata",
+        "price": 1750,
+        "stock": 9,
+        "image": {
+          "id": 296,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/57.png",
+          "alt": "Clutch Chica con Base",
+          "localFileName": "397_296_Clutch Chica con Base.png"
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Café",
+          "Cobre Rosado",
+          "Negro",
+          "Plata"
+        ]
+      }
+    ],
+    "featured": false,
+    "status": "active",
+    "createdAt": "2024-06-25T19:52:10",
+    "updatedAt": "2025-08-26T18:31:06"
+  }
+]

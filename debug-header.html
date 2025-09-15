@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEBUG: Header System - Estudio Artesana</title>
+    <style>
+        body {
+            font-family: monospace;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .debug-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .error { background: #ffe6e6; border-color: #ff9999; }
+        .success { background: #e6ffe6; border-color: #99ff99; }
+        .warning { background: #fff5e6; border-color: #ffcc99; }
+        pre { background: #f8f8f8; padding: 10px; border-radius: 4px; overflow-x: auto; }
+        .tienda-link { color: red; font-weight: bold; }
+        .correct-link { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>🔍 DEBUG: Sistema de Header</h1>
+    
+    <div class="debug-section">
+        <h2>📁 Información del Path Actual</h2>
+        <pre id="pathInfo"></pre>
+    </div>
+
+    <div class="debug-section">
+        <h2>🔧 Estado del Universal Header</h2>
+        <pre id="headerStatus"></pre>
+    </div>
+
+    <div class="debug-section">
+        <h2>🌐 URLs Generadas</h2>
+        <pre id="generatedUrls"></pre>
+    </div>
+
+    <div class="debug-section">
+        <h2>📋 Header HTML Renderizado</h2>
+        <div id="headerContent"></div>
+    </div>
+
+    <div class="debug-section">
+        <h2>🔍 Enlaces del Header (Análisis)</h2>
+        <div id="linkAnalysis"></div>
+    </div>
+
+    <!-- Header Universal Container -->
+    <div id="universal-header-container">
+        <!-- El header se carga aquí -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/universal-header.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔍 Iniciando diagnóstico del header...');
+            
+            // Información del path actual
+            const pathInfo = {
+                'window.location.pathname': window.location.pathname,
+                'window.location.href': window.location.href,
+                'document.URL': document.URL
+            };
+            document.getElementById('pathInfo').textContent = JSON.stringify(pathInfo, null, 2);
+            
+            // Esperar a que el header se cargue
+            setTimeout(() => {
+                diagnosticarHeader();
+            }, 2000);
+        });
+        
+        function diagnosticarHeader() {
+            const headerStatus = document.getElementById('headerStatus');
+            const generatedUrls = document.getElementById('generatedUrls');
+            const headerContent = document.getElementById('headerContent');
+            const linkAnalysis = document.getElementById('linkAnalysis');
+            
+            // Estado del Universal Header
+            let status = {};
+            if (window.universalHeader) {
+                status = {
+                    'Instancia encontrada': '✅ Sí',
+                    'currentPath': window.universalHeader.currentPath,
+                    'depth': window.universalHeader.depth,
+                    'baseUrl': window.universalHeader.baseUrl,
+                    'currentPage': window.universalHeader.currentPage
+                };
+                
+                // URLs generadas
+                const urls = window.universalHeader.generateUrls();
+                generatedUrls.textContent = JSON.stringify(urls, null, 2);
+                
+                // Verificar URL de tienda específicamente
+                if (urls.TIENDA_URL.includes('/tienda/index.html')) {
+                    generatedUrls.className += ' error';
+                    generatedUrls.innerHTML = '<strong>❌ ERROR: TIENDA_URL aún apunta a /tienda/index.html</strong>\n' + JSON.stringify(urls, null, 2);
+                } else if (urls.TIENDA_URL.includes('tienda.html')) {
+                    generatedUrls.className += ' success';
+                    generatedUrls.innerHTML = '<strong>✅ CORRECTO: TIENDA_URL apunta a tienda.html</strong>\n' + JSON.stringify(urls, null, 2);
+                } else {
+                    generatedUrls.className += ' warning';
+                    generatedUrls.innerHTML = '<strong>⚠️ DESCONOCIDO: TIENDA_URL tiene un valor inesperado</strong>\n' + JSON.stringify(urls, null, 2);
+                }
+                
+            } else {
+                status['Error'] = '❌ window.universalHeader no está disponible';
+            }
+            
+            headerStatus.textContent = JSON.stringify(status, null, 2);
+            
+            // Contenido del header renderizado
+            const headerContainer = document.getElementById('universal-header-container');
+            if (headerContainer && headerContainer.innerHTML) {
+                headerContent.innerHTML = '<code>' + headerContainer.innerHTML.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</code>';
+            } else {
+                headerContent.innerHTML = '<strong>❌ Header no renderizado</strong>';
+            }
+            
+            // Análisis de enlaces
+            const tiendaLinks = document.querySelectorAll('a[href*="tienda"]');
+            let analysis = `<p>Se encontraron ${tiendaLinks.length} enlaces que contienen "tienda":</p><ul>`;
+            
+            tiendaLinks.forEach((link, index) => {
+                const href = link.getAttribute('href');
+                let className = '';
+                let status = '';
+                
+                if (href.includes('/tienda/index.html')) {
+                    className = 'tienda-link';
+                    status = '❌ INCORRECTO';
+                } else if (href.includes('tienda.html')) {
+                    className = 'correct-link';
+                    status = '✅ CORRECTO';
+                } else {
+                    status = '⚠️ OTRO';
+                }
+                
+                analysis += `<li>Enlace ${index + 1}: <span class="${className}">${href}</span> ${status}</li>`;
+            });
+            
+            analysis += '</ul>';
+            linkAnalysis.innerHTML = analysis;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST: Enlaces del Header - Estudio Artesana</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .test-section { background: #f8f9fa; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .link-test { margin: 10px 0; padding: 10px; background: white; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>🧪 TEST: Enlaces del Header</h1>
+    
+    <div class="test-section">
+        <h2>🎯 Objetivo</h2>
+        <p>Verificar que los enlaces del header apunten a <strong>tienda.html</strong> y NO a <strong>tienda/index.html</strong></p>
+    </div>
+
+    <!-- Header Universal Container -->
+    <div id="universal-header-container">
+        <div style="padding: 20px; text-align: center; background: #e9ecef;">
+            <em>El header se cargará aquí automáticamente...</em>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>📝 Resultados del Test</h2>
+        <div id="testResults">
+            <p><em>Ejecutando tests...</em></p>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔍 Enlaces Encontrados</h2>
+        <div id="foundLinks"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/universal-header.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🧪 Iniciando test de enlaces del header...');
+            
+            // Esperar a que el header se cargue
+            setTimeout(() => {
+                runLinkTests();
+            }, 3000);
+        });
+        
+        function runLinkTests() {
+            const testResults = document.getElementById('testResults');
+            const foundLinks = document.getElementById('foundLinks');
+            
+            let results = [];
+            let linksList = '';
+            
+            // Buscar todos los enlaces que contengan "tienda"
+            const tiendaLinks = document.querySelectorAll('a[href*="tienda"]');
+            
+            console.log(`🔍 Se encontraron ${tiendaLinks.length} enlaces con "tienda"`);
+            
+            if (tiendaLinks.length === 0) {
+                results.push('❌ ERROR: No se encontraron enlaces de tienda');
+                linksList = '<p>❌ No se encontraron enlaces de tienda en el header</p>';
+            } else {
+                tiendaLinks.forEach((link, index) => {
+                    const href = link.getAttribute('href');
+                    const text = link.textContent.trim();
+                    
+                    linksList += `<div class="link-test">
+                        <strong>Enlace ${index + 1}:</strong> "${text}"<br>
+                        <strong>URL:</strong> <code>${href}</code><br>
+                        <strong>Estado:</strong> `;
+                    
+                    if (href.includes('/tienda/index.html')) {
+                        results.push(`❌ FALLO: Enlace "${text}" apunta a ${href}`);
+                        linksList += '<span style="color: red;">❌ INCORRECTO (apunta a /tienda/index.html)</span>';
+                    } else if (href.includes('tienda.html')) {
+                        results.push(`✅ ÉXITO: Enlace "${text}" apunta correctamente a ${href}`);
+                        linksList += '<span style="color: green;">✅ CORRECTO (apunta a tienda.html)</span>';
+                    } else {
+                        results.push(`⚠️ ADVERTENCIA: Enlace "${text}" tiene URL inesperada: ${href}`);
+                        linksList += '<span style="color: orange;">⚠️ INESPERADO</span>';
+                    }
+                    
+                    linksList += '</div>';
+                });
+            }
+            
+            // Verificar URLs generadas por el sistema
+            if (window.universalHeader) {
+                const urls = window.universalHeader.generateUrls();
+                if (urls.TIENDA_URL.includes('tienda.html')) {
+                    results.push('✅ URLs generadas correctamente');
+                } else {
+                    results.push(`❌ URLs mal generadas: ${urls.TIENDA_URL}`);
+                }
+            } else {
+                results.push('❌ Sistema Universal Header no disponible');
+            }
+            
+            // Mostrar resultados
+            const hasErrors = results.some(r => r.includes('❌'));
+            const allSuccess = results.every(r => r.includes('✅'));
+            
+            let resultClass = '';
+            let summary = '';
+            
+            if (allSuccess) {
+                resultClass = 'success';
+                summary = '🎉 TODOS LOS TESTS PASARON - Los enlaces funcionan correctamente';
+            } else if (hasErrors) {
+                resultClass = 'error';
+                summary = '🚨 TESTS FALLARON - Hay enlaces incorrectos';
+            } else {
+                summary = '⚠️ TESTS CON ADVERTENCIAS - Revisar resultados';
+            }
+            
+            testResults.className = `test-section ${resultClass}`;
+            testResults.innerHTML = `
+                <h3>${summary}</h3>
+                <ul>
+                    ${results.map(r => `<li>${r}</li>`).join('')}
+                </ul>
+                <p><strong>Timestamp:</strong> ${new Date().toLocaleString()}</p>
+            `;
+            
+            foundLinks.innerHTML = linksList || '<p>No se encontraron enlaces</p>';
+            
+            // Log para consola
+            console.log('🧪 Resultados de tests:', results);
+        }
+        
+        // Función para rerun tests manualmente
+        window.rerunTests = runLinkTests;
+    </script>
+    
+    <div class="test-section">
+        <h2>🔄 Acciones</h2>
+        <button onclick="rerunTests()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            🔄 Ejecutar Tests Nuevamente
+        </button>
+        <button onclick="window.location.reload(true)" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">
+            🔄 Hard Refresh
+        </button>
+    </div>
+</body>
+</html>
