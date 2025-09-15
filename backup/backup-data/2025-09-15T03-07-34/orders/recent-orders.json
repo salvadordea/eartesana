@@ -1,0 +1,593 @@
+[
+  {
+    "id": 2191,
+    "parent_id": 0,
+    "status": "failed",
+    "currency": "MXN",
+    "version": "10.1.1",
+    "prices_include_tax": true,
+    "date_created": "2025-08-21T20:50:54",
+    "date_modified": "2025-08-21T20:54:55",
+    "discount_total": "0.00",
+    "discount_tax": "0.00",
+    "shipping_total": "0.00",
+    "shipping_tax": "0.00",
+    "cart_tax": "0.00",
+    "total": "1300.00",
+    "total_tax": "0.00",
+    "customer_id": 0,
+    "order_key": "wc_order_dFBr5TbfseYs7",
+    "billing": {
+      "first_name": "luis",
+      "last_name": "ayala",
+      "company": "",
+      "address_1": "orquidea 2009 colonia la palmira",
+      "address_2": "",
+      "city": "zapopan",
+      "state": "JA",
+      "postcode": "45234",
+      "country": "MX",
+      "email": "sorianoayala3@gmail.com",
+      "phone": "+523328668222"
+    },
+    "shipping": {
+      "first_name": "luis",
+      "last_name": "ayala",
+      "company": "",
+      "address_1": "orquidea 2009 colonia la palmira",
+      "address_2": "",
+      "city": "zapopan",
+      "state": "JA",
+      "postcode": "45234",
+      "country": "MX",
+      "phone": "+523328668222"
+    },
+    "payment_method": "ppcp-gateway",
+    "payment_method_title": "PayPal",
+    "transaction_id": "",
+    "customer_ip_address": "189.163.59.125",
+    "customer_user_agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36",
+    "created_via": "store-api",
+    "customer_note": "",
+    "date_completed": null,
+    "date_paid": null,
+    "cart_hash": "a8041c253caf199e84db7dceded7681f",
+    "number": "2191",
+    "meta_data": [
+      {
+        "id": 18893,
+        "key": "_shipping_hash",
+        "value": "01abc8521da6596273175c46c9b6fe70"
+      },
+      {
+        "id": 18894,
+        "key": "_coupons_hash",
+        "value": "d751713988987e9331980363e24189ce"
+      },
+      {
+        "id": 18895,
+        "key": "_fees_hash",
+        "value": "d751713988987e9331980363e24189ce"
+      },
+      {
+        "id": 18896,
+        "key": "_taxes_hash",
+        "value": "d751713988987e9331980363e24189ce"
+      },
+      {
+        "id": 18897,
+        "key": "is_vat_exempt",
+        "value": "no"
+      },
+      {
+        "id": 18898,
+        "key": "trp_language",
+        "value": "es_ES"
+      },
+      {
+        "id": 18913,
+        "key": "_wc_order_attribution_source_type",
+        "value": "typein"
+      },
+      {
+        "id": 18914,
+        "key": "_wc_order_attribution_utm_source",
+        "value": "(direct)"
+      },
+      {
+        "id": 18915,
+        "key": "_wc_order_attribution_session_entry",
+        "value": "https://estudioartesana.com/"
+      },
+      {
+        "id": 18916,
+        "key": "_wc_order_attribution_session_start_time",
+        "value": "2025-08-21 18:30:53"
+      },
+      {
+        "id": 18917,
+        "key": "_wc_order_attribution_session_pages",
+        "value": "10"
+      },
+      {
+        "id": 18918,
+        "key": "_wc_order_attribution_session_count",
+        "value": "2"
+      },
+      {
+        "id": 18919,
+        "key": "_wc_order_attribution_user_agent",
+        "value": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36"
+      },
+      {
+        "id": 18920,
+        "key": "_wc_order_attribution_device_type",
+        "value": "Mobile"
+      }
+    ],
+    "line_items": [
+      {
+        "id": 97,
+        "name": "Bolsa Ovalada lisa<span> - </span>Miel",
+        "product_id": 476,
+        "variation_id": 480,
+        "quantity": 1,
+        "tax_class": "",
+        "subtotal": "1300.00",
+        "subtotal_tax": "0.00",
+        "total": "1300.00",
+        "total_tax": "0.00",
+        "taxes": [],
+        "meta_data": [
+          {
+            "id": 1278,
+            "key": "_wdp_cart_item_key",
+            "value": "88e1143fa8d9675a24f89be1b98a053e",
+            "display_key": "_wdp_cart_item_key",
+            "display_value": "88e1143fa8d9675a24f89be1b98a053e"
+          },
+          {
+            "id": 1279,
+            "key": "pa_color",
+            "value": "miel",
+            "display_key": "Color",
+            "display_value": "Miel"
+          }
+        ],
+        "sku": "308-2",
+        "global_unique_id": "",
+        "price": 1300,
+        "image": {
+          "id": 264,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/25.png"
+        },
+        "parent_name": "Bolsa Ovalada lisa"
+      }
+    ],
+    "tax_lines": [],
+    "shipping_lines": [],
+    "fee_lines": [],
+    "coupon_lines": [],
+    "refunds": [],
+    "payment_url": "https://estudioartesana.com/finalizar-compra/order-pay/2191/?pay_for_order=true&key=wc_order_dFBr5TbfseYs7",
+    "is_editable": false,
+    "needs_payment": true,
+    "needs_processing": true,
+    "date_created_gmt": "2025-08-21T20:50:54",
+    "date_modified_gmt": "2025-08-21T20:54:55",
+    "date_completed_gmt": null,
+    "date_paid_gmt": null,
+    "currency_symbol": "MXN $",
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/orders/2191",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/orders"
+        }
+      ],
+      "email_templates": [
+        {
+          "embeddable": true,
+          "href": "https://estudioartesana.com/wp-json/wc/v3/orders/2191/actions/email_templates"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2063,
+    "parent_id": 0,
+    "status": "pending",
+    "currency": "MXN",
+    "version": "10.1.1",
+    "prices_include_tax": false,
+    "date_created": "2025-06-24T23:57:38",
+    "date_modified": "2025-06-25T00:02:10",
+    "discount_total": "0.00",
+    "discount_tax": "0.00",
+    "shipping_total": "225.53",
+    "shipping_tax": "0.00",
+    "cart_tax": "0.00",
+    "total": "495.53",
+    "total_tax": "0.00",
+    "customer_id": 0,
+    "order_key": "wc_order_DxoXpXXNfLPDR",
+    "billing": {
+      "first_name": "IMELDA",
+      "last_name": "martin del campo",
+      "company": "",
+      "address_1": "paseo de la escondida 68",
+      "address_2": "",
+      "city": "Lagos de Moreno",
+      "state": "JA",
+      "postcode": "47530",
+      "country": "MX",
+      "email": "estudioartesana@gmail.com",
+      "phone": "+523310686216"
+    },
+    "shipping": {
+      "first_name": "IMELDA",
+      "last_name": "martin del campo",
+      "company": "",
+      "address_1": "paseo de la escondida 68",
+      "address_2": "",
+      "city": "Lagos de Moreno",
+      "state": "JA",
+      "postcode": "47530",
+      "country": "MX",
+      "phone": "+523310686216"
+    },
+    "payment_method": "ppcp-gateway",
+    "payment_method_title": "PayPal",
+    "transaction_id": "",
+    "customer_ip_address": "177.248.44.81",
+    "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+    "created_via": "store-api",
+    "customer_note": "",
+    "date_completed": null,
+    "date_paid": null,
+    "cart_hash": "f5d591f53fb81f015c618510219eeb01",
+    "number": "2063",
+    "meta_data": [
+      {
+        "id": 16383,
+        "key": "_shipping_hash",
+        "value": "9d4568c009d203ab10e33ea9953a0264"
+      },
+      {
+        "id": 16384,
+        "key": "_coupons_hash",
+        "value": "d751713988987e9331980363e24189ce"
+      },
+      {
+        "id": 16385,
+        "key": "_fees_hash",
+        "value": "d751713988987e9331980363e24189ce"
+      },
+      {
+        "id": 16386,
+        "key": "_taxes_hash",
+        "value": "d751713988987e9331980363e24189ce"
+      },
+      {
+        "id": 16387,
+        "key": "is_vat_exempt",
+        "value": "no"
+      },
+      {
+        "id": 16388,
+        "key": "trp_language",
+        "value": "es_ES"
+      },
+      {
+        "id": 16402,
+        "key": "_wc_order_attribution_source_type",
+        "value": "organic"
+      },
+      {
+        "id": 16403,
+        "key": "_wc_order_attribution_referrer",
+        "value": "https://www.google.com/"
+      },
+      {
+        "id": 16404,
+        "key": "_wc_order_attribution_utm_source",
+        "value": "google"
+      },
+      {
+        "id": 16405,
+        "key": "_wc_order_attribution_utm_medium",
+        "value": "organic"
+      },
+      {
+        "id": 16406,
+        "key": "_wc_order_attribution_session_entry",
+        "value": "https://estudioartesana.com/"
+      },
+      {
+        "id": 16407,
+        "key": "_wc_order_attribution_session_start_time",
+        "value": "2025-06-24 23:51:41"
+      },
+      {
+        "id": 16408,
+        "key": "_wc_order_attribution_session_pages",
+        "value": "68"
+      },
+      {
+        "id": 16409,
+        "key": "_wc_order_attribution_session_count",
+        "value": "1"
+      },
+      {
+        "id": 16410,
+        "key": "_wc_order_attribution_user_agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+      },
+      {
+        "id": 16411,
+        "key": "_wc_order_attribution_device_type",
+        "value": "Desktop"
+      }
+    ],
+    "line_items": [
+      {
+        "id": 65,
+        "name": "Llavero Corto<span> - </span>Cafe Oscuro y negro",
+        "product_id": 964,
+        "variation_id": 965,
+        "quantity": 1,
+        "tax_class": "",
+        "subtotal": "270.00",
+        "subtotal_tax": "0.00",
+        "total": "270.00",
+        "total_tax": "0.00",
+        "taxes": [],
+        "meta_data": [
+          {
+            "id": 847,
+            "key": "pa_color",
+            "value": "cafe-oscuro-y-negro",
+            "display_key": "Color",
+            "display_value": "Cafe Oscuro y negro"
+          }
+        ],
+        "sku": "208-1",
+        "global_unique_id": "",
+        "price": 270,
+        "image": {
+          "id": 770,
+          "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_152726-scaled.jpg"
+        },
+        "parent_name": "Llavero Corto"
+      }
+    ],
+    "tax_lines": [],
+    "shipping_lines": [
+      {
+        "id": 70,
+        "method_title": "FedEx Entrega en 2 días",
+        "method_id": "wc-enviaya-shipping",
+        "instance_id": "0",
+        "total": "225.53",
+        "total_tax": "0.00",
+        "taxes": [],
+        "tax_status": "taxable",
+        "meta_data": [
+          {
+            "id": 965,
+            "key": "rate_id",
+            "value": "240836119",
+            "display_key": "rate_id",
+            "display_value": "240836119"
+          },
+          {
+            "id": 966,
+            "key": "shipment_id",
+            "value": "32054230",
+            "display_key": "shipment_id",
+            "display_value": "32054230"
+          },
+          {
+            "id": 967,
+            "key": "dynamic_service_name",
+            "value": "Entrega en 2 días",
+            "display_key": "dynamic_service_name",
+            "display_value": "Entrega en 2 días"
+          },
+          {
+            "id": 968,
+            "key": "date",
+            "value": "2025-06-24T18:00:02.134-06:00",
+            "display_key": "date",
+            "display_value": "2025-06-24T18:00:02.134-06:00"
+          },
+          {
+            "id": 969,
+            "key": "carrier_name",
+            "value": "FedEx",
+            "display_key": "carrier_name",
+            "display_value": "FedEx"
+          },
+          {
+            "id": 970,
+            "key": "carrier_service_name",
+            "value": "Nacional Económico",
+            "display_key": "carrier_service_name",
+            "display_value": "Nacional Económico"
+          },
+          {
+            "id": 971,
+            "key": "carrier_service_code",
+            "value": "FEDEX_EXPRESS_SAVER",
+            "display_key": "carrier_service_code",
+            "display_value": "FEDEX_EXPRESS_SAVER"
+          },
+          {
+            "id": 972,
+            "key": "carrier_logo_url",
+            "value": "https://enviaya-public.s3-us-west-1.amazonaws.com/carriers/fedex/fedex.png",
+            "display_key": "carrier_logo_url",
+            "display_value": "https://enviaya-public.s3-us-west-1.amazonaws.com/carriers/fedex/fedex.png"
+          },
+          {
+            "id": 973,
+            "key": "estimated_delivery",
+            "value": "2025-06-26 15:00",
+            "display_key": "estimated_delivery",
+            "display_value": "2025-06-26 15:00"
+          },
+          {
+            "id": 974,
+            "key": "est_transit_time_hours",
+            "value": "44",
+            "display_key": "est_transit_time_hours",
+            "display_value": "44"
+          },
+          {
+            "id": 975,
+            "key": "net_shipping_amount",
+            "value": "166.17",
+            "display_key": "net_shipping_amount",
+            "display_value": "166.17"
+          },
+          {
+            "id": 976,
+            "key": "net_surcharges_amount",
+            "value": "28.25",
+            "display_key": "net_surcharges_amount",
+            "display_value": "28.25"
+          },
+          {
+            "id": 977,
+            "key": "net_total_amount",
+            "value": "194.42",
+            "display_key": "net_total_amount",
+            "display_value": "194.42"
+          },
+          {
+            "id": 978,
+            "key": "vat_amount",
+            "value": "31.11",
+            "display_key": "vat_amount",
+            "display_value": "31.11"
+          },
+          {
+            "id": 979,
+            "key": "vat_rate",
+            "value": "16",
+            "display_key": "vat_rate",
+            "display_value": "16"
+          },
+          {
+            "id": 980,
+            "key": "total_amount",
+            "value": "225.53",
+            "display_key": "total_amount",
+            "display_value": "225.53"
+          },
+          {
+            "id": 981,
+            "key": "currency",
+            "value": "MXN",
+            "display_key": "currency",
+            "display_value": "MXN"
+          },
+          {
+            "id": 982,
+            "key": "list_total_amount",
+            "value": "272.15",
+            "display_key": "list_total_amount",
+            "display_value": "272.15"
+          },
+          {
+            "id": 983,
+            "key": "list_net_amount",
+            "value": "234.61",
+            "display_key": "list_net_amount",
+            "display_value": "234.61"
+          },
+          {
+            "id": 984,
+            "key": "list_vat_amount",
+            "value": "37.54",
+            "display_key": "list_vat_amount",
+            "display_value": "37.54"
+          },
+          {
+            "id": 985,
+            "key": "list_total_amount_currency",
+            "value": "MXN",
+            "display_key": "list_total_amount_currency",
+            "display_value": "MXN"
+          },
+          {
+            "id": 986,
+            "key": "enviaya_service_name",
+            "value": "Nacional Económico",
+            "display_key": "enviaya_service_name",
+            "display_value": "Nacional Económico"
+          },
+          {
+            "id": 987,
+            "key": "enviaya_service_code",
+            "value": "EY 56",
+            "display_key": "enviaya_service_code",
+            "display_value": "EY 56"
+          }
+        ]
+      }
+    ],
+    "fee_lines": [],
+    "coupon_lines": [],
+    "refunds": [],
+    "payment_url": "https://estudioartesana.com/finalizar-compra/order-pay/2063/?pay_for_order=true&key=wc_order_DxoXpXXNfLPDR",
+    "is_editable": true,
+    "needs_payment": true,
+    "needs_processing": true,
+    "date_created_gmt": "2025-06-24T23:57:38",
+    "date_modified_gmt": "2025-06-25T00:02:10",
+    "date_completed_gmt": null,
+    "date_paid_gmt": null,
+    "currency_symbol": "MXN $",
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/orders/2063",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/orders"
+        }
+      ],
+      "email_templates": [
+        {
+          "embeddable": true,
+          "href": "https://estudioartesana.com/wp-json/wc/v3/orders/2063/actions/email_templates"
+        }
+      ]
+    }
+  }
+]

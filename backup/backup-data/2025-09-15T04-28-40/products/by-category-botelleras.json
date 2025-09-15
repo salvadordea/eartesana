@@ -1,0 +1,519 @@
+[
+  {
+    "id": 860,
+    "name": "Botelleras",
+    "slug": "botelleras",
+    "permalink": "https://estudioartesana.com/product/botelleras/",
+    "date_created": "2024-07-01T19:22:24",
+    "date_created_gmt": "2024-07-01T19:22:24",
+    "date_modified": "2025-07-04T20:06:06",
+    "date_modified_gmt": "2025-07-04T20:06:06",
+    "type": "variable",
+    "status": "publish",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "<p>Botellera de piel resistente y elegante para proteger tus botellas medidas 28 x 16 cm</p>\n",
+    "short_description": "",
+    "sku": "700",
+    "price": "1100",
+    "regular_price": "",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 0,
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "1",
+    "dimensions": {
+      "length": "25",
+      "width": "39",
+      "height": "5"
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 22,
+        "name": "Botelleras",
+        "slug": "botelleras"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [
+      {
+        "id": 858,
+        "date_created": "2024-07-01T19:15:41",
+        "date_created_gmt": "2024-07-01T19:15:41",
+        "date_modified": "2024-07-01T19:15:41",
+        "date_modified_gmt": "2024-07-01T19:15:41",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/ppal-categoria-botelleras-scaled.jpg",
+        "name": "ppal categoria botelleras",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 1,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Café Oscuro",
+          "Miel"
+        ]
+      }
+    ],
+    "default_attributes": [],
+    "variations": [
+      1714,
+      1715
+    ],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">MXN $</span>&nbsp;1,100.00</bdi></span>",
+    "related_ids": [],
+    "meta_data": [
+      {
+        "id": 4893,
+        "key": "_et_pb_post_hide_nav",
+        "value": "default"
+      },
+      {
+        "id": 4894,
+        "key": "_et_pb_page_layout",
+        "value": "et_right_sidebar"
+      },
+      {
+        "id": 4895,
+        "key": "_et_pb_side_nav",
+        "value": "off"
+      },
+      {
+        "id": 4896,
+        "key": "_et_pb_use_builder",
+        "value": ""
+      },
+      {
+        "id": 4897,
+        "key": "_et_pb_first_image",
+        "value": ""
+      },
+      {
+        "id": 4898,
+        "key": "_et_pb_truncate_post",
+        "value": ""
+      },
+      {
+        "id": 4899,
+        "key": "_et_pb_truncate_post_date",
+        "value": ""
+      },
+      {
+        "id": 4900,
+        "key": "_et_pb_old_content",
+        "value": ""
+      },
+      {
+        "id": 11655,
+        "key": "cfvsw_product_attr_pa_color",
+        "value": {
+          "31": {
+            "image": "858"
+          },
+          "37": {
+            "image": "859"
+          },
+          "type": "image"
+        }
+      },
+      {
+        "id": 21017,
+        "key": "_et_dynamic_cached_shortcodes",
+        "value": [
+          "et_pb_column_inner",
+          "et_pb_section",
+          "et_pb_row",
+          "et_pb_column",
+          "et_pb_row_inner",
+          "et_pb_menu",
+          "et_pb_shop",
+          "et_pb_text",
+          "et_pb_wc_add_to_cart",
+          "et_pb_wc_description",
+          "et_pb_wc_images",
+          "et_pb_wc_price",
+          "et_pb_wc_rating",
+          "et_pb_wc_reviews",
+          "et_pb_wc_stock",
+          "et_pb_wc_title"
+        ]
+      },
+      {
+        "id": 21018,
+        "key": "_et_dynamic_cached_attributes",
+        "value": {
+          "specialty": [
+            "on"
+          ]
+        }
+      },
+      {
+        "id": 21019,
+        "key": "et_enqueued_post_fonts",
+        "value": {
+          "family": {
+            "et-gf-abel": "Abel:regular",
+            "et-gf-baskervville": "Baskervville:regular,italic",
+            "et-gf-amethysta": "Amethysta:regular",
+            "et-gf-abhaya-libre": "Abhaya+Libre:regular,500,600,700,800",
+            "et-gf-abyssinica-sil": "Abyssinica+SIL:regular",
+            "et-gf-albert-sans": "Albert+Sans:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic",
+            "et-gf-adamina": "Adamina:regular"
+          },
+          "subset": [
+            "latin",
+            "latin-ext"
+          ],
+          "cache_key": "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"enable_all_character_sets\":\"false\"}"
+        }
+      },
+      {
+        "id": 21020,
+        "key": "_et_builder_module_features_cache",
+        "value": [
+          "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"tb\":{\"1106\":\"2025-08-19 18:10:58\",\"234\":\"2025-08-26 18:24:07\"},\"wpe\":[]}",
+          {
+            "et_pb_section_893e623712ef39b4d6b5e3f73bdf78b0": {
+              "bared": true,
+              "baret": true,
+              "barep": true,
+              "hhere": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_9a93ac275ae4e642cd74d8b03cda54c9": {
+              "hhere": true,
+              "hmire": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_38e5d6c22d990d327966c6283c404209": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_menu_23101086f1385c3ff279b9c7c40a4e5f": {
+              "glde": {
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_section_e73038c2eaff8e04460f6f07441c5335": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_ced0257a7ca04bf6e6c563f75c758419": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_images_8ab8a2b6d7821e77a3350f5a7680076c": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_a6660090d595172f21e6d46d3c3ccbc5": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_inner_87f5fdd65ad7d33399fc4f3882f1fb89": {
+              "bor": true,
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_3765b530b7443aa1e0de793b41ca6631": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_rating_d064cbdab1e4761750516ed6ed9f85b7": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_title_b509d81988303eeafa49e27fb4820b1f": {
+              "glde": {
+                "header_font_size": "30px",
+                "header_line_height": "1em"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_price_3f033b038d31ee4c92034baa9d0e7ad3": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2d4cad3c0a0b576518dd64be7cc5ac0f": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_add_to_cart_7dd69fbb6c99f0c26606903c7531add4": {
+              "foop": true,
+              "tesh": true,
+              "bor": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_inner_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_7490643e73aef730999045da79541cac": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_43234dae3aac68b0d48c24b2a3c87393": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_stock_eea2797752b07eef16810df7412a8818": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_section_e28e466ebc5b19ec846f756ac59d60a6": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_row_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_61ed8437aca6119960185ca6d5cab2b2": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_e1462549f9912503647a23e295ae13e6": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2be71c00baea7d6a4688f49410cb2b69": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_reviews_36142086dbdcd2bf042a1b9620cd225b": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_223e2d6492f9a7191b7b138470d5e8b2": {
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_12969367b38955286d51d12f2a3ce40d": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_877843d934deb6b4ef2e4468d104ea43": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_shop_4ad207ba844feae5a88c8fd8fd2caa06": {
+              "glde": {
+                "title_font_size": "16",
+                "title_letter_spacing": "0px",
+                "title_line_height": "1em",
+                "price_font_size": "14",
+                "price_letter_spacing": "0px",
+                "price_line_height": "26px",
+                "sale_badge_font_size": "16",
+                "sale_price_font_size": "14"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            }
+          }
+        ]
+      }
+    ],
+    "stock_status": "instock",
+    "has_options": true,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/860",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  }
+]

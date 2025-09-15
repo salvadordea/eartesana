@@ -1,0 +1,64 @@
+[
+  {
+    "id": 0,
+    "name": "Ubicaciones no cubiertas por tus otras zonas",
+    "order": 0,
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/shipping/zones/0",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/shipping/zones"
+        }
+      ],
+      "describedby": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/shipping/zones/0/locations"
+        }
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "name": "Pais",
+    "order": 0,
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/shipping/zones/4",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/shipping/zones"
+        }
+      ],
+      "describedby": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/shipping/zones/4/locations"
+        }
+      ]
+    }
+  }
+]

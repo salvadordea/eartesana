@@ -1,0 +1,666 @@
+[
+  {
+    "id": "bacs",
+    "title": "Transferencia bancaria directa",
+    "description": "Realiza tu pago directamente en nuestra cuenta bancaria. Por favor, usa el número del pedido como referencia de pago. Tu pedido no se procesará hasta que se haya recibido el importe en nuestra cuenta.",
+    "order": 2,
+    "enabled": false,
+    "method_title": "Transferencia bancaria directa",
+    "method_description": "Recibe pagos en persona mediante BACS. También conocida como transferencia directa al banco o por cable.",
+    "method_supports": [
+      "products"
+    ],
+    "settings": {
+      "title": {
+        "id": "title",
+        "label": "Título",
+        "description": "Esto controla el título que el usuario ve durante el proceso de pago.",
+        "type": "safe_text",
+        "value": "Transferencia bancaria directa",
+        "default": "Transferencia bancaria directa",
+        "tip": "Esto controla el título que el usuario ve durante el proceso de pago.",
+        "placeholder": ""
+      },
+      "instructions": {
+        "id": "instructions",
+        "label": "Instrucciones",
+        "description": "Instrucciones que se añadirán a la página de agradecimiento y correos electrónicos.",
+        "type": "textarea",
+        "value": "",
+        "default": "",
+        "tip": "Instrucciones que se añadirán a la página de agradecimiento y correos electrónicos.",
+        "placeholder": ""
+      }
+    },
+    "needs_setup": false,
+    "post_install_scripts": [],
+    "settings_url": "https://estudioartesana.com/wp-admin/admin.php?page=wc-settings&tab=checkout&path=/offline/bacs",
+    "connection_url": null,
+    "setup_help_text": null,
+    "required_settings_keys": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways/bacs",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cheque",
+    "title": "Pagos por cheque",
+    "description": "Por favor, envía un cheque a Nombre de la tienda, Calle de la tienda, Ciudad de la tienda, Provincia/País de la tienda, Código postal de la tienda.",
+    "order": 3,
+    "enabled": false,
+    "method_title": "Pagos por cheque",
+    "method_description": "Obtén pagos en persona mediante cheques. Esta pasarela de pago offline también puede ser útil para pruebas de compra.",
+    "method_supports": [
+      "products"
+    ],
+    "settings": {
+      "title": {
+        "id": "title",
+        "label": "Título",
+        "description": "Esto controla el título que el usuario ve durante el proceso de pago.",
+        "type": "safe_text",
+        "value": "Pagos por cheque",
+        "default": "Pagos por cheque",
+        "tip": "Esto controla el título que el usuario ve durante el proceso de pago.",
+        "placeholder": ""
+      },
+      "instructions": {
+        "id": "instructions",
+        "label": "Instrucciones",
+        "description": "Instrucciones que se añadirán a la página de agradecimiento y correos electrónicos.",
+        "type": "textarea",
+        "value": "",
+        "default": "",
+        "tip": "Instrucciones que se añadirán a la página de agradecimiento y correos electrónicos.",
+        "placeholder": ""
+      }
+    },
+    "needs_setup": false,
+    "post_install_scripts": [],
+    "settings_url": "https://estudioartesana.com/wp-admin/admin.php?page=wc-settings&tab=checkout&path=/offline/cheque",
+    "connection_url": null,
+    "setup_help_text": null,
+    "required_settings_keys": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways/cheque",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cod",
+    "title": "Contra reembolso",
+    "description": "Paga en efectivo en el momento de la entrega.",
+    "order": 4,
+    "enabled": false,
+    "method_title": "Contra reembolso",
+    "method_description": "Permite que tus compradores paguen en el momento de la entrega, en efectivo o con otros métodos de pago.",
+    "method_supports": [
+      "products"
+    ],
+    "settings": {
+      "title": {
+        "id": "title",
+        "label": "Título",
+        "description": "Descripción del método de pago que el cliente verá en el pago.",
+        "type": "safe_text",
+        "value": "Contra reembolso",
+        "default": "Contra reembolso",
+        "tip": "Descripción del método de pago que el cliente verá en el pago.",
+        "placeholder": ""
+      },
+      "instructions": {
+        "id": "instructions",
+        "label": "Instrucciones",
+        "description": "Instrucciones que se añadirán a la página de agradecimiento.",
+        "type": "textarea",
+        "value": "Paga en efectivo en el momento de la entrega.",
+        "default": "Paga en efectivo en el momento de la entrega.",
+        "tip": "Instrucciones que se añadirán a la página de agradecimiento.",
+        "placeholder": ""
+      },
+      "enable_for_methods": {
+        "id": "enable_for_methods",
+        "label": "Activar para métodos de envío",
+        "description": "Si deseas que el contra reembolso solo esté disponible para ciertos métodos de envío, configúralo aquí. Déjalo en blanco para activarlo para todos los métodos.",
+        "type": "multiselect",
+        "value": "",
+        "default": "",
+        "tip": "Si deseas que el contra reembolso solo esté disponible para ciertos métodos de envío, configúralo aquí. Déjalo en blanco para activarlo para todos los métodos.",
+        "placeholder": "",
+        "options": {
+          "Precio fijo": {
+            "flat_rate": "Cualquier método &quot;Precio fijo&quot;"
+          },
+          "Envío gratuito": {
+            "free_shipping": "Cualquier método &quot;Envío gratuito&quot;"
+          },
+          "Recogida local": {
+            "pickup_location": "Cualquier método &quot;Recogida local&quot;"
+          },
+          "": {
+            "wc-enviaya-shipping": "Cualquier método &quot;&quot;"
+          }
+        }
+      },
+      "enable_for_virtual": {
+        "id": "enable_for_virtual",
+        "label": "Aceptar contra reembolso si el pedido es virtual",
+        "description": "",
+        "type": "checkbox",
+        "value": "yes",
+        "default": "yes",
+        "tip": "",
+        "placeholder": ""
+      }
+    },
+    "needs_setup": false,
+    "post_install_scripts": [],
+    "settings_url": "https://estudioartesana.com/wp-admin/admin.php?page=wc-settings&tab=checkout&path=/offline/cod",
+    "connection_url": null,
+    "setup_help_text": null,
+    "required_settings_keys": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways/cod",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ppcp-gateway",
+    "title": "PayPal",
+    "description": "Paga a través de PayPal.",
+    "order": 6,
+    "enabled": false,
+    "method_title": "PayPal",
+    "method_description": "Paga a través de PayPal.",
+    "method_supports": [
+      "products",
+      "refunds",
+      "tokenization",
+      "add_payment_method"
+    ],
+    "settings": [],
+    "needs_setup": true,
+    "post_install_scripts": [],
+    "settings_url": "https://estudioartesana.com/wp-admin/admin.php?page=wc-settings&tab=checkout&section=ppcp-gateway",
+    "connection_url": null,
+    "setup_help_text": null,
+    "required_settings_keys": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways/ppcp-gateway",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ppcp-bancontact",
+    "title": "Bancontact",
+    "description": "",
+    "order": 9,
+    "enabled": false,
+    "method_title": "Bancontact (a través de PayPal)",
+    "method_description": "Un método de pago electrónico popular y de confianza en Bélgica, utilizado por los clientes belgas con tarjetas Bancontact emitidas por bancos locales. Las transacciones se procesan en EUR.",
+    "method_supports": [
+      "refunds",
+      "products"
+    ],
+    "settings": {
+      "title": {
+        "id": "title",
+        "label": "Título",
+        "description": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "type": "text",
+        "value": "Bancontact",
+        "default": "Bancontact",
+        "tip": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "placeholder": ""
+      }
+    },
+    "needs_setup": false,
+    "post_install_scripts": [],
+    "settings_url": "https://estudioartesana.com/wp-admin/admin.php?page=wc-settings&tab=checkout&section=ppcp-bancontact",
+    "connection_url": null,
+    "setup_help_text": null,
+    "required_settings_keys": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways/ppcp-bancontact",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ppcp-blik",
+    "title": "Blik",
+    "description": "",
+    "order": 10,
+    "enabled": false,
+    "method_title": "Blik (a través de PayPal)",
+    "method_description": "Un método de pago por móvil muy utilizado en Polonia, que permite a los clientes polacos pagar directamente a través de sus aplicaciones bancarias. Las transacciones se procesan en PLN.",
+    "method_supports": [
+      "refunds",
+      "products"
+    ],
+    "settings": {
+      "title": {
+        "id": "title",
+        "label": "Título",
+        "description": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "type": "text",
+        "value": "Blik",
+        "default": "Blik",
+        "tip": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "placeholder": ""
+      }
+    },
+    "needs_setup": false,
+    "post_install_scripts": [],
+    "settings_url": "https://estudioartesana.com/wp-admin/admin.php?page=wc-settings&tab=checkout&section=ppcp-blik",
+    "connection_url": null,
+    "setup_help_text": null,
+    "required_settings_keys": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways/ppcp-blik",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ppcp-eps",
+    "title": "EPS",
+    "description": "",
+    "order": 11,
+    "enabled": false,
+    "method_title": "EPS (a través de PayPal)",
+    "method_description": "Un método de pago en línea en Austria, que permite a los compradores austriacos realizar pagos seguros directamente a través de sus cuentas bancarias. Las transacciones se procesan en EUR.",
+    "method_supports": [
+      "refunds",
+      "products"
+    ],
+    "settings": {
+      "title": {
+        "id": "title",
+        "label": "Título",
+        "description": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "type": "text",
+        "value": "EPS",
+        "default": "EPS",
+        "tip": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "placeholder": ""
+      }
+    },
+    "needs_setup": false,
+    "post_install_scripts": [],
+    "settings_url": "https://estudioartesana.com/wp-admin/admin.php?page=wc-settings&tab=checkout&section=ppcp-eps",
+    "connection_url": null,
+    "setup_help_text": null,
+    "required_settings_keys": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways/ppcp-eps",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ppcp-ideal",
+    "title": "iDeal",
+    "description": "",
+    "order": 12,
+    "enabled": false,
+    "method_title": "iDeal (a través de PayPal)",
+    "method_description": "El método de pago más común en Holanda, que permite a los compradores holandeses pagar directamente a través de su banco preferido. Las transacciones se procesan en EUR.",
+    "method_supports": [
+      "refunds",
+      "products"
+    ],
+    "settings": {
+      "title": {
+        "id": "title",
+        "label": "Título",
+        "description": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "type": "text",
+        "value": "iDeal",
+        "default": "iDeal",
+        "tip": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "placeholder": ""
+      }
+    },
+    "needs_setup": false,
+    "post_install_scripts": [],
+    "settings_url": "https://estudioartesana.com/wp-admin/admin.php?page=wc-settings&tab=checkout&section=ppcp-ideal",
+    "connection_url": null,
+    "setup_help_text": null,
+    "required_settings_keys": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways/ppcp-ideal",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ppcp-mybank",
+    "title": "MyBank",
+    "description": "",
+    "order": 13,
+    "enabled": false,
+    "method_title": "MyBank (a través de PayPal)",
+    "method_description": "Una solución europea de pago bancario en línea utilizada principalmente en Italia, que permite a los clientes realizar transferencias bancarias seguras durante el pago. Las transacciones se procesan en EUR.",
+    "method_supports": [
+      "refunds",
+      "products"
+    ],
+    "settings": {
+      "title": {
+        "id": "title",
+        "label": "Título",
+        "description": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "type": "text",
+        "value": "MyBank",
+        "default": "MyBank",
+        "tip": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "placeholder": ""
+      }
+    },
+    "needs_setup": false,
+    "post_install_scripts": [],
+    "settings_url": "https://estudioartesana.com/wp-admin/admin.php?page=wc-settings&tab=checkout&section=ppcp-mybank",
+    "connection_url": null,
+    "setup_help_text": null,
+    "required_settings_keys": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways/ppcp-mybank",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ppcp-p24",
+    "title": "Przelewy24",
+    "description": "",
+    "order": 14,
+    "enabled": false,
+    "method_title": "Przelewy24 (a través de PayPal)",
+    "method_description": "Una pasarela de pago online muy popular en Polonia, que ofrece varias opciones de pago para los clientes polacos. Las transacciones pueden procesarse en PLN o EUR.",
+    "method_supports": [
+      "refunds",
+      "products"
+    ],
+    "settings": {
+      "title": {
+        "id": "title",
+        "label": "Título",
+        "description": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "type": "text",
+        "value": "Przelewy24",
+        "default": "Przelewy24",
+        "tip": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "placeholder": ""
+      }
+    },
+    "needs_setup": false,
+    "post_install_scripts": [],
+    "settings_url": "https://estudioartesana.com/wp-admin/admin.php?page=wc-settings&tab=checkout&section=ppcp-p24",
+    "connection_url": null,
+    "setup_help_text": null,
+    "required_settings_keys": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways/ppcp-p24",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ppcp-trustly",
+    "title": "Trustly",
+    "description": "",
+    "order": 15,
+    "enabled": false,
+    "method_title": "Trustly (a través de PayPal)",
+    "method_description": "Un método de pago europeo que permite a los compradores realizar pagos directamente desde sus cuentas bancarias, adecuado para clientes de varios países europeos. Las monedas admitidas son EUR, DKK, SEK, GBP y NOK.",
+    "method_supports": [
+      "refunds",
+      "products"
+    ],
+    "settings": {
+      "title": {
+        "id": "title",
+        "label": "Título",
+        "description": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "type": "text",
+        "value": "Trustly",
+        "default": "Trustly",
+        "tip": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "placeholder": ""
+      }
+    },
+    "needs_setup": false,
+    "post_install_scripts": [],
+    "settings_url": "https://estudioartesana.com/wp-admin/admin.php?page=wc-settings&tab=checkout&section=ppcp-trustly",
+    "connection_url": null,
+    "setup_help_text": null,
+    "required_settings_keys": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways/ppcp-trustly",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ppcp-multibanco",
+    "title": "Multibanco",
+    "description": "",
+    "order": 16,
+    "enabled": false,
+    "method_title": "Multibanco (a través de PayPal)",
+    "method_description": "Un método de pago en línea en Portugal, que permite a los compradores portugueses realizar pagos seguros directamente a través de sus cuentas bancarias. Las transacciones se procesan en EUR.",
+    "method_supports": [
+      "refunds",
+      "products"
+    ],
+    "settings": {
+      "title": {
+        "id": "title",
+        "label": "Título",
+        "description": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "type": "text",
+        "value": "Multibanco",
+        "default": "Multibanco",
+        "tip": "Esto controla el título que el usuario ve al finalizar la compra.",
+        "placeholder": ""
+      }
+    },
+    "needs_setup": false,
+    "post_install_scripts": [],
+    "settings_url": "https://estudioartesana.com/wp-admin/admin.php?page=wc-settings&tab=checkout&section=ppcp-multibanco",
+    "connection_url": null,
+    "setup_help_text": null,
+    "required_settings_keys": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways/ppcp-multibanco",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/payment_gateways"
+        }
+      ]
+    }
+  }
+]

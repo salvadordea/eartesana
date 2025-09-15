@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico WooCommerce - Estudio Artesana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .diagnostic {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .warning { background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        .category-card {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            width: 200px;
+            vertical-align: top;
+        }
+        .category-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        .btn {
+            background: #007cba;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn:hover { background: #005a87; }
+        .json-data {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Diagnóstico WooCommerce API - Estudio Artesana</h1>
+    
+    <div class="diagnostic">
+        <h2>📊 Estado de Configuración</h2>
+        <div id="configStatus"></div>
+        <button class="btn" onclick="checkConfig()">Verificar Configuración</button>
+    </div>
+
+    <div class="diagnostic">
+        <h2>🌐 Conectividad API</h2>
+        <div id="connectivityStatus"></div>
+        <button class="btn" onclick="testConnectivity()">Probar Conexión</button>
+    </div>
+
+    <div class="diagnostic">
+        <h2>📂 Estado de Categorías</h2>
+        <div id="categoriesStatus"></div>
+        <button class="btn" onclick="loadCategories()">Cargar Categorías</button>
+        <button class="btn" onclick="clearCache()">Limpiar Caché</button>
+        <div id="categoriesData"></div>
+    </div>
+
+    <div class="diagnostic">
+        <h2>📦 Estado de Productos</h2>
+        <div id="productsStatus"></div>
+        <button class="btn" onclick="loadProducts()">Cargar Productos</button>
+        <div id="productsData"></div>
+    </div>
+
+    <div class="diagnostic">
+        <h2>⚡ Performance</h2>
+        <div id="performanceStatus"></div>
+        <button class="btn" onclick="runPerformanceTest()">Test de Rendimiento</button>
+    </div>
+
+    <div class="diagnostic">
+        <h2>🚀 Optimizador WooCommerce</h2>
+        <div id="optimizerStatus"></div>
+        <button class="btn" onclick="runOptimizerDiagnostic()">Diagnóstico del Optimizador</button>
+        <button class="btn" onclick="showPerformanceStats()">Ver Estadísticas</button>
+    </div>
+
+    <div class="diagnostic">
+        <h2>🔧 Herramientas de Corrección</h2>
+        <button class="btn" onclick="fixCommonIssues()">Corregir Problemas Comunes</button>
+        <button class="btn" onclick="rebuildCache()">Reconstruir Caché</button>
+        <button class="btn" onclick="testOptimizedLoad()">Probar Carga Optimizada</button>
+        <button class="btn" onclick="testOptimizedCategoriesLoad()">Test Optimizado de Categorías</button>
+    </div>
+
+    <!-- Scripts necesarios -->
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/woocommerce-api.js"></script>
+    <script src="assets/js/categories-preloader.js"></script>
+    <script src="assets/js/woocommerce-optimizer.js"></script>
+
+    <script>
+        let diagnosticData = {
+            config: null,
+            connectivity: null,
+            categories: null,
+            products: null,
+            performance: {}
+        };
+
+        async function checkConfig() {
+            const statusDiv = document.getElementById('configStatus');
+            statusDiv.innerHTML = '<div class="loading"></div> Verificando configuración...';
+
+            try {
+                const config = window.EstudioArtesanaConfig;
+                const wooConfig = config?.woocommerce;
+
+                let html = '';
+
+                if (!config) {
+                    html += '<div class="error">❌ Configuración global no encontrada</div>';
+                } else {
+                    html += '<div class="success">✅ Configuración global cargada</div>';
+                }
+
+                if (!wooConfig) {
+                    html += '<div class="error">❌ Configuración WooCommerce no encontrada</div>';
+                } else {
+                    html += '<div class="success">✅ Configuración WooCommerce encontrada</div>';
+                    html += `<div class="info">🌍 URL Base: ${wooConfig.baseURL}</div>`;
+                    html += `<div class="info">🔑 Consumer Key: ${wooConfig.consumerKey ? '✅ Configurado' : '❌ Faltante'}</div>`;
+                    html += `<div class="info">🔐 Consumer Secret: ${wooConfig.consumerSecret ? '✅ Configurado' : '❌ Faltante'}</div>`;
+                }
+
+                if (window.WooAPI) {
+                    html += '<div class="success">✅ API de WooCommerce inicializada</div>';
+                } else {
+                    html += '<div class="error">❌ API de WooCommerce no inicializada</div>';
+                }
+
+                diagnosticData.config = {
+                    hasGlobalConfig: !!config,
+                    hasWooConfig: !!wooConfig,
+                    hasAPI: !!window.WooAPI,
+                    baseURL: wooConfig?.baseURL,
+                    hasCredentials: !!(wooConfig?.consumerKey && wooConfig?.consumerSecret)
+                };
+
+                statusDiv.innerHTML = html;
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">❌ Error verificando configuración: ${error.message}</div>`;
+            }
+        }
+
+        async function testConnectivity() {
+            const statusDiv = document.getElementById('connectivityStatus');
+            statusDiv.innerHTML = '<div class="loading"></div> Probando conectividad...';
+
+            try {
+                const startTime = performance.now();
+                
+                // Test básico de conectividad
+                const response = await fetch(window.EstudioArtesanaConfig.woocommerce.baseURL + '/wp-json/wc/v3', {
+                    method: 'HEAD',
+                    headers: window.WooAPI.getAuthHeader()
+                });
+
+                const endTime = performance.now();
+                const responseTime = Math.round(endTime - startTime);
+
+                let html = '';
+                
+                if (response.ok) {
+                    html += '<div class="success">✅ Conexión exitosa al API WooCommerce</div>';
+                    html += `<div class="info">⏱️ Tiempo de respuesta: ${responseTime}ms</div>`;
+                    
+                    if (responseTime > 3000) {
+                        html += '<div class="warning">⚠️ Conexión lenta (>3s)</div>';
+                    } else if (responseTime > 1000) {
+                        html += '<div class="warning">⚠️ Conexión moderadamente lenta (>1s)</div>';
+                    }
+                } else {
+                    html += `<div class="error">❌ Error de conexión: ${response.status} ${response.statusText}</div>`;
+                }
+
+                diagnosticData.connectivity = {
+                    success: response.ok,
+                    status: response.status,
+                    responseTime: responseTime
+                };
+
+                statusDiv.innerHTML = html;
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">❌ Error de conectividad: ${error.message}</div>`;
+                diagnosticData.connectivity = { success: false, error: error.message };
+            }
+        }
+
+        async function loadCategories() {
+            const statusDiv = document.getElementById('categoriesStatus');
+            const dataDiv = document.getElementById('categoriesData');
+            
+            statusDiv.innerHTML = '<div class="loading"></div> Cargando categorías...';
+            dataDiv.innerHTML = '';
+
+            try {
+                const startTime = performance.now();
+                const categories = await window.WooAPI.getCategories({
+                    hide_empty: false,
+                    per_page: 100
+                });
+                const endTime = performance.now();
+                const loadTime = Math.round(endTime - startTime);
+
+                let html = `<div class="success">✅ ${categories.length} categorías cargadas</div>`;
+                html += `<div class="info">⏱️ Tiempo de carga: ${loadTime}ms</div>`;
+
+                // Análisis de categorías
+                const withProducts = categories.filter(cat => cat.count > 0);
+                const withoutProducts = categories.filter(cat => cat.count === 0);
+                const withImages = categories.filter(cat => cat.image && cat.image.src);
+
+                html += `<div class="info">📦 Con productos: ${withProducts.length}</div>`;
+                html += `<div class="info">📭 Sin productos: ${withoutProducts.length}</div>`;
+                html += `<div class="info">🖼️ Con imágenes: ${withImages.length}</div>`;
+
+                // Categorías principales vs subcategorías
+                const mainCategories = categories.filter(cat => cat.parent === 0);
+                const subCategories = categories.filter(cat => cat.parent !== 0);
+                
+                html += `<div class="info">🏠 Categorías principales: ${mainCategories.length}</div>`;
+                html += `<div class="info">📁 Subcategorías: ${subCategories.length}</div>`;
+
+                if (loadTime > 5000) {
+                    html += '<div class="error">❌ Carga muy lenta (>5s)</div>';
+                } else if (loadTime > 2000) {
+                    html += '<div class="warning">⚠️ Carga lenta (>2s)</div>';
+                }
+
+                statusDiv.innerHTML = html;
+
+                // Mostrar muestra de categorías
+                let categoryCards = '<h3>📋 Muestra de Categorías</h3>';
+                categories.slice(0, 6).forEach(cat => {
+                    const imageUrl = cat.image?.src || 'https://via.placeholder.com/200x120?text=Sin+Imagen';
+                    categoryCards += `
+                        <div class="category-card">
+                            <img src="${imageUrl}" alt="${cat.name}" class="category-image" onerror="this.src='https://via.placeholder.com/200x120?text=Error+Imagen'">
+                            <h4>${cat.name}</h4>
+                            <p>Productos: ${cat.count}</p>
+                            <p>ID: ${cat.id} | Parent: ${cat.parent}</p>
+                        </div>
+                    `;
+                });
+
+                dataDiv.innerHTML = categoryCards;
+
+                diagnosticData.categories = {
+                    total: categories.length,
+                    withProducts: withProducts.length,
+                    withoutProducts: withoutProducts.length,
+                    withImages: withImages.length,
+                    mainCategories: mainCategories.length,
+                    subCategories: subCategories.length,
+                    loadTime: loadTime
+                };
+
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">❌ Error cargando categorías: ${error.message}</div>`;
+                dataDiv.innerHTML = `<div class="json-data">${JSON.stringify(error, null, 2)}</div>`;
+            }
+        }
+
+        async function loadProducts() {
+            const statusDiv = document.getElementById('productsStatus');
+            const dataDiv = document.getElementById('productsData');
+            
+            statusDiv.innerHTML = '<div class="loading"></div> Cargando productos...';
+
+            try {
+                const startTime = performance.now();
+                const products = await window.WooAPI.getProducts({
+                    per_page: 20,
+                    status: 'publish'
+                });
+                const endTime = performance.now();
+                const loadTime = Math.round(endTime - startTime);
+
+                let html = `<div class="success">✅ ${products.length} productos cargados</div>`;
+                html += `<div class="info">⏱️ Tiempo de carga: ${loadTime}ms</div>`;
+
+                // Análisis de productos
+                const withCategories = products.filter(prod => prod.categories && prod.categories.length > 0);
+                const withoutCategories = products.filter(prod => !prod.categories || prod.categories.length === 0);
+                const withImages = products.filter(prod => prod.images && prod.images.length > 0);
+                const inStock = products.filter(prod => prod.stock_status === 'instock');
+
+                html += `<div class="info">📂 Con categorías: ${withCategories.length}</div>`;
+                html += `<div class="warning">🚫 Sin categorías: ${withoutCategories.length}</div>`;
+                html += `<div class="info">🖼️ Con imágenes: ${withImages.length}</div>`;
+                html += `<div class="info">📦 En stock: ${inStock.length}</div>`;
+
+                if (withoutCategories.length > 0) {
+                    html += '<div class="error">❌ Hay productos sin categorías asignadas</div>';
+                }
+
+                statusDiv.innerHTML = html;
+
+                // Mostrar productos sin categoría para diagnóstico
+                if (withoutCategories.length > 0) {
+                    let uncategorizedHtml = '<h3>🚫 Productos sin categoría:</h3>';
+                    withoutCategories.slice(0, 10).forEach(prod => {
+                        uncategorizedHtml += `<div class="info">• ${prod.name} (ID: ${prod.id})</div>`;
+                    });
+                    dataDiv.innerHTML = uncategorizedHtml;
+                }
+
+                diagnosticData.products = {
+                    total: products.length,
+                    withCategories: withCategories.length,
+                    withoutCategories: withoutCategories.length,
+                    withImages: withImages.length,
+                    inStock: inStock.length,
+                    loadTime: loadTime
+                };
+
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">❌ Error cargando productos: ${error.message}</div>`;
+            }
+        }
+
+        async function runPerformanceTest() {
+            const statusDiv = document.getElementById('performanceStatus');
+            statusDiv.innerHTML = '<div class="loading"></div> Ejecutando tests de rendimiento...';
+
+            let html = '';
+            const tests = [];
+
+            try {
+                // Test 1: Carga de categorías
+                let startTime = performance.now();
+                const categories = await window.WooAPI.getCategories({ per_page: 50 });
+                let endTime = performance.now();
+                tests.push({ name: 'Categorías', time: Math.round(endTime - startTime) });
+
+                // Test 2: Carga de productos
+                startTime = performance.now();
+                const products = await window.WooAPI.getProducts({ per_page: 12 });
+                endTime = performance.now();
+                tests.push({ name: 'Productos', time: Math.round(endTime - startTime) });
+
+                // Test 3: Búsqueda
+                startTime = performance.now();
+                const searchResults = await window.WooAPI.getProducts({ search: 'bolsa', per_page: 5 });
+                endTime = performance.now();
+                tests.push({ name: 'Búsqueda', time: Math.round(endTime - startTime) });
+
+                tests.forEach(test => {
+                    const status = test.time < 1000 ? 'success' : test.time < 3000 ? 'warning' : 'error';
+                    html += `<div class="${status}">${test.name}: ${test.time}ms</div>`;
+                });
+
+                const totalTime = tests.reduce((sum, test) => sum + test.time, 0);
+                html += `<div class="info">⏱️ Tiempo total: ${totalTime}ms</div>`;
+
+                statusDiv.innerHTML = html;
+
+                diagnosticData.performance = tests;
+
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">❌ Error en test de rendimiento: ${error.message}</div>`;
+            }
+        }
+
+        function clearCache() {
+            localStorage.removeItem('estudioartesana_categories');
+            localStorage.removeItem('estudioartesana_categories_timestamp');
+            if (window.WooAPI) {
+                window.WooAPI.clearCache();
+            }
+            document.getElementById('categoriesStatus').innerHTML = '<div class="success">✅ Caché limpiado</div>';
+        }
+
+        async function fixCommonIssues() {
+            const fixes = [];
+            
+            // Fix 1: Actualizar caché de categorías
+            try {
+                await window.CategoriesPreloader?.forceRefresh();
+                fixes.push('✅ Caché de categorías actualizado');
+            } catch (e) {
+                fixes.push('❌ Error actualizando caché de categorías');
+            }
+
+            // Fix 2: Limpiar caché API
+            window.WooAPI?.clearCache();
+            fixes.push('✅ Caché de API limpiado');
+
+            // Fix 3: Re-inicializar preloader
+            if (window.CategoriesPreloader) {
+                window.CategoriesPreloader.init();
+                fixes.push('✅ Preloader re-inicializado');
+            }
+
+            alert('Correcciones aplicadas:\n' + fixes.join('\n'));
+        }
+
+        async function rebuildCache() {
+            document.getElementById('categoriesStatus').innerHTML = '<div class="loading"></div> Reconstruyendo caché...';
+            
+            try {
+                // Forzar reconstrucción completa
+                await window.CategoriesPreloader?.forceRefresh();
+                document.getElementById('categoriesStatus').innerHTML = '<div class="success">✅ Caché reconstruido exitosamente</div>';
+            } catch (error) {
+                document.getElementById('categoriesStatus').innerHTML = `<div class="error">❌ Error reconstruyendo caché: ${error.message}</div>`;
+            }
+        }
+
+        async function testOptimizedLoad() {
+            console.log('🚀 Testing optimized category loading...');
+            
+            const startTime = performance.now();
+            
+            // Test con preloader
+            if (window.CategoriesPreloader) {
+                const cachedCategories = window.CategoriesPreloader.getTopCategories(6);
+                const endTime = performance.now();
+                
+                console.log(`📦 Cached load time: ${Math.round(endTime - startTime)}ms`);
+                console.log(`📊 Categories loaded: ${cachedCategories.length}`);
+                
+                alert(`Carga optimizada: ${Math.round(endTime - startTime)}ms para ${cachedCategories.length} categorías`);
+            }
+        }
+
+        // Nuevas funciones del optimizador
+        async function runOptimizerDiagnostic() {
+            const statusDiv = document.getElementById('optimizerStatus');
+            statusDiv.innerHTML = '<div class="loading"></div> Ejecutando diagnóstico del optimizador...';
+            
+            try {
+                if (!window.WooOptimizer) {
+                    statusDiv.innerHTML = '<div class="warning">⚠️ Optimizador no disponible. Asegúrate de que la página esté completamente cargada.</div>';
+                    return;
+                }
+                
+                const diagnostic = await window.WooOptimizer.runDiagnostic();
+                
+                let html = '<div class="success">✅ Diagnóstico del optimizador completado</div>';
+                
+                // Mostrar resultados de categorías
+                if (diagnostic.tests.categories.success) {
+                    const catTime = diagnostic.tests.categories.duration;
+                    const catClass = catTime < 1000 ? 'success' : catTime < 3000 ? 'warning' : 'error';
+                    html += `<div class="${catClass}">📂 Categorías optimizadas: ${catTime}ms (${diagnostic.tests.categories.count} items)</div>`;
+                } else {
+                    html += `<div class="error">❌ Error en categorías: ${diagnostic.tests.categories.error}</div>`;
+                }
+                
+                // Mostrar resultados de productos
+                if (diagnostic.tests.products.success) {
+                    const prodTime = diagnostic.tests.products.duration;
+                    const prodClass = prodTime < 1000 ? 'success' : prodTime < 3000 ? 'warning' : 'error';
+                    html += `<div class="${prodClass}">📦 Productos optimizados: ${prodTime}ms (${diagnostic.tests.products.count} items)</div>`;
+                } else {
+                    html += `<div class="error">❌ Error en productos: ${diagnostic.tests.products.error}</div>`;
+                }
+                
+                // Mostrar estado del caché
+                if (diagnostic.tests.cache.hasCache) {
+                    const cacheClass = diagnostic.tests.cache.isValid ? 'success' : 'warning';
+                    html += `<div class="${cacheClass}">📦 Caché: ${diagnostic.tests.cache.count} categorías ${diagnostic.tests.cache.isValid ? 'válidas' : 'expiradas'}</div>`;
+                } else {
+                    html += '<div class="warning">⚠️ No hay caché disponible</div>';
+                }
+                
+                statusDiv.innerHTML = html;
+                
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">❌ Error en diagnóstico del optimizador: ${error.message}</div>`;
+            }
+        }
+        
+        function showPerformanceStats() {
+            if (!window.WooOptimizer) {
+                alert('Optimizador no disponible');
+                return;
+            }
+            
+            const stats = window.WooOptimizer.getPerformanceStats();
+            
+            if (!stats) {
+                alert('No hay estadísticas de rendimiento disponibles. Realiza algunas operaciones primero.');
+                return;
+            }
+            
+            let message = `📊 ESTADÍSTICAS DE RENDIMIENTO\n\n`;
+            message += `Total de requests: ${stats.totalRequests}\n`;
+            message += `Tiempo promedio: ${stats.averageTime}ms\n`;
+            message += `Requests rápidos (<1s): ${stats.fastRequests}\n`;
+            message += `Requests lentos (>3s): ${stats.slowRequests}\n`;
+            message += `Endpoints usados: ${stats.endpoints.join(', ')}`;
+            
+            alert(message);
+        }
+        
+        async function testOptimizedCategoriesLoad() {
+            if (!window.OptimizedCategoriesLoader) {
+                alert('Loader optimizado no disponible. Asegúrate de que la página esté completamente cargada.');
+                return;
+            }
+            
+            const statusDiv = document.getElementById('optimizerStatus');
+            statusDiv.innerHTML = '<div class="loading"></div> Probando carga optimizada de categorías...';
+            
+            try {
+                const startTime = performance.now();
+                const categories = await window.OptimizedCategoriesLoader.loadCategories({ limit: 12 });
+                const endTime = performance.now();
+                const loadTime = Math.round(endTime - startTime);
+                
+                const timeClass = loadTime < 500 ? 'success' : loadTime < 1500 ? 'warning' : 'error';
+                const timeIcon = loadTime < 500 ? '🚀' : loadTime < 1500 ? '⚡' : '🐌';
+                
+                statusDiv.innerHTML = `<div class="${timeClass}">${timeIcon} Carga optimizada: ${loadTime}ms para ${categories.length} categorías</div>`;
+                
+                console.log('📊 Optimized categories loaded:', categories);
+                
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">❌ Error en carga optimizada: ${error.message}</div>`;
+            }
+        }
+        
+        // Auto-ejecutar verificaciones básicas
+        window.addEventListener('load', () => {
+            setTimeout(checkConfig, 100);
+            setTimeout(testConnectivity, 500);
+            // Dar más tiempo para que se cargue el optimizador
+            setTimeout(() => {
+                if (window.WooOptimizer) {
+                    document.getElementById('optimizerStatus').innerHTML = '<div class="success">✅ Optimizador WooCommerce activo</div>';
+                } else {
+                    document.getElementById('optimizerStatus').innerHTML = '<div class="warning">⚠️ Optimizador no detectado</div>';
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

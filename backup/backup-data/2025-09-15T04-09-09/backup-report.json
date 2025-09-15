@@ -1,0 +1,28 @@
+{
+  "backup": {
+    "timestamp": "2025-09-15T04-09-09",
+    "duration": "25 segundos",
+    "source": "https://estudioartesana.com"
+  },
+  "summary": {
+    "products": 0,
+    "categories": 0,
+    "orders": 0,
+    "customers": 0,
+    "totalErrors": 6
+  },
+  "errors": [
+    "Settings: Request failed with status code 404",
+    "customers - Página 1: Request failed with status code 404",
+    "products - Página 1: Request failed with status code 404",
+    "products/categories - Página 1: Request failed with status code 404",
+    "orders - Página 1: Request failed with status code 404",
+    "products/categories - Página 1: Request failed with status code 404"
+  ],
+  "recommendations": [
+    "Verificar que todos los datos críticos fueron extraídos",
+    "Hacer backup manual de la base de datos WordPress como respaldo adicional",
+    "Probar la carga de datos en sistema de pruebas antes de migración",
+    "Guardar este backup en múltiples ubicaciones (local, cloud)"
+  ]
+}

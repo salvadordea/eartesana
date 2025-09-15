@@ -1,0 +1,422 @@
+[
+  {
+    "id": 17,
+    "name": "Accesorios",
+    "slug": "accesorios",
+    "parent": 0,
+    "description": "",
+    "display": "default",
+    "image": {
+      "id": 743,
+      "date_created": "2024-06-29T00:22:40",
+      "date_created_gmt": "2024-06-29T00:22:40",
+      "date_modified": "2024-06-29T00:22:40",
+      "date_modified_gmt": "2024-06-29T00:22:40",
+      "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240623_192017-scaled.jpg",
+      "name": "20240623_192017",
+      "alt": ""
+    },
+    "menu_order": 2,
+    "count": 12,
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories/17",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories"
+        }
+      ]
+    }
+  },
+  {
+    "id": 83,
+    "name": "Backpacks",
+    "slug": "backpacks-y-maletines",
+    "parent": 0,
+    "description": "",
+    "display": "default",
+    "image": {
+      "id": 504,
+      "date_created": "2024-06-27T19:52:37",
+      "date_created_gmt": "2024-06-27T19:52:37",
+      "date_modified": "2024-06-27T19:52:37",
+      "date_modified_gmt": "2024-06-27T19:52:37",
+      "src": "https://estudioartesana.com/wp-content/uploads/2024/06/PRINCIPAL-BOLSAS-GRANDES-Y-BACKPACKS-scaled.jpg",
+      "name": "PRINCIPAL BOLSAS GRANDES Y BACKPACKS",
+      "alt": ""
+    },
+    "menu_order": 6,
+    "count": 1,
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories/83",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories"
+        }
+      ]
+    }
+  },
+  {
+    "id": 19,
+    "name": "Bolsas Cruzadas",
+    "slug": "bolsas-cruzadas",
+    "parent": 0,
+    "description": "",
+    "display": "default",
+    "image": null,
+    "menu_order": 7,
+    "count": 6,
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories/19",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories"
+        }
+      ]
+    }
+  },
+  {
+    "id": 18,
+    "name": "Bolsas de mano",
+    "slug": "bolsas-de-mano",
+    "parent": 0,
+    "description": "",
+    "display": "default",
+    "image": null,
+    "menu_order": 8,
+    "count": 2,
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories/18",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories"
+        }
+      ]
+    }
+  },
+  {
+    "id": 148,
+    "name": "Bolsas de Textil y Piel",
+    "slug": "bolsas-de-textil-y-piel",
+    "parent": 0,
+    "description": "",
+    "display": "default",
+    "image": {
+      "id": 738,
+      "date_created": "2024-06-28T23:04:02",
+      "date_created_gmt": "2024-06-28T23:04:02",
+      "date_modified": "2024-06-28T23:04:02",
+      "date_modified_gmt": "2024-06-28T23:04:02",
+      "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20201111_073021-scaled.jpg",
+      "name": "20201111_073021",
+      "alt": ""
+    },
+    "menu_order": 10,
+    "count": 4,
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories/148",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories"
+        }
+      ]
+    }
+  },
+  {
+    "id": 20,
+    "name": "Bolsas Grandes",
+    "slug": "bolsas-grandes",
+    "parent": 0,
+    "description": "",
+    "display": "default",
+    "image": null,
+    "menu_order": 11,
+    "count": 5,
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories/20",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories"
+        }
+      ]
+    }
+  },
+  {
+    "id": 22,
+    "name": "Botelleras",
+    "slug": "botelleras",
+    "parent": 0,
+    "description": "",
+    "display": "default",
+    "image": null,
+    "menu_order": 12,
+    "count": 1,
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories/22",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories"
+        }
+      ]
+    }
+  },
+  {
+    "id": 23,
+    "name": "Hogar",
+    "slug": "hogar",
+    "parent": 0,
+    "description": "",
+    "display": "default",
+    "image": null,
+    "menu_order": 13,
+    "count": 1,
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories/23",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories"
+        }
+      ]
+    }
+  },
+  {
+    "id": 16,
+    "name": "Joyeria",
+    "slug": "joyeria",
+    "parent": 0,
+    "description": "",
+    "display": "default",
+    "image": null,
+    "menu_order": 14,
+    "count": 11,
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories/16",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories"
+        }
+      ]
+    }
+  },
+  {
+    "id": 89,
+    "name": "Portacel",
+    "slug": "portacel",
+    "parent": 0,
+    "description": "",
+    "display": "default",
+    "image": {
+      "id": 532,
+      "date_created": "2024-06-27T21:07:06",
+      "date_created_gmt": "2024-06-27T21:07:06",
+      "date_modified": "2024-06-27T21:07:06",
+      "date_modified_gmt": "2024-06-27T21:07:06",
+      "src": "https://estudioartesana.com/wp-content/uploads/2024/06/ppal-subcategoria-portacel-liso.jpg",
+      "name": "ppal subcategoria portacel liso",
+      "alt": ""
+    },
+    "menu_order": 17,
+    "count": 4,
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories/89",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories"
+        }
+      ]
+    }
+  },
+  {
+    "id": 15,
+    "name": "Uncategorized",
+    "slug": "uncategorized",
+    "parent": 0,
+    "description": "",
+    "display": "default",
+    "image": null,
+    "menu_order": 1,
+    "count": 0,
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories/15",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories"
+        }
+      ]
+    }
+  },
+  {
+    "id": 21,
+    "name": "Vestimenta",
+    "slug": "vestimenta",
+    "parent": 0,
+    "description": "",
+    "display": "default",
+    "image": null,
+    "menu_order": 18,
+    "count": 0,
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories/21",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/categories"
+        }
+      ]
+    }
+  }
+]

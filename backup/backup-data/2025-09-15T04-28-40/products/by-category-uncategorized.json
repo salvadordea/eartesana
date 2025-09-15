@@ -1,0 +1,105 @@
+[
+  {
+    "id": 602,
+    "name": "Brazalete Linea Ancha",
+    "slug": "",
+    "permalink": "https://estudioartesana.com/?post_type=product&p=602",
+    "date_created": null,
+    "date_created_gmt": null,
+    "date_modified": "2024-06-28T21:39:52",
+    "date_modified_gmt": "2024-06-28T21:39:52",
+    "type": "simple",
+    "status": "draft",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "",
+    "short_description": "",
+    "sku": "",
+    "price": "",
+    "regular_price": "",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": false,
+    "total_sales": "0",
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "",
+    "dimensions": {
+      "length": "",
+      "width": "",
+      "height": ""
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 15,
+        "name": "Uncategorized",
+        "slug": "uncategorized"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [],
+    "attributes": [],
+    "default_attributes": [],
+    "variations": [],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "",
+    "related_ids": [],
+    "meta_data": [],
+    "stock_status": "instock",
+    "has_options": false,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/602",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  }
+]

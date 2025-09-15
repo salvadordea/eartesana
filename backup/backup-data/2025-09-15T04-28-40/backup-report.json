@@ -1,0 +1,21 @@
+{
+  "backup": {
+    "timestamp": "2025-09-15T04-28-40",
+    "duration": "46 segundos",
+    "source": "https://estudioartesana.com"
+  },
+  "summary": {
+    "products": 48,
+    "categories": 18,
+    "orders": 2,
+    "customers": 0,
+    "totalErrors": 0
+  },
+  "errors": [],
+  "recommendations": [
+    "Verificar que todos los datos críticos fueron extraídos",
+    "Hacer backup manual de la base de datos WordPress como respaldo adicional",
+    "Probar la carga de datos en sistema de pruebas antes de migración",
+    "Guardar este backup en múltiples ubicaciones (local, cloud)"
+  ]
+}

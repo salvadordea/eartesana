@@ -1,0 +1,2846 @@
+[
+  {
+    "id": 1753,
+    "name": "Bolsa Gigante vertical Pelo y Miel",
+    "slug": "bolsa-gigante-vertical-pelo-y-miel",
+    "permalink": "https://estudioartesana.com/product/bolsa-gigante-vertical-pelo-y-miel/",
+    "date_created": "2024-08-08T19:51:39",
+    "date_created_gmt": "2024-08-08T19:51:39",
+    "date_modified": "2025-08-15T02:37:20",
+    "date_modified_gmt": "2025-08-15T02:37:20",
+    "type": "simple",
+    "status": "publish",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "<p>Bolsa Gigante vertical de piel con pelo tonos blanco y negro (los tonos pueden variar)</p>\n<p>medidas 38 x 31 cm</p>\n",
+    "short_description": "",
+    "sku": "",
+    "price": "2750",
+    "regular_price": "2750",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 0,
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "2",
+    "dimensions": {
+      "length": "38",
+      "width": "14",
+      "height": "31"
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 20,
+        "name": "Bolsas Grandes",
+        "slug": "bolsas-grandes"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [
+      {
+        "id": 307,
+        "date_created": "2024-06-24T23:56:26",
+        "date_created_gmt": "2024-06-24T23:56:26",
+        "date_modified": "2024-06-24T23:56:26",
+        "date_modified_gmt": "2024-06-24T23:56:26",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/68.png",
+        "name": "68",
+        "alt": ""
+      },
+      {
+        "id": 306,
+        "date_created": "2024-06-24T23:56:22",
+        "date_created_gmt": "2024-06-24T23:56:22",
+        "date_modified": "2024-06-24T23:56:22",
+        "date_modified_gmt": "2024-06-24T23:56:22",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/67.png",
+        "name": "67",
+        "alt": ""
+      }
+    ],
+    "attributes": [],
+    "default_attributes": [],
+    "variations": [],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">MXN $</span>&nbsp;2,750.00</bdi></span>",
+    "related_ids": [
+      1315,
+      1286,
+      1072,
+      1273
+    ],
+    "meta_data": [
+      {
+        "id": 12157,
+        "key": "_et_pb_post_hide_nav",
+        "value": "default"
+      },
+      {
+        "id": 12158,
+        "key": "_et_pb_page_layout",
+        "value": "et_right_sidebar"
+      },
+      {
+        "id": 12159,
+        "key": "_et_pb_side_nav",
+        "value": "off"
+      },
+      {
+        "id": 12160,
+        "key": "_et_pb_use_builder",
+        "value": ""
+      },
+      {
+        "id": 12161,
+        "key": "_et_pb_first_image",
+        "value": ""
+      },
+      {
+        "id": 12162,
+        "key": "_et_pb_truncate_post",
+        "value": ""
+      },
+      {
+        "id": 12163,
+        "key": "_et_pb_truncate_post_date",
+        "value": ""
+      },
+      {
+        "id": 12164,
+        "key": "_et_pb_old_content",
+        "value": ""
+      },
+      {
+        "id": 20910,
+        "key": "_et_dynamic_cached_shortcodes",
+        "value": [
+          "et_pb_column_inner",
+          "et_pb_section",
+          "et_pb_row",
+          "et_pb_column",
+          "et_pb_row_inner",
+          "et_pb_menu",
+          "et_pb_shop",
+          "et_pb_text",
+          "et_pb_wc_add_to_cart",
+          "et_pb_wc_description",
+          "et_pb_wc_images",
+          "et_pb_wc_price",
+          "et_pb_wc_rating",
+          "et_pb_wc_reviews",
+          "et_pb_wc_stock",
+          "et_pb_wc_title"
+        ]
+      },
+      {
+        "id": 20911,
+        "key": "_et_dynamic_cached_attributes",
+        "value": {
+          "specialty": [
+            "on"
+          ]
+        }
+      },
+      {
+        "id": 20912,
+        "key": "et_enqueued_post_fonts",
+        "value": {
+          "family": {
+            "et-gf-abel": "Abel:regular",
+            "et-gf-baskervville": "Baskervville:regular,italic",
+            "et-gf-amethysta": "Amethysta:regular",
+            "et-gf-abhaya-libre": "Abhaya+Libre:regular,500,600,700,800",
+            "et-gf-abyssinica-sil": "Abyssinica+SIL:regular",
+            "et-gf-albert-sans": "Albert+Sans:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic",
+            "et-gf-adamina": "Adamina:regular"
+          },
+          "subset": [
+            "latin",
+            "latin-ext"
+          ],
+          "cache_key": "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"enable_all_character_sets\":\"false\"}"
+        }
+      },
+      {
+        "id": 20913,
+        "key": "_et_builder_module_features_cache",
+        "value": [
+          "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"tb\":{\"1106\":\"2025-08-19 18:10:58\",\"234\":\"2025-08-26 18:24:07\"},\"wpe\":[]}",
+          {
+            "et_pb_section_893e623712ef39b4d6b5e3f73bdf78b0": {
+              "bared": true,
+              "baret": true,
+              "barep": true,
+              "hhere": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_9a93ac275ae4e642cd74d8b03cda54c9": {
+              "hhere": true,
+              "hmire": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_38e5d6c22d990d327966c6283c404209": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_menu_23101086f1385c3ff279b9c7c40a4e5f": {
+              "glde": {
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_section_e73038c2eaff8e04460f6f07441c5335": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_ced0257a7ca04bf6e6c563f75c758419": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_images_8ab8a2b6d7821e77a3350f5a7680076c": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_a6660090d595172f21e6d46d3c3ccbc5": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_inner_87f5fdd65ad7d33399fc4f3882f1fb89": {
+              "bor": true,
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_3765b530b7443aa1e0de793b41ca6631": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_rating_d064cbdab1e4761750516ed6ed9f85b7": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_title_b509d81988303eeafa49e27fb4820b1f": {
+              "glde": {
+                "header_font_size": "30px",
+                "header_line_height": "1em"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_price_3f033b038d31ee4c92034baa9d0e7ad3": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2d4cad3c0a0b576518dd64be7cc5ac0f": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_add_to_cart_7dd69fbb6c99f0c26606903c7531add4": {
+              "foop": true,
+              "tesh": true,
+              "bor": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_inner_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_7490643e73aef730999045da79541cac": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_43234dae3aac68b0d48c24b2a3c87393": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_stock_eea2797752b07eef16810df7412a8818": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_section_e28e466ebc5b19ec846f756ac59d60a6": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_row_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_61ed8437aca6119960185ca6d5cab2b2": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_e1462549f9912503647a23e295ae13e6": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2be71c00baea7d6a4688f49410cb2b69": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_reviews_36142086dbdcd2bf042a1b9620cd225b": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_223e2d6492f9a7191b7b138470d5e8b2": {
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_12969367b38955286d51d12f2a3ce40d": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_877843d934deb6b4ef2e4468d104ea43": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_shop_4ad207ba844feae5a88c8fd8fd2caa06": {
+              "glde": {
+                "title_font_size": "16",
+                "title_letter_spacing": "0px",
+                "title_line_height": "1em",
+                "price_font_size": "14",
+                "price_letter_spacing": "0px",
+                "price_line_height": "26px",
+                "sale_badge_font_size": "16",
+                "sale_price_font_size": "14"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            }
+          }
+        ]
+      }
+    ],
+    "stock_status": "outofstock",
+    "has_options": false,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/1753",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  },
+  {
+    "id": 1315,
+    "name": "Bolsas Gigante Plana",
+    "slug": "bolsas-gigante-plana",
+    "permalink": "https://estudioartesana.com/product/bolsas-gigante-plana/",
+    "date_created": "2024-07-15T18:58:05",
+    "date_created_gmt": "2024-07-15T18:58:05",
+    "date_modified": "2025-08-15T02:44:54",
+    "date_modified_gmt": "2025-08-15T02:44:54",
+    "type": "variable",
+    "status": "publish",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "<p>Bolsa gigante plana de piel de excelente calidad resistente y espaciosa medidas 29 x 39</p>\n",
+    "short_description": "",
+    "sku": "505",
+    "price": "2400",
+    "regular_price": "",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 0,
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "2",
+    "dimensions": {
+      "length": "29",
+      "width": "39",
+      "height": "5"
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 20,
+        "name": "Bolsas Grandes",
+        "slug": "bolsas-grandes"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [
+      {
+        "id": 1321,
+        "date_created": "2024-07-15T18:57:55",
+        "date_created_gmt": "2024-07-15T18:57:55",
+        "date_modified": "2024-07-15T18:57:55",
+        "date_modified_gmt": "2024-07-15T18:57:55",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/Planas-port.png",
+        "name": "Planas port",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Cafe chocolate",
+          "Café Claro",
+          "Camel",
+          "Negro",
+          "Tinta"
+        ]
+      }
+    ],
+    "default_attributes": [],
+    "variations": [
+      1316,
+      1317,
+      1318,
+      1319,
+      1320
+    ],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">MXN $</span>&nbsp;2,400.00</bdi></span>",
+    "related_ids": [
+      1753,
+      1286,
+      1273,
+      1072
+    ],
+    "meta_data": [
+      {
+        "id": 9567,
+        "key": "_et_pb_post_hide_nav",
+        "value": "default"
+      },
+      {
+        "id": 9568,
+        "key": "_et_pb_page_layout",
+        "value": "et_right_sidebar"
+      },
+      {
+        "id": 9569,
+        "key": "_et_pb_side_nav",
+        "value": "off"
+      },
+      {
+        "id": 9570,
+        "key": "_et_pb_use_builder",
+        "value": ""
+      },
+      {
+        "id": 9571,
+        "key": "_et_pb_first_image",
+        "value": ""
+      },
+      {
+        "id": 9572,
+        "key": "_et_pb_truncate_post",
+        "value": ""
+      },
+      {
+        "id": 9573,
+        "key": "_et_pb_truncate_post_date",
+        "value": ""
+      },
+      {
+        "id": 9574,
+        "key": "_et_pb_old_content",
+        "value": ""
+      },
+      {
+        "id": 10632,
+        "key": "cfvsw_product_attr_pa_color",
+        "value": {
+          "27": {
+            "image": "278"
+          },
+          "32": {
+            "image": "277"
+          },
+          "34": {
+            "image": "280"
+          },
+          "51": {
+            "image": "276"
+          },
+          "59": {
+            "image": "279"
+          },
+          "type": "image"
+        }
+      },
+      {
+        "id": 21044,
+        "key": "_et_dynamic_cached_shortcodes",
+        "value": [
+          "et_pb_column_inner",
+          "et_pb_section",
+          "et_pb_row",
+          "et_pb_column",
+          "et_pb_row_inner",
+          "et_pb_menu",
+          "et_pb_shop",
+          "et_pb_text",
+          "et_pb_wc_add_to_cart",
+          "et_pb_wc_description",
+          "et_pb_wc_images",
+          "et_pb_wc_price",
+          "et_pb_wc_rating",
+          "et_pb_wc_reviews",
+          "et_pb_wc_stock",
+          "et_pb_wc_title"
+        ]
+      },
+      {
+        "id": 21045,
+        "key": "_et_dynamic_cached_attributes",
+        "value": {
+          "specialty": [
+            "on"
+          ]
+        }
+      },
+      {
+        "id": 21046,
+        "key": "et_enqueued_post_fonts",
+        "value": {
+          "family": {
+            "et-gf-abel": "Abel:regular",
+            "et-gf-baskervville": "Baskervville:regular,italic",
+            "et-gf-amethysta": "Amethysta:regular",
+            "et-gf-abhaya-libre": "Abhaya+Libre:regular,500,600,700,800",
+            "et-gf-abyssinica-sil": "Abyssinica+SIL:regular",
+            "et-gf-albert-sans": "Albert+Sans:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic",
+            "et-gf-adamina": "Adamina:regular"
+          },
+          "subset": [
+            "latin",
+            "latin-ext"
+          ],
+          "cache_key": "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"enable_all_character_sets\":\"false\"}"
+        }
+      },
+      {
+        "id": 21047,
+        "key": "_et_builder_module_features_cache",
+        "value": [
+          "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"tb\":{\"1106\":\"2025-08-19 18:10:58\",\"234\":\"2025-08-26 18:24:07\"},\"wpe\":[]}",
+          {
+            "et_pb_section_893e623712ef39b4d6b5e3f73bdf78b0": {
+              "bared": true,
+              "baret": true,
+              "barep": true,
+              "hhere": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_9a93ac275ae4e642cd74d8b03cda54c9": {
+              "hhere": true,
+              "hmire": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_38e5d6c22d990d327966c6283c404209": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_menu_23101086f1385c3ff279b9c7c40a4e5f": {
+              "glde": {
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_section_e73038c2eaff8e04460f6f07441c5335": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_ced0257a7ca04bf6e6c563f75c758419": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_images_8ab8a2b6d7821e77a3350f5a7680076c": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_a6660090d595172f21e6d46d3c3ccbc5": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_inner_87f5fdd65ad7d33399fc4f3882f1fb89": {
+              "bor": true,
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_3765b530b7443aa1e0de793b41ca6631": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_rating_d064cbdab1e4761750516ed6ed9f85b7": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_title_b509d81988303eeafa49e27fb4820b1f": {
+              "glde": {
+                "header_font_size": "30px",
+                "header_line_height": "1em"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_price_3f033b038d31ee4c92034baa9d0e7ad3": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2d4cad3c0a0b576518dd64be7cc5ac0f": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_add_to_cart_7dd69fbb6c99f0c26606903c7531add4": {
+              "foop": true,
+              "tesh": true,
+              "bor": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_inner_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_7490643e73aef730999045da79541cac": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_43234dae3aac68b0d48c24b2a3c87393": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_stock_eea2797752b07eef16810df7412a8818": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_section_e28e466ebc5b19ec846f756ac59d60a6": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_row_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_61ed8437aca6119960185ca6d5cab2b2": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_e1462549f9912503647a23e295ae13e6": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2be71c00baea7d6a4688f49410cb2b69": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_reviews_36142086dbdcd2bf042a1b9620cd225b": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_223e2d6492f9a7191b7b138470d5e8b2": {
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_12969367b38955286d51d12f2a3ce40d": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_877843d934deb6b4ef2e4468d104ea43": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_shop_4ad207ba844feae5a88c8fd8fd2caa06": {
+              "glde": {
+                "title_font_size": "16",
+                "title_letter_spacing": "0px",
+                "title_line_height": "1em",
+                "price_font_size": "14",
+                "price_letter_spacing": "0px",
+                "price_line_height": "26px",
+                "sale_badge_font_size": "16",
+                "sale_price_font_size": "14"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            }
+          }
+        ]
+      }
+    ],
+    "stock_status": "instock",
+    "has_options": true,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/1315",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  },
+  {
+    "id": 1286,
+    "name": "Bolsa grande con Jareta",
+    "slug": "bolsa-grande-con-jareta",
+    "permalink": "https://estudioartesana.com/product/bolsa-grande-con-jareta/",
+    "date_created": "2024-07-15T17:12:57",
+    "date_created_gmt": "2024-07-15T17:12:57",
+    "date_modified": "2025-08-15T02:40:46",
+    "date_modified_gmt": "2025-08-15T02:40:46",
+    "type": "variable",
+    "status": "publish",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "<p>Bolsa grande práctica y espaciosa de piel con jareta resistente color medidas 36 x 30 cm</p>\n",
+    "short_description": "<p>Bolsa grande práctica y espaciosa de piel con jareta</p>\n",
+    "sku": "504",
+    "price": "2280",
+    "regular_price": "",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 0,
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "2",
+    "dimensions": {
+      "length": "33",
+      "width": "39",
+      "height": "5"
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 20,
+        "name": "Bolsas Grandes",
+        "slug": "bolsas-grandes"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [
+      {
+        "id": 1545,
+        "date_created": "2024-07-22T22:19:05",
+        "date_created_gmt": "2024-07-22T22:19:05",
+        "date_modified": "2025-08-15T02:40:06",
+        "date_modified_gmt": "2025-08-15T02:40:06",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/07/46-1.png",
+        "name": "46",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Café",
+          "Cafe gamuza",
+          "Ladrillo",
+          "Mostaza",
+          "Negro",
+          "Tinta",
+          "Tinto gamuza"
+        ]
+      }
+    ],
+    "default_attributes": [],
+    "variations": [
+      1287,
+      1288,
+      1289,
+      1290,
+      1291,
+      1292,
+      1293
+    ],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">MXN $</span>&nbsp;2,280.00</bdi></span>",
+    "related_ids": [
+      1273,
+      1072,
+      1315,
+      1753
+    ],
+    "meta_data": [
+      {
+        "id": 8985,
+        "key": "_et_pb_post_hide_nav",
+        "value": "default"
+      },
+      {
+        "id": 8986,
+        "key": "_et_pb_page_layout",
+        "value": "et_right_sidebar"
+      },
+      {
+        "id": 8987,
+        "key": "_et_pb_side_nav",
+        "value": "off"
+      },
+      {
+        "id": 8988,
+        "key": "_et_pb_use_builder",
+        "value": ""
+      },
+      {
+        "id": 8989,
+        "key": "_et_pb_first_image",
+        "value": ""
+      },
+      {
+        "id": 8990,
+        "key": "_et_pb_truncate_post",
+        "value": ""
+      },
+      {
+        "id": 8991,
+        "key": "_et_pb_truncate_post_date",
+        "value": ""
+      },
+      {
+        "id": 8992,
+        "key": "_et_pb_old_content",
+        "value": ""
+      },
+      {
+        "id": 10968,
+        "key": "cfvsw_product_attr_pa_color",
+        "value": {
+          "27": {
+            "image": "1541"
+          },
+          "28": {
+            "image": "1548"
+          },
+          "34": {
+            "image": "1544"
+          },
+          "38": {
+            "image": "1543"
+          },
+          "74": {
+            "image": "1547"
+          },
+          "75": {
+            "image": "1545"
+          },
+          "76": {
+            "image": "1546"
+          },
+          "type": "image"
+        }
+      },
+      {
+        "id": 21080,
+        "key": "_et_dynamic_cached_shortcodes",
+        "value": [
+          "et_pb_column_inner",
+          "et_pb_section",
+          "et_pb_row",
+          "et_pb_column",
+          "et_pb_row_inner",
+          "et_pb_menu",
+          "et_pb_shop",
+          "et_pb_text",
+          "et_pb_wc_add_to_cart",
+          "et_pb_wc_description",
+          "et_pb_wc_images",
+          "et_pb_wc_price",
+          "et_pb_wc_rating",
+          "et_pb_wc_reviews",
+          "et_pb_wc_stock",
+          "et_pb_wc_title"
+        ]
+      },
+      {
+        "id": 21081,
+        "key": "_et_dynamic_cached_attributes",
+        "value": {
+          "specialty": [
+            "on"
+          ]
+        }
+      },
+      {
+        "id": 21082,
+        "key": "et_enqueued_post_fonts",
+        "value": {
+          "family": {
+            "et-gf-abel": "Abel:regular",
+            "et-gf-baskervville": "Baskervville:regular,italic",
+            "et-gf-amethysta": "Amethysta:regular",
+            "et-gf-abhaya-libre": "Abhaya+Libre:regular,500,600,700,800",
+            "et-gf-abyssinica-sil": "Abyssinica+SIL:regular",
+            "et-gf-albert-sans": "Albert+Sans:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic",
+            "et-gf-adamina": "Adamina:regular"
+          },
+          "subset": [
+            "latin",
+            "latin-ext"
+          ],
+          "cache_key": "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"enable_all_character_sets\":\"false\"}"
+        }
+      },
+      {
+        "id": 21083,
+        "key": "_et_builder_module_features_cache",
+        "value": [
+          "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"tb\":{\"1106\":\"2025-08-19 18:10:58\",\"234\":\"2025-08-26 18:24:07\"},\"wpe\":[]}",
+          {
+            "et_pb_section_893e623712ef39b4d6b5e3f73bdf78b0": {
+              "bared": true,
+              "baret": true,
+              "barep": true,
+              "hhere": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_9a93ac275ae4e642cd74d8b03cda54c9": {
+              "hhere": true,
+              "hmire": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_38e5d6c22d990d327966c6283c404209": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_menu_23101086f1385c3ff279b9c7c40a4e5f": {
+              "glde": {
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_section_e73038c2eaff8e04460f6f07441c5335": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_ced0257a7ca04bf6e6c563f75c758419": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_images_8ab8a2b6d7821e77a3350f5a7680076c": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_a6660090d595172f21e6d46d3c3ccbc5": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_inner_87f5fdd65ad7d33399fc4f3882f1fb89": {
+              "bor": true,
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_3765b530b7443aa1e0de793b41ca6631": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_rating_d064cbdab1e4761750516ed6ed9f85b7": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_title_b509d81988303eeafa49e27fb4820b1f": {
+              "glde": {
+                "header_font_size": "30px",
+                "header_line_height": "1em"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_price_3f033b038d31ee4c92034baa9d0e7ad3": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2d4cad3c0a0b576518dd64be7cc5ac0f": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_add_to_cart_7dd69fbb6c99f0c26606903c7531add4": {
+              "foop": true,
+              "tesh": true,
+              "bor": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_inner_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_7490643e73aef730999045da79541cac": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_43234dae3aac68b0d48c24b2a3c87393": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_stock_eea2797752b07eef16810df7412a8818": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_section_e28e466ebc5b19ec846f756ac59d60a6": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_row_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_61ed8437aca6119960185ca6d5cab2b2": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_e1462549f9912503647a23e295ae13e6": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2be71c00baea7d6a4688f49410cb2b69": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_reviews_36142086dbdcd2bf042a1b9620cd225b": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_223e2d6492f9a7191b7b138470d5e8b2": {
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_12969367b38955286d51d12f2a3ce40d": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_877843d934deb6b4ef2e4468d104ea43": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_shop_4ad207ba844feae5a88c8fd8fd2caa06": {
+              "glde": {
+                "title_font_size": "16",
+                "title_letter_spacing": "0px",
+                "title_line_height": "1em",
+                "price_font_size": "14",
+                "price_letter_spacing": "0px",
+                "price_line_height": "26px",
+                "sale_badge_font_size": "16",
+                "sale_price_font_size": "14"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            }
+          }
+        ]
+      }
+    ],
+    "stock_status": "instock",
+    "has_options": true,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/1286",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  },
+  {
+    "id": 1273,
+    "name": "Bolsa Gigante Vertical",
+    "slug": "bolsa-gigante-vertical",
+    "permalink": "https://estudioartesana.com/product/bolsa-gigante-vertical/",
+    "date_created": "2024-07-15T15:10:01",
+    "date_created_gmt": "2024-07-15T15:10:01",
+    "date_modified": "2025-08-15T02:36:53",
+    "date_modified_gmt": "2025-08-15T02:36:53",
+    "type": "variable",
+    "status": "publish",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "<p>Bolsa muy grande y alta de piel con correas resistentes medidas 41 x 30 cm</p>\n",
+    "short_description": "",
+    "sku": "501",
+    "price": "2650",
+    "regular_price": "",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 0,
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "1",
+    "dimensions": {
+      "length": "38",
+      "width": "14",
+      "height": "31"
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 20,
+        "name": "Bolsas Grandes",
+        "slug": "bolsas-grandes"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [
+      {
+        "id": 305,
+        "date_created": "2024-06-24T23:56:19",
+        "date_created_gmt": "2024-06-24T23:56:19",
+        "date_modified": "2025-08-15T02:36:52",
+        "date_modified_gmt": "2025-08-15T02:36:52",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/66.png",
+        "name": "66",
+        "alt": ""
+      },
+      {
+        "id": 312,
+        "date_created": "2024-06-24T23:56:44",
+        "date_created_gmt": "2024-06-24T23:56:44",
+        "date_modified": "2024-06-24T23:56:44",
+        "date_modified_gmt": "2024-06-24T23:56:44",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/73.png",
+        "name": "73",
+        "alt": ""
+      },
+      {
+        "id": 309,
+        "date_created": "2024-06-24T23:56:32",
+        "date_created_gmt": "2024-06-24T23:56:32",
+        "date_modified": "2024-06-24T23:56:32",
+        "date_modified_gmt": "2024-06-24T23:56:32",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/70.png",
+        "name": "70",
+        "alt": ""
+      },
+      {
+        "id": 308,
+        "date_created": "2024-06-24T23:56:28",
+        "date_created_gmt": "2024-06-24T23:56:28",
+        "date_modified": "2024-06-24T23:56:28",
+        "date_modified_gmt": "2024-06-24T23:56:28",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/69.png",
+        "name": "69",
+        "alt": ""
+      },
+      {
+        "id": 315,
+        "date_created": "2024-06-24T23:56:55",
+        "date_created_gmt": "2024-06-24T23:56:55",
+        "date_modified": "2024-06-24T23:56:55",
+        "date_modified_gmt": "2024-06-24T23:56:55",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/76.png",
+        "name": "76",
+        "alt": ""
+      },
+      {
+        "id": 304,
+        "date_created": "2024-06-24T23:56:16",
+        "date_created_gmt": "2024-06-24T23:56:16",
+        "date_modified": "2024-06-24T23:56:16",
+        "date_modified_gmt": "2024-06-24T23:56:16",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/65.png",
+        "name": "65",
+        "alt": ""
+      },
+      {
+        "id": 317,
+        "date_created": "2024-06-24T23:57:01",
+        "date_created_gmt": "2024-06-24T23:57:01",
+        "date_modified": "2024-06-24T23:57:01",
+        "date_modified_gmt": "2024-06-24T23:57:01",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/78.png",
+        "name": "78",
+        "alt": ""
+      },
+      {
+        "id": 319,
+        "date_created": "2024-06-24T23:57:07",
+        "date_created_gmt": "2024-06-24T23:57:07",
+        "date_modified": "2024-06-24T23:57:07",
+        "date_modified_gmt": "2024-06-24T23:57:07",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/80.png",
+        "name": "80",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul",
+          "Azul oscuro",
+          "Gris",
+          "Miel",
+          "Negro",
+          "Tinta",
+          "Verde"
+        ]
+      }
+    ],
+    "default_attributes": [],
+    "variations": [
+      1274,
+      1275,
+      1276,
+      1277,
+      1279,
+      1280,
+      1281
+    ],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">MXN $</span>&nbsp;2,650.00</bdi></span>",
+    "related_ids": [
+      1753,
+      1286,
+      1315,
+      1072
+    ],
+    "meta_data": [
+      {
+        "id": 8709,
+        "key": "_et_pb_post_hide_nav",
+        "value": "default"
+      },
+      {
+        "id": 8710,
+        "key": "_et_pb_page_layout",
+        "value": "et_right_sidebar"
+      },
+      {
+        "id": 8711,
+        "key": "_et_pb_side_nav",
+        "value": "off"
+      },
+      {
+        "id": 8712,
+        "key": "_et_pb_use_builder",
+        "value": "off"
+      },
+      {
+        "id": 8713,
+        "key": "_et_pb_first_image",
+        "value": ""
+      },
+      {
+        "id": 8714,
+        "key": "_et_pb_truncate_post",
+        "value": ""
+      },
+      {
+        "id": 8715,
+        "key": "_et_pb_truncate_post_date",
+        "value": ""
+      },
+      {
+        "id": 8716,
+        "key": "_et_pb_old_content",
+        "value": ""
+      },
+      {
+        "id": 10969,
+        "key": "cfvsw_product_attr_pa_color",
+        "value": {
+          "27": {
+            "image": "1495"
+          },
+          "34": {
+            "image": "1493"
+          },
+          "37": {
+            "image": "1500"
+          },
+          "39": {
+            "image": "1492"
+          },
+          "72": {
+            "image": "1484"
+          },
+          "73": {
+            "image": "1486"
+          },
+          "80": {
+            "image": "1490"
+          },
+          "140": {
+            "image": "1489"
+          },
+          "type": "image"
+        }
+      },
+      {
+        "id": 13841,
+        "key": "_et_pb_built_for_post_type",
+        "value": "page"
+      },
+      {
+        "id": 13842,
+        "key": "_et_pb_ab_subjects",
+        "value": ""
+      },
+      {
+        "id": 13843,
+        "key": "_et_pb_enable_shortcode_tracking",
+        "value": ""
+      },
+      {
+        "id": 13844,
+        "key": "_et_pb_ab_current_shortcode",
+        "value": "[et_pb_split_track id=\"1273\" /]"
+      },
+      {
+        "id": 13845,
+        "key": "_et_pb_custom_css",
+        "value": ""
+      },
+      {
+        "id": 13846,
+        "key": "_et_pb_gutter_width",
+        "value": "3"
+      },
+      {
+        "id": 13847,
+        "key": "_global_colors_info",
+        "value": "{}"
+      },
+      {
+        "id": 13848,
+        "key": "_et_builder_version",
+        "value": "VB|Divi|4.27.0"
+      },
+      {
+        "id": 13849,
+        "key": "_et_pb_show_page_creation",
+        "value": "off"
+      },
+      {
+        "id": 20951,
+        "key": "_et_dynamic_cached_shortcodes",
+        "value": [
+          "et_pb_column_inner",
+          "et_pb_section",
+          "et_pb_row",
+          "et_pb_column",
+          "et_pb_row_inner",
+          "et_pb_menu",
+          "et_pb_shop",
+          "et_pb_text",
+          "et_pb_wc_add_to_cart",
+          "et_pb_wc_description",
+          "et_pb_wc_images",
+          "et_pb_wc_price",
+          "et_pb_wc_rating",
+          "et_pb_wc_reviews",
+          "et_pb_wc_stock",
+          "et_pb_wc_title"
+        ]
+      },
+      {
+        "id": 20952,
+        "key": "_et_dynamic_cached_attributes",
+        "value": {
+          "specialty": [
+            "on"
+          ]
+        }
+      },
+      {
+        "id": 20953,
+        "key": "et_enqueued_post_fonts",
+        "value": {
+          "family": {
+            "et-gf-abel": "Abel:regular",
+            "et-gf-baskervville": "Baskervville:regular,italic",
+            "et-gf-amethysta": "Amethysta:regular",
+            "et-gf-abhaya-libre": "Abhaya+Libre:regular,500,600,700,800",
+            "et-gf-abyssinica-sil": "Abyssinica+SIL:regular",
+            "et-gf-albert-sans": "Albert+Sans:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic",
+            "et-gf-adamina": "Adamina:regular"
+          },
+          "subset": [
+            "latin",
+            "latin-ext"
+          ],
+          "cache_key": "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"enable_all_character_sets\":\"false\"}"
+        }
+      },
+      {
+        "id": 20954,
+        "key": "_et_builder_module_features_cache",
+        "value": [
+          "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"tb\":{\"1106\":\"2025-08-19 18:10:58\",\"234\":\"2025-08-26 18:24:07\"},\"wpe\":[]}",
+          {
+            "et_pb_section_893e623712ef39b4d6b5e3f73bdf78b0": {
+              "bared": true,
+              "baret": true,
+              "barep": true,
+              "hhere": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_9a93ac275ae4e642cd74d8b03cda54c9": {
+              "hhere": true,
+              "hmire": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_38e5d6c22d990d327966c6283c404209": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_menu_23101086f1385c3ff279b9c7c40a4e5f": {
+              "glde": {
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_section_e73038c2eaff8e04460f6f07441c5335": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_ced0257a7ca04bf6e6c563f75c758419": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_images_8ab8a2b6d7821e77a3350f5a7680076c": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_a6660090d595172f21e6d46d3c3ccbc5": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_inner_87f5fdd65ad7d33399fc4f3882f1fb89": {
+              "bor": true,
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_3765b530b7443aa1e0de793b41ca6631": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_rating_d064cbdab1e4761750516ed6ed9f85b7": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_title_b509d81988303eeafa49e27fb4820b1f": {
+              "glde": {
+                "header_font_size": "30px",
+                "header_line_height": "1em"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_price_3f033b038d31ee4c92034baa9d0e7ad3": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2d4cad3c0a0b576518dd64be7cc5ac0f": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_add_to_cart_7dd69fbb6c99f0c26606903c7531add4": {
+              "foop": true,
+              "tesh": true,
+              "bor": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_inner_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_7490643e73aef730999045da79541cac": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_43234dae3aac68b0d48c24b2a3c87393": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_stock_eea2797752b07eef16810df7412a8818": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_section_e28e466ebc5b19ec846f756ac59d60a6": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_row_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_61ed8437aca6119960185ca6d5cab2b2": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_e1462549f9912503647a23e295ae13e6": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2be71c00baea7d6a4688f49410cb2b69": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_reviews_36142086dbdcd2bf042a1b9620cd225b": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_223e2d6492f9a7191b7b138470d5e8b2": {
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_12969367b38955286d51d12f2a3ce40d": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_877843d934deb6b4ef2e4468d104ea43": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_shop_4ad207ba844feae5a88c8fd8fd2caa06": {
+              "glde": {
+                "title_font_size": "16",
+                "title_letter_spacing": "0px",
+                "title_line_height": "1em",
+                "price_font_size": "14",
+                "price_letter_spacing": "0px",
+                "price_line_height": "26px",
+                "sale_badge_font_size": "16",
+                "sale_price_font_size": "14"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            }
+          }
+        ]
+      }
+    ],
+    "stock_status": "instock",
+    "has_options": true,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/1273",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  },
+  {
+    "id": 1072,
+    "name": "Bolsa Gigante horizontal",
+    "slug": "bolsa-gigante-horizontal",
+    "permalink": "https://estudioartesana.com/product/bolsa-gigante-horizontal/",
+    "date_created": "2024-07-10T13:02:53",
+    "date_created_gmt": "2024-07-10T13:02:53",
+    "date_modified": "2025-08-15T02:38:56",
+    "date_modified_gmt": "2025-08-15T02:38:56",
+    "type": "variable",
+    "status": "publish",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "<p>Bolsa horizontal de piel gigante con buen espacio para todo tipo de cosas y correas de piel resistentes medidas 28 x 44 cm</p>\n",
+    "short_description": "",
+    "sku": "503",
+    "price": "2950",
+    "regular_price": "",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 0,
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "2",
+    "dimensions": {
+      "length": "38",
+      "width": "14",
+      "height": "31"
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 20,
+        "name": "Bolsas Grandes",
+        "slug": "bolsas-grandes"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [
+      {
+        "id": 385,
+        "date_created": "2024-06-25T00:01:47",
+        "date_created_gmt": "2024-06-25T00:01:47",
+        "date_modified": "2025-08-15T02:38:23",
+        "date_modified_gmt": "2025-08-15T02:38:23",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/48-1.png",
+        "name": "48",
+        "alt": ""
+      },
+      {
+        "id": 394,
+        "date_created": "2024-06-25T00:02:24",
+        "date_created_gmt": "2024-06-25T00:02:24",
+        "date_modified": "2024-06-25T00:02:24",
+        "date_modified_gmt": "2024-06-25T00:02:24",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/57-1.png",
+        "name": "57",
+        "alt": ""
+      },
+      {
+        "id": 392,
+        "date_created": "2024-06-25T00:02:17",
+        "date_created_gmt": "2024-06-25T00:02:17",
+        "date_modified": "2024-06-25T00:02:17",
+        "date_modified_gmt": "2024-06-25T00:02:17",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/55-1.png",
+        "name": "55",
+        "alt": ""
+      },
+      {
+        "id": 390,
+        "date_created": "2024-06-25T00:02:10",
+        "date_created_gmt": "2024-06-25T00:02:10",
+        "date_modified": "2024-06-25T00:02:10",
+        "date_modified_gmt": "2024-06-25T00:02:10",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/53-1.png",
+        "name": "53",
+        "alt": ""
+      },
+      {
+        "id": 388,
+        "date_created": "2024-06-25T00:02:03",
+        "date_created_gmt": "2024-06-25T00:02:03",
+        "date_modified": "2024-06-25T00:02:03",
+        "date_modified_gmt": "2024-06-25T00:02:03",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/51-1.png",
+        "name": "51",
+        "alt": ""
+      },
+      {
+        "id": 386,
+        "date_created": "2024-06-25T00:01:53",
+        "date_created_gmt": "2024-06-25T00:01:53",
+        "date_modified": "2024-06-25T00:01:53",
+        "date_modified_gmt": "2024-06-25T00:01:53",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/49-1.png",
+        "name": "49",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Azul Denim",
+          "Gris",
+          "Miel",
+          "Negro",
+          "Tinta",
+          "Verde"
+        ]
+      }
+    ],
+    "default_attributes": [],
+    "variations": [
+      1073,
+      1074,
+      1075,
+      1076,
+      1077,
+      1078
+    ],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">MXN $</span>&nbsp;2,950.00</bdi></span>",
+    "related_ids": [
+      1286,
+      1753,
+      1315,
+      1273
+    ],
+    "meta_data": [
+      {
+        "id": 7854,
+        "key": "_et_pb_post_hide_nav",
+        "value": "default"
+      },
+      {
+        "id": 7855,
+        "key": "_et_pb_page_layout",
+        "value": "et_right_sidebar"
+      },
+      {
+        "id": 7856,
+        "key": "_et_pb_side_nav",
+        "value": "off"
+      },
+      {
+        "id": 7857,
+        "key": "_et_pb_use_builder",
+        "value": ""
+      },
+      {
+        "id": 7858,
+        "key": "_et_pb_first_image",
+        "value": ""
+      },
+      {
+        "id": 7859,
+        "key": "_et_pb_truncate_post",
+        "value": ""
+      },
+      {
+        "id": 7860,
+        "key": "_et_pb_truncate_post_date",
+        "value": ""
+      },
+      {
+        "id": 7861,
+        "key": "_et_pb_old_content",
+        "value": ""
+      },
+      {
+        "id": 10970,
+        "key": "cfvsw_product_attr_pa_color",
+        "value": {
+          "27": {
+            "image": "1413"
+          },
+          "34": {
+            "image": "1417"
+          },
+          "37": {
+            "image": "1415"
+          },
+          "39": {
+            "image": "1419"
+          },
+          "40": {
+            "image": "1421"
+          },
+          "72": {
+            "image": "1423"
+          },
+          "type": "image"
+        }
+      },
+      {
+        "id": 21036,
+        "key": "_et_dynamic_cached_shortcodes",
+        "value": [
+          "et_pb_column_inner",
+          "et_pb_section",
+          "et_pb_row",
+          "et_pb_column",
+          "et_pb_row_inner",
+          "et_pb_menu",
+          "et_pb_shop",
+          "et_pb_text",
+          "et_pb_wc_add_to_cart",
+          "et_pb_wc_description",
+          "et_pb_wc_images",
+          "et_pb_wc_price",
+          "et_pb_wc_rating",
+          "et_pb_wc_reviews",
+          "et_pb_wc_stock",
+          "et_pb_wc_title"
+        ]
+      },
+      {
+        "id": 21037,
+        "key": "_et_dynamic_cached_attributes",
+        "value": {
+          "specialty": [
+            "on"
+          ]
+        }
+      },
+      {
+        "id": 21038,
+        "key": "et_enqueued_post_fonts",
+        "value": {
+          "family": {
+            "et-gf-abel": "Abel:regular",
+            "et-gf-baskervville": "Baskervville:regular,italic",
+            "et-gf-amethysta": "Amethysta:regular",
+            "et-gf-abhaya-libre": "Abhaya+Libre:regular,500,600,700,800",
+            "et-gf-abyssinica-sil": "Abyssinica+SIL:regular",
+            "et-gf-albert-sans": "Albert+Sans:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic",
+            "et-gf-adamina": "Adamina:regular"
+          },
+          "subset": [
+            "latin",
+            "latin-ext"
+          ],
+          "cache_key": "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"enable_all_character_sets\":\"false\"}"
+        }
+      },
+      {
+        "id": 21039,
+        "key": "_et_builder_module_features_cache",
+        "value": [
+          "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"tb\":{\"1106\":\"2025-08-19 18:10:58\",\"234\":\"2025-08-26 18:24:07\"},\"wpe\":[]}",
+          {
+            "et_pb_section_893e623712ef39b4d6b5e3f73bdf78b0": {
+              "bared": true,
+              "baret": true,
+              "barep": true,
+              "hhere": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_9a93ac275ae4e642cd74d8b03cda54c9": {
+              "hhere": true,
+              "hmire": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_38e5d6c22d990d327966c6283c404209": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_menu_23101086f1385c3ff279b9c7c40a4e5f": {
+              "glde": {
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_section_e73038c2eaff8e04460f6f07441c5335": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_ced0257a7ca04bf6e6c563f75c758419": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_images_8ab8a2b6d7821e77a3350f5a7680076c": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_a6660090d595172f21e6d46d3c3ccbc5": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_inner_87f5fdd65ad7d33399fc4f3882f1fb89": {
+              "bor": true,
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_3765b530b7443aa1e0de793b41ca6631": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_rating_d064cbdab1e4761750516ed6ed9f85b7": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_title_b509d81988303eeafa49e27fb4820b1f": {
+              "glde": {
+                "header_font_size": "30px",
+                "header_line_height": "1em"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_price_3f033b038d31ee4c92034baa9d0e7ad3": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2d4cad3c0a0b576518dd64be7cc5ac0f": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_add_to_cart_7dd69fbb6c99f0c26606903c7531add4": {
+              "foop": true,
+              "tesh": true,
+              "bor": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_inner_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_7490643e73aef730999045da79541cac": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_43234dae3aac68b0d48c24b2a3c87393": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_stock_eea2797752b07eef16810df7412a8818": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_section_e28e466ebc5b19ec846f756ac59d60a6": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_row_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_61ed8437aca6119960185ca6d5cab2b2": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_e1462549f9912503647a23e295ae13e6": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2be71c00baea7d6a4688f49410cb2b69": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_reviews_36142086dbdcd2bf042a1b9620cd225b": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_223e2d6492f9a7191b7b138470d5e8b2": {
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_12969367b38955286d51d12f2a3ce40d": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_877843d934deb6b4ef2e4468d104ea43": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_shop_4ad207ba844feae5a88c8fd8fd2caa06": {
+              "glde": {
+                "title_font_size": "16",
+                "title_letter_spacing": "0px",
+                "title_line_height": "1em",
+                "price_font_size": "14",
+                "price_letter_spacing": "0px",
+                "price_line_height": "26px",
+                "sale_badge_font_size": "16",
+                "sale_price_font_size": "14"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            }
+          }
+        ]
+      }
+    ],
+    "stock_status": "instock",
+    "has_options": true,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/1072",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  }
+]

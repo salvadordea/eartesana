@@ -311,16 +311,21 @@ class EstudioArtesanaCategorias {
         
         // If we're in the root directory
         if (currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/EstArtesana/') || currentPath.endsWith('/EstArtesana/index.html')) {
-            return 'pages/tienda/index.html';
+            return 'tienda/index.html';
         }
         
         // If we're in a pages subdirectory (tienda, sobre-nosotros, categorias, producto)
         if (currentPath.includes('/pages/')) {
-            return '../tienda/index.html';
+            return '../../tienda/index.html';
+        }
+        
+        // If we're in the tienda directory
+        if (currentPath.includes('/tienda/')) {
+            return 'index.html';
         }
         
         // Default fallback - assume we're in root
-        return 'pages/tienda/index.html';
+        return 'tienda/index.html';
     }
 }
 

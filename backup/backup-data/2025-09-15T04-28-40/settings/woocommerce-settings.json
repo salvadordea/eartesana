@@ -1,0 +1,396 @@
+[
+  {
+    "id": "wc_admin",
+    "label": "WooCommerce Admin",
+    "description": "Ajustes del informe de administración de WooCommerce",
+    "parent_id": "",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/wc_admin"
+        }
+      ]
+    }
+  },
+  {
+    "id": "general",
+    "label": "General",
+    "description": "",
+    "parent_id": "",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/general"
+        }
+      ]
+    }
+  },
+  {
+    "id": "products",
+    "label": "Productos",
+    "description": "",
+    "parent_id": "",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/products"
+        }
+      ]
+    }
+  },
+  {
+    "id": "tax",
+    "label": "Impuesto",
+    "description": "",
+    "parent_id": "",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/tax"
+        }
+      ]
+    }
+  },
+  {
+    "id": "shipping",
+    "label": "Envío",
+    "description": "",
+    "parent_id": "",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/shipping"
+        }
+      ]
+    }
+  },
+  {
+    "id": "checkout",
+    "label": "Pagos",
+    "description": "",
+    "parent_id": "",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/checkout"
+        }
+      ]
+    }
+  },
+  {
+    "id": "account",
+    "label": "Cuentas y privacidad",
+    "description": "",
+    "parent_id": "",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/account"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email",
+    "label": "Correos electrónicos",
+    "description": "",
+    "parent_id": "",
+    "sub_groups": [
+      "email_new_order",
+      "email_cancelled_order",
+      "email_customer_cancelled_order",
+      "email_failed_order",
+      "email_customer_failed_order",
+      "email_customer_on_hold_order",
+      "email_customer_processing_order",
+      "email_customer_completed_order",
+      "email_customer_refunded_order",
+      "email_customer_invoice",
+      "email_customer_note",
+      "email_customer_reset_password",
+      "email_customer_new_account",
+      "email_customer_pos_completed_order",
+      "email_customer_pos_refunded_order"
+    ],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email"
+        }
+      ]
+    }
+  },
+  {
+    "id": "integration",
+    "label": "Integración",
+    "description": "",
+    "parent_id": "",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/integration"
+        }
+      ]
+    }
+  },
+  {
+    "id": "site-visibility",
+    "label": "Visibilidad del sitio",
+    "description": "",
+    "parent_id": "",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/site-visibility"
+        }
+      ]
+    }
+  },
+  {
+    "id": "point-of-sale",
+    "label": "Punto de venta",
+    "description": "",
+    "parent_id": "",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/point-of-sale"
+        }
+      ]
+    }
+  },
+  {
+    "id": "advanced",
+    "label": "Avanzado",
+    "description": "",
+    "parent_id": "",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/advanced"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_new_order",
+    "label": "Nuevo pedido",
+    "description": "Cuando se recibe un nuevo pedido se envían correos electrónicos de nuevo pedido a los destinatarios seleccionados.",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_new_order"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_cancelled_order",
+    "label": "Pedido cancelado",
+    "description": "Los correos electrónicos de pedido cancelados se enviarán a los destinatarios seleccionados cuando los pedidos se marquen como cancelados (si previamente estaban marcados como procesando o en espera).",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_cancelled_order"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_customer_cancelled_order",
+    "label": "Pedido cancelado",
+    "description": "Los correos electrónicos de pedido cancelado se envían a los clientes cuando sus pedidos se marcan como cancelados (si previamente se estaban procesando o en espera).",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_customer_cancelled_order"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_failed_order",
+    "label": "Pedido fallido",
+    "description": "Los correos electrónicos de pedidos fallidos se envían a los destinatarios seleccionados cuando los pedidos han sido marcados como fallidos (si estaban previamente como pendientes o en espera).",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_failed_order"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_customer_failed_order",
+    "label": "Pedido fallido",
+    "description": "Los correos electrónicos de pedidos fallidos se envían a los clientes cuando sus pedidos se marcan como fallidos.",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_customer_failed_order"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_customer_on_hold_order",
+    "label": "Pedido a la espera",
+    "description": "Esto es un aviso de pedido enviado a los clientes que contiene los datos del pedido, después de que este se haya puesto en espera desde el estado «Pendiente», «Cancelado» o «Error».",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_customer_on_hold_order"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_customer_processing_order",
+    "label": "Procesando tu pedido",
+    "description": "Esto es un aviso de pedido que se envía al cliente después del pago con los detalles del pedido.",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_customer_processing_order"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_customer_completed_order",
+    "label": "Pedido completado",
+    "description": "Los avisos de pedido completado se envían al cliente cuando el pedido se marca como «completado» e indican que el pedido ha sido enviado o está listo para recoger.",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_customer_completed_order"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_customer_refunded_order",
+    "label": "Pedido reembolsado",
+    "description": "Los correos electrónicos de los reembolsos ​se envían a los clientes cuando sus pedidos se reembolsan.",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_customer_refunded_order"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_customer_invoice",
+    "label": "Detalles del pedido",
+    "description": "Se pueden enviar recibos por correo electrónico a los clientes que contienen la información de su pedido y enlaces para realizar el pago.",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_customer_invoice"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_customer_note",
+    "label": "Nota para el cliente",
+    "description": "Los correos electrónicos de las notas de los clientes se envían cuando añades una nota a un pedido.",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_customer_note"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_customer_reset_password",
+    "label": "Restablecer contraseña",
+    "description": "Envía un correo electrónico a los clientes para notificarles que se ha restablecido su contraseña",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_customer_reset_password"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_customer_new_account",
+    "label": "Nueva cuenta",
+    "description": "Envía un correo electrónico a los clientes para notificarles que han creado una cuenta",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_customer_new_account"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_customer_pos_completed_order",
+    "label": "Pedido de TPV completado",
+    "description": "Los correos electrónicos de pedido completado se envían a los clientes cuando sus pedidos de TPV se marcan como completados.",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_customer_pos_completed_order"
+        }
+      ]
+    }
+  },
+  {
+    "id": "email_customer_pos_refunded_order",
+    "label": "Pedido de TPV reembolsado",
+    "description": "Los correos electrónicos de pedidos reembolsados ​​se envían a los clientes cuando se reembolsan sus pedidos de TPV.",
+    "parent_id": "email",
+    "sub_groups": [],
+    "_links": {
+      "options": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/settings/email_customer_pos_refunded_order"
+        }
+      ]
+    }
+  }
+]

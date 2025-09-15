@@ -56,7 +56,7 @@ const EstudioArtesanaConfig = {
             title: 'Bolsas Artesanales Únicas',
             subtitle: 'Hechas a mano con técnicas ancestrales',
             ctaText: 'Ver Colección',
-            ctaLink: 'pages/tienda/index.html?category=bolsas'
+            ctaLink: 'tienda/index.html?category=bolsas'
         },
         {
             id: 'hero2', 
@@ -65,7 +65,7 @@ const EstudioArtesanaConfig = {
             title: 'Accesorios de Diseño',
             subtitle: 'Collares y aretes con identidad propia',
             ctaText: 'Explorar',
-            ctaLink: 'pages/tienda/index.html?category=accesorios'
+            ctaLink: 'tienda/index.html?category=accesorios'
         },
         {
             id: 'hero3',
@@ -74,7 +74,7 @@ const EstudioArtesanaConfig = {
             title: 'Cuadernos Artesanales',
             subtitle: 'Para tus ideas más creativas',
             ctaText: 'Descubrir',
-            ctaLink: 'pages/tienda/index.html?category=cuadernos'
+            ctaLink: 'tienda/index.html?category=cuadernos'
         },
         {
             id: 'hero4',
@@ -83,7 +83,7 @@ const EstudioArtesanaConfig = {
             title: 'Proceso Artesanal',
             subtitle: 'Cada pieza cuenta una historia',
             ctaText: 'Conocer Más',
-            ctaLink: 'pages/tienda/index.html'
+            ctaLink: 'tienda/index.html'
         }
     ],
 
@@ -194,7 +194,7 @@ const EstudioArtesanaConfig = {
         code: 'PRIMERA20',
         expiry: 'Válido hasta fin de mes',
         ctaText: '¡Compra Ahora!',
-        ctaLink: 'pages/tienda/index.html',
+        ctaLink: 'tienda/index.html',
         icon: 'fas fa-gift', // FontAwesome icon class
         theme: 'default', // 'default', 'valentine', 'christmas', 'summer', etc.
         

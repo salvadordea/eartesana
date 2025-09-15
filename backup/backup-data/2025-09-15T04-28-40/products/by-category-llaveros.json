@@ -1,0 +1,1120 @@
+[
+  {
+    "id": 1025,
+    "name": "Llavero Largo",
+    "slug": "llavero-largo",
+    "permalink": "https://estudioartesana.com/product/llavero-largo/",
+    "date_created": "2024-07-04T18:59:43",
+    "date_created_gmt": "2024-07-04T18:59:43",
+    "date_modified": "2025-08-26T16:54:39",
+    "date_modified_gmt": "2025-08-26T16:54:39",
+    "type": "variable",
+    "status": "publish",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "<table style=\"width: 319px;\" width=\"122\">\n<tbody>\n<tr>\n<td style=\"width: 310.333px;\">Medidas 17.5 cm de largo x 2.5 cm de ancho</td>\n</tr>\n</tbody>\n</table>\n",
+    "short_description": "",
+    "sku": "209",
+    "price": "370",
+    "regular_price": "",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 0,
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "0.5",
+    "dimensions": {
+      "length": "15",
+      "width": "22",
+      "height": "1"
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 104,
+        "name": "Llaveros",
+        "slug": "llaveros"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [
+      {
+        "id": 545,
+        "date_created": "2024-06-27T21:22:50",
+        "date_created_gmt": "2024-06-27T21:22:50",
+        "date_modified": "2024-06-27T21:22:50",
+        "date_modified_gmt": "2024-06-27T21:22:50",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/Llavero-largo-cat-scaled.jpg",
+        "name": "Llavero largo cat",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Gris y Miel",
+          "Miel y Azul",
+          "Miel y gris",
+          "Miel y Naranja",
+          "Miel y Negro",
+          "Miel y tinto",
+          "Naranja y Cafe Oscuro"
+        ]
+      }
+    ],
+    "default_attributes": [],
+    "variations": [
+      1026,
+      1027,
+      1028,
+      1029,
+      1030,
+      1031,
+      1032
+    ],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">MXN $</span>&nbsp;370.00</bdi></span>",
+    "related_ids": [
+      964
+    ],
+    "meta_data": [
+      {
+        "id": 7448,
+        "key": "_et_pb_post_hide_nav",
+        "value": "default"
+      },
+      {
+        "id": 7449,
+        "key": "_et_pb_page_layout",
+        "value": "et_right_sidebar"
+      },
+      {
+        "id": 7450,
+        "key": "_et_pb_side_nav",
+        "value": "off"
+      },
+      {
+        "id": 7451,
+        "key": "_et_pb_use_builder",
+        "value": ""
+      },
+      {
+        "id": 7452,
+        "key": "_et_pb_first_image",
+        "value": ""
+      },
+      {
+        "id": 7453,
+        "key": "_et_pb_truncate_post",
+        "value": ""
+      },
+      {
+        "id": 7454,
+        "key": "_et_pb_truncate_post_date",
+        "value": ""
+      },
+      {
+        "id": 7455,
+        "key": "_et_pb_old_content",
+        "value": ""
+      },
+      {
+        "id": 11536,
+        "key": "cfvsw_product_attr_pa_color",
+        "value": {
+          "54": {
+            "image": "1041"
+          },
+          "55": {
+            "image": "1038"
+          },
+          "128": {
+            "image": "1034"
+          },
+          "153": {
+            "image": "1039"
+          },
+          "154": {
+            "image": "1040"
+          },
+          "157": {
+            "image": "1037"
+          },
+          "158": {
+            "image": "1033"
+          },
+          "type": "image"
+        }
+      },
+      {
+        "id": 21103,
+        "key": "_et_dynamic_cached_shortcodes",
+        "value": [
+          "et_pb_column_inner",
+          "et_pb_section",
+          "et_pb_row",
+          "et_pb_column",
+          "et_pb_row_inner",
+          "et_pb_menu",
+          "et_pb_shop",
+          "et_pb_text",
+          "et_pb_wc_add_to_cart",
+          "et_pb_wc_description",
+          "et_pb_wc_images",
+          "et_pb_wc_price",
+          "et_pb_wc_rating",
+          "et_pb_wc_reviews",
+          "et_pb_wc_stock",
+          "et_pb_wc_title"
+        ]
+      },
+      {
+        "id": 21104,
+        "key": "_et_dynamic_cached_attributes",
+        "value": {
+          "specialty": [
+            "on"
+          ]
+        }
+      },
+      {
+        "id": 21105,
+        "key": "et_enqueued_post_fonts",
+        "value": {
+          "family": {
+            "et-gf-abel": "Abel:regular",
+            "et-gf-baskervville": "Baskervville:regular,italic",
+            "et-gf-amethysta": "Amethysta:regular",
+            "et-gf-abhaya-libre": "Abhaya+Libre:regular,500,600,700,800",
+            "et-gf-abyssinica-sil": "Abyssinica+SIL:regular",
+            "et-gf-albert-sans": "Albert+Sans:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic",
+            "et-gf-adamina": "Adamina:regular"
+          },
+          "subset": [
+            "latin",
+            "latin-ext"
+          ],
+          "cache_key": "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"enable_all_character_sets\":\"false\"}"
+        }
+      },
+      {
+        "id": 21106,
+        "key": "_et_builder_module_features_cache",
+        "value": [
+          "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"tb\":{\"1106\":\"2025-08-19 18:10:58\",\"234\":\"2025-08-26 18:24:07\"},\"wpe\":[]}",
+          {
+            "et_pb_section_893e623712ef39b4d6b5e3f73bdf78b0": {
+              "bared": true,
+              "baret": true,
+              "barep": true,
+              "hhere": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_9a93ac275ae4e642cd74d8b03cda54c9": {
+              "hhere": true,
+              "hmire": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_38e5d6c22d990d327966c6283c404209": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_menu_23101086f1385c3ff279b9c7c40a4e5f": {
+              "glde": {
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_section_e73038c2eaff8e04460f6f07441c5335": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_ced0257a7ca04bf6e6c563f75c758419": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_images_8ab8a2b6d7821e77a3350f5a7680076c": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_a6660090d595172f21e6d46d3c3ccbc5": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_inner_87f5fdd65ad7d33399fc4f3882f1fb89": {
+              "bor": true,
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_3765b530b7443aa1e0de793b41ca6631": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_rating_d064cbdab1e4761750516ed6ed9f85b7": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_title_b509d81988303eeafa49e27fb4820b1f": {
+              "glde": {
+                "header_font_size": "30px",
+                "header_line_height": "1em"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_price_3f033b038d31ee4c92034baa9d0e7ad3": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2d4cad3c0a0b576518dd64be7cc5ac0f": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_add_to_cart_7dd69fbb6c99f0c26606903c7531add4": {
+              "foop": true,
+              "tesh": true,
+              "bor": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_inner_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_7490643e73aef730999045da79541cac": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_43234dae3aac68b0d48c24b2a3c87393": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_stock_eea2797752b07eef16810df7412a8818": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_section_e28e466ebc5b19ec846f756ac59d60a6": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_row_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_61ed8437aca6119960185ca6d5cab2b2": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_e1462549f9912503647a23e295ae13e6": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2be71c00baea7d6a4688f49410cb2b69": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_reviews_36142086dbdcd2bf042a1b9620cd225b": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_223e2d6492f9a7191b7b138470d5e8b2": {
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_12969367b38955286d51d12f2a3ce40d": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_877843d934deb6b4ef2e4468d104ea43": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_shop_4ad207ba844feae5a88c8fd8fd2caa06": {
+              "glde": {
+                "title_font_size": "16",
+                "title_letter_spacing": "0px",
+                "title_line_height": "1em",
+                "price_font_size": "14",
+                "price_letter_spacing": "0px",
+                "price_line_height": "26px",
+                "sale_badge_font_size": "16",
+                "sale_price_font_size": "14"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            }
+          }
+        ]
+      }
+    ],
+    "stock_status": "instock",
+    "has_options": true,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/1025",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  },
+  {
+    "id": 964,
+    "name": "Llavero Corto",
+    "slug": "llavero-corto",
+    "permalink": "https://estudioartesana.com/product/llavero-corto/",
+    "date_created": "2024-07-04T00:10:20",
+    "date_created_gmt": "2024-07-04T00:10:20",
+    "date_modified": "2025-08-26T17:03:50",
+    "date_modified_gmt": "2025-08-26T17:03:50",
+    "type": "variable",
+    "status": "publish",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "<table style=\"width: 311px;\" width=\"122\">\n<tbody>\n<tr>\n<td style=\"width: 302.333px;\">Medidas 11 cms. De largo x 3.2 cms de ancho</td>\n</tr>\n</tbody>\n</table>\n",
+    "short_description": "",
+    "sku": "208",
+    "price": "270",
+    "regular_price": "",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 0,
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "0.5",
+    "dimensions": {
+      "length": "15",
+      "width": "22",
+      "height": "1"
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 104,
+        "name": "Llaveros",
+        "slug": "llaveros"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [
+      {
+        "id": 765,
+        "date_created": "2024-06-29T00:27:47",
+        "date_created_gmt": "2024-06-29T00:27:47",
+        "date_modified": "2024-06-29T00:27:47",
+        "date_modified_gmt": "2024-06-29T00:27:47",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_152342-scaled.jpg",
+        "name": "20240622_152342",
+        "alt": ""
+      },
+      {
+        "id": 767,
+        "date_created": "2024-06-29T00:28:04",
+        "date_created_gmt": "2024-06-29T00:28:04",
+        "date_modified": "2024-06-29T00:28:04",
+        "date_modified_gmt": "2024-06-29T00:28:04",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_152048-scaled.jpg",
+        "name": "20240622_152048",
+        "alt": ""
+      },
+      {
+        "id": 766,
+        "date_created": "2024-06-29T00:27:56",
+        "date_created_gmt": "2024-06-29T00:27:56",
+        "date_modified": "2024-06-29T00:27:56",
+        "date_modified_gmt": "2024-06-29T00:27:56",
+        "src": "https://estudioartesana.com/wp-content/uploads/2024/06/20240622_151935-scaled.jpg",
+        "name": "20240622_151935",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 1,
+        "name": "Color",
+        "slug": "pa_color",
+        "position": 0,
+        "visible": true,
+        "variation": true,
+        "options": [
+          "Cafe Oscuro y negro",
+          "Cafe y miel",
+          "Gris y Miel",
+          "Ladrillo y miel",
+          "Miel y cafe",
+          "Miel y gris",
+          "Miel y tinto",
+          "Negro y cafe oscuro",
+          "Tinto y miel"
+        ]
+      }
+    ],
+    "default_attributes": [],
+    "variations": [
+      965,
+      966,
+      967,
+      968,
+      969,
+      970,
+      971,
+      972,
+      973
+    ],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">MXN $</span>&nbsp;270.00</bdi></span>",
+    "related_ids": [
+      1025
+    ],
+    "meta_data": [
+      {
+        "id": 6155,
+        "key": "_et_pb_post_hide_nav",
+        "value": "default"
+      },
+      {
+        "id": 6156,
+        "key": "_et_pb_page_layout",
+        "value": "et_right_sidebar"
+      },
+      {
+        "id": 6157,
+        "key": "_et_pb_side_nav",
+        "value": "off"
+      },
+      {
+        "id": 6158,
+        "key": "_et_pb_use_builder",
+        "value": ""
+      },
+      {
+        "id": 6159,
+        "key": "_et_pb_first_image",
+        "value": ""
+      },
+      {
+        "id": 6160,
+        "key": "_et_pb_truncate_post",
+        "value": ""
+      },
+      {
+        "id": 6161,
+        "key": "_et_pb_truncate_post_date",
+        "value": ""
+      },
+      {
+        "id": 6162,
+        "key": "_et_pb_old_content",
+        "value": ""
+      },
+      {
+        "id": 10981,
+        "key": "cfvsw_product_attr_pa_color",
+        "value": {
+          "54": {
+            "image": "761"
+          },
+          "55": {
+            "image": "763"
+          },
+          "56": {
+            "image": "762"
+          },
+          "128": {
+            "image": "771"
+          },
+          "129": {
+            "image": "759"
+          },
+          "130": {
+            "image": "758"
+          },
+          "131": {
+            "image": "769"
+          },
+          "132": {
+            "image": "770"
+          },
+          "133": {
+            "image": "760"
+          },
+          "type": "image"
+        }
+      },
+      {
+        "id": 21052,
+        "key": "_et_dynamic_cached_shortcodes",
+        "value": [
+          "et_pb_column_inner",
+          "et_pb_section",
+          "et_pb_row",
+          "et_pb_column",
+          "et_pb_row_inner",
+          "et_pb_menu",
+          "et_pb_shop",
+          "et_pb_text",
+          "et_pb_wc_add_to_cart",
+          "et_pb_wc_description",
+          "et_pb_wc_images",
+          "et_pb_wc_price",
+          "et_pb_wc_rating",
+          "et_pb_wc_reviews",
+          "et_pb_wc_stock",
+          "et_pb_wc_title"
+        ]
+      },
+      {
+        "id": 21053,
+        "key": "_et_dynamic_cached_attributes",
+        "value": {
+          "specialty": [
+            "on"
+          ]
+        }
+      },
+      {
+        "id": 21054,
+        "key": "et_enqueued_post_fonts",
+        "value": {
+          "family": {
+            "et-gf-abel": "Abel:regular",
+            "et-gf-baskervville": "Baskervville:regular,italic",
+            "et-gf-amethysta": "Amethysta:regular",
+            "et-gf-abhaya-libre": "Abhaya+Libre:regular,500,600,700,800",
+            "et-gf-abyssinica-sil": "Abyssinica+SIL:regular",
+            "et-gf-albert-sans": "Albert+Sans:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic",
+            "et-gf-adamina": "Adamina:regular"
+          },
+          "subset": [
+            "latin",
+            "latin-ext"
+          ],
+          "cache_key": "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"enable_all_character_sets\":\"false\"}"
+        }
+      },
+      {
+        "id": 21055,
+        "key": "_et_builder_module_features_cache",
+        "value": [
+          "{\"gph\":-1,\"divi\":\"4.27.4\",\"wp\":\"6.8.2\",\"tb\":{\"1106\":\"2025-08-19 18:10:58\",\"234\":\"2025-08-26 18:24:07\"},\"wpe\":[]}",
+          {
+            "et_pb_section_893e623712ef39b4d6b5e3f73bdf78b0": {
+              "bared": true,
+              "baret": true,
+              "barep": true,
+              "hhere": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_9a93ac275ae4e642cd74d8b03cda54c9": {
+              "hhere": true,
+              "hmire": true,
+              "hmare": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_38e5d6c22d990d327966c6283c404209": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_menu_23101086f1385c3ff279b9c7c40a4e5f": {
+              "glde": {
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_section_e73038c2eaff8e04460f6f07441c5335": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_ced0257a7ca04bf6e6c563f75c758419": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_images_8ab8a2b6d7821e77a3350f5a7680076c": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_a6660090d595172f21e6d46d3c3ccbc5": {
+              "cuma": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_row_inner_87f5fdd65ad7d33399fc4f3882f1fb89": {
+              "bor": true,
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_3765b530b7443aa1e0de793b41ca6631": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_rating_d064cbdab1e4761750516ed6ed9f85b7": {
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_wc_title_b509d81988303eeafa49e27fb4820b1f": {
+              "glde": {
+                "header_font_size": "30px",
+                "header_line_height": "1em"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_price_3f033b038d31ee4c92034baa9d0e7ad3": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2d4cad3c0a0b576518dd64be7cc5ac0f": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_add_to_cart_7dd69fbb6c99f0c26606903c7531add4": {
+              "foop": true,
+              "tesh": true,
+              "bor": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_inner_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_inner_7490643e73aef730999045da79541cac": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_43234dae3aac68b0d48c24b2a3c87393": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_stock_eea2797752b07eef16810df7412a8818": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_section_e28e466ebc5b19ec846f756ac59d60a6": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_row_8e35024bc19dfb2d54206889492a588f": {
+              "mawi": true,
+              "bosh": true,
+              "anim": true
+            },
+            "et_pb_column_61ed8437aca6119960185ca6d5cab2b2": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_e1462549f9912503647a23e295ae13e6": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_description_2be71c00baea7d6a4688f49410cb2b69": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_wc_reviews_36142086dbdcd2bf042a1b9620cd225b": {
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "but": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_row_223e2d6492f9a7191b7b138470d5e8b2": {
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "mapac": true,
+              "anim": true
+            },
+            "et_pb_column_12969367b38955286d51d12f2a3ce40d": {
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_text_877843d934deb6b4ef2e4468d104ea43": {
+              "glde": {
+                "text_font_size": "14",
+                "text_letter_spacing": "0px",
+                "text_line_height": "1.7em",
+                "header_font_size": "30px",
+                "header_letter_spacing": "0px",
+                "header_line_height": "1em",
+                "background_size": "cover",
+                "background_position": "center",
+                "background_repeat": "no-repeat",
+                "background_blend": "normal"
+              },
+              "foop": true,
+              "tesh": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "anim": true
+            },
+            "et_pb_shop_4ad207ba844feae5a88c8fd8fd2caa06": {
+              "glde": {
+                "title_font_size": "16",
+                "title_letter_spacing": "0px",
+                "title_line_height": "1em",
+                "price_font_size": "14",
+                "price_letter_spacing": "0px",
+                "price_line_height": "26px",
+                "sale_badge_font_size": "16",
+                "sale_price_font_size": "14"
+              },
+              "foop": true,
+              "tesh": true,
+              "cuma": true,
+              "mawi": true,
+              "bosh": true,
+              "pos": true,
+              "mapac": true,
+              "anim": true
+            }
+          }
+        ]
+      }
+    ],
+    "stock_status": "instock",
+    "has_options": true,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products/964",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://estudioartesana.com/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  }
+]
