@@ -75,19 +75,28 @@ class EstudioArtesanaAPI {
     async getProduct(identifier) {
         const cacheKey = 'product_' + identifier;
         
+        console.log('🔍 Buscando producto con ID/slug:', identifier);
+        
         if (this.cache.has(cacheKey)) {
             console.log('📋 Producto obtenido desde cache:', identifier);
             return this.cache.get(cacheKey);
         }
 
         try {
+            console.log('🌐 Haciendo petición a:', `${this.baseURL}/producto/${identifier}`);
             const product = await this.request(`/producto/${identifier}`);
-            this.cache.set(cacheKey, product);
             
-            console.log('📦 Producto cargado:', product.name);
+            if (!product) {
+                console.warn('⚠️ Producto no encontrado:', identifier);
+                return null;
+            }
+            
+            this.cache.set(cacheKey, product);
+            console.log('📦 Producto cargado exitosamente:', product.name);
             return product;
         } catch (error) {
-            console.error('❌ Error obteniendo producto:', identifier, error);
+            console.error('❌ Error obteniendo producto:', identifier);
+            console.error('❌ Detalles del error:', error);
             return null;
         }
     }

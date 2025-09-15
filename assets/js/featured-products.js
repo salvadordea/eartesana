@@ -211,10 +211,15 @@ class FeaturedProductsManager {
         if (currentPath === '/' || currentPath === '/index.html' || 
             currentPath.endsWith('/EstArtesana/') || 
             currentPath.endsWith('/EstArtesana/index.html')) {
-            return `pages/producto/index.html?id=${productId}`;
+            return `producto.html?id=${productId}`;
         }
         
-        return `pages/producto/index.html?id=${productId}`;
+        // If we're in a subdirectory, go up one level
+        if (currentPath.includes('/pages/') || currentPath.includes('/tienda/')) {
+            return `../producto.html?id=${productId}`;
+        }
+        
+        return `producto.html?id=${productId}`;
     }
     
     showLoading() {

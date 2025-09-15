@@ -967,16 +967,16 @@ class EstudioArtesanaTienda {
         
         // If we're in the root directory
         if (currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/EstArtesana/') || currentPath.endsWith('/EstArtesana/index.html')) {
-            return 'pages/producto/index.html';
+            return 'producto.html';
         }
         
-        // If we're in a pages subdirectory (tienda, sobre-nosotros, categorias, producto)
-        if (currentPath.includes('/pages/')) {
-            return '../producto/index.html';
+        // If we're in a subdirectory (tienda, sobre-nosotros, categorias, etc.)
+        if (currentPath.includes('/tienda/') || currentPath.includes('/pages/')) {
+            return '../producto.html';
         }
         
         // Default fallback - assume we're in root
-        return 'pages/producto/index.html';
+        return 'producto.html';
     }
     
     getTiendaPath() {

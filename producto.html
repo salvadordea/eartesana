@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto - Estudio Artesana</title>
+    <meta name="description" content="Detalle del producto artesanal - Estudio Artesana">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/producto.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Universal Container -->
+    <div id="universal-header-container">
+        <!-- El header se carga dinámicamente aquí -->
+    </div>
+
+    <!-- Breadcrumbs -->
+    <section class="breadcrumbs">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="./index.html">Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="./tienda.html">Tienda</a>
+                <i class="fas fa-chevron-right"></i>
+                <span id="breadcrumb-category">Categoría</span>
+                <i class="fas fa-chevron-right"></i>
+                <span id="breadcrumb-product">Producto</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Product Details -->
+    <section class="product-details">
+        <div class="container" id="productContainer">
+            <!-- El contenido se carga dinámicamente aquí -->
+        </div>
+    </section>
+
+    <!-- Product View -->
+    <section class="product-view" id="productView">
+        <div class="container">
+            <div class="product-layout">
+                <!-- Product Images -->
+                <div class="product-images">
+                    <div class="main-image" id="mainProductImage">
+                        <!-- Imagen principal se inserta aquí -->
+                    </div>
+                    <div class="image-thumbnails" id="productThumbnails">
+                        <!-- Thumbnails se insertan aquí -->
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info">
+                    <div class="product-header">
+                        <div class="product-category" id="productCategory"></div>
+                        <h1 class="product-title" id="productTitle">Cargando...</h1>
+                        <div class="product-rating" id="productRating"></div>
+                    </div>
+
+                    <div class="product-price" id="productPrice">
+                        <span class="current-price">$0.00</span>
+                    </div>
+
+                    <div class="product-stock" id="productStock"></div>
+
+                    <div class="product-description" id="productShortDescription">
+                        <p>Cargando descripción...</p>
+                    </div>
+
+                    <!-- Product Variants -->
+                    <div class="product-variants" id="productVariants">
+                        <!-- Se insertan dinámicamente -->
+                    </div>
+
+                    <!-- Quantity and Add to Cart -->
+                    <div class="product-actions">
+                        <div class="quantity-selector">
+                            <label for="quantityInput">Cantidad:</label>
+                            <div class="quantity-controls">
+                                <button type="button" id="decreaseQuantity">-</button>
+                                <input type="number" id="quantityInput" value="1" min="1" max="99">
+                                <button type="button" id="increaseQuantity">+</button>
+                            </div>
+                        </div>
+
+                        <button class="add-to-cart-btn" id="addToCartBtn">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Details Tabs -->
+    <section class="product-tabs" id="productTabs">
+        <div class="container">
+            <div class="tabs-navigation">
+                <button class="tab-button active" data-tab="description">Descripción</button>
+                <button class="tab-button" data-tab="specifications">Especificaciones</button>
+                <button class="tab-button" data-tab="reviews">Reseñas</button>
+            </div>
+
+            <div class="tabs-content">
+                <!-- Description Tab -->
+                <div class="tab-content active" id="descriptionContent">
+                    <!-- Se inserta dinámicamente -->
+                </div>
+
+                <!-- Specifications Tab -->
+                <div class="tab-content" id="specificationsContent">
+                    <!-- Se inserta dinámicamente -->
+                </div>
+
+                <!-- Reviews Tab -->
+                <div class="tab-content" id="reviewsContent">
+                    <!-- Se inserta dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-products" id="relatedProductsSection">
+        <div class="container">
+            <h2>Productos Relacionados</h2>
+            <div class="related-products-loading" id="relatedProductsLoading">
+                <div class="loading-spinner"></div>
+                <p>Cargando productos relacionados...</p>
+            </div>
+            <div class="related-products-grid" id="relatedProductsGrid">
+                <!-- Related products se insertan aquí -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>Email: info@estudioartesana.com</p>
+                    <p>Teléfono: +52 123 456 7890</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Estudio Artesana. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/cloudinary-config.js"></script>
+    
+    <!-- Header Universal (DEBE CARGARSE PRIMERO) -->
+    <script src="./assets/js/universal-header.js"></script>
+    
+    <!-- API Client - Supabase -->
+    <script src="js/supabase-api-client.js"></script>
+    
+    <!-- Main Scripts -->
+    <script src="./assets/js/main.js"></script>
+    
+    <!-- Producto Dynamic Script -->
+    <script src="./assets/js/producto-dynamic.js"></script>
+    
+    <!-- Product Page Scripts -->
+    <script>
+        // Inicialización de la página de producto
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎨 Página de producto cargada');
+            
+            // Verificar que tenemos el ID del producto
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            
+            if (!productId) {
+                console.error('❌ No se proporcionó ID de producto');
+                showProductNotFound();
+                return;
+            }
+            
+            console.log('🔍 ID de producto:', productId);
+        });
+        
+        function showProductNotFound() {
+            const loading = document.getElementById('productLoading');
+            const notFound = document.getElementById('productNotFound');
+            
+            if (loading) loading.style.display = 'none';
+            if (notFound) notFound.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

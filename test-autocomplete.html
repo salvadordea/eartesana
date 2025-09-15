@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Autocompletado - Estudio Artesana</title>
+    <style>
+        body { 
+            background: #000; 
+            color: #fff; 
+            font-family: Arial, sans-serif; 
+            padding: 50px;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .search-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .search-box-modern {
+            display: flex;
+            border: 2px solid #333;
+            border-radius: 50px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .search-box-modern input {
+            flex: 1;
+            padding: 20px 28px;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            background: transparent;
+            color: #fff;
+        }
+        .search-box-modern input::placeholder {
+            color: #999;
+        }
+        .search-box-modern button {
+            background: #C0C0C0;
+            color: #000;
+            border: none;
+            padding: 20px 28px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        /* Copiamos los estilos del dropdown */
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            max-height: 400px;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 5px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .search-suggestions.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .suggestion-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #222;
+            color: #ccc;
+        }
+        
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+        
+        .suggestion-item:hover {
+            background: rgba(192, 192, 192, 0.08);
+            color: #fff;
+            border-left: 3px solid #C0C0C0;
+        }
+        
+        .suggestion-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            object-fit: cover;
+            margin-right: 12px;
+            background: #222;
+            flex-shrink: 0;
+        }
+        
+        .suggestion-content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .suggestion-title {
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+        
+        .suggestion-category {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .suggestion-price {
+            font-weight: 600;
+            color: #C0C0C0;
+            font-size: 13px;
+            margin-left: 8px;
+        }
+        
+        .log {
+            background: #111;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        
+        .log div {
+            margin-bottom: 5px;
+        }
+        
+        .error { color: #ff4444; }
+        .success { color: #44ff44; }
+        .info { color: #4444ff; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Test Autocompletado - Estudio Artesana</h1>
+        <p>Prueba la funcionalidad de autocompletado escribiendo en la barra de búsqueda.</p>
+        
+        <div class="search-container">
+            <div class="search-box-modern">
+                <input type="text" id="searchInput" placeholder="Buscar productos, categorías..." autocomplete="off">
+                <button type="button">
+                    <i class="fas fa-search">🔍</i>
+                </button>
+            </div>
+            <div id="searchSuggestions" class="search-suggestions"></div>
+        </div>
+        
+        <div class="log" id="log"></div>
+    </div>
+
+    <script>
+        // Mock API para testing
+        window.artesanaAPI = {
+            async searchProducts(query, limit) {
+                log('API call: searchProducts("' + query + '", ' + limit + ')', 'info');
+                
+                // Simular productos de ejemplo
+                const mockProducts = [
+                    {
+                        id: 1,
+                        name: 'Bolsa Artesanal de Cuero',
+                        category: 'bolsas',
+                        price: 450.00,
+                        mainImage: 'https://res.cloudinary.com/dkzq3gxmx/image/upload/v1736934002/products/bolsas/bolsa-artesanal-1.jpg'
+                    },
+                    {
+                        id: 2,
+                        name: 'Cuaderno Papel Reciclado',
+                        category: 'cuadernos',
+                        price: 125.00,
+                        mainImage: 'https://res.cloudinary.com/dkzq3gxmx/image/upload/v1736934002/products/cuadernos/cuaderno-1.jpg'
+                    },
+                    {
+                        id: 3,
+                        name: 'Accesorio Hecho a Mano',
+                        category: 'accesorios',
+                        price: 85.00,
+                        mainImage: 'https://res.cloudinary.com/dkzq3gxmx/image/upload/v1736934002/products/accesorios/accesorio-1.jpg'
+                    }
+                ];
+                
+                // Filtrar productos que contengan el query
+                const filteredProducts = mockProducts.filter(product => 
+                    product.name.toLowerCase().includes(query.toLowerCase()) ||
+                    product.category.toLowerCase().includes(query.toLowerCase())
+                );
+                
+                // Simular delay de API
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                const result = {
+                    products: filteredProducts.slice(0, limit || 8),
+                    total: filteredProducts.length
+                };
+                
+                log('API response: ' + filteredProducts.length + ' productos encontrados', 'success');
+                return result;
+            }
+        };
+        
+        // Función de logging
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const entry = document.createElement('div');
+            entry.className = type;
+            entry.textContent = new Date().toLocaleTimeString() + ' - ' + message;
+            logDiv.appendChild(entry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        log('🚀 Mock API inicializado', 'success');
+        log('✅ Escriba en la barra de búsqueda para probar', 'info');
+    </script>
+
+    <!-- Incluir el script de autocompletado -->
+    <script src="./assets/js/search-autocomplete.js"></script>
+</body>
+</html>

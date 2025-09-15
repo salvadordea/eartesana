@@ -71,11 +71,12 @@
         <div class="container">
             <div class="search-container">
                 <div class="search-box-modern">
-                    <input type="text" id="productSearch" placeholder="Buscar productos...">
-                    <button type="button" id="searchBtn">
+                    <input type="text" id="searchInput" placeholder="Buscar productos, categorías..." autocomplete="off">
+                    <button type="button" onclick="searchProducts()">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
+                <div id="searchSuggestions" class="search-suggestions"></div>
             </div>
         </div>
     </section>
@@ -241,12 +242,17 @@
     <!-- Header Universal (DEBE CARGARSE PRIMERO) -->
     <script src="./assets/js/universal-header.js"></script>
     
-    <!-- API Backend Integration -->
-    <script src="./api/tienda-api-client.js"></script>
-    <script src="./api/tienda-integration.js"></script>
+    <!-- Supabase API Client -->
+    <script src="js/supabase-api-client.js"></script>
     
     <!-- Main Scripts (mantener solo los necesarios) -->
     <script src="./assets/js/main.js"></script>
+    
+    <!-- Search Autocomplete -->
+    <script src="./assets/js/search-autocomplete.js"></script>
+    
+    <!-- Tienda Supabase Integration -->
+    <script src="./assets/js/tienda-supabase-integration.js"></script>
     
     <!-- Script específico para manejar API connection status -->
     <script>
@@ -277,7 +283,7 @@
                     `;
                     errorDiv.innerHTML = `
                         <strong>⚠️ Error de Conexión</strong><br>
-                        No se puede conectar con el servidor API. Verifica que esté funcionando en puerto 3001.
+                        No se puede conectar con Supabase. Verifica tu conexión a internet.
                     `;
                     document.body.appendChild(errorDiv);
                     

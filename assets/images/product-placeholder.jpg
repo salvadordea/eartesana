@@ -1,0 +1,8 @@
+<!-- Placeholder SVG convertido a base64 para usar como fallback -->
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  <rect x="50" y="50" width="300" height="200" fill="#e9ecef" rx="8"/>
+  <circle cx="120" cy="120" r="20" fill="#dee2e6"/>
+  <path d="M60 220 L150 140 L200 190 L280 120 L340 180 V210 H60 Z" fill="#dee2e6"/>
+  <text x="200" y="250" text-anchor="middle" fill="#6c757d" font-family="Arial, sans-serif" font-size="16">Imagen no disponible</text>
+</svg>
