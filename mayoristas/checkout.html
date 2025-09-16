@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Mayoristas - Estudio Artesana</title>
+    <meta name="description" content="Finalizar pedido mayorista en Estudio Artesana. Proceso seguro y rápido.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/mayoristas-tienda.css">
+    <link rel="stylesheet" href="../assets/css/mayoristas-checkout.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="checkout-page">
+    <!-- Header Simple -->
+    <header class="checkout-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.webp" alt="Estudio Artesana Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="checkout-steps">
+                    <div class="step active">
+                        <span class="step-number">1</span>
+                        <span class="step-text">Información</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <span class="step-text">Confirmación</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <span class="step-text">Completado</span>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <i class="fas fa-user-tie"></i>
+                    <span id="checkoutWholesalerName">Mayorista</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="checkout-main">
+        <div class="container">
+            <div class="checkout-layout">
+                <!-- Left Panel - Order Form -->
+                <div class="checkout-form-panel">
+                    <div class="panel-header">
+                        <h2>🛒 Finalizar Pedido Mayorista</h2>
+                        <p>Completa la información para procesar tu pedido</p>
+                    </div>
+
+                    <form class="checkout-form" id="checkoutForm">
+                        <!-- Contact Information -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-user"></i> Información de Contacto</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contactName">Nombre del Contacto *</label>
+                                    <input type="text" id="contactName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactEmail">Email *</label>
+                                    <input type="email" id="contactEmail" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contactPhone">Teléfono *</label>
+                                    <input type="tel" id="contactPhone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="company">Empresa *</label>
+                                    <input type="text" id="company" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Shipping Address -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-truck"></i> Dirección de Envío</h3>
+                            <div class="form-group">
+                                <label for="shippingAddress">Dirección Completa *</label>
+                                <input type="text" id="shippingAddress" placeholder="Calle, número, colonia" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">Ciudad *</label>
+                                    <input type="text" id="city" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="state">Estado *</label>
+                                    <input type="text" id="state" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="postalCode">Código Postal *</label>
+                                    <input type="text" id="postalCode" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">País</label>
+                                    <input type="text" id="country" value="México" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="shippingNotes">Notas de Envío</label>
+                                <textarea id="shippingNotes" placeholder="Instrucciones especiales para el envío (opcional)" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Billing Information -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-file-invoice"></i> Información de Facturación</h3>
+                            <div class="form-checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="sameAsShipping" checked>
+                                    <span class="checkmark"></span>
+                                    La dirección de facturación es la misma que la de envío
+                                </label>
+                            </div>
+                            <div id="billingAddressSection" style="display: none;">
+                                <div class="form-group">
+                                    <label for="billingAddress">Dirección de Facturación</label>
+                                    <input type="text" id="billingAddress" placeholder="Calle, número, colonia">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="billingCity">Ciudad</label>
+                                        <input type="text" id="billingCity">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="billingState">Estado</label>
+                                        <input type="text" id="billingState">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="rfc">RFC *</label>
+                                    <input type="text" id="rfc" placeholder="RFC de la empresa" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="businessName">Razón Social *</label>
+                                    <input type="text" id="businessName" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-credit-card"></i> Método de Pago</h3>
+                            <div class="payment-options">
+                                <label class="payment-option">
+                                    <input type="radio" name="paymentMethod" value="credit_30" checked>
+                                    <span class="payment-icon"><i class="fas fa-calendar-alt"></i></span>
+                                    <div class="payment-text">
+                                        <strong>Crédito a 30 Días</strong>
+                                        <small>Pago posterior con términos mayoristas</small>
+                                    </div>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="paymentMethod" value="bank_transfer">
+                                    <span class="payment-icon"><i class="fas fa-university"></i></span>
+                                    <div class="payment-text">
+                                        <strong>Transferencia Bancaria</strong>
+                                        <small>Pago inmediato por transferencia</small>
+                                    </div>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="paymentMethod" value="credit_card">
+                                    <span class="payment-icon"><i class="fas fa-credit-card"></i></span>
+                                    <div class="payment-text">
+                                        <strong>Tarjeta de Crédito</strong>
+                                        <small>Pago inmediato con tarjeta</small>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Order Notes -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-sticky-note"></i> Notas del Pedido</h3>
+                            <div class="form-group">
+                                <textarea id="orderNotes" placeholder="Comentarios adicionales sobre tu pedido (opcional)" rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Terms -->
+                        <div class="form-section">
+                            <div class="form-checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="acceptTerms" required>
+                                    <span class="checkmark"></span>
+                                    Acepto los <a href="../pages/politicas/mayoristas.html" target="_blank">términos y condiciones mayoristas</a>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Right Panel - Order Summary -->
+                <div class="order-summary-panel">
+                    <div class="summary-header">
+                        <h3>📋 Resumen del Pedido</h3>
+                    </div>
+
+                    <div class="cart-items" id="checkoutCartItems">
+                        <div class="loading-cart">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Cargando carrito...</span>
+                        </div>
+                    </div>
+
+                    <div class="order-calculations">
+                        <div class="calculation-row">
+                            <span>Subtotal:</span>
+                            <span id="checkoutSubtotal">$0.00</span>
+                        </div>
+                        <div class="calculation-row discount-row">
+                            <span>Descuento mayorista (20%):</span>
+                            <span id="checkoutDiscount">-$0.00</span>
+                        </div>
+                        <div class="calculation-row shipping-row">
+                            <span>Envío:</span>
+                            <span class="free-shipping">GRATIS</span>
+                        </div>
+                        <div class="calculation-row tax-row">
+                            <span>IVA (16%):</span>
+                            <span id="checkoutTax">$0.00</span>
+                        </div>
+                        <div class="calculation-row total-row">
+                            <span>Total:</span>
+                            <span id="checkoutTotal">$0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="order-benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-shipping-fast"></i>
+                            <span>Envío gratis incluido</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Garantía mayorista</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-headset"></i>
+                            <span>Soporte dedicado</span>
+                        </div>
+                    </div>
+
+                    <div class="checkout-actions">
+                        <button type="button" class="btn-secondary" onclick="goBackToStore()">
+                            <i class="fas fa-arrow-left"></i>
+                            Volver a la Tienda
+                        </button>
+                        <button type="button" class="btn-primary" onclick="processOrder()" id="processOrderBtn">
+                            <i class="fas fa-credit-card"></i>
+                            Procesar Pedido
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="checkout-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>🔒 Conexión segura • 📞 Soporte 24/7: +52 555 123 4567 • 📧 mayoristas@estudioartesana.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Order Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✅ Pedido Procesado</h2>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-content">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>¡Tu pedido ha sido procesado exitosamente!</h3>
+                    <div class="order-details">
+                        <div class="detail-item">
+                            <strong>Número de Pedido:</strong>
+                            <span id="orderNumber">#WS-2024-0001</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Total:</strong>
+                            <span id="orderTotal">$0.00</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Método de Pago:</strong>
+                            <span id="orderPaymentMethod">Crédito a 30 días</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Tiempo de Entrega:</strong>
+                            <span>5-7 días hábiles</span>
+                        </div>
+                    </div>
+                    <div class="next-steps">
+                        <h4>📋 Próximos pasos:</h4>
+                        <ul>
+                            <li>Recibirás un email de confirmación en los próximos minutos</li>
+                            <li>Te contactaremos para coordinar la entrega</li>
+                            <li>Puedes seguir tu pedido en "Mis Pedidos"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="continueShopping()">
+                    <i class="fas fa-shopping-cart"></i>
+                    Seguir Comprando
+                </button>
+                <button type="button" class="btn btn-primary" onclick="viewMyOrders()">
+                    <i class="fas fa-list-alt"></i>
+                    Ver Mis Pedidos
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/config.js"></script>
+    <script>
+        // Checkout Configuration
+        const WHOLESALE_DISCOUNT = 0.20;
+        const TAX_RATE = 0.16;
+        let checkoutCart = [];
+        let currentUser = null;
+        let orderTotal = 0;
+
+        // Check authentication
+        function checkCheckoutAuth() {
+            const wholesaleSession = localStorage.getItem('wholesaleSession');
+            if (!wholesaleSession) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            
+            try {
+                const sessionData = JSON.parse(wholesaleSession);
+                const now = Date.now();
+                
+                if (!sessionData.isLoggedIn || now > sessionData.expires) {
+                    localStorage.removeItem('wholesaleSession');
+                    window.location.href = 'login.html';
+                    return false;
+                }
+                
+                currentUser = sessionData;
+                updateUserInfo();
+                return true;
+            } catch (error) {
+                localStorage.removeItem('wholesaleSession');
+                window.location.href = 'login.html';
+                return false;
+            }
+        }
+
+        // Update user info
+        function updateUserInfo() {
+            if (currentUser) {
+                document.getElementById('checkoutWholesalerName').textContent = 
+                    currentUser.company || currentUser.name || 'Mayorista';
+                
+                // Pre-fill form with user data
+                document.getElementById('contactName').value = currentUser.name || '';
+                document.getElementById('contactEmail').value = currentUser.email || '';
+                document.getElementById('contactPhone').value = currentUser.phone || '';
+                document.getElementById('company').value = currentUser.company || '';
+            }
+        }
+
+        // Load cart from localStorage
+        function loadCheckoutCart() {
+            const savedCart = localStorage.getItem('wholesaleCart');
+            if (savedCart) {
+                try {
+                    checkoutCart = JSON.parse(savedCart);
+                    renderCheckoutCart();
+                    calculateOrderTotal();
+                } catch (error) {
+                    console.error('Error loading cart:', error);
+                    showEmptyCart();
+                }
+            } else {
+                showEmptyCart();
+            }
+        }
+
+        // Show empty cart
+        function showEmptyCart() {
+            document.getElementById('checkoutCartItems').innerHTML = `
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Tu carrito está vacío</p>
+                    <button onclick="goBackToStore()" class="btn-primary">
+                        <i class="fas fa-shopping-cart"></i>
+                        Ir a la Tienda
+                    </button>
+                </div>
+            `;
+        }
+
+        // Render checkout cart
+        function renderCheckoutCart() {
+            const container = document.getElementById('checkoutCartItems');
+            
+            if (checkoutCart.length === 0) {
+                showEmptyCart();
+                return;
+            }
+
+            container.innerHTML = checkoutCart.map(item => `
+                <div class="checkout-item">
+                    <div class="item-info">
+                        <h4>${item.name}</h4>
+                        <div class="item-quantity">Cantidad: ${item.quantity} piezas</div>
+                        <div class="item-pricing">
+                            <span class="regular-price">Precio regular: $${item.regularPrice.toFixed(2)}</span>
+                            <span class="wholesale-price">Precio mayorista: $${item.wholesalePrice.toFixed(2)}</span>
+                        </div>
+                    </div>
+                    <div class="item-total">
+                        $${(item.wholesalePrice * item.quantity).toFixed(2)}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Calculate order total
+        function calculateOrderTotal() {
+            if (checkoutCart.length === 0) {
+                document.getElementById('checkoutSubtotal').textContent = '$0.00';
+                document.getElementById('checkoutDiscount').textContent = '-$0.00';
+                document.getElementById('checkoutTax').textContent = '$0.00';
+                document.getElementById('checkoutTotal').textContent = '$0.00';
+                return;
+            }
+
+            const subtotal = checkoutCart.reduce((sum, item) => sum + (item.regularPrice * item.quantity), 0);
+            const discount = subtotal * WHOLESALE_DISCOUNT;
+            const discountedTotal = subtotal - discount;
+            const tax = discountedTotal * TAX_RATE;
+            orderTotal = discountedTotal + tax;
+
+            document.getElementById('checkoutSubtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('checkoutDiscount').textContent = `-$${discount.toFixed(2)}`;
+            document.getElementById('checkoutTax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('checkoutTotal').textContent = `$${orderTotal.toFixed(2)}`;
+        }
+
+        // Toggle billing address section
+        function toggleBillingAddress() {
+            const checkbox = document.getElementById('sameAsShipping');
+            const billingSection = document.getElementById('billingAddressSection');
+            
+            if (checkbox.checked) {
+                billingSection.style.display = 'none';
+            } else {
+                billingSection.style.display = 'block';
+            }
+        }
+
+        // Process order
+        async function processOrder() {
+            if (checkoutCart.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+
+            // Validate form
+            const form = document.getElementById('checkoutForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const processBtn = document.getElementById('processOrderBtn');
+            const originalText = processBtn.innerHTML;
+            
+            try {
+                // Disable button and show loading
+                processBtn.disabled = true;
+                processBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando Pedido...';
+
+                // Simulate processing time
+                await new Promise(resolve => setTimeout(resolve, 3000));
+
+                // Collect order data
+                const orderData = {
+                    // Customer info
+                    customer: {
+                        id: currentUser.id,
+                        name: document.getElementById('contactName').value,
+                        email: document.getElementById('contactEmail').value,
+                        phone: document.getElementById('contactPhone').value,
+                        company: document.getElementById('company').value
+                    },
+                    // Shipping address
+                    shipping: {
+                        address: document.getElementById('shippingAddress').value,
+                        city: document.getElementById('city').value,
+                        state: document.getElementById('state').value,
+                        postalCode: document.getElementById('postalCode').value,
+                        country: document.getElementById('country').value,
+                        notes: document.getElementById('shippingNotes').value
+                    },
+                    // Billing info
+                    billing: {
+                        sameAsShipping: document.getElementById('sameAsShipping').checked,
+                        rfc: document.getElementById('rfc').value,
+                        businessName: document.getElementById('businessName').value
+                    },
+                    // Order details
+                    items: checkoutCart,
+                    paymentMethod: document.querySelector('input[name="paymentMethod"]:checked').value,
+                    orderNotes: document.getElementById('orderNotes').value,
+                    // Totals
+                    subtotal: checkoutCart.reduce((sum, item) => sum + (item.regularPrice * item.quantity), 0),
+                    discount: checkoutCart.reduce((sum, item) => sum + (item.regularPrice * item.quantity), 0) * WHOLESALE_DISCOUNT,
+                    tax: (checkoutCart.reduce((sum, item) => sum + (item.wholesalePrice * item.quantity), 0)) * TAX_RATE,
+                    total: orderTotal,
+                    // Metadata
+                    orderDate: new Date().toISOString(),
+                    orderNumber: `WS-${new Date().getFullYear()}-${String(Date.now()).slice(-4)}`
+                };
+
+                console.log('Order processed:', orderData);
+
+                // Show success modal
+                showOrderConfirmation(orderData);
+
+                // Clear cart
+                localStorage.removeItem('wholesaleCart');
+                checkoutCart = [];
+
+            } catch (error) {
+                console.error('Order processing error:', error);
+                alert('Error procesando el pedido. Por favor intenta nuevamente.');
+                
+                // Reset button
+                processBtn.disabled = false;
+                processBtn.innerHTML = originalText;
+            }
+        }
+
+        // Show order confirmation
+        function showOrderConfirmation(orderData) {
+            document.getElementById('orderNumber').textContent = orderData.orderNumber;
+            document.getElementById('orderTotal').textContent = `$${orderData.total.toFixed(2)}`;
+            
+            const paymentMethods = {
+                'credit_30': 'Crédito a 30 días',
+                'bank_transfer': 'Transferencia bancaria',
+                'credit_card': 'Tarjeta de crédito'
+            };
+            document.getElementById('orderPaymentMethod').textContent = paymentMethods[orderData.paymentMethod];
+            
+            document.getElementById('confirmationModal').classList.add('show');
+            
+            // Update checkout steps
+            updateCheckoutStep(3);
+        }
+
+        // Update checkout step
+        function updateCheckoutStep(step) {
+            const steps = document.querySelectorAll('.checkout-steps .step');
+            steps.forEach((stepEl, index) => {
+                if (index < step) {
+                    stepEl.classList.add('completed');
+                }
+                if (index === step - 1) {
+                    stepEl.classList.add('active');
+                }
+            });
+        }
+
+        // Go back to store
+        function goBackToStore() {
+            window.location.href = 'tienda.html';
+        }
+
+        // Continue shopping
+        function continueShopping() {
+            document.getElementById('confirmationModal').classList.remove('show');
+            window.location.href = 'tienda.html';
+        }
+
+        // View my orders
+        function viewMyOrders() {
+            document.getElementById('confirmationModal').classList.remove('show');
+            window.location.href = 'pedidos.html';
+        }
+
+        // Initialize checkout
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🛒 Checkout mayoristas inicializado');
+            
+            if (!checkCheckoutAuth()) return;
+            
+            loadCheckoutCart();
+            
+            // Setup form interactions
+            document.getElementById('sameAsShipping').addEventListener('change', toggleBillingAddress);
+            
+            // Close modal when clicking outside
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.classList.remove('show');
+                }
+            });
+            
+            // Auto-uppercase RFC
+            document.getElementById('rfc').addEventListener('input', function() {
+                this.value = this.value.toUpperCase();
+            });
+            
+            // Format phone number
+            document.getElementById('contactPhone').addEventListener('input', function() {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 0) {
+                    if (value.length <= 10) {
+                        value = value.replace(/(\d{3})(\d{3})(\d{0,4})/, '$1 $2 $3').trim();
+                    } else {
+                        value = '+' + value.substring(0, 2) + ' ' + value.substring(2, 5) + ' ' + 
+                               value.substring(5, 8) + ' ' + value.substring(8, 12);
+                    }
+                }
+                this.value = value;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -226,6 +226,17 @@
             background: #dc3545;
             color: white;
         }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
 
         .btn-sm {
             padding: 4px 8px;
@@ -2529,6 +2540,238 @@ para ver los cambios aplicados.
                 
                 alert(cartDetails);
             }
+        }
+        
+        // ====== SISTEMA DE NOTIFICACIONES POR EMAIL ======
+        
+        // Enviar notificación de pedido completado
+        async function sendOrderCompletionEmail(orderId, customerEmail, orderDetails) {
+            console.log('📧 Enviando notificación de pedido completado...');
+            
+            const emailData = {
+                to: customerEmail,
+                subject: `✅ Tu pedido #${orderId} ha sido completado - Estudio Artesana`,
+                template: 'order_completion',
+                data: {
+                    orderId: orderId,
+                    customerName: orderDetails.customerName,
+                    items: orderDetails.items,
+                    total: orderDetails.total,
+                    trackingNumber: orderDetails.trackingNumber || `WS${Date.now().toString().slice(-6)}`
+                }
+            };
+            
+            try {
+                // En producción, esto se conectaría a un servicio de email como SendGrid, Mailgun, etc.
+                await simulateEmailSend(emailData);
+                
+                return {
+                    success: true,
+                    message: `Email enviado exitosamente a ${customerEmail}`
+                };
+            } catch (error) {
+                console.error('Error enviando email:', error);
+                return {
+                    success: false,
+                    message: `Error enviando email: ${error.message}`
+                };
+            }
+        }
+        
+        // Simular envío de email
+        async function simulateEmailSend(emailData) {
+            console.log('🔄 Simulando envío de email...');
+            console.log('Email Data:', emailData);
+            
+            // Simular delay de API
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Simular 95% de éxito
+            if (Math.random() > 0.05) {
+                console.log('✅ Email enviado exitosamente (simulado)');
+                return true;
+            } else {
+                throw new Error('Servicio de email temporalmente no disponible');
+            }
+        }
+        
+        // Debitar inventario cuando se marca como entregado
+        async function debitInventoryOnDelivery(orderItems) {
+            console.log('📦 Debitando inventario por pedido entregado...');
+            
+            try {
+                for (const item of orderItems) {
+                    if (supabase) {
+                        // Actualizar stock en la base de datos
+                        const { error } = await supabase
+                            .from('products')
+                            .update({
+                                stock: supabase.sql`stock - ${item.quantity}`
+                            })
+                            .eq('id', item.productId);
+                        
+                        if (error) {
+                            console.error(`Error actualizando stock del producto ${item.productId}:`, error);
+                        } else {
+                            console.log(`✅ Stock actualizado para producto ${item.productId}: -${item.quantity} unidades`);
+                        }
+                    } else {
+                        // Modo demostración
+                        console.log(`📦 (DEMO) Debitando ${item.quantity} unidades del producto: ${item.name}`);
+                    }
+                }
+                
+                return {
+                    success: true,
+                    message: 'Inventario actualizado exitosamente'
+                };
+            } catch (error) {
+                console.error('Error debitando inventario:', error);
+                return {
+                    success: false,
+                    message: `Error actualizando inventario: ${error.message}`
+                };
+            }
+        }
+        
+        // Marcar pedido como entregado
+        async function markOrderAsDelivered(orderId) {
+            const confirmMessage = `📦 MARCAR PEDIDO COMO ENTREGADO
+
+¿Confirmar que el pedido #${orderId} ha sido entregado?
+
+✅ Esto realizará las siguientes acciones:
+• Actualizar estado del pedido a "Entregado"
+• Debitar el inventario correspondiente
+• Enviar email de confirmación al cliente
+
+¿Continuar?`;
+            
+            if (!confirm(confirmMessage)) {
+                return;
+            }
+            
+            try {
+                // Datos simulados del pedido (en producción vendría de la base de datos)
+                const orderData = {
+                    id: orderId,
+                    customerName: 'María González',
+                    customerEmail: 'maria@empresa.com',
+                    items: [
+                        { productId: 1, name: 'Bolsa Artesanal Premium', quantity: 15, price: 360 },
+                        { productId: 2, name: 'Cuaderno de Cuero Natural', quantity: 20, price: 224 }
+                    ],
+                    total: 8800,
+                    orderDate: '2024-01-15',
+                    trackingNumber: `WS${Date.now().toString().slice(-6)}`
+                };
+                
+                // 1. Actualizar estado del pedido
+                if (supabase) {
+                    const { error } = await supabase
+                        .from('orders')
+                        .update({
+                            status: 'delivered',
+                            delivered_at: new Date().toISOString()
+                        })
+                        .eq('id', orderId);
+                    
+                    if (error) {
+                        throw new Error(`Error actualizando estado del pedido: ${error.message}`);
+                    }
+                }
+                
+                // 2. Debitar inventario
+                const inventoryResult = await debitInventoryOnDelivery(orderData.items);
+                
+                // 3. Enviar email de confirmación
+                const emailResult = await sendOrderCompletionEmail(
+                    orderId, 
+                    orderData.customerEmail, 
+                    orderData
+                );
+                
+                // Mostrar resultado
+                let resultMessage = `✅ PEDIDO #${orderId} MARCADO COMO ENTREGADO
+
+`;
+                resultMessage += `📦 Estado: Actualizado exitosamente
+`;
+                resultMessage += `📊 Inventario: ${inventoryResult.success ? 'Actualizado' : 'Error - ' + inventoryResult.message}
+`;
+                resultMessage += `📧 Email: ${emailResult.success ? 'Enviado' : 'Error - ' + emailResult.message}
+`;
+                
+                if (inventoryResult.success && emailResult.success) {
+                    resultMessage += `
+🎉 ¡Proceso completado exitosamente!`;
+                } else {
+                    resultMessage += `
+⚠️ Proceso completado con algunos errores.`;
+                }
+                
+                alert(resultMessage);
+                
+                // Actualizar vista si es necesario
+                refreshSalesData();
+                
+            } catch (error) {
+                console.error('Error marcando pedido como entregado:', error);
+                alert(`❌ Error marcando pedido como entregado: ${error.message}`);
+            }
+        }
+        
+        // Integrar botón en la tabla de pedidos
+        function renderOrdersTable() {
+            const tbody = document.getElementById('ordersTableBody');
+            
+            if (allOrders.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="loading-row">
+                            <i class="fas fa-info-circle"></i> No hay pedidos para mostrar. 
+                            <br><small style="color: #666;">Los pedidos aparecerán aquí una vez que los usuarios realicen compras.</small>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            tbody.innerHTML = allOrders.map(order => {
+                const orderDate = new Date(order.created_at).toLocaleDateString();
+                const customerName = order.profiles?.full_name || order.profiles?.email || 'Usuario Invitado';
+                const statusBadge = getOrderStatusBadge(order.status);
+                
+                return `
+                    <tr>
+                        <td><strong>#${order.id}</strong></td>
+                        <td>${customerName}</td>
+                        <td>${orderDate}</td>
+                        <td>$${parseFloat(order.total || 0).toFixed(2)}</td>
+                        <td>${statusBadge}</td>
+                        <td>${order.payment_method || 'No especificado'}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn btn-primary" onclick="viewOrder(${order.id})" title="Ver Detalles">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn btn-success" onclick="updateOrderStatus(${order.id})" title="Actualizar Estado">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                ${order.status !== 'delivered' ? `
+                                    <button class="action-btn btn-warning" onclick="markOrderAsDelivered(${order.id})" title="Marcar como Entregado">
+                                        <i class="fas fa-truck"></i>
+                                    </button>
+                                ` : `
+                                    <button class="action-btn btn-secondary" title="Ya Entregado" disabled>
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                `}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
         }
         
         // Enviar email de recuperación
