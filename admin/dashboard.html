@@ -916,10 +916,43 @@
             document.getElementById('pageTitle').textContent = titles[sectionId] || 'Panel de Administración';
         }
 
-        function logout() {
+        async function logout() {
             if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
-                localStorage.removeItem('adminSession');
-                window.location.href = 'login.html';
+                try {
+                    // Limpiar sesión local
+                    localStorage.removeItem('adminSession');
+                    
+                    // Si hay sesión de Supabase, cerrarla también
+                    if (supabase) {
+                        await supabase.auth.signOut();
+                    }
+                    
+                    // Limpiar todos los datos de localStorage relacionados
+                    const keysToRemove = [];
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const key = localStorage.key(i);
+                        if (key && (key.includes('admin') || key.includes('supabase'))) {
+                            keysToRemove.push(key);
+                        }
+                    }
+                    keysToRemove.forEach(key => localStorage.removeItem(key));
+                    
+                    // Esperar un poco antes de redirigir para asegurar limpieza
+                    setTimeout(() => {
+                        // Verificar si estamos en producción o desarrollo
+                        const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+                        const loginUrl = isProduction ? '/admin/login.html' : 'login.html';
+                        
+                        // Redirigir usando replace para no crear historial
+                        window.location.replace(loginUrl);
+                    }, 100);
+                    
+                } catch (error) {
+                    console.error('Error durante logout:', error);
+                    // Forzar logout aunque haya error
+                    localStorage.clear();
+                    window.location.replace('login.html');
+                }
             }
         }
 

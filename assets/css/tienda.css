@@ -1484,3 +1484,163 @@ body {
         gap: 15px;
     }
 }
+
+/* ============================================
+   MOBILE SEARCH IMPROVEMENTS - NUEVA FUNCIONALIDAD
+   ============================================ */
+
+/* Mobile Search Toggle Button */
+.mobile-search-toggle {
+    background: transparent;
+    padding: 0;
+    display: none; /* Hidden by default */
+}
+
+.mobile-search-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(192, 192, 192, 0.2);
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.mobile-search-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(192, 192, 192, 0.4);
+    transform: translateY(-2px);
+}
+
+.mobile-search-btn .fas:first-child {
+    color: var(--secondary-color);
+    margin-right: 12px;
+}
+
+.mobile-search-btn span {
+    flex: 1;
+    text-align: left;
+}
+
+.mobile-search-btn .toggle-icon {
+    transition: transform 0.3s ease;
+    color: var(--secondary-color);
+}
+
+.mobile-search-btn.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* Mobile Search Container */
+.mobile-search-container {
+    display: none; /* Hidden by default */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-search-container.show {
+    opacity: 1;
+    max-height: 200px;
+}
+
+/* Desktop/Tablet: Show regular search, hide mobile elements */
+@media (min-width: 769px) {
+    .mobile-search-toggle {
+        display: none !important;
+    }
+    
+    .mobile-search-container {
+        display: none !important;
+    }
+    
+    .search-bar {
+        display: block !important;
+    }
+}
+
+/* Mobile: Hide regular search, show mobile elements */
+@media (max-width: 768px) {
+    /* Hide the top search bar */
+    .search-bar {
+        display: none !important;
+    }
+    
+    /* Show mobile toggle button */
+    .mobile-search-toggle {
+        display: block;
+        padding: 15px 0;
+        background: transparent;
+    }
+    
+    /* Show mobile search container when needed */
+    .mobile-search-container {
+        display: block;
+    }
+    
+    /* Reorder elements in shop-main using flexbox */
+    .shop-main {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Order for mobile layout */
+    .main-categories {
+        order: 1; /* Categories first */
+    }
+    
+    .mobile-search-container {
+        order: 2; /* Search after categories */
+    }
+    
+    .products-results {
+        order: 3;
+    }
+    
+    .products-container {
+        order: 4;
+    }
+    
+    .pagination {
+        order: 5;
+    }
+}
+
+/* Extra styles for better mobile UX */
+@media (max-width: 480px) {
+    .mobile-search-btn {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    .mobile-search-container {
+        margin: 15px 0;
+        padding: 16px;
+    }
+    
+    .mobile-search-container .search-box-modern {
+        border-radius: 25px;
+    }
+    
+    .mobile-search-container .search-box-modern input {
+        padding: 16px 20px;
+        font-size: 16px;
+    }
+    
+    .mobile-search-container .search-box-modern button {
+        padding: 16px 20px;
+    }
+}

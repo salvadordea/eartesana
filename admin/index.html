@@ -149,8 +149,12 @@
         function redirect() {
             if (!checkSession()) {
                 // Not logged in, redirect to login
+                // Verificar si estamos en producción o desarrollo
+                const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+                const loginUrl = isProduction ? '/admin/login.html' : 'login.html';
+                
                 setTimeout(() => {
-                    window.location.href = 'login.html';
+                    window.location.href = loginUrl;
                 }, 2000);
             }
         }

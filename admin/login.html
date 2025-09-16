@@ -281,7 +281,10 @@
                         showAlert('¡Login exitoso (modo local)! Redirigiendo...', 'success');
                         
                         setTimeout(() => {
-                            window.location.href = 'dashboard.html';
+                            // Verificar si estamos en producción o desarrollo
+                            const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+                            const dashboardUrl = isProduction ? '/admin/dashboard.html' : 'dashboard.html';
+                            window.location.replace(dashboardUrl);
                         }, 1500);
                     } else {
                         // Mostrar error específico de Supabase o genérico
@@ -309,7 +312,10 @@
                     showAlert('Login exitoso (modo local)', 'success');
                     
                     setTimeout(() => {
-                        window.location.href = 'dashboard.html';
+                        // Verificar si estamos en producción o desarrollo
+                        const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+                        const dashboardUrl = isProduction ? '/admin/dashboard.html' : 'dashboard.html';
+                        window.location.replace(dashboardUrl);
                     }, 1500);
                 } else {
                     showAlert('Error de conexión y credenciales incorrectas', 'danger');

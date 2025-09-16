@@ -193,6 +193,11 @@ class ContactDataLoader {
     refresh() {
         console.log('🔄 Refrescando datos de contacto...');
         this.applyData();
+        
+        // También actualizar el footer si está disponible
+        if (window.UniversalFooter) {
+            window.UniversalFooter.refresh();
+        }
     }
 }
 

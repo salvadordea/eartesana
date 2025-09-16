@@ -1,0 +1,323 @@
+<!-- Universal Footer Component -->
+<footer class="universal-footer">
+    <div class="container">
+        <div class="footer-content">
+            <!-- Columna 1: Estudio Artesana -->
+            <div class="footer-section brand-section">
+                <div class="footer-logo">
+                    <h3>ESTUDIO ARTESANA</h3>
+                </div>
+                <p class="footer-description">
+                    Creamos productos artesanales únicos que honran la tradición mexicana con un enfoque contemporáneo y elegante.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook" id="footerFacebookLink">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram" id="footerInstagramLink">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="WhatsApp" id="footerWhatsAppLink">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Columna 2: Enlaces Rápidos -->
+            <div class="footer-section links-section">
+                <h4>Enlaces Rápidos</h4>
+                <ul class="footer-links">
+                    <li><a href="/index.html" class="footer-link">Inicio</a></li>
+                    <li><a href="/tienda/index.html" class="footer-link">Tienda</a></li>
+                    <li><a href="/pages/sobre-nosotros/index.html" class="footer-link">Nosotros</a></li>
+                    <li><a href="/pages/mayoristas/index.html" class="footer-link">Mayoristas</a></li>
+                    <li><a href="#contacto" class="footer-link">Contacto</a></li>
+                </ul>
+            </div>
+            
+            <!-- Columna 3: Información Legal -->
+            <div class="footer-section legal-section">
+                <h4>Información</h4>
+                <ul class="footer-links">
+                    <li><a href="/pages/politicas/terminos.html" class="footer-link">Términos y Condiciones</a></li>
+                    <li><a href="/pages/politicas/privacidad.html" class="footer-link">Aviso de Privacidad</a></li>
+                    <li><a href="/pages/politicas/envios.html" class="footer-link">Envíos y Devoluciones</a></li>
+                    <li><a href="/pages/politicas/garantia.html" class="footer-link">Garantía</a></li>
+                    <li><a href="/pages/politicas/cuidados.html" class="footer-link">Cuidado de Productos</a></li>
+                </ul>
+            </div>
+            
+            <!-- Columna 4: Contacto -->
+            <div class="footer-section contact-section">
+                <h4>Contacto</h4>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:info@estudioartesana.com" id="footerEmailLink">info@estudioartesana.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+5212345678490" id="footerPhoneLink">+52 123 456 7890</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span id="footerLocationText">Ciudad de México, México</span>
+                    </div>
+                    <div class="contact-item hours">
+                        <i class="fas fa-clock"></i>
+                        <div id="footerBusinessHours">
+                            <span>Lun - Vie: 9:00 AM - 6:00 PM</span>
+                            <span>Sáb: 10:00 AM - 4:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2025 Estudio Artesana. Todos los derechos reservados.</p>
+                <div class="footer-bottom-links">
+                    <a href="/pages/politicas/cookies.html">Política de Cookies</a>
+                    <span class="separator">|</span>
+                    <a href="/sitemap.html">Mapa del Sitio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+.universal-footer {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    padding: 50px 0 0;
+    margin-top: auto;
+}
+
+.universal-footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    color: #D4AF37;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-section h3 {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+}
+
+.footer-section h4 {
+    font-size: 1.1rem;
+}
+
+.footer-description {
+    color: #bdc3c7;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 2px solid #D4AF37;
+    border-radius: 50%;
+    color: #D4AF37;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: #D4AF37;
+    color: #2c3e50;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-link {
+    color: #bdc3c7;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.footer-link:hover {
+    color: #D4AF37;
+    padding-left: 5px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: #bdc3c7;
+    font-size: 0.95rem;
+}
+
+.contact-item i {
+    color: #D4AF37;
+    width: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.contact-item a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: #D4AF37;
+}
+
+.contact-item.hours {
+    align-items: flex-start;
+}
+
+.contact-item.hours div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.contact-item.hours span {
+    font-size: 0.9rem;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 25px 0;
+}
+
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-bottom-content p {
+    color: #bdc3c7;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.footer-bottom-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.footer-bottom-links a {
+    color: #bdc3c7;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom-links a:hover {
+    color: #D4AF37;
+}
+
+.separator {
+    color: rgba(212, 175, 55, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .universal-footer {
+        padding: 30px 0 0;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .contact-item {
+        justify-content: center;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .universal-footer .container {
+        padding: 0 15px;
+    }
+    
+    .footer-content {
+        gap: 25px;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        gap: 5px;
+        align-items: center;
+    }
+    
+    .contact-item i {
+        margin-top: 0;
+    }
+}
+</style>

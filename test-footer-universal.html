@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Footer Universal - Estudio Artesana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #f8f8f8;
+        }
+
+        .main-content {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .test-header {
+            background: linear-gradient(135deg, #d4a574 0%, #b8956a 100%);
+            color: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .test-header h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .test-section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .test-section h2 {
+            color: #d4a574;
+            margin-bottom: 1rem;
+            font-family: 'Crimson Text', serif;
+        }
+
+        .test-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-group label {
+            font-weight: bold;
+            color: #666;
+        }
+
+        .control-group input {
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .control-group input:focus {
+            outline: none;
+            border-color: #d4a574;
+        }
+
+        .btn {
+            background: #d4a574;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0.5rem;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #b8956a;
+        }
+
+        .info-box {
+            background: #f0f7ff;
+            padding: 1rem;
+            border-left: 4px solid #d4a574;
+            margin: 1rem 0;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        .status-connected {
+            background: #4CAF50;
+        }
+
+        .status-disconnected {
+            background: #f44336;
+        }
+
+        .logs {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        @media (max-width: 768px) {
+            .test-controls {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <div class="test-header">
+            <h1>🦶 Prueba Footer Universal</h1>
+            <p>Sistema de footer dinámico con sincronización de datos de contacto</p>
+        </div>
+
+        <div class="test-section">
+            <h2>📊 Estado del Sistema</h2>
+            <div class="info-box">
+                <p><strong>Footer Universal:</strong> <span id="footerStatus" class="status-indicator status-disconnected"></span> <span id="footerStatusText">Cargando...</span></p>
+                <p><strong>Datos de Contacto:</strong> <span id="contactDataStatus" class="status-indicator status-disconnected"></span> <span id="contactDataStatusText">Verificando...</span></p>
+                <p><strong>Sincronización:</strong> <span id="syncStatus" class="status-indicator status-disconnected"></span> <span id="syncStatusText">Esperando...</span></p>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>🎛️ Controles de Prueba</h2>
+            <p>Simula cambios en los datos de contacto para verificar la sincronización con el footer:</p>
+            
+            <div class="test-controls">
+                <div class="control-group">
+                    <label>Email de Contacto:</label>
+                    <input type="email" id="testEmail" placeholder="info@estudioartesana.com">
+                </div>
+                
+                <div class="control-group">
+                    <label>Número de Teléfono:</label>
+                    <input type="tel" id="testPhone" placeholder="+52 123 456 7890">
+                </div>
+                
+                <div class="control-group">
+                    <label>URL de Instagram:</label>
+                    <input type="url" id="testInstagram" placeholder="https://instagram.com/estudioartesana">
+                </div>
+                
+                <div class="control-group">
+                    <label>URL de Facebook:</label>
+                    <input type="url" id="testFacebook" placeholder="https://facebook.com/estudioartesana">
+                </div>
+                
+                <div class="control-group">
+                    <label>WhatsApp (número):</label>
+                    <input type="tel" id="testWhatsapp" placeholder="+5212345678490">
+                </div>
+                
+                <div class="control-group">
+                    <label>Ubicación:</label>
+                    <input type="text" id="testLocation" placeholder="Ciudad de México, México">
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 2rem 0;">
+                <button class="btn" onclick="updateContactData()">📝 Actualizar Datos</button>
+                <button class="btn" onclick="refreshFooter()">🔄 Refrescar Footer</button>
+                <button class="btn" onclick="clearStorage()">🗑️ Limpiar Datos</button>
+                <button class="btn" onclick="loadDefaults()">⚡ Cargar Por Defecto</button>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>📝 Logs del Sistema</h2>
+            <div class="logs" id="systemLogs">
+                Iniciando sistema de pruebas...<br>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>ℹ️ Instrucciones</h2>
+            <ol>
+                <li><strong>Carga inicial:</strong> El footer se carga automáticamente con datos por defecto</li>
+                <li><strong>Prueba de actualización:</strong> Modifica los campos y haz clic en "Actualizar Datos"</li>
+                <li><strong>Verificación:</strong> Los cambios deben reflejarse inmediatamente en el footer</li>
+                <li><strong>Panel de admin:</strong> Los datos también se sincronizan con el panel de administración</li>
+                <li><strong>Múltiples pestañas:</strong> Abre varias pestañas para probar la sincronización en tiempo real</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Footer será cargado dinámicamente aquí -->
+
+    <!-- Scripts necesarios -->
+    <script src="assets/js/footer-universal.js"></script>
+
+    <script>
+        // Sistema de logs
+        function addLog(message, type = 'info') {
+            const logs = document.getElementById('systemLogs');
+            const timestamp = new Date().toLocaleTimeString();
+            const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
+            logs.innerHTML += `[${timestamp}] ${icon} ${message}<br>`;
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        // Actualizar indicadores de estado
+        function updateStatus(element, status, text) {
+            const indicator = document.getElementById(element);
+            const statusText = document.getElementById(element + 'Text');
+            
+            indicator.className = 'status-indicator ' + (status ? 'status-connected' : 'status-disconnected');
+            statusText.textContent = text;
+        }
+
+        // Cargar datos actuales en los campos
+        function loadCurrentData() {
+            try {
+                const savedData = localStorage.getItem('contactInfo');
+                if (savedData) {
+                    const data = JSON.parse(savedData);
+                    
+                    document.getElementById('testEmail').value = data.contactEmail || '';
+                    document.getElementById('testPhone').value = data.phoneNumber || '';
+                    document.getElementById('testInstagram').value = data.instagramUrl || '';
+                    document.getElementById('testFacebook').value = data.facebookUrl || '';
+                    document.getElementById('testWhatsapp').value = data.whatsappNumber || '';
+                    document.getElementById('testLocation').value = data.locationText || '';
+                    
+                    addLog('Datos actuales cargados en formulario', 'success');
+                    updateStatus('contactDataStatus', true, 'Datos cargados');
+                }
+            } catch (error) {
+                addLog('Error al cargar datos actuales: ' + error.message, 'error');
+                updateStatus('contactDataStatus', false, 'Error al cargar');
+            }
+        }
+
+        // Actualizar datos de contacto
+        function updateContactData() {
+            const newData = {
+                contactEmail: document.getElementById('testEmail').value,
+                phoneNumber: document.getElementById('testPhone').value,
+                instagramUrl: document.getElementById('testInstagram').value,
+                facebookUrl: document.getElementById('testFacebook').value,
+                whatsappNumber: document.getElementById('testWhatsapp').value,
+                locationText: document.getElementById('testLocation').value,
+                businessHours: 'Lun - Vie: 9:00 AM - 6:00 PM\\nSáb: 10:00 AM - 4:00 PM'
+            };
+
+            try {
+                // Guardar en localStorage
+                localStorage.setItem('contactInfo', JSON.stringify(newData));
+                
+                // Disparar evento para sincronización
+                window.dispatchEvent(new StorageEvent('storage', {
+                    key: 'contactInfo',
+                    newValue: JSON.stringify(newData),
+                    storageArea: localStorage
+                }));
+                
+                addLog('Datos actualizados correctamente', 'success');
+                updateStatus('syncStatus', true, 'Sincronizado');
+                
+                // Refrescar footer si está disponible
+                if (window.UniversalFooter) {
+                    window.UniversalFooter.refresh();
+                }
+                
+            } catch (error) {
+                addLog('Error al actualizar datos: ' + error.message, 'error');
+                updateStatus('syncStatus', false, 'Error de sincronización');
+            }
+        }
+
+        // Refrescar footer manualmente
+        function refreshFooter() {
+            if (window.UniversalFooter) {
+                window.UniversalFooter.refresh();
+                addLog('Footer refrescado manualmente', 'success');
+            } else {
+                addLog('Footer no disponible para refrescar', 'error');
+            }
+        }
+
+        // Limpiar datos guardados
+        function clearStorage() {
+            localStorage.removeItem('contactInfo');
+            
+            // Limpiar campos
+            document.getElementById('testEmail').value = '';
+            document.getElementById('testPhone').value = '';
+            document.getElementById('testInstagram').value = '';
+            document.getElementById('testFacebook').value = '';
+            document.getElementById('testWhatsapp').value = '';
+            document.getElementById('testLocation').value = '';
+            
+            addLog('Datos limpiados correctamente', 'success');
+            updateStatus('contactDataStatus', false, 'Sin datos');
+            updateStatus('syncStatus', false, 'Datos limpiados');
+            
+            // Refrescar footer
+            if (window.UniversalFooter) {
+                window.UniversalFooter.refresh();
+            }
+        }
+
+        // Cargar datos por defecto
+        function loadDefaults() {
+            document.getElementById('testEmail').value = 'info@estudioartesana.com';
+            document.getElementById('testPhone').value = '+52 123 456 7890';
+            document.getElementById('testInstagram').value = 'https://instagram.com/estudioartesana';
+            document.getElementById('testFacebook').value = 'https://facebook.com/estudioartesana';
+            document.getElementById('testWhatsapp').value = '+5212345678490';
+            document.getElementById('testLocation').value = 'Ciudad de México, México';
+            
+            addLog('Datos por defecto cargados', 'info');
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            addLog('Sistema de pruebas iniciado', 'success');
+            
+            // Verificar si el footer se carga
+            setTimeout(() => {
+                const footer = document.querySelector('footer');
+                if (footer) {
+                    updateStatus('footerStatus', true, 'Footer cargado');
+                    addLog('Footer universal cargado correctamente', 'success');
+                } else {
+                    updateStatus('footerStatus', false, 'Error al cargar');
+                    addLog('Error: Footer no se pudo cargar', 'error');
+                }
+            }, 1000);
+            
+            // Cargar datos actuales
+            loadCurrentData();
+            
+            // Escuchar cambios en localStorage
+            window.addEventListener('storage', (e) => {
+                if (e.key === 'contactInfo') {
+                    addLog('Cambio detectado en otra pestaña', 'info');
+                    loadCurrentData();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

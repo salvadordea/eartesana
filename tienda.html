@@ -66,8 +66,19 @@
         </div>
     </section>
 
+    <!-- Mobile Search Toggle Button -->
+    <section class="mobile-search-toggle">
+        <div class="container">
+            <button id="mobileSearchToggle" class="mobile-search-btn">
+                <i class="fas fa-search"></i>
+                <span>Buscar productos</span>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </button>
+        </div>
+    </section>
+
     <!-- Search Bar (Top) -->
-    <section class="search-bar">
+    <section class="search-bar" id="searchBarSection">
         <div class="container">
             <div class="search-container">
                 <div class="search-box-modern">
@@ -143,8 +154,8 @@
 
                 <!-- Main Area with Categories and Products -->
                 <main class="shop-main">
-                    <!-- Categories Section -->
-                    <div class="categories-section-inline">
+                    <!-- Categories Section (order: 1) -->
+                    <div class="categories-section-inline main-categories">
                         <!-- Categories Loading -->
                         <div class="categories-loading" id="categoriesLoading">
                             <div class="loading-spinner"></div>
@@ -164,7 +175,20 @@
                         </div>
                     </div>
 
-                    <!-- Products Results Info -->
+                    <!-- Mobile Search Bar (order: 2 on mobile) -->
+                    <div class="mobile-search-container" id="mobileSearchContainer">
+                        <div class="search-container">
+                            <div class="search-box-modern">
+                                <input type="text" id="mobileSearchInput" placeholder="Buscar productos, categorías..." autocomplete="off">
+                                <button type="button" onclick="searchProductsMobile()">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <div id="mobileSearchSuggestions" class="search-suggestions"></div>
+                        </div>
+                    </div>
+
+                    <!-- Products Results Info (order: 3) -->
                     <div class="products-results" id="productsResults">
                         <span class="results-count">Cargando productos...</span>
                         <div class="results-pagination">
@@ -172,7 +196,7 @@
                         </div>
                     </div>
 
-                    <!-- Products Grid Container -->
+                    <!-- Products Grid Container (order: 4) -->
                     <div class="products-container" id="productsContainer">
                         <!-- Loading State -->
                         <div class="products-loading" id="productsLoading">
@@ -202,7 +226,7 @@
                         </div>
                     </div>
 
-                    <!-- Pagination -->
+                    <!-- Pagination (order: 5) -->
                     <div class="pagination" id="pagination">
                         <!-- Pagination will be inserted here dynamically -->
                     </div>
@@ -254,7 +278,7 @@
     <!-- Tienda Supabase Integration -->
     <script src="./assets/js/tienda-supabase-integration.js"></script>
     
-    <!-- Script específico para manejar API connection status -->
+    <!-- Script específico para manejar API connection status y mobile search -->
     <script>
         // Mostrar estado de conexión con el API
         document.addEventListener('DOMContentLoaded', function() {
@@ -290,7 +314,73 @@
                     setTimeout(() => errorDiv.remove(), 5000);
                 }
             }, 3000);
+            
+            // ============================================
+            // MOBILE SEARCH COLLAPSE FUNCTIONALITY
+            // ============================================
+            
+            const mobileSearchToggle = document.getElementById('mobileSearchToggle');
+            const mobileSearchContainer = document.getElementById('mobileSearchContainer');
+            const mobileSearchInput = document.getElementById('mobileSearchInput');
+            const desktopSearchInput = document.getElementById('searchInput');
+            
+            if (mobileSearchToggle && mobileSearchContainer) {
+                console.log('📱 Inicializando funcionalidad de búsqueda móvil');
+                
+                // Toggle mobile search visibility
+                mobileSearchToggle.addEventListener('click', function() {
+                    const isActive = this.classList.contains('active');
+                    
+                    if (isActive) {
+                        // Hide search
+                        this.classList.remove('active');
+                        mobileSearchContainer.classList.remove('show');
+                        console.log('📱 Búsqueda móvil oculta');
+                    } else {
+                        // Show search
+                        this.classList.add('active');
+                        mobileSearchContainer.classList.add('show');
+                        
+                        // Auto-focus on input after animation
+                        setTimeout(() => {
+                            if (mobileSearchInput) {
+                                mobileSearchInput.focus();
+                            }
+                        }, 200);
+                        
+                        console.log('📱 Búsqueda móvil mostrada');
+                    }
+                });
+                
+                // Sync mobile search with desktop search
+                if (mobileSearchInput && desktopSearchInput) {
+                    mobileSearchInput.addEventListener('input', function() {
+                        desktopSearchInput.value = this.value;
+                        // Trigger search if there's an existing search function
+                        if (typeof searchProducts === 'function') {
+                            searchProducts();
+                        }
+                    });
+                    
+                    desktopSearchInput.addEventListener('input', function() {
+                        mobileSearchInput.value = this.value;
+                    });
+                }
+                
+                console.log('✅ Funcionalidad de búsqueda móvil configurada');
+            }
         });
+        
+        // Function for mobile search (mirrors desktop search)
+        function searchProductsMobile() {
+            // Use the existing search function if available
+            if (typeof searchProducts === 'function') {
+                searchProducts();
+            } else {
+                console.log('🔍 Búsqueda móvil ejecutada');
+                // Fallback search logic here if needed
+            }
+        }
     </script>
 </body>
 </html>
