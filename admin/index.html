@@ -117,19 +117,19 @@
         
         <div class="manual-link">
             <p>Si no rediriges automáticamente:</p>
-            <a href="login-simple.html" id="manualLink">Hacer clic aquí para acceder</a>
+            <a href="login.html" id="manualLink">Hacer clic aquí para acceder</a>
         </div>
     </div>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
-        // Check if already logged in
+        // Check if already logged in with simple session system
         function checkSession() {
             const session = localStorage.getItem('adminSession');
             if (session) {
                 try {
-                    const data = JSON.parse(session);
-                    if (data.expires > Date.now()) {
+                    const sessionData = JSON.parse(session);
+                    if (sessionData.expires > Date.now() && sessionData.isLoggedIn) {
                         // User is logged in, redirect to panel
                         window.location.href = 'panel.html';
                         return true;
@@ -150,7 +150,7 @@
             if (!checkSession()) {
                 // Not logged in, redirect to login
                 setTimeout(() => {
-                    window.location.href = 'login-simple.html';
+                    window.location.href = 'login.html';
                 }, 2000);
             }
         }
@@ -162,7 +162,7 @@
             // Make manual link immediately available
             document.getElementById('manualLink').addEventListener('click', function(e) {
                 e.preventDefault();
-                window.location.href = 'login-simple.html';
+                window.location.href = 'login.html';
             });
         });
     </script>

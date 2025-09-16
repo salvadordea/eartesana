@@ -32,10 +32,6 @@
             text-align: center;
         }
 
-        .login-header {
-            margin-bottom: 30px;
-        }
-
         .login-logo {
             width: 80px;
             height: 80px;
@@ -59,10 +55,7 @@
         .login-subtitle {
             color: #666;
             font-size: 1rem;
-        }
-
-        .login-form {
-            margin-top: 30px;
+            margin-bottom: 30px;
         }
 
         .form-group {
@@ -92,7 +85,7 @@
             box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
         }
 
-        .btn {
+        .login-btn {
             width: 100%;
             padding: 15px;
             background: linear-gradient(135deg, #D4AF37, #B8941F);
@@ -105,14 +98,15 @@
             transition: transform 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-bottom: 20px;
         }
 
-        .btn:hover {
+        .login-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
         }
 
-        .btn:disabled {
+        .login-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
@@ -123,6 +117,7 @@
             border-radius: 8px;
             margin-bottom: 20px;
             font-size: 14px;
+            display: none;
         }
 
         .alert-danger {
@@ -137,251 +132,229 @@
             border: 1px solid #c3e6cb;
         }
 
-        .loading {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .loading.active {
-            display: flex;
-        }
-
-        .spinner {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #D4AF37;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .forgot-password {
+        .credentials-info {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
             margin-top: 20px;
-            text-align: center;
+            font-size: 12px;
+            text-align: left;
         }
 
-        .forgot-password a {
-            color: #D4AF37;
-            text-decoration: none;
-            font-size: 14px;
+        .credentials-info h4 {
+            margin-bottom: 10px;
+            color: #495057;
         }
 
-        .forgot-password a:hover {
-            text-decoration: underline;
+        .credentials-info .creds {
+            font-family: monospace;
+            color: #28a745;
+            background: #fff;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 5px 0;
         }
     </style>
 </head>
 <body>
     <div class="login-container">
-        <div class="login-header">
-            <div class="login-logo">
-                <i class="fas fa-palette"></i>
-            </div>
-            <h1 class="login-title">Admin Panel</h1>
-            <p class="login-subtitle">Estudio Artesana</p>
+        <div class="login-logo">
+            <i class="fas fa-tools"></i>
         </div>
-
+        <h1 class="login-title">Panel de Admin</h1>
+        <p class="login-subtitle">Estudio Artesana</p>
+        
         <div id="alert-container"></div>
 
-        <form class="login-form" id="loginForm">
+        <form id="loginForm">
             <div class="form-group">
-                <label class="form-label" for="username">Usuario</label>
-                <input type="text" class="form-control" id="username" name="username" required autocomplete="username">
+                <label class="form-label" for="username">Email / Usuario</label>
+                <input type="email" class="form-control" id="username" name="username" required>
             </div>
             
             <div class="form-group">
                 <label class="form-label" for="password">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password" required autocomplete="current-password">
+                <input type="password" class="form-control" id="password" name="password" required>
             </div>
 
-            <button type="submit" class="btn" id="loginBtn">
-                <span id="loginText">Iniciar Sesión</span>
-                <div class="loading" id="loginLoading">
-                    <div class="spinner"></div>
-                    <span>Verificando...</span>
-                </div>
+            <button type="submit" class="login-btn" id="loginBtn">
+                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
             </button>
         </form>
 
-        <div class="forgot-password">
-            <a href="https://estudioartesana.com/wp-admin/admin.php?action=lostpassword" target="_blank">
-                ¿Olvidaste tu contraseña?
-            </a>
+        <div class="credentials-info">
+            <h4>🔑 Credenciales de Administrador:</h4>
+            <div class="creds">Email: salvadordeaguinaga@gmail.com</div>
+            <div class="creds">Contraseña: ZaqXsw124!</div>
+            <p style="color: #666; font-size: 11px; margin-top: 8px;">
+                Usa las credenciales reales de Supabase o las locales de respaldo (admin/admin123)
+            </p>
         </div>
     </div>
 
+    <!-- Scripts de Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="../assets/js/config.js"></script>
     <script>
-        class AdminAuth {
-            constructor() {
-                this.wpBaseURL = EstudioArtesanaConfig.woocommerce.baseURL;
-                this.init();
+        // Configuración de Supabase
+        let supabase;
+        let adminCredentials = { username: 'admin', password: 'admin123' };
+        
+        // Inicializar Supabase
+        function initSupabase() {
+            if (window.SUPABASE_CONFIG) {
+                supabase = window.supabase.createClient(
+                    window.SUPABASE_CONFIG.url,
+                    window.SUPABASE_CONFIG.anonKey
+                );
+                console.log('✅ Supabase inicializado');
+                checkExistingSession();
+            } else {
+                console.error('❌ Configuración de Supabase no encontrada');
+                showAlert('Error: Configuración no disponible', 'danger');
             }
-
-            init() {
-                // Check if already logged in
-                if (this.isLoggedIn()) {
-                    window.location.href = 'index.html';
-                    return;
+        }
+        
+        // Verificar si ya hay una sesión activa
+        async function checkExistingSession() {
+            try {
+                const { data: { session }, error } = await supabase.auth.getSession();
+                if (session && session.user) {
+                    // Ya hay una sesión activa, redirigir al panel
+                    console.log('✅ Sesión activa encontrada:', session.user.email);
+                    window.location.href = 'dashboard.html';
                 }
-
-                document.getElementById('loginForm').addEventListener('submit', (e) => this.handleLogin(e));
-            }
-
-            async handleLogin(event) {
-                event.preventDefault();
-                
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                
-                if (!username || !password) {
-                    this.showAlert('Por favor ingresa usuario y contraseña', 'danger');
-                    return;
-                }
-
-                this.setLoading(true);
-
-                try {
-                    const success = await this.authenticateWithWordPress(username, password);
-                    
-                    if (success) {
-                        this.showAlert('¡Login exitoso! Redirigiendo...', 'success');
-                        setTimeout(() => {
-                            window.location.href = 'index.html';
-                        }, 1500);
-                    } else {
-                        this.showAlert('Usuario o contraseña incorrectos', 'danger');
-                    }
-                } catch (error) {
-                    console.error('Login error:', error);
-                    this.showAlert('Error de conexión. Verifica tu internet.', 'danger');
-                } finally {
-                    this.setLoading(false);
-                }
-            }
-
-            async authenticateWithWordPress(username, password) {
-                try {
-                    // Método 1: Intentar con JWT Auth (si está instalado)
-                    try {
-                        const jwtResponse = await fetch(`${this.wpBaseURL}/wp-json/jwt-auth/v1/token`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                username: username,
-                                password: password
-                            })
-                        });
-
-                        if (jwtResponse.ok) {
-                            const data = await jwtResponse.json();
-                            this.saveSession(data);
-                            return true;
-                        }
-                    } catch (jwtError) {
-                        console.log('JWT not available, trying alternative method');
-                    }
-
-                    // Método 2: Verificación básica con WP REST API
-                    const basicAuth = btoa(username + ':' + password);
-                    const response = await fetch(`${this.wpBaseURL}/wp-json/wp/v2/users/me`, {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': `Basic ${basicAuth}`,
-                            'Content-Type': 'application/json'
-                        }
-                    });
-
-                    if (response.ok) {
-                        const userData = await response.json();
-                        
-                        // Verificar que el usuario tenga permisos de administración
-                        if (userData.capabilities && 
-                            (userData.capabilities.manage_options || 
-                             userData.capabilities.edit_posts ||
-                             userData.roles?.includes('administrator') ||
-                             userData.roles?.includes('editor'))) {
-                            
-                            this.saveSession({
-                                token: basicAuth,
-                                user: userData,
-                                method: 'basic'
-                            });
-                            return true;
-                        } else {
-                            this.showAlert('No tienes permisos de administrador', 'danger');
-                            return false;
-                        }
-                    }
-
-                    return false;
-
-                } catch (error) {
-                    console.error('Authentication error:', error);
-                    throw error;
-                }
-            }
-
-            saveSession(data) {
-                const session = {
-                    token: data.token,
-                    user: data.user || { username: data.user_display_name },
-                    method: data.method || 'jwt',
-                    timestamp: Date.now(),
-                    expires: Date.now() + (24 * 60 * 60 * 1000) // 24 horas
-                };
-
-                localStorage.setItem('adminSession', JSON.stringify(session));
-            }
-
-            isLoggedIn() {
-                const session = localStorage.getItem('adminSession');
-                if (!session) return false;
-
-                try {
-                    const data = JSON.parse(session);
-                    return data.expires > Date.now();
-                } catch {
-                    return false;
-                }
-            }
-
-            setLoading(loading) {
-                const btn = document.getElementById('loginBtn');
-                const text = document.getElementById('loginText');
-                const spinner = document.getElementById('loginLoading');
-                
-                btn.disabled = loading;
-                text.style.display = loading ? 'none' : 'inline';
-                spinner.classList.toggle('active', loading);
-            }
-
-            showAlert(message, type) {
-                const container = document.getElementById('alert-container');
-                container.innerHTML = `
-                    <div class="alert alert-${type}">
-                        ${message}
-                    </div>
-                `;
-
-                setTimeout(() => {
-                    container.innerHTML = '';
-                }, 5000);
+            } catch (error) {
+                console.log('No hay sesión activa');
             }
         }
 
-        // Initialize admin auth
-        new AdminAuth();
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            if (!email || !password) {
+                showAlert('Por favor ingresa email y contraseña', 'danger');
+                return;
+            }
+            
+            // Mostrar estado de carga
+            const btn = document.getElementById('loginBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
+            
+            try {
+                // Intentar autenticación con Supabase Auth
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+                    
+                if (data.user && data.session) {
+                    // Login exitoso con Supabase
+                    const sessionData = {
+                        isLoggedIn: true,
+                        email: data.user.email,
+                        userId: data.user.id,
+                        source: 'supabase_auth',
+                        loginTime: Date.now(),
+                        expires: Date.now() + (24 * 60 * 60 * 1000), // 24 horas
+                        supabaseSession: data.session
+                    };
+                    
+                    localStorage.setItem('adminSession', JSON.stringify(sessionData));
+                    
+                    showAlert('¡Login exitoso con Supabase Auth! Redirigiendo...', 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
+                    
+                } else if (error) {
+                    console.error('Error de Supabase Auth:', error);
+                    
+                    // Fallback: verificar credenciales locales
+                    if (email === adminCredentials.username && password === adminCredentials.password) {
+                        const sessionData = {
+                            isLoggedIn: true,
+                            username: email,
+                            source: 'local',
+                            loginTime: Date.now(),
+                            expires: Date.now() + (24 * 60 * 60 * 1000)
+                        };
+                        
+                        localStorage.setItem('adminSession', JSON.stringify(sessionData));
+                        showAlert('¡Login exitoso (modo local)! Redirigiendo...', 'success');
+                        
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.html';
+                        }, 1500);
+                    } else {
+                        // Mostrar error específico de Supabase o genérico
+                        const errorMsg = error.message === 'Invalid login credentials' 
+                            ? 'Credenciales incorrectas. Verifica tu email y contraseña.' 
+                            : `Error: ${error.message}`;
+                        showAlert(errorMsg, 'danger');
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Error de autenticación:', error);
+                
+                // Fallback a credenciales locales si Supabase falla completamente
+                if (email === adminCredentials.username && password === adminCredentials.password) {
+                    const sessionData = {
+                        isLoggedIn: true,
+                        username: email,
+                        source: 'local_fallback',
+                        loginTime: Date.now(),
+                        expires: Date.now() + (24 * 60 * 60 * 1000)
+                    };
+                    
+                    localStorage.setItem('adminSession', JSON.stringify(sessionData));
+                    showAlert('Login exitoso (modo local)', 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
+                } else {
+                    showAlert('Error de conexión y credenciales incorrectas', 'danger');
+                }
+            } finally {
+                // Restaurar botón
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Iniciar Sesión';
+            }
+        });
+
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alert-container');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            alertDiv.style.display = 'block';
+            
+            alertContainer.innerHTML = '';
+            alertContainer.appendChild(alertDiv);
+            
+            if (type !== 'success') {
+                setTimeout(() => {
+                    alertDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+        
+        // Inicializar al cargar
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                initSupabase();
+                // Pre-llenar campos para testing con credenciales reales
+                document.getElementById('username').value = 'salvadordeaguinaga@gmail.com';
+                document.getElementById('password').value = 'ZaqXsw124!';
+            }, 500);
+        });
     </script>
 </body>
 </html>

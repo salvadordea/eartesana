@@ -55,6 +55,9 @@ class TiendaSupabaseIntegration {
             const response = await window.artesanaAPI.getCategories();
             this.allCategories = response.categories;
             
+            console.log('🔍 DIAGNÓSTICO - Categorías raw de Supabase:', this.allCategories);
+            console.log('🔍 DIAGNÓSTICO - Nombres de categorías:', this.allCategories.map(cat => cat.name));
+            
             this.renderCategoriesGrid();
             this.renderCategoriesFilters();
             
@@ -72,6 +75,11 @@ class TiendaSupabaseIntegration {
         try {
             const response = await window.artesanaAPI.getProducts(1, 100); // Cargar todos los productos
             this.allProducts = response.products;
+            
+            console.log('🔍 DIAGNÓSTICO - Productos raw de Supabase:', this.allProducts);
+            console.log('🔍 DIAGNÓSTICO - Primer producto:', this.allProducts[0]);
+            console.log('🔍 DIAGNÓSTICO - Categorías del primer producto:', this.allProducts[0]?.categories);
+            console.log('🔍 DIAGNÓSTICO - Category_ids del primer producto:', this.allProducts[0]?.category_ids);
             
             // NO renderizar productos inicialmente, solo cargar los datos
             console.log(`✅ ${this.allProducts.length} productos cargados`);
@@ -210,19 +218,27 @@ class TiendaSupabaseIntegration {
     }
 
     getProductCountForCategory(categoryId) {
-        return this.allProducts.filter(product => {
-            // Verificar tanto category_ids como categories
-            const hasIdMatch = product.category_ids && product.category_ids.includes(categoryId);
-            const hasCategoryMatch = product.categories && product.categories.some(cat => 
-                this.getCategoryIdByName(cat) === categoryId
+        const matchingProducts = this.allProducts.filter(product => {
+            // Usar categories array desde products_full
+            return product.categories && product.categories.some(cat => 
+                // Buscar por ID en category_ids o por nombre
+                (product.category_ids && product.category_ids.includes(categoryId)) ||
+                cat.toLowerCase() === this.getCategoryNameById(categoryId)?.toLowerCase()
             );
-            return hasIdMatch || hasCategoryMatch;
-        }).length;
+        });
+        
+        console.log(`🔢 Conteo para categoría ID ${categoryId}: ${matchingProducts.length} productos`);
+        return matchingProducts.length;
     }
 
     getCategoryIdByName(categoryName) {
         const category = this.allCategories.find(cat => cat.name === categoryName);
         return category ? category.id : null;
+    }
+    
+    getCategoryNameById(categoryId) {
+        const category = this.allCategories.find(cat => cat.id == categoryId);
+        return category ? category.name : null;
     }
 
     renderProducts() {
@@ -268,9 +284,10 @@ class TiendaSupabaseIntegration {
                 </div>
                 <div class="product-info">
                     <div class="product-categories">
-                        ${(product.categories || []).slice(0, 2).map(cat => 
-                            `<span class="product-category">${cat}</span>`
-                        ).join('')}
+                        ${product.category_id ? 
+                            `<span class="product-category">${this.getCategoryNameById(product.category_id)}</span>` :
+                            `<span class="product-category">Sin categoría</span>`
+                        }
                     </div>
                     <h3 class="product-title">${product.name}</h3>
                     <div class="product-price">
@@ -314,11 +331,21 @@ class TiendaSupabaseIntegration {
     }
 
     applyFilters(products) {
-        return products.filter(product => {
-            // Filtro por categoría
+        console.log('🔍 DIAGNÓSTICO - Aplicando filtros:', this.currentFilters);
+        console.log('🔍 DIAGNÓSTICO - Total productos antes de filtrar:', products.length);
+        
+        const filteredProducts = products.filter(product => {
+            // Filtro por categoría usando categories array desde products_full
             if (this.currentFilters.category) {
-                if (!product.categories || !product.categories.includes(this.currentFilters.category)) {
+                const categoryMatches = product.categories && product.categories.some(cat => 
+                    cat.toLowerCase() === this.currentFilters.category.toLowerCase()
+                );
+                
+                if (!categoryMatches) {
+                    console.log(`❌ Producto "${product.name}" NO coincide con categoría "${this.currentFilters.category}". Categorías del producto:`, product.categories);
                     return false;
+                } else {
+                    console.log(`✅ Producto "${product.name}" SÍ coincide con categoría "${this.currentFilters.category}"`);
                 }
             }
 
@@ -327,7 +354,8 @@ class TiendaSupabaseIntegration {
                 const searchTerm = this.currentFilters.search.toLowerCase();
                 const matchName = product.name.toLowerCase().includes(searchTerm);
                 const matchDescription = product.description && product.description.toLowerCase().includes(searchTerm);
-                const matchCategories = product.categories && product.categories.some(cat => 
+                // Para búsqueda en categorías, buscar en el array categories
+                const matchCategories = product.categories && product.categories.some(cat =>
                     cat.toLowerCase().includes(searchTerm)
                 );
                 
@@ -357,6 +385,11 @@ class TiendaSupabaseIntegration {
 
             return true;
         });
+        
+        console.log('🔍 DIAGNÓSTICO - Total productos después de filtrar:', filteredProducts.length);
+        console.log('🔍 DIAGNÓSTICO - Productos filtrados:', filteredProducts.map(p => p.name));
+        
+        return filteredProducts;
     }
 
     applySorting(products) {

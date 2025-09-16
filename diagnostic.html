@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico Supabase</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        pre { background: #f5f5f5; padding: 10px; border-radius: 5px; overflow: auto; }
+        .success { color: green; }
+        .error { color: red; }
+        .warning { color: orange; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Diagnóstico de Estructura de Datos</h1>
+    <div id="output"></div>
+
+    <script>
+        // Configuración de Supabase
+        const baseUrl = 'https://yrmfrfpyqctvwyhrhivl.supabase.co';
+        const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlybWZyZnB5cWN0dnd5aHJoaXZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc5NTg5MzUsImV4cCI6MjA3MzUzNDkzNX0.qEijwK3FlnqXP2qw0gl438Tt-Rd1vrfts1cXslUuteU';
+        
+        const headers = {
+            'Content-Type': 'application/json',
+            'apikey': apiKey,
+            'Authorization': `Bearer ${apiKey}`
+        };
+
+        async function diagnostic() {
+            const output = document.getElementById('output');
+            
+            try {
+                output.innerHTML += '<h2 class="success">🔍 Iniciando diagnóstico...</h2>';
+                
+                // 1. Obtener estructura de la tabla products
+                console.log('📦 Consultando productos...');
+                const productsResponse = await fetch(`${baseUrl}/rest/v1/products?limit=3`, {
+                    method: 'GET',
+                    headers: headers
+                });
+                
+                if (!productsResponse.ok) {
+                    throw new Error(`Error productos: ${productsResponse.status}`);
+                }
+                
+                const products = await productsResponse.json();
+                output.innerHTML += '<h3>📦 Estructura de tabla PRODUCTS (primeros 3):</h3>';
+                output.innerHTML += `<pre>${JSON.stringify(products, null, 2)}</pre>`;
+                
+                // 1.5. Verificar si existe products_full
+                console.log('📦 Consultando products_full...');
+                try {
+                    const productsFullResponse = await fetch(`${baseUrl}/rest/v1/products_full?limit=3`, {
+                        method: 'GET',
+                        headers: headers
+                    });
+                    
+                    if (productsFullResponse.ok) {
+                        const productsFull = await productsFullResponse.json();
+                        output.innerHTML += '<h3 class="success">📦 Estructura de tabla PRODUCTS_FULL encontrada:</h3>';
+                        output.innerHTML += `<pre>${JSON.stringify(productsFull, null, 2)}</pre>`;
+                        
+                        // Analizar campos de products_full
+                        if (productsFull.length > 0) {
+                            const firstProductFull = productsFull[0];
+                            const fieldsProductsFull = Object.keys(firstProductFull);
+                            
+                            output.innerHTML += '<h4>Campos en tabla products_full:</h4>';
+                            output.innerHTML += `<ul>${fieldsProductsFull.map(field => `<li><strong>${field}</strong>: ${typeof firstProductFull[field]} = ${JSON.stringify(firstProductFull[field]).slice(0, 100)}...</li>`).join('')}</ul>`;
+                        }
+                    } else {
+                        output.innerHTML += '<h3 class="warning">⚠️ Tabla PRODUCTS_FULL no accesible</h3>';
+                    }
+                } catch(e) {
+                    output.innerHTML += '<h3 class="error">❌ Tabla PRODUCTS_FULL no existe</h3>';
+                }
+                
+                // 2. Obtener todas las categorías
+                console.log('📂 Consultando categorías...');
+                const categoriesResponse = await fetch(`${baseUrl}/rest/v1/categories?is_active=eq.true&order=name`, {
+                    method: 'GET',  
+                    headers: headers
+                });
+                
+                if (!categoriesResponse.ok) {
+                    throw new Error(`Error categorías: ${categoriesResponse.status}`);
+                }
+                
+                const categories = await categoriesResponse.json();
+                output.innerHTML += '<h3>📂 Estructura de tabla CATEGORIES:</h3>';
+                output.innerHTML += `<pre>${JSON.stringify(categories, null, 2)}</pre>`;
+                
+                // 3. Verificar si existe tabla product_categories
+                console.log('🔗 Verificando tabla product_categories...');
+                try {
+                    const relationsResponse = await fetch(`${baseUrl}/rest/v1/product_categories?limit=10`, {
+                        method: 'GET',
+                        headers: headers
+                    });
+                    
+                    if (relationsResponse.ok) {
+                        const relations = await relationsResponse.json();
+                        output.innerHTML += '<h3 class="success">🔗 Tabla PRODUCT_CATEGORIES encontrada:</h3>';
+                        output.innerHTML += `<pre>${JSON.stringify(relations, null, 2)}</pre>`;
+                    } else {
+                        output.innerHTML += '<h3 class="warning">⚠️ Tabla PRODUCT_CATEGORIES no accesible</h3>';
+                    }
+                } catch(e) {
+                    output.innerHTML += '<h3 class="error">❌ Tabla PRODUCT_CATEGORIES no existe</h3>';
+                }
+                
+                // 4. Análisis de la estructura actual
+                output.innerHTML += '<h3>🧐 ANÁLISIS DE ESTRUCTURA:</h3>';
+                
+                if (products.length > 0) {
+                    const firstProduct = products[0];
+                    const fields = Object.keys(firstProduct);
+                    
+                    output.innerHTML += '<h4>Campos en tabla products:</h4>';
+                    output.innerHTML += `<ul>${fields.map(field => `<li>${field}: ${typeof firstProduct[field]}</li>`).join('')}</ul>`;
+                    
+                    // Verificar si hay category_id singular
+                    if (firstProduct.hasOwnProperty('category_id')) {
+                        output.innerHTML += '<p class="success">✅ Campo category_id ENCONTRADO (estructura singular)</p>';
+                    } else {
+                        output.innerHTML += '<p class="error">❌ Campo category_id NO encontrado</p>';
+                    }
+                    
+                    // Verificar si hay categories múltiples
+                    if (firstProduct.hasOwnProperty('categories')) {
+                        output.innerHTML += '<p class="warning">⚠️ Campo categories ENCONTRADO (estructura múltiple)</p>';
+                    } else {
+                        output.innerHTML += '<p class="warning">⚠️ Campo categories NO encontrado</p>';
+                    }
+                }
+                
+                // 5. Contar productos por categoría usando diferentes métodos
+                output.innerHTML += '<h3>📊 PRUEBAS DE CONTEO por categoría:</h3>';
+                
+                for (const category of categories.slice(0, 3)) {
+                    output.innerHTML += `<h4>Categoría: ${category.name} (ID: ${category.id})</h4>`;
+                    
+                    // Método 1: Usar category_id singular
+                    try {
+                        const countResponse1 = await fetch(`${baseUrl}/rest/v1/products?category_id=eq.${category.id}&select=id`, {
+                            method: 'GET',
+                            headers: headers
+                        });
+                        
+                        if (countResponse1.ok) {
+                            const countProducts1 = await countResponse1.json();
+                            output.innerHTML += `<p class="success">✅ Método category_id: ${countProducts1.length} productos</p>`;
+                        } else {
+                            output.innerHTML += `<p class="error">❌ Método category_id falló</p>`;
+                        }
+                    } catch(e) {
+                        output.innerHTML += `<p class="error">❌ Método category_id error: ${e.message}</p>`;
+                    }
+                    
+                    // Método 2: Usar búsqueda en texto (si existe categories como texto)
+                    try {
+                        const countResponse2 = await fetch(`${baseUrl}/rest/v1/products?categories=ilike.*${category.name}*&select=id`, {
+                            method: 'GET',
+                            headers: headers
+                        });
+                        
+                        if (countResponse2.ok) {
+                            const countProducts2 = await countResponse2.json();
+                            output.innerHTML += `<p class="warning">⚠️ Método categories texto: ${countProducts2.length} productos</p>`;
+                        } else {
+                            output.innerHTML += `<p class="warning">⚠️ Método categories texto no disponible</p>`;
+                        }
+                    } catch(e) {
+                        output.innerHTML += `<p class="warning">⚠️ Método categories texto error</p>`;
+                    }
+                }
+                
+                output.innerHTML += '<h2 class="success">✅ Diagnóstico completado</h2>';
+                
+            } catch (error) {
+                output.innerHTML += `<p class="error">❌ Error general: ${error.message}</p>`;
+                console.error('Error:', error);
+            }
+        }
+
+        // Ejecutar diagnóstico al cargar la página
+        diagnostic();
+    </script>
+</body>
+</html>

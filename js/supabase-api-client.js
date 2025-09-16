@@ -57,7 +57,12 @@ class SupabaseAPI {
             );
             
             // Transformar datos al formato que espera el frontend
-            const transformedProducts = productsWithCategories.map(this.transformProduct.bind(this));
+            let transformedProducts = productsWithCategories.map(this.transformProduct.bind(this));
+            
+            // Aplicar precios de mayorista si corresponde
+            if (this.isWholesaler()) {
+                transformedProducts = transformedProducts.map(product => this.applyCustomPricing(product));
+            }
             
             console.log(`✅ ${transformedProducts.length} productos obtenidos`);
             
@@ -96,11 +101,16 @@ class SupabaseAPI {
                 throw new Error('Producto no encontrado');
             }
 
-            const product = this.transformProduct(products[0]);
+            let product = this.transformProduct(products[0]);
             
             // Obtener variantes del producto
             const variants = await this.getProductVariants(id);
             product.variations = variants;
+            
+            // Aplicar precios de mayorista si corresponde
+            if (this.isWholesaler()) {
+                product = this.applyCustomPricing(product);
+            }
             
             console.log(`✅ Producto "${product.name}" obtenido`);
             return product;
@@ -474,6 +484,126 @@ class SupabaseAPI {
             console.error('❌ Error conectando con Supabase:', error);
             return false;
         }
+    }
+
+    // ==========================================
+    // GESTIÓN DE USUARIOS Y AUTENTICACIÓN
+    // ==========================================
+
+    /**
+     * Obtener información del usuario actual
+     */
+    getCurrentUser() {
+        if (window.authManager) {
+            return window.authManager.getCurrentUser();
+        }
+        return null;
+    }
+
+    /**
+     * Obtener perfil del usuario actual
+     */
+    getUserProfile() {
+        if (window.authManager) {
+            return window.authManager.getUserProfile();
+        }
+        return null;
+    }
+
+    /**
+     * Verificar si el usuario está autenticado
+     */
+    isAuthenticated() {
+        if (window.authManager) {
+            return window.authManager.isAuthenticated();
+        }
+        return false;
+    }
+
+    /**
+     * Obtener rol del usuario
+     */
+    getUserRole() {
+        if (window.authManager) {
+            return window.authManager.getUserRole();
+        }
+        return 'Usuario';
+    }
+
+    /**
+     * Verificar si el usuario es mayorista
+     */
+    isWholesaler() {
+        if (window.authManager) {
+            return window.authManager.isWholesaler();
+        }
+        return false;
+    }
+
+    /**
+     * Obtener descuento de mayorista
+     */
+    getWholesaleDiscount() {
+        if (window.authManager) {
+            return window.authManager.getWholesaleDiscount();
+        }
+        return 0;
+    }
+
+    // ==========================================
+    // PRECIOS PERSONALIZADOS PARA MAYORISTAS
+    // ==========================================
+
+    /**
+     * Calcular precio con descuento de mayorista
+     */
+    calculatePrice(originalPrice) {
+        const discount = this.getWholesaleDiscount();
+        
+        if (discount > 0 && this.isWholesaler()) {
+            const discountAmount = originalPrice * (discount / 100);
+            return originalPrice - discountAmount;
+        }
+        
+        return originalPrice;
+    }
+
+    /**
+     * Aplicar precios personalizados a un producto
+     */
+    applyCustomPricing(product) {
+        if (!this.isWholesaler()) {
+            return product;
+        }
+        
+        const discount = this.getWholesaleDiscount();
+        
+        if (discount > 0) {
+            // Aplicar descuento al precio principal
+            product.price = this.calculatePrice(product.price);
+            
+            if (product.regularPrice) {
+                product.regularPrice = this.calculatePrice(product.regularPrice);
+            }
+            
+            if (product.salePrice) {
+                product.salePrice = this.calculatePrice(product.salePrice);
+            }
+            
+            // Aplicar descuento a variantes
+            if (product.variations && product.variations.length > 0) {
+                product.variations = product.variations.map(variant => ({
+                    ...variant,
+                    price: this.calculatePrice(variant.price)
+                }));
+            }
+            
+            // Marcar que el producto tiene precios mayoristas
+            product.hasWholesalePricing = true;
+            product.wholesaleDiscount = discount;
+        }
+        
+        return product;
     }
 }
 

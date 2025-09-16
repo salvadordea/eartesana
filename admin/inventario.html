@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Inventario - Estudio Artesana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            color: white;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .filters-bar {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .filter-group label {
+            font-weight: 600;
+            font-size: 12px;
+            color: #495057;
+        }
+        
+        .filter-group input,
+        .filter-group select {
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        .inventory-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        .inventory-table th,
+        .inventory-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .inventory-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .inventory-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .product-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-low-stock {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .action-btn {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .btn-warning {
+            background: #ffc107;
+            color: #212529;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .loading-row {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+        
+        .debug-info {
+            background: #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            color: white;
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+        
+        .form-input {
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .image-upload-area {
+            border: 2px dashed #ced4da;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .image-upload-area:hover {
+            border-color: #D4AF37;
+            background: #fefefe;
+        }
+        
+        .image-upload-area.drag-over {
+            border-color: #D4AF37;
+            background: #fffdf0;
+        }
+        
+        .current-image {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .modal-actions {
+            padding: 20px 30px;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+        
+        .btn-modal {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-modal.btn-cancel {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-modal.btn-save {
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            color: white;
+        }
+        
+        .btn-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .quick-edit {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .quick-edit input {
+            width: 60px;
+            padding: 4px 6px;
+            border: 1px solid #ced4da;
+            border-radius: 3px;
+            text-align: center;
+        }
+        
+        .quick-edit button {
+            padding: 4px 8px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+        
+        /* Estilos para CSV */
+        .csv-upload-area {
+            border: 2px dashed #17a2b8;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: #f8f9fa;
+        }
+        
+        .csv-upload-area:hover {
+            border-color: #138496;
+            background: #e2f3f5;
+        }
+        
+        .csv-upload-area.drag-over {
+            border-color: #138496;
+            background: #d1ecf1;
+        }
+        
+        .csv-data-container {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .csv-preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        
+        .csv-preview-table th,
+        .csv-preview-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+            word-break: break-word;
+            max-width: 150px;
+        }
+        
+        .csv-preview-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .csv-preview-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        /* Animaciones para notificaciones */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test - Gestión de Inventario</h1>
+        
+        <div class="debug-info" id="debugInfo">
+            📋 Estado del sistema: Inicializando...
+        </div>
+        
+        <div class="header">
+            <h2>Productos</h2>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="showAddProductModal()">
+                    <i class="fas fa-plus"></i> Agregar Producto
+                </button>
+                <button class="btn btn-success" onclick="refreshInventory()">
+                    <i class="fas fa-sync"></i> Actualizar
+                </button>
+                <button class="btn" style="background: #17a2b8; color: white;" onclick="exportToCSV()">
+                    <i class="fas fa-download"></i> Exportar CSV
+                </button>
+                <button class="btn" style="background: #fd7e14; color: white;" onclick="showImportCSVModal()">
+                    <i class="fas fa-upload"></i> Importar CSV
+                </button>
+            </div>
+        </div>
+        
+        <!-- Filtros -->
+        <div class="filters-bar">
+            <div class="filter-group">
+                <label>Categoría:</label>
+                <select id="categoryFilter" onchange="filterProducts()">
+                    <option value="">Todas las categorías</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Buscar:</label>
+                <input type="text" id="searchFilter" placeholder="Nombre del producto..." onkeyup="filterProducts()">
+            </div>
+            <div class="filter-group">
+                <label>Estado:</label>
+                <select id="statusFilter" onchange="filterProducts()">
+                    <option value="">Todos</option>
+                    <option value="active">Activos</option>
+                    <option value="inactive">Inactivos</option>
+                    <option value="low-stock">Stock Bajo</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Tabla de productos -->
+        <div class="table-container">
+            <table class="inventory-table" id="inventoryTable">
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryTableBody">
+                    <tr>
+                        <td colspan="7" class="loading-row">
+                            <i class="fas fa-spinner fa-spin"></i> Cargando productos...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal de Edición/Creación de Producto -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Agregar Nuevo Producto</h3>
+                <button class="modal-close" onclick="closeProductModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <form id="productForm">
+                    <div class="form-grid">
+                        <!-- Imagen del producto -->
+                        <div class="form-group full-width">
+                            <label class="form-label">Imagen del Producto</label>
+                            <div class="image-upload-area" id="imageUploadArea" onclick="document.getElementById('imageInput').click()">
+                                <div id="imagePreview">
+                                    <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #6c757d; margin-bottom: 10px;"></i>
+                                    <p>Haz clic para seleccionar una imagen o arrástrala aquí</p>
+                                    <small style="color: #6c757d;">Formatos: JPG, PNG, WebP (máx. 5MB)</small>
+                                </div>
+                            </div>
+                            <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageSelect(event)">
+                        </div>
+                        
+                        <!-- Información básica -->
+                        <div class="form-group">
+                            <label class="form-label" for="productName">Nombre del Producto *</label>
+                            <input type="text" class="form-input" id="productName" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="productSku">Código SKU</label>
+                            <input type="text" class="form-input" id="productSku" name="sku" placeholder="Autogenerado si se deja vacío">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="productPrice">Precio *</label>
+                            <input type="number" class="form-input" id="productPrice" name="price" step="0.01" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="productStock">Stock *</label>
+                            <input type="number" class="form-input" id="productStock" name="stock" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="productCategory">Categoría</label>
+                            <select class="form-input" id="productCategory" name="category_id">
+                                <option value="">Seleccionar categoría...</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="productStatus">Estado</label>
+                            <select class="form-input" id="productStatus" name="is_active">
+                                <option value="true">Activo</option>
+                                <option value="false">Inactivo</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Descripción -->
+                        <div class="form-group full-width">
+                            <label class="form-label" for="productDescription">Descripción</label>
+                            <textarea class="form-input form-textarea" id="productDescription" name="description" placeholder="Descripción del producto..."></textarea>
+                        </div>
+                        
+                        <!-- Medidas -->
+                        <div class="form-group">
+                            <label class="form-label" for="productWidth">Ancho (cm)</label>
+                            <input type="number" class="form-input" id="productWidth" name="width" step="0.1" min="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="productHeight">Alto (cm)</label>
+                            <input type="number" class="form-input" id="productHeight" name="height" step="0.1" min="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="productDepth">Profundidad (cm)</label>
+                            <input type="number" class="form-input" id="productDepth" name="depth" step="0.1" min="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="productWeight">Peso (kg)</label>
+                            <input type="number" class="form-input" id="productWeight" name="weight" step="0.01" min="0">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-actions">
+                <button type="button" class="btn-modal btn-cancel" onclick="closeProductModal()">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button type="button" class="btn-modal btn-save" onclick="saveProduct()">
+                    <i class="fas fa-save"></i> Guardar Producto
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Importación CSV -->
+    <div class="modal-overlay" id="importCSVModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Importar Productos desde CSV</h3>
+                <button class="modal-close" onclick="closeImportCSVModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="form-group full-width">
+                    <label class="form-label">Seleccionar archivo CSV</label>
+                    <div class="csv-upload-area" id="csvUploadArea" onclick="document.getElementById('csvInput').click()">
+                        <div id="csvPreview">
+                            <i class="fas fa-file-csv" style="font-size: 2rem; color: #17a2b8; margin-bottom: 10px;"></i>
+                            <p>Haz clic para seleccionar un archivo CSV o arrástralo aquí</p>
+                            <small style="color: #6c757d;">Formato CSV con columnas: nombre, precio, stock, categoria, descripcion</small>
+                        </div>
+                    </div>
+                    <input type="file" id="csvInput" accept=".csv" style="display: none;" onchange="handleCSVSelect(event)">
+                </div>
+                
+                <div class="form-group full-width" id="csvDataPreview" style="display: none;">
+                    <label class="form-label">Vista previa de datos (primeras 5 filas)</label>
+                    <div class="csv-data-container">
+                        <table class="csv-preview-table" id="csvPreviewTable">
+                            <thead id="csvPreviewHeader"></thead>
+                            <tbody id="csvPreviewBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="form-group full-width" id="importOptions" style="display: none;">
+                    <label class="form-label">Opciones de importación</label>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" id="skipDuplicates" checked>
+                            <span>Omitir productos duplicados (por nombre)</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" id="updateExisting">
+                            <span>Actualizar productos existentes</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button type="button" class="btn-modal btn-cancel" onclick="closeImportCSVModal()">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button type="button" class="btn-modal btn-save" id="importCSVBtn" onclick="importCSVData()" style="display: none;">
+                    <i class="fas fa-upload"></i> Importar Productos
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales para inventario
+        let supabase = null;
+        let allProducts = [];
+        let filteredProducts = [];
+        let categories = [];
+        let currentEditingProduct = null;
+        let selectedImageFile = null;
+        let currentImageUrl = null;
+        let isImageUploading = false;
+        
+        // Función para actualizar información de debug
+        function updateDebugInfo(message) {
+            const debugDiv = document.getElementById('debugInfo');
+            debugDiv.innerHTML = `📋 ${new Date().toLocaleTimeString()}: ${message}`;
+            console.log('🐛 DEBUG:', message);
+        }
+        
+        // ==========================================
+        // SISTEMA DE SUBIDA DE IMÁGENES
+        // ==========================================
+        
+        // Función para manejar la selección de imagen
+        function handleImageSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // Validar tipo de archivo
+            if (!file.type.startsWith('image/')) {
+                showNotification('Por favor selecciona un archivo de imagen válido', 'error');
+                return;
+            }
+            
+            // Validar tamaño (máx. 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                showNotification('La imagen es demasiado grande. Máximo 5MB permitido', 'error');
+                return;
+            }
+            
+            selectedImageFile = file;
+            updateDebugInfo(`Imagen seleccionada: ${file.name} (${(file.size/1024/1024).toFixed(2)}MB)`);
+            
+            // Mostrar preview
+            showImagePreview(file);
+        }
+        
+        // Función para mostrar preview de la imagen
+        function showImagePreview(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imagePreview = document.getElementById('imagePreview');
+                imagePreview.innerHTML = `
+                    <div style="position: relative; display: inline-block;">
+                        <img src="${e.target.result}" alt="Preview" style="max-width: 200px; max-height: 200px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <button type="button" onclick="clearImageSelection()" style="position: absolute; top: -10px; right: -10px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer; font-size: 14px;">×</button>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <small style="color: #28a745;">📁 ${file.name}</small><br>
+                        <small style="color: #6c757d;">Tamaño: ${(file.size/1024/1024).toFixed(2)}MB</small>
+                    </div>
+                `;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Función para limpiar selección de imagen
+        function clearImageSelection() {
+            selectedImageFile = null;
+            currentImageUrl = null;
+            document.getElementById('imageInput').value = '';
+            resetImagePreview();
+            updateDebugInfo('Selección de imagen limpiada');
+        }
+        
+        // Función para resetear preview de imagen
+        function resetImagePreview() {
+            document.getElementById('imagePreview').innerHTML = `
+                <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #6c757d; margin-bottom: 10px;"></i>
+                <p>Haz clic para seleccionar una imagen o arrástrala aquí</p>
+                <small style="color: #6c757d;">Formatos: JPG, PNG, WebP (máx. 5MB)</small>
+            `;
+        }
+        
+        // Función para subir imagen a Supabase Storage
+        async function uploadImage(file, productName) {
+            if (!file || !supabase) {
+                throw new Error('No hay archivo seleccionado o Supabase no está inicializado');
+            }
+            
+            try {
+                isImageUploading = true;
+                updateDebugInfo('Subiendo imagen a Supabase Storage...');
+                
+                // Generar nombre único para el archivo
+                const timestamp = Date.now();
+                const sanitizedName = productName.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 30);
+                const extension = file.name.split('.').pop();
+                const fileName = `products/${sanitizedName}-${timestamp}.${extension}`;
+                
+                console.log('📤 Subiendo imagen:', fileName);
+                
+                // Subir archivo a Supabase Storage
+                const { data, error } = await supabase.storage
+                    .from('product-images')
+                    .upload(fileName, file, {
+                        cacheControl: '3600',
+                        upsert: false
+                    });
+                
+                if (error) {
+                    console.error('❌ Error subiendo imagen:', error);
+                    throw new Error(`Error subiendo imagen: ${error.message}`);
+                }
+                
+                // Obtener URL pública
+                const { data: { publicUrl } } = supabase.storage
+                    .from('product-images')
+                    .getPublicUrl(data.path);
+                
+                console.log('✅ Imagen subida exitosamente:', publicUrl);
+                updateDebugInfo(`Imagen subida exitosamente: ${fileName}`);
+                
+                return publicUrl;
+                
+            } catch (error) {
+                console.error('❌ Error en uploadImage:', error);
+                throw error;
+            } finally {
+                isImageUploading = false;
+            }
+        }
+        
+        // Función para eliminar imagen de Supabase Storage
+        async function deleteImage(imageUrl) {
+            if (!imageUrl || !supabase) return;
+            
+            try {
+                // Extraer path de la URL
+                const url = new URL(imageUrl);
+                const path = url.pathname.split('/').slice(-2).join('/'); // Obtener 'products/filename'
+                
+                console.log('🗑️ Eliminando imagen:', path);
+                
+                const { error } = await supabase.storage
+                    .from('product-images')
+                    .remove([path]);
+                
+                if (error) {
+                    console.error('❌ Error eliminando imagen:', error);
+                } else {
+                    console.log('✅ Imagen eliminada exitosamente');
+                }
+                
+            } catch (error) {
+                console.error('❌ Error en deleteImage:', error);
+            }
+        }
+        
+        // Configurar drag & drop para el área de subida de imágenes
+        function setupImageDragAndDrop() {
+            const uploadArea = document.getElementById('imageUploadArea');
+            
+            if (!uploadArea) return;
+            
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, unhighlight, false);
+            });
+            
+            uploadArea.addEventListener('drop', handleDrop, false);
+            
+            function highlight(e) {
+                uploadArea.classList.add('drag-over');
+            }
+            
+            function unhighlight(e) {
+                uploadArea.classList.remove('drag-over');
+            }
+            
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                
+                if (files.length > 0) {
+                    const file = files[0];
+                    document.getElementById('imageInput').files = files;
+                    handleImageSelect({ target: { files: files } });
+                }
+            }
+        }
+        
+        // Función para mostrar notificación
+        function showNotification(message, type = 'info') {
+            // Crear elemento de notificación
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 10000;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            // Colores según tipo
+            const colors = {
+                success: '#28a745',
+                error: '#dc3545',
+                warning: '#ffc107',
+                info: '#17a2b8'
+            };
+            
+            notification.style.background = colors[type] || colors.info;
+            notification.textContent = message;
+            
+            // Agregar al DOM
+            document.body.appendChild(notification);
+            
+            // Auto-remover después de 4 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 4000);
+        }
+        
+        // Cargar configuración de Supabase
+        function loadSupabaseConfig() {
+            updateDebugInfo('Cargando configuración de Supabase...');
+            const script = document.createElement('script');
+            script.src = '../assets/js/config.js';
+            script.onload = function() {
+                if (initSupabase()) {
+                    updateDebugInfo('✅ Supabase inicializado correctamente');
+                    loadCategories();
+                    loadProducts();
+                } else {
+                    updateDebugInfo('❌ No se pudo inicializar Supabase - usando datos de prueba');
+                    showMockData();
+                }
+            };
+            script.onerror = function() {
+                updateDebugInfo('❌ Error cargando config.js - usando datos de prueba');
+                showMockData();
+            };
+            document.head.appendChild(script);
+        }
+        
+        // Inicializar Supabase
+        function initSupabase() {
+            if (window.SUPABASE_CONFIG) {
+                supabase = window.supabase.createClient(
+                    window.SUPABASE_CONFIG.url,
+                    window.SUPABASE_CONFIG.anonKey
+                );
+                return true;
+            }
+            return false;
+        }
+        
+        // Cargar productos desde Supabase
+        async function loadProducts() {
+            updateDebugInfo('Cargando productos desde Supabase...');
+            if (!supabase) {
+                showMockData();
+                return;
+            }
+            
+            try {
+                // Consulta simplificada con JOIN directo entre products y categories
+                const { data, error } = await supabase
+                    .from('products')
+                    .select(`
+                        *,
+                        categories (
+                            id,
+                            name,
+                            slug
+                        )
+                    `)
+                    .order('created_at', { ascending: false });
+                
+                if (error) {
+                    updateDebugInfo(`❌ Error cargando productos: ${error.message}`);
+                    showMockData();
+                    return;
+                }
+                
+                // Formatear datos para compatibilidad con la interfaz
+                allProducts = (data || []).map(product => ({
+                    ...product,
+                    category_name: product.categories?.name || null,
+                    category: product.categories?.name || 'Sin categoría' // Para compatibilidad
+                }));
+                
+                // Depurar los productos recibidos
+                console.log('Productos cargados con categorías:', allProducts.slice(0, 3));
+                
+                filteredProducts = [...allProducts];
+                updateDebugInfo(`✅ ${allProducts.length} productos cargados desde Supabase`);
+                renderProducts();
+                
+            } catch (error) {
+                updateDebugInfo(`❌ Error inesperado: ${error.message}`);
+                showMockData();
+            }
+        }
+        
+        // Cargar categorías desde Supabase
+        async function loadCategories() {
+            if (!supabase) {
+                categories = [
+                    { id: 1, name: 'Herramientas', slug: 'herramientas' },
+                    { id: 2, name: 'Materiales', slug: 'materiales' },
+                    { id: 3, name: 'Accesorios', slug: 'accesorios' }
+                ];
+                populateCategoryFilter();
+                return;
+            }
+            
+            try {
+                const { data, error } = await supabase
+                    .from('categories')
+                    .select('*')
+                    .order('name');
+                
+                if (error) {
+                    updateDebugInfo(`Error cargando categorías: ${error.message}`);
+                } else {
+                    categories = data || [];
+                    console.log('Categorías cargadas:', categories);
+                    updateDebugInfo(`${categories.length} categorías cargadas`);
+                }
+                
+                populateCategoryFilter();
+            } catch (error) {
+                updateDebugInfo(`Error cargando categorías: ${error.message}`);
+            }
+        }
+        
+        // Mostrar datos de prueba si Supabase no está disponible
+        function showMockData() {
+            updateDebugInfo('📦 Mostrando datos de prueba...');
+            allProducts = [
+                {
+                    id: 1,
+                    name: 'Martillo de Acero',
+                    category: 'Herramientas',
+                    price: 250.00,
+                    stock: 15,
+                    status: 'active',
+                    image_url: 'https://via.placeholder.com/50x50?text=🔨'
+                },
+                {
+                    id: 2,
+                    name: 'Pintura Acrílica',
+                    category: 'Materiales',
+                    price: 85.50,
+                    stock: 3,
+                    status: 'low-stock',
+                    image_url: 'https://via.placeholder.com/50x50?text=🎨'
+                },
+                {
+                    id: 3,
+                    name: 'Pinceles Set',
+                    category: 'Accesorios',
+                    price: 120.00,
+                    stock: 0,
+                    status: 'inactive',
+                    image_url: 'https://via.placeholder.com/50x50?text=🖌️'
+                },
+                {
+                    id: 4,
+                    name: 'Taladro Eléctrico',
+                    category: 'Herramientas',
+                    price: 450.00,
+                    stock: 8,
+                    status: 'active',
+                    image_url: 'https://via.placeholder.com/50x50?text=🔧'
+                }
+            ];
+            filteredProducts = [...allProducts];
+            renderProducts();
+        }
+        
+        // Poblar filtro de categorías
+        function populateCategoryFilter() {
+            const categoryFilter = document.getElementById('categoryFilter');
+            categoryFilter.innerHTML = '<option value="">Todas las categorías</option>';
+            
+            // Verificar si hay un error en los nombres de categorías
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                // Verificar qué campos existen en cada categoría
+                const categoryName = category.name || category.category_name || category.title || category.slug || 'Sin nombre';
+                // Usar el mismo valor y texto para asegurar coincidencia
+                option.value = categoryName;
+                option.textContent = categoryName;
+                categoryFilter.appendChild(option);
+            });
+        }
+        
+        // Renderizar productos en la tabla
+        function renderProducts() {
+            const tbody = document.getElementById('inventoryTableBody');
+            
+            if (filteredProducts.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="loading-row">No se encontraron productos</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = filteredProducts.map(product => {
+                const status = getProductStatus(product);
+                return `
+                    <tr>
+                        <td><img src="${product.image_url || 'https://via.placeholder.com/50x50?text=IMG'}" alt="${product.name}" class="product-img"></td>
+                        <td><strong>${product.name}</strong></td>
+                        <td>${product.category_name || product.category || 'Sin categoría'}</td>
+                        <td>$${parseFloat(product.price || 0).toFixed(2)}</td>
+                        <td>
+                            <div class="quick-edit">
+                                <input type="number" value="${product.stock || 0}" min="0" onchange="quickUpdateStock(${product.id}, this.value)">
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-${status.class}">${status.text}</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn btn-warning" onclick="editProduct(${product.id})" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="action-btn btn-success" onclick="duplicateProduct(${product.id})" title="Duplicar">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                                <button class="action-btn btn-danger" onclick="deleteProduct(${product.id})" title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+            
+            updateDebugInfo(`📊 ${filteredProducts.length} productos mostrados en la tabla`);
+        }
+        
+        // Obtener estado del producto
+        function getProductStatus(product) {
+            const stock = parseInt(product.stock || 0);
+            
+            if (stock === 0) {
+                return { class: 'inactive', text: 'Sin Stock' };
+            } else if (stock <= 5) {
+                return { class: 'low-stock', text: 'Stock Bajo' };
+            } else {
+                return { class: 'active', text: 'Activo' };
+            }
+        }
+        
+        // Filtrar productos
+        function filterProducts() {
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const searchFilter = document.getElementById('searchFilter').value.toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value;
+            
+            // Mostrar en consola los filtros activos para depuración
+            console.log('Filtros aplicados:', { categoryFilter, searchFilter, statusFilter });
+            
+            filteredProducts = allProducts.filter(product => {
+                // Comprobamos el nombre del campo de categoría
+                const productCategory = product.category_name || product.category || '';
+                
+                const matchesCategory = !categoryFilter || 
+                                       productCategory === categoryFilter || 
+                                       productCategory.toLowerCase() === categoryFilter.toLowerCase();
+                                       
+                const matchesSearch = !searchFilter || 
+                                     (product.name && product.name.toLowerCase().includes(searchFilter));
+                                     
+                const productStatus = getProductStatus(product);
+                const matchesStatus = !statusFilter || productStatus.class === statusFilter;
+                
+                // Para depuración
+                if (categoryFilter && productCategory && !matchesCategory) {
+                    console.log(`Categoría no coincide: ${productCategory} !== ${categoryFilter}`);
+                }
+                
+                return matchesCategory && matchesSearch && matchesStatus;
+            });
+            
+            console.log(`Filtrado: ${filteredProducts.length} de ${allProducts.length} productos`);
+            renderProducts();
+        }
+        
+        // Actualizar inventario
+        function refreshInventory() {
+            updateDebugInfo('🔄 Actualizando inventario...');
+            document.getElementById('inventoryTableBody').innerHTML = '<tr><td colspan="7" class="loading-row"><i class="fas fa-spinner fa-spin"></i> Actualizando...</td></tr>';
+            setTimeout(() => {
+                loadProducts();
+                loadCategories();
+            }, 1000);
+        }
+        
+        // ===== GESTIÓN DE MODAL =====
+        
+        function showAddProductModal() {
+            updateDebugInfo('🆕 Abriendo modal para nuevo producto');
+            currentEditingProduct = null;
+            selectedImageFile = null;
+            
+            // Limpiar formulario
+            document.getElementById('productForm').reset();
+            document.getElementById('modalTitle').textContent = 'Agregar Nuevo Producto';
+            
+            // Resetear preview de imagen
+            resetImagePreview();
+            
+            // Poblar categorías en el modal
+            populateModalCategories();
+            
+            // Mostrar modal
+            document.getElementById('productModal').style.display = 'flex';
+        }
+        
+        function editProduct(id) {
+            const product = allProducts.find(p => p.id === id);
+            if (!product) {
+                alert('Producto no encontrado');
+                return;
+            }
+            
+            updateDebugInfo(`✏️ Editando producto: ${product.name}`);
+            currentEditingProduct = product;
+            selectedImageFile = null;
+            
+            // Llenar formulario con datos del producto
+            document.getElementById('productName').value = product.name || '';
+            document.getElementById('productSku').value = product.sku || '';
+            document.getElementById('productPrice').value = product.price || 0;
+            document.getElementById('productStock').value = product.stock || 0;
+            document.getElementById('productDescription').value = product.description || '';
+            document.getElementById('productWidth').value = product.width || '';
+            document.getElementById('productHeight').value = product.height || '';
+            document.getElementById('productDepth').value = product.depth || '';
+            document.getElementById('productWeight').value = product.weight || '';
+            document.getElementById('productStatus').value = product.is_active ? 'true' : 'false';
+            
+            // Mostrar imagen actual
+            if (product.image_url) {
+                showCurrentImage(product.image_url);
+            } else {
+                resetImagePreview();
+            }
+            
+            // Actualizar título del modal
+            document.getElementById('modalTitle').textContent = `Editar: ${product.name}`;
+            
+            // Poblar categorías y seleccionar la actual
+            populateModalCategories(product.category_id);
+            
+            // Mostrar modal
+            document.getElementById('productModal').style.display = 'flex';
+        }
+        
+        function duplicateProduct(id) {
+            const product = allProducts.find(p => p.id === id);
+            if (!product) {
+                alert('Producto no encontrado');
+                return;
+            }
+            
+            if (!confirm(`¿Duplicar producto "${product.name}"?`)) {
+                return;
+            }
+            
+            updateDebugInfo(`📋 Duplicando producto: ${product.name}`);
+            
+            // Copiar datos del producto pero sin ID para crear uno nuevo
+            currentEditingProduct = null;
+            selectedImageFile = null;
+            
+            // Llenar formulario con datos del producto original
+            document.getElementById('productName').value = `${product.name} (Copia)`;
+            document.getElementById('productSku').value = ''; // SKU nuevo autogenerado
+            document.getElementById('productPrice').value = product.price || 0;
+            document.getElementById('productStock').value = 0; // Stock inicial en 0
+            document.getElementById('productDescription').value = product.description || '';
+            document.getElementById('productWidth').value = product.width || '';
+            document.getElementById('productHeight').value = product.height || '';
+            document.getElementById('productDepth').value = product.depth || '';
+            document.getElementById('productWeight').value = product.weight || '';
+            document.getElementById('productStatus').value = 'true'; // Activo por defecto
+            
+            // Mostrar imagen del producto original
+            if (product.image_url) {
+                showCurrentImage(product.image_url);
+            } else {
+                resetImagePreview();
+            }
+            
+            // Actualizar título del modal
+            document.getElementById('modalTitle').textContent = `Duplicar: ${product.name}`;
+            
+            // Poblar categorías y seleccionar la del producto original
+            populateModalCategories(product.category_id);
+            
+            // Mostrar modal
+            document.getElementById('productModal').style.display = 'flex';
+        }
+        
+        function closeProductModal() {
+            document.getElementById('productModal').style.display = 'none';
+            currentEditingProduct = null;
+            selectedImageFile = null;
+        }
+        
+        // ===== GESTIÓN DE IMÁGENES =====
+        
+        function resetImagePreview() {
+            document.getElementById('imagePreview').innerHTML = `
+                <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #6c757d; margin-bottom: 10px;"></i>
+                <p>Haz clic para seleccionar una imagen o arrástrala aquí</p>
+                <small style="color: #6c757d;">Formatos: JPG, PNG, WebP (máx. 5MB)</small>
+            `;
+        }
+        
+        function showCurrentImage(imageUrl) {
+            document.getElementById('imagePreview').innerHTML = `
+                <img src="${imageUrl}" class="current-image" alt="Imagen actual">
+                <p>Imagen actual - Haz clic para cambiar</p>
+                <small style="color: #6c757d;">O arrastra una nueva imagen</small>
+            `;
+        }
+        
+        function handleImageSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // Validar tamaño (5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('La imagen es demasiado grande. Máximo 5MB.');
+                return;
+            }
+            
+            // Validar tipo
+            if (!file.type.startsWith('image/')) {
+                alert('Por favor selecciona un archivo de imagen válido.');
+                return;
+            }
+            
+            selectedImageFile = file;
+            
+            // Mostrar preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').innerHTML = `
+                    <img src="${e.target.result}" class="current-image" alt="Nueva imagen">
+                    <p>Nueva imagen seleccionada: <strong>${file.name}</strong></p>
+                    <small style="color: #6c757d;">Tamaño: ${(file.size / 1024 / 1024).toFixed(2)}MB</small>
+                `;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // ===== GESTIÓN DE CATEGORIAS EN MODAL =====
+        
+        function populateModalCategories(selectedCategoryId = null) {
+            const categorySelect = document.getElementById('productCategory');
+            categorySelect.innerHTML = '<option value="">Seleccionar categoría...</option>';
+            
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                
+                if (selectedCategoryId && category.id == selectedCategoryId) {
+                    option.selected = true;
+                }
+                
+                categorySelect.appendChild(option);
+            });
+        }
+        
+        // ===== GUARDAR PRODUCTO =====
+        
+        async function saveProduct() {
+            const btn = document.querySelector('.btn-save');
+            const originalText = btn.innerHTML;
+            
+            try {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+                
+                // Obtener datos del formulario
+                const formData = new FormData(document.getElementById('productForm'));
+                const productData = {
+                    name: formData.get('name')?.trim(),
+                    sku: formData.get('sku')?.trim() || null,
+                    price: parseFloat(formData.get('price')) || 0,
+                    stock: parseInt(formData.get('stock')) || 0,
+                    description: formData.get('description')?.trim() || null,
+                    width: parseFloat(formData.get('width')) || null,
+                    height: parseFloat(formData.get('height')) || null,
+                    depth: parseFloat(formData.get('depth')) || null,
+                    weight: parseFloat(formData.get('weight')) || null,
+                    is_active: formData.get('is_active') === 'true',
+                    category_id: formData.get('category_id') || null
+                };
+                
+                // Validaciones básicas
+                if (!productData.name) {
+                    alert('El nombre del producto es obligatorio');
+                    return;
+                }
+                
+                if (productData.price < 0) {
+                    alert('El precio no puede ser negativo');
+                    return;
+                }
+                
+                if (productData.stock < 0) {
+                    alert('El stock no puede ser negativo');
+                    return;
+                }
+                
+                // Subir imagen si hay una nueva
+                let imageUrl = currentEditingProduct?.image_url || null;
+                if (selectedImageFile) {
+                    updateDebugInfo('📤 Subiendo nueva imagen...');
+                    showNotification('Subiendo imagen...', 'info');
+                    try {
+                        imageUrl = await uploadImage(selectedImageFile, productData.name);
+                        showNotification('Imagen subida exitosamente', 'success');
+                    } catch (uploadError) {
+                        showNotification('Error subiendo imagen: ' + uploadError.message, 'error');
+                        throw uploadError;
+                    }
+                }
+                
+                productData.image_url = imageUrl;
+                
+                // Guardar producto
+                if (currentEditingProduct) {
+                    await updateProduct(currentEditingProduct.id, productData);
+                } else {
+                    await createProduct(productData);
+                }
+                
+                // Cerrar modal y actualizar lista
+                closeProductModal();
+                refreshInventory();
+                
+            } catch (error) {
+                console.error('Error guardando producto:', error);
+                alert('Error al guardar el producto: ' + error.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+        
+        // ===== OPERACIONES CON SUPABASE =====
+        
+        async function uploadImage(file) {
+            if (!supabase) {
+                // Simulación para testing
+                return `https://via.placeholder.com/400x400?text=${encodeURIComponent(file.name)}`;
+            }
+            
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+            
+            const { data, error } = await supabase.storage
+                .from('product-images')
+                .upload(fileName, file);
+            
+            if (error) {
+                throw new Error('Error subiendo imagen: ' + error.message);
+            }
+            
+            const { data: { publicUrl } } = supabase.storage
+                .from('product-images')
+                .getPublicUrl(fileName);
+            
+            return publicUrl;
+        }
+        
+        async function createProduct(productData) {
+            if (!supabase) {
+                // Simulación para testing
+                updateDebugInfo('🆕 Simulando creación de producto...');
+                return;
+            }
+            
+            // Generar SKU si no se proporcionó
+            if (!productData.sku) {
+                productData.sku = `PROD-${Date.now()}`;
+            }
+            
+            // Ahora category_id es un campo directo en la tabla products
+            const { data, error } = await supabase
+                .from('products')
+                .insert([productData])
+                .select();
+            
+            if (error) {
+                throw new Error('Error creando producto: ' + error.message);
+            }
+            
+            updateDebugInfo('✅ Producto creado exitosamente');
+        }
+        
+        async function updateProduct(productId, productData) {
+            if (!supabase) {
+                // Simulación para testing
+                updateDebugInfo('✏️ Simulando actualización de producto...');
+                return;
+            }
+            
+            // Ahora category_id es un campo directo en la tabla products
+            const { error } = await supabase
+                .from('products')
+                .update(productData)
+                .eq('id', productId);
+            
+            if (error) {
+                throw new Error('Error actualizando producto: ' + error.message);
+            }
+            
+            updateDebugInfo('✅ Producto actualizado exitosamente');
+        }
+        
+        
+        // ===== EDICIÓN RÁPIDA DE STOCK =====
+        
+        async function quickUpdateStock(productId, newStock) {
+            const stock = parseInt(newStock);
+            
+            if (isNaN(stock) || stock < 0) {
+                alert('El stock debe ser un número positivo');
+                refreshInventory(); // Recargar para restaurar valor original
+                return;
+            }
+            
+            updateDebugInfo(`🔄 Actualizando stock del producto ${productId} a ${stock}`);
+            
+            if (!supabase) {
+                // Simulación para testing
+                updateDebugInfo('✅ Stock actualizado (simulación)');
+                // Actualizar localmente para testing
+                const product = allProducts.find(p => p.id === productId);
+                if (product) {
+                    product.stock = stock;
+                    renderProducts();
+                }
+                return;
+            }
+            
+            try {
+                const { error } = await supabase
+                    .from('products')
+                    .update({ stock: stock })
+                    .eq('id', productId);
+                
+                if (error) {
+                    throw new Error(error.message);
+                }
+                
+                updateDebugInfo('✅ Stock actualizado exitosamente');
+                
+                // Actualizar producto local sin recargar todo
+                const product = allProducts.find(p => p.id === productId);
+                if (product) {
+                    product.stock = stock;
+                    renderProducts();
+                }
+                
+            } catch (error) {
+                console.error('Error actualizando stock:', error);
+                alert('Error actualizando stock: ' + error.message);
+                refreshInventory(); // Recargar para restaurar valor original
+            }
+        }
+        
+        // ===== ELIMINAR PRODUCTO =====
+        
+        async function deleteProduct(id) {
+            const product = allProducts.find(p => p.id === id);
+            if (!product) {
+                alert('Producto no encontrado');
+                return;
+            }
+            
+            if (!confirm(`¿Eliminar producto "${product.name}"?\n\nEsta acción no se puede deshacer.`)) {
+                return;
+            }
+            
+            updateDebugInfo(`🗑️ Eliminando producto: ${product.name}`);
+            
+            if (!supabase) {
+                // Simulación para testing
+                updateDebugInfo('✅ Producto eliminado (simulación)');
+                allProducts = allProducts.filter(p => p.id !== id);
+                filterProducts();
+                return;
+            }
+            
+            try {
+                // Eliminar producto directamente (ya no necesitamos eliminar relaciones)
+                const { error } = await supabase
+                    .from('products')
+                    .delete()
+                    .eq('id', id);
+                
+                if (error) {
+                    throw new Error(error.message);
+                }
+                
+                updateDebugInfo('✅ Producto eliminado exitosamente');
+                
+                // Actualizar lista local
+                allProducts = allProducts.filter(p => p.id !== id);
+                filterProducts();
+                
+            } catch (error) {
+                console.error('Error eliminando producto:', error);
+                alert('Error eliminando producto: ' + error.message);
+            }
+        }
+        
+        // ==========================================
+        // SISTEMA DE IMPORTACIÓN/EXPORTACIÓN CSV
+        // ==========================================
+        
+        // Variables para manejo CSV
+        let csvData = [];
+        let selectedCSVFile = null;
+        
+        // Función para exportar productos a CSV
+        function exportToCSV() {
+            updateDebugInfo('📤 Exportando productos a CSV...');
+            
+            if (filteredProducts.length === 0) {
+                showNotification('No hay productos para exportar', 'warning');
+                return;
+            }
+            
+            // Crear cabeceras
+            const headers = ['ID', 'Nombre', 'SKU', 'Precio', 'Stock', 'Categoría', 'Descripción', 'Ancho', 'Alto', 'Profundidad', 'Peso', 'Estado', 'URL Imagen'];
+            
+            // Crear filas de datos
+            const rows = filteredProducts.map(product => [
+                product.id || '',
+                product.name || '',
+                product.sku || '',
+                product.price || 0,
+                product.stock || 0,
+                product.category_name || product.category || '',
+                (product.description || '').replace(/\n/g, ' ').replace(/,/g, ';'),
+                product.width || '',
+                product.height || '',
+                product.depth || '',
+                product.weight || '',
+                product.is_active ? 'Activo' : 'Inactivo',
+                product.image_url || ''
+            ]);
+            
+            // Combinar cabeceras y datos
+            const csvContent = [headers, ...rows]
+                .map(row => row.map(field => `"${field}"`).join(','))
+                .join('\n');
+            
+            // Descargar archivo
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `inventario_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            updateDebugInfo(`✅ ${filteredProducts.length} productos exportados exitosamente`);
+            showNotification(`Se exportaron ${filteredProducts.length} productos exitosamente`, 'success');
+        }
+        
+        // Función para mostrar modal de importación CSV
+        function showImportCSVModal() {
+            updateDebugInfo('📥 Abriendo modal de importación CSV');
+            
+            // Limpiar estado anterior
+            csvData = [];
+            selectedCSVFile = null;
+            
+            // Resetear elementos del modal
+            document.getElementById('csvPreview').innerHTML = `
+                <i class="fas fa-file-csv" style="font-size: 2rem; color: #17a2b8; margin-bottom: 10px;"></i>
+                <p>Haz clic para seleccionar un archivo CSV o arrástralo aquí</p>
+                <small style="color: #6c757d;">Formato CSV con columnas: nombre, precio, stock, categoria, descripcion</small>
+            `;
+            
+            // Ocultar elementos
+            document.getElementById('csvDataPreview').style.display = 'none';
+            document.getElementById('importOptions').style.display = 'none';
+            document.getElementById('importCSVBtn').style.display = 'none';
+            
+            // Limpiar input
+            document.getElementById('csvInput').value = '';
+            
+            // Mostrar modal
+            document.getElementById('importCSVModal').style.display = 'flex';
+        }
+        
+        // Función para cerrar modal de importación CSV
+        function closeImportCSVModal() {
+            document.getElementById('importCSVModal').style.display = 'none';
+            csvData = [];
+            selectedCSVFile = null;
+        }
+        
+        // Función para manejar selección de archivo CSV
+        function handleCSVSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // Validar tipo de archivo
+            if (!file.name.endsWith('.csv') && file.type !== 'text/csv') {
+                showNotification('Por favor selecciona un archivo CSV válido', 'error');
+                return;
+            }
+            
+            // Validar tamaño (máx. 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                showNotification('El archivo CSV es demasiado grande. Máximo 10MB permitido', 'error');
+                return;
+            }
+            
+            selectedCSVFile = file;
+            updateDebugInfo(`Archivo CSV seleccionado: ${file.name} (${(file.size/1024/1024).toFixed(2)}MB)`);
+            
+            // Mostrar preview del archivo
+            document.getElementById('csvPreview').innerHTML = `
+                <div style="text-align: center;">
+                    <i class="fas fa-file-csv" style="font-size: 2rem; color: #28a745; margin-bottom: 10px;"></i>
+                    <p><strong>${file.name}</strong></p>
+                    <small style="color: #6c757d;">Tamaño: ${(file.size/1024/1024).toFixed(2)}MB</small>
+                    <div style="margin-top: 10px;">
+                        <small style="color: #17a2b8;">📊 Analizando archivo...</small>
+                    </div>
+                </div>
+            `;
+            
+            // Procesar archivo CSV
+            parseCSVFile(file);
+        }
+        
+        // Función para parsear archivo CSV
+        function parseCSVFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const csvText = e.target.result;
+                    csvData = parseCSV(csvText);
+                    
+                    if (csvData.length === 0) {
+                        throw new Error('El archivo CSV está vacío o no tiene datos válidos');
+                    }
+                    
+                    updateDebugInfo(`CSV parseado: ${csvData.length} filas encontradas`);
+                    showCSVPreview();
+                    
+                } catch (error) {
+                    console.error('Error parseando CSV:', error);
+                    showNotification('Error procesando archivo CSV: ' + error.message, 'error');
+                    
+                    // Mostrar error en preview
+                    document.getElementById('csvPreview').innerHTML = `
+                        <div style="text-align: center; color: #dc3545;">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                            <p><strong>Error procesando archivo</strong></p>
+                            <small>${error.message}</small>
+                        </div>
+                    `;
+                }
+            };
+            
+            reader.onerror = function() {
+                showNotification('Error leyendo el archivo CSV', 'error');
+            };
+            
+            reader.readAsText(file, 'utf-8');
+        }
+        
+        // Función para parsear texto CSV
+        function parseCSV(csvText) {
+            const lines = csvText.trim().split('\n');
+            if (lines.length < 2) {
+                throw new Error('El archivo debe tener al menos una cabecera y una fila de datos');
+            }
+            
+            // Parsear cabecera
+            const headers = parseCSVLine(lines[0]);
+            const data = [];
+            
+            // Parsear datos
+            for (let i = 1; i < lines.length; i++) {
+                if (lines[i].trim() === '') continue; // Saltar líneas vacías
+                
+                const values = parseCSVLine(lines[i]);
+                const row = {};
+                
+                headers.forEach((header, index) => {
+                    row[header.toLowerCase().trim()] = values[index] || '';
+                });
+                
+                data.push(row);
+            }
+            
+            return data;
+        }
+        
+        // Función para parsear una línea CSV
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                
+                if (char === '"') {
+                    if (inQuotes && line[i + 1] === '"') {
+                        current += '"';
+                        i++; // Skip next quote
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            
+            result.push(current.trim());
+            return result;
+        }
+        
+        // Función para mostrar preview de datos CSV
+        function showCSVPreview() {
+            const previewContainer = document.getElementById('csvDataPreview');
+            const headerElement = document.getElementById('csvPreviewHeader');
+            const bodyElement = document.getElementById('csvPreviewBody');
+            
+            // Limpiar contenido anterior
+            headerElement.innerHTML = '';
+            bodyElement.innerHTML = '';
+            
+            if (csvData.length === 0) {
+                previewContainer.style.display = 'none';
+                return;
+            }
+            
+            // Obtener columnas
+            const columns = Object.keys(csvData[0]);
+            
+            // Crear cabecera
+            const headerRow = document.createElement('tr');
+            columns.forEach(col => {
+                const th = document.createElement('th');
+                th.textContent = col;
+                headerRow.appendChild(th);
+            });
+            headerElement.appendChild(headerRow);
+            
+            // Mostrar primeras 5 filas
+            const rowsToShow = Math.min(5, csvData.length);
+            for (let i = 0; i < rowsToShow; i++) {
+                const row = document.createElement('tr');
+                
+                columns.forEach(col => {
+                    const td = document.createElement('td');
+                    const value = csvData[i][col] || '';
+                    td.textContent = value.length > 30 ? value.substring(0, 30) + '...' : value;
+                    td.title = value; // Tooltip con valor completo
+                    row.appendChild(td);
+                });
+                
+                bodyElement.appendChild(row);
+            }
+            
+            // Actualizar mensaje de archivo
+            document.getElementById('csvPreview').innerHTML = `
+                <div style="text-align: center;">
+                    <i class="fas fa-file-csv" style="font-size: 2rem; color: #28a745; margin-bottom: 10px;"></i>
+                    <p><strong>${selectedCSVFile.name}</strong></p>
+                    <small style="color: #28a745;">✅ ${csvData.length} filas encontradas</small>
+                </div>
+            `;
+            
+            // Mostrar elementos
+            previewContainer.style.display = 'block';
+            document.getElementById('importOptions').style.display = 'block';
+            document.getElementById('importCSVBtn').style.display = 'inline-block';
+            
+            updateDebugInfo(`✅ Vista previa CSV generada: ${csvData.length} filas`);
+        }
+        
+        // Función para importar datos CSV
+        async function importCSVData() {
+            if (!csvData || csvData.length === 0) {
+                showNotification('No hay datos para importar', 'error');
+                return;
+            }
+            
+            const btn = document.getElementById('importCSVBtn');
+            const originalText = btn.innerHTML;
+            
+            try {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Importando...';
+                
+                const skipDuplicates = document.getElementById('skipDuplicates').checked;
+                const updateExisting = document.getElementById('updateExisting').checked;
+                
+                updateDebugInfo('🚀 Iniciando importación de productos desde CSV...');
+                showNotification('Iniciando importación...', 'info');
+                
+                let imported = 0;
+                let skipped = 0;
+                let updated = 0;
+                let errors = 0;
+                
+                for (let i = 0; i < csvData.length; i++) {
+                    const row = csvData[i];
+                    
+                    try {
+                        // Validar datos mínimos requeridos
+                        if (!row.nombre || !row.precio) {
+                            console.warn(`Fila ${i + 1}: faltan datos obligatorios (nombre o precio)`);
+                            errors++;
+                            continue;
+                        }
+                        
+                        // Verificar si el producto ya existe
+                        const existingProduct = allProducts.find(p => 
+                            p.name.toLowerCase() === row.nombre.toLowerCase()
+                        );
+                        
+                        if (existingProduct) {
+                            if (skipDuplicates && !updateExisting) {
+                                skipped++;
+                                continue;
+                            } else if (updateExisting) {
+                                await updateProductFromCSV(existingProduct.id, row);
+                                updated++;
+                            } else {
+                                // Crear como nuevo producto con sufijo
+                                await createProductFromCSV(row, ` (Importado ${Date.now()})`);
+                                imported++;
+                            }
+                        } else {
+                            await createProductFromCSV(row);
+                            imported++;
+                        }
+                        
+                    } catch (error) {
+                        console.error(`Error procesando fila ${i + 1}:`, error);
+                        errors++;
+                    }
+                }
+                
+                // Mostrar resultados
+                const message = `Importación completada:\n• Importados: ${imported}\n• Actualizados: ${updated}\n• Omitidos: ${skipped}\n• Errores: ${errors}`;
+                showNotification(message.replace(/\n/g, ', '), 'success');
+                updateDebugInfo(`✅ ${message.replace(/\n/g, ' - ')}`);
+                
+                // Cerrar modal y actualizar inventario
+                closeImportCSVModal();
+                refreshInventory();
+                
+            } catch (error) {
+                console.error('Error en importación CSV:', error);
+                showNotification('Error durante la importación: ' + error.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+        
+        // Función para crear producto desde datos CSV
+        async function createProductFromCSV(row, nameSuffix = '') {
+            const productData = {
+                name: (row.nombre || '').trim() + nameSuffix,
+                sku: (row.sku || '').trim() || null,
+                price: parseFloat(row.precio) || 0,
+                stock: parseInt(row.stock) || 0,
+                description: (row.descripcion || '').trim() || null,
+                width: parseFloat(row.ancho) || null,
+                height: parseFloat(row.alto) || null,
+                depth: parseFloat(row.profundidad) || null,
+                weight: parseFloat(row.peso) || null,
+                is_active: true, // Por defecto activo
+                category_id: await findCategoryId(row.categoria)
+            };
+            
+            await createProduct(productData);
+        }
+        
+        // Función para actualizar producto desde datos CSV
+        async function updateProductFromCSV(productId, row) {
+            const productData = {
+                name: (row.nombre || '').trim(),
+                sku: (row.sku || '').trim() || null,
+                price: parseFloat(row.precio) || 0,
+                stock: parseInt(row.stock) || 0,
+                description: (row.descripcion || '').trim() || null,
+                width: parseFloat(row.ancho) || null,
+                height: parseFloat(row.alto) || null,
+                depth: parseFloat(row.profundidad) || null,
+                weight: parseFloat(row.peso) || null,
+                category_id: await findCategoryId(row.categoria)
+            };
+            
+            await updateProduct(productId, productData);
+        }
+        
+        // Función para buscar ID de categoría por nombre
+        async function findCategoryId(categoryName) {
+            if (!categoryName || !categoryName.trim()) return null;
+            
+            const category = categories.find(cat => 
+                cat.name.toLowerCase() === categoryName.toLowerCase().trim()
+            );
+            
+            return category ? category.id : null;
+        }
+        
+        // Configurar drag & drop para CSV
+        function setupCSVDragAndDrop() {
+            const uploadArea = document.getElementById('csvUploadArea');
+            
+            if (!uploadArea) return;
+            
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, unhighlight, false);
+            });
+            
+            uploadArea.addEventListener('drop', handleCSVDrop, false);
+            
+            function highlight(e) {
+                uploadArea.classList.add('drag-over');
+            }
+            
+            function unhighlight(e) {
+                uploadArea.classList.remove('drag-over');
+            }
+            
+            function handleCSVDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                
+                if (files.length > 0) {
+                    const file = files[0];
+                    document.getElementById('csvInput').files = files;
+                    handleCSVSelect({ target: { files: files } });
+                }
+            }
+        }
+        
+        // Inicializar cuando carga la página
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDebugInfo('🚀 Inicializando sistema de inventario...');
+            
+            // Configurar drag & drop para imágenes y CSV
+            setupImageDragAndDrop();
+            setupCSVDragAndDrop();
+            
+            setTimeout(() => {
+                loadSupabaseConfig();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

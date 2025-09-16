@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración Storage - Supabase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        
+        .section {
+            padding: 30px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .button {
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+        
+        .button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .log {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: monospace;
+            font-size: 12px;
+            height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        
+        .success {
+            color: #155724;
+            background: #d4edda;
+            padding: 3px 6px;
+            border-radius: 3px;
+        }
+        
+        .error {
+            color: #721c24;
+            background: #f8d7da;
+            padding: 3px 6px;
+            border-radius: 3px;
+        }
+        
+        .warning {
+            color: #856404;
+            background: #fff3cd;
+            padding: 3px 6px;
+            border-radius: 3px;
+        }
+        
+        .info {
+            color: #0c5460;
+            background: #d1ecf1;
+            padding: 3px 6px;
+            border-radius: 3px;
+        }
+        
+        .config-info {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .policy-code {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-cloud-upload-alt"></i> Configurar Supabase Storage</h1>
+            <p>Sistema de almacenamiento de imágenes de productos</p>
+        </div>
+
+        <!-- Verificar conexión -->
+        <div class="section">
+            <h2><i class="fas fa-link"></i> Verificar Conexión</h2>
+            <p>Comprobar conectividad con Supabase:</p>
+            <button class="button" onclick="testConnection()">
+                <i class="fas fa-wifi"></i> Probar Conexión
+            </button>
+            <div id="connectionLog" class="log"></div>
+        </div>
+
+        <!-- Configurar Storage -->
+        <div class="section">
+            <h2><i class="fas fa-folder-plus"></i> Configurar Storage</h2>
+            <p>Crear bucket y configurar políticas para imágenes de productos:</p>
+            
+            <div class="config-info">
+                <h4>📋 Configuración que se aplicará:</h4>
+                <ul>
+                    <li><strong>Bucket:</strong> product-images (público para lectura)</li>
+                    <li><strong>Tipos permitidos:</strong> JPG, PNG, WebP, GIF</li>
+                    <li><strong>Tamaño máximo:</strong> 5MB por archivo</li>
+                    <li><strong>Políticas:</strong> Lectura pública, escritura autenticada</li>
+                </ul>
+            </div>
+            
+            <button class="button" onclick="createBucket()">
+                <i class="fas fa-plus"></i> Crear Bucket
+            </button>
+            <button class="button" onclick="setupPolicies()">
+                <i class="fas fa-shield-alt"></i> Configurar Políticas
+            </button>
+            <button class="button" onclick="testUpload()">
+                <i class="fas fa-upload"></i> Probar Subida
+            </button>
+            <div id="storageLog" class="log"></div>
+        </div>
+
+        <!-- Políticas RLS -->
+        <div class="section">
+            <h2><i class="fas fa-code"></i> Políticas de Seguridad</h2>
+            <p>Las siguientes políticas se aplicarán automáticamente:</p>
+            
+            <h4>1. Política de Lectura Pública:</h4>
+            <div class="policy-code">CREATE POLICY "Allow public read access on product images" ON storage.objects
+FOR SELECT USING (bucket_id = 'product-images');</div>
+
+            <h4>2. Política de Escritura Autenticada:</h4>
+            <div class="policy-code">CREATE POLICY "Allow authenticated upload product images" ON storage.objects
+FOR INSERT WITH CHECK (
+  bucket_id = 'product-images' 
+  AND auth.role() = 'authenticated'
+  AND (storage.foldername(name))[1] = 'products'
+);</div>
+
+            <h4>3. Política de Actualización:</h4>
+            <div class="policy-code">CREATE POLICY "Allow authenticated update product images" ON storage.objects
+FOR UPDATE USING (
+  bucket_id = 'product-images' 
+  AND auth.role() = 'authenticated'
+);</div>
+
+            <h4>4. Política de Eliminación:</h4>
+            <div class="policy-code">CREATE POLICY "Allow authenticated delete product images" ON storage.objects
+FOR DELETE USING (
+  bucket_id = 'product-images' 
+  AND auth.role() = 'authenticated'
+);</div>
+        </div>
+
+        <!-- Test final -->
+        <div class="section">
+            <h2><i class="fas fa-check-circle"></i> Pruebas Finales</h2>
+            <button class="button" onclick="fullStorageTest()">
+                <i class="fas fa-play"></i> Ejecutar Todas las Pruebas
+            </button>
+            <button class="button" onclick="cleanupTest()">
+                <i class="fas fa-trash"></i> Limpiar Archivos de Prueba
+            </button>
+            <div id="testLog" class="log"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/config.js"></script>
+    <script>
+        let supabase;
+        
+        // Inicializar Supabase
+        function initSupabase() {
+            if (window.SUPABASE_CONFIG) {
+                supabase = window.supabase.createClient(
+                    window.SUPABASE_CONFIG.url,
+                    window.SUPABASE_CONFIG.anonKey
+                );
+                return true;
+            }
+            return false;
+        }
+        
+        // Función para logging
+        function log(elementId, message, type = 'info') {
+            const logElement = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type;
+            const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : type === 'warning' ? '⚠️' : 'ℹ️';
+            logElement.innerHTML += `<span class="${className}">[${timestamp}] ${icon} ${message}</span>\n`;
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+        
+        // Probar conexión
+        async function testConnection() {
+            const logId = 'connectionLog';
+            document.getElementById(logId).innerHTML = '';
+            
+            if (!initSupabase()) {
+                log(logId, 'Error: Configuración de Supabase no encontrada', 'error');
+                return false;
+            }
+            
+            try {
+                log(logId, 'Probando conexión a Supabase...', 'info');
+                
+                // Test básico de conexión
+                const { data, error } = await supabase.from('products').select('count').limit(1);
+                
+                if (error) {
+                    log(logId, `Error de conexión: ${error.message}`, 'error');
+                    return false;
+                } else {
+                    log(logId, 'Conexión exitosa a Supabase ✅', 'success');
+                    log(logId, `URL: ${window.SUPABASE_CONFIG.url}`, 'info');
+                    return true;
+                }
+            } catch (error) {
+                log(logId, `Error inesperado: ${error.message}`, 'error');
+                return false;
+            }
+        }
+        
+        // Crear bucket
+        async function createBucket() {
+            const logId = 'storageLog';
+            document.getElementById(logId).innerHTML = '';
+            
+            if (!supabase) {
+                if (!initSupabase()) {
+                    log(logId, 'Error: No se pudo inicializar Supabase', 'error');
+                    return;
+                }
+            }
+            
+            try {
+                log(logId, 'Creando bucket "product-images"...', 'info');
+                
+                const { data, error } = await supabase.storage.createBucket('product-images', {
+                    public: true,
+                    allowedMimeTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'],
+                    fileSizeLimit: 5242880 // 5MB
+                });
+                
+                if (error) {
+                    if (error.message.includes('already exists')) {
+                        log(logId, 'Bucket "product-images" ya existe ✅', 'warning');
+                    } else {
+                        log(logId, `Error creando bucket: ${error.message}`, 'error');
+                    }
+                } else {
+                    log(logId, 'Bucket "product-images" creado exitosamente ✅', 'success');
+                }
+                
+                // Verificar bucket
+                const { data: buckets, error: listError } = await supabase.storage.listBuckets();
+                
+                if (buckets) {
+                    const productBucket = buckets.find(b => b.name === 'product-images');
+                    if (productBucket) {
+                        log(logId, `Bucket configurado - Público: ${productBucket.public}`, 'info');
+                    }
+                }
+                
+            } catch (error) {
+                log(logId, `Error inesperado: ${error.message}`, 'error');
+            }
+        }
+        
+        // Configurar políticas
+        async function setupPolicies() {
+            const logId = 'storageLog';
+            
+            log(logId, 'Configurando políticas de acceso...', 'info');
+            
+            const policies = [
+                {
+                    name: 'Allow public read access on product images',
+                    sql: `CREATE POLICY "Allow public read access on product images" ON storage.objects FOR SELECT USING (bucket_id = 'product-images');`
+                },
+                {
+                    name: 'Allow authenticated upload product images',
+                    sql: `CREATE POLICY "Allow authenticated upload product images" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'product-images' AND auth.role() = 'authenticated');`
+                },
+                {
+                    name: 'Allow authenticated update product images',
+                    sql: `CREATE POLICY "Allow authenticated update product images" ON storage.objects FOR UPDATE USING (bucket_id = 'product-images' AND auth.role() = 'authenticated');`
+                },
+                {
+                    name: 'Allow authenticated delete product images',
+                    sql: `CREATE POLICY "Allow authenticated delete product images" ON storage.objects FOR DELETE USING (bucket_id = 'product-images' AND auth.role() = 'authenticated');`
+                }
+            ];
+            
+            log(logId, 'ℹ️ IMPORTANTE: Las políticas deben crearse manualmente en el panel de Supabase', 'warning');
+            log(logId, '1. Ve a tu proyecto en https://supabase.com/dashboard', 'info');
+            log(logId, '2. Ve a Storage > Policies', 'info');
+            log(logId, '3. Crea las políticas mostradas arriba', 'info');
+            log(logId, 'Las políticas están listadas en la sección "Políticas de Seguridad"', 'info');
+        }
+        
+        // Probar subida
+        async function testUpload() {
+            const logId = 'storageLog';
+            
+            log(logId, 'Probando subida de archivo de prueba...', 'info');
+            
+            try {
+                // Crear un blob de prueba
+                const testContent = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==';
+                const blob = await fetch(testContent).then(r => r.blob());
+                
+                const fileName = `test-${Date.now()}.png`;
+                
+                const { data, error } = await supabase.storage
+                    .from('product-images')
+                    .upload(`test/${fileName}`, blob);
+                
+                if (error) {
+                    log(logId, `Error subiendo archivo: ${error.message}`, 'error');
+                } else {
+                    log(logId, `Archivo subido exitosamente: ${data.path}`, 'success');
+                    
+                    // Obtener URL pública
+                    const { data: { publicUrl } } = supabase.storage
+                        .from('product-images')
+                        .getPublicUrl(data.path);
+                    
+                    log(logId, `URL pública: ${publicUrl}`, 'info');
+                }
+                
+            } catch (error) {
+                log(logId, `Error en prueba: ${error.message}`, 'error');
+            }
+        }
+        
+        // Prueba completa
+        async function fullStorageTest() {
+            const logId = 'testLog';
+            document.getElementById(logId).innerHTML = '';
+            
+            log(logId, '🚀 Iniciando prueba completa de Storage...', 'info');
+            
+            // 1. Probar conexión
+            const connected = await testConnection();
+            if (!connected) {
+                log(logId, 'Prueba fallida: Sin conexión a Supabase', 'error');
+                return;
+            }
+            
+            // 2. Crear bucket
+            await createBucket();
+            
+            // 3. Probar subida
+            await testUpload();
+            
+            log(logId, '✅ Prueba completa finalizada', 'success');
+            log(logId, 'Revisa los logs de cada sección para más detalles', 'info');
+        }
+        
+        // Limpiar archivos de prueba
+        async function cleanupTest() {
+            const logId = 'testLog';
+            
+            log(logId, 'Limpiando archivos de prueba...', 'info');
+            
+            try {
+                const { data, error } = await supabase.storage
+                    .from('product-images')
+                    .list('test', { limit: 100 });
+                
+                if (data && data.length > 0) {
+                    const filesToDelete = data.map(file => `test/${file.name}`);
+                    
+                    const { error: deleteError } = await supabase.storage
+                        .from('product-images')
+                        .remove(filesToDelete);
+                    
+                    if (deleteError) {
+                        log(logId, `Error eliminando archivos: ${deleteError.message}`, 'error');
+                    } else {
+                        log(logId, `${filesToDelete.length} archivos de prueba eliminados`, 'success');
+                    }
+                } else {
+                    log(logId, 'No hay archivos de prueba para eliminar', 'info');
+                }
+                
+            } catch (error) {
+                log(logId, `Error en limpieza: ${error.message}`, 'error');
+            }
+        }
+        
+        // Inicializar al cargar
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                initSupabase();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

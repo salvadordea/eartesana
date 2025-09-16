@@ -1,20 +1,27 @@
 /**
  * Home Categories JavaScript - Estudio Artesana
- * Loads and displays categories dynamically on the homepage
+ * Loads and displays categories dynamically on the homepage using Supabase
  */
 
 class HomeCategoriesLoader {
     constructor() {
         this.categories = [];
+        this.allProducts = [];
         this.isLoading = false;
-        this.maxCategories = 999; // Show ALL categories on homepage by default
         
-        this.init();
+        console.log('🏠 Home Categories Loader inicializado');
     }
     
-    init() {
+    async init() {
+        // Esperar a que el API esté disponible
+        if (!window.artesanaAPI) {
+            console.log('⏳ Esperando API de Supabase...');
+            setTimeout(() => this.init(), 500);
+            return;
+        }
+        
         this.initializeElements();
-        this.loadHomeCategories();
+        await this.loadHomeCategories();
     }
     
     initializeElements() {
@@ -29,23 +36,31 @@ class HomeCategoriesLoader {
         this.showLoading();
         
         try {
-            // Load categories from WooCommerce
-            const allCategories = await window.WooAPI.getCategories({
-                hide_empty: true,
-                per_page: 50,
-                orderby: 'count',
-                order: 'desc'
-            });
+            // Cargar categorías desde Supabase
+            const categoriesResponse = await window.artesanaAPI.getCategories();
             
-            // Take only the top categories for homepage
-            this.categories = allCategories.slice(0, this.maxCategories);
+            // Cargar productos para obtener conteos
+            const productsResponse = await window.artesanaAPI.getProducts(1, 100);
+            this.allProducts = productsResponse.products;
+            
+            // Filtrar categorías activas y excluir 'Uncategorized'
+            this.categories = categoriesResponse.categories
+                .filter(cat => cat.name !== 'Uncategorized')
+                .map(category => ({
+                    ...category,
+                    count: this.getProductCountForCategory(category.id),
+                    slug: this.generateSlug(category.name)
+                }))
+                .filter(cat => cat.count > 0); // Solo categorías con productos
+            
+            console.log('🏠 Categorías cargadas para inicio:', this.categories);
             
             this.renderHomeCategories();
             
         } catch (error) {
-            console.error('Error loading home categories:', error);
+            console.error('❌ Error cargando categorías del inicio:', error);
             this.hideLoading();
-            // On error, hide the section gracefully
+            // En error, ocultar la sección
             if (this.categoriesGrid) {
                 this.categoriesGrid.style.display = 'none';
             }
@@ -97,49 +112,42 @@ class HomeCategoriesLoader {
     }
     
     getCategoryImage(category) {
-        // Check if WooCommerce provides an image
-        if (category.image && category.image.src) {
-            // Ensure the image URL is complete and accessible
-            let imageUrl = category.image.src;
-            
-            // If it's a relative URL, make it absolute
-            if (imageUrl.startsWith('/')) {
-                imageUrl = window.EstudioArtesanaConfig.woocommerce.baseURL + imageUrl;
-            }
-            
-            // Check different image sizes if available
-            if (category.image.sizes) {
-                // Try to get medium or large size first
-                const preferredSizes = ['medium', 'medium_large', 'large', 'full'];
-                for (let size of preferredSizes) {
-                    if (category.image.sizes[size]) {
-                        imageUrl = category.image.sizes[size];
-                        break;
-                    }
-                }
-            }
-            
-            return imageUrl;
+        // Usar la imagen desde Supabase si está disponible
+        if (category.image) {
+            return category.image;
         }
         
-        // Fallback images based on category name
+        // Fallback images basado en nombres de categorías (usando imágenes existentes)
         const categoryImages = {
+            // Joyería
             'joyeria': 'assets/images/categories/joyeria.jpg',
-            'joyería': 'assets/images/categories/joyeria.jpg', 
-            'accesorios': 'assets/images/categories/accesorios.jpg',
-            'aretes de piel': 'assets/images/categories/aretes-piel.jpg',
-            'aretes del piel': 'assets/images/categories/aretes-piel.jpg',
-            'bolsas': 'assets/images/categories/bolsas.jpg',
+            'joyería': 'assets/images/categories/joyeria.jpg',
+            
+            // Bolsas - mapear todas las variantes a las imágenes existentes
             'bolsas de mano': 'assets/images/categories/bolsas-de-mano.jpg',
             'bolsas textil y piel': 'assets/images/categories/bolsas-textil.jpg',
+            'bolsas de textil y piel': 'assets/images/categories/bolsas-textil.jpg',
             'bolsas cruzadas': 'assets/images/categories/bolsas-cruzadas.jpg',
             'bolsas grandes': 'assets/images/categories/bolsas-grandes.jpg',
+            
+            // Backpacks
+            'backpacks': 'assets/images/categories/backpacks.jpg',
+            'backpack': 'assets/images/categories/backpacks.jpg',
+            
+            // Botelleras
             'botelleras': 'assets/images/categories/botelleras.jpg',
-            'carteras': 'assets/images/categories/carteras.jpg',
+            
+            // Hogar
             'hogar': 'assets/images/categories/hogar.jpg',
+            
+            // Portacel
             'portacel': 'assets/images/categories/portacel.jpg',
-            'cuadernos': 'assets/images/categories/cuadernos.jpg',
-            'libretas': 'assets/images/categories/cuadernos.jpg'
+            
+            // Vestimenta
+            'vestimenta': 'assets/images/categories/vestimenta.jpg',
+            
+            // Accesorios - usar joyeria como fallback
+            'accesorios': 'assets/images/categories/joyeria.jpg'
         };
         
         const categoryName = category.name.toLowerCase();
@@ -253,45 +261,50 @@ class HomeCategoriesLoader {
         }
     }
     
+    // Método para contar productos por categoría
+    getProductCountForCategory(categoryId) {
+        const matchingProducts = this.allProducts.filter(product => {
+            return product.categories && product.categories.some(cat => {
+                // Buscar por ID en category_ids o por nombre
+                return (product.category_ids && product.category_ids.includes(categoryId)) ||
+                       cat.toLowerCase() === this.getCategoryNameById(categoryId)?.toLowerCase();
+            });
+        });
+        
+        return matchingProducts.length;
+    }
+    
+    // Obtener nombre de categoría por ID
+    getCategoryNameById(categoryId) {
+        const category = this.categories.find(cat => cat.id == categoryId);
+        return category ? category.name : null;
+    }
+    
+    // Generar slug para categoría
+    generateSlug(name) {
+        return name.toLowerCase()
+            .replace(/ñ/g, 'n')
+            .replace(/[áàäâ]/g, 'a')
+            .replace(/[éèëê]/g, 'e')
+            .replace(/[íìïî]/g, 'i')
+            .replace(/[óòöô]/g, 'o')
+            .replace(/[úùüû]/g, 'u')
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+    }
+    
     // Helper method to get correct path to tienda based on current location
     getTiendaPath() {
-        const currentPath = window.location.pathname;
-        
-        // If we're in the root directory
-        if (currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/EstArtesana/') || currentPath.endsWith('/EstArtesana/index.html')) {
-            return 'tienda/index.html';
-        }
-        
-        // If we're in a pages subdirectory (tienda, sobre-nosotros, categorias, producto)
-        if (currentPath.includes('/pages/')) {
-            return '../../tienda/index.html';
-        }
-        
-        // If we're in the tienda directory
-        if (currentPath.includes('/tienda/')) {
-            return 'index.html';
-        }
-        
-        // Default fallback - assume we're in root
-        return 'tienda/index.html';
+        // Para simplificar, desde el index.html la ruta siempre es tienda.html
+        return 'tienda.html';
     }
 }
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Set WooCommerce API credentials from config
-    if (window.EstudioArtesanaConfig && window.EstudioArtesanaConfig.woocommerce) {
-        window.WooAPI.setCredentials(
-            window.EstudioArtesanaConfig.woocommerce.consumerKey,
-            window.EstudioArtesanaConfig.woocommerce.consumerSecret
-        );
-        
-        // Set base URL
-        window.WooAPI.config.baseURL = window.EstudioArtesanaConfig.woocommerce.baseURL;
-    }
-    
     // Initialize home categories loader
-    new HomeCategoriesLoader();
+    const homeCategoriesLoader = new HomeCategoriesLoader();
+    homeCategoriesLoader.init();
 });
 
 // Add CSS for smooth animations

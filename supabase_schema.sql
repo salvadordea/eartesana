@@ -121,6 +121,16 @@ CREATE INDEX idx_categories_slug ON categories(slug);
 CREATE INDEX idx_categories_parent ON categories(parent_id);
 CREATE INDEX idx_categories_active ON categories(is_active);
 
+-- Índices para usuarios
+CREATE INDEX idx_user_profiles_email ON user_profiles(email);
+CREATE INDEX idx_user_profiles_role ON user_profiles(role);
+CREATE INDEX idx_user_profiles_active ON user_profiles(is_active);
+CREATE INDEX idx_user_profiles_wholesale ON user_profiles(wholesale_approved);
+CREATE INDEX idx_user_sessions_user ON user_sessions(user_id);
+CREATE INDEX idx_user_sessions_active ON user_sessions(is_active);
+CREATE INDEX idx_wholesale_applications_user ON wholesale_applications(user_id);
+CREATE INDEX idx_wholesale_applications_status ON wholesale_applications(status);
+
 -- ===========================================
 -- FUNCIONES Y TRIGGERS
 -- ===========================================
@@ -147,6 +157,45 @@ CREATE TRIGGER update_variants_updated_at
     BEFORE UPDATE ON product_variants 
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
+-- Triggers para tablas de usuarios
+CREATE TRIGGER update_user_profiles_updated_at 
+    BEFORE UPDATE ON user_profiles 
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_wholesale_applications_updated_at 
+    BEFORE UPDATE ON wholesale_applications 
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Función para crear perfil de usuario automáticamente al registrarse
+CREATE OR REPLACE FUNCTION public.handle_new_user() 
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO public.user_profiles (id, email, full_name, role)
+    VALUES (
+        NEW.id, 
+        NEW.email,
+        COALESCE(NEW.raw_user_meta_data->>'full_name', ''),
+        COALESCE(NEW.raw_user_meta_data->>'role', 'Usuario')
+    );
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Trigger para crear perfil automáticamente
+CREATE TRIGGER on_auth_user_created
+    AFTER INSERT ON auth.users
+    FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
+
+-- Función para actualizar last_login
+CREATE OR REPLACE FUNCTION public.update_user_last_login(user_id UUID)
+RETURNS VOID AS $$
+BEGIN
+    UPDATE user_profiles 
+    SET last_login = NOW() 
+    WHERE id = user_id;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
 -- ===========================================
 -- POLÍTICAS RLS (Row Level Security)
 -- ===========================================
@@ -160,6 +209,11 @@ ALTER TABLE attributes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE attribute_values ENABLE ROW LEVEL SECURITY;
 ALTER TABLE product_variants ENABLE ROW LEVEL SECURITY;
 ALTER TABLE variant_attributes ENABLE ROW LEVEL SECURITY;
+
+-- Habilitar RLS en tablas de usuarios
+ALTER TABLE user_profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE wholesale_applications ENABLE ROW LEVEL SECURITY;
 
 -- Políticas para lectura pública (todos pueden ver productos activos)
 CREATE POLICY "Public can view active categories" ON categories
@@ -185,6 +239,148 @@ CREATE POLICY "Public can view active variants" ON product_variants
 
 CREATE POLICY "Public can view variant attributes" ON variant_attributes
     FOR SELECT USING (true);
+
+-- ===========================================
+-- POLÍTICAS RLS PARA USUARIOS
+-- ===========================================
+
+-- Políticas para user_profiles
+CREATE POLICY "Users can view own profile" ON user_profiles
+    FOR SELECT USING (auth.uid() = id);
+
+CREATE POLICY "Users can update own profile" ON user_profiles
+    FOR UPDATE USING (auth.uid() = id);
+
+CREATE POLICY "Anyone can create profile" ON user_profiles
+    FOR INSERT WITH CHECK (auth.uid() = id);
+
+CREATE POLICY "Admins can view all profiles" ON user_profiles
+    FOR ALL USING (
+        EXISTS (
+            SELECT 1 FROM user_profiles 
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- Políticas para user_sessions
+CREATE POLICY "Users can view own sessions" ON user_sessions
+    FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can insert own sessions" ON user_sessions
+    FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update own sessions" ON user_sessions
+    FOR UPDATE USING (auth.uid() = user_id);
+
+CREATE POLICY "Admins can manage all sessions" ON user_sessions
+    FOR ALL USING (
+        EXISTS (
+            SELECT 1 FROM user_profiles 
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- Políticas para wholesale_applications
+CREATE POLICY "Users can view own applications" ON wholesale_applications
+    FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can create own applications" ON wholesale_applications
+    FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update own pending applications" ON wholesale_applications
+    FOR UPDATE USING (
+        auth.uid() = user_id AND status = 'pending'
+    );
+
+CREATE POLICY "Admins can manage all applications" ON wholesale_applications
+    FOR ALL USING (
+        EXISTS (
+            SELECT 1 FROM user_profiles 
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- ===========================================
+-- TABLAS DE USUARIOS
+-- ===========================================
+
+-- 9. TABLA DE USUARIOS EXTENDIDA (extiende auth.users de Supabase)
+CREATE TABLE user_profiles (
+    id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    full_name VARCHAR(255),
+    phone VARCHAR(20),
+    role VARCHAR(20) NOT NULL DEFAULT 'Usuario' CHECK (role IN ('Admin', 'Mayorista', 'Usuario')),
+    avatar_url TEXT,
+    
+    -- Información adicional
+    company_name VARCHAR(255), -- Para mayoristas
+    tax_id VARCHAR(50), -- RFC o tax ID para mayoristas
+    address TEXT,
+    city VARCHAR(100),
+    state VARCHAR(100),
+    postal_code VARCHAR(20),
+    country VARCHAR(100) DEFAULT 'México',
+    
+    -- Configuraciones de cuenta
+    is_active BOOLEAN DEFAULT true,
+    email_verified BOOLEAN DEFAULT false,
+    phone_verified BOOLEAN DEFAULT false,
+    newsletter_subscribed BOOLEAN DEFAULT false,
+    
+    -- Información de mayorista
+    wholesale_approved BOOLEAN DEFAULT false,
+    wholesale_application_date TIMESTAMPTZ,
+    wholesale_approved_date TIMESTAMPTZ,
+    wholesale_discount_percent DECIMAL(5,2) DEFAULT 0.00, -- Descuento en porcentaje
+    
+    -- Metadatos
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    last_login TIMESTAMPTZ
+);
+
+-- 10. TABLA DE SESIONES DE USUARIO (para tracking)
+CREATE TABLE user_sessions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL REFERENCES user_profiles(id) ON DELETE CASCADE,
+    device_info JSONB,
+    ip_address INET,
+    user_agent TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    expires_at TIMESTAMPTZ DEFAULT NOW() + INTERVAL '30 days',
+    is_active BOOLEAN DEFAULT true
+);
+
+-- 11. TABLA DE APLICACIONES DE MAYORISTA
+CREATE TABLE wholesale_applications (
+    id BIGSERIAL PRIMARY KEY,
+    user_id UUID NOT NULL REFERENCES user_profiles(id) ON DELETE CASCADE,
+    business_name VARCHAR(255) NOT NULL,
+    tax_id VARCHAR(50) NOT NULL,
+    business_type VARCHAR(100),
+    business_address TEXT NOT NULL,
+    business_phone VARCHAR(20),
+    business_email VARCHAR(255),
+    website_url TEXT,
+    years_in_business INTEGER,
+    expected_monthly_volume DECIMAL(10,2),
+    
+    -- Documentos
+    business_license_url TEXT,
+    tax_document_url TEXT,
+    references TEXT, -- Referencias comerciales
+    
+    -- Estado de la aplicación
+    status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'reviewing', 'approved', 'rejected')),
+    reviewed_by UUID REFERENCES user_profiles(id),
+    review_notes TEXT,
+    
+    -- Fechas
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    reviewed_at TIMESTAMPTZ
+);
 
 -- ===========================================
 -- DATOS INICIALES

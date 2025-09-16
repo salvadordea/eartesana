@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Login - Estudio Artesana</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        h1 {
+            color: #2d3748;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+        
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        button:hover {
+            background: #5a67d8;
+        }
+        
+        button:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+        }
+        
+        .test-users {
+            background: #f7fafc;
+            border-left: 4px solid #4299e1;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .test-users h3 {
+            margin-top: 0;
+            color: #2b6cb0;
+        }
+        
+        .test-users ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .quick-login {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .quick-login button {
+            flex: 1;
+            padding: 8px;
+            font-size: 14px;
+        }
+        
+        .admin { background: #e53e3e; }
+        .admin:hover { background: #c53030; }
+        .wholesaler { background: #38a169; }
+        .wholesaler:hover { background: #2f855a; }
+        .user { background: #3182ce; }
+        .user:hover { background: #2c5282; }
+        
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .status.success {
+            background: #c6f6d5;
+            border: 1px solid #68d391;
+            color: #22543d;
+        }
+        
+        .status.error {
+            background: #fed7d7;
+            border: 1px solid #fc8181;
+            color: #742a2a;
+        }
+        
+        .user-info {
+            background: #e6fffa;
+            border: 1px solid #4fd1c7;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .user-info h3 {
+            margin-top: 0;
+            color: #234e52;
+        }
+        
+        .user-info p {
+            margin: 5px 0;
+            color: #2c7a7b;
+        }
+        
+        .logout-btn {
+            background: #e53e3e;
+            margin-top: 15px;
+        }
+        
+        .logout-btn:hover {
+            background: #c53030;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-login {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🔐 Prueba de Sistema de Usuarios - Estudio Artesana</h1>
+    
+    <div class="container">
+        <div class="card">
+            <h2>Login Manual</h2>
+            
+            <div class="test-users">
+                <h3>Usuarios de Prueba:</h3>
+                <ul>
+                    <li><strong>Admin:</strong> estudio@artesana.com / ZaqXsw124!</li>
+                    <li><strong>Mayorista:</strong> mayorista@prueba.com / mayoristas123</li>
+                    <li><strong>Usuario:</strong> usuario@prueba.com / usuario123</li>
+                </ul>
+                
+                <div class="quick-login">
+                    <button type="button" class="admin" onclick="quickLogin('admin')">Login Admin</button>
+                    <button type="button" class="wholesaler" onclick="quickLogin('mayorista')">Login Mayorista</button>
+                    <button type="button" class="user" onclick="quickLogin('usuario')">Login Usuario</button>
+                </div>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" id="loginBtn">Iniciar Sesión</button>
+            </form>
+        </div>
+        
+        <div class="card">
+            <h2>Estado de Autenticación</h2>
+            
+            <div id="authStatus">
+                <p>No autenticado</p>
+            </div>
+            
+            <div id="userInfo" class="user-info">
+                <h3>Información del Usuario</h3>
+                <p><strong>Nombre:</strong> <span id="userName">-</span></p>
+                <p><strong>Email:</strong> <span id="userEmail">-</span></p>
+                <p><strong>Rol:</strong> <span id="userRole">-</span></p>
+                <p><strong>Teléfono:</strong> <span id="userPhone">-</span></p>
+                <p><strong>Es Mayorista:</strong> <span id="isWholesaler">-</span></p>
+                <p><strong>Descuento:</strong> <span id="discount">-</span></p>
+                <p><strong>Último Login:</strong> <span id="lastLogin">-</span></p>
+                
+                <button type="button" class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card full-width">
+        <h2>Prueba de Productos con Precios Mayoristas</h2>
+        <div id="productTest">
+            <button onclick="testProducts()">Cargar Productos de Prueba</button>
+            <div id="productResults"></div>
+        </div>
+    </div>
+    
+    <div id="messages"></div>
+    
+    <!-- Scripts -->
+    <script src="js/auth-manager.js"></script>
+    <script src="js/supabase-api-client.js"></script>
+    
+    <script>
+        // Variables globales
+        let currentUser = null;
+        
+        // Esperar a que los scripts se carguen
+        window.addEventListener('load', function() {
+            initializeApp();
+        });
+        
+        function initializeApp() {
+            console.log('🚀 Inicializando aplicación de prueba...');
+            
+            // Verificar que los managers estén disponibles
+            if (typeof window.authManager === 'undefined') {
+                showMessage('❌ Error: AuthManager no está disponible', 'error');
+                return;
+            }
+            
+            if (typeof window.artesanaAPI === 'undefined') {
+                showMessage('❌ Error: SupabaseAPI no está disponible', 'error');
+                return;
+            }
+            
+            // Configurar eventos
+            setupEventListeners();
+            
+            // Monitorear cambios de autenticación
+            window.authManager.onAuthChange((isAuthenticated, user, profile) => {
+                updateAuthStatus(isAuthenticated, user, profile);
+            });
+            
+            showMessage('✅ Aplicación inicializada correctamente', 'success');
+        }
+        
+        function setupEventListeners() {
+            // Formulario de login
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+        }
+        
+        async function handleLogin(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Iniciando sesión...';
+            
+            try {
+                const result = await window.authManager.signIn(email, password);
+                
+                if (result.success) {
+                    showMessage('✅ Sesión iniciada exitosamente', 'success');
+                    document.getElementById('loginForm').reset();
+                } else {
+                    showMessage('❌ Error: ' + result.message, 'error');
+                }
+            } catch (error) {
+                showMessage('❌ Error inesperado: ' + error.message, 'error');
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Iniciar Sesión';
+            }
+        }
+        
+        function quickLogin(tipo) {
+            let email, password;
+            
+            switch(tipo) {
+                case 'admin':
+                    email = 'estudio@artesana.com';
+                    password = 'ZaqXsw124!';
+                    break;
+                case 'mayorista':
+                    email = 'mayorista@prueba.com';
+                    password = 'mayoristas123';
+                    break;
+                case 'usuario':
+                    email = 'usuario@prueba.com';
+                    password = 'usuario123';
+                    break;
+            }
+            
+            document.getElementById('email').value = email;
+            document.getElementById('password').value = password;
+            
+            // Auto-submit
+            document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+        }
+        
+        async function logout() {
+            try {
+                await window.authManager.signOut();
+                showMessage('✅ Sesión cerrada exitosamente', 'success');
+            } catch (error) {
+                showMessage('❌ Error cerrando sesión: ' + error.message, 'error');
+            }
+        }
+        
+        function updateAuthStatus(isAuthenticated, user, profile) {
+            const authStatus = document.getElementById('authStatus');
+            const userInfo = document.getElementById('userInfo');
+            
+            if (isAuthenticated && profile) {
+                currentUser = user;
+                
+                authStatus.innerHTML = '<p style="color: #22543d; font-weight: 600;">✅ Usuario autenticado</p>';
+                
+                // Actualizar información del usuario
+                document.getElementById('userName').textContent = profile.full_name || 'N/A';
+                document.getElementById('userEmail').textContent = profile.email || 'N/A';
+                document.getElementById('userRole').textContent = profile.role || 'Usuario';
+                document.getElementById('userPhone').textContent = profile.phone || 'N/A';
+                document.getElementById('isWholesaler').textContent = window.authManager.isWholesaler() ? 'Sí' : 'No';
+                document.getElementById('discount').textContent = window.authManager.getWholesaleDiscount() + '%';
+                document.getElementById('lastLogin').textContent = profile.last_login ? 
+                    new Date(profile.last_login).toLocaleString('es-MX') : 'N/A';
+                
+                userInfo.style.display = 'block';
+            } else {
+                currentUser = null;
+                authStatus.innerHTML = '<p style="color: #742a2a; font-weight: 600;">❌ No autenticado</p>';
+                userInfo.style.display = 'none';
+            }
+        }
+        
+        async function testProducts() {
+            const resultsDiv = document.getElementById('productResults');
+            resultsDiv.innerHTML = '<p>Cargando productos...</p>';
+            
+            try {
+                // Simular algunos productos para la prueba
+                const mockProducts = [
+                    { id: 1, name: 'Bolsa Artesanal Premium', price: 1500 },
+                    { id: 2, name: 'Collar de Cuentas', price: 800 },
+                    { id: 3, name: 'Cuaderno Bordado', price: 450 }
+                ];
+                
+                let html = '<h3>Productos con Precios:</h3>';
+                
+                mockProducts.forEach(product => {
+                    const finalPrice = window.artesanaAPI.calculatePrice(product.price);
+                    const isDiscounted = finalPrice !== product.price;
+                    
+                    html += `
+                        <div style="border: 1px solid #e2e8f0; padding: 15px; margin: 10px 0; border-radius: 8px;">
+                            <h4>${product.name}</h4>
+                            <p><strong>Precio original:</strong> $${product.price.toFixed(2)}</p>
+                            ${isDiscounted ? 
+                                `<p><strong>Precio con descuento:</strong> <span style="color: #22543d; font-weight: 600;">$${finalPrice.toFixed(2)}</span></p>
+                                <p><small>Descuento aplicado: ${window.authManager.getWholesaleDiscount()}%</small></p>` : 
+                                '<p><em>No hay descuento aplicado</em></p>'
+                            }
+                        </div>
+                    `;
+                });
+                
+                resultsDiv.innerHTML = html;
+                
+            } catch (error) {
+                resultsDiv.innerHTML = '<p style="color: #e53e3e;">Error cargando productos: ' + error.message + '</p>';
+            }
+        }
+        
+        function showMessage(message, type) {
+            const messagesDiv = document.getElementById('messages');
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `status ${type}`;
+            messageDiv.textContent = message;
+            
+            messagesDiv.appendChild(messageDiv);
+            
+            // Auto-remove después de 5 segundos
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.parentNode.removeChild(messageDiv);
+                }
+            }, 5000);
+            
+            // Scroll to message
+            messageDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

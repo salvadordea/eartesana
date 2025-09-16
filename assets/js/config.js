@@ -145,6 +145,12 @@ const EstudioArtesanaConfig = {
         allowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'webp']
     },
     
+    // Supabase Configuration (for admin authentication)
+    supabase: {
+        url: 'https://yrmfrfpyqctvwyhrhivl.supabase.co',
+        anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlybWZyZnB5cWN0dnd5aHJoaXZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc5NTg5MzUsImV4cCI6MjA3MzUzNDkzNX0.qEijwK3FlnqXP2qw0gl438Tt-Rd1vrfts1cXslUuteU'
+    },
+    
     // WooCommerce API Configuration
     // USANDO SITIO EN LÍNEA: https://estudioartesana.com
     woocommerce: {
@@ -243,3 +249,9 @@ if (typeof module !== 'undefined' && module.exports) {
 
 // Global access for vanilla JS
 window.EstudioArtesanaConfig = EstudioArtesanaConfig;
+
+// Global Supabase configuration for AuthManager
+window.SUPABASE_CONFIG = {
+    url: EstudioArtesanaConfig.supabase.url,
+    anonKey: EstudioArtesanaConfig.supabase.anonKey
+};

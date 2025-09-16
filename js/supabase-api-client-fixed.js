@@ -1,0 +1,484 @@
+/**
+ * CLIENTE API SUPABASE CORREGIDO CON LÓGICA DE CATEGORÍAS
+ * =======================================================
+ * Versión corregida que implementa la lógica de categorías múltiples
+ * usando el mismo enfoque exitoso del panel de administración
+ */
+
+class SupabaseAPIFixed {
+    constructor() {
+        // Configuración de Supabase
+        this.baseUrl = 'https://yrmfrfpyqctvwyhrhivl.supabase.co';
+        this.apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlybWZyZnB5cWN0dnd5aHJoaXZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc5NTg5MzUsImV4cCI6MjA3MzUzNDkzNX0.qEijwK3FlnqXP2qw0gl438Tt-Rd1vrfts1cXslUuteU';
+        
+        // Headers para todas las peticiones
+        this.headers = {
+            'Content-Type': 'application/json',
+            'apikey': this.apiKey,
+            'Authorization': `Bearer ${this.apiKey}`
+        };
+        
+        console.log('✅ SupabaseAPI (Fixed) inicializado');
+    }
+
+    // ==========================================
+    // PRODUCTOS CON CATEGORÍAS CORREGIDAS
+    // ==========================================
+
+    /**
+     * Obtener todos los productos con categorías usando JOIN manual
+     */
+    async getProducts(page = 1, limit = 12) {
+        try {
+            console.log(`📦 Obteniendo productos con categorías (página ${page}, límite ${limit})`);
+            
+            // Obtener productos con categorías usando la lógica corregida
+            const productsWithCategories = await this.getProductsWithCategoriesJoin();
+            
+            // Aplicar paginación
+            const offset = (page - 1) * limit;
+            const paginatedProducts = productsWithCategories.slice(offset, offset + limit);
+            
+            // Transformar al formato esperado por el frontend
+            const transformedProducts = paginatedProducts.map(this.transformProduct.bind(this));
+            
+            console.log(`✅ ${transformedProducts.length} productos obtenidos con categorías`);
+            console.log('🔍 EJEMPLO - Primer producto:', transformedProducts[0]);
+            
+            return {
+                products: transformedProducts,
+                total: productsWithCategories.length,
+                page: page,
+                totalPages: Math.ceil(productsWithCategories.length / limit)
+            };
+            
+        } catch (error) {
+            console.error('❌ Error obteniendo productos:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Obtener productos usando la vista products_full que ya incluye categories
+     */
+    async getProductsWithCategoriesJoin() {
+        try {
+            console.log('🔄 Obteniendo productos desde products_full...');
+            
+            // Usar products_full que ya incluye categories y category_ids
+            const productsResponse = await fetch(`${this.baseUrl}/rest/v1/products_full?order=name`, {
+                method: 'GET',
+                headers: this.headers
+            });
+
+            if (!productsResponse.ok) {
+                throw new Error(`Error obteniendo productos: ${productsResponse.status}`);
+            }
+
+            const products = await productsResponse.json();
+            console.log(`📦 ${products.length} productos obtenidos desde products_full`);
+
+            // Los productos ya vienen con categories y category_ids
+            console.log('🔍 DIAGNÓSTICO - Producto ejemplo:', products[0]);
+            return products;
+
+        } catch (error) {
+            console.error('❌ Error obteniendo productos desde products_full:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Obtener un producto específico con sus categorías
+     */
+    async getProduct(id) {
+        try {
+            console.log(`📦 Obteniendo producto ID: ${id}`);
+            
+            // Obtener todos los productos con categorías
+            const productsWithCategories = await this.getProductsWithCategoriesJoin();
+            
+            // Buscar el producto específico
+            const product = productsWithCategories.find(p => p.id == id);
+            
+            if (!product) {
+                throw new Error('Producto no encontrado');
+            }
+
+            // Transformar al formato esperado
+            let transformedProduct = this.transformProduct(product);
+            
+            // Obtener variantes del producto
+            const variants = await this.getProductVariants(id);
+            transformedProduct.variations = variants;
+            
+            console.log(`✅ Producto "${transformedProduct.name}" obtenido con categorías`);
+            return transformedProduct;
+            
+        } catch (error) {
+            console.error('❌ Error obteniendo producto:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Buscar productos por término (incluye búsqueda en categorías)
+     */
+    async searchProducts(query, limit = 12) {
+        try {
+            console.log(`🔍 Buscando productos: "${query}"`);
+            
+            // Obtener todos los productos con categorías
+            const productsWithCategories = await this.getProductsWithCategoriesJoin();
+            
+            // Filtrar productos que coincidan con el término de búsqueda
+            const searchTerm = query.toLowerCase();
+            const filteredProducts = productsWithCategories.filter(product => {
+                const matchName = product.name.toLowerCase().includes(searchTerm);
+                const matchDescription = product.description && product.description.toLowerCase().includes(searchTerm);
+                const matchCategories = product.category_names.toLowerCase().includes(searchTerm);
+                
+                return matchName || matchDescription || matchCategories;
+            });
+
+            // Aplicar límite
+            const limitedProducts = filteredProducts.slice(0, limit);
+            
+            // Transformar al formato esperado
+            const transformedProducts = limitedProducts.map(this.transformProduct.bind(this));
+            
+            console.log(`✅ ${transformedProducts.length} productos encontrados`);
+            
+            return {
+                products: transformedProducts,
+                total: filteredProducts.length
+            };
+            
+        } catch (error) {
+            console.error('❌ Error buscando productos:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Obtener productos por categoría usando la nueva lógica
+     */
+    async getProductsByCategory(categoryName, limit = 12) {
+        try {
+            console.log(`📂 Obteniendo productos de categoría: "${categoryName}"`);
+            
+            // Obtener todos los productos con categorías
+            const productsWithCategories = await this.getProductsWithCategoriesJoin();
+            
+            // Filtrar productos que pertenezcan a la categoría
+            const categoryProducts = productsWithCategories.filter(product => {
+                return product.categories && product.categories.includes(categoryName);
+            });
+
+            // Aplicar límite
+            const limitedProducts = categoryProducts.slice(0, limit);
+            
+            // Transformar al formato esperado
+            const transformedProducts = limitedProducts.map(this.transformProduct.bind(this));
+            
+            console.log(`✅ ${transformedProducts.length} productos obtenidos de la categoría "${categoryName}"`);
+            
+            return {
+                products: transformedProducts,
+                total: categoryProducts.length
+            };
+            
+        } catch (error) {
+            console.error('❌ Error obteniendo productos por categoría:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Obtener productos relacionados basados en categorías compartidas
+     */
+    async getRelatedProducts(productId, limit = 4) {
+        try {
+            console.log(`🔗 Obteniendo productos relacionados para ID: ${productId}`);
+            
+            // Obtener el producto actual
+            const currentProduct = await this.getProduct(productId);
+            
+            if (!currentProduct.categories || currentProduct.categories.length === 0) {
+                return { products: [] };
+            }
+
+            // Obtener todos los productos con categorías
+            const productsWithCategories = await this.getProductsWithCategoriesJoin();
+            
+            // Filtrar productos que compartan al menos una categoría (excluyendo el actual)
+            const relatedProducts = productsWithCategories
+                .filter(product => product.id != productId) // Excluir el producto actual
+                .filter(product => {
+                    // Verificar si comparte alguna categoría
+                    const hasSharedCategory = currentProduct.categories.some(category => 
+                        product.categories && product.categories.includes(category)
+                    );
+                    return hasSharedCategory;
+                })
+                .slice(0, limit); // Aplicar límite
+            
+            // Transformar al formato esperado
+            const transformedProducts = relatedProducts.map(this.transformProduct.bind(this));
+            
+            console.log(`✅ ${transformedProducts.length} productos relacionados obtenidos`);
+            
+            return {
+                products: transformedProducts
+            };
+            
+        } catch (error) {
+            console.error('❌ Error obteniendo productos relacionados:', error);
+            return { products: [] };
+        }
+    }
+
+    // ==========================================
+    // CATEGORÍAS
+    // ==========================================
+
+    /**
+     * Obtener todas las categorías activas
+     */
+    async getCategories() {
+        try {
+            console.log('📂 Obteniendo categorías');
+            
+            const response = await fetch(`${this.baseUrl}/rest/v1/categories?is_active=eq.true&order=name`, {
+                method: 'GET',
+                headers: this.headers
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+
+            const categories = await response.json();
+            
+            console.log(`✅ ${categories.length} categorías obtenidas`);
+            
+            return {
+                categories: categories.map(cat => ({
+                    id: cat.id,
+                    name: cat.name,
+                    slug: cat.slug,
+                    description: cat.description,
+                    image: cat.image_url
+                }))
+            };
+            
+        } catch (error) {
+            console.error('❌ Error obteniendo categorías:', error);
+            throw error;
+        }
+    }
+
+    // ==========================================
+    // VARIANTES DE PRODUCTOS
+    // ==========================================
+
+    /**
+     * Obtener variantes de un producto
+     */
+    async getProductVariants(productId) {
+        try {
+            const response = await fetch(`${this.baseUrl}/rest/v1/product_variants?product_id=eq.${productId}&is_active=eq.true&order=name`, {
+                method: 'GET',
+                headers: this.headers
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+
+            const variants = await response.json();
+            
+            // Transformar al formato esperado por el frontend
+            return variants.map(variant => ({
+                id: variant.id,
+                name: variant.name,
+                price: variant.price,
+                stock: variant.stock,
+                image: variant.image_url,
+                inStock: variant.stock > 0
+            }));
+            
+        } catch (error) {
+            console.error('❌ Error obteniendo variantes:', error);
+            return [];
+        }
+    }
+
+    // ==========================================
+    // UTILIDADES
+    // ==========================================
+
+    /**
+     * Transformar producto al formato del frontend
+     */
+    transformProduct(product) {
+        return {
+            id: product.id,
+            name: product.name,
+            slug: product.slug,
+            description: product.description,
+            shortDescription: product.short_description,
+            price: product.price,
+            regularPrice: product.regular_price,
+            salePrice: product.sale_price,
+            onSale: product.on_sale,
+            type: product.type,
+            status: product.status,
+            featured: product.featured,
+            inStock: product.in_stock,
+            totalSales: product.total_sales || 0,
+            averageRating: product.average_rating || 4.8,
+            mainImage: this.processImageUrl(product.main_image_url),
+            permalink: product.permalink,
+            categories: product.categories || [],
+            category_ids: product.category_ids || [],
+            // Para compatibilidad con la lógica de frontend
+            category_id: product.category_ids && product.category_ids.length > 0 ? product.category_ids[0] : null,
+            images: (product.images || []).map(img => this.processImageUrl(img)),
+            createdAt: product.created_at
+        };
+    }
+
+    /**
+     * Procesar URLs de imágenes
+     */
+    processImageUrl(imageUrl) {
+        if (!imageUrl) {
+            // Usar placeholder desde Supabase Storage
+            return 'https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/placeholder-product.jpg';
+        }
+        
+        // Si la imagen ya es local, mantenerla
+        if (imageUrl.startsWith('assets/') || imageUrl.startsWith('./assets/')) {
+            return imageUrl;
+        }
+        
+        // Si es una URL de Supabase Storage, mantenerla
+        if (imageUrl.includes('supabase.co/storage')) {
+            return imageUrl;
+        }
+        
+        // Para cualquier otra URL, retornarla tal como está
+        return imageUrl;
+    }
+
+    /**
+     * Verificar conexión con Supabase
+     */
+    async testConnection() {
+        try {
+            console.log('🔌 Verificando conexión con Supabase...');
+            
+            const response = await fetch(`${this.baseUrl}/rest/v1/products?limit=1`, {
+                method: 'GET',
+                headers: this.headers
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+
+            console.log('✅ Conexión con Supabase exitosa');
+            return true;
+            
+        } catch (error) {
+            console.error('❌ Error conectando con Supabase:', error);
+            return false;
+        }
+    }
+
+    // ==========================================
+    // CARRITO DE COMPRAS (LOCAL STORAGE)
+    // ==========================================
+
+    /**
+     * Agregar item al carrito
+     */
+    async addToCart(productId, variantId = null, quantity = 1) {
+        try {
+            console.log(`🛒 Agregando al carrito: Producto ${productId}, Variante ${variantId}, Cantidad ${quantity}`);
+            
+            // Obtener datos del producto
+            const product = await this.getProduct(productId);
+            
+            // Buscar la variante específica si se proporcionó
+            let selectedVariant = null;
+            if (variantId && product.variations) {
+                selectedVariant = product.variations.find(v => v.id === variantId);
+            }
+            
+            // Crear item del carrito
+            const cartItem = {
+                productId: productId,
+                variantId: variantId,
+                name: product.name,
+                price: selectedVariant ? selectedVariant.price : product.price,
+                quantity: quantity,
+                image: selectedVariant?.image || product.mainImage,
+                variant: selectedVariant?.name || 'Estándar',
+                slug: product.slug
+            };
+            
+            // Obtener carrito actual
+            let cart = JSON.parse(localStorage.getItem('artesana_cart') || '[]');
+            
+            // Buscar si el item ya existe
+            const existingIndex = cart.findIndex(item => 
+                item.productId === productId && item.variantId === variantId
+            );
+            
+            if (existingIndex >= 0) {
+                // Actualizar cantidad
+                cart[existingIndex].quantity += quantity;
+            } else {
+                // Agregar nuevo item
+                cart.push(cartItem);
+            }
+            
+            // Guardar carrito
+            localStorage.setItem('artesana_cart', JSON.stringify(cart));
+            
+            console.log('✅ Item agregado al carrito');
+            
+            return {
+                success: true,
+                message: 'Producto agregado al carrito',
+                cart: cart
+            };
+            
+        } catch (error) {
+            console.error('❌ Error agregando al carrito:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Obtener items del carrito
+     */
+    getCart() {
+        return JSON.parse(localStorage.getItem('artesana_cart') || '[]');
+    }
+
+    /**
+     * Limpiar carrito
+     */
+    clearCart() {
+        localStorage.removeItem('artesana_cart');
+        return { success: true, message: 'Carrito vaciado' };
+    }
+}
+
+// Inicializar el API corregido
+window.artesanaAPI = new SupabaseAPIFixed();
+
+console.log('🔧 Cliente API Supabase CORREGIDO cargado - Listo para manejar categorías múltiples');
