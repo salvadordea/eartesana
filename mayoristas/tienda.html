@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Mayoristas - Estudio Artesana</title>
+    <meta name="description" content="Tienda exclusiva para mayoristas de Estudio Artesana. Productos artesanales con descuentos especiales para negocios.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/tienda.css">
+    <link rel="stylesheet" href="../assets/css/mayoristas-tienda.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="wholesale-mode">
+    <!-- Header Mayoristas -->
+    <header class="header wholesale-header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.webp" alt="Estudio Artesana Logo" class="logo-img">
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link">INICIO</a></li>
+                        <li class="nav-item"><a href="tienda.html" class="nav-link active">TIENDA MAYORISTAS</a></li>
+                        <li class="nav-item"><a href="pedidos.html" class="nav-link">MIS PEDIDOS</a></li>
+                        <li class="nav-item"><a href="../pages/mayoristas/index.html" class="nav-link">PROGRAMA MAYORISTAS</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Header Icons -->
+                <div class="header-icons">
+                    <div class="user-info-header">
+                        <i class="fas fa-user-tie"></i>
+                        <span id="wholesalerName">Mayorista</span>
+                    </div>
+                    <a href="#carrito" class="header-icon cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <button class="logout-btn" onclick="logoutWholesaler()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Wholesale Banner -->
+    <section class="wholesale-banner">
+        <div class="container">
+            <div class="wholesale-banner-content">
+                <div class="banner-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="banner-text">
+                    <h2>🏢 Tienda Exclusiva Mayoristas</h2>
+                    <p>Precios especiales con <strong>20% de descuento</strong> en todos los productos • Pedidos mínimos de 10 piezas</p>
+                </div>
+                <div class="discount-badge">
+                    <span>-20%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breadcrumbs -->
+    <section class="breadcrumbs">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="../index.html">Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="login.html">Mayoristas</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Tienda</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Shop Header -->
+    <section class="shop-header">
+        <div class="container">
+            <div class="shop-header-content">
+                <div class="shop-title">
+                    <h1>Catálogo Mayoristas</h1>
+                    <p>Productos artesanales con precios especiales para tu negocio</p>
+                </div>
+                
+                <div class="shop-controls">
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="sort-dropdown">
+                        <select id="sortProducts">
+                            <option value="date-desc">Más recientes</option>
+                            <option value="date-asc">Más antiguos</option>
+                            <option value="price-asc">Precio: menor a mayor</option>
+                            <option value="price-desc">Precio: mayor a menor</option>
+                            <option value="title-asc" selected>Nombre: A-Z</option>
+                            <option value="title-desc">Nombre: Z-A</option>
+                            <option value="popularity">Más populares</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Bar -->
+    <section class="search-bar" id="searchBarSection">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-box-modern">
+                    <input type="text" id="searchInput" placeholder="Buscar productos para tu negocio..." autocomplete="off">
+                    <button type="button" onclick="searchProducts()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div id="searchSuggestions" class="search-suggestions"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Shop Content -->
+    <section class="shop-content">
+        <div class="container">
+            <div class="shop-layout">
+                <!-- Filters Sidebar -->
+                <aside class="shop-sidebar">
+                    <!-- Wholesale Info -->
+                    <div class="filter-section wholesale-info">
+                        <h3>🏪 Información Mayorista</h3>
+                        <div class="wholesale-details">
+                            <div class="info-item">
+                                <i class="fas fa-percentage"></i>
+                                <span>20% descuento aplicado</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-boxes"></i>
+                                <span>Mín. 10 piezas/producto</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-shipping-fast"></i>
+                                <span>Envío gratis</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Crédito 30 días</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Filters -->
+                    <div class="filter-section">
+                        <h3>Categorías</h3>
+                        <div class="category-filters" id="sidebarCategoryFilters">
+                            <div class="filter-loading" id="categoryFiltersLoading">
+                                Cargando categorías...
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Price Filter (Wholesale Prices) -->
+                    <div class="filter-section">
+                        <h3>Precio Mayorista</h3>
+                        <div class="price-filter">
+                            <div class="price-inputs">
+                                <input type="number" id="minPrice" placeholder="Mín" min="0">
+                                <span>-</span>
+                                <input type="number" id="maxPrice" placeholder="Máx" min="0">
+                            </div>
+                            <button type="button" id="applyPriceFilter">Aplicar</button>
+                            <small>*Precios con descuento incluido</small>
+                        </div>
+                    </div>
+
+                    <!-- Stock Filter -->
+                    <div class="filter-section">
+                        <h3>Disponibilidad</h3>
+                        <div class="special-filters">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" id="highStockFilter">
+                                <span class="checkmark"></span>
+                                Stock alto (50+ pzs)
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" id="inStockFilter" checked>
+                                <span class="checkmark"></span>
+                                En stock (10+ pzs)
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Clear Filters -->
+                    <div class="filter-section">
+                        <button type="button" id="clearFilters" class="clear-filters-btn">
+                            <i class="fas fa-times"></i>
+                            Limpiar filtros
+                        </button>
+                    </div>
+                </aside>
+
+                <!-- Main Products Area -->
+                <main class="shop-main">
+                    <!-- Cart Summary (Fixed Top) -->
+                    <div class="cart-summary-bar" id="cartSummaryBar" style="display: none;">
+                        <div class="cart-summary-content">
+                            <div class="cart-items-info">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span id="cartItemsCount">0 productos</span>
+                            </div>
+                            <div class="cart-total-info">
+                                <span>Total: </span>
+                                <span class="wholesale-price" id="cartTotal">$0.00</span>
+                            </div>
+                            <button class="btn-primary" onclick="openCart()">
+                                Ver Carrito
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Categories Section -->
+                    <div class="categories-section-inline main-categories">
+                        <!-- Categories Loading -->
+                        <div class="categories-loading" id="categoriesLoading">
+                            <div class="loading-spinner"></div>
+                            <p>Cargando categorías...</p>
+                        </div>
+
+                        <!-- Categories Grid -->
+                        <div class="categories-grid" id="categoriesGrid" style="display: none;">
+                            <!-- Categories will be inserted here dynamically -->
+                        </div>
+
+                        <!-- Categories Error -->
+                        <div class="categories-error" id="categoriesError" style="display: none;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Error cargando categorías</h3>
+                            <p>No se pudieron cargar las categorías.</p>
+                        </div>
+                    </div>
+
+                    <!-- Products Results Info -->
+                    <div class="products-results" id="productsResults">
+                        <span class="results-count">Cargando productos...</span>
+                        <div class="results-pagination">
+                            <span id="currentPage">1</span> de <span id="totalPages">1</span>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid Container -->
+                    <div class="products-container" id="productsContainer">
+                        <!-- Loading State -->
+                        <div class="products-loading" id="productsLoading">
+                            <div class="loading-spinner"></div>
+                            <p>Cargando productos mayoristas...</p>
+                        </div>
+
+                        <!-- Products Grid -->
+                        <div class="products-grid wholesale-products" id="productsGrid" style="display: none;">
+                            <!-- Products will be inserted here dynamically with wholesale prices -->
+                        </div>
+
+                        <!-- No Results -->
+                        <div class="no-results" id="noResults" style="display: none;">
+                            <i class="fas fa-search"></i>
+                            <h3>No se encontraron productos</h3>
+                            <p>Intenta ajustar tus filtros o buscar con otros términos.</p>
+                            <button type="button" id="resetSearch">Mostrar todos los productos</button>
+                        </div>
+
+                        <!-- API Error -->
+                        <div class="api-error" id="apiError" style="display: none;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Error de Conexión</h3>
+                            <p>No se pudieron cargar los productos. Por favor, verifica tu conexión.</p>
+                            <button type="button" id="retryLoad">Reintentar</button>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination" id="pagination">
+                        <!-- Pagination will be inserted here dynamically -->
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="modal cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🛒 Carrito Mayorista</h2>
+                <button class="modal-close" onclick="closeCart()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems" class="cart-items">
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Tu carrito está vacío</p>
+                        <small>Agrega productos con el pedido mínimo de 10 piezas</small>
+                    </div>
+                </div>
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="cartSubtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row discount-row">
+                        <span>Descuento mayorista (20%):</span>
+                        <span id="cartDiscount">-$0.00</span>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span>Total:</span>
+                        <span id="cartTotalModal">$0.00</span>
+                    </div>
+                    <div class="summary-info">
+                        <p><i class="fas fa-shipping-fast"></i> Envío gratis incluido</p>
+                        <p><i class="fas fa-calendar-alt"></i> Pago a 30 días</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeCart()">Seguir Comprando</button>
+                <button type="button" class="btn btn-primary" onclick="proceedToCheckout()" id="checkoutBtn" disabled>
+                    <i class="fas fa-credit-card"></i> Proceder al Pedido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Mayoristas</h4>
+                    <ul class="footer-links">
+                        <li><a href="tienda.html">Tienda Mayoristas</a></li>
+                        <li><a href="pedidos.html">Mis Pedidos</a></li>
+                        <li><a href="../pages/mayoristas/index.html">Programa Mayoristas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto Mayoristas</h4>
+                    <p>Email: mayoristas@estudioartesana.com</p>
+                    <p>Teléfono: +52 555 123 4567</p>
+                    <p>WhatsApp: +52 123 456 7890</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Estudio Artesana - Portal Mayoristas. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/cloudinary-config.js"></script>
+    <script src="../assets/js/main.js"></script>
+    
+    <!-- Wholesale Store Scripts -->
+    <script>
+        // Wholesale Store Configuration
+        const WHOLESALE_DISCOUNT = 0.20; // 20% discount
+        const MIN_QUANTITY = 10; // Minimum 10 pieces per product
+        let wholesalerCart = [];
+        let currentUser = null;
+
+        // Check wholesale authentication
+        function checkWholesaleAuth() {
+            const wholesaleSession = localStorage.getItem('wholesaleSession');
+            if (!wholesaleSession) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            
+            try {
+                const sessionData = JSON.parse(wholesaleSession);
+                const now = Date.now();
+                
+                if (!sessionData.isLoggedIn || now > sessionData.expires) {
+                    localStorage.removeItem('wholesaleSession');
+                    window.location.href = 'login.html';
+                    return false;
+                }
+                
+                currentUser = sessionData;
+                updateUserInfo();
+                return true;
+            } catch (error) {
+                localStorage.removeItem('wholesaleSession');
+                window.location.href = 'login.html';
+                return false;
+            }
+        }
+
+        // Update user info in header
+        function updateUserInfo() {
+            if (currentUser) {
+                const userNameElement = document.getElementById('wholesalerName');
+                if (userNameElement) {
+                    userNameElement.textContent = currentUser.company || currentUser.name || 'Mayorista';
+                }
+            }
+        }
+
+        // Calculate wholesale price
+        function calculateWholesalePrice(regularPrice) {
+            return regularPrice * (1 - WHOLESALE_DISCOUNT);
+        }
+
+        // Format price with currency
+        function formatPrice(price) {
+            return new Intl.NumberFormat('es-MX', {
+                style: 'currency',
+                currency: 'MXN'
+            }).format(price);
+        }
+
+        // Load products with wholesale prices
+        async function loadWholesaleProducts() {
+            try {
+                // This would integrate with your existing product loading system
+                // For now, we'll use a simplified approach
+                
+                const productsContainer = document.getElementById('productsGrid');
+                const loadingElement = document.getElementById('productsLoading');
+                
+                // Simulate loading
+                setTimeout(() => {
+                    loadingElement.style.display = 'none';
+                    productsContainer.style.display = 'grid';
+                    
+                    // Sample wholesale products
+                    const sampleProducts = [
+                        {
+                            id: 1,
+                            name: 'Bolsa Artesanal Premium',
+                            regularPrice: 450,
+                            image: '../assets/images/productos/bolsa1.jpg',
+                            stock: 25,
+                            category: 'Bolsas'
+                        },
+                        {
+                            id: 2,
+                            name: 'Cuaderno de Cuero Natural',
+                            regularPrice: 280,
+                            image: '../assets/images/productos/cuaderno1.jpg',
+                            stock: 40,
+                            category: 'Cuadernos'
+                        },
+                        {
+                            id: 3,
+                            name: 'Collar de Plata Oxidada',
+                            regularPrice: 320,
+                            image: '../assets/images/productos/collar1.jpg',
+                            stock: 15,
+                            category: 'Joyería'
+                        }
+                    ];
+                    
+                    renderWholesaleProducts(sampleProducts);
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Error loading wholesale products:', error);
+                document.getElementById('apiError').style.display = 'block';
+                document.getElementById('productsLoading').style.display = 'none';
+            }
+        }
+
+        // Render products with wholesale prices
+        function renderWholesaleProducts(products) {
+            const container = document.getElementById('productsGrid');
+            
+            container.innerHTML = products.map(product => {
+                const wholesalePrice = calculateWholesalePrice(product.regularPrice);
+                const savings = product.regularPrice - wholesalePrice;
+                
+                return `
+                    <div class="product-card wholesale-product">
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}" loading="lazy" 
+                                 onerror="this.src='../assets/images/placeholder.jpg'">
+                            <div class="wholesale-badge">-20%</div>
+                            ${product.stock < MIN_QUANTITY ? '<div class="low-stock-badge">Stock Bajo</div>' : ''}
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <div class="product-category">${product.category}</div>
+                            <div class="product-pricing wholesale-pricing">
+                                <div class="regular-price">${formatPrice(product.regularPrice)}</div>
+                                <div class="wholesale-price">${formatPrice(wholesalePrice)}</div>
+                                <div class="savings">Ahorras ${formatPrice(savings)}</div>
+                            </div>
+                            <div class="product-stock">
+                                <i class="fas fa-boxes"></i>
+                                Stock: ${product.stock} pzs disponibles
+                            </div>
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button type="button" onclick="decreaseQuantity(${product.id})">-</button>
+                                    <input type="number" id="qty-${product.id}" value="${MIN_QUANTITY}" 
+                                           min="${MIN_QUANTITY}" max="${product.stock}">
+                                    <button type="button" onclick="increaseQuantity(${product.id})">+</button>
+                                </div>
+                                <button class="add-to-cart-btn ${product.stock < MIN_QUANTITY ? 'disabled' : ''}" 
+                                        onclick="addToWholesaleCart(${product.id})"
+                                        ${product.stock < MIN_QUANTITY ? 'disabled' : ''}>
+                                    <i class="fas fa-cart-plus"></i>
+                                    ${product.stock < MIN_QUANTITY ? 'Stock Insuficiente' : 'Agregar al Carrito'}
+                                </button>
+                            </div>
+                            <div class="wholesale-note">
+                                <i class="fas fa-info-circle"></i>
+                                Pedido mínimo: ${MIN_QUANTITY} piezas
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Update results count
+            document.querySelector('.results-count').textContent = `${products.length} productos mayoristas disponibles`;
+        }
+
+        // Quantity controls
+        function increaseQuantity(productId) {
+            const input = document.getElementById(`qty-${productId}`);
+            const max = parseInt(input.max);
+            const current = parseInt(input.value);
+            if (current < max) {
+                input.value = current + 1;
+            }
+        }
+
+        function decreaseQuantity(productId) {
+            const input = document.getElementById(`qty-${productId}`);
+            const min = parseInt(input.min);
+            const current = parseInt(input.value);
+            if (current > min) {
+                input.value = current - 1;
+            }
+        }
+
+        // Add to wholesale cart
+        function addToWholesaleCart(productId) {
+            const quantityInput = document.getElementById(`qty-${productId}`);
+            const quantity = parseInt(quantityInput.value);
+            
+            if (quantity < MIN_QUANTITY) {
+                alert(`El pedido mínimo es de ${MIN_QUANTITY} piezas por producto.`);
+                return;
+            }
+
+            // Find product (in real implementation, get from loaded products)
+            const sampleProducts = [
+                { id: 1, name: 'Bolsa Artesanal Premium', regularPrice: 450 },
+                { id: 2, name: 'Cuaderno de Cuero Natural', regularPrice: 280 },
+                { id: 3, name: 'Collar de Plata Oxidada', regularPrice: 320 }
+            ];
+            
+            const product = sampleProducts.find(p => p.id === productId);
+            if (!product) return;
+
+            // Check if already in cart
+            const existingItem = wholesalerCart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                wholesalerCart.push({
+                    id: productId,
+                    name: product.name,
+                    regularPrice: product.regularPrice,
+                    wholesalePrice: calculateWholesalePrice(product.regularPrice),
+                    quantity: quantity
+                });
+            }
+
+            updateCartDisplay();
+            showCartSummaryBar();
+            
+            // Success feedback
+            const button = event.target.closest('.add-to-cart-btn');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Agregado';
+            button.style.backgroundColor = '#28a745';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.backgroundColor = '';
+            }, 2000);
+        }
+
+        // Update cart display
+        function updateCartDisplay() {
+            const cartCount = document.getElementById('cartCount');
+            const totalItems = wholesalerCart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+
+            // Update cart summary bar
+            const cartItemsCount = document.getElementById('cartItemsCount');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (cartItemsCount) {
+                cartItemsCount.textContent = `${totalItems} productos`;
+            }
+            
+            if (cartTotal) {
+                const total = wholesalerCart.reduce((sum, item) => sum + (item.wholesalePrice * item.quantity), 0);
+                cartTotal.textContent = formatPrice(total);
+            }
+        }
+
+        // Show cart summary bar
+        function showCartSummaryBar() {
+            const cartSummaryBar = document.getElementById('cartSummaryBar');
+            if (wholesalerCart.length > 0) {
+                cartSummaryBar.style.display = 'flex';
+            } else {
+                cartSummaryBar.style.display = 'none';
+            }
+        }
+
+        // Open cart modal
+        function openCart() {
+            document.getElementById('cartModal').classList.add('show');
+            renderCartItems();
+        }
+
+        // Close cart modal
+        function closeCart() {
+            document.getElementById('cartModal').classList.remove('show');
+        }
+
+        // Render cart items
+        function renderCartItems() {
+            const cartItems = document.getElementById('cartItems');
+            
+            if (wholesalerCart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Tu carrito está vacío</p>
+                        <small>Agrega productos con el pedido mínimo de ${MIN_QUANTITY} piezas</small>
+                    </div>
+                `;
+                document.getElementById('checkoutBtn').disabled = true;
+                return;
+            }
+
+            cartItems.innerHTML = wholesalerCart.map(item => `
+                <div class="cart-item">
+                    <div class="item-info">
+                        <h4>${item.name}</h4>
+                        <div class="item-pricing">
+                            <span class="regular-price">${formatPrice(item.regularPrice)}</span>
+                            <span class="wholesale-price">${formatPrice(item.wholesalePrice)}</span>
+                        </div>
+                    </div>
+                    <div class="item-quantity">
+                        <button onclick="updateCartQuantity(${item.id}, -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button onclick="updateCartQuantity(${item.id}, 1)">+</button>
+                    </div>
+                    <div class="item-total">${formatPrice(item.wholesalePrice * item.quantity)}</div>
+                    <button class="remove-item" onclick="removeFromCart(${item.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            updateCartSummary();
+            document.getElementById('checkoutBtn').disabled = false;
+        }
+
+        // Update cart summary
+        function updateCartSummary() {
+            const subtotal = wholesalerCart.reduce((sum, item) => sum + (item.regularPrice * item.quantity), 0);
+            const discount = subtotal * WHOLESALE_DISCOUNT;
+            const total = subtotal - discount;
+
+            document.getElementById('cartSubtotal').textContent = formatPrice(subtotal);
+            document.getElementById('cartDiscount').textContent = formatPrice(discount);
+            document.getElementById('cartTotalModal').textContent = formatPrice(total);
+        }
+
+        // Update cart item quantity
+        function updateCartQuantity(productId, change) {
+            const item = wholesalerCart.find(item => item.id === productId);
+            if (!item) return;
+
+            item.quantity += change;
+            
+            if (item.quantity < MIN_QUANTITY) {
+                item.quantity = MIN_QUANTITY;
+            }
+
+            renderCartItems();
+            updateCartDisplay();
+        }
+
+        // Remove from cart
+        function removeFromCart(productId) {
+            wholesalerCart = wholesalerCart.filter(item => item.id !== productId);
+            renderCartItems();
+            updateCartDisplay();
+            showCartSummaryBar();
+        }
+
+        // Proceed to checkout
+        function proceedToCheckout() {
+            if (wholesalerCart.length === 0) {
+                alert('Tu carrito está vacío.');
+                return;
+            }
+
+            // Save cart to localStorage for checkout page
+            localStorage.setItem('wholesaleCart', JSON.stringify(wholesalerCart));
+            
+            // Redirect to checkout
+            window.location.href = 'checkout.html';
+        }
+
+        // Logout wholesaler
+        function logoutWholesaler() {
+            if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                localStorage.removeItem('wholesaleSession');
+                localStorage.removeItem('wholesaleCart');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Search products
+        function searchProducts() {
+            const searchTerm = document.getElementById('searchInput').value;
+            console.log('Searching for:', searchTerm);
+            // Implement search functionality
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!checkWholesaleAuth()) return;
+            
+            console.log('🏪 Tienda Mayoristas inicializada');
+            loadWholesaleProducts();
+            updateCartDisplay();
+            showCartSummaryBar();
+
+            // Close modal when clicking outside
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

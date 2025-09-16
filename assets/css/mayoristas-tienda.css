@@ -1,0 +1,807 @@
+/* ========================================
+   ESTILOS ESPECÍFICOS PARA TIENDA MAYORISTAS
+   ======================================== */
+
+/* Variables CSS para la tienda mayoristas */
+:root {
+    --wholesale-primary: #2c5530;
+    --wholesale-secondary: #D4AF37;
+    --wholesale-accent: #8B4513;
+    --wholesale-success: #28a745;
+    --wholesale-warning: #ffc107;
+    --wholesale-danger: #dc3545;
+    --wholesale-discount: #e8f5e9;
+    --wholesale-border: #4caf50;
+}
+
+/* ========================================
+   BODY Y LAYOUT MAYORISTA
+   ======================================== */
+
+.wholesale-mode {
+    --primary-color: var(--wholesale-primary);
+    --accent-color: var(--wholesale-secondary);
+}
+
+/* ========================================
+   HEADER MAYORISTA
+   ======================================== */
+
+.wholesale-header {
+    background: linear-gradient(135deg, var(--wholesale-primary), #1e3d22);
+    border-bottom: 3px solid var(--wholesale-secondary);
+}
+
+.wholesale-header .logo-img {
+    filter: brightness(1.2);
+}
+
+.user-info-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.user-info-header i {
+    color: var(--wholesale-secondary);
+}
+
+.cart-icon {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--wholesale-danger);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.logout-btn {
+    background: var(--wholesale-danger);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #c82333;
+    transform: translateY(-1px);
+}
+
+/* ========================================
+   BANNER MAYORISTA
+   ======================================== */
+
+.wholesale-banner {
+    background: linear-gradient(135deg, var(--wholesale-discount), #f1f8f3);
+    border: 2px solid var(--wholesale-border);
+    padding: 20px 0;
+    margin-bottom: 0;
+}
+
+.wholesale-banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.banner-icon {
+    font-size: 2rem;
+    color: var(--wholesale-secondary);
+}
+
+.banner-text {
+    flex: 1;
+}
+
+.banner-text h2 {
+    margin: 0 0 8px 0;
+    color: var(--wholesale-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.banner-text p {
+    margin: 0;
+    color: #2e7d32;
+    font-size: 1rem;
+}
+
+.discount-badge {
+    background: var(--wholesale-danger);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+/* ========================================
+   SIDEBAR MAYORISTA
+   ======================================== */
+
+.wholesale-info {
+    background: var(--wholesale-discount);
+    border: 2px solid var(--wholesale-border);
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.wholesale-info h3 {
+    color: var(--wholesale-primary);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.wholesale-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #2e7d32;
+}
+
+.info-item i {
+    color: var(--wholesale-border);
+    width: 20px;
+    text-align: center;
+}
+
+/* ========================================
+   PRODUCTOS MAYORISTAS
+   ======================================== */
+
+.wholesale-products .product-card {
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.wholesale-products .product-card:hover {
+    border-color: var(--wholesale-border);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.15);
+}
+
+.wholesale-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--wholesale-danger);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.low-stock-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--wholesale-warning);
+    color: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.wholesale-pricing {
+    background: var(--wholesale-discount);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--wholesale-border);
+    margin: 15px 0;
+}
+
+.wholesale-pricing .regular-price {
+    text-decoration: line-through;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.wholesale-pricing .wholesale-price {
+    color: var(--wholesale-success);
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.wholesale-pricing .savings {
+    color: var(--wholesale-danger);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.product-stock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.product-stock i {
+    color: var(--wholesale-border);
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--wholesale-border);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background: white;
+}
+
+.quantity-selector button {
+    background: var(--wholesale-border);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.quantity-selector button:hover {
+    background: #45a049;
+}
+
+.quantity-selector input {
+    border: none;
+    text-align: center;
+    width: 60px;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.add-to-cart-btn {
+    width: 100%;
+    background: var(--wholesale-success);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.add-to-cart-btn:hover:not(.disabled) {
+    background: #1e7e34;
+    transform: translateY(-1px);
+}
+
+.add-to-cart-btn.disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
+.wholesale-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 8px;
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #856404;
+}
+
+/* ========================================
+   RESUMEN DEL CARRITO
+   ======================================== */
+
+.cart-summary-bar {
+    position: sticky;
+    top: 0;
+    background: var(--wholesale-success);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+    z-index: 100;
+}
+
+.cart-summary-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.cart-items-info,
+.cart-total-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.cart-total-info .wholesale-price {
+    font-size: 1.2rem;
+    color: var(--wholesale-secondary);
+}
+
+.cart-summary-bar .btn-primary {
+    background: white;
+    color: var(--wholesale-success);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cart-summary-bar .btn-primary:hover {
+    background: #f8f9fa;
+    transform: translateY(-1px);
+}
+
+/* ========================================
+   MODAL DEL CARRITO
+   ======================================== */
+
+.cart-modal .modal-content {
+    max-width: 700px;
+    max-height: 90vh;
+}
+
+.cart-items {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 2fr auto auto auto;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: white;
+}
+
+.item-info h4 {
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+    color: var(--wholesale-primary);
+}
+
+.item-pricing {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.item-pricing .regular-price {
+    text-decoration: line-through;
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.item-pricing .wholesale-price {
+    color: var(--wholesale-success);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.item-quantity button {
+    background: var(--wholesale-border);
+    color: white;
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.item-quantity span {
+    min-width: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.item-total {
+    font-weight: bold;
+    color: var(--wholesale-success);
+    font-size: 1rem;
+}
+
+.remove-item {
+    background: var(--wholesale-danger);
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-summary {
+    border-top: 2px solid var(--wholesale-border);
+    padding-top: 15px;
+    background: var(--wholesale-discount);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.discount-row {
+    color: var(--wholesale-success);
+    font-weight: 600;
+}
+
+.total-row {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--wholesale-primary);
+    border-top: 1px solid var(--wholesale-border);
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.summary-info {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+}
+
+.summary-info p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.summary-info i {
+    color: var(--wholesale-success);
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+.empty-cart i {
+    font-size: 3rem;
+    color: #ddd;
+    margin-bottom: 15px;
+}
+
+.empty-cart p {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+/* ========================================
+   MODAL GENERAL STYLES
+   ======================================== */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+    width: 90%;
+    max-width: 600px;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--wholesale-primary), var(--wholesale-secondary));
+    color: white;
+    padding: 20px 25px;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.modal-close:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.modal-footer {
+    background: #f8f9fa;
+    padding: 20px 25px;
+    border-radius: 0 0 15px 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid #e9ecef;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: var(--wholesale-success);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #218838;
+    transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-1px);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+    .wholesale-banner-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .banner-text h2 {
+        font-size: 1.3rem;
+    }
+    
+    .banner-text p {
+        font-size: 0.9rem;
+    }
+    
+    .cart-summary-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cart-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+    
+    .user-info-header {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+    
+    .wholesale-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    
+    .info-item {
+        font-size: 12px;
+        padding: 6px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .discount-badge {
+        padding: 10px 15px;
+        font-size: 1.2rem;
+    }
+    
+    .wholesale-pricing {
+        padding: 10px;
+    }
+    
+    .quantity-selector {
+        margin-bottom: 8px;
+    }
+    
+    .add-to-cart-btn {
+        padding: 10px;
+        font-size: 13px;
+    }
+}
+
+/* ========================================
+   LOADING STATES
+   ======================================== */
+
+.loading-spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--wholesale-border);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+.cart-count {
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+.cart-count:before {
+    content: attr(data-count);
+    text-indent: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Focus styles for better accessibility */
+.add-to-cart-btn:focus,
+.btn:focus,
+.quantity-selector button:focus {
+    outline: 3px solid rgba(76, 175, 80, 0.3);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .wholesale-banner {
+        border: 3px solid var(--wholesale-border);
+    }
+    
+    .wholesale-pricing {
+        border: 2px solid var(--wholesale-border);
+    }
+    
+    .cart-summary-bar {
+        border: 2px solid white;
+    }
+}

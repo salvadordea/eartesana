@@ -468,6 +468,179 @@
             border: 1px solid #e9ecef;
         }
         
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            padding: 0;
+            border: none;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .modal-close {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        
+        .modal-close:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .modal-body {
+            padding: 25px;
+        }
+        
+        .modal-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .modal-form .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+            font-size: 14px;
+        }
+        
+        .modal-form .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .modal-form .form-control:focus {
+            outline: none;
+            border-color: #D4AF37;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+        }
+        
+        .modal-form .form-control:invalid {
+            border-color: #dc3545;
+        }
+        
+        .modal-form small {
+            display: block;
+            margin-top: 5px;
+            color: #6c757d;
+            font-size: 12px;
+        }
+        
+        .modal-footer {
+            background: #f8f9fa;
+            padding: 20px 25px;
+            border-radius: 0 0 15px 15px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .modal-footer .btn {
+            padding: 10px 20px;
+            font-weight: 600;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .alert-success {
+            background-color: #d1e7dd;
+            color: #0f5132;
+            border: 1px solid #badbcc;
+        }
+        
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #664d03;
+            border: 1px solid #ffecb5;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #58151c;
+            border: 1px solid #f1aeb5;
+        }
+        
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -492,6 +665,13 @@
             .editor-actions {
                 flex-direction: column;
                 align-items: center;
+            }
+            .modal-content {
+                width: 95%;
+                margin: 10px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -909,7 +1089,108 @@
 
         <div id="mayoristas" class="content-area">
             <h2>Administración de Mayoristas</h2>
-            <p>Próximamente: Gestión de usuarios mayoristas...</p>
+            
+            <!-- Resumen de Mayoristas -->
+            <div class="mayoristas-summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 4px solid #28a745;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3 style="margin: 0; color: #28a745; font-size: 0.9rem;">MAYORISTAS ACTIVOS</h3>
+                            <p style="font-size: 1.8rem; font-weight: bold; margin: 5px 0; color: #2c3e50;" id="activeMayoristasCount">0</p>
+                        </div>
+                        <i class="fas fa-user-check" style="font-size: 2rem; color: #28a745; opacity: 0.7;"></i>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 4px solid #ffc107;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3 style="margin: 0; color: #ffc107; font-size: 0.9rem;">MAYORISTAS SUSPENDIDOS</h3>
+                            <p style="font-size: 1.8rem; font-weight: bold; margin: 5px 0; color: #2c3e50;" id="suspendedMayoristasCount">0</p>
+                        </div>
+                        <i class="fas fa-user-times" style="font-size: 2rem; color: #ffc107; opacity: 0.7;"></i>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 4px solid #17a2b8;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3 style="margin: 0; color: #17a2b8; font-size: 0.9rem;">PEDIDOS ESTE MES</h3>
+                            <p style="font-size: 1.8rem; font-weight: bold; margin: 5px 0; color: #2c3e50;" id="monthlyOrdersCount">0</p>
+                        </div>
+                        <i class="fas fa-shopping-cart" style="font-size: 2rem; color: #17a2b8; opacity: 0.7;"></i>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 4px solid #6f42c1;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3 style="margin: 0; color: #6f42c1; font-size: 0.9rem;">VENTAS MAYORISTAS</h3>
+                            <p style="font-size: 1.8rem; font-weight: bold; margin: 5px 0; color: #2c3e50;" id="wholesaleSalesAmount">$0.00</p>
+                        </div>
+                        <i class="fas fa-chart-line" style="font-size: 2rem; color: #6f42c1; opacity: 0.7;"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Controles de Mayoristas -->
+            <div class="mayoristas-controls" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px;">
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <div>
+                            <label style="font-weight: 600; margin-bottom: 5px; display: block; color: #495057;">Estado:</label>
+                            <select id="mayoristasStatusFilter" style="padding: 8px; border: 1px solid #ced4da; border-radius: 4px; font-size: 14px;" onchange="filterMayoristas()">
+                                <option value="">Todos los Estados</option>
+                                <option value="active">Activos</option>
+                                <option value="suspended">Suspendidos</option>
+                                <option value="inactive">Inactivos</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label style="font-weight: 600; margin-bottom: 5px; display: block; color: #495057;">Buscar:</label>
+                            <input type="text" id="mayoristasSearchFilter" placeholder="Nombre o email..." style="padding: 8px; border: 1px solid #ced4da; border-radius: 4px; font-size: 14px;" onkeyup="filterMayoristas()">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <button class="btn btn-success" onclick="showAddMayoristaModal()">
+                            <i class="fas fa-plus"></i> Nuevo Mayorista
+                        </button>
+                        <button class="btn btn-primary" onclick="refreshMayoristasData()">
+                            <i class="fas fa-sync"></i> Actualizar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lista de Mayoristas -->
+            <div class="mayoristas-section" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <h3 style="margin-bottom: 20px; color: #2c3e50;">👥 Gestión de Mayoristas</h3>
+                
+                <div class="table-container">
+                    <table class="inventory-table" id="mayoristasTable" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Empresa</th>
+                                <th>Fecha Registro</th>
+                                <th>Estado</th>
+                                <th>Pedidos</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mayoristasTableBody">
+                            <tr>
+                                <td colspan="7" class="loading-row">
+                                    <i class="fas fa-spinner fa-spin"></i> Cargando mayoristas...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
         <div id="usuarios" class="content-area">
@@ -1046,6 +1327,130 @@
                         <i class="fas fa-info-circle"></i> Las configuraciones avanzadas se realizan directamente en el servidor.
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Nuevo/Editar Mayorista -->
+    <div id="mayoristasModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="mayoristasModalTitle">🏢 Nuevo Mayorista</h2>
+                <button class="modal-close" onclick="closeMayoristasModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="modal-form" id="mayoristasForm" onsubmit="saveMayorista(event)">
+                    <input type="hidden" id="editMayoristaId" value="">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mayoristaNombre">Nombre Completo *</label>
+                            <input type="text" id="mayoristaNombre" class="form-control" required>
+                            <small>Nombre completo del contacto mayorista</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mayoristaEmail">Email *</label>
+                            <input type="email" id="mayoristaEmail" class="form-control" required>
+                            <small>Este email será usado para el login</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mayoristaEmpresa">Empresa *</label>
+                            <input type="text" id="mayoristaEmpresa" class="form-control" required>
+                            <small>Nombre de la empresa o negocio</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mayoristaTelefono">Teléfono</label>
+                            <input type="tel" id="mayoristaTelefono" class="form-control">
+                            <small>Teléfono de contacto (opcional)</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mayoristaPassword">Contraseña *</label>
+                        <input type="password" id="mayoristaPassword" class="form-control" required minlength="6">
+                        <small>Mínimo 6 caracteres. En edición, dejar vacío para mantener la actual.</small>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mayoristaDescuento">Descuento (%)</label>
+                            <input type="number" id="mayoristaDescuento" class="form-control" min="0" max="50" value="20">
+                            <small>Descuento por defecto (0-50%)</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mayoristaEstado">Estado</label>
+                            <select id="mayoristaEstado" class="form-control">
+                                <option value="active">Activo</option>
+                                <option value="suspended">Suspendido</option>
+                                <option value="inactive">Inactivo</option>
+                            </select>
+                            <small>Estado actual del mayorista</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mayoristaNotas">Notas</label>
+                        <textarea id="mayoristaNotas" class="form-control" rows="3" placeholder="Notas internas sobre el mayorista (opcional)"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="closeMayoristasModal()">Cancelar</button>
+                <button type="submit" form="mayoristasForm" class="btn btn-success">
+                    <i class="fas fa-save"></i> <span id="mayoristaSaveText">Crear Mayorista</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Cambio de Contraseña -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔐 Cambiar Contraseña</h2>
+                <button class="modal-close" onclick="closePasswordModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Cambio de Contraseña:</strong> Esta acción enviará una notificación al mayorista con su nueva contraseña.
+                </div>
+                
+                <form class="modal-form" id="passwordForm" onsubmit="changePassword(event)">
+                    <input type="hidden" id="passwordMayoristaId" value="">
+                    
+                    <div class="form-group">
+                        <label>Mayorista:</label>
+                        <div style="background: #f8f9fa; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+                            <strong id="passwordMayoristaNombre"></strong><br>
+                            <small id="passwordMayoristaEmail" style="color: #666;"></small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newPassword">Nueva Contraseña *</label>
+                        <input type="password" id="newPassword" class="form-control" required minlength="6">
+                        <small>Mínimo 6 caracteres. Será enviada por email al mayorista.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmar Contraseña *</label>
+                        <input type="password" id="confirmPassword" class="form-control" required minlength="6">
+                        <small>Repite la nueva contraseña para confirmar</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="closePasswordModal()">Cancelar</button>
+                <button type="submit" form="passwordForm" class="btn btn-warning">
+                    <i class="fas fa-key"></i> Cambiar Contraseña
+                </button>
             </div>
         </div>
     </div>
@@ -2147,6 +2552,502 @@ para ver los cambios aplicados.
             console.log('Actualizar configuración de recuperación');
         }
         
+        // ====== FUNCIONES PARA GESTIÓN DE MAYORISTAS ======
+        
+        // Variables globales para mayoristas
+        let allMayoristas = [];
+        let filteredMayoristas = [];
+        let mayoristasData = {
+            active: 0,
+            suspended: 0,
+            monthlyOrders: 0,
+            wholesaleSales: 0
+        };
+        
+        // Inicializar gestión de mayoristas
+        function initMayoristasPanel() {
+            console.log('👥 Inicializando panel de mayoristas...');
+            loadMayoristasData();
+            updateMayoristasSummary();
+        }
+        
+        // Cargar datos de mayoristas
+        async function loadMayoristasData() {
+            if (!supabase) {
+                console.log('⚠️ Supabase no disponible, mostrando datos de ejemplo');
+                loadSupabaseConfig();
+                showMockMayoristasData();
+                return;
+            }
+            
+            try {
+                const { data: mayoristas, error } = await supabase
+                    .from('wholesalers')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                
+                if (error) {
+                    console.error('Error cargando mayoristas:', error);
+                    showMockMayoristasData();
+                    return;
+                }
+                
+                allMayoristas = mayoristas || [];
+                filteredMayoristas = [...allMayoristas];
+                
+                // Calcular estadísticas
+                mayoristasData.active = allMayoristas.filter(m => m.status === 'active').length;
+                mayoristasData.suspended = allMayoristas.filter(m => m.status === 'suspended').length;
+                
+                renderMayoristasTable();
+                updateMayoristasSummary();
+                
+            } catch (error) {
+                console.error('Error inesperado cargando mayoristas:', error);
+                showMockMayoristasData();
+            }
+        }
+        
+        // Mostrar datos de ejemplo
+        function showMockMayoristasData() {
+            allMayoristas = [
+                {
+                    id: 1,
+                    name: 'María González',
+                    email: 'maria@empresa.com',
+                    company: 'Artesanías del Norte',
+                    phone: '+52 123 456 7890',
+                    status: 'active',
+                    discount: 20,
+                    created_at: '2024-01-15T10:00:00Z',
+                    notes: 'Cliente frecuente, pedidos grandes'
+                },
+                {
+                    id: 2,
+                    name: 'Roberto Martínez',
+                    email: 'roberto@comercial.mx',
+                    company: 'Comercial Martínez',
+                    phone: '+52 987 654 3210',
+                    status: 'suspended',
+                    discount: 15,
+                    created_at: '2024-02-10T14:30:00Z',
+                    notes: 'Suspendido por pago pendiente'
+                }
+            ];
+            filteredMayoristas = [...allMayoristas];
+            
+            mayoristasData.active = 1;
+            mayoristasData.suspended = 1;
+            mayoristasData.monthlyOrders = 12;
+            mayoristasData.wholesaleSales = 45750.00;
+            
+            renderMayoristasTable();
+            updateMayoristasSummary();
+        }
+        
+        // Actualizar resumen de mayoristas
+        function updateMayoristasSummary() {
+            document.getElementById('activeMayoristasCount').textContent = mayoristasData.active;
+            document.getElementById('suspendedMayoristasCount').textContent = mayoristasData.suspended;
+            document.getElementById('monthlyOrdersCount').textContent = mayoristasData.monthlyOrders;
+            document.getElementById('wholesaleSalesAmount').textContent = `$${mayoristasData.wholesaleSales.toFixed(2)}`;
+        }
+        
+        // Renderizar tabla de mayoristas
+        function renderMayoristasTable() {
+            const tbody = document.getElementById('mayoristasTableBody');
+            
+            if (filteredMayoristas.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="loading-row">
+                            <i class="fas fa-users-cog"></i> No se encontraron mayoristas.
+                            <br><small style="color: #666;">Los mayoristas aparecerán aquí una vez que se registren en el sistema.</small>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            tbody.innerHTML = filteredMayoristas.map(mayorista => {
+                const registerDate = new Date(mayorista.created_at).toLocaleDateString();
+                const statusBadge = getMayoristaStatusBadge(mayorista.status);
+                const ordersCount = Math.floor(Math.random() * 20) + 1; // Simulado
+                
+                return `
+                    <tr>
+                        <td><strong>${mayorista.name}</strong></td>
+                        <td>${mayorista.email}</td>
+                        <td>${mayorista.company}</td>
+                        <td>${registerDate}</td>
+                        <td>${statusBadge}</td>
+                        <td>${ordersCount}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn btn-primary" onclick="viewMayorista(${mayorista.id})" title="Ver Detalles">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn btn-warning" onclick="editMayorista(${mayorista.id})" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="action-btn btn-success" onclick="showPasswordModal(${mayorista.id})" title="Cambiar Contraseña">
+                                    <i class="fas fa-key"></i>
+                                </button>
+                                ${mayorista.status === 'active' ? `
+                                    <button class="action-btn btn-danger" onclick="suspendMayorista(${mayorista.id})" title="Suspender">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                                ` : `
+                                    <button class="action-btn btn-success" onclick="activateMayorista(${mayorista.id})" title="Activar">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                `}
+                                <button class="action-btn btn-danger" onclick="deleteMayorista(${mayorista.id})" title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        // Obtener badge de estado de mayorista
+        function getMayoristaStatusBadge(status) {
+            const statusMap = {
+                'active': { class: 'status-active', text: 'Activo' },
+                'suspended': { class: 'status-low-stock', text: 'Suspendido' },
+                'inactive': { class: 'status-inactive', text: 'Inactivo' }
+            };
+            
+            const statusInfo = statusMap[status] || { class: 'status-inactive', text: 'Desconocido' };
+            return `<span class="status-badge ${statusInfo.class}">${statusInfo.text}</span>`;
+        }
+        
+        // Filtrar mayoristas
+        function filterMayoristas() {
+            const statusFilter = document.getElementById('mayoristasStatusFilter').value;
+            const searchFilter = document.getElementById('mayoristasSearchFilter').value.toLowerCase();
+            
+            filteredMayoristas = allMayoristas.filter(mayorista => {
+                const matchesStatus = !statusFilter || mayorista.status === statusFilter;
+                const matchesSearch = !searchFilter || 
+                                     mayorista.name.toLowerCase().includes(searchFilter) ||
+                                     mayorista.email.toLowerCase().includes(searchFilter) ||
+                                     mayorista.company.toLowerCase().includes(searchFilter);
+                
+                return matchesStatus && matchesSearch;
+            });
+            
+            renderMayoristasTable();
+        }
+        
+        // Actualizar datos de mayoristas
+        function refreshMayoristasData() {
+            console.log('🔄 Actualizando datos de mayoristas...');
+            
+            // Mostrar indicador de carga
+            const tbody = document.getElementById('mayoristasTableBody');
+            tbody.innerHTML = '<tr><td colspan="7" class="loading-row"><i class="fas fa-spinner fa-spin"></i> Actualizando...</td></tr>';
+            
+            setTimeout(() => {
+                loadMayoristasData();
+            }, 1000);
+        }
+        
+        // ====== MODAL FUNCTIONS ======
+        
+        // Mostrar modal para nuevo mayorista
+        function showAddMayoristaModal() {
+            document.getElementById('mayoristasModalTitle').textContent = '🏢 Nuevo Mayorista';
+            document.getElementById('mayoristaSaveText').textContent = 'Crear Mayorista';
+            document.getElementById('editMayoristaId').value = '';
+            
+            // Limpiar formulario
+            document.getElementById('mayoristasForm').reset();
+            document.getElementById('mayoristaDescuento').value = 20;
+            document.getElementById('mayoristaEstado').value = 'active';
+            document.getElementById('mayoristaPassword').required = true;
+            
+            document.getElementById('mayoristasModal').classList.add('show');
+        }
+        
+        // Editar mayorista
+        function editMayorista(id) {
+            const mayorista = allMayoristas.find(m => m.id === id);
+            if (!mayorista) return;
+            
+            document.getElementById('mayoristasModalTitle').textContent = '✏️ Editar Mayorista';
+            document.getElementById('mayoristaSaveText').textContent = 'Guardar Cambios';
+            document.getElementById('editMayoristaId').value = id;
+            
+            // Llenar formulario
+            document.getElementById('mayoristaNombre').value = mayorista.name;
+            document.getElementById('mayoristaEmail').value = mayorista.email;
+            document.getElementById('mayoristaEmpresa').value = mayorista.company;
+            document.getElementById('mayoristaTelefono').value = mayorista.phone || '';
+            document.getElementById('mayoristaDescuento').value = mayorista.discount || 20;
+            document.getElementById('mayoristaEstado').value = mayorista.status;
+            document.getElementById('mayoristaNotas').value = mayorista.notes || '';
+            document.getElementById('mayoristaPassword').value = '';
+            document.getElementById('mayoristaPassword').required = false;
+            
+            document.getElementById('mayoristasModal').classList.add('show');
+        }
+        
+        // Cerrar modal de mayoristas
+        function closeMayoristasModal() {
+            document.getElementById('mayoristasModal').classList.remove('show');
+        }
+        
+        // Guardar mayorista
+        async function saveMayorista(event) {
+            event.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('mayoristaNombre').value,
+                email: document.getElementById('mayoristaEmail').value,
+                company: document.getElementById('mayoristaEmpresa').value,
+                phone: document.getElementById('mayoristaTelefono').value,
+                password: document.getElementById('mayoristaPassword').value,
+                discount: parseInt(document.getElementById('mayoristaDescuento').value),
+                status: document.getElementById('mayoristaEstado').value,
+                notes: document.getElementById('mayoristaNotas').value
+            };
+            
+            const editId = document.getElementById('editMayoristaId').value;
+            const isEdit = editId !== '';
+            
+            try {
+                if (supabase) {
+                    let result;
+                    
+                    if (isEdit) {
+                        // Actualizar mayorista existente
+                        const updateData = { ...formData };
+                        if (!updateData.password) {
+                            delete updateData.password; // No actualizar contraseña si está vacía
+                        }
+                        
+                        result = await supabase
+                            .from('wholesalers')
+                            .update(updateData)
+                            .eq('id', editId);
+                    } else {
+                        // Crear nuevo mayorista
+                        result = await supabase
+                            .from('wholesalers')
+                            .insert([formData]);
+                    }
+                    
+                    if (result.error) {
+                        throw result.error;
+                    }
+                    
+                    // Éxito
+                    alert(`✅ Mayorista ${isEdit ? 'actualizado' : 'creado'} exitosamente`);
+                    
+                } else {
+                    // Modo de demostración sin Supabase
+                    if (isEdit) {
+                        const index = allMayoristas.findIndex(m => m.id == editId);
+                        if (index !== -1) {
+                            allMayoristas[index] = { ...allMayoristas[index], ...formData };
+                        }
+                    } else {
+                        const newMayorista = {
+                            id: Math.max(...allMayoristas.map(m => m.id), 0) + 1,
+                            ...formData,
+                            created_at: new Date().toISOString()
+                        };
+                        allMayoristas.unshift(newMayorista);
+                    }
+                    
+                    alert(`✅ Mayorista ${isEdit ? 'actualizado' : 'creado'} exitosamente (Modo demostración)`);
+                }
+                
+                // Cerrar modal y actualizar tabla
+                closeMayoristasModal();
+                loadMayoristasData();
+                
+            } catch (error) {
+                console.error('Error guardando mayorista:', error);
+                alert(`❌ Error al ${isEdit ? 'actualizar' : 'crear'} mayorista: ${error.message}`);
+            }
+        }
+        
+        // Ver detalles de mayorista
+        function viewMayorista(id) {
+            const mayorista = allMayoristas.find(m => m.id === id);
+            if (!mayorista) return;
+            
+            const details = `
+                👤 DETALLES DEL MAYORISTA
+                
+                🏢 Empresa: ${mayorista.company}
+                👨‍💼 Contacto: ${mayorista.name}
+                📧 Email: ${mayorista.email}
+                📞 Teléfono: ${mayorista.phone || 'No especificado'}
+                🏷️ Descuento: ${mayorista.discount || 20}%
+                📊 Estado: ${mayorista.status}
+                📅 Registrado: ${new Date(mayorista.created_at).toLocaleDateString()}
+                
+                📝 Notas: ${mayorista.notes || 'Sin notas'}
+            `;
+            
+            alert(details);
+        }
+        
+        // Suspender mayorista
+        async function suspendMayorista(id) {
+            const mayorista = allMayoristas.find(m => m.id === id);
+            if (!mayorista) return;
+            
+            if (!confirm(`¿Suspender al mayorista "${mayorista.name}" de "${mayorista.company}"?\n\nEsto impedirá que realice nuevos pedidos.`)) {
+                return;
+            }
+            
+            await updateMayoristaStatus(id, 'suspended');
+        }
+        
+        // Activar mayorista
+        async function activateMayorista(id) {
+            const mayorista = allMayoristas.find(m => m.id === id);
+            if (!mayorista) return;
+            
+            if (!confirm(`¿Activar al mayorista "${mayorista.name}" de "${mayorista.company}"?`)) {
+                return;
+            }
+            
+            await updateMayoristaStatus(id, 'active');
+        }
+        
+        // Actualizar estado de mayorista
+        async function updateMayoristaStatus(id, newStatus) {
+            try {
+                if (supabase) {
+                    const { error } = await supabase
+                        .from('wholesalers')
+                        .update({ status: newStatus })
+                        .eq('id', id);
+                    
+                    if (error) throw error;
+                } else {
+                    // Modo demostración
+                    const mayorista = allMayoristas.find(m => m.id === id);
+                    if (mayorista) {
+                        mayorista.status = newStatus;
+                    }
+                }
+                
+                alert(`✅ Estado del mayorista actualizado a: ${newStatus}`);
+                loadMayoristasData();
+                
+            } catch (error) {
+                console.error('Error actualizando estado:', error);
+                alert(`❌ Error al actualizar estado: ${error.message}`);
+            }
+        }
+        
+        // Eliminar mayorista
+        async function deleteMayorista(id) {
+            const mayorista = allMayoristas.find(m => m.id === id);
+            if (!mayorista) return;
+            
+            const confirmMsg = `⚠️ ELIMINAR MAYORISTA\n\n¿Estás seguro de que quieres eliminar al mayorista:\n\n👤 ${mayorista.name}\n🏢 ${mayorista.company}\n📧 ${mayorista.email}\n\n❌ Esta acción NO SE PUEDE DESHACER.\n\n¿Continuar?`;
+            
+            if (!confirm(confirmMsg)) {
+                return;
+            }
+            
+            try {
+                if (supabase) {
+                    const { error } = await supabase
+                        .from('wholesalers')
+                        .delete()
+                        .eq('id', id);
+                    
+                    if (error) throw error;
+                } else {
+                    // Modo demostración
+                    const index = allMayoristas.findIndex(m => m.id === id);
+                    if (index !== -1) {
+                        allMayoristas.splice(index, 1);
+                    }
+                }
+                
+                alert(`✅ Mayorista eliminado exitosamente`);
+                loadMayoristasData();
+                
+            } catch (error) {
+                console.error('Error eliminando mayorista:', error);
+                alert(`❌ Error al eliminar mayorista: ${error.message}`);
+            }
+        }
+        
+        // ====== PASSWORD MODAL FUNCTIONS ======
+        
+        // Mostrar modal de cambio de contraseña
+        function showPasswordModal(id) {
+            const mayorista = allMayoristas.find(m => m.id === id);
+            if (!mayorista) return;
+            
+            document.getElementById('passwordMayoristaId').value = id;
+            document.getElementById('passwordMayoristaNombre').textContent = mayorista.name;
+            document.getElementById('passwordMayoristaEmail').textContent = mayorista.email;
+            
+            // Limpiar campos
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+            
+            document.getElementById('passwordModal').classList.add('show');
+        }
+        
+        // Cerrar modal de contraseña
+        function closePasswordModal() {
+            document.getElementById('passwordModal').classList.remove('show');
+        }
+        
+        // Cambiar contraseña
+        async function changePassword(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('passwordMayoristaId').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Validar contraseñas
+            if (newPassword !== confirmPassword) {
+                alert('❌ Las contraseñas no coinciden');
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                alert('❌ La contraseña debe tener al menos 6 caracteres');
+                return;
+            }
+            
+            try {
+                if (supabase) {
+                    const { error } = await supabase
+                        .from('wholesalers')
+                        .update({ password: newPassword })
+                        .eq('id', id);
+                    
+                    if (error) throw error;
+                }
+                
+                const mayorista = allMayoristas.find(m => m.id == id);
+                
+                alert(`✅ Contraseña actualizada exitosamente para ${mayorista.name}\n\n📧 Se ha enviado una notificación al email: ${mayorista.email}\n\n(En producción se enviaría un email real)`);
+                closePasswordModal();
+                
+            } catch (error) {
+                console.error('Error cambiando contraseña:', error);
+                alert(`❌ Error al cambiar contraseña: ${error.message}`);
+            }
+        }
+        
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
             if (!checkAuth()) return;
@@ -2163,9 +3064,18 @@ para ver los cambios aplicados.
                             setTimeout(initContactEditor, 100);
                         } else if (sectionId === 'ventas') {
                             setTimeout(initSalesPanel, 100);
+                        } else if (sectionId === 'mayoristas') {
+                            setTimeout(initMayoristasPanel, 100);
                         }
                     }
                 });
+            });
+            
+            // Cerrar modales al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.classList.remove('show');
+                }
             });
         });
     </script>
