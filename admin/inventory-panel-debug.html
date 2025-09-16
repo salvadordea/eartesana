@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Inventario - Debug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .debug-info {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .error { color: red; }
+        .success { color: green; }
+        .warning { color: orange; }
+        .loading {
+            text-align: center;
+            padding: 50px;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #C0C0C0;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        pre {
+            background: #f8f8f8;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .test-results {
+            margin: 20px 0;
+        }
+        .test-item {
+            padding: 10px;
+            margin: 5px 0;
+            border-left: 4px solid #ddd;
+        }
+        .test-pass { border-left-color: #4CAF50; background: #f0fff0; }
+        .test-fail { border-left-color: #f44336; background: #fff0f0; }
+        .test-warn { border-left-color: #ff9800; background: #fff8e1; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Panel de Inventario - Diagnóstico</h1>
+    
+    <div class="debug-info">
+        <h2>📋 Estado de la Conexión</h2>
+        <div id="connectionStatus">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Verificando conexión...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="debug-info">
+        <h2>🧪 Resultados de Pruebas</h2>
+        <div id="testResults" class="test-results">
+            <p>Ejecutando pruebas...</p>
+        </div>
+    </div>
+
+    <div class="debug-info">
+        <h2>📊 Datos de Prueba</h2>
+        <div id="sampleData">
+            <p>Cargando datos...</p>
+        </div>
+    </div>
+
+    <div class="debug-info">
+        <h2>🚨 Log de Errores</h2>
+        <div id="errorLog">
+            <p>No hay errores registrados.</p>
+        </div>
+    </div>
+
+    <script>
+        // Capturar errores de JavaScript
+        window.onerror = function(message, source, lineno, colno, error) {
+            logError(`JavaScript Error: ${message} at ${source}:${lineno}:${colno}`, error);
+            return false;
+        };
+
+        window.addEventListener('unhandledrejection', function(event) {
+            logError('Unhandled Promise Rejection: ' + event.reason, event.reason);
+        });
+
+        function logError(message, error) {
+            console.error(message, error);
+            const errorLog = document.getElementById('errorLog');
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error';
+            errorDiv.innerHTML = `
+                <strong>[${new Date().toLocaleTimeString()}]</strong> ${message}<br>
+                ${error ? `<pre>${error.stack || error}</pre>` : ''}
+            `;
+            errorLog.appendChild(errorDiv);
+        }
+
+        function addTestResult(name, status, message, details = null) {
+            const testResults = document.getElementById('testResults');
+            const testDiv = document.createElement('div');
+            testDiv.className = `test-item test-${status}`;
+            testDiv.innerHTML = `
+                <strong>${status === 'pass' ? '✅' : status === 'warn' ? '⚠️' : '❌'} ${name}</strong><br>
+                ${message}
+                ${details ? `<pre>${details}</pre>` : ''}
+            `;
+            testResults.appendChild(testDiv);
+        }
+
+        async function runDiagnostics() {
+            try {
+                // Test 1: Verificar configuración
+                addTestResult('Configuración', 'pass', 'Verificando archivos de configuración...');
+                
+                let config;
+                try {
+                    // Intentar cargar desde config principal
+                    const configResponse = await fetch('../config.js');
+                    if (configResponse.ok) {
+                        const configText = await configResponse.text();
+                        addTestResult('Config Principal', 'pass', 'Archivo config.js encontrado');
+                    } else {
+                        addTestResult('Config Principal', 'warn', 'No se pudo cargar config.js');
+                    }
+                } catch (error) {
+                    addTestResult('Config Principal', 'fail', 'Error cargando config.js', error.message);
+                }
+
+                // Test 2: Verificar Supabase
+                addTestResult('Supabase', 'warn', 'Intentando conexión directa...');
+                
+                // Configuración hardcodeada para pruebas
+                const supabaseUrl = 'https://yrmfrfpyqctvwyhrhivl.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlybWZyZnB5cWN0dnd5aHJoaXZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc5NTg5MzUsImV4cCI6MjA3MzUzNDkzNX0.qEijwK3FlnqXP2qw0gl438Tt-Rd1vrfts1cXslUuteU';
+
+                // Test 3: Verificar si Supabase está disponible
+                try {
+                    const testResponse = await fetch(`${supabaseUrl}/rest/v1/products?limit=1`, {
+                        headers: {
+                            'apikey': supabaseKey,
+                            'Authorization': `Bearer ${supabaseKey}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    if (testResponse.ok) {
+                        const data = await testResponse.json();
+                        addTestResult('Conexión Supabase', 'pass', `Conexión exitosa. Productos encontrados: ${data.length}`);
+                        
+                        // Mostrar datos de muestra
+                        document.getElementById('sampleData').innerHTML = `
+                            <h3>Productos de muestra:</h3>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        `;
+                        
+                    } else {
+                        addTestResult('Conexión Supabase', 'fail', `Error HTTP: ${testResponse.status} - ${testResponse.statusText}`);
+                    }
+                } catch (error) {
+                    addTestResult('Conexión Supabase', 'fail', 'Error de conexión', error.message);
+                }
+
+                // Test 4: Verificar tabla product_variants
+                try {
+                    const variantsResponse = await fetch(`${supabaseUrl}/rest/v1/product_variants?limit=3`, {
+                        headers: {
+                            'apikey': supabaseKey,
+                            'Authorization': `Bearer ${supabaseKey}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    if (variantsResponse.ok) {
+                        const variants = await variantsResponse.json();
+                        addTestResult('Tabla Variants', 'pass', `Variantes encontradas: ${variants.length}`);
+                        
+                        if (variants.length > 0) {
+                            const sampleData = document.getElementById('sampleData');
+                            sampleData.innerHTML += `
+                                <h3>Variantes de muestra:</h3>
+                                <pre>${JSON.stringify(variants, null, 2)}</pre>
+                            `;
+                        }
+                    } else {
+                        addTestResult('Tabla Variants', 'fail', `Error accediendo a product_variants: ${variantsResponse.status}`);
+                    }
+                } catch (error) {
+                    addTestResult('Tabla Variants', 'fail', 'Error verificando variantes', error.message);
+                }
+
+                // Test 5: Verificar API externa
+                try {
+                    const apiResponse = await fetch('../api/inventory-variants-api.js');
+                    if (apiResponse.ok) {
+                        addTestResult('API File', 'pass', 'Archivo API encontrado');
+                    } else {
+                        addTestResult('API File', 'warn', 'Archivo API no encontrado o no accesible');
+                    }
+                } catch (error) {
+                    addTestResult('API File', 'fail', 'Error cargando API', error.message);
+                }
+
+                // Actualizar estado de conexión
+                document.getElementById('connectionStatus').innerHTML = `
+                    <div class="success">
+                        <h3>✅ Diagnóstico Completado</h3>
+                        <p>Revisa los resultados arriba para identificar posibles problemas.</p>
+                    </div>
+                `;
+
+            } catch (error) {
+                logError('Error durante diagnóstico', error);
+                document.getElementById('connectionStatus').innerHTML = `
+                    <div class="error">
+                        <h3>❌ Error en Diagnóstico</h3>
+                        <p>Error: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Ejecutar diagnóstico cuando se carga la página
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔧 Iniciando diagnóstico del panel de inventario...');
+            runDiagnostics();
+        });
+    </script>
+</body>
+</html>

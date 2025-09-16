@@ -116,5 +116,7 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = EstudioArtesanaConfig;
 }
 
-// Global access for vanilla JS
-window.EstudioArtesanaConfig = EstudioArtesanaConfig;
+// Global access for vanilla JS (solo en navegador)
+if (typeof window !== 'undefined') {
+    window.EstudioArtesanaConfig = EstudioArtesanaConfig;
+}

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Inventario - Estudio Artesana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Supabase JS desde CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .panel-header {
+            background: linear-gradient(135deg, #1a1a1a, #000);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #333;
+        }
+
+        .panel-title {
+            font-size: 2rem;
+            font-weight: 300;
+        }
+
+        .panel-stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 600;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Products Table */
+        .products-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .products-header {
+            padding: 25px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .products-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .products-table th,
+        .products-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .products-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .product-row {
+            transition: background-color 0.3s ease;
+        }
+
+        .product-row:hover {
+            background: #f8f9fa;
+        }
+
+        .product-main {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .product-price {
+            font-weight: 500;
+            color: #28a745;
+        }
+
+        .stock-total {
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .stock-high {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .stock-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .stock-low {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .stock-out {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Variants */
+        .variants-container {
+            margin-top: 10px;
+        }
+
+        .variant-row {
+            padding: 8px 0;
+            padding-left: 20px;
+            border-left: 3px solid #C0C0C0;
+            margin-left: 10px;
+            background: #f8f9fa;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .variant-info {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .variant-name {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .variant-sku {
+            color: #6c757d;
+            font-size: 0.85rem;
+            background: #e9ecef;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        /* Toggle Button */
+        .toggle-variants {
+            background: none;
+            border: none;
+            color: #C0C0C0;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-variants:hover {
+            background: #f0f0f0;
+        }
+
+        .variants-expanded .toggle-variants {
+            transform: rotate(90deg);
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #6c757d;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #C0C0C0;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Error */
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px;
+        }
+
+        /* Product Image */
+        .product-image {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .product-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .panel-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .products-table {
+                font-size: 14px;
+            }
+
+            .product-image {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="panel-header">
+            <h1 class="panel-title">
+                <i class="fas fa-boxes"></i>
+                Panel de Inventario
+            </h1>
+            <div class="panel-stats" id="panelStats">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalProducts">-</span>
+                    <span class="stat-label">Productos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="totalStock">-</span>
+                    <span class="stat-label">Stock Total</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="lowStockCount">-</span>
+                    <span class="stat-label">Bajo Stock</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Table -->
+        <div class="products-section">
+            <div class="products-header">
+                <h2 class="products-title">Productos e Inventario</h2>
+                <button class="btn btn-success" onclick="reloadData()" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer;">
+                    <i class="fas fa-refresh"></i> Recargar
+                </button>
+            </div>
+
+            <div id="productsLoading" class="loading">
+                <div class="spinner"></div>
+                <p>Cargando productos...</p>
+            </div>
+
+            <div id="errorContainer"></div>
+
+            <table class="products-table" id="productsTable" style="display: none;">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Stock Total</th>
+                        <th>Imagen</th>
+                    </tr>
+                </thead>
+                <tbody id="productsTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Configuración de Supabase
+        const SUPABASE_URL = 'https://yrmfrfpyqctvwyhrhivl.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlybWZyZnB5cWN0dnd5aHJoaXZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc5NTg5MzUsImV4cCI6MjA3MzUzNDkzNX0.qEijwK3FlnqXP2qw0gl438Tt-Rd1vrfts1cXslUuteU';
+
+        // Crear cliente de Supabase
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let currentProducts = [];
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Iniciando panel de inventario...');
+            loadDashboardData();
+        });
+
+        async function loadDashboardData() {
+            try {
+                showLoading(true);
+                clearErrors();
+
+                console.log('📊 Cargando productos...');
+                await loadProducts();
+
+                console.log('✅ Datos cargados correctamente');
+                
+            } catch (error) {
+                console.error('❌ Error loading dashboard:', error);
+                showError('Error cargando el panel de inventario: ' + error.message);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function loadProducts() {
+            try {
+                // Cargar productos básicos
+                console.log('🔍 Consultando productos...');
+                const { data: products, error: productsError } = await supabase
+                    .from('products')
+                    .select('id, name, price, total_stock, has_variants, main_image_url')
+                    .order('id');
+
+                if (productsError) {
+                    throw new Error(`Error cargando productos: ${productsError.message}`);
+                }
+
+                console.log(`📦 ${products.length} productos encontrados`);
+
+                // Cargar variantes para cada producto
+                for (let product of products) {
+                    if (product.has_variants) {
+                        console.log(`🎨 Cargando variantes para producto ${product.id}...`);
+                        const { data: variants, error: variantsError } = await supabase
+                            .from('product_variants')
+                            .select('*')
+                            .eq('product_id', product.id)
+                            .eq('is_active', true)
+                            .order('sort_order', { nullsFirst: false });
+
+                        if (!variantsError && variants) {
+                            product.variants = variants;
+                            console.log(`  ✅ ${variants.length} variantes cargadas`);
+                        } else {
+                            console.log(`  ⚠️ Error cargando variantes: ${variantsError?.message || 'Sin variantes'}`);
+                            product.variants = [];
+                        }
+                    } else {
+                        product.variants = [];
+                    }
+                }
+
+                currentProducts = products;
+                renderProductsTable();
+                updateDashboardStats();
+
+            } catch (error) {
+                console.error('❌ Error en loadProducts:', error);
+                throw error;
+            }
+        }
+
+        function renderProductsTable() {
+            const tbody = document.getElementById('productsTableBody');
+            tbody.innerHTML = '';
+
+            if (currentProducts.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 40px;">No hay productos disponibles</td></tr>';
+                return;
+            }
+
+            currentProducts.forEach(product => {
+                const rows = createProductRow(product);
+                if (Array.isArray(rows)) {
+                    rows.forEach(row => tbody.appendChild(row));
+                } else {
+                    tbody.appendChild(rows);
+                }
+            });
+
+            document.getElementById('productsTable').style.display = 'table';
+        }
+
+        function createProductRow(product) {
+            const row = document.createElement('tr');
+            row.className = 'product-row';
+            row.setAttribute('data-product-id', product.id);
+
+            const hasVariants = product.variants && product.variants.length > 0;
+            const stockStatus = getStockStatus(product.total_stock || 0);
+
+            // Obtener URL de imagen
+            let imageUrl = '../assets/images/placeholder-product.jpg';
+            if (product.main_image_url) {
+                imageUrl = product.main_image_url;
+            }
+
+            row.innerHTML = `
+                <td>
+                    ${hasVariants ? `<button class="toggle-variants" onclick="toggleVariants(${product.id})">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>` : ''}
+                </td>
+                <td>
+                    <div class="product-main">${product.name}</div>
+                    ${hasVariants ? `<small style="color: #6c757d;">${product.variants.length} variante(s)</small>` : ''}
+                </td>
+                <td>
+                    <span class="product-price">$${parseFloat(product.price || 0).toFixed(2)}</span>
+                </td>
+                <td>
+                    <span class="stock-total stock-${stockStatus.class}">${product.total_stock || 0}</span>
+                </td>
+                <td>
+                    <div class="product-image">
+                        <img src="${imageUrl}" alt="${product.name}" class="product-thumb" 
+                             onerror="this.src='../assets/images/placeholder-product.jpg'">
+                    </div>
+                </td>
+            `;
+
+            // Agregar variantes si existen
+            if (hasVariants) {
+                const variantsContainer = document.createElement('tr');
+                variantsContainer.className = 'variants-container';
+                variantsContainer.setAttribute('data-product-id', product.id);
+                variantsContainer.style.display = 'none';
+
+                const variantsCell = document.createElement('td');
+                variantsCell.colSpan = 5;
+                
+                const variantsHtml = product.variants.map(variant => `
+                    <div class="variant-row">
+                        <div class="variant-info">
+                            <span class="variant-name">${variant.name || variant.variant_name || 'Sin nombre'}</span>
+                            ${variant.sku ? `<span class="variant-sku">${variant.sku}</span>` : ''}
+                        </div>
+                        <div>Stock: ${variant.stock || 0}</div>
+                    </div>
+                `).join('');
+
+                variantsCell.innerHTML = variantsHtml;
+                variantsContainer.appendChild(variantsCell);
+
+                return [row, variantsContainer];
+            }
+
+            return row;
+        }
+
+        function getStockStatus(stock) {
+            if (stock === 0) return { class: 'out', text: 'Sin Stock' };
+            if (stock < 5) return { class: 'low', text: 'Bajo' };
+            if (stock < 20) return { class: 'medium', text: 'Medio' };
+            return { class: 'high', text: 'Alto' };
+        }
+
+        function toggleVariants(productId) {
+            const variantsRow = document.querySelector(`tr.variants-container[data-product-id="${productId}"]`);
+            const toggleBtn = document.querySelector(`tr[data-product-id="${productId}"] .toggle-variants`);
+            
+            if (variantsRow.style.display === 'none') {
+                variantsRow.style.display = 'table-row';
+                toggleBtn.classList.add('variants-expanded');
+            } else {
+                variantsRow.style.display = 'none';
+                toggleBtn.classList.remove('variants-expanded');
+            }
+        }
+
+        function updateDashboardStats() {
+            const totalProducts = currentProducts.length;
+            const totalStock = currentProducts.reduce((sum, product) => sum + (product.total_stock || 0), 0);
+            const lowStockCount = currentProducts.filter(product => (product.total_stock || 0) < 5).length;
+
+            document.getElementById('totalProducts').textContent = totalProducts;
+            document.getElementById('totalStock').textContent = totalStock;
+            document.getElementById('lowStockCount').textContent = lowStockCount;
+        }
+
+        function showLoading(show) {
+            const loading = document.getElementById('productsLoading');
+            const table = document.getElementById('productsTable');
+            
+            if (show) {
+                loading.style.display = 'block';
+                table.style.display = 'none';
+            } else {
+                loading.style.display = 'none';
+                // La tabla se mostrará en renderProductsTable si hay datos
+            }
+        }
+
+        function showError(message) {
+            const errorContainer = document.getElementById('errorContainer');
+            errorContainer.innerHTML = `
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Error:</strong> ${message}
+                </div>
+            `;
+        }
+
+        function clearErrors() {
+            document.getElementById('errorContainer').innerHTML = '';
+        }
+
+        function showSuccess(message) {
+            const errorContainer = document.getElementById('errorContainer');
+            errorContainer.innerHTML = `
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <strong>Éxito:</strong> ${message}
+                </div>
+            `;
+        }
+
+        function reloadData() {
+            loadDashboardData();
+        }
+
+        // Logging para debug
+        console.log('🔧 Panel de inventario cargado');
+        console.log('📡 Supabase URL:', SUPABASE_URL);
+        console.log('🔑 Supabase Key:', SUPABASE_KEY.substring(0, 20) + '...');
+    </script>
+</body>
+</html>

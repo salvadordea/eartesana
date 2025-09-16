@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Inventario - Estudio Artesana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .panel-header {
+            background: linear-gradient(135deg, #1a1a1a, #000);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #333;
+        }
+
+        .panel-title {
+            font-size: 2rem;
+            font-weight: 300;
+        }
+
+        .panel-stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 600;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Filters */
+        .filters-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .filters-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 200px;
+            gap: 20px;
+            align-items: end;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .filter-input {
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: #C0C0C0;
+            box-shadow: 0 0 0 3px rgba(192, 192, 192, 0.1);
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(192, 192, 192, 0.3);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+
+        /* Products Table */
+        .products-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .products-header {
+            padding: 25px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .products-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .products-table th,
+        .products-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .products-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .product-row {
+            transition: background-color 0.3s ease;
+        }
+
+        .product-row:hover {
+            background: #f8f9fa;
+        }
+
+        .product-main {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .product-category {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .product-price {
+            font-weight: 500;
+            color: #28a745;
+        }
+
+        .stock-total {
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .stock-high {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .stock-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .stock-low {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .stock-out {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Variants */
+        .variants-container {
+            margin-top: 10px;
+        }
+
+        .variant-row {
+            padding: 8px 0;
+            padding-left: 20px;
+            border-left: 3px solid #C0C0C0;
+            margin-left: 10px;
+            background: #f8f9fa;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .variant-info {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .variant-name {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .variant-sku {
+            color: #6c757d;
+            font-size: 0.85rem;
+            background: #e9ecef;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .variant-stock-input {
+            width: 80px;
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .variant-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        /* Toggle Button */
+        .toggle-variants {
+            background: none;
+            border: none;
+            color: #C0C0C0;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-variants:hover {
+            background: #f0f0f0;
+        }
+
+        .variants-expanded .toggle-variants {
+            transform: rotate(90deg);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .close {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #C0C0C0;
+            box-shadow: 0 0 0 3px rgba(192, 192, 192, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #6c757d;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #C0C0C0;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        /* Product Images */
+        .product-image {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .product-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .product-thumb:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-small {
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Enhanced Buttons with Hover Effects */
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(220,53,69,0.3);
+        }
+
+        /* Copy/Duplicate Button Specific Style */
+        .btn-copy {
+            background: linear-gradient(135deg, #17a2b8, #138496);
+            color: white;
+            border: none;
+        }
+
+        .btn-copy:hover {
+            background: linear-gradient(135deg, #138496, #117a8b);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(23,162,184,0.3);
+        }
+
+        /* Edit Button Enhanced */
+        .btn-edit {
+            background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
+            color: #000;
+        }
+
+        .btn-edit:hover {
+            background: linear-gradient(135deg, #A0A0A0, #808080);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(192,192,192,0.3);
+        }
+
+        /* Bulk Actions Bar */
+        .bulk-actions {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bulk-actions.show {
+            display: flex;
+        }
+
+        .bulk-actions-label {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        /* Product Selection */
+        .product-checkbox {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .product-row.selected {
+            background: rgba(192, 192, 192, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .filters-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .panel-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .products-table {
+                font-size: 14px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 3px;
+            }
+
+            .product-image {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="panel-header">
+            <h1 class="panel-title">
+                <i class="fas fa-boxes"></i>
+                Panel de Inventario
+            </h1>
+            <div class="panel-stats" id="panelStats">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalProducts">-</span>
+                    <span class="stat-label">Productos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="totalStock">-</span>
+                    <span class="stat-label">Stock Total</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="lowStockCount">-</span>
+                    <span class="stat-label">Bajo Stock</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label class="filter-label">Buscar Producto</label>
+                    <input type="text" class="filter-input" id="searchInput" placeholder="Nombre o SKU...">
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Categoría</label>
+                    <select class="filter-input" id="categoryFilter">
+                        <option value="">Todas las categorías</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Estado de Stock</label>
+                    <select class="filter-input" id="stockFilter">
+                        <option value="">Todos</option>
+                        <option value="high">Stock Alto</option>
+                        <option value="medium">Stock Medio</option>
+                        <option value="low">Stock Bajo</option>
+                        <option value="out">Sin Stock</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">&nbsp;</label>
+                    <button class="btn btn-primary" onclick="applyFilters()">
+                        <i class="fas fa-search"></i> Filtrar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Table -->
+        <div class="products-section">
+            <div class="products-header">
+                <h2 class="products-title">Productos e Inventario</h2>
+                <button class="btn btn-success" onclick="showAddVariantModal()">
+                    <i class="fas fa-plus"></i> Agregar Variante
+                </button>
+            </div>
+
+            <div id="productsLoading" class="loading">
+                <div class="spinner"></div>
+                <p>Cargando productos...</p>
+            </div>
+
+            <table class="products-table" id="productsTable" style="display: none;">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                <th>Stock Total</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="productsTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add/Edit Variant Modal -->
+    <div id="variantModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Agregar Variante</h3>
+                <button class="close" onclick="closeVariantModal()">&times;</button>
+            </div>
+            
+            <form id="variantForm">
+                <input type="hidden" id="productId" name="productId">
+                <input type="hidden" id="variantId" name="variantId">
+                
+                <div class="form-group">
+                    <label class="form-label">Producto</label>
+                    <select class="form-control" id="productSelect" name="product_id" required>
+                        <option value="">Selecciona un producto</option>
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Variante</label>
+                        <select class="form-control" id="variantType" name="variant_type">
+                            <option value="color">Color</option>
+                            <option value="talla">Talla</option>
+                            <option value="material">Material</option>
+                            <option value="tamaño">Tamaño</option>
+                            <option value="acabado">Acabado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Valor de Variante</label>
+                        <input type="text" class="form-control" id="variantValue" name="variant_value" placeholder="Ej: Rojo, Grande, Cuero" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Nombre de Variante</label>
+                    <input type="text" class="form-control" id="variantName" name="variant_name" placeholder="Se generará automáticamente" readonly>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">SKU</label>
+                        <input type="text" class="form-control" id="variantSKU" name="sku" placeholder="Se generará automáticamente">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Stock Inicial</label>
+                        <input type="number" class="form-control" id="variantStock" name="stock" min="0" value="0" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Precio (opcional)</label>
+                    <input type="number" class="form-control" id="variantPrice" name="price" step="0.01" placeholder="Deja vacío para usar precio del producto">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">URL de Imagen (opcional)</label>
+                    <input type="url" class="form-control" id="variantImage" name="image_url" placeholder="https://...">
+                </div>
+                
+                <div class="form-group" style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px;">
+                    <button type="button" class="btn" onclick="closeVariantModal()" style="background: #6c757d; color: white;">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-success" id="saveVariantBtn">
+                        <i class="fas fa-save"></i> Guardar Variante
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../api/inventory-variants-api.js"></script>
+    <script>
+        let currentProducts = [];
+        let currentProductId = null;
+        let currentVariantId = null;
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDashboardData();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Auto-generar nombre de variante
+            document.getElementById('variantType').addEventListener('change', generateVariantName);
+            document.getElementById('variantValue').addEventListener('input', generateVariantName);
+            document.getElementById('productSelect').addEventListener('change', generateVariantSKU);
+
+            // Formulario de variante
+            document.getElementById('variantForm').addEventListener('submit', handleVariantSubmit);
+
+            // Filtros en tiempo real
+            document.getElementById('searchInput').addEventListener('input', debounce(applyFilters, 300));
+        }
+
+        async function loadDashboardData() {
+            try {
+                // Cargar estadísticas
+                const summary = await inventoryVariantsAPI.getInventorySummary();
+                updateDashboardStats(summary);
+
+                // Cargar productos
+                await loadProducts();
+
+                // Cargar opciones para formularios
+                await loadFormOptions();
+
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                showNotification('Error cargando el panel de inventario', 'error');
+            }
+        }
+
+        function updateDashboardStats(summary) {
+            document.getElementById('totalProducts').textContent = summary.totalProducts || 0;
+            document.getElementById('totalStock').textContent = summary.totalStock || 0;
+            document.getElementById('lowStockCount').textContent = summary.lowStockCount || 0;
+        }
+
+        async function loadProducts() {
+            const loading = document.getElementById('productsLoading');
+            const table = document.getElementById('productsTable');
+            
+            try {
+                loading.style.display = 'block';
+                table.style.display = 'none';
+
+                const response = await inventoryVariantsAPI.getProductsWithVariants();
+                currentProducts = response.products || [];
+
+                renderProductsTable();
+
+                loading.style.display = 'none';
+                table.style.display = 'table';
+
+            } catch (error) {
+                console.error('Error loading products:', error);
+                loading.innerHTML = '<p>Error cargando productos</p>';
+            }
+        }
+
+        function renderProductsTable() {
+            const tbody = document.getElementById('productsTableBody');
+            tbody.innerHTML = '';
+
+            currentProducts.forEach(product => {
+                const row = createProductRow(product);
+                tbody.appendChild(row);
+            });
+        }
+
+        function createProductRow(product) {
+            const row = document.createElement('tr');
+            row.className = 'product-row';
+            row.setAttribute('data-product-id', product.id);
+
+            const hasVariants = product.variants && product.variants.length > 0;
+            const stockStatus = getStockStatus(product.total_stock || 0);
+            const imageUrl = getProductImageUrl(product);
+
+            row.innerHTML = `
+                <td>
+                    ${hasVariants ? `<button class="toggle-variants" onclick="toggleVariants(${product.id})">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>` : ''}
+                </td>
+                <td>
+                    <div class="product-main">${product.nombre}</div>
+                    ${hasVariants ? `<small class="text-muted">${product.variants.length} variante(s)</small>` : ''}
+                </td>
+                <td>
+                    <span class="product-category">${product.categoria}</span>
+                </td>
+                <td>
+                    <span class="product-price">$${parseFloat(product.precio || 0).toFixed(2)}</span>
+                </td>
+                <td>
+                    <span class="stock-total stock-${stockStatus.class}">${product.total_stock || 0} ${stockStatus.text}</span>
+                </td>
+                <td>
+                    <div class="product-image">
+                        <img src="${imageUrl}" alt="${product.nombre}" class="product-thumb" 
+                             onerror="this.src='../assets/images/placeholder-product.jpg'">
+                    </div>
+                </td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="btn btn-small btn-primary" onclick="showAddVariantModal(${product.id})" title="Agregar Variante">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="btn btn-small" onclick="editProduct(${product.id})" 
+                                style="background: #C0C0C0; color: #000;" title="Editar Producto">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-small" onclick="duplicateProduct(${product.id})" 
+                                style="background: #17a2b8; color: white;" title="Duplicar Producto">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        ${hasVariants ? `<button class="btn btn-small" onclick="showBulkStockModal(${product.id})" 
+                                style="background: #28a745; color: white;" title="Gestionar Stock">
+                            <i class="fas fa-boxes"></i>
+                        </button>` : ''}
+                        <button class="btn btn-small btn-danger" onclick="deleteProduct(${product.id})" title="Eliminar Producto">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            `;
+
+            // Agregar variantes si existen
+            if (hasVariants) {
+                const variantsContainer = document.createElement('tr');
+                variantsContainer.className = 'variants-container';
+                variantsContainer.setAttribute('data-product-id', product.id);
+                variantsContainer.style.display = 'none';
+
+                const variantsCell = document.createElement('td');
+                variantsCell.colSpan = 7;
+                
+                const variantsHtml = product.variants.map(variant => `
+                    <div class="variant-row">
+                        <div class="variant-info">
+                            <span class="variant-name">${variant.variant_name}</span>
+                            ${variant.sku ? `<span class="variant-sku">${variant.sku}</span>` : ''}
+                        </div>
+                        <div class="variant-stock">
+                            <input type="number" class="variant-stock-input" value="${variant.stock}" 
+                                   min="0" onchange="updateVariantStock(${product.id}, ${variant.id}, this.value)">
+                        </div>
+                        <div class="variant-actions">
+                            <button class="btn btn-small" onclick="editVariant(${product.id}, ${variant.id})" 
+                                    style="background: #ffc107; color: #000;">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-small btn-danger" onclick="deleteVariant(${product.id}, ${variant.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+
+                variantsCell.innerHTML = variantsHtml;
+                variantsContainer.appendChild(variantsCell);
+
+                return [row, variantsContainer];
+            }
+
+            return row;
+        }
+
+        function getStockStatus(stock) {
+            if (stock === 0) return { class: 'out', text: 'Sin Stock' };
+            if (stock < 5) return { class: 'low', text: 'Bajo' };
+            if (stock < 20) return { class: 'medium', text: 'Medio' };
+            return { class: 'high', text: 'Alto' };
+        }
+
+        function toggleVariants(productId) {
+            const variantsRow = document.querySelector(`tr.variants-container[data-product-id="${productId}"]`);
+            const toggleBtn = document.querySelector(`tr[data-product-id="${productId}"] .toggle-variants`);
+            
+            if (variantsRow.style.display === 'none') {
+                variantsRow.style.display = 'table-row';
+                toggleBtn.classList.add('variants-expanded');
+            } else {
+                variantsRow.style.display = 'none';
+                toggleBtn.classList.remove('variants-expanded');
+            }
+        }
+
+        async function updateVariantStock(productId, variantId, newStock) {
+            try {
+                await inventoryVariantsAPI.updateVariantStock(productId, variantId, parseInt(newStock));
+                showNotification('Stock actualizado correctamente', 'success');
+                
+                // Recargar productos para actualizar totales
+                await loadProducts();
+                
+            } catch (error) {
+                console.error('Error updating stock:', error);
+                showNotification('Error actualizando stock', 'error');
+            }
+        }
+
+        function showAddVariantModal(productId = null) {
+            currentProductId = productId;
+            currentVariantId = null;
+            
+            document.getElementById('modalTitle').textContent = 'Agregar Nueva Variante';
+            document.getElementById('variantForm').reset();
+            
+            if (productId) {
+                document.getElementById('productSelect').value = productId;
+                document.getElementById('productSelect').disabled = true;
+            } else {
+                document.getElementById('productSelect').disabled = false;
+            }
+            
+            document.getElementById('variantModal').style.display = 'block';
+        }
+
+        function closeVariantModal() {
+            document.getElementById('variantModal').style.display = 'none';
+        }
+
+        function generateVariantName() {
+            const type = document.getElementById('variantType').value;
+            const value = document.getElementById('variantValue').value;
+            const nameField = document.getElementById('variantName');
+            
+            if (type && value) {
+                const typeLabels = {
+                    'color': 'Color',
+                    'talla': 'Talla',
+                    'material': 'Material',
+                    'tamaño': 'Tamaño',
+                    'acabado': 'Acabado'
+                };
+                
+                nameField.value = `${typeLabels[type]} ${value}`;
+                generateVariantSKU();
+            }
+        }
+
+        async function generateVariantSKU() {
+            const productId = document.getElementById('productSelect').value;
+            const variantValue = document.getElementById('variantValue').value;
+            const skuField = document.getElementById('variantSKU');
+            
+            if (productId && variantValue) {
+                try {
+                    const response = await inventoryVariantsAPI.generateVariantSKU(productId, variantValue);
+                    if (response.success) {
+                        skuField.value = response.sku;
+                    }
+                } catch (error) {
+                    console.error('Error generating SKU:', error);
+                }
+            }
+        }
+
+        async function handleVariantSubmit(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('saveVariantBtn');
+            const originalText = btn.innerHTML;
+            
+            try {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+                
+                const formData = new FormData(e.target);
+                const productId = formData.get('product_id');
+                
+                const variantData = {
+                    variant_name: formData.get('variant_name'),
+                    variant_value: formData.get('variant_value'),
+                    sku: formData.get('sku'),
+                    stock: parseInt(formData.get('stock')),
+                    price: formData.get('price') ? parseFloat(formData.get('price')) : null,
+                    image_url: formData.get('image_url') || null
+                };
+
+                if (currentVariantId) {
+                    await inventoryVariantsAPI.updateVariant(productId, currentVariantId, variantData);
+                    showNotification('Variante actualizada correctamente', 'success');
+                } else {
+                    await inventoryVariantsAPI.createVariant(productId, variantData);
+                    showNotification('Variante creada correctamente', 'success');
+                }
+                
+                closeVariantModal();
+                await loadProducts();
+                
+            } catch (error) {
+                console.error('Error saving variant:', error);
+                showNotification('Error guardando variante', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+
+        async function editVariant(productId, variantId) {
+            try {
+                const response = await inventoryVariantsAPI.getProductWithVariants(productId);
+                const variant = response.product.variants.find(v => v.id === variantId);
+                
+                if (variant) {
+                    currentProductId = productId;
+                    currentVariantId = variantId;
+                    
+                    document.getElementById('modalTitle').textContent = 'Editar Variante';
+                    document.getElementById('productSelect').value = productId;
+                    document.getElementById('productSelect').disabled = true;
+                    document.getElementById('variantType').value = variant.variant_type || 'color';
+                    document.getElementById('variantValue').value = variant.variant_value;
+                    document.getElementById('variantName').value = variant.variant_name;
+                    document.getElementById('variantSKU').value = variant.sku || '';
+                    document.getElementById('variantStock').value = variant.stock;
+                    document.getElementById('variantPrice').value = variant.price || '';
+                    document.getElementById('variantImage').value = variant.image_url || '';
+                    
+                    document.getElementById('variantModal').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error loading variant:', error);
+                showNotification('Error cargando variante', 'error');
+            }
+        }
+
+        async function deleteVariant(productId, variantId) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta variante?')) {
+                try {
+                    await inventoryVariantsAPI.deleteVariant(productId, variantId);
+                    showNotification('Variante eliminada correctamente', 'success');
+                    await loadProducts();
+                } catch (error) {
+                    console.error('Error deleting variant:', error);
+                    showNotification('Error eliminando variante', 'error');
+                }
+            }
+        }
+
+        async function loadFormOptions() {
+            try {
+                // Cargar productos para el selector
+                const products = currentProducts;
+                const productSelect = document.getElementById('productSelect');
+                productSelect.innerHTML = '<option value="">Selecciona un producto</option>';
+                
+                products.forEach(product => {
+                    const option = document.createElement('option');
+                    option.value = product.id;
+                    option.textContent = product.nombre;
+                    productSelect.appendChild(option);
+                });
+
+                // Cargar categorías para filtros
+                const categories = [...new Set(products.map(p => p.categoria))];
+                const categoryFilter = document.getElementById('categoryFilter');
+                categories.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.textContent = category;
+                    categoryFilter.appendChild(option);
+                });
+
+            } catch (error) {
+                console.error('Error loading form options:', error);
+            }
+        }
+
+        function applyFilters() {
+            // Implementar filtrado de productos
+            // Esta función filtraría los productos basado en los criterios seleccionados
+            console.log('Aplicando filtros...');
+        }
+
+        function showNotification(message, type) {
+            // Crear sistema de notificaciones
+            console.log(`${type.toUpperCase()}: ${message}`);
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // ====== FUNCIONES PARA GESTIÓN DE PRODUCTOS ======
+        
+        // Función para obtener URL de imagen del producto
+        function getProductImageUrl(product) {
+            // Orden de prioridad para obtener imagen:
+            // 1. URL directa en el producto
+            // 2. Imagen de Cloudinary generada
+            // 3. Imagen por defecto
+            
+            if (product.imagen && product.imagen.startsWith('http')) {
+                return product.imagen;
+            }
+            
+            if (product.imagen && window.cloudinaryConfig) {
+                return `${window.cloudinaryConfig.baseURL}/${product.imagen}`;
+            }
+            
+            if (product.image_url) {
+                return product.image_url;
+            }
+            
+            // Imagen por defecto
+            return '../assets/images/placeholder-product.jpg';
+        }
+        
+        // Función para editar producto
+        async function editProduct(productId) {
+            try {
+                showNotification('Redirigiendo al editor de producto...', 'info');
+                // Redirigir al panel de edición de productos
+                window.location.href = `../admin/inventario.html?edit=${productId}`;
+            } catch (error) {
+                console.error('Error al editar producto:', error);
+                showNotification('Error al abrir editor de producto', 'error');
+            }
+        }
+        
+        // Función para duplicar producto
+        async function duplicateProduct(productId) {
+            if (confirm('¿Estás seguro de que quieres duplicar este producto?')) {
+                try {
+                    showNotification('Duplicando producto...', 'info');
+                    
+                    // Obtener datos del producto original
+                    const product = currentProducts.find(p => p.id === productId);
+                    if (!product) {
+                        throw new Error('Producto no encontrado');
+                    }
+                    
+                    // Crear copia del producto (simulado)
+                    const duplicatedProduct = {
+                        ...product,
+                        nombre: `${product.nombre} (Copia)`,
+                        sku: `${product.sku || 'PROD'}-COPY-${Date.now()}`,
+                        id: undefined // Para que se genere nuevo ID
+                    };
+                    
+                    // En una implementación real, aquí llamarías a la API
+                    // await inventoryAPI.createProduct(duplicatedProduct);
+                    
+                    showNotification('Producto duplicado correctamente', 'success');
+                    await loadProducts(); // Recargar lista
+                    
+                } catch (error) {
+                    console.error('Error duplicando producto:', error);
+                    showNotification('Error al duplicar producto', 'error');
+                }
+            }
+        }
+        
+        // Función para eliminar producto
+        async function deleteProduct(productId) {
+            const product = currentProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            const hasVariants = product.variants && product.variants.length > 0;
+            let confirmMessage = `¿Estás seguro de que quieres eliminar el producto "${product.nombre}"?`;
+            
+            if (hasVariants) {
+                confirmMessage += `\n\nEste producto tiene ${product.variants.length} variante(s) que también serán eliminadas.`;
+            }
+            
+            if (confirm(confirmMessage)) {
+                try {
+                    showNotification('Eliminando producto...', 'info');
+                    
+                    // En una implementación real, aquí llamarías a la API
+                    // await inventoryAPI.deleteProduct(productId);
+                    
+                    // Simular eliminación
+                    currentProducts = currentProducts.filter(p => p.id !== productId);
+                    renderProductsTable();
+                    
+                    showNotification('Producto eliminado correctamente', 'success');
+                    
+                } catch (error) {
+                    console.error('Error eliminando producto:', error);
+                    showNotification('Error al eliminar producto', 'error');
+                }
+            }
+        }
+        
+        // Función para mostrar modal de gestión masiva de stock
+        async function showBulkStockModal(productId) {
+            try {
+                const product = currentProducts.find(p => p.id === productId);
+                if (!product || !product.variants || product.variants.length === 0) {
+                    showNotification('Este producto no tiene variantes', 'warning');
+                    return;
+                }
+                
+                // Crear modal dinámico para gestión masiva
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.style.display = 'block';
+                
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Gestión Masiva de Stock - ${product.nombre}</h3>
+                            <button class="close" onclick="this.closest('.modal').remove()">&times;</button>
+                        </div>
+                        <div class="bulk-stock-content">
+                            <p>Actualiza el stock de todas las variantes:</p>
+                            <div class="bulk-stock-list">
+                                ${product.variants.map(variant => `
+                                    <div class="bulk-stock-item">
+                                        <label>${variant.variant_name}</label>
+                                        <input type="number" class="form-control" data-variant-id="${variant.id}" 
+                                               value="${variant.stock}" min="0" style="width: 100px; display: inline-block;">
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="bulk-actions" style="margin-top: 20px; text-align: right;">
+                                <button class="btn" onclick="this.closest('.modal').remove()" 
+                                        style="background: #6c757d; color: white; margin-right: 10px;">Cancelar</button>
+                                <button class="btn btn-success" onclick="saveBulkStock(${productId}, this)">
+                                    <i class="fas fa-save"></i> Guardar Cambios
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+            } catch (error) {
+                console.error('Error showing bulk stock modal:', error);
+                showNotification('Error al abrir gestión de stock', 'error');
+            }
+        }
+        
+        // Función para guardar cambios masivos de stock
+        async function saveBulkStock(productId, buttonElement) {
+            const modal = buttonElement.closest('.modal');
+            const inputs = modal.querySelectorAll('[data-variant-id]');
+            const originalText = buttonElement.innerHTML;
+            
+            try {
+                buttonElement.disabled = true;
+                buttonElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+                
+                const updates = [];
+                inputs.forEach(input => {
+                    updates.push({
+                        variantId: parseInt(input.dataset.variantId),
+                        stock: parseInt(input.value)
+                    });
+                });
+                
+                // En una implementación real:
+                // await inventoryVariantsAPI.updateBulkVariantStock(productId, updates);
+                
+                // Simular actualización
+                const product = currentProducts.find(p => p.id === productId);
+                if (product && product.variants) {
+                    updates.forEach(update => {
+                        const variant = product.variants.find(v => v.id === update.variantId);
+                        if (variant) {
+                            variant.stock = update.stock;
+                        }
+                    });
+                    
+                    // Recalcular stock total
+                    product.total_stock = product.variants.reduce((sum, v) => sum + v.stock, 0);
+                }
+                
+                renderProductsTable();
+                modal.remove();
+                showNotification('Stock actualizado correctamente', 'success');
+                
+            } catch (error) {
+                console.error('Error saving bulk stock:', error);
+                showNotification('Error al guardar cambios de stock', 'error');
+            } finally {
+                buttonElement.disabled = false;
+                buttonElement.innerHTML = originalText;
+            }
+        }
+        
+        // Función mejorada para notificaciones
+        function showNotification(message, type) {
+            // Crear contenedor de notificaciones si no existe
+            let container = document.getElementById('notifications-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'notifications-container';
+                container.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    z-index: 9999;
+                    max-width: 350px;
+                `;
+                document.body.appendChild(container);
+            }
+            
+            // Crear notificación
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                background: ${type === 'success' ? '#d4edda' : type === 'error' ? '#f8d7da' : type === 'warning' ? '#fff3cd' : '#cce7ff'};
+                color: ${type === 'success' ? '#155724' : type === 'error' ? '#721c24' : type === 'warning' ? '#856404' : '#004085'};
+                border: 1px solid ${type === 'success' ? '#c3e6cb' : type === 'error' ? '#f5c6cb' : type === 'warning' ? '#ffeaa7' : '#b8d8f0'};
+                border-radius: 8px;
+                padding: 12px 16px;
+                margin-bottom: 10px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                animation: slideInRight 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            `;
+            
+            const icon = type === 'success' ? 'check-circle' : 
+                        type === 'error' ? 'exclamation-circle' : 
+                        type === 'warning' ? 'exclamation-triangle' : 'info-circle';
+            
+            notification.innerHTML = `
+                <i class="fas fa-${icon}"></i>
+                <span>${message}</span>
+                <button onclick="this.parentElement.remove()" 
+                        style="background: none; border: none; font-size: 16px; cursor: pointer; margin-left: auto; opacity: 0.7;">
+                    &times;
+                </button>
+            `;
+            
+            container.appendChild(notification);
+            
+            // Auto-remover después de 5 segundos (excepto errores)
+            if (type !== 'error') {
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.remove();
+                    }
+                }, 5000);
+            }
+        }
+        
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('variantModal');
+            if (event.target === modal) {
+                closeVariantModal();
+            }
+        }
+        
+        // Agregar estilos para animaciones de notificaciones
+        if (!document.getElementById('notification-styles')) {
+            const styles = document.createElement('style');
+            styles.id = 'notification-styles';
+            styles.textContent = `
+                @keyframes slideInRight {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+                
+                .bulk-stock-item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 10px 0;
+                    border-bottom: 1px solid #e9ecef;
+                }
+                
+                .bulk-stock-item:last-child {
+                    border-bottom: none;
+                }
+            `;
+            document.head.appendChild(styles);
+        }
+    </script>
+</body>
+</html>
