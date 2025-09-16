@@ -1579,6 +1579,17 @@ body {
         display: none !important;
     }
     
+    /* HIDE SIDEBAR COMPLETELY IN MOBILE */
+    .shop-sidebar {
+        display: none !important;
+    }
+    
+    /* Make shop-layout single column */
+    .shop-layout {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+    }
+    
     /* Show mobile toggle button */
     .mobile-search-toggle {
         display: block;
@@ -1597,13 +1608,13 @@ body {
         flex-direction: column;
     }
     
-    /* Order for mobile layout */
-    .main-categories {
-        order: 1; /* Categories first */
+    /* Order for mobile layout: Search → Categories → Products */
+    .mobile-search-container {
+        order: 1; /* Search toggle first */
     }
     
-    .mobile-search-container {
-        order: 2; /* Search after categories */
+    .main-categories {
+        order: 2; /* Categories second */
     }
     
     .products-results {
