@@ -182,14 +182,6 @@
             </button>
         </form>
 
-        <div class="credentials-info">
-            <h4>🔑 Credenciales de Administrador:</h4>
-            <div class="creds">Email: salvadordeaguinaga@gmail.com</div>
-            <div class="creds">Contraseña: ZaqXsw124!</div>
-            <p style="color: #666; font-size: 11px; margin-top: 8px;">
-                Usa las credenciales reales de Supabase o las locales de respaldo (admin/admin123)
-            </p>
-        </div>
     </div>
 
     <!-- Scripts de Supabase -->
@@ -350,9 +342,6 @@
         window.addEventListener('load', function() {
             setTimeout(() => {
                 initSupabase();
-                // Pre-llenar campos para testing con credenciales reales
-                document.getElementById('username').value = 'salvadordeaguinaga@gmail.com';
-                document.getElementById('password').value = 'ZaqXsw124!';
             }, 500);
         });
     </script>

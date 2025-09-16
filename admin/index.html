@@ -131,7 +131,7 @@
                     const sessionData = JSON.parse(session);
                     if (sessionData.expires > Date.now() && sessionData.isLoggedIn) {
                         // User is logged in, redirect to panel
-                        window.location.href = 'panel.html';
+                        window.location.href = 'dashboard.html';
                         return true;
                     } else {
                         // Session expired, clean up
