@@ -200,7 +200,8 @@ function initSmoothScrolling() {
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();
-                const headerHeight = document.querySelector('.header').offsetHeight;
+                const header = document.querySelector('.header');
+                const headerHeight = header ? header.offsetHeight : 0;
                 const targetPosition = targetElement.offsetTop - headerHeight;
                 
                 window.scrollTo({
@@ -215,6 +216,13 @@ function initSmoothScrolling() {
 // Header scroll effect
 function initHeaderScroll() {
     const header = document.querySelector('.header');
+    
+    // Early return if header doesn't exist (e.g., in tienda.html with universal header)
+    if (!header) {
+        console.log('ℹ️ Header element not found, skipping header scroll effects');
+        return;
+    }
+    
     let lastScrollY = 0;
     
     window.addEventListener('scroll', () => {
