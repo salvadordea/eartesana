@@ -1,9 +1,0 @@
-{
-  "total": 2,
-  "byStatus": {
-    "failed": 1,
-    "pending": 1
-  },
-  "totalRevenue": 1795.53,
-  "averageOrder": 897.765
-}

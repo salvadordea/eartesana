@@ -362,6 +362,112 @@
             color: #6c757d;
         }
 
+        /* Contact Editor Styles */
+        .contact-editor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .editor-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .editor-section h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .editor-section p {
+            color: #6c757d;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #495057;
+            font-size: 14px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        
+        .form-group small {
+            color: #6c757d;
+            font-size: 12px;
+            display: block;
+            margin-top: 5px;
+        }
+        
+        .card-editor {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .card-editor h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .editor-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px 0;
+            border-top: 1px solid #e9ecef;
+            margin-top: 20px;
+        }
+        
+        .trust-icons-form .form-group {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .social-form .form-group {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #e9ecef;
+        }
+        
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -379,6 +485,13 @@
             .inventory-header {
                 flex-direction: column;
                 gap: 15px;
+            }
+            .contact-editor-grid {
+                grid-template-columns: 1fr;
+            }
+            .editor-actions {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -616,7 +729,116 @@
 
         <div id="contacto" class="content-area">
             <h2>Editor de Información de Contacto</h2>
-            <p>Próximamente: Editor de tarjetas de contacto...</p>
+            
+            <div class="contact-editor-grid">
+                <!-- Trust Icons Section -->
+                <div class="editor-section">
+                    <h3><i class="fas fa-shield-alt"></i> Elementos de Confianza</h3>
+                    <p>Edita los íconos de confianza que aparecen en la sección hero de inicio</p>
+                    
+                    <div class="trust-icons-form">
+                        <div class="form-group">
+                            <label>Ícono 1 - Envío</label>
+                            <input type="text" id="trustIcon1Text" placeholder="Envío Gratis*" class="form-control">
+                            <select id="trustIcon1Icon" class="form-control">
+                                <option value="fas fa-truck">🚚 Camión (Envío)</option>
+                                <option value="fas fa-shipping-fast">📦 Envío Rápido</option>
+                                <option value="fas fa-plane">✈️ Avión</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Ícono 2 - Artesanal</label>
+                            <input type="text" id="trustIcon2Text" placeholder="Hecho a Mano" class="form-control">
+                            <select id="trustIcon2Icon" class="form-control">
+                                <option value="fas fa-hand-holding-heart">👐 Hecho a Mano</option>
+                                <option value="fas fa-hands">🙌 Manos</option>
+                                <option value="fas fa-hammer">🔨 Herramientas</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Ícono 3 - Calidad</label>
+                            <input type="text" id="trustIcon3Text" placeholder="Calidad Premium" class="form-control">
+                            <select id="trustIcon3Icon" class="form-control">
+                                <option value="fas fa-shield-alt">🛡️ Escudo</option>
+                                <option value="fas fa-award">🏆 Premio</option>
+                                <option value="fas fa-star">⭐ Estrella</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Descargo de envío</label>
+                            <input type="text" id="shippingDisclaimer" placeholder="*En compras superiores a $2,000.00" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Social Media Section -->
+                <div class="editor-section">
+                    <h3><i class="fab fa-instagram"></i> Redes Sociales</h3>
+                    <p>Enlaces a redes sociales (Pinterest será eliminado)</p>
+                    
+                    <div class="social-form">
+                        <div class="form-group">
+                            <label><i class="fab fa-instagram"></i> Instagram</label>
+                            <input type="url" id="instagramUrl" placeholder="https://instagram.com/estudioartesana" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fab fa-facebook-f"></i> Facebook</label>
+                            <input type="url" id="facebookUrl" placeholder="https://facebook.com/estudioartesana" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fab fa-whatsapp"></i> WhatsApp</label>
+                            <input type="tel" id="whatsappNumber" placeholder="+5212345678490" class="form-control">
+                            <small>Número con código de país (ej: +52...)</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Cards Section -->
+                <div class="editor-section contact-cards-section">
+                    <h3><i class="fas fa-address-card"></i> Tarjetas de Contacto</h3>
+                    <p>Información que aparece en la sección de contacto</p>
+                    
+                    <div class="contact-cards-form">
+                        <div class="card-editor">
+                            <h4><i class="fas fa-map-marker-alt"></i> Ubicación</h4>
+                            <input type="text" id="locationText" placeholder="Ciudad de México, México" class="form-control">
+                        </div>
+                        
+                        <div class="card-editor">
+                            <h4><i class="fas fa-phone"></i> Teléfono</h4>
+                            <input type="tel" id="phoneNumber" placeholder="+52 123 456 7890" class="form-control">
+                        </div>
+                        
+                        <div class="card-editor">
+                            <h4><i class="fas fa-envelope"></i> Email</h4>
+                            <input type="email" id="contactEmail" placeholder="info@estudioartesana.com" class="form-control">
+                        </div>
+                        
+                        <div class="card-editor">
+                            <h4><i class="fas fa-clock"></i> Horarios</h4>
+                            <textarea id="businessHours" class="form-control" rows="3" placeholder="Lun - Vie: 9:00 AM - 6:00 PM&#10;Sáb: 10:00 AM - 4:00 PM"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="editor-actions">
+                <button class="btn btn-success" onclick="loadContactInfo()">
+                    <i class="fas fa-sync"></i> Cargar Datos Actuales
+                </button>
+                <button class="btn btn-primary" onclick="saveContactInfo()">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+                <button class="btn btn-warning" onclick="previewChanges()">
+                    <i class="fas fa-eye"></i> Vista Previa
+                </button>
+            </div>
         </div>
 
         <div id="setup" class="content-area">
@@ -1089,6 +1311,197 @@
             }, 500);
         }
 
+        // ====== FUNCIONES PARA EDITOR DE CONTACTO ======
+        
+        // Cargar información de contacto actual desde index.html
+        function loadContactInfo() {
+            console.log('📞 Cargando información de contacto actual...');
+            
+            // Datos por defecto basados en index.html actual
+            const defaultData = {
+                // Trust Icons
+                trustIcon1Text: 'Envío Gratis*',
+                trustIcon1Icon: 'fas fa-truck',
+                trustIcon2Text: 'Hecho a Mano',
+                trustIcon2Icon: 'fas fa-hand-holding-heart',
+                trustIcon3Text: 'Calidad Premium',
+                trustIcon3Icon: 'fas fa-shield-alt',
+                shippingDisclaimer: '*En compras superiores a $2,000.00',
+                
+                // Social Media
+                instagramUrl: '#',
+                facebookUrl: '#',
+                whatsappNumber: '+5212345678490',
+                
+                // Contact Cards
+                locationText: 'Ciudad de México, México',
+                phoneNumber: '+52 123 456 7890',
+                contactEmail: 'info@estudioartesana.com',
+                businessHours: 'Lun - Vie: 9:00 AM - 6:00 PM\nSáb: 10:00 AM - 4:00 PM'
+            };
+            
+            // Llenar formulario con datos por defecto
+            Object.keys(defaultData).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = defaultData[key];
+                }
+            });
+            
+            alert('✅ Datos actuales cargados desde la configuración actual del sitio web');
+        }
+        
+        // Guardar cambios (por ahora mostrará un resumen)
+        function saveContactInfo() {
+            const contactData = {
+                // Trust Icons
+                trustIcon1Text: document.getElementById('trustIcon1Text').value,
+                trustIcon1Icon: document.getElementById('trustIcon1Icon').value,
+                trustIcon2Text: document.getElementById('trustIcon2Text').value,
+                trustIcon2Icon: document.getElementById('trustIcon2Icon').value,
+                trustIcon3Text: document.getElementById('trustIcon3Text').value,
+                trustIcon3Icon: document.getElementById('trustIcon3Icon').value,
+                shippingDisclaimer: document.getElementById('shippingDisclaimer').value,
+                
+                // Social Media
+                instagramUrl: document.getElementById('instagramUrl').value,
+                facebookUrl: document.getElementById('facebookUrl').value,
+                whatsappNumber: document.getElementById('whatsappNumber').value,
+                
+                // Contact Cards
+                locationText: document.getElementById('locationText').value,
+                phoneNumber: document.getElementById('phoneNumber').value,
+                contactEmail: document.getElementById('contactEmail').value,
+                businessHours: document.getElementById('businessHours').value
+            };
+            
+            // Validar campos obligatorios
+            const requiredFields = ['trustIcon1Text', 'trustIcon2Text', 'trustIcon3Text', 'locationText', 'phoneNumber', 'contactEmail'];
+            const missingFields = requiredFields.filter(field => !contactData[field].trim());
+            
+            if (missingFields.length > 0) {
+                alert('❌ Por favor completa todos los campos obligatorios:\n' + missingFields.join(', '));
+                return;
+            }
+            
+            // Mostrar resumen de cambios
+            const summary = `
+📄 RESUMEN DE CAMBIOS:
+
+🛡️ ELEMENTOS DE CONFIANZA:
+• Ícono 1: ${contactData.trustIcon1Text}
+• Ícono 2: ${contactData.trustIcon2Text}
+• Ícono 3: ${contactData.trustIcon3Text}
+• Descargo: ${contactData.shippingDisclaimer}
+
+📱 REDES SOCIALES:
+• Instagram: ${contactData.instagramUrl}
+• Facebook: ${contactData.facebookUrl}
+• WhatsApp: ${contactData.whatsappNumber}
+
+📍 INFORMACIÓN DE CONTACTO:
+• Ubicación: ${contactData.locationText}
+• Teléfono: ${contactData.phoneNumber}
+• Email: ${contactData.contactEmail}
+• Horarios: ${contactData.businessHours.replace(/\n/g, ' | ')}
+
+✅ Para aplicar estos cambios, deberás actualizar manualmente el archivo index.html con esta información.
+            `;
+            
+            alert(summary);
+            
+            // Guardar en localStorage para persistencia temporal
+            localStorage.setItem('contactInfo', JSON.stringify(contactData));
+            console.log('💾 Información guardada temporalmente:', contactData);
+        }
+        
+        // Vista previa de cambios
+        function previewChanges() {
+            const previewData = {
+                trustIcon1Text: document.getElementById('trustIcon1Text').value || 'Envío Gratis*',
+                trustIcon1Icon: document.getElementById('trustIcon1Icon').value || 'fas fa-truck',
+                trustIcon2Text: document.getElementById('trustIcon2Text').value || 'Hecho a Mano',
+                trustIcon2Icon: document.getElementById('trustIcon2Icon').value || 'fas fa-hand-holding-heart',
+                trustIcon3Text: document.getElementById('trustIcon3Text').value || 'Calidad Premium',
+                trustIcon3Icon: document.getElementById('trustIcon3Icon').value || 'fas fa-shield-alt',
+                locationText: document.getElementById('locationText').value || 'Ciudad de México, México',
+                phoneNumber: document.getElementById('phoneNumber').value || '+52 123 456 7890',
+                contactEmail: document.getElementById('contactEmail').value || 'info@estudioartesana.com'
+            };
+            
+            // Crear ventana de vista previa
+            const previewHTML = `
+                <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; max-width: 600px;">
+                    <h2 style="color: #2c3e50; margin-bottom: 20px;">👀 Vista Previa de Cambios</h2>
+                    
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <h3 style="color: #495057; margin-bottom: 15px;">🛡️ Elementos de Confianza:</h3>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <div style="display: flex; align-items: center; gap: 5px; background: white; padding: 8px; border-radius: 5px;">
+                                <i class="${previewData.trustIcon1Icon}" style="color: #D4AF37;"></i>
+                                <span>${previewData.trustIcon1Text}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 5px; background: white; padding: 8px; border-radius: 5px;">
+                                <i class="${previewData.trustIcon2Icon}" style="color: #D4AF37;"></i>
+                                <span>${previewData.trustIcon2Text}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 5px; background: white; padding: 8px; border-radius: 5px;">
+                                <i class="${previewData.trustIcon3Icon}" style="color: #D4AF37;"></i>
+                                <span>${previewData.trustIcon3Text}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                        <h3 style="color: #495057; margin-bottom: 15px;">📍 Tarjetas de Contacto:</h3>
+                        <div style="display: grid; gap: 10px;">
+                            <div style="background: white; padding: 10px; border-radius: 5px; display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-map-marker-alt" style="color: #D4AF37; width: 20px;"></i>
+                                <span>${previewData.locationText}</span>
+                            </div>
+                            <div style="background: white; padding: 10px; border-radius: 5px; display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-phone" style="color: #D4AF37; width: 20px;"></i>
+                                <span>${previewData.phoneNumber}</span>
+                            </div>
+                            <div style="background: white; padding: 10px; border-radius: 5px; display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-envelope" style="color: #D4AF37; width: 20px;"></i>
+                                <span>${previewData.contactEmail}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; padding: 10px; background: #e3f2fd; border-radius: 5px; color: #1565c0;">
+                        <i class="fas fa-info-circle"></i> Esta es una vista previa aproximada. Los cambios reales se verán en el sitio web una vez aplicados.
+                    </div>
+                </div>
+            `;
+            
+            // Abrir ventana de vista previa
+            const previewWindow = window.open('', 'preview', 'width=700,height=600,scrollbars=yes');
+            previewWindow.document.write(previewHTML);
+            previewWindow.document.head.innerHTML = '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">';
+        }
+        
+        // Inicializar editor de contacto cuando se activa la sección
+        function initContactEditor() {
+            // Cargar datos guardados del localStorage si existen
+            const savedData = localStorage.getItem('contactInfo');
+            if (savedData) {
+                try {
+                    const contactData = JSON.parse(savedData);
+                    Object.keys(contactData).forEach(key => {
+                        const element = document.getElementById(key);
+                        if (element) {
+                            element.value = contactData[key];
+                        }
+                    });
+                    console.log('📞 Datos previamente guardados cargados desde localStorage');
+                } catch (error) {
+                    console.error('Error al cargar datos guardados:', error);
+                }
+            }
+        }
+        
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
             if (!checkAuth()) return;
@@ -1101,6 +1514,8 @@
                         showSection(sectionId);
                         if (sectionId === 'inventory') {
                             setTimeout(initInventory, 100);
+                        } else if (sectionId === 'contacto') {
+                            setTimeout(initContactEditor, 100);
                         }
                     }
                 });
