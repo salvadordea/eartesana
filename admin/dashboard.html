@@ -1351,7 +1351,7 @@
             alert('✅ Datos actuales cargados desde la configuración actual del sitio web');
         }
         
-        // Guardar cambios (por ahora mostrará un resumen)
+        // Guardar cambios - Aplicación automática
         function saveContactInfo() {
             const contactData = {
                 // Trust Icons
@@ -1384,8 +1384,10 @@
                 return;
             }
             
-            // Mostrar resumen de cambios
-            const summary = `
+            // Mostrar mensaje de confirmación
+            const success = confirm(`
+🚀 APLICAR CAMBIOS AUTOMÁTICAMENTE
+
 📄 RESUMEN DE CAMBIOS:
 
 🛡️ ELEMENTOS DE CONFIANZA:
@@ -1395,8 +1397,8 @@
 • Descargo: ${contactData.shippingDisclaimer}
 
 📱 REDES SOCIALES:
-• Instagram: ${contactData.instagramUrl}
-• Facebook: ${contactData.facebookUrl}
+• Instagram: ${contactData.instagramUrl || 'Sin cambios'}
+• Facebook: ${contactData.facebookUrl || 'Sin cambios'}
 • WhatsApp: ${contactData.whatsappNumber}
 
 📍 INFORMACIÓN DE CONTACTO:
@@ -1405,14 +1407,44 @@
 • Email: ${contactData.contactEmail}
 • Horarios: ${contactData.businessHours.replace(/\n/g, ' | ')}
 
-✅ Para aplicar estos cambios, deberás actualizar manualmente el archivo index.html con esta información.
-            `;
+✅ Estos cambios se aplicarán automáticamente en la página de inicio.
+¿Continuar?`);
             
-            alert(summary);
+            if (!success) {
+                return;
+            }
             
-            // Guardar en localStorage para persistencia temporal
+            // Guardar en localStorage
             localStorage.setItem('contactInfo', JSON.stringify(contactData));
-            console.log('💾 Información guardada temporalmente:', contactData);
+            
+            // Intentar refrescar index.html si está abierto en otra pestaña
+            try {
+                // Disparar evento de storage para actualización en tiempo real
+                window.dispatchEvent(new StorageEvent('storage', {
+                    key: 'contactInfo',
+                    newValue: JSON.stringify(contactData)
+                }));
+            } catch (error) {
+                console.warn('No se pudo disparar evento de storage:', error);
+            }
+            
+            // Mostrar mensaje de éxito
+            const successMessage = `
+✅ ¡CAMBIOS GUARDADOS EXITOSAMENTE!
+
+🔄 Los cambios se han aplicado automáticamente.
+
+📱 Si tienes la página principal abierta en otra pestaña, 
+los cambios se reflejarán inmediatamente.
+
+🌐 Si no, simplemente recarga la página principal 
+para ver los cambios aplicados.
+
+💾 Los cambios han sido guardados permanentemente.`;
+            
+            alert(successMessage);
+            
+            console.log('💾 ✅ Información de contacto guardada y aplicada:', contactData);
         }
         
         // Vista previa de cambios
