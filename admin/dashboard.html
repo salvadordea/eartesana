@@ -700,7 +700,7 @@
             <a href="#" class="nav-item active" data-section="dashboard">
                 <i class="fas fa-tachometer-alt"></i> Dashboard
             </a>
-            <a href="/admin/inventario.html" class="nav-item">
+            <a href="inventario.html" class="nav-item">
                 <i class="fas fa-boxes"></i> Inventario
             </a>
             <a href="#" class="nav-item" data-section="ventas">
@@ -750,7 +750,7 @@
                     <div class="card-description">
                         Administra productos, categorías, precios, existencias y variantes. Agrega, edita, copia o elimina productos.
                     </div>
-                    <div class="card-action" onclick="window.location.href='/admin/inventario.html'">
+                    <div class="card-action" onclick="window.location.href='inventario.html'">
                         <i class="fas fa-arrow-right"></i> Administrar Inventario
                     </div>
                 </div>
@@ -1470,28 +1470,69 @@
         let currentUser = null;
 
         function checkAuth() {
-            const session = localStorage.getItem('adminSession');
-            if (!session) {
-                window.location.href = 'login.html';
-                return false;
-            }
-
             try {
-                const sessionData = JSON.parse(session);
+                const session = localStorage.getItem('adminSession');
+                
+                // Verificar si hay intento de loop infinito
+                const lastAuthCheck = localStorage.getItem('lastAuthCheck');
                 const now = Date.now();
                 
-                if (!sessionData.isLoggedIn || now > sessionData.expires) {
+                if (lastAuthCheck && (now - parseInt(lastAuthCheck)) < 1000) {
+                    console.warn('⚠️ Detectado posible loop de autenticación, deteniendo redirecciones');
                     localStorage.removeItem('adminSession');
-                    window.location.href = 'login.html';
+                    localStorage.removeItem('lastAuthCheck');
                     return false;
                 }
                 
+                localStorage.setItem('lastAuthCheck', now.toString());
+                
+                if (!session) {
+                    console.log('🔒 No hay sesión admin, redirigiendo a login');
+                    setTimeout(() => {
+                        window.location.replace('login.html');
+                    }, 100);
+                    return false;
+                }
+    
+                const sessionData = JSON.parse(session);
+                
+                if (!sessionData.isLoggedIn) {
+                    console.log('🔒 Sesión admin no válida (not logged in)');
+                    localStorage.removeItem('adminSession');
+                    setTimeout(() => {
+                        window.location.replace('login.html');
+                    }, 100);
+                    return false;
+                }
+                
+                if (sessionData.expires && now > sessionData.expires) {
+                    console.log('🔒 Sesión admin expirada');
+                    localStorage.removeItem('adminSession');
+                    setTimeout(() => {
+                        window.location.replace('login.html');
+                    }, 100);
+                    return false;
+                }
+                
+                // Sesión válida
                 currentUser = sessionData;
                 updateUserInfo();
+                console.log('✅ Autenticación admin válida:', sessionData.email || sessionData.username);
+                
+                // Limpiar contador de verificaciones
+                setTimeout(() => {
+                    localStorage.removeItem('lastAuthCheck');
+                }, 2000);
+                
                 return true;
+                
             } catch (error) {
+                console.error('❌ Error en checkAuth:', error);
                 localStorage.removeItem('adminSession');
-                window.location.href = 'login.html';
+                localStorage.removeItem('lastAuthCheck');
+                setTimeout(() => {
+                    window.location.replace('login.html');
+                }, 100);
                 return false;
             }
         }
@@ -1531,38 +1572,43 @@
         async function logout() {
             if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
                 try {
-                    // Limpiar sesión local
+                    console.log('🔄 Iniciando proceso de logout admin...');
+                    
+                    // 1. Limpiar solo la sesión de admin (no todas las sesiones)
                     localStorage.removeItem('adminSession');
                     
-                    // Si hay sesión de Supabase, cerrarla también
+                    // 2. Si hay sesión de Supabase, cerrarla también
                     if (supabase) {
-                        await supabase.auth.signOut();
+                        try {
+                            await supabase.auth.signOut();
+                            console.log('✅ Sesión de Supabase cerrada');
+                        } catch (supabaseError) {
+                            console.warn('⚠️ Error cerrando sesión de Supabase:', supabaseError);
+                        }
                     }
                     
-                    // Limpiar todos los datos de localStorage relacionados
+                    // 3. Limpiar solo claves específicas de admin (no mayoristas ni usuarios)
                     const keysToRemove = [];
                     for (let i = 0; i < localStorage.length; i++) {
                         const key = localStorage.key(i);
-                        if (key && (key.includes('admin') || key.includes('supabase'))) {
+                        if (key && key.startsWith('admin')) {
                             keysToRemove.push(key);
                         }
                     }
-                    keysToRemove.forEach(key => localStorage.removeItem(key));
+                    keysToRemove.forEach(key => {
+                        console.log(`🗑️ Removiendo clave: ${key}`);
+                        localStorage.removeItem(key);
+                    });
                     
-                    // Esperar un poco antes de redirigir para asegurar limpieza
-                    setTimeout(() => {
-                        // Verificar si estamos en producción o desarrollo
-                        const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
-                        const loginUrl = isProduction ? '/admin/login.html' : 'login.html';
-                        
-                        // Redirigir usando replace para no crear historial
-                        window.location.replace(loginUrl);
-                    }, 100);
+                    console.log('✅ Logout completado, redirigiendo...');
+                    
+                    // 4. Redirigir inmediatamente sin setTimeout para evitar loops
+                    window.location.replace('login.html');
                     
                 } catch (error) {
-                    console.error('Error durante logout:', error);
-                    // Forzar logout aunque haya error
-                    localStorage.clear();
+                    console.error('❌ Error durante logout:', error);
+                    // Forzar logout con limpieza mínima
+                    localStorage.removeItem('adminSession');
                     window.location.replace('login.html');
                 }
             }
@@ -3297,9 +3343,11 @@ para ver los cambios aplicados.
 
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.addEventListener('click', function(e) {
-                    e.preventDefault();
                     const sectionId = this.dataset.section;
+                    
+                    // Si tiene data-section, manejar como sección interna
                     if (sectionId) {
+                        e.preventDefault();
                         showSection(sectionId);
                         if (sectionId === 'inventory') {
                             setTimeout(initInventory, 100);
@@ -3311,6 +3359,8 @@ para ver los cambios aplicados.
                             setTimeout(initMayoristasPanel, 100);
                         }
                     }
+                    // Si no tiene data-section pero tiene href, permitir navegación normal
+                    // (como el caso del inventario que va a inventario.html)
                 });
             });
             

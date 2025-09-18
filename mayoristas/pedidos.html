@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pedidos - Portal Mayoristas</title>
+    <meta name="description" content="Historial y seguimiento de pedidos mayoristas en Estudio Artesana.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/mayoristas-tienda.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Dark Theme with Silver Accents */
+        :root {
+            --dark-bg: #1a1a1a;
+            --dark-surface: #2d2d2d;
+            --dark-surface-light: #3a3a3a;
+            --silver-accent: #c0c0c0;
+            --silver-light: #e8e8e8;
+            --silver-dark: #a0a0a0;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+            --border-color: #404040;
+            --shadow-dark: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --gradient-silver: linear-gradient(135deg, #c0c0c0, #a8a8a8);
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            font-family: 'Lato', sans-serif;
+        }
+
+        /* Header */
+        .header {
+            background: var(--dark-surface);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .header .nav-link {
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .header .nav-link:hover,
+        .header .nav-link.active {
+            color: var(--silver-accent);
+        }
+
+        .user-info-header {
+            color: var(--silver-accent);
+        }
+
+        .logout-btn {
+            background: var(--gradient-silver);
+            border: none;
+            color: var(--dark-bg);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(192, 192, 192, 0.3);
+        }
+
+        /* Main Content */
+        .orders-main {
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        .page-header {
+            background: var(--dark-surface);
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--silver-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Stats Cards */
+        .orders-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--dark-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-silver);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--silver-accent);
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Filters */
+        .orders-filters {
+            background: var(--dark-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .filter-input,
+        .filter-select {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--dark-surface-light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--silver-accent);
+            box-shadow: 0 0 0 3px rgba(192, 192, 192, 0.1);
+        }
+
+        .filter-btn {
+            background: var(--gradient-silver);
+            color: var(--dark-bg);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(192, 192, 192, 0.3);
+        }
+
+        /* Orders List */
+        .orders-container {
+            background: var(--dark-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .orders-list {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .order-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-item:hover {
+            background: var(--dark-surface-light);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .order-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--silver-accent);
+        }
+
+        .order-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-pending {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border: 1px solid #ffc107;
+        }
+
+        .status-processing {
+            background: rgba(23, 162, 184, 0.2);
+            color: #17a2b8;
+            border: 1px solid #17a2b8;
+        }
+
+        .status-shipped {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            border: 1px solid #28a745;
+        }
+
+        .status-delivered {
+            background: rgba(32, 201, 151, 0.2);
+            color: #20c997;
+            border: 1px solid #20c997;
+        }
+
+        .status-cancelled {
+            background: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+
+        .order-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .order-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .order-info i {
+            color: var(--silver-accent);
+            width: 16px;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-action {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-action:hover {
+            background: var(--silver-accent);
+            color: var(--dark-bg);
+            border-color: var(--silver-accent);
+        }
+
+        .btn-primary {
+            background: var(--gradient-silver);
+            color: var(--dark-bg);
+            border-color: var(--silver-accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--silver-light);
+        }
+
+        /* Empty State */
+        .empty-orders {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+
+        .empty-orders i {
+            font-size: 4rem;
+            color: var(--silver-accent);
+            margin-bottom: 1rem;
+        }
+
+        .empty-orders h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-orders p {
+            margin-bottom: 2rem;
+        }
+
+        .btn-shop {
+            background: var(--gradient-silver);
+            color: var(--dark-bg);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-shop:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(192, 192, 192, 0.3);
+            color: var(--dark-bg);
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--dark-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--silver-accent);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--silver-accent);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-surface);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .orders-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-row {
+                flex-direction: column;
+            }
+            
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .order-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .order-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.webp" alt="Estudio Artesana Logo" class="logo-img">
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link">INICIO</a></li>
+                        <li class="nav-item"><a href="tienda.html" class="nav-link">TIENDA MAYORISTAS</a></li>
+                        <li class="nav-item"><a href="pedidos.html" class="nav-link active">MIS PEDIDOS</a></li>
+                        <li class="nav-item"><a href="../pages/mayoristas/index.html" class="nav-link">PROGRAMA MAYORISTAS</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Header Icons -->
+                <div class="header-icons">
+                    <div class="user-info-header">
+                        <i class="fas fa-user-tie"></i>
+                        <span id="wholesalerName">Mayorista</span>
+                    </div>
+                    <button class="logout-btn" onclick="logoutWholesaler()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Cerrar Sesión
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="orders-main">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">📋 Mis Pedidos</h1>
+                <p class="page-subtitle">Historial y seguimiento de tus pedidos mayoristas</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Stats Cards -->
+            <div class="orders-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stat-number" id="totalOrders">0</div>
+                    <div class="stat-label">Total Pedidos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-number" id="pendingOrders">0</div>
+                    <div class="stat-label">En Proceso</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="stat-number" id="shippedOrders">0</div>
+                    <div class="stat-label">Enviados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-number" id="totalSpent">$0</div>
+                    <div class="stat-label">Total Gastado</div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="orders-filters">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label class="filter-label">Estado del Pedido</label>
+                        <select class="filter-select" id="statusFilter">
+                            <option value="">Todos los estados</option>
+                            <option value="pending">Pendiente</option>
+                            <option value="processing">En Proceso</option>
+                            <option value="shipped">Enviado</option>
+                            <option value="delivered">Entregado</option>
+                            <option value="cancelled">Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Fecha Desde</label>
+                        <input type="date" class="filter-input" id="dateFromFilter">
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Fecha Hasta</label>
+                        <input type="date" class="filter-input" id="dateToFilter">
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">&nbsp;</label>
+                        <button class="filter-btn" onclick="applyFilters()">
+                            <i class="fas fa-filter"></i> Filtrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Container -->
+            <div class="orders-container">
+                <div class="orders-list" id="ordersList">
+                    <!-- Orders will be loaded here -->
+                    <div class="empty-orders" id="emptyOrders">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>No tienes pedidos aún</h3>
+                        <p>Cuando realices tu primera compra, aparecerá aquí.</p>
+                        <a href="tienda.html" class="btn-shop">
+                            <i class="fas fa-shopping-cart"></i>
+                            Ir a la Tienda
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Order Details Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Detalles del Pedido</h2>
+                <button class="modal-close" onclick="closeOrderModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="orderModalBody">
+                <!-- Order details will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-action" onclick="closeOrderModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Mayoristas</h4>
+                    <ul class="footer-links">
+                        <li><a href="tienda.html">Tienda Mayoristas</a></li>
+                        <li><a href="pedidos.html">Mis Pedidos</a></li>
+                        <li><a href="../pages/mayoristas/index.html">Programa Mayoristas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto Mayoristas</h4>
+                    <p>Email: mayoristas@estudioartesana.com</p>
+                    <p>Teléfono: +52 555 123 4567</p>
+                    <p>WhatsApp: +52 123 456 7890</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Estudio Artesana - Portal Mayoristas. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/config.js"></script>
+    <script>
+        let currentUser = null;
+        let allOrders = [];
+        let filteredOrders = [];
+
+        // Check wholesale authentication
+        function checkWholesaleAuth() {
+            const wholesaleSession = localStorage.getItem('wholesaleSession');
+            if (!wholesaleSession) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            
+            try {
+                const sessionData = JSON.parse(wholesaleSession);
+                const now = Date.now();
+                
+                if (!sessionData.isLoggedIn || now > sessionData.expires) {
+                    localStorage.removeItem('wholesaleSession');
+                    window.location.href = 'login.html';
+                    return false;
+                }
+                
+                currentUser = sessionData;
+                updateUserInfo();
+                return true;
+            } catch (error) {
+                localStorage.removeItem('wholesaleSession');
+                window.location.href = 'login.html';
+                return false;
+            }
+        }
+
+        // Update user info
+        function updateUserInfo() {
+            if (currentUser) {
+                const userNameElement = document.getElementById('wholesalerName');
+                if (userNameElement) {
+                    userNameElement.textContent = currentUser.company || currentUser.name || 'Mayorista';
+                }
+            }
+        }
+
+        // Load orders
+        async function loadOrders() {
+            try {
+                // Sample orders for demonstration
+                allOrders = [
+                    {
+                        id: 'WS-2024-0001',
+                        date: '2024-01-15',
+                        status: 'delivered',
+                        items: 25,
+                        total: 8750.00,
+                        paymentMethod: 'Crédito 30 días',
+                        shippingAddress: 'Av. Reforma 123, CDMX',
+                        trackingNumber: 'TRK123456',
+                        products: [
+                            { name: 'Bolsa Artesanal Premium', quantity: 15, price: 360 },
+                            { name: 'Cuaderno de Cuero Natural', quantity: 10, price: 224 }
+                        ]
+                    },
+                    {
+                        id: 'WS-2024-0002',
+                        date: '2024-01-20',
+                        status: 'shipped',
+                        items: 30,
+                        total: 12600.00,
+                        paymentMethod: 'Transferencia',
+                        shippingAddress: 'Calle Principal 456, Guadalajara',
+                        trackingNumber: 'TRK789012',
+                        products: [
+                            { name: 'Collar de Plata Oxidada', quantity: 20, price: 256 },
+                            { name: 'Anillo Artesanal', quantity: 10, price: 384 }
+                        ]
+                    },
+                    {
+                        id: 'WS-2024-0003',
+                        date: '2024-01-22',
+                        status: 'processing',
+                        items: 40,
+                        total: 15200.00,
+                        paymentMethod: 'Crédito 30 días',
+                        shippingAddress: 'Boulevard Norte 789, Monterrey',
+                        trackingNumber: null,
+                        products: [
+                            { name: 'Pulsera de Cuero', quantity: 25, price: 192 },
+                            { name: 'Porta-llaves Artesanal', quantity: 15, price: 128 }
+                        ]
+                    }
+                ];
+
+                filteredOrders = [...allOrders];
+                renderOrders();
+                updateStats();
+                
+            } catch (error) {
+                console.error('Error loading orders:', error);
+                showEmptyOrders();
+            }
+        }
+
+        // Render orders
+        function renderOrders() {
+            const ordersList = document.getElementById('ordersList');
+            const emptyOrders = document.getElementById('emptyOrders');
+            
+            if (filteredOrders.length === 0) {
+                emptyOrders.style.display = 'block';
+                ordersList.style.display = 'none';
+                return;
+            }
+
+            emptyOrders.style.display = 'none';
+            ordersList.style.display = 'block';
+            
+            ordersList.innerHTML = filteredOrders.map(order => `
+                <div class="order-item">
+                    <div class="order-header">
+                        <div class="order-number">#${order.id}</div>
+                        <div class="order-status status-${order.status}">
+                            ${getStatusText(order.status)}
+                        </div>
+                    </div>
+                    <div class="order-details">
+                        <div class="order-info">
+                            <i class="fas fa-calendar"></i>
+                            <span>${formatDate(order.date)}</span>
+                        </div>
+                        <div class="order-info">
+                            <i class="fas fa-boxes"></i>
+                            <span>${order.items} productos</span>
+                        </div>
+                        <div class="order-info">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>$${order.total.toFixed(2)}</span>
+                        </div>
+                        <div class="order-info">
+                            <i class="fas fa-credit-card"></i>
+                            <span>${order.paymentMethod}</span>
+                        </div>
+                        ${order.trackingNumber ? `
+                            <div class="order-info">
+                                <i class="fas fa-truck"></i>
+                                <span>${order.trackingNumber}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="order-actions">
+                        <button class="btn-action btn-primary" onclick="viewOrderDetails('${order.id}')">
+                            <i class="fas fa-eye"></i> Ver Detalles
+                        </button>
+                        ${order.trackingNumber ? `
+                            <button class="btn-action" onclick="trackOrder('${order.trackingNumber}')">
+                                <i class="fas fa-truck"></i> Rastrear
+                            </button>
+                        ` : ''}
+                        ${order.status === 'delivered' ? `
+                            <button class="btn-action" onclick="reorderItems('${order.id}')">
+                                <i class="fas fa-redo"></i> Reordenar
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update stats
+        function updateStats() {
+            const totalOrders = allOrders.length;
+            const pendingOrders = allOrders.filter(o => ['pending', 'processing'].includes(o.status)).length;
+            const shippedOrders = allOrders.filter(o => ['shipped', 'delivered'].includes(o.status)).length;
+            const totalSpent = allOrders.reduce((sum, order) => sum + order.total, 0);
+
+            document.getElementById('totalOrders').textContent = totalOrders;
+            document.getElementById('pendingOrders').textContent = pendingOrders;
+            document.getElementById('shippedOrders').textContent = shippedOrders;
+            document.getElementById('totalSpent').textContent = `$${totalSpent.toFixed(0)}`;
+        }
+
+        // Get status text
+        function getStatusText(status) {
+            const statusMap = {
+                'pending': 'Pendiente',
+                'processing': 'En Proceso',
+                'shipped': 'Enviado',
+                'delivered': 'Entregado',
+                'cancelled': 'Cancelado'
+            };
+            return statusMap[status] || status;
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('es-MX', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Apply filters
+        function applyFilters() {
+            const statusFilter = document.getElementById('statusFilter').value;
+            const dateFromFilter = document.getElementById('dateFromFilter').value;
+            const dateToFilter = document.getElementById('dateToFilter').value;
+
+            filteredOrders = allOrders.filter(order => {
+                let matches = true;
+
+                if (statusFilter && order.status !== statusFilter) {
+                    matches = false;
+                }
+
+                if (dateFromFilter && order.date < dateFromFilter) {
+                    matches = false;
+                }
+
+                if (dateToFilter && order.date > dateToFilter) {
+                    matches = false;
+                }
+
+                return matches;
+            });
+
+            renderOrders();
+        }
+
+        // View order details
+        function viewOrderDetails(orderId) {
+            const order = allOrders.find(o => o.id === orderId);
+            if (!order) return;
+
+            const modalBody = document.getElementById('orderModalBody');
+            modalBody.innerHTML = `
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="color: var(--silver-accent); margin-bottom: 1rem;">Pedido #${order.id}</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                        <div>
+                            <strong style="color: var(--text-secondary);">Estado:</strong><br>
+                            <span class="order-status status-${order.status}">${getStatusText(order.status)}</span>
+                        </div>
+                        <div>
+                            <strong style="color: var(--text-secondary);">Fecha:</strong><br>
+                            ${formatDate(order.date)}
+                        </div>
+                        <div>
+                            <strong style="color: var(--text-secondary);">Total:</strong><br>
+                            $${order.total.toFixed(2)}
+                        </div>
+                        <div>
+                            <strong style="color: var(--text-secondary);">Método de Pago:</strong><br>
+                            ${order.paymentMethod}
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <h4 style="color: var(--silver-accent); margin-bottom: 1rem;">Dirección de Envío</h4>
+                    <p>${order.shippingAddress}</p>
+                    ${order.trackingNumber ? `<p><strong>Número de Rastreo:</strong> ${order.trackingNumber}</p>` : ''}
+                </div>
+
+                <div>
+                    <h4 style="color: var(--silver-accent); margin-bottom: 1rem;">Productos (${order.items} items)</h4>
+                    <div style="max-height: 300px; overflow-y: auto;">
+                        ${order.products.map(product => `
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 0.5rem;">
+                                <div>
+                                    <div style="font-weight: 600;">${product.name}</div>
+                                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Cantidad: ${product.quantity}</div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-weight: 600;">$${product.price.toFixed(2)}</div>
+                                    <div style="color: var(--text-secondary); font-size: 0.9rem;">c/u</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('orderModal').classList.add('show');
+        }
+
+        // Close order modal
+        function closeOrderModal() {
+            document.getElementById('orderModal').classList.remove('show');
+        }
+
+        // Track order
+        function trackOrder(trackingNumber) {
+            alert(`Rastreando pedido con número: ${trackingNumber}\n\nEn un sistema real, esto abriría una página de rastreo.`);
+        }
+
+        // Reorder items
+        function reorderItems(orderId) {
+            if (confirm('¿Deseas agregar estos productos a tu carrito para hacer un nuevo pedido?')) {
+                // In a real system, this would add the items to cart
+                alert('Productos agregados al carrito. Serás redirigido a la tienda.');
+                window.location.href = 'tienda.html';
+            }
+        }
+
+        // Show empty orders
+        function showEmptyOrders() {
+            document.getElementById('emptyOrders').style.display = 'block';
+            document.getElementById('ordersList').style.display = 'none';
+        }
+
+        // Logout wholesaler
+        function logoutWholesaler() {
+            if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                localStorage.removeItem('wholesaleSession');
+                localStorage.removeItem('wholesaleCart');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📋 Página de pedidos mayoristas inicializada');
+            
+            if (!checkWholesaleAuth()) return;
+            
+            loadOrders();
+
+            // Close modal when clicking outside
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

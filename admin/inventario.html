@@ -554,10 +554,232 @@
             justify-content: center;
         }
 
-        /* Responsive */
+        /* Mobile Card View */
+        .mobile-view {
+            display: none;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
+        }
+
+        .product-card-header {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .product-card-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .product-card-info {
+            flex: 1;
+        }
+
+        .product-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0 0 5px 0;
+        }
+
+        .product-card-category {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .product-card-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .product-card-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .card-detail-item {
+            text-align: center;
+        }
+
+        .card-detail-label {
+            font-size: 12px;
+            color: #6c757d;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .card-detail-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .card-stock-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .product-card-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .product-card-actions .btn {
+            flex: 1;
+            min-width: 100px;
+            justify-content: center;
+            font-size: 12px;
+            padding: 8px 12px;
+        }
+
+        .mobile-variants {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .mobile-variants-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .mobile-variants-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .mobile-variant-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-left: 3px solid #C0C0C0;
+        }
+
+        .mobile-variant-name {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+
+        .mobile-variant-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .mobile-variant-stock {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mobile-variant-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        /* Mobile Toggle Button */
+        .mobile-toggle {
+            display: none;
+            background: var(--gradient-silver, #C0C0C0);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .mobile-toggle i {
+            margin-right: 8px;
+        }
+
+        /* View Toggle */
+        .view-toggle {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .view-btn {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .view-btn.active {
+            background: var(--gradient-silver, #C0C0C0);
+            color: #000;
+            border-color: #C0C0C0;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .filters-row {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+            
+            .panel-stats {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .products-table th,
+            .products-table td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+        }
+
         @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
             .filters-row {
                 grid-template-columns: 1fr;
+                gap: 15px;
             }
             
             .panel-stats {
@@ -565,18 +787,77 @@
                 gap: 15px;
             }
             
-            .products-table {
-                font-size: 14px;
+            .panel-title {
+                font-size: 1.5rem;
             }
-
-            .action-buttons {
+            
+            .action-bar {
                 flex-direction: column;
-                gap: 3px;
+                gap: 10px;
             }
+            
+            .view-toggle {
+                display: flex;
+            }
+            
+            /* Hide table on mobile by default */
+            .desktop-view {
+                display: none;
+            }
+            
+            .mobile-view {
+                display: block;
+            }
+        }
 
-            .product-image {
-                width: 40px;
-                height: 40px;
+        @media (max-width: 480px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .product-card {
+                padding: 15px;
+            }
+            
+            .product-card-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .product-card-image {
+                width: 100px;
+                height: 100px;
+                margin: 0 auto;
+            }
+            
+            .product-card-details {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .product-card-actions {
+                flex-direction: column;
+            }
+            
+            .product-card-actions .btn {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+
+        /* Hide mobile elements on desktop */
+        @media (min-width: 769px) {
+            .mobile-toggle,
+            .view-toggle {
+                display: none;
+            }
+            
+            .desktop-view {
+                display: block;
+            }
+            
+            .mobile-view {
+                display: none;
             }
         }
 
@@ -763,12 +1044,22 @@
             <div class="products-header">
                 <h2 class="products-title">Inventario de Productos</h2>
                 <div class="action-buttons">
-            <button class="btn btn-small btn-info" onclick="exportInventory()">
-                <i class="fas fa-download"></i> Exportar CSV
-            </button>
-            <button class="btn btn-small btn-success" onclick="showImportCSVModal()">
-                <i class="fas fa-upload"></i> Importar CSV
-            </button>
+                    <!-- View Toggle for Mobile -->
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="table" onclick="toggleView('table')">
+                            <i class="fas fa-table"></i> Tabla
+                        </button>
+                        <button class="view-btn" data-view="cards" onclick="toggleView('cards')">
+                            <i class="fas fa-th-large"></i> Tarjetas
+                        </button>
+                    </div>
+                    
+                    <button class="btn btn-small btn-info" onclick="exportInventory()">
+                        <i class="fas fa-download"></i> Exportar CSV
+                    </button>
+                    <button class="btn btn-small btn-success" onclick="showImportCSVModal()">
+                        <i class="fas fa-upload"></i> Importar CSV
+                    </button>
                 </div>
             </div>
 
@@ -779,22 +1070,32 @@
 
             <div id="errorContainer"></div>
 
-            <table class="products-table" id="productsTable" style="display: none;">
-                <thead>
-                    <tr>
-                        <th><input type="checkbox" id="selectAll" onchange="toggleSelectAll()"></th>
-                        <th></th>
-                        <th>Producto</th>
-                        <th>Categoría</th>
-                        <th>Precio</th>
-                        <th>Stock Total</th>
-                        <th>Imagen</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="productsTableBody">
-                </tbody>
-            </table>
+            <!-- Desktop Table View -->
+            <div class="desktop-view" id="desktopView">
+                <table class="products-table" id="productsTable" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll" onchange="toggleSelectAll()"></th>
+                            <th></th>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Stock Total</th>
+                            <th>Imagen</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile Cards View -->
+            <div class="mobile-view" id="mobileView" style="display: none;">
+                <div id="productsCardsContainer">
+                    <!-- Cards will be inserted here -->
+                </div>
+            </div>
         </div>
     </div>
 
@@ -2668,9 +2969,232 @@
             }
         }
 
+        // ===============================================
+        // MOBILE VIEW MANAGEMENT
+        // ===============================================
+        
+        function toggleView(viewType) {
+            const desktopView = document.getElementById('desktopView');
+            const mobileView = document.getElementById('mobileView');
+            const tableBtn = document.querySelector('[data-view="table"]');
+            const cardsBtn = document.querySelector('[data-view="cards"]');
+            
+            if (viewType === 'table') {
+                // Mostrar vista de tabla
+                desktopView.style.display = 'block';
+                mobileView.style.display = 'none';
+                tableBtn.classList.add('active');
+                cardsBtn.classList.remove('active');
+            } else {
+                // Mostrar vista de tarjetas
+                desktopView.style.display = 'none';
+                mobileView.style.display = 'block';
+                cardsBtn.classList.add('active');
+                tableBtn.classList.remove('active');
+                
+                // Renderizar tarjetas si aún no se han renderizado
+                renderProductCards();
+            }
+        }
+        
+        function renderProductCards() {
+            const container = document.getElementById('productsCardsContainer');
+            container.innerHTML = '';
+            
+            if (filteredProducts.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #6c757d;">
+                        <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                        <p>No hay productos que coincidan con los filtros</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredProducts.forEach(product => {
+                const card = createProductCard(product);
+                container.appendChild(card);
+            });
+        }
+        
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            
+            const hasVariants = product.variants && product.variants.length > 0;
+            const stockStatus = getStockStatus(product.total_stock || 0);
+            const categories = product.categories.map(c => c.name).join(', ') || 'Sin categoría';
+            
+            // Obtener URL de imagen
+            let imageUrl = '../assets/images/placeholder-product.jpg';
+            if (product.main_image_url) {
+                imageUrl = product.main_image_url;
+            }
+            
+            card.innerHTML = `
+                <div class="product-card-header">
+                    <div class="product-card-image">
+                        <img src="${imageUrl}" alt="${product.name}" class="product-thumb" 
+                             onerror="this.src='../assets/images/placeholder-product.jpg'">
+                    </div>
+                    <div class="product-card-info">
+                        <h3 class="product-card-title">${product.name}</h3>
+                        <p class="product-card-category">${categories}</p>
+                        <div class="product-card-price">$${parseFloat(product.price || 0).toFixed(2)}</div>
+                    </div>
+                </div>
+                
+                <div class="product-card-details">
+                    <div class="card-detail-item">
+                        <div class="card-detail-label">Stock Total</div>
+                        <div class="card-detail-value">
+                            <span class="card-stock-badge stock-${stockStatus.class}">${product.total_stock || 0}</span>
+                        </div>
+                    </div>
+                    <div class="card-detail-item">
+                        <div class="card-detail-label">Variantes</div>
+                        <div class="card-detail-value">${hasVariants ? product.variants.length : 'Sin variantes'}</div>
+                    </div>
+                </div>
+                
+                <div class="product-card-actions">
+                    <button class="btn btn-small btn-primary" onclick="showEditProductModal(${product.id})" 
+                            title="Editar Producto">
+                        <i class="fas fa-edit"></i> Editar
+                    </button>
+                    ${hasVariants ? 
+                        `<button class="btn btn-small btn-info" onclick="showAddVariantModal(${product.id})" 
+                                 title="Agregar Variante">
+                            <i class="fas fa-plus"></i> Variante
+                        </button>` : 
+                        `<button class="btn btn-small btn-info" onclick="showAddVariantModal(${product.id})" 
+                                 title="Convertir a Variante">
+                            <i class="fas fa-palette"></i> Variante
+                        </button>`
+                    }
+                    <button class="btn btn-small btn-warning" onclick="duplicateProduct(${product.id})" 
+                            title="Duplicar">
+                        <i class="fas fa-copy"></i> Duplicar
+                    </button>
+                    <button class="btn btn-small btn-danger" onclick="deleteProduct(${product.id})" 
+                            title="Eliminar">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                </div>
+                
+                ${hasVariants ? `
+                <div class="mobile-variants" id="mobileVariants-${product.id}" style="display: none;">
+                    <div class="mobile-variants-header">
+                        <div class="mobile-variants-title">Variantes (${product.variants.length})</div>
+                        <button class="btn btn-small btn-primary" onclick="toggleMobileVariants(${product.id})">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="mobile-variants-list">
+                        ${product.variants.map(variant => `
+                            <div class="mobile-variant-item">
+                                <div class="mobile-variant-name">${variant.name || variant.variant_name || 'Sin nombre'}</div>
+                                <div class="mobile-variant-details">
+                                    <div class="mobile-variant-info">
+                                        ${variant.sku ? `<span class="variant-sku">${variant.sku}</span>` : ''}
+                                    </div>
+                                    <div class="mobile-variant-stock">
+                                        <input type="number" class="variant-stock-input" value="${variant.stock || 0}" min="0"
+                                               onchange="updateVariantStock(${product.id}, '${variant.id}', this.value)">
+                                        <div class="mobile-variant-actions">
+                                            <button class="btn btn-small btn-warning" onclick="showEditVariantModal(${product.id}, '${variant.id}')" 
+                                                    title="Editar Variante">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-small btn-danger" onclick="deleteVariant(${product.id}, '${variant.id}')" 
+                                                    title="Eliminar Variante">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+                
+                <!-- Agregar botón para mostrar/ocultar variantes si las tiene -->
+                ${hasVariants ? `
+                <div style="margin-top: 15px; text-align: center;">
+                    <button class="btn btn-small" onclick="toggleMobileVariants(${product.id})" 
+                            style="background: #f8f9fa; border: 1px solid #dee2e6; width: 100%;">
+                        <i class="fas fa-chevron-down" id="chevron-${product.id}"></i> 
+                        Ver Variantes (${product.variants.length})
+                    </button>
+                </div>
+                ` : ''}
+            `;
+            
+            return card;
+        }
+        
+        function toggleMobileVariants(productId) {
+            const variantsSection = document.getElementById(`mobileVariants-${productId}`);
+            const chevron = document.getElementById(`chevron-${productId}`);
+            const button = chevron.parentElement;
+            
+            if (variantsSection.style.display === 'none' || variantsSection.style.display === '') {
+                variantsSection.style.display = 'block';
+                chevron.className = 'fas fa-chevron-up';
+                button.innerHTML = chevron.outerHTML + ` Ocultar Variantes`;
+            } else {
+                variantsSection.style.display = 'none';
+                chevron.className = 'fas fa-chevron-down';
+                const product = currentProducts.find(p => p.id === productId);
+                const variantCount = product ? product.variants.length : 0;
+                button.innerHTML = chevron.outerHTML + ` Ver Variantes (${variantCount})`;
+            }
+        }
+        
+        // Modificar renderProductsTable para también actualizar cards
+        const originalRenderProductsTable = renderProductsTable;
+        renderProductsTable = function() {
+            originalRenderProductsTable();
+            
+            // Si estamos en vista móvil de cards, también actualizar las cards
+            const mobileView = document.getElementById('mobileView');
+            if (mobileView && mobileView.style.display !== 'none') {
+                renderProductCards();
+            }
+        };
+        
+        // Detectar cambio de tamaño de ventana para ajustar vista automáticamente
+        window.addEventListener('resize', function() {
+            const width = window.innerWidth;
+            const desktopView = document.getElementById('desktopView');
+            const mobileView = document.getElementById('mobileView');
+            const viewToggle = document.querySelector('.view-toggle');
+            
+            if (width <= 768) {
+                // Modo móvil - mostrar toggle y cards por defecto
+                if (viewToggle) viewToggle.style.display = 'flex';
+                if (desktopView.style.display !== 'none') {
+                    toggleView('cards');
+                }
+            } else {
+                // Modo desktop - ocultar toggle y mostrar tabla
+                if (viewToggle) viewToggle.style.display = 'none';
+                if (mobileView.style.display !== 'none') {
+                    toggleView('table');
+                }
+            }
+        });
+        
+        // Disparar resize al cargar para establecer vista inicial correcta
+        window.addEventListener('load', function() {
+            window.dispatchEvent(new Event('resize'));
+        });
+
         // Logging para debug
         console.log('🔧 Panel de inventario completo cargado');
         console.log('📡 Supabase URL:', SUPABASE_URL);
+        console.log('📱 Sistema de vistas móviles habilitado');
     </script>
 </body>
 </html>

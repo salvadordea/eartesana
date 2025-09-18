@@ -542,6 +542,9 @@
 
                 console.log('Order processed:', orderData);
 
+                // Send email notification to admin
+                await sendOrderNotificationEmail(orderData);
+
                 // Show success modal
                 showOrderConfirmation(orderData);
 
@@ -557,6 +560,130 @@
                 processBtn.disabled = false;
                 processBtn.innerHTML = originalText;
             }
+        }
+
+        // Send order notification email
+        async function sendOrderNotificationEmail(orderData) {
+            try {
+                const emailData = {
+                    to: 'admin@estudioartesana.com',
+                    subject: `Nuevo Pedido Mayorista #${orderData.orderNumber}`,
+                    orderNumber: orderData.orderNumber,
+                    customer: orderData.customer,
+                    items: orderData.items,
+                    totals: {
+                        subtotal: orderData.subtotal,
+                        discount: orderData.discount,
+                        tax: orderData.tax,
+                        total: orderData.total
+                    },
+                    shipping: orderData.shipping,
+                    billing: orderData.billing,
+                    paymentMethod: orderData.paymentMethod,
+                    orderNotes: orderData.orderNotes,
+                    orderDate: orderData.orderDate
+                };
+
+                console.log('📧 Enviando notificación de pedido:', emailData);
+
+                const response = await fetch('/api/sendOrderEmail', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(emailData)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                console.log('✅ Email enviado exitosamente:', result);
+                
+                // Mostrar notificación de éxito
+                showNotification('📧 Notificación de pedido enviada exitosamente', 'success');
+                
+            } catch (error) {
+                console.error('❌ Error enviando email:', error);
+                
+                // Mostrar notificación de error pero no bloquear el proceso
+                showNotification('⚠️ El pedido se procesó correctamente, pero hubo un problema enviando la notificación por email', 'warning');
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            // Agregar estilos si no existen
+            if (!document.querySelector('#notification-styles')) {
+                const styles = document.createElement('style');
+                styles.id = 'notification-styles';
+                styles.textContent = `
+                    .notification {
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: #fff;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                        z-index: 10000;
+                        min-width: 300px;
+                        max-width: 500px;
+                        animation: slideIn 0.3s ease;
+                    }
+                    .notification.success {
+                        border-left: 4px solid #28a745;
+                    }
+                    .notification.warning {
+                        border-left: 4px solid #ffc107;
+                    }
+                    .notification.error {
+                        border-left: 4px solid #dc3545;
+                    }
+                    .notification-content {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 15px;
+                        font-size: 14px;
+                    }
+                    .notification-content button {
+                        background: none;
+                        border: none;
+                        font-size: 16px;
+                        cursor: pointer;
+                        color: #666;
+                        padding: 0;
+                        margin-left: 10px;
+                    }
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                `;
+                document.head.appendChild(styles);
+            }
+            
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
         }
 
         // Show order confirmation

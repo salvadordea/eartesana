@@ -1,0 +1,48 @@
+{
+  "name": "estudio-artesana-email-service",
+  "version": "1.0.0",
+  "description": "Servicio de notificaciones por email para pedidos mayoristas de Estudio Artesana",
+  "main": "email-service.js",
+  "scripts": {
+    "start": "node email-service.js",
+    "dev": "nodemon email-service.js",
+    "test": "jest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "keywords": [
+    "email",
+    "notifications",
+    "wholesale",
+    "ecommerce",
+    "artesania"
+  ],
+  "author": "Estudio Artesana",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.7",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "jest": "^29.7.0",
+    "eslint": "^8.54.0",
+    "supertest": "^6.3.3"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/estudio-artesana/email-service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/estudio-artesana/email-service/issues"
+  },
+  "homepage": "https://github.com/estudio-artesana/email-service#readme"
+}

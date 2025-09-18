@@ -57,7 +57,7 @@
                         <li class="nav-item"><a href="../sobre-nosotros/index.html" class="nav-link">SOBRE NOSOTROS</a></li>
                         <li class="nav-item"><a href="index.html" class="nav-link active">MAYORISTAS</a></li>
                         <li class="nav-item"><a href="#contacto" class="nav-link">CONTACTO</a></li>
-                        <li class="nav-item"><a href="../../index.html#registro" class="nav-link">REGISTRO DE CLIENTES</a></li>
+                        <li class="nav-item"><a href="../../micuenta.html" class="nav-link">MI CUENTA</a></li>
                     </ul>
                 </nav>
                 
@@ -111,8 +111,64 @@
                         </div>
                     </div>
                     
-                    <div class="hero-image">
-                        <img src="../../assets/images/mayoristas.jpg" alt="Ventas Mayoristas - Estudio Artesana" class="hero-img">
+                    <!-- Wholesale Login Form -->
+                    <div class="wholesale-login-container">
+                        <div class="login-card">
+                            <div class="login-header">
+                                <div class="login-icon">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <h3 class="login-title">Acceso Mayoristas</h3>
+                                <p class="login-subtitle">Ingresa a tu cuenta para acceder a precios especiales</p>
+                            </div>
+                            
+                            <form class="login-form" id="wholesaleLoginForm">
+                                <div class="form-group">
+                                    <label for="wholesaleEmail" class="form-label">Correo Electrónico</label>
+                                    <div class="input-group">
+                                        <i class="fas fa-envelope input-icon"></i>
+                                        <input type="email" id="wholesaleEmail" name="email" class="form-control" placeholder="tu@empresa.com" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="wholesalePassword" class="form-label">Contraseña</label>
+                                    <div class="input-group password-toggle">
+                                        <i class="fas fa-lock input-icon"></i>
+                                        <input type="password" id="wholesalePassword" name="password" class="form-control" placeholder="••••••••" required>
+                                        <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('wholesalePassword')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-options">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="rememberMe">
+                                        <span class="checkmark"></span>
+                                        Recordar sesión
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="login-btn">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    Iniciar Sesión
+                                </button>
+                                
+                                <div class="login-footer">
+                                    <p class="forgot-password">
+                                        <a href="#" onclick="showForgotPassword()">¿Olvidaste tu contraseña?</a>
+                                    </p>
+                                    <div class="register-link">
+                                        <p>¿No tienes cuenta mayorista?</p>
+                                        <a href="#solicitar-info" class="register-btn">Solicitar Acceso</a>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                            <!-- Alert Messages -->
+                            <div id="loginAlert" class="login-alert" style="display: none;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -166,18 +222,6 @@
                         </ul>
                     </div>
                     
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                        <h3 class="benefit-title">Términos Flexibles</h3>
-                        <p class="benefit-description">Condiciones de pago adaptadas a tu negocio</p>
-                        <ul class="benefit-list">
-                            <li>Crédito hasta 30 días</li>
-                            <li>Pedidos recurrentes programados</li>
-                            <li>Facturación empresarial</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </section>
@@ -223,8 +267,68 @@
                         </div>
                     </div>
                     
-                    <div class="requirements-image">
-                        <img src="../../assets/images/mayoristas-requisitos.jpg" alt="Requisitos Mayoristas" class="requirements-img">
+                    <!-- Solicitud de Información Form -->
+                    <div class="requirements-form">
+                        <div class="form-card">
+                            <div class="form-header">
+                                <h3>Solicitar Información</h3>
+                                <p>Llena este formulario y nos contactaremos contigo</p>
+                            </div>
+                            
+                            <form class="info-request-form" id="infoRequestForm">
+                                <div class="form-group">
+                                    <label for="infoNombreEmpresa">Nombre de la empresa / contacto *</label>
+                                    <input type="text" id="infoNombreEmpresa" name="nombre_empresa" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="infoEmail">Correo electrónico</label>
+                                    <input type="email" id="infoEmail" name="email">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="infoTelefono">Teléfono *</label>
+                                    <input type="tel" id="infoTelefono" name="telefono" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="infoTipoNegocio">Tipo de negocio *</label>
+                                    <select id="infoTipoNegocio" name="tipo_negocio" required>
+                                        <option value="">Selecciona una opción</option>
+                                        <option value="tienda-fisica">Tienda Física</option>
+                                        <option value="tienda-online">Tienda Online</option>
+                                        <option value="boutique">Boutique</option>
+                                        <option value="galeria">Galería de Arte</option>
+                                        <option value="distribuidor">Distribuidor</option>
+                                        <option value="restaurante">Restaurante</option>
+                                        <option value="hotel">Hotel</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="infoVolumenCompra">Volumen de Compra Estimado Mensual *</label>
+                                    <select id="infoVolumenCompra" name="volumen_compra" required>
+                                        <option value="">Selecciona un rango</option>
+                                        <option value="10-25">10-25 piezas</option>
+                                        <option value="25-50">25-50 piezas</option>
+                                        <option value="50-100">50-100 piezas</option>
+                                        <option value="100-250">100-250 piezas</option>
+                                        <option value="250+">Más de 250 piezas</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="infoMensaje">Mensaje Adicional</label>
+                                    <textarea id="infoMensaje" name="mensaje" rows="4" placeholder="Cuéntanos sobre tu negocio y necesidades específicas..."></textarea>
+                                </div>
+                                
+                                <button type="submit" class="form-submit-btn">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Solicitar Información
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -274,144 +378,7 @@
             </div>
         </section>
 
-        <!-- Contact Form Section -->
-        <section class="contact-form-section" id="solicitar-info">
-            <div class="container">
-                <div class="form-content">
-                    <div class="form-header">
-                        <h2 class="section-title">Solicitar Información</h2>
-                        <p class="section-subtitle">Completa el siguiente formulario y nos pondremos en contacto contigo</p>
-                    </div>
-                    
-                    <form class="mayorista-form" id="mayoristaForm">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="empresaNombre">Nombre de la Empresa *</label>
-                                <input type="text" id="empresaNombre" name="empresa_nombre" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="contactoNombre">Nombre del Contacto *</label>
-                                <input type="text" id="contactoNombre" name="contacto_nombre" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Correo Electrónico *</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="telefono">Teléfono *</label>
-                                <input type="tel" id="telefono" name="telefono" required>
-                            </div>
-                            
-                            <div class="form-group full-width">
-                                <label for="direccion">Dirección de la Empresa *</label>
-                                <input type="text" id="direccion" name="direccion" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="rfc">RFC *</label>
-                                <input type="text" id="rfc" name="rfc" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="tipoNegocio">Tipo de Negocio *</label>
-                                <select id="tipoNegocio" name="tipo_negocio" required>
-                                    <option value="">Selecciona una opción</option>
-                                    <option value="tienda-fisica">Tienda Física</option>
-                                    <option value="tienda-online">Tienda Online</option>
-                                    <option value="boutique">Boutique</option>
-                                    <option value="galeria">Galería de Arte</option>
-                                    <option value="distribuidor">Distribuidor</option>
-                                    <option value="otro">Otro</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group full-width">
-                                <label for="experiencia">Experiencia Previa con Productos Artesanales</label>
-                                <textarea id="experiencia" name="experiencia" rows="3" placeholder="Describe tu experiencia con productos similares..."></textarea>
-                            </div>
-                            
-                            <div class="form-group full-width">
-                                <label for="volumenEstimado">Volumen de Compra Estimado Mensual *</label>
-                                <select id="volumenEstimado" name="volumen_estimado" required>
-                                    <option value="">Selecciona un rango</option>
-                                    <option value="10-25">10-25 piezas</option>
-                                    <option value="25-50">25-50 piezas</option>
-                                    <option value="50-100">50-100 piezas</option>
-                                    <option value="100+">Más de 100 piezas</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group full-width">
-                                <label for="mensaje">Mensaje Adicional</label>
-                                <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos más sobre tu negocio y tus necesidades..."></textarea>
-                            </div>
-                        </div>
-                        
-                        <div class="form-actions">
-                            <button type="submit" class="submit-btn">
-                                <i class="fas fa-paper-plane"></i>
-                                Solicitar Información
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
 
-        <!-- FAQ Section -->
-        <section class="faq-section">
-            <div class="container">
-                <div class="section-header centered">
-                    <h2 class="section-title">Preguntas Frecuentes</h2>
-                    <p class="section-subtitle">Resolvemos las dudas más comunes sobre nuestro programa de mayoristas</p>
-                </div>
-                
-                <div class="faq-grid">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h3>¿Cuál es el pedido mínimo?</h3>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>El pedido mínimo es de 10 piezas por producto. No hay mínimo de monto total, pero recomendamos pedidos de al menos $5,000 MXN para optimizar los costos de envío.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h3>¿Qué documentos necesito?</h3>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Necesitas RFC activo, comprobante de domicilio fiscal, identificación oficial del representante legal, y constancia de situación fiscal actualizada.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h3>¿Cuánto tiempo toma la aprobación?</h3>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>El proceso de evaluación toma de 2 a 3 días hábiles. Una vez aprobado, recibirás tu código de mayorista y podrás realizar pedidos inmediatamente.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h3>¿Ofrecen exclusividad territorial?</h3>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>No manejamos exclusividad territorial, pero sí limitamos la cantidad de distribuidores por zona para asegurar un mercado saludable para todos nuestros socios.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- Footer -->
@@ -485,9 +452,496 @@
     <script src="../../assets/js/dropdown-categories.js"></script>
     <script src="../../assets/js/main.js"></script>
     
+    <!-- Login Styles -->
+    <style>
+        /* Wholesale Login Container */
+        .wholesale-login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100%;
+        }
+
+        .login-card {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+            border: 1px solid #333;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(192, 192, 192, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+            border: 3px solid rgba(192, 192, 192, 0.3);
+            color: #C0C0C0;
+        }
+
+        .login-title {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .login-subtitle {
+            color: #ccc;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .login-form .form-group {
+            margin-bottom: 25px;
+        }
+
+        .login-form .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 16px;
+            z-index: 2;
+        }
+
+        .login-form .form-control {
+            width: 100%;
+            padding: 15px 18px 15px 50px;
+            border: 2px solid #333;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        .login-form .form-control:focus {
+            outline: none;
+            border-color: #C0C0C0;
+            box-shadow: 0 0 0 4px rgba(192, 192, 192, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .password-toggle-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6c757d;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px;
+            z-index: 2;
+        }
+
+        .form-options {
+            margin-bottom: 25px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #C0C0C0;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(192, 192, 192, 0.4);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .login-footer {
+            text-align: center;
+        }
+
+        .forgot-password {
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            color: #C0C0C0;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: rgba(192, 192, 192, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            background: rgba(192, 192, 192, 0.2);
+        }
+
+        .register-link p {
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .register-btn {
+            color: #C0C0C0;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: 2px solid #C0C0C0;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .register-btn:hover {
+            background: #C0C0C0;
+            color: #000;
+        }
+
+        .login-alert {
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .login-alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .login-alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Requirements Form Styles */
+        .requirements-form {
+            max-width: 500px;
+        }
+
+        .form-card {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid #333;
+            overflow: hidden;
+        }
+
+        .form-card .form-header {
+            background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
+            color: #000;
+            text-align: center;
+            padding: 25px 30px;
+            margin-bottom: 0;
+        }
+
+        .form-card .form-header h3 {
+            font-size: 1.5rem;
+            color: #000;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-card .form-header p {
+            color: #2a2a2a;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .info-request-form {
+            padding: 30px;
+        }
+
+        .info-request-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .info-request-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .info-request-form input,
+        .info-request-form select,
+        .info-request-form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #333;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        .info-request-form input:focus,
+        .info-request-form select:focus,
+        .info-request-form textarea:focus {
+            outline: none;
+            border-color: #c0c0c0;
+            box-shadow: 0 0 0 4px rgba(192, 192, 192, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .info-request-form select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 40px;
+            appearance: none;
+        }
+
+        .info-request-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-submit-btn {
+            width: 100%;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: none;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .form-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(192, 192, 192, 0.4);
+        }
+
+        .form-submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        @media (max-width: 768px) {
+            .login-card {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+
+            .mayoristas-hero .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .requirements-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+
     <!-- Page-specific JavaScript -->
     <script>
+        // Password visibility toggle
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const button = input.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        // Show forgot password functionality
+        function showForgotPassword() {
+            alert('Para recuperar tu contraseña, contacta a: mayoristas@estudioartesana.com');
+        }
+
+        // Show login alert
+        function showLoginAlert(message, type = 'error') {
+            const alertElement = document.getElementById('loginAlert');
+            alertElement.className = `login-alert ${type}`;
+            alertElement.textContent = message;
+            alertElement.style.display = 'block';
+            
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            // Wholesale login form
+            const wholesaleLoginForm = document.getElementById('wholesaleLoginForm');
+            if (wholesaleLoginForm) {
+                wholesaleLoginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const email = document.getElementById('wholesaleEmail').value;
+                    const password = document.getElementById('wholesalePassword').value;
+                    const submitBtn = this.querySelector('.login-btn');
+                    const originalText = submitBtn.innerHTML;
+                    
+                    // Show loading state
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando sesión...';
+                    submitBtn.disabled = true;
+                    
+                    // Simulate authentication (replace with real authentication)
+                    setTimeout(() => {
+                        // Demo credentials
+                        if (email === 'mayorista@empresa.com' && password === 'demo123') {
+                            // Create session
+                            const sessionData = {
+                                isLoggedIn: true,
+                                email: email,
+                                name: 'Empresa Demo',
+                                company: 'Empresa Demo S.A. de C.V.',
+                                expires: Date.now() + (24 * 60 * 60 * 1000) // 24 hours
+                            };
+                            
+                            localStorage.setItem('wholesaleSession', JSON.stringify(sessionData));
+                            
+                            showLoginAlert('¡Sesión iniciada correctamente! Redirigiendo...', 'success');
+                            
+                            setTimeout(() => {
+                                window.location.href = '../../mayoristas/tienda.html';
+                            }, 1500);
+                        } else {
+                            showLoginAlert('Credenciales incorrectas. Intenta con: mayorista@empresa.com / demo123');
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                        }
+                    }, 2000);
+                });
+            }
+
+            // Check if already logged in
+            const wholesaleSession = localStorage.getItem('wholesaleSession');
+            if (wholesaleSession) {
+                try {
+                    const sessionData = JSON.parse(wholesaleSession);
+                    const now = Date.now();
+                    
+                    if (sessionData.isLoggedIn && now < sessionData.expires) {
+                        // Already logged in, show different content
+                        const loginCard = document.querySelector('.login-card');
+                        if (loginCard) {
+                            loginCard.innerHTML = `
+                                <div class="login-header">
+                                    <div class="login-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <h3 class="login-title">¡Bienvenido de vuelta!</h3>
+                                    <p class="login-subtitle">${sessionData.company || sessionData.name}</p>
+                                </div>
+                                <div style="text-align: center;">
+                                    <a href="../../mayoristas/tienda.html" class="login-btn" style="text-decoration: none; margin-bottom: 15px;">
+                                        <i class="fas fa-store"></i>
+                                        Ir a Tienda Mayoristas
+                                    </a>
+                                    <a href="../../mayoristas/pedidos.html" class="login-btn" style="text-decoration: none; background: linear-gradient(135deg, #666, #555); margin-bottom: 15px;">
+                                        <i class="fas fa-box"></i>
+                                        Ver Mis Pedidos
+                                    </a>
+                                    <button onclick="logoutWholesaler()" class="login-btn" style="background: linear-gradient(135deg, #dc3545, #c82333);">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        Cerrar Sesión
+                                    </button>
+                                </div>
+                            `;
+                        }
+                    }
+                } catch (error) {
+                    localStorage.removeItem('wholesaleSession');
+                }
+            }
             // FAQ Accordion
             const faqItems = document.querySelectorAll('.faq-item');
             
@@ -533,7 +987,38 @@
                     }, 2000);
                 });
             }
+            
+            // Info request form submission
+            const infoRequestForm = document.getElementById('infoRequestForm');
+            if (infoRequestForm) {
+                infoRequestForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const submitBtn = e.target.querySelector('.form-submit-btn');
+                    const originalText = submitBtn.innerHTML;
+                    
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+                    submitBtn.disabled = true;
+                    
+                    // Simulate form submission
+                    setTimeout(() => {
+                        alert('¡Solicitud enviada correctamente! Nos pondremos en contacto contigo en las próximas 24-48 horas.');
+                        this.reset();
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 2000);
+                });
+            }
         });
+
+        // Global logout function
+        function logoutWholesaler() {
+            if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                localStorage.removeItem('wholesaleSession');
+                localStorage.removeItem('wholesaleCart');
+                location.reload(); // Reload to show login form again
+            }
+        }
     </script>
 </body>
 </html>
