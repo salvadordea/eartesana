@@ -1,6 +1,6 @@
 /**
  * Dynamic Carousel - Estudio Artesana
- * Loads random product images for the hero carousel
+ * Loads product images for the hero carousel from Supabase or fallback images
  */
 
 class DynamicCarousel {
@@ -48,75 +48,78 @@ class DynamicCarousel {
                 return;
             }
             
-            // Otherwise, fetch from WooCommerce
-            await this.fetchProductImages();
+            // Try to fetch from Supabase, otherwise use fallback
+            await this.fetchProductImagesFromSupabase();
         } catch (error) {
             console.error('Error loading carousel images:', error);
             this.loadFallbackImages();
         }
     }
     
-    async fetchProductImages() {
-        if (!window.WooAPI || !window.EstudioArtesanaConfig?.woocommerce) {
-            console.warn('WooCommerce API not available');
-            this.loadFallbackImages();
-            return;
-        }
-        
-        let products = [];
-        
+    async fetchProductImagesFromSupabase() {
         try {
+            // Check if Supabase API is available
+            if (!window.supabaseApiClient) {
+                console.warn('Supabase API not available, using fallback images');
+                this.loadFallbackImages();
+                return;
+            }
+            
+            let products = [];
+            
             switch (this.config.source) {
                 case 'featured':
-                    products = await window.WooAPI.getProducts({
+                    products = await window.supabaseApiClient.getProducts({
                         featured: true,
-                        per_page: this.config.count * 2, // Get more to filter later
-                        status: 'publish'
+                        limit: this.config.count * 2
                     });
                     break;
                     
                 case 'recent':
-                    products = await window.WooAPI.getProducts({
-                        per_page: this.config.count * 2,
-                        orderby: 'date',
-                        order: 'desc',
-                        status: 'publish'
+                    products = await window.supabaseApiClient.getProducts({
+                        orderBy: 'created_at',
+                        orderDirection: 'desc',
+                        limit: this.config.count * 2
                     });
                     break;
                     
                 default: // 'random'
-                    products = await window.WooAPI.getProducts({
-                        per_page: this.config.count * 3, // Get more for better randomization
-                        orderby: 'date',
-                        order: 'desc',
-                        status: 'publish'
+                    products = await window.supabaseApiClient.getProducts({
+                        limit: this.config.count * 3
                     });
                     // Randomize the results
                     products = this.shuffleArray(products);
                     break;
             }
             
-            // Filter products with images
+            // Filter products with images and prepare carousel data
             const productsWithImages = products
-                .filter(product => product.images && product.images.length > 0)
+                .filter(product => product.main_image_url || product.images?.length > 0)
                 .slice(0, this.config.count);
             
             if (productsWithImages.length > 0) {
-                const carouselImages = productsWithImages.map(product => ({
-                    src: product.images[0].src,
-                    alt: product.name,
-                    id: product.id,
-                    name: product.name,
-                    price: product.price
-                }));
+                const carouselImages = productsWithImages.map(product => {
+                    // Use main_image_url or first image from images array
+                    const imageUrl = product.main_image_url || 
+                        (product.images && product.images.length > 0 ? product.images[0] : null);
+                    
+                    return {
+                        src: imageUrl,
+                        alt: product.name || 'Producto artesanal',
+                        id: product.id,
+                        name: product.name,
+                        price: product.price
+                    };
+                });
                 
                 this.renderCarousel(carouselImages);
             } else {
+                console.log('No products with images found, using fallback images');
                 this.loadFallbackImages();
             }
             
         } catch (error) {
-            console.error('Error fetching products:', error);
+            console.error('Error fetching products from Supabase:', error);
             this.loadFallbackImages();
         }
     }
@@ -131,13 +134,14 @@ class DynamicCarousel {
     }
     
     loadFallbackImages() {
-        // Default fallback images
+        // Default fallback images using available assets
         const fallbackImages = [
-            { src: 'assets/images/product-1.jpg', alt: 'Producto artesanal 1', id: 'fallback-1' },
-            { src: 'assets/images/product-2.jpg', alt: 'Producto artesanal 2', id: 'fallback-2' },
-            { src: 'assets/images/product-3.jpg', alt: 'Producto artesanal 3', id: 'fallback-3' }
+            { src: 'assets/images/placeholder-product.jpg', alt: 'Producto artesanal 1', id: 'fallback-1' },
+            { src: 'assets/images/inicio.png', alt: 'Producto artesanal 2', id: 'fallback-2' },
+            { src: 'assets/images/logo-hero.webp', alt: 'Producto artesanal 3', id: 'fallback-3' }
         ];
         
+        console.log('🖼️ Loading fallback images for carousel');
         this.renderCarousel(fallbackImages.slice(0, this.config.count));
     }
     
@@ -217,7 +221,7 @@ class DynamicCarousel {
     async refreshCarousel() {
         console.log('🔄 Refreshing carousel...');
         this.stopAutoPlay();
-        await this.fetchProductImages();
+        await this.fetchProductImagesFromSupabase();
     }
     
     // Method to update config and refresh
@@ -229,7 +233,7 @@ class DynamicCarousel {
 
 // Initialize dynamic carousel
 document.addEventListener('DOMContentLoaded', function() {
-    // Wait a bit for WooAPI to be ready
+    // Wait a bit for Supabase API to be ready
     setTimeout(() => {
         window.dynamicCarousel = new DynamicCarousel();
     }, 1000);

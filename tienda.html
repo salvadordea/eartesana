@@ -177,7 +177,7 @@
 
                     <!-- Mobile Search Bar (order: 2 on mobile) -->
                     <div class="mobile-search-container" id="mobileSearchContainer">
-                        <div class="search-container">
+                        <div class="mobile-search-wrapper">
                             <div class="search-box-modern">
                                 <input type="text" id="mobileSearchInput" placeholder="Buscar productos, categorías..." autocomplete="off">
                                 <button type="button" onclick="searchProductsMobile()">
@@ -263,7 +263,10 @@
     <script src="./assets/js/config.js"></script>
     <script src="./assets/js/cloudinary-config.js"></script>
     
-    <!-- Header Universal (DEBE CARGARSE PRIMERO) -->
+    <!-- Universal Cart (DEBE CARGARSE ANTES DEL HEADER) -->
+    <script src="./assets/js/universal-cart.js"></script>
+    
+    <!-- Header Universal -->
     <script src="./assets/js/universal-header.js"></script>
     
     <!-- Supabase API Client (CORREGIDO) -->

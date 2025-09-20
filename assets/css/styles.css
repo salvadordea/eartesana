@@ -151,10 +151,23 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 12px 20px;
-    color: var(--white);
+    color: var(--white) !important;
     text-decoration: none;
     transition: var(--transition);
     font-size: 14px;
+}
+
+/* Específico para el dropdown de Tienda */
+#tiendaDropdown .dropdown-link,
+#tiendaDropdown .dropdown-link .category-name,
+#tiendaDropdown .dropdown-link .category-count {
+    color: #ffffff !important;
+}
+
+#tiendaDropdown .dropdown-loading,
+#tiendaDropdown .dropdown-error,
+#tiendaDropdown .dropdown-empty {
+    color: #ffffff !important;
 }
 
 .dropdown-link:hover {

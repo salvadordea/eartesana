@@ -34,6 +34,9 @@ class ProductoManager {
 
         // Inicializar event listeners
         this.initEventListeners();
+        
+        // Inicializar contador del carrito
+        this.updateCartCounter();
     }
 
     async waitForAPI() {
@@ -604,21 +607,53 @@ class ProductoManager {
         const cartItem = {
             id: this.product.id,
             name: this.product.name,
-            price: this.product.price,
-            image: this.images[0],
+            price: this.selectedVariant && this.selectedVariant.priceModifier 
+                ? this.product.price + this.selectedVariant.priceModifier 
+                : this.product.price,
+            image: this.images[0] || './assets/images/placeholder-product.jpg',
             quantity: this.selectedQuantity,
-            variant: this.selectedVariant
+            variant: this.selectedVariant,
+            stock: this.product.stock
         };
 
-        // Usar la funcionalidad del API client si está disponible
-        if (window.artesanaAPI && window.artesanaAPI.addToCart) {
-            window.artesanaAPI.addToCart(this.product.id, this.selectedQuantity);
-        } else {
-            // Implementación manual del carrito
-            this.addToCartManual(cartItem);
+        // Usar UniversalCart si está disponible
+        if (window.UniversalCart) {
+            try {
+                const success = window.UniversalCart.addItem(cartItem);
+                if (success) {
+                    this.showNotification('Producto agregado al carrito', 'success');
+                    console.log('✅ Producto agregado al carrito via UniversalCart:', cartItem);
+                } else {
+                    this.showNotification('Error al agregar al carrito', 'error');
+                }
+            } catch (error) {
+                console.error('❌ Error usando UniversalCart:', error);
+                this.showNotification('Error al agregar al carrito', 'error');
+            }
         }
-
-        this.showNotification('Producto agregado al carrito', 'success');
+        // Si hay API disponible, también intentar con la API
+        else if (window.artesanaAPI && window.artesanaAPI.addToCart) {
+            const variantId = this.selectedVariant ? this.selectedVariant.id : null;
+            window.artesanaAPI.addToCart(this.product.id, variantId, this.selectedQuantity)
+                .then(response => {
+                    console.log('✅ Producto agregado al carrito via API:', response);
+                    this.showNotification('Producto agregado al carrito', 'success');
+                    // También actualizar el carrito local para mantener sincronización
+                    if (window.UniversalCart) {
+                        window.UniversalCart.addItem(cartItem);
+                    }
+                })
+                .catch(error => {
+                    console.error('❌ Error agregando al carrito via API:', error);
+                    this.showNotification('Error al agregar al carrito', 'error');
+                });
+        }
+        // Fallback a implementación manual si no hay UniversalCart ni API
+        else {
+            this.addToCartManual(cartItem);
+            this.updateCartCounter();
+            this.showNotification('Producto agregado al carrito', 'success');
+        }
     }
 
     addToCartManual(item) {
@@ -636,6 +671,36 @@ class ProductoManager {
         }
 
         localStorage.setItem('artesana_cart', JSON.stringify(cart));
+    }
+
+    // Update cart counter in header
+    updateCartCounter() {
+        try {
+            const cart = JSON.parse(localStorage.getItem('artesana_cart') || '[]');
+            const totalItems = cart.reduce((total, item) => total + (item.quantity || 0), 0);
+            
+            // Update counter in header
+            const cartCountElement = document.getElementById('cartCount');
+            if (cartCountElement) {
+                cartCountElement.textContent = totalItems;
+                cartCountElement.style.display = totalItems > 0 ? 'flex' : 'none';
+                console.log(`🛒 Cart counter updated: ${totalItems} items`);
+            } else {
+                console.warn('⚠️ Cart counter element not found in DOM');
+            }
+            
+            // También actualizar cualquier otro contador de carrito que pueda existir
+            const altCartCounters = document.querySelectorAll('.cart-counter, .cart-count');
+            altCartCounters.forEach(counter => {
+                if (counter.id !== 'cartCount') { // Evitar duplicar el update del principal
+                    counter.textContent = totalItems;
+                    counter.style.display = totalItems > 0 ? 'flex' : 'none';
+                }
+            });
+            
+        } catch (error) {
+            console.error('❌ Error updating cart counter:', error);
+        }
     }
 
     // Tab Management

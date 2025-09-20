@@ -49,38 +49,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     
     function forceMobileSearchHide() {
-        const searchBar = document.getElementById('searchBarSection');
-        const mobileToggle = document.querySelector('.mobile-search-toggle');
+        // DESHABILITADO: Mantenemos la barra de búsqueda siempre visible
+        console.log('📱 Función de ocultamiento móvil deshabilitada - barra de búsqueda siempre visible');
         
-        if (searchBar && mobileToggle) {
-            // Función para verificar y aplicar estilos móviles
-            function checkAndApplyMobileStyles() {
-                const isMobile = window.innerWidth <= 768;
-                
-                if (isMobile) {
-                    // Forzar ocultamiento de la búsqueda superior
-                    searchBar.style.display = 'none';
-                    mobileToggle.style.display = 'block';
-                    
-                    console.log('📱 Estilos móviles aplicados - búsqueda superior oculta');
-                } else {
-                    // Mostrar búsqueda superior en desktop
-                    searchBar.style.display = 'block';
-                    mobileToggle.style.display = 'none';
-                    
-                    console.log('💻 Estilos desktop aplicados - búsqueda superior visible');
-                }
-            }
-            
-            // Aplicar al cargar
-            checkAndApplyMobileStyles();
-            
-            // Aplicar al cambiar tamaño de ventana
-            let resizeTimeout;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(checkAndApplyMobileStyles, 100);
-            });
+        // Asegurar que la barra de búsqueda esté siempre visible
+        const searchBar = document.getElementById('searchBarSection');
+        if (searchBar) {
+            searchBar.style.display = 'block';
+        }
+        
+        // Ocultar cualquier toggle móvil que pueda existir
+        const mobileToggle = document.querySelector('.mobile-search-toggle');
+        if (mobileToggle) {
+            mobileToggle.style.display = 'none';
         }
     }
     
@@ -169,51 +150,45 @@ document.addEventListener('DOMContentLoaded', function() {
     function applyAdditionalCSS() {
         const additionalStyles = document.createElement('style');
         additionalStyles.textContent = `
-            /* Asegurar que los estilos móviles se apliquen correctamente */
+            /* Mantener la barra de búsqueda siempre visible */
+            .search-bar {
+                display: block !important;
+            }
+            
+            /* Ocultar elementos móviles - no los necesitamos */
+            .mobile-search-toggle,
+            .mobile-search-container {
+                display: none !important;
+            }
+            
+            /* Ajustes responsive para la barra de búsqueda */
             @media (max-width: 768px) {
                 .search-bar {
-                    display: none !important;
+                    padding: 15px 0 !important;
                 }
                 
-                .mobile-search-toggle {
-                    display: block !important;
+                .search-bar .container {
+                    padding: 0 20px !important;
                 }
                 
-                .mobile-search-container {
-                    display: block !important;
-                }
-            }
-            
-            @media (min-width: 769px) {
-                .search-bar {
-                    display: block !important;
+                .search-container {
+                    width: 95% !important;
                 }
                 
-                .mobile-search-toggle {
-                    display: none !important;
+                .search-box-modern input {
+                    padding: 16px 20px !important;
+                    font-size: 16px !important;
                 }
                 
-                .mobile-search-container {
-                    display: none !important;
+                .search-box-modern button {
+                    padding: 16px 20px !important;
+                    font-size: 16px !important;
                 }
-            }
-            
-            /* Mejoras de animación */
-            .mobile-search-container {
-                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            }
-            
-            .mobile-search-btn .toggle-icon {
-                transition: transform 0.3s ease !important;
-            }
-            
-            .mobile-search-btn.active .toggle-icon {
-                transform: rotate(180deg) !important;
             }
         `;
         
         document.head.appendChild(additionalStyles);
-        console.log('🎨 Estilos adicionales aplicados');
+        console.log('🎨 Estilos para barra de búsqueda siempre visible aplicados');
     }
     
     // ============================================

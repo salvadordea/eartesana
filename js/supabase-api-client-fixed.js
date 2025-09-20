@@ -131,13 +131,41 @@ class SupabaseAPIFixed {
             // Obtener todos los productos con categorías
             const productsWithCategories = await this.getProductsWithCategoriesJoin();
             
+            // DEBUG: Mostrar estructura de primer producto
+            if (productsWithCategories.length > 0) {
+                console.log('🔍 DEBUG - Estructura del primer producto:', {
+                    keys: Object.keys(productsWithCategories[0]),
+                    categories: productsWithCategories[0].categories,
+                    category_names: productsWithCategories[0].category_names,
+                    category: productsWithCategories[0].category
+                });
+            }
+            
             // Filtrar productos que coincidan con el término de búsqueda
             const searchTerm = query.toLowerCase();
             const filteredProducts = productsWithCategories.filter(product => {
-                const matchName = product.name.toLowerCase().includes(searchTerm);
+                // Búsqueda principal en nombre y descripción (siempre funcionará)
+                const matchName = product.name && product.name.toLowerCase().includes(searchTerm);
                 const matchDescription = product.description && product.description.toLowerCase().includes(searchTerm);
-                const matchCategories = product.category_names.toLowerCase().includes(searchTerm);
                 
+                // Buscar en categorías - con manejo robusto de errores
+                let matchCategories = false;
+                try {
+                    if (product.category_names && typeof product.category_names === 'string') {
+                        matchCategories = product.category_names.toLowerCase().includes(searchTerm);
+                    } else if (product.categories && Array.isArray(product.categories)) {
+                        matchCategories = product.categories.some(cat => 
+                            cat && typeof cat === 'string' && cat.toLowerCase().includes(searchTerm)
+                        );
+                    } else if (product.category && typeof product.category === 'string') {
+                        matchCategories = product.category.toLowerCase().includes(searchTerm);
+                    }
+                } catch (error) {
+                    console.warn('⚠️ Error buscando en categorías:', error);
+                    // Continuar con búsqueda solo en nombre/descripción
+                }
+                
+                // Al menos debe coincidir nombre o descripción para que funcione básicamente
                 return matchName || matchDescription || matchCategories;
             });
 

@@ -24,15 +24,33 @@ class UniversalHeader {
      * Calcula la profundidad del archivo actual (cuántas carpetas desde la raíz)
      */
     calculateDepth() {
-        // Eliminar el nombre del archivo si existe
-        let pathWithoutFile = this.currentPath;
-        if (pathWithoutFile.includes('.html')) {
-            pathWithoutFile = pathWithoutFile.substring(0, pathWithoutFile.lastIndexOf('/'));
+        // Normalizar la ruta
+        let path = this.currentPath;
+        
+        // Remover la barra inicial si existe
+        if (path.startsWith('/')) {
+            path = path.substring(1);
         }
         
-        // Contar las barras (menos 1 porque la primera siempre está)
-        const depth = (pathWithoutFile.match(/\//g) || []).length - 1;
-        return Math.max(0, depth);
+        // Si estamos en la raíz (index.html o vacío), profundidad 0
+        if (!path || path === 'index.html' || path === '/') {
+            return 0;
+        }
+        
+        // Eliminar el nombre del archivo si existe
+        if (path.includes('.html')) {
+            path = path.substring(0, path.lastIndexOf('/'));
+        }
+        
+        // Si después de eliminar el archivo no queda nada, estamos en la raíz
+        if (!path) {
+            return 0;
+        }
+        
+        // Contar las barras para determinar la profundidad
+        const depth = (path.match(/\//g) || []).length + 1;
+        console.log(`🔍 Depth calculation: path='${this.currentPath}' -> cleaned='${path}' -> depth=${depth}`);
+        return depth;
     }
 
     /**
@@ -151,14 +169,17 @@ class UniversalHeader {
                     <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
                         <div class="logo">
                             <a href="${urls.HOMEPAGE_URL}">
-                                <img src="${urls.LOGO_URL}" alt="Estudio Artesana" style="height: 40px;" onerror="this.style.display='none'; this.parentNode.innerHTML='Estudio Artesana';">
+                                <img src="${urls.LOGO_URL}" alt="Estudio Artesana" style="height: 40px;" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\"color:#fff;font-weight:bold;\">Estudio Artesana</span>';">
                             </a>
                         </div>
-                        <nav style="display: flex; gap: 20px;">
+                        <nav style="display: flex; align-items: center; gap: 20px;">
                             <a href="${urls.HOMEPAGE_URL}" style="color: #fff; text-decoration: none;">INICIO</a>
                             <a href="${urls.TIENDA_URL}" style="color: #fff; text-decoration: none;">TIENDA</a>
                             <a href="${urls.SOBRE_NOSOTROS_URL}" style="color: #fff; text-decoration: none;">SOBRE NOSOTROS</a>
-                            <a href="${urls.MAYORISTAS_URL}" style="color: #fff; text-decoration: none;">MAYORISTAS</a>
+                            <button class="cart-btn" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 1.2rem; padding: 8px; border-radius: 4px; position: relative;" title="Ver carrito">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span id="cartCount" class="cart-counter" style="display: none; position: absolute; top: -8px; right: -8px; background: #ff4444; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; display: flex; align-items: center; justify-content: center;">0</span>
+                            </button>
                         </nav>
                     </div>
                 </header>
@@ -181,6 +202,31 @@ class UniversalHeader {
                 nav.classList.toggle('mobile-active');
                 mobileToggle.classList.toggle('active');
             });
+        }
+        
+        // Inicializar carrito universal si está disponible
+        if (window.UniversalCart) {
+            // El carrito ya está inicializado, solo actualizamos el contador
+            this.initializeCartCounter();
+            console.log('✅ Carrito universal encontrado e inicializado');
+        } else {
+            // Esperar a que esté disponible
+            console.log('⏳ Esperando a que se cargue el carrito universal...');
+            const checkCart = setInterval(() => {
+                if (window.UniversalCart) {
+                    this.initializeCartCounter();
+                    clearInterval(checkCart);
+                    console.log('✅ Carrito universal cargado exitosamente');
+                }
+            }, 100);
+            
+            // Timeout después de 10 segundos
+            setTimeout(() => {
+                clearInterval(checkCart);
+                if (!window.UniversalCart) {
+                    console.error('❌ Error: No se pudo cargar el carrito universal');
+                }
+            }, 10000);
         }
 
         // Dropdown de tienda
@@ -214,6 +260,17 @@ class UniversalHeader {
         }
 
         console.log('⚙️ Funcionalidad del header inicializada');
+    }
+    
+    /**
+     * Inicializa el contador del carrito en el header
+     */
+    initializeCartCounter() {
+        if (window.UniversalCart) {
+            // Actualizar contador inicial
+            window.UniversalCart.updateCartCounter();
+            console.log('🛒 Contador del carrito inicializado en header');
+        }
     }
 
     /**

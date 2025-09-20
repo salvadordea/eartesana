@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Cart - Estudio Artesana</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .debug-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 9999;
+        }
+        .debug-panel h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .debug-btn {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            background: #007cba;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .debug-btn:hover {
+            background: #005a87;
+        }
+        .debug-info {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+            color: #000;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Universal Container -->
+    <div id="universal-header-container">
+        <!-- El header se carga dinámicamente aquí -->
+    </div>
+
+    <main class="main-content" style="padding: 100px 20px;">
+        <div class="container">
+            <h1>🛒 Debug del Carrito Universal</h1>
+            <p>Esta página es para probar la funcionalidad del carrito en diferentes escenarios.</p>
+            
+            <div class="debug-panel">
+                <h3>🔧 Panel de Debug</h3>
+                <button class="debug-btn" onclick="testCartButton()">Test Botón Carrito</button>
+                <button class="debug-btn" onclick="addTestProduct()">Agregar Producto Test</button>
+                <button class="debug-btn" onclick="showCartInfo()">Ver Info del Carrito</button>
+                <button class="debug-btn" onclick="openCartModal()">Abrir Modal</button>
+                <button class="debug-btn" onclick="clearDebugCart()">Limpiar Carrito</button>
+                <button class="debug-btn" onclick="forceResetCart()" style="background: #dc3545;">🧿 Force Reset</button>
+                
+                <div id="debugInfo" class="debug-info">
+                    Logs aparecerán aquí...
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/cloudinary-config.js"></script>
+    
+    <!-- Universal Cart (DEBE CARGARSE ANTES DEL HEADER) -->
+    <script src="assets/js/universal-cart.js"></script>
+    
+    <!-- Header Universal -->
+    <script src="assets/js/universal-header.js"></script>
+
+    <script>
+        function logToDebug(message) {
+            const debugInfo = document.getElementById('debugInfo');
+            const timestamp = new Date().toLocaleTimeString();
+            debugInfo.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+            debugInfo.scrollTop = debugInfo.scrollHeight;
+            console.log(message);
+        }
+
+        function testCartButton() {
+            const cartBtn = document.querySelector('.cart-btn');
+            logToDebug(`🔍 Cart button found: ${!!cartBtn}`);
+            
+            if (cartBtn) {
+                logToDebug(`📍 Button classes: ${cartBtn.className}`);
+                logToDebug(`🎯 Button onclick: ${cartBtn.onclick}`);
+                
+                // Test click event
+                cartBtn.click();
+                logToDebug('🖱️ Clicked cart button');
+            } else {
+                logToDebug('❌ Cart button not found in DOM');
+            }
+        }
+
+        function addTestProduct() {
+            if (window.UniversalCart) {
+                const success = window.UniversalCart.addItem({
+                    id: `test-${Date.now()}`,
+                    name: 'Producto de Prueba',
+                    price: 299.99,
+                    image: 'assets/images/placeholder-product.jpg',
+                    quantity: 1
+                });
+                logToDebug(`✅ Test product added: ${success}`);
+            } else {
+                logToDebug('❌ UniversalCart not available');
+            }
+        }
+
+        function showCartInfo() {
+            if (window.universalCart) {
+                const cart = window.universalCart.getCart();
+                const count = window.universalCart.getCartItemCount();
+                const total = window.universalCart.getCartTotal();
+                
+                logToDebug(`📦 Cart items: ${cart.length}`);
+                logToDebug(`🔢 Total items: ${count}`);
+                logToDebug(`💰 Total price: $${total}`);
+                logToDebug(`🛒 Cart: ${JSON.stringify(cart, null, 2)}`);
+            } else {
+                logToDebug('❌ universalCart instance not available');
+            }
+        }
+
+        function openCartModal() {
+            if (window.UniversalCart && window.UniversalCart.showModal) {
+                window.UniversalCart.showModal();
+                logToDebug('📂 Attempted to open cart modal');
+            } else {
+                logToDebug('❌ showModal method not available');
+            }
+        }
+
+        function clearDebugCart() {
+            if (window.UniversalCart && window.UniversalCart.clearCart) {
+                window.UniversalCart.clearCart();
+                logToDebug('🧙 Cart cleared');
+            } else {
+                logToDebug('❌ clearCart method not available');
+            }
+        }
+        
+        function forceResetCart() {
+            if (window.UniversalCart && window.UniversalCart.forceReset) {
+                window.UniversalCart.forceReset();
+                logToDebug('🧿 FORCE RESET: Cart completely wiped');
+            } else {
+                logToDebug('❌ forceReset method not available');
+            }
+        }
+
+        // Log inicial
+        window.addEventListener('load', () => {
+            logToDebug('🚀 Debug page loaded');
+            logToDebug(`🛒 UniversalCart available: ${!!window.UniversalCart}`);
+            logToDebug(`🛒 universalCart instance available: ${!!window.universalCart}`);
+            
+            setTimeout(() => {
+                const cartBtn = document.querySelector('.cart-btn');
+                logToDebug(`🔍 Cart button in header: ${!!cartBtn}`);
+                
+                const modal = document.getElementById('cartModal');
+                logToDebug(`🖼️ Cart modal loaded: ${!!modal}`);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

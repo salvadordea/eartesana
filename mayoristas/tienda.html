@@ -254,6 +254,48 @@
             font-size: 14px;
         }
         
+        /* Cart Controls */
+        .cart-controls {
+            display: flex;
+            align-items: center;
+        }
+        
+        .cart-btn {
+            background: var(--gradient-silver);
+            color: var(--dark-bg);
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+        
+        .cart-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cart-count {
+            background: var(--danger-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+        
         /* View Toggle - Solo visible en móvil */
         .view-toggle {
             display: none;
@@ -364,15 +406,6 @@
             display: inline-block;
         }
 
-        .variant-selector {
-            background: var(--dark-surface-light);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 13px;
-            width: 120px;
-        }
 
         .stock-badge {
             padding: 4px 8px;
@@ -581,6 +614,239 @@
 
         .variants-expanded .toggle-variants {
             transform: rotate(90deg);
+        }
+
+        /* Variants Accordion */
+        .variants-accordion {
+            display: none;
+            background: var(--dark-surface-light);
+            border-left: 3px solid var(--silver-accent);
+            margin-top: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .variants-accordion.show {
+            display: block;
+        }
+
+        .variant-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .variant-item:last-child {
+            border-bottom: none;
+        }
+
+        .variant-details {
+            flex: 1;
+        }
+
+        .variant-name-display {
+            color: var(--silver-accent);
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .variant-attributes {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .variant-stock-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .variant-stock-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .variant-stock-high { background: #d4edda; color: #155724; }
+        .variant-stock-medium { background: #fff3cd; color: #856404; }
+        .variant-stock-low { background: #f8d7da; color: #721c24; }
+        .variant-stock-out { background: #f8d7da; color: #721c24; }
+
+        .variant-price-info {
+            text-align: right;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .variant-wholesale-price {
+            color: var(--silver-accent);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .variant-regular-price {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        /* Variant Controls in Accordion */
+        .variant-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .variant-quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--dark-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2px;
+        }
+
+        .variant-qty-btn {
+            background: var(--dark-surface-light);
+            color: var(--silver-accent);
+            border: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .variant-qty-btn:hover {
+            background: var(--silver-accent);
+            color: var(--dark-bg);
+        }
+
+        .variant-qty-input {
+            background: transparent;
+            color: var(--text-primary);
+            border: none;
+            width: 45px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .variant-qty-input:focus {
+            outline: none;
+        }
+
+        .variant-subtotal {
+            background: var(--dark-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 6px 10px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .variant-subtotal-amount {
+            color: var(--silver-accent);
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .variant-add-btn {
+            background: var(--gradient-silver);
+            color: var(--dark-bg);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        .variant-add-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(192, 192, 192, 0.3);
+        }
+
+        .variant-no-stock {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            border-radius: 6px;
+        }
+
+        .no-stock-message {
+            color: var(--danger-color);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Responsive adjustments for variant controls */
+        @media (max-width: 768px) {
+            .variant-item {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .variant-controls {
+                justify-content: space-between;
+                flex-wrap: nowrap;
+                gap: 8px;
+            }
+
+            .variant-quantity-controls {
+                flex: 0 0 auto;
+            }
+
+            .variant-subtotal {
+                flex: 1;
+                min-width: auto;
+            }
+
+            .variant-add-btn {
+                flex: 0 0 auto;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .has-variants {
+            border-left: 3px solid var(--warning-color);
+        }
+
+        .variant-stock-display {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-left: 5px;
         }
 
         /* Loading */
@@ -1164,6 +1430,49 @@
             opacity: 0.5;
         }
 
+        /* Estilos para productos con variantes - Input informativo */
+        .variant-total-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-align: center;
+        }
+
+        .variant-total-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .qty-readonly {
+            background: var(--dark-surface-light) !important;
+            color: var(--silver-accent) !important;
+            border: 1px solid var(--border-color);
+            cursor: not-allowed;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .variant-help-text {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .variant-required-message {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 6px;
+            color: var(--warning-color);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
         .subtotal-amount {
             color: var(--silver-accent) !important;
             font-weight: 600;
@@ -1296,6 +1605,14 @@
                             <span>•</span>
                             <span id="totalStock">0 piezas disponibles</span>
                         </div>
+                        <!-- Carrito Button -->
+                        <div class="cart-controls">
+                            <button class="cart-btn" onclick="openCart()">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Carrito</span>
+                                <span class="cart-count" id="cartCount">0</span>
+                            </button>
+                        </div>
                         <!-- Vista Toggle (solo visible en móvil) -->
                         <div class="view-toggle" id="viewToggle">
                             <button class="view-btn active" id="tableViewBtn" onclick="toggleView('table')">
@@ -1358,7 +1675,7 @@
                     <div class="empty-cart">
                         <i class="fas fa-shopping-cart"></i>
                         <p>Tu carrito está vacío</p>
-                        <small>Agrega productos con el pedido mínimo de 10 piezas</small>
+                        <small>Agrega productos con el pedido mínimo de 1 pieza</small>
                     </div>
                 </div>
                 <div class="cart-summary">
@@ -1389,6 +1706,25 @@
         </div>
     </div>
 
+    <!-- Cart Summary Bar (Bottom Floating) -->
+    <div id="cartSummaryBar" class="cart-summary" style="display: none;">
+        <div class="cart-summary-content">
+            <div class="cart-info">
+                <div class="cart-stat">
+                    <p class="cart-stat-label">Productos</p>
+                    <p class="cart-stat-value" id="cartItemsCount">0 productos</p>
+                </div>
+                <div class="cart-stat">
+                    <p class="cart-stat-label">Total</p>
+                    <p class="cart-stat-value" id="cartTotal">$0.00</p>
+                </div>
+            </div>
+            <button class="checkout-btn" onclick="openCart()">
+                <i class="fas fa-shopping-cart"></i>
+                Ver Carrito
+            </button>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="../assets/js/config.js"></script>
@@ -1400,10 +1736,10 @@
     <script>
         // Wholesale Store Configuration
         const WHOLESALE_DISCOUNT = 0.20; // 20% discount
-        const MIN_QUANTITY = 10; // Minimum 10 pieces per product
+        const MIN_QUANTITY = 1; // Minimum 1 piece per product (removed 10 piece restriction)
         let wholesalerCart = [];
         let currentUser = null;
-        let allProducts = []; // Store all loaded products
+        let allProducts = []; // Store all loaded products with variants
         let supabase = null;
         let currentView = 'table'; // 'table' or 'cards'
         
@@ -1472,7 +1808,7 @@
             }).format(price);
         }
 
-        // Load products with wholesale prices from Supabase
+        // Load products with wholesale prices from Supabase with full variant support
         async function loadWholesaleProducts() {
             try {
                 const loadingElement = document.getElementById('productsLoading');
@@ -1488,27 +1824,77 @@
                     throw new Error('Supabase client not initialized');
                 }
                 
-                console.log('🔄 Loading products for wholesale...');
+                console.log('🔄 Loading products with variants for wholesale...');
                 
-                // Usar el nuevo sistema de productos con variantes
+                // Usar el nuevo sistema de productos con variantes completo
                 if (window.ProductVariantsManager) {
-                    const result = await window.ProductVariantsManager.getSimpleProducts(supabase);
+                    const result = await window.ProductVariantsManager.getProductsWithVariants(supabase);
                     
-                    console.log(`✅ Loaded ${result.length} products for wholesale`);
+                    // Extraer el array de productos de la estructura de respuesta
+                    const productsData = result.products || result;
                     
-                    // Transform products for wholesale display
-                    allProducts = result.map(product => ({
-                        id: product.id,
-                        name: product.name,
-                        regularPrice: product.price,
-                        image: getProductImageUrl(product.main_image_url),
-                        stock: product.stock || 0,
-                        category: product.category,
-                        description: product.description,
-                        slug: product.slug
-                    }));
+                    console.log(`✅ Loaded ${productsData.length} products with variants for wholesale`);
+                    console.log('📊 Stats:', result.stats);
+                    
+                    // Transform products for wholesale display with variant support
+                    allProducts = productsData.map(product => {
+                        // Debug: log variant IDs before processing
+                        if (product.variants && product.variants.length > 0) {
+                            console.log(`🔍 Product ${product.id} (${product.name}) variants:`, 
+                                product.variants.map(v => ({
+                                    originalId: v.id,
+                                    idType: typeof v.id,
+                                    name: v.name || v.variant_name
+                                }))
+                            );
+                        }
+                        
+                        // Process variants to ensure proper ID format
+                        const processedVariants = (product.variants || []).map((variant, index) => {
+                            // Ensure variant has a proper string ID
+                            let variantId = variant.id;
+                            
+                            // If variant.id is just a number or doesn't follow expected format,
+                            // create a composite ID using product ID and index
+                            if (typeof variantId === 'number' || 
+                                (typeof variantId === 'string' && !variantId.includes('-'))) {
+                                variantId = `${variantId}-${index}`;
+                                console.log(`🔧 Converted variant ID from ${variant.id} to ${variantId} for product ${product.id}`);
+                            }
+                            
+                            return {
+                                ...variant,
+                                id: variantId,
+                                // Ensure other properties are properly set
+                                name: variant.name || variant.variant_name || `Variante ${index + 1}`,
+                                color: variant.color || variant.variant_value,
+                                size: variant.size || '',
+                                material: variant.material || '',
+                                sku: variant.sku || `${product.id}-VAR-${index + 1}`
+                            };
+                        });
+                        
+                        return {
+                            id: product.id,
+                            name: product.name,
+                            regularPrice: product.price,
+                            image: getProductImageUrl(product.main_image_url),
+                            stock: product.calculated_stock || product.total_stock || 0,
+                            category: product.category,
+                            description: product.description,
+                            slug: product.slug,
+                            variants: processedVariants,
+                            hasVariants: product.has_variants && processedVariants.length > 0
+                        };
+                    });
+                    
+                    console.log(`📦 Products with variants loaded:`, allProducts.map(p => ({
+                        name: p.name,
+                        hasVariants: p.hasVariants,
+                        variantCount: p.variants.length
+                    })));
                 } else {
-                    // Fallback al método anterior si no está disponible el manager
+                    // Fallback al método anterior sin variantes
                     const { data: products, error } = await supabase
                         .from('products')
                         .select('id, name, price, total_stock, main_image_url, description, slug, category_id')
@@ -1537,7 +1923,9 @@
                         stock: product.total_stock || 0,
                         category: categoryMap[product.category_id] || 'Sin categoría',
                         description: product.description,
-                        slug: product.slug
+                        slug: product.slug,
+                        variants: [],
+                        hasVariants: false
                     }));
                 }
                 
@@ -1586,7 +1974,7 @@
             return `../assets/images/productos/${imageId}`;
         }
 
-        // Render products with wholesale prices in table format
+        // Render products with wholesale prices in table format with variant support
         function renderWholesaleProducts(products) {
             const tableBody = document.getElementById('productsTableBody');
             const productsSection = document.getElementById('productsSection');
@@ -1606,22 +1994,92 @@
                 totalStock.textContent = `${total} piezas disponibles`;
             }
             
-            // Populate table rows
+            // Populate table rows with variant support
             tableBody.innerHTML = products.map(product => {
                 const wholesalePrice = calculateWholesalePrice(product.regularPrice);
                 const savings = product.regularPrice - wholesalePrice;
                 const defaultQuantity = MIN_QUANTITY;
                 const defaultSubtotal = wholesalePrice * defaultQuantity;
                 
+                // Determine if product has available variants
+                const hasValidVariants = product.hasVariants && product.variants.some(v => v.stock > 0);
+                
                 return `
-                    <tr class="product-row ${product.stock < MIN_QUANTITY ? 'low-stock-row' : ''}" data-product-id="${product.id}">
+                    <tr class="product-row ${product.hasVariants ? 'has-variants' : ''} ${product.stock < MIN_QUANTITY ? 'low-stock-row' : ''}" 
+                        data-product-id="${product.id}" data-has-variants="${product.hasVariants}">
                         <td class="product-cell">
                             <div class="product-info-cell">
+                                ${product.hasVariants ? `
+                                    <button type="button" class="toggle-variants" onclick="toggleProductVariants(${product.id})" title="Ver variantes">
+                                        <i class="fas fa-caret-right"></i>
+                                    </button>
+                                ` : ''}
                                 <img src="${product.image}" alt="${product.name}" class="product-thumb" 
                                      onerror="this.src='../assets/images/categories/backpacks.jpg'">
                                 <div class="product-details">
-                                    <h4 class="product-name">${product.name}</h4>
+                                    <h4 class="product-name">${product.name}
+                                        ${product.hasVariants ? '<i class="fas fa-layer-group variant-icon" title="Tiene variantes"></i>' : ''}
+                                    </h4>
                                     <span class="product-sku">SKU: ${product.id.toString().padStart(6, '0')}</span>
+                                    ${product.hasVariants ? `
+                                        <!-- Acordeón de Variantes -->
+                                        <div class="variants-accordion" id="variants-accordion-${product.id}">
+                                            ${product.variants.map(variant => {
+                                                const variantPrice = variant.price || product.regularPrice;
+                                                const wholesalePrice = calculateWholesalePrice(variantPrice);
+                                                const stockClass = variant.stock === 0 ? 'variant-stock-out' : variant.stock < 5 ? 'variant-stock-low' : variant.stock < 20 ? 'variant-stock-medium' : 'variant-stock-high';
+                                                const variantName = variant.name || `${variant.color || ''} ${variant.size || ''} ${variant.material || ''}`.trim();
+                                                return `
+                                                    <div class="variant-item">
+                                                        <div class="variant-details">
+                                                            <div class="variant-name-display">${variantName}</div>
+                                                            <div class="variant-attributes">
+                                                                ${variant.sku ? `SKU: ${variant.sku}` : ''}
+                                                                ${variant.color ? `• Color: ${variant.color}` : ''}
+                                                                ${variant.size ? `• Talla: ${variant.size}` : ''}
+                                                                ${variant.material ? `• Material: ${variant.material}` : ''}
+                                                            </div>
+                                                        </div>
+                                                        <div class="variant-stock-info">
+                                                            <span class="variant-stock-badge ${stockClass}">
+                                                                ${variant.stock} pzs
+                                                            </span>
+                                                        </div>
+                                                        <div class="variant-price-info">
+                                                            <div class="variant-regular-price">${formatPrice(variantPrice)}</div>
+                                                            <div class="variant-wholesale-price">${formatPrice(wholesalePrice)}</div>
+                                                        </div>
+                                                        <div class="variant-controls">
+                                                            ${variant.stock > 0 ? `
+                                                                <div class="variant-quantity-controls">
+                                                                    <button type="button" class="variant-qty-btn" onclick="decreaseVariantQuantity(${product.id}, '${variant.id}')">
+                                                                        <i class="fas fa-minus"></i>
+                                                                    </button>
+                                                                    <input type="number" id="variant-qty-${product.id}-${variant.id}" class="variant-qty-input" value="0" 
+                                                                           min="0" max="${variant.stock}" 
+                                                                           onchange="updateVariantSubtotal(${product.id}, '${variant.id}')"
+                                                                           oninput="updateVariantSubtotal(${product.id}, '${variant.id}')">
+                                                                    <button type="button" class="variant-qty-btn" onclick="increaseVariantQuantity(${product.id}, '${variant.id}')">
+                                                                        <i class="fas fa-plus"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="variant-subtotal">
+                                                                    <span class="variant-subtotal-amount" id="variant-subtotal-${product.id}-${variant.id}">${formatPrice(0)}</span>
+                                                                </div>
+                                                                <button class="variant-add-btn" onclick="addVariantToCart(${product.id}, '${variant.id}')">
+                                                                    <i class="fas fa-plus"></i> Agregar
+                                                                </button>
+                                                            ` : `
+                                                                <div class="variant-no-stock">
+                                                                    <span class="no-stock-message">Sin stock</span>
+                                                                </div>
+                                                            `}
+                                                        </div>
+                                                    </div>
+                                                `;
+                                            }).join('')}
+                                        </div>
+                                    ` : ''}
                                 </div>
                             </div>
                         </td>
@@ -1629,44 +2087,61 @@
                             <span class="category-badge">${product.category}</span>
                         </td>
                         <td class="regular-price-cell">
-                            <span class="price-crossed">${formatPrice(product.regularPrice)}</span>
+                            <span class="price-crossed" id="regular-price-${product.id}">${formatPrice(product.regularPrice)}</span>
                         </td>
                         <td class="wholesale-price-cell">
-                            <span class="price-wholesale">${formatPrice(wholesalePrice)}</span>
+                            <span class="price-wholesale" id="wholesale-price-${product.id}">${formatPrice(wholesalePrice)}</span>
                             <small class="discount-badge">-20%</small>
                         </td>
                         <td class="savings-cell">
-                            <span class="savings-amount">${formatPrice(savings)}</span>
+                            <span class="savings-amount" id="savings-${product.id}">${formatPrice(savings)}</span>
                         </td>
                         <td class="stock-cell">
-                            <div class="stock-info ${product.stock < MIN_QUANTITY ? 'low-stock' : product.stock > 50 ? 'high-stock' : 'normal-stock'}">
+                            <div class="stock-info ${product.stock < MIN_QUANTITY ? 'low-stock' : product.stock > 50 ? 'high-stock' : 'normal-stock'}" id="stock-info-${product.id}">
                                 <i class="fas fa-boxes"></i>
                                 <span>${product.stock} pzs</span>
+                                ${product.hasVariants ? '<span class="variant-stock-display">(Total)</span>' : ''}
                                 ${product.stock < MIN_QUANTITY ? '<i class="fas fa-exclamation-triangle warning-icon"></i>' : ''}
                             </div>
                         </td>
                         <td class="quantity-cell">
-                            <div class="quantity-controls">
-                                <button type="button" class="qty-btn qty-decrease" onclick="decreaseQuantity(${product.id})" ${product.stock < MIN_QUANTITY ? 'disabled' : ''}>
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <input type="number" id="qty-${product.id}" class="qty-input" value="${MIN_QUANTITY}" 
-                                       min="${MIN_QUANTITY}" max="${product.stock}" 
-                                       onchange="updateRowSubtotal(${product.id})" ${product.stock < MIN_QUANTITY ? 'disabled' : ''}>
-                                <button type="button" class="qty-btn qty-increase" onclick="increaseQuantity(${product.id})" ${product.stock < MIN_QUANTITY ? 'disabled' : ''}>
-                                    <i class="fas fa-plus"></i>
-                                </button>
+                            <div class="quantity-controls" id="quantity-controls-${product.id}">
+                                ${product.hasVariants ? `
+                                    <!-- Input informativo para productos con variantes -->
+                                    <div class="variant-total-display">
+                                        <span class="variant-total-label">Total:</span>
+                                        <input type="number" id="qty-${product.id}" class="qty-input qty-readonly" value="0" 
+                                               readonly disabled title="Suma automática de las cantidades de variantes">
+                                        <small class="variant-help-text">Suma de variantes</small>
+                                    </div>
+                                ` : product.stock < MIN_QUANTITY ? `
+                                    <div class="variant-required-message">
+                                        <small>Sin stock</small>
+                                    </div>
+                                ` : `
+                                    <!-- Controles normales para productos sin variantes -->
+                                    <button type="button" class="qty-btn qty-decrease" onclick="decreaseQuantity(${product.id})">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" id="qty-${product.id}" class="qty-input" value="${MIN_QUANTITY}" 
+                                           min="${MIN_QUANTITY}" max="${product.stock}" 
+                                           onchange="updateRowSubtotal(${product.id})">
+                                    <button type="button" class="qty-btn qty-increase" onclick="increaseQuantity(${product.id})">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                `}
                             </div>
                         </td>
                         <td class="subtotal-cell">
-                            <span class="subtotal-amount" id="subtotal-${product.id}">${formatPrice(defaultSubtotal)}</span>
+                            <span class="subtotal-amount" id="subtotal-${product.id}">${formatPrice(product.hasVariants ? 0 : defaultSubtotal)}</span>
                         </td>
                         <td class="action-cell">
-                            <button class="add-to-order-btn ${product.stock < MIN_QUANTITY ? 'disabled' : ''}" 
+                            <button class="add-to-order-btn ${(product.hasVariants && !hasValidVariants) || product.stock < MIN_QUANTITY ? 'disabled' : ''}" 
                                     onclick="addToWholesaleCart(${product.id})"
-                                    ${product.stock < MIN_QUANTITY ? 'disabled' : ''}>
+                                    ${(product.hasVariants && !hasValidVariants) || product.stock < MIN_QUANTITY ? 'disabled' : ''}>
                                 <i class="fas fa-plus"></i>
-                                ${product.stock < MIN_QUANTITY ? 'Sin Stock' : 'Agregar'}
+                                ${product.hasVariants && !hasValidVariants ? 'Selecciona Variante' : 
+                                  product.stock < MIN_QUANTITY ? 'Sin Stock' : 'Agregar'}
                             </button>
                         </td>
                     </tr>
@@ -1707,8 +2182,26 @@
             const product = allProducts.find(p => p.id === productId);
             if (!product) return;
             
-            const wholesalePrice = calculateWholesalePrice(product.regularPrice);
-            const subtotal = wholesalePrice * quantity;
+            let subtotal = 0;
+            
+            // If product has variants, calculate subtotal from variant quantities and prices
+            if (product.hasVariants) {
+                product.variants.forEach(variant => {
+                    const variantQtyInput = document.getElementById(`variant-qty-${productId}-${variant.id}`);
+                    if (variantQtyInput) {
+                        const variantQty = parseInt(variantQtyInput.value) || 0;
+                        if (variantQty > 0) {
+                            const variantPrice = variant.price || product.regularPrice;
+                            const variantWholesalePrice = calculateWholesalePrice(variantPrice);
+                            subtotal += variantWholesalePrice * variantQty;
+                        }
+                    }
+                });
+            } else {
+                // For products without variants, use regular calculation
+                const wholesalePrice = calculateWholesalePrice(product.regularPrice);
+                subtotal = wholesalePrice * quantity;
+            }
             
             subtotalElement.textContent = formatPrice(subtotal);
             updatePageSubtotal();
@@ -1871,8 +2364,12 @@
             if (cartSummaryBar) {
                 if (wholesalerCart.length > 0) {
                     cartSummaryBar.style.display = 'flex';
+                    cartSummaryBar.classList.add('visible');
                 } else {
-                    cartSummaryBar.style.display = 'none';
+                    cartSummaryBar.classList.remove('visible');
+                    setTimeout(() => {
+                        cartSummaryBar.style.display = 'none';
+                    }, 300);
                 }
             }
             console.log(`🛒 Cart summary bar ${cartSummaryBar ? 'updated' : 'not found'}`);
@@ -2023,15 +2520,455 @@
             // Implement search functionality
         }
 
+        // Variant Management Functions
+        
+        // Toggle product variants visibility with accordion functionality
+        function toggleProductVariants(productId) {
+            const row = document.querySelector(`[data-product-id="${productId}"]`);
+            const toggleBtn = row.querySelector('.toggle-variants');
+            const accordionElement = document.getElementById(`variants-accordion-${productId}`);
+            
+            if (!accordionElement) {
+                console.warn(`Accordion element not found for product ${productId}`);
+                return;
+            }
+            
+            if (row.classList.contains('variants-expanded')) {
+                // Collapse variants
+                row.classList.remove('variants-expanded');
+                accordionElement.classList.remove('show');
+                toggleBtn.innerHTML = '<i class="fas fa-caret-right"></i>';
+                console.log(`📱 Collapsed variants accordion for product ${productId}`);
+            } else {
+                // Expand variants
+                row.classList.add('variants-expanded');
+                accordionElement.classList.add('show');
+                toggleBtn.innerHTML = '<i class="fas fa-caret-down"></i>';
+                console.log(`📱 Expanded variants accordion for product ${productId}`);
+            }
+        }
+        
+        
+        // Enhanced updateRowSubtotal to handle variant pricing
+        function updateRowSubtotalWithVariant(productId, variantPrice = null) {
+            const quantityInput = document.getElementById(`qty-${productId}`);
+            const subtotalElement = document.getElementById(`subtotal-${productId}`);
+            
+            if (!quantityInput || !subtotalElement) return;
+            
+            const quantity = parseInt(quantityInput.value);
+            
+            let price;
+            if (variantPrice) {
+                price = variantPrice;
+            } else {
+                // Find product from loaded products
+                const product = allProducts.find(p => p.id === productId);
+                if (!product) return;
+                price = product.regularPrice;
+            }
+            
+            const wholesalePrice = calculateWholesalePrice(price);
+            const subtotal = wholesalePrice * quantity;
+            
+            subtotalElement.textContent = formatPrice(subtotal);
+            updatePageSubtotal();
+        }
+        
+        // Enhanced addToWholesaleCart to handle variants
+        function addToWholesaleCartWithVariant(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            const quantityInput = document.getElementById(`qty-${productId}`);
+            const quantity = parseInt(quantityInput.value);
+            
+            if (quantity < MIN_QUANTITY) {
+                alert(`El pedido mínimo es de ${MIN_QUANTITY} piezas por producto.`);
+                return;
+            }
+            
+            let selectedVariant = null;
+            let finalPrice = product.regularPrice;
+            let productName = product.name;
+            let cartKey = productId; // Default cart key is just the product ID
+            
+            
+            // Check if already in cart (using the cart key)
+            const existingItem = wholesalerCart.find(item => item.cartKey === cartKey);
+            
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                wholesalerCart.push({
+                    id: productId,
+                    cartKey: cartKey, // Unique identifier for cart item
+                    variantId: selectedVariant ? selectedVariant.id : null,
+                    name: productName,
+                    regularPrice: finalPrice,
+                    wholesalePrice: calculateWholesalePrice(finalPrice),
+                    quantity: quantity,
+                    variant: selectedVariant
+                });
+            }
+
+            updateCartDisplay();
+            showCartSummaryBar();
+            
+            // Success feedback
+            const button = event.target.closest('.add-to-order-btn');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Agregado';
+            button.style.backgroundColor = '#28a745';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.backgroundColor = '';
+            }, 2000);
+            
+            console.log(`🛒 Added to cart:`, {
+                product: productName,
+                quantity: quantity,
+                variant: selectedVariant?.name || 'No variant',
+                price: formatPrice(calculateWholesalePrice(finalPrice))
+            });
+        }
+        
+        // Update the main addToWholesaleCart function to use the variant-aware version
+        function addToWholesaleCart(productId) {
+            return addToWholesaleCartWithVariant(productId);
+        }
+        
+        // Update the main updateRowSubtotal function to handle variants
+        function updateRowSubtotal(productId, variantPrice = null) {
+            return updateRowSubtotalWithVariant(productId, variantPrice);
+        }
+
+        // Variant quantity controls for accordion
+        function increaseVariantQuantity(productId, variantId) {
+            // Mantener el formato completo del variantId (ya incluye el índice)
+            const inputId = `variant-qty-${productId}-${variantId}`;
+            const input = document.getElementById(inputId);
+            
+            if (!input) {
+                console.error(`❌ Input not found: ${inputId}`);
+                
+                // Debug: Check if the accordion is visible
+                const accordion = document.getElementById(`variants-accordion-${productId}`);
+                console.log(`🔍 Accordion for product ${productId} exists: ${!!accordion}`);
+                if (accordion) {
+                    console.log(`🔍 Accordion is visible: ${accordion.classList.contains('show')}`);
+                    console.log(`🔍 Accordion innerHTML length: ${accordion.innerHTML.length}`);
+                }
+                
+                // Debug: List all variant inputs
+                const allVariantInputs = document.querySelectorAll('.variant-qty-input');
+                console.log(`🔍 All variant inputs (${allVariantInputs.length}):`);
+                allVariantInputs.forEach(inp => {
+                    console.log(`  - ${inp.id}`);
+                });
+                
+                // Check if product and variant exist in data
+                const product = allProducts.find(p => p.id === productId);
+                if (product) {
+                    const variant = product.variants.find(v => v.id === variantId);
+                    console.log(`🔍 Product ${productId} found, variant ${variantId} found: ${!!variant}`);
+                } else {
+                    console.error(`❌ Product ${productId} not found in allProducts`);
+                }
+                
+                return;
+            }
+            
+            const max = parseInt(input.max) || 999;
+            const current = parseInt(input.value) || 0;
+            
+            console.log(`➕ Increasing variant quantity for product ${productId}, variant ${variantId}: ${current} -> ${Math.min(current + 1, max)}`);
+            
+            if (current < max) {
+                input.value = current + 1;
+                updateVariantSubtotal(productId, variantId);
+            } else {
+                console.log(`⚠️ Maximum quantity reached: ${max}`);
+            }
+        }
+
+        function decreaseVariantQuantity(productId, variantId) {
+            // Mantener el formato completo del variantId (ya incluye el índice)
+            const inputId = `variant-qty-${productId}-${variantId}`;
+            const input = document.getElementById(inputId);
+            
+            if (!input) {
+                console.error(`❌ Input not found: ${inputId}`);
+                
+                // Same debugging as in increase function
+                const accordion = document.getElementById(`variants-accordion-${productId}`);
+                console.log(`🔍 Accordion for product ${productId} exists: ${!!accordion}`);
+                if (accordion) {
+                    console.log(`🔍 Accordion is visible: ${accordion.classList.contains('show')}`);
+                }
+                return;
+            }
+            
+            const min = parseInt(input.min) || 0;
+            const current = parseInt(input.value) || 0;
+            
+            console.log(`➖ Decreasing variant quantity for product ${productId}, variant ${variantId}: ${current} -> ${Math.max(current - 1, min)}`);
+            
+            if (current > min) {
+                input.value = current - 1;
+                updateVariantSubtotal(productId, variantId);
+            } else {
+                console.log(`⚠️ Minimum quantity reached: ${min}`);
+            }
+        }
+
+        // Update subtotal for variant in accordion
+        function updateVariantSubtotal(productId, variantId) {
+            console.log(`📊 Updating variant subtotal for product ${productId}, variant ${variantId}`);
+            
+            const quantityInput = document.getElementById(`variant-qty-${productId}-${variantId}`);
+            const subtotalElement = document.getElementById(`variant-subtotal-${productId}-${variantId}`);
+            
+            if (!quantityInput || !subtotalElement) {
+                console.error(`❌ Elements not found:`, {
+                    quantityInput: !!quantityInput,
+                    subtotalElement: !!subtotalElement
+                });
+                return;
+            }
+
+            const quantity = parseInt(quantityInput.value) || 0;
+            console.log(`📝 Variant quantity: ${quantity}`);
+
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) {
+                console.error(`❌ Product not found: ${productId}`);
+                return;
+            }
+
+            const variant = product.variants.find(v => v.id === variantId);
+            if (!variant) {
+                console.error(`❌ Variant not found: ${variantId}`);
+                return;
+            }
+
+            const variantPrice = variant.price || product.regularPrice;
+            const wholesalePrice = calculateWholesalePrice(variantPrice);
+            const subtotal = wholesalePrice * quantity;
+
+            subtotalElement.textContent = formatPrice(subtotal);
+            console.log(`💰 Variant subtotal updated: ${formatPrice(subtotal)}`);
+            
+            // Update the main quantity input to reflect the sum of all variant quantities
+            updateMainQuantityFromVariants(productId);
+        }
+        
+        // Update main quantity input to reflect sum of variant quantities
+        function updateMainQuantityFromVariants(productId) {
+            const mainQuantityInput = document.getElementById(`qty-${productId}`);
+            if (!mainQuantityInput) return;
+            
+            const product = allProducts.find(p => p.id === productId);
+            if (!product || !product.hasVariants) return;
+            
+            // Sum all variant quantities
+            let totalQuantity = 0;
+            product.variants.forEach(variant => {
+                const variantQtyInput = document.getElementById(`variant-qty-${productId}-${variant.id}`);
+                if (variantQtyInput) {
+                    totalQuantity += parseInt(variantQtyInput.value) || 0;
+                }
+            });
+            
+            // Update main quantity input
+            mainQuantityInput.value = totalQuantity;
+            
+            // Update the row subtotal
+            updateRowSubtotal(productId);
+            
+            console.log(`📊 Updated main quantity for product ${productId} to ${totalQuantity}`);
+        }
+
+        // Add variant to cart from accordion
+        function addVariantToCart(productId, variantId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+
+            const variant = product.variants.find(v => v.id === variantId);
+            if (!variant) return;
+
+            const quantityInput = document.getElementById(`variant-qty-${productId}-${variantId}`);
+            const quantity = parseInt(quantityInput.value);
+
+            if (quantity < MIN_QUANTITY) {
+                alert(`El pedido mínimo es de ${MIN_QUANTITY} piezas por producto.`);
+                return;
+            }
+
+            if (variant.stock < quantity) {
+                alert(`Stock insuficiente. Disponible: ${variant.stock} piezas.`);
+                return;
+            }
+
+            const variantPrice = variant.price || product.regularPrice;
+            const finalPrice = variantPrice;
+            const cartKey = `${productId}-${variantId}`;
+            const variantName = variant.name || `${variant.color || ''} ${variant.size || ''} ${variant.material || ''}`.trim();
+            const productName = `${product.name} - ${variantName}`;
+
+            // Check if already in cart
+            const existingItem = wholesalerCart.find(item => item.cartKey === cartKey);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                wholesalerCart.push({
+                    id: productId,
+                    cartKey: cartKey,
+                    variantId: variant.id,
+                    name: productName,
+                    regularPrice: finalPrice,
+                    wholesalePrice: calculateWholesalePrice(finalPrice),
+                    quantity: quantity,
+                    variant: variant
+                });
+            }
+
+            updateCartDisplay();
+            showCartSummaryBar();
+
+            // Success feedback
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Agregado';
+            button.style.backgroundColor = '#28a745';
+
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.backgroundColor = '';
+            }, 2000);
+
+            console.log(`🛒 Added variant to cart:`, {
+                product: productName,
+                quantity: quantity,
+                variant: variantName,
+                price: formatPrice(calculateWholesalePrice(finalPrice))
+            });
+        }
+        
+        // Test variant controls function for debugging
+        function testVariantControls() {
+            console.log('🧪 Testing variant controls...');
+            
+            // Find all variant quantity inputs
+            const variantInputs = document.querySelectorAll('.variant-qty-input');
+            console.log(`Found ${variantInputs.length} variant quantity inputs`);
+            
+            variantInputs.forEach((input, index) => {
+                const id = input.id;
+                console.log(`${index + 1}. Input ID: ${id}, Value: ${input.value}, Min: ${input.min}, Max: ${input.max}`);
+                
+                // Test if we can programmatically change the value
+                const testValue = 5;
+                input.value = testValue;
+                console.log(`   Set test value to ${testValue}, actual value: ${input.value}`);
+                
+                // Reset to 0
+                input.value = 0;
+            });
+            
+            // Find all variant control buttons
+            const variantButtons = document.querySelectorAll('.variant-qty-btn');
+            console.log(`Found ${variantButtons.length} variant control buttons`);
+            
+            variantButtons.forEach((btn, index) => {
+                const onclick = btn.getAttribute('onclick');
+                console.log(`${index + 1}. Button onclick: ${onclick}`);
+            });
+            
+            // Check variant accordions
+            const accordions = document.querySelectorAll('.variants-accordion');
+            console.log(`Found ${accordions.length} variant accordions`);
+            
+            accordions.forEach((accordion, index) => {
+                const id = accordion.id;
+                const isVisible = accordion.classList.contains('show');
+                console.log(`${index + 1}. Accordion ID: ${id}, Visible: ${isVisible}`);
+            });
+            
+            // Check for products with variants
+            console.log('📊 Checking products with variants...');
+            allProducts.forEach(product => {
+                if (product.hasVariants) {
+                    console.log(`Product ${product.id} (${product.name}) has ${product.variants.length} variants:`);
+                    product.variants.forEach((variant, vIndex) => {
+                        const expectedInputId = `variant-qty-${product.id}-${variant.id}`;
+                        const actualInput = document.getElementById(expectedInputId);
+                        console.log(`  Variant ${vIndex + 1}: ID=${variant.id}, Expected Input ID=${expectedInputId}, Found=${!!actualInput}`);
+                        if (!actualInput) {
+                            console.error(`❌ Missing input for variant: ${expectedInputId}`);
+                        }
+                    });
+                }
+            });
+        }
+        
+        // Add event listeners to variant controls after products are loaded
+        function setupVariantEventListeners() {
+            console.log('🎯 Setting up variant event listeners...');
+            
+            // Use event delegation for dynamically created elements
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('variant-qty-btn')) {
+                    e.preventDefault();
+                    const onclick = e.target.getAttribute('onclick');
+                    if (onclick) {
+                        console.log(`🖱️ Variant button clicked: ${onclick}`);
+                        // Execute the onclick function
+                        try {
+                            eval(onclick);
+                        } catch (error) {
+                            console.error('❌ Error executing onclick:', error);
+                        }
+                    }
+                }
+            });
+            
+            // Event delegation for variant quantity inputs
+            document.addEventListener('input', function(e) {
+                if (e.target.classList.contains('variant-qty-input')) {
+                    const id = e.target.id;
+                    const matches = id.match(/variant-qty-(\d+)-(\d+)/);
+                    if (matches) {
+                        const productId = parseInt(matches[1]);
+                        const variantId = parseInt(matches[2]);
+                        console.log(`📝 Variant input changed: Product ${productId}, Variant ${variantId}, Value: ${e.target.value}`);
+                        updateVariantSubtotal(productId, variantId);
+                    }
+                }
+            });
+            
+            console.log('✅ Variant event listeners setup complete');
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             if (!checkWholesaleAuth()) return;
             
-            console.log('🏦 Tienda Mayoristas inicializada');
+            console.log('🏦 Tienda Mayoristas inicializada con soporte completo de variantes');
+            
+            // Setup event listeners for variants
+            setupVariantEventListeners();
             
             // Initialize Supabase first
             if (initializeSupabase()) {
-                loadWholesaleProducts();
+                loadWholesaleProducts().then(() => {
+                    console.log('✅ Products loaded, testing variant controls...');
+                    // Wait a bit for DOM to be fully ready
+                    setTimeout(() => {
+                        testVariantControls();
+                    }, 1000);
+                });
             } else {
                 // Show error state if Supabase fails to initialize
                 document.getElementById('productsLoading').style.display = 'none';

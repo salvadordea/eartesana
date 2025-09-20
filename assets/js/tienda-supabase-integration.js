@@ -33,9 +33,18 @@ class TiendaSupabaseIntegration {
                 throw new Error('API de Supabase no disponible');
             }
 
+            // Leer parámetros URL antes de cargar datos
+            this.readURLParameters();
+
             // Cargar datos iniciales
             await this.loadCategories();
             await this.loadProducts();
+            
+            // Si hay filtros desde URL, aplicarlos con efecto suave
+            if (this.hasActiveFilters()) {
+                console.log('🎯 Aplicando filtros desde URL:', this.currentFilters);
+                this.applyURLFiltersWithTransition();
+            }
             
             // Configurar event listeners
             this.setupEventListeners();
@@ -45,6 +54,300 @@ class TiendaSupabaseIntegration {
         } catch (error) {
             console.error('❌ Error inicializando tienda:', error);
             this.showError('Error cargando la tienda');
+        }
+    }
+
+    readURLParameters() {
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const categorySlug = urlParams.get('categoria');
+            const categoryName = urlParams.get('nombre');
+            
+            console.log('🔍 Parámetros URL detectados:');
+            console.log('  - categoria:', categorySlug);
+            console.log('  - nombre:', categoryName);
+            
+            if (categoryName) {
+                // Usar el nombre decodificado de la URL
+                this.currentFilters.category = decodeURIComponent(categoryName);
+                console.log('✅ Filtro de categoría establecido:', this.currentFilters.category);
+            }
+        } catch (error) {
+            console.warn('⚠️ Error leyendo parámetros URL:', error);
+        }
+    }
+
+    hasActiveFilters() {
+        return this.currentFilters.category || 
+               this.currentFilters.search || 
+               this.currentFilters.minPrice || 
+               this.currentFilters.maxPrice || 
+               this.currentFilters.onSale || 
+               this.currentFilters.featured || 
+               !this.currentFilters.inStock;
+    }
+
+    hideCategoriesSection() {
+        const categoriesSection = document.querySelector('.categories-section-inline');
+        if (categoriesSection) {
+            categoriesSection.style.display = 'none';
+            console.log('👁️ Sección de categorías ocultada');
+        }
+    }
+
+    showCategoriesSection() {
+        const categoriesSection = document.querySelector('.categories-section-inline');
+        if (categoriesSection) {
+            categoriesSection.style.display = 'block';
+            console.log('👁️ Sección de categorías mostrada');
+        }
+    }
+
+    applyURLFiltersWithTransition() {
+        // Primero mostrar las categorías brevemente para el efecto
+        this.showCategoriesSection();
+        
+        // Crear un overlay de carga elegante
+        const loadingOverlay = this.createLoadingOverlay();
+        document.body.appendChild(loadingOverlay);
+        
+        // Después de un breve momento, aplicar la transición
+        setTimeout(() => {
+            // Animar la transición de categorías a productos
+            this.hideCategoriesWithTransition();
+            
+            // Actualizar breadcrumbs con animación
+            this.updateBreadcrumbsWithAnimation();
+            
+            // Después de la transición, mostrar productos
+            setTimeout(() => {
+                this.renderProducts();
+                this.showProductsSectionWithAnimation();
+                
+                // Remover overlay de carga
+                setTimeout(() => {
+                    loadingOverlay.style.opacity = '0';
+                    setTimeout(() => {
+                        if (loadingOverlay.parentNode) {
+                            loadingOverlay.parentNode.removeChild(loadingOverlay);
+                        }
+                    }, 300);
+                }, 500);
+            }, 600);
+        }, 800); // Mostrar categorías por 800ms para el efecto
+    }
+
+    createLoadingOverlay() {
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(2px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        `;
+        
+        overlay.innerHTML = `
+            <div style="
+                background: white;
+                padding: 30px 40px;
+                border-radius: 16px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                transform: scale(1);
+                animation: pulseScale 1.5s ease-in-out infinite;
+            ">
+                <div style="
+                    width: 40px;
+                    height: 40px;
+                    border: 3px solid #C0C0C0;
+                    border-top: 3px solid transparent;
+                    border-radius: 50%;
+                    margin: 0 auto 15px;
+                    animation: spin 1s linear infinite;
+                "></div>
+                <p style="
+                    margin: 0;
+                    color: #333;
+                    font-weight: 600;
+                    font-size: 16px;
+                ">Cargando ${this.currentFilters.category}...</p>
+            </div>
+            
+            <style>
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+                
+                @keyframes pulseScale {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                    100% { transform: scale(1); }
+                }
+            </style>
+        `;
+        
+        return overlay;
+    }
+
+    hideCategoriesWithTransition() {
+        const categoriesSection = document.querySelector('.categories-section-inline');
+        const categoriesGrid = document.getElementById('categoriesGrid');
+        
+        if (categoriesSection) {
+            categoriesSection.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            categoriesSection.style.transform = 'translateY(-20px) scale(0.95)';
+            categoriesSection.style.opacity = '0';
+            categoriesSection.style.filter = 'blur(5px)';
+            
+            setTimeout(() => {
+                categoriesSection.style.display = 'none';
+            }, 600);
+        }
+        
+        if (categoriesGrid) {
+            const categoryCards = categoriesGrid.querySelectorAll('.category-card');
+            categoryCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.transition = 'all 0.4s ease';
+                    card.style.transform = 'translateY(-15px)';
+                    card.style.opacity = '0';
+                }, index * 50);
+            });
+        }
+    }
+
+    showProductsSectionWithAnimation() {
+        const productsContainer = document.getElementById('productsContainer');
+        const productsResults = document.getElementById('productsResults');
+        const productsGrid = document.getElementById('productsGrid');
+        
+        if (productsContainer) {
+            productsContainer.style.display = 'block';
+            productsContainer.style.opacity = '0';
+            productsContainer.style.transform = 'translateY(30px)';
+            productsContainer.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            
+            setTimeout(() => {
+                productsContainer.style.opacity = '1';
+                productsContainer.style.transform = 'translateY(0)';
+            }, 100);
+        }
+        
+        if (productsResults) {
+            productsResults.style.display = 'flex';
+            productsResults.style.opacity = '0';
+            productsResults.style.transform = 'translateY(20px)';
+            productsResults.style.transition = 'all 0.5s ease';
+            
+            setTimeout(() => {
+                productsResults.style.opacity = '1';
+                productsResults.style.transform = 'translateY(0)';
+            }, 200);
+        }
+        
+        // Animar las tarjetas de productos individualmente
+        if (productsGrid) {
+            const productCards = productsGrid.querySelectorAll('.product-card');
+            productCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px) scale(0.9)';
+                card.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0) scale(1)';
+                }, 300 + (index * 100));
+            });
+        }
+    }
+
+    updateBreadcrumbsWithAnimation() {
+        const breadcrumbNav = document.querySelector('.breadcrumb-nav');
+        if (breadcrumbNav && this.currentFilters.category) {
+            const shopTitle = document.querySelector('.shop-title h1');
+            const shopDesc = document.querySelector('.shop-title p');
+            
+            // Animar breadcrumbs
+            breadcrumbNav.style.transition = 'all 0.4s ease';
+            breadcrumbNav.style.opacity = '0';
+            breadcrumbNav.style.transform = 'translateX(-10px)';
+            
+            setTimeout(() => {
+                breadcrumbNav.innerHTML = `
+                    <a href="./index.html">Inicio</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="./tienda.html">Tienda</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>${this.currentFilters.category}</span>
+                `;
+                
+                breadcrumbNav.style.opacity = '1';
+                breadcrumbNav.style.transform = 'translateX(0)';
+            }, 200);
+            
+            // Animar título
+            if (shopTitle) {
+                shopTitle.style.transition = 'all 0.4s ease';
+                shopTitle.style.opacity = '0';
+                shopTitle.style.transform = 'translateY(-10px)';
+                
+                setTimeout(() => {
+                    shopTitle.textContent = this.currentFilters.category;
+                    shopTitle.style.opacity = '1';
+                    shopTitle.style.transform = 'translateY(0)';
+                }, 200);
+            }
+            
+            // Animar descripción
+            if (shopDesc) {
+                shopDesc.style.transition = 'all 0.4s ease';
+                shopDesc.style.opacity = '0';
+                shopDesc.style.transform = 'translateY(-10px)';
+                
+                setTimeout(() => {
+                    shopDesc.textContent = `Productos de ${this.currentFilters.category.toLowerCase()}`;
+                    shopDesc.style.opacity = '1';
+                    shopDesc.style.transform = 'translateY(0)';
+                }, 300);
+            }
+            
+            console.log('🍞 Breadcrumbs animados para categoría:', this.currentFilters.category);
+        }
+    }
+
+    updateBreadcrumbs() {
+        // Versión sin animación para uso interno
+        const breadcrumbNav = document.querySelector('.breadcrumb-nav');
+        if (breadcrumbNav && this.currentFilters.category) {
+            const shopTitle = document.querySelector('.shop-title h1');
+            const shopDesc = document.querySelector('.shop-title p');
+            
+            breadcrumbNav.innerHTML = `
+                <a href="./index.html">Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="./tienda.html">Tienda</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>${this.currentFilters.category}</span>
+            `;
+            
+            if (shopTitle) {
+                shopTitle.textContent = this.currentFilters.category;
+            }
+            if (shopDesc) {
+                shopDesc.textContent = `Productos de ${this.currentFilters.category.toLowerCase()}`;
+            }
+            
+            console.log('🍞 Breadcrumbs actualizados para categoría:', this.currentFilters.category);
         }
     }
 
@@ -349,18 +652,26 @@ class TiendaSupabaseIntegration {
                 }
             }
 
-            // Filtro por búsqueda
+            // Filtro por búsqueda con fuzzy search
             if (this.currentFilters.search) {
-                const searchTerm = this.currentFilters.search.toLowerCase();
-                const matchName = product.name.toLowerCase().includes(searchTerm);
-                const matchDescription = product.description && product.description.toLowerCase().includes(searchTerm);
-                // Para búsqueda en categorías, buscar en el array categories
-                const matchCategories = product.categories && product.categories.some(cat =>
-                    cat.toLowerCase().includes(searchTerm)
-                );
+                const searchTerm = this.currentFilters.search.toLowerCase().trim();
                 
-                if (!matchName && !matchDescription && !matchCategories) {
-                    return false;
+                // Si es muy corto, usar búsqueda exacta
+                if (searchTerm.length <= 2) {
+                    const matchName = product.name.toLowerCase().includes(searchTerm);
+                    const matchDescription = product.description && product.description.toLowerCase().includes(searchTerm);
+                    const matchCategories = product.categories && product.categories.some(cat =>
+                        cat.toLowerCase().includes(searchTerm)
+                    );
+                    
+                    if (!matchName && !matchDescription && !matchCategories) {
+                        return false;
+                    }
+                } else {
+                    // Usar fuzzy search para términos más largos
+                    if (!this.fuzzySearchMatch(product, searchTerm)) {
+                        return false;
+                    }
                 }
             }
 
@@ -390,6 +701,154 @@ class TiendaSupabaseIntegration {
         console.log('🔍 DIAGNÓSTICO - Productos filtrados:', filteredProducts.map(p => p.name));
         
         return filteredProducts;
+    }
+
+    // ========================================
+    // FUZZY SEARCH IMPLEMENTATION
+    // ========================================
+    
+    fuzzySearchMatch(product, searchTerm) {
+        const searchWords = searchTerm.split(' ').filter(word => word.length > 0);
+        
+        // Campos donde buscar
+        const searchFields = [
+            product.name || '',
+            product.description || '',
+            ...(product.categories || [])
+        ].map(field => field.toLowerCase());
+        
+        // Cada palabra del término de búsqueda debe coincidir en algún campo
+        return searchWords.every(searchWord => {
+            return searchFields.some(field => {
+                return this.isWordMatch(field, searchWord);
+            });
+        });
+    }
+    
+    isWordMatch(text, searchWord) {
+        // 1. Búsqueda exacta (más rápida)
+        if (text.includes(searchWord)) {
+            return true;
+        }
+        
+        // 2. Búsqueda por palabras individuales (para plurales)
+        const textWords = text.split(/[\s,.-]+/).filter(word => word.length > 0);
+        
+        for (let textWord of textWords) {
+            // Búsqueda exacta de palabra
+            if (textWord === searchWord) {
+                return true;
+            }
+            
+            // 3. Similitud por plurales/singulares
+            if (this.checkPluralSingular(textWord, searchWord)) {
+                return true;
+            }
+            
+            // 4. Distancia de Levenshtein para errores tipográficos
+            if (searchWord.length >= 4 && textWord.length >= 4) {
+                const distance = this.levenshteinDistance(textWord, searchWord);
+                const maxDistance = Math.floor(Math.max(textWord.length, searchWord.length) * 0.2); // 20% de tolerancia
+                
+                if (distance <= maxDistance) {
+                    return true;
+                }
+            }
+            
+            // 5. Búsqueda de subcadenas para palabras largas
+            if (searchWord.length >= 4 && textWord.length >= 4) {
+                if (textWord.includes(searchWord) || searchWord.includes(textWord)) {
+                    return true;
+                }
+            }
+        }
+        
+        // 6. Verificar sinónimos
+        return this.checkSynonyms(text, searchWord);
+    }
+    
+    checkPluralSingular(word1, word2) {
+        const pluralRules = [
+            // Español
+            { singular: /(.+)s$/, plural: '$1es' }, // corazones -> corazón
+            { singular: /(.+)es$/, plural: '$1' },   // aretes -> arete
+            { singular: /(.+)as$/, plural: '$1a' },  // bolsas -> bolsa
+            { singular: /(.+)os$/, plural: '$1o' },  // anillos -> anillo
+            { singular: /(.+)s$/, plural: '$1' },    // collares -> collar
+        ];
+        
+        // Verificar si word1 es plural de word2
+        for (let rule of pluralRules) {
+            if (rule.singular.test(word1)) {
+                const singular = word1.replace(rule.singular, rule.plural);
+                if (singular === word2) {
+                    return true;
+                }
+            }
+            if (rule.singular.test(word2)) {
+                const singular = word2.replace(rule.singular, rule.plural);
+                if (singular === word1) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    checkSynonyms(text, searchWord) {
+        const synonyms = {
+            'arete': ['pendiente', 'zarcillo', 'aro', 'aretes'],
+            'aretes': ['pendientes', 'zarcillos', 'aros', 'arete'],
+            'anillo': ['sortija', 'aro', 'anillos'],
+            'anillos': ['sortijas', 'aros', 'anillo'],
+            'collar': ['gargantilla', 'cadena', 'collares'],
+            'collares': ['gargantillas', 'cadenas', 'collar'],
+            'pulsera': ['brazalete', 'manilla', 'pulseras'],
+            'pulseras': ['brazaletes', 'manillas', 'pulsera'],
+            'bolsa': ['cartera', 'bolso', 'morral', 'bag', 'bolsas'],
+            'bolsas': ['carteras', 'bolsos', 'morrales', 'bags', 'bolsa'],
+            'backpack': ['mochila', 'morral', 'backpacks'],
+            'backpacks': ['mochilas', 'morrales', 'backpack'],
+            'joyeria': ['joyería', 'joyas', 'bisutería'],
+            'joyas': ['joyería', 'bisutería', 'joyeria'],
+            'accesorios': ['complementos', 'accesorio'],
+            'accesorio': ['complemento', 'accesorios']
+        };
+        
+        const searchSynonyms = synonyms[searchWord] || [];
+        
+        return searchSynonyms.some(synonym => {
+            return text.includes(synonym);
+        });
+    }
+    
+    levenshteinDistance(str1, str2) {
+        const matrix = [];
+        
+        for (let i = 0; i <= str2.length; i++) {
+            matrix[i] = [i];
+        }
+        
+        for (let j = 0; j <= str1.length; j++) {
+            matrix[0][j] = j;
+        }
+        
+        for (let i = 1; i <= str2.length; i++) {
+            for (let j = 1; j <= str1.length; j++) {
+                if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+                    matrix[i][j] = matrix[i - 1][j - 1];
+                } else {
+                    matrix[i][j] = Math.min(
+                        matrix[i - 1][j - 1] + 1,
+                        matrix[i][j - 1] + 1,
+                        matrix[i - 1][j] + 1
+                    );
+                }
+            }
+        }
+        
+        return matrix[str2.length][str1.length];
     }
 
     applySorting(products) {
@@ -534,12 +993,6 @@ class TiendaSupabaseIntegration {
             this.renderProducts();
             this.renderCategoriesFilters();
             this.showProductsSection();
-            
-            // Scroll suave a la sección de productos
-            document.getElementById('productsContainer')?.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start' 
-            });
         }, 500); // Esperar que termine la animación de ocultación
     }
     
@@ -687,12 +1140,6 @@ class TiendaSupabaseIntegration {
             setTimeout(() => {
                 this.renderProducts();
                 this.showProductsSection();
-                
-                // Scroll suave a la sección de productos
-                document.getElementById('productsContainer')?.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
-                });
             }, 500);
         }
     }

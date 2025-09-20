@@ -6,30 +6,50 @@
 class SearchAutocomplete {
     constructor() {
         this.searchInput = document.getElementById('searchInput');
+        this.mobileSearchInput = document.getElementById('mobileSearchInput');
         this.suggestionsContainer = document.getElementById('searchSuggestions');
+        this.mobileSuggestionsContainer = document.getElementById('mobileSearchSuggestions');
         this.currentSuggestions = [];
         this.selectedIndex = -1;
         this.searchTimeout = null;
         this.isVisible = false;
+        this.activeSuggestions = null; // Track which suggestions container is active
+        this.activeInput = null; // Track which input is active
         
         this.init();
     }
 
     init() {
-        if (!this.searchInput || !this.suggestionsContainer) {
-            console.warn('Search autocomplete elements not found');
-            return;
-        }
-
         this.bindEvents();
         this.setupClickOutside();
+        
+        console.log('🔍 SearchAutocomplete initialized with:', {
+            desktop: !!this.searchInput && !!this.suggestionsContainer,
+            mobile: !!this.mobileSearchInput && !!this.mobileSuggestionsContainer
+        });
     }
 
     bindEvents() {
+        // Bind desktop search input
+        if (this.searchInput) {
+            this.bindInputEvents(this.searchInput, this.suggestionsContainer, 'desktop');
+        }
+        
+        // Bind mobile search input
+        if (this.mobileSearchInput) {
+            this.bindInputEvents(this.mobileSearchInput, this.mobileSuggestionsContainer, 'mobile');
+        }
+    }
+    
+    bindInputEvents(input, suggestionsContainer, type) {
         // Evento input con debounce
-        this.searchInput.addEventListener('input', (e) => {
+        input.addEventListener('input', (e) => {
             clearTimeout(this.searchTimeout);
             const query = e.target.value.trim();
+            
+            // Set active context
+            this.activeInput = input;
+            this.activeSuggestions = suggestionsContainer;
             
             if (query.length < 2) {
                 this.hideSuggestions();
@@ -42,8 +62,8 @@ class SearchAutocomplete {
         });
 
         // Eventos de teclado para navegación
-        this.searchInput.addEventListener('keydown', (e) => {
-            if (!this.isVisible) return;
+        input.addEventListener('keydown', (e) => {
+            if (!this.isVisible || this.activeInput !== input) return;
 
             switch (e.key) {
                 case 'ArrowDown':
@@ -60,14 +80,17 @@ class SearchAutocomplete {
                     break;
                 case 'Escape':
                     this.hideSuggestions();
-                    this.searchInput.blur();
+                    input.blur();
                     break;
             }
         });
 
         // Focus events
-        this.searchInput.addEventListener('focus', () => {
-            const query = this.searchInput.value.trim();
+        input.addEventListener('focus', () => {
+            this.activeInput = input;
+            this.activeSuggestions = suggestionsContainer;
+            
+            const query = input.value.trim();
             if (query.length >= 2 && this.currentSuggestions.length > 0) {
                 this.showSuggestions();
             }
@@ -76,13 +99,31 @@ class SearchAutocomplete {
 
     setupClickOutside() {
         document.addEventListener('click', (e) => {
-            if (!this.searchInput.contains(e.target) && !this.suggestionsContainer.contains(e.target)) {
+            let isClickOutside = true;
+            
+            // Check desktop elements
+            if (this.searchInput && this.suggestionsContainer) {
+                if (this.searchInput.contains(e.target) || this.suggestionsContainer.contains(e.target)) {
+                    isClickOutside = false;
+                }
+            }
+            
+            // Check mobile elements  
+            if (this.mobileSearchInput && this.mobileSuggestionsContainer) {
+                if (this.mobileSearchInput.contains(e.target) || this.mobileSuggestionsContainer.contains(e.target)) {
+                    isClickOutside = false;
+                }
+            }
+            
+            if (isClickOutside) {
                 this.hideSuggestions();
             }
         });
     }
 
     async fetchSuggestions(query) {
+        if (!this.activeSuggestions) return;
+        
         try {
             this.showLoading();
             
@@ -107,7 +148,9 @@ class SearchAutocomplete {
     }
 
     showLoading() {
-        this.suggestionsContainer.innerHTML = `
+        if (!this.activeSuggestions) return;
+        
+        this.activeSuggestions.innerHTML = `
             <div class="suggestion-loading">
                 <div class="loading-spinner"></div>
                 <span>Buscando...</span>
@@ -117,30 +160,33 @@ class SearchAutocomplete {
     }
 
     renderSuggestions() {
-        if (this.currentSuggestions.length === 0) {
+        if (!this.activeSuggestions || this.currentSuggestions.length === 0) {
             this.showNoResults();
             return;
         }
 
+        const currentQuery = this.activeInput ? this.activeInput.value : '';
         const suggestionsHTML = this.currentSuggestions.map((product, index) => `
             <div class="suggestion-item" data-index="${index}" data-id="${product.id}">
                 <img src="${this.getProductImage(product)}" alt="${product.name || product.title}" class="suggestion-image" onerror="this.src='./assets/images/placeholder-product.jpg'">
                 <div class="suggestion-content">
-                    <div class="suggestion-title">${this.highlightText(product.name || product.title, this.searchInput.value)}</div>
+                    <div class="suggestion-title">${this.highlightText(product.name || product.title, currentQuery)}</div>
                     <div class="suggestion-category">${product.category || 'Producto'}</div>
                 </div>
                 <div class="suggestion-price">$${this.formatPrice(product.price)}</div>
             </div>
         `).join('');
 
-        this.suggestionsContainer.innerHTML = suggestionsHTML;
+        this.activeSuggestions.innerHTML = suggestionsHTML;
         this.bindSuggestionEvents();
         this.showSuggestions();
         this.selectedIndex = -1;
     }
 
     bindSuggestionEvents() {
-        const suggestionItems = this.suggestionsContainer.querySelectorAll('.suggestion-item');
+        if (!this.activeSuggestions) return;
+        
+        const suggestionItems = this.activeSuggestions.querySelectorAll('.suggestion-item');
         
         suggestionItems.forEach((item, index) => {
             item.addEventListener('click', () => {
@@ -155,16 +201,20 @@ class SearchAutocomplete {
     }
 
     showNoResults() {
-        this.suggestionsContainer.innerHTML = `
+        if (!this.activeSuggestions || !this.activeInput) return;
+        
+        this.activeSuggestions.innerHTML = `
             <div class="suggestion-no-results">
-                No se encontraron productos para "${this.searchInput.value}"
+                No se encontraron productos para "${this.activeInput.value}"
             </div>
         `;
         this.showSuggestions();
     }
 
     showError() {
-        this.suggestionsContainer.innerHTML = `
+        if (!this.activeSuggestions) return;
+        
+        this.activeSuggestions.innerHTML = `
             <div class="suggestion-no-results">
                 Error al buscar productos. Inténtalo de nuevo.
             </div>
@@ -173,12 +223,21 @@ class SearchAutocomplete {
     }
 
     showSuggestions() {
-        this.suggestionsContainer.classList.add('visible');
+        if (!this.activeSuggestions) return;
+        
+        this.activeSuggestions.classList.add('visible');
         this.isVisible = true;
     }
 
     hideSuggestions() {
-        this.suggestionsContainer.classList.remove('visible');
+        // Hide both containers
+        if (this.suggestionsContainer) {
+            this.suggestionsContainer.classList.remove('visible');
+        }
+        if (this.mobileSuggestionsContainer) {
+            this.mobileSuggestionsContainer.classList.remove('visible');
+        }
+        
         this.isVisible = false;
         this.selectedIndex = -1;
         this.updateSelection(-1);
@@ -201,7 +260,9 @@ class SearchAutocomplete {
     }
 
     updateSelection(index) {
-        const suggestionItems = this.suggestionsContainer.querySelectorAll('.suggestion-item');
+        if (!this.activeSuggestions) return;
+        
+        const suggestionItems = this.activeSuggestions.querySelectorAll('.suggestion-item');
         
         suggestionItems.forEach((item, i) => {
             item.classList.toggle('highlighted', i === index);
@@ -225,10 +286,10 @@ class SearchAutocomplete {
             
             // Ir directamente a la página del producto
             window.location.href = `${productUrl}?id=${selectedProduct.id}`;
-        } else if (this.searchInput.value.trim()) {
+        } else if (this.activeInput && this.activeInput.value.trim()) {
             // Si no hay selección pero hay texto, hacer búsqueda normal
             this.hideSuggestions();
-            this.performSearch(this.searchInput.value.trim());
+            this.performSearch(this.activeInput.value.trim());
         }
     }
 
@@ -289,19 +350,76 @@ class SearchAutocomplete {
 }
 
 // Inicializar autocompletado cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-    // Esperar a que la API esté disponible
-    const initAutocomplete = () => {
-        if (window.artesanaAPI) {
-            window.searchAutocomplete = new SearchAutocomplete();
-            console.log('✅ Search Autocomplete initialized');
+function initializeSearchAutocomplete() {
+    const searchInput = document.getElementById('searchInput');
+    const searchSuggestions = document.getElementById('searchSuggestions');
+    const mobileSearchInput = document.getElementById('mobileSearchInput');
+    const mobileSuggestions = document.getElementById('mobileSearchSuggestions');
+    
+    console.log('🔍 Verificando elementos para autocompletado:', {
+        searchInput: !!searchInput,
+        searchSuggestions: !!searchSuggestions,
+        mobileSearchInput: !!mobileSearchInput,
+        mobileSuggestions: !!mobileSuggestions,
+        artesanaAPI: !!window.artesanaAPI
+    });
+    
+    // Verificar que al menos tengamos los elementos principales
+    const hasDesktopElements = searchInput && searchSuggestions;
+    const hasMobileElements = mobileSearchInput && mobileSuggestions;
+    
+    if (hasDesktopElements || hasMobileElements) {
+        if (window.artesanaAPI && typeof window.artesanaAPI.searchProducts === 'function') {
+            // Solo crear la instancia si no existe ya
+            if (!window.searchAutocomplete) {
+                try {
+                    window.searchAutocomplete = new SearchAutocomplete();
+                    console.log('✅ Search Autocomplete initialized successfully');
+                    return true;
+                } catch (error) {
+                    console.error('❌ Error inicializando SearchAutocomplete:', error);
+                    return false;
+                }
+            }
+            return true;
         } else {
-            setTimeout(initAutocomplete, 500);
+            console.log('⏳ Esperando artesanaAPI...');
+            return false;
         }
-    };
+    } else {
+        console.log('⏳ Esperando elementos DOM...');
+        return false;
+    }
+}
 
-    // Pequeño delay para asegurar que la API esté lista
-    setTimeout(initAutocomplete, 1000);
+// Intentar inicializar con múltiples estrategias
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('📄 DOM loaded - intentando inicializar autocompletado');
+    
+    // Intento inmediato
+    if (!initializeSearchAutocomplete()) {
+        // Intentos con delay creciente
+        let attempts = 0;
+        const maxAttempts = 10;
+        
+        const tryInit = () => {
+            attempts++;
+            console.log(`🔄 Intento ${attempts}/${maxAttempts} de inicialización`);
+            
+            if (initializeSearchAutocomplete()) {
+                console.log('🎉 Autocompletado inicializado exitosamente');
+                return;
+            }
+            
+            if (attempts < maxAttempts) {
+                setTimeout(tryInit, attempts * 500); // Delay creciente
+            } else {
+                console.warn('⚠️ No se pudo inicializar el autocompletado después de múltiples intentos');
+            }
+        };
+        
+        tryInit();
+    }
 });
 
 // Limpiar sugerencias al navegar

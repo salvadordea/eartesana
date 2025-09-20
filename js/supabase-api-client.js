@@ -107,6 +107,18 @@ class SupabaseAPI {
             const variants = await this.getProductVariants(id);
             product.variations = variants;
             
+            // Si el producto tiene variantes, actualizar el stock calculando desde las variantes
+            if (product.hasVariants && variants.length > 0) {
+                const calculatedStock = variants.reduce((total, variant) => total + (variant.stock || 0), 0);
+                product.stock = calculatedStock;
+                console.log(`📊 Stock calculado desde variantes para producto ${id}: ${calculatedStock}`);
+                
+                // Verificar inconsistencia con el stock almacenado
+                if (calculatedStock !== (products[0].total_stock || 0)) {
+                    console.warn(`⚠️ Inconsistencia de stock para producto ${id}: DB=${products[0].total_stock}, Calculado=${calculatedStock}`);
+                }
+            }
+            
             // Aplicar precios de mayorista si corresponde
             if (this.isWholesaler()) {
                 product = this.applyCustomPricing(product);
@@ -413,6 +425,12 @@ class SupabaseAPI {
      * Transformar producto de Supabase al formato del frontend
      */
     transformProduct(product) {
+        // Calcular stock total
+        let stock = product.total_stock || product.stock || 0;
+        
+        // Si el producto tiene variantes, el stock podría calcularse desde las variantes
+        // Esto se actualizará cuando se carguen las variantes en getProduct()
+        
         return {
             id: product.id,
             name: product.name,
@@ -427,6 +445,8 @@ class SupabaseAPI {
             status: product.status,
             featured: product.featured,
             inStock: product.in_stock,
+            stock: stock,
+            hasVariants: product.has_variants,
             totalSales: product.total_sales,
             averageRating: product.average_rating,
             mainImage: this.processImageUrl(product.main_image_url),
