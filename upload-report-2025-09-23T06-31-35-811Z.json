@@ -1,0 +1,2957 @@
+{
+  "timestamp": "2025-09-23T06:31:35.811Z",
+  "summary": {
+    "total": 286,
+    "successful": 244,
+    "failed": 42,
+    "totalSize": 171412253,
+    "categoryStats": {
+      "Accesorios": {
+        "count": 74,
+        "size": 56072436
+      },
+      "Backpacks": {
+        "count": 4,
+        "size": 3281659
+      },
+      "Bolsas Cruzadas": {
+        "count": 17,
+        "size": 9774767
+      },
+      "Bolsas de mano": {
+        "count": 14,
+        "size": 8593649
+      },
+      "Bolsas de Textil y Piel": {
+        "count": 25,
+        "size": 15914492
+      },
+      "Bolsas Grandes": {
+        "count": 29,
+        "size": 19223356
+      },
+      "Botelleras": {
+        "count": 2,
+        "size": 1334859
+      },
+      "Hogar": {
+        "count": 2,
+        "size": 141952
+      },
+      "Joyeria": {
+        "count": 55,
+        "size": 48389042
+      },
+      "Portacel": {
+        "count": 22,
+        "size": 8686041
+      }
+    }
+  },
+  "categories": {
+    "Accesorios": {
+      "count": 74,
+      "size": 56072436
+    },
+    "Backpacks": {
+      "count": 4,
+      "size": 3281659
+    },
+    "Bolsas Cruzadas": {
+      "count": 17,
+      "size": 9774767
+    },
+    "Bolsas de mano": {
+      "count": 14,
+      "size": 8593649
+    },
+    "Bolsas de Textil y Piel": {
+      "count": 25,
+      "size": 15914492
+    },
+    "Bolsas Grandes": {
+      "count": 29,
+      "size": 19223356
+    },
+    "Botelleras": {
+      "count": 2,
+      "size": 1334859
+    },
+    "Hogar": {
+      "count": 2,
+      "size": 141952
+    },
+    "Joyeria": {
+      "count": 55,
+      "size": 48389042
+    },
+    "Portacel": {
+      "count": 22,
+      "size": 8686041
+    }
+  },
+  "successful": [
+    {
+      "localPath": "scraper\\Accesorios\\Cartera con Costura\\Gris.jpg",
+      "bucketPath": "Accesorios/Cartera con Costura/Gris.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera con Costura",
+      "archivo": "Gris.jpg",
+      "size": 1274102,
+      "uploadPath": "Accesorios/Cartera con Costura/Gris.jpg",
+      "uploadedAt": "2025-09-23T06:29:03.922Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Cartera con Costura\\Miel.jpg",
+      "bucketPath": "Accesorios/Cartera con Costura/Miel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera con Costura",
+      "archivo": "Miel.jpg",
+      "size": 1034898,
+      "uploadPath": "Accesorios/Cartera con Costura/Miel.jpg",
+      "uploadedAt": "2025-09-23T06:29:04.529Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Cartera con Costura\\Negro.jpg",
+      "bucketPath": "Accesorios/Cartera con Costura/Negro.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera con Costura",
+      "archivo": "Negro.jpg",
+      "size": 1396465,
+      "uploadPath": "Accesorios/Cartera con Costura/Negro.jpg",
+      "uploadedAt": "2025-09-23T06:29:05.291Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Cartera con Costura\\principal.jpg",
+      "bucketPath": "Accesorios/Cartera con Costura/principal.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera con Costura",
+      "archivo": "principal.jpg",
+      "size": 90711,
+      "uploadPath": "Accesorios/Cartera con Costura/principal.jpg",
+      "uploadedAt": "2025-09-23T06:29:05.548Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Cartera Liga\\Azul.jpg",
+      "bucketPath": "Accesorios/Cartera Liga/Azul.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera Liga",
+      "archivo": "Azul.jpg",
+      "size": 1377397,
+      "uploadPath": "Accesorios/Cartera Liga/Azul.jpg",
+      "uploadedAt": "2025-09-23T06:29:06.019Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Cartera Liga\\Gris.jpg",
+      "bucketPath": "Accesorios/Cartera Liga/Gris.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera Liga",
+      "archivo": "Gris.jpg",
+      "size": 1170318,
+      "uploadPath": "Accesorios/Cartera Liga/Gris.jpg",
+      "uploadedAt": "2025-09-23T06:29:07.579Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Cartera Liga\\Miel.jpg",
+      "bucketPath": "Accesorios/Cartera Liga/Miel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera Liga",
+      "archivo": "Miel.jpg",
+      "size": 1347099,
+      "uploadPath": "Accesorios/Cartera Liga/Miel.jpg",
+      "uploadedAt": "2025-09-23T06:29:08.226Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Cartera Liga\\Negro.jpg",
+      "bucketPath": "Accesorios/Cartera Liga/Negro.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera Liga",
+      "archivo": "Negro.jpg",
+      "size": 1342254,
+      "uploadPath": "Accesorios/Cartera Liga/Negro.jpg",
+      "uploadedAt": "2025-09-23T06:29:08.624Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Cartera Liga\\Pelo Blanco y cafe.jpg",
+      "bucketPath": "Accesorios/Cartera Liga/Pelo Blanco y cafe.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera Liga",
+      "archivo": "Pelo Blanco y cafe.jpg",
+      "size": 1294584,
+      "uploadPath": "Accesorios/Cartera Liga/Pelo Blanco y cafe.jpg",
+      "uploadedAt": "2025-09-23T06:29:09.023Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Cartera Liga\\Pelo tonos blancos.jpg",
+      "bucketPath": "Accesorios/Cartera Liga/Pelo tonos blancos.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera Liga",
+      "archivo": "Pelo tonos blancos.jpg",
+      "size": 1292728,
+      "uploadPath": "Accesorios/Cartera Liga/Pelo tonos blancos.jpg",
+      "uploadedAt": "2025-09-23T06:29:10.349Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Cartera Liga\\Pelo tonos negros.jpg",
+      "bucketPath": "Accesorios/Cartera Liga/Pelo tonos negros.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera Liga",
+      "archivo": "Pelo tonos negros.jpg",
+      "size": 1049220,
+      "uploadPath": "Accesorios/Cartera Liga/Pelo tonos negros.jpg",
+      "uploadedAt": "2025-09-23T06:29:10.707Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Cartera Liga\\principal.jpg",
+      "bucketPath": "Accesorios/Cartera Liga/principal.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera Liga",
+      "archivo": "principal.jpg",
+      "size": 31548,
+      "uploadPath": "Accesorios/Cartera Liga/principal.jpg",
+      "uploadedAt": "2025-09-23T06:29:10.964Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Cartera Liga\\Tinta.jpg",
+      "bucketPath": "Accesorios/Cartera Liga/Tinta.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera Liga",
+      "archivo": "Tinta.jpg",
+      "size": 1126592,
+      "uploadPath": "Accesorios/Cartera Liga/Tinta.jpg",
+      "uploadedAt": "2025-09-23T06:29:11.294Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Cartera Liga\\Verde.jpg",
+      "bucketPath": "Accesorios/Cartera Liga/Verde.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera Liga",
+      "archivo": "Verde.jpg",
+      "size": 1280329,
+      "uploadPath": "Accesorios/Cartera Liga/Verde.jpg",
+      "uploadedAt": "2025-09-23T06:29:11.612Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Llavero Corto\\Cafe Oscuro y negro.jpg",
+      "bucketPath": "Accesorios/Llavero Corto/Cafe Oscuro y negro.jpg",
+      "categoria": "Accesorios",
+      "producto": "Llavero Corto",
+      "archivo": "Cafe Oscuro y negro.jpg",
+      "size": 332460,
+      "uploadPath": "Accesorios/Llavero Corto/Cafe Oscuro y negro.jpg",
+      "uploadedAt": "2025-09-23T06:29:12.851Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Llavero Corto\\Cafe y miel.jpg",
+      "bucketPath": "Accesorios/Llavero Corto/Cafe y miel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Llavero Corto",
+      "archivo": "Cafe y miel.jpg",
+      "size": 259510,
+      "uploadPath": "Accesorios/Llavero Corto/Cafe y miel.jpg",
+      "uploadedAt": "2025-09-23T06:29:13.125Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Llavero Corto\\Gris y Miel.jpg",
+      "bucketPath": "Accesorios/Llavero Corto/Gris y Miel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Llavero Corto",
+      "archivo": "Gris y Miel.jpg",
+      "size": 393837,
+      "uploadPath": "Accesorios/Llavero Corto/Gris y Miel.jpg",
+      "uploadedAt": "2025-09-23T06:29:13.437Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Llavero Corto\\Ladrillo y miel.jpg",
+      "bucketPath": "Accesorios/Llavero Corto/Ladrillo y miel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Llavero Corto",
+      "archivo": "Ladrillo y miel.jpg",
+      "size": 359843,
+      "uploadPath": "Accesorios/Llavero Corto/Ladrillo y miel.jpg",
+      "uploadedAt": "2025-09-23T06:29:13.755Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Llavero Corto\\Miel y cafe.jpg",
+      "bucketPath": "Accesorios/Llavero Corto/Miel y cafe.jpg",
+      "categoria": "Accesorios",
+      "producto": "Llavero Corto",
+      "archivo": "Miel y cafe.jpg",
+      "size": 276556,
+      "uploadPath": "Accesorios/Llavero Corto/Miel y cafe.jpg",
+      "uploadedAt": "2025-09-23T06:29:14.084Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Llavero Corto\\Miel y gris.jpg",
+      "bucketPath": "Accesorios/Llavero Corto/Miel y gris.jpg",
+      "categoria": "Accesorios",
+      "producto": "Llavero Corto",
+      "archivo": "Miel y gris.jpg",
+      "size": 304765,
+      "uploadPath": "Accesorios/Llavero Corto/Miel y gris.jpg",
+      "uploadedAt": "2025-09-23T06:29:15.352Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Llavero Corto\\Miel y tinto.jpg",
+      "bucketPath": "Accesorios/Llavero Corto/Miel y tinto.jpg",
+      "categoria": "Accesorios",
+      "producto": "Llavero Corto",
+      "archivo": "Miel y tinto.jpg",
+      "size": 364777,
+      "uploadPath": "Accesorios/Llavero Corto/Miel y tinto.jpg",
+      "uploadedAt": "2025-09-23T06:29:15.701Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Llavero Corto\\Negro y cafe oscuro.jpg",
+      "bucketPath": "Accesorios/Llavero Corto/Negro y cafe oscuro.jpg",
+      "categoria": "Accesorios",
+      "producto": "Llavero Corto",
+      "archivo": "Negro y cafe oscuro.jpg",
+      "size": 282554,
+      "uploadPath": "Accesorios/Llavero Corto/Negro y cafe oscuro.jpg",
+      "uploadedAt": "2025-09-23T06:29:16.287Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Llavero Corto\\principal.jpg",
+      "bucketPath": "Accesorios/Llavero Corto/principal.jpg",
+      "categoria": "Accesorios",
+      "producto": "Llavero Corto",
+      "archivo": "principal.jpg",
+      "size": 107678,
+      "uploadPath": "Accesorios/Llavero Corto/principal.jpg",
+      "uploadedAt": "2025-09-23T06:29:16.543Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Llavero Corto\\Tinto y miel.jpg",
+      "bucketPath": "Accesorios/Llavero Corto/Tinto y miel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Llavero Corto",
+      "archivo": "Tinto y miel.jpg",
+      "size": 313351,
+      "uploadPath": "Accesorios/Llavero Corto/Tinto y miel.jpg",
+      "uploadedAt": "2025-09-23T06:29:16.843Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Cierre\\Azul.jpg",
+      "bucketPath": "Accesorios/Monedero Cierre/Azul.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Cierre",
+      "archivo": "Azul.jpg",
+      "size": 284488,
+      "uploadPath": "Accesorios/Monedero Cierre/Azul.jpg",
+      "uploadedAt": "2025-09-23T06:29:18.137Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Cierre\\Cafe chocolate.jpg",
+      "bucketPath": "Accesorios/Monedero Cierre/Cafe chocolate.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Cierre",
+      "archivo": "Cafe chocolate.jpg",
+      "size": 249899,
+      "uploadPath": "Accesorios/Monedero Cierre/Cafe chocolate.jpg",
+      "uploadedAt": "2025-09-23T06:29:18.384Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Cierre\\Gris.jpg",
+      "bucketPath": "Accesorios/Monedero Cierre/Gris.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Cierre",
+      "archivo": "Gris.jpg",
+      "size": 211047,
+      "uploadPath": "Accesorios/Monedero Cierre/Gris.jpg",
+      "uploadedAt": "2025-09-23T06:29:18.923Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Cierre\\Ladrillo.jpg",
+      "bucketPath": "Accesorios/Monedero Cierre/Ladrillo.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Cierre",
+      "archivo": "Ladrillo.jpg",
+      "size": 321381,
+      "uploadPath": "Accesorios/Monedero Cierre/Ladrillo.jpg",
+      "uploadedAt": "2025-09-23T06:29:19.203Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Cierre\\Miel.jpg",
+      "bucketPath": "Accesorios/Monedero Cierre/Miel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Cierre",
+      "archivo": "Miel.jpg",
+      "size": 359803,
+      "uploadPath": "Accesorios/Monedero Cierre/Miel.jpg",
+      "uploadedAt": "2025-09-23T06:29:19.502Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Cierre\\Negro.jpg",
+      "bucketPath": "Accesorios/Monedero Cierre/Negro.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Cierre",
+      "archivo": "Negro.jpg",
+      "size": 267793,
+      "uploadPath": "Accesorios/Monedero Cierre/Negro.jpg",
+      "uploadedAt": "2025-09-23T06:29:20.999Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Cierre\\Perla.jpg",
+      "bucketPath": "Accesorios/Monedero Cierre/Perla.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Cierre",
+      "archivo": "Perla.jpg",
+      "size": 1225339,
+      "uploadPath": "Accesorios/Monedero Cierre/Perla.jpg",
+      "uploadedAt": "2025-09-23T06:29:21.376Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Cierre\\principal.jpg",
+      "bucketPath": "Accesorios/Monedero Cierre/principal.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Cierre",
+      "archivo": "principal.jpg",
+      "size": 39612,
+      "uploadPath": "Accesorios/Monedero Cierre/principal.jpg",
+      "uploadedAt": "2025-09-23T06:29:21.569Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Clip\\Azul.jpg",
+      "bucketPath": "Accesorios/Monedero Clip/Azul.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Clip",
+      "archivo": "Azul.jpg",
+      "size": 242481,
+      "uploadPath": "Accesorios/Monedero Clip/Azul.jpg",
+      "uploadedAt": "2025-09-23T06:29:21.907Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Clip\\Camel.jpg",
+      "bucketPath": "Accesorios/Monedero Clip/Camel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Clip",
+      "archivo": "Camel.jpg",
+      "size": 301785,
+      "uploadPath": "Accesorios/Monedero Clip/Camel.jpg",
+      "uploadedAt": "2025-09-23T06:29:22.192Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Clip\\Dorado.jpg",
+      "bucketPath": "Accesorios/Monedero Clip/Dorado.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Clip",
+      "archivo": "Dorado.jpg",
+      "size": 421754,
+      "uploadPath": "Accesorios/Monedero Clip/Dorado.jpg",
+      "uploadedAt": "2025-09-23T06:29:23.459Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Clip\\Gris.jpg",
+      "bucketPath": "Accesorios/Monedero Clip/Gris.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Clip",
+      "archivo": "Gris.jpg",
+      "size": 233942,
+      "uploadPath": "Accesorios/Monedero Clip/Gris.jpg",
+      "uploadedAt": "2025-09-23T06:29:23.738Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Clip\\Ladrillo.jpg",
+      "bucketPath": "Accesorios/Monedero Clip/Ladrillo.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Clip",
+      "archivo": "Ladrillo.jpg",
+      "size": 244271,
+      "uploadPath": "Accesorios/Monedero Clip/Ladrillo.jpg",
+      "uploadedAt": "2025-09-23T06:29:24.020Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Clip\\Miel.jpg",
+      "bucketPath": "Accesorios/Monedero Clip/Miel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Clip",
+      "archivo": "Miel.jpg",
+      "size": 379902,
+      "uploadPath": "Accesorios/Monedero Clip/Miel.jpg",
+      "uploadedAt": "2025-09-23T06:29:24.454Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Clip\\Perla.jpg",
+      "bucketPath": "Accesorios/Monedero Clip/Perla.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Clip",
+      "archivo": "Perla.jpg",
+      "size": 1028677,
+      "uploadPath": "Accesorios/Monedero Clip/Perla.jpg",
+      "uploadedAt": "2025-09-23T06:29:24.750Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Clip\\principal.jpg",
+      "bucketPath": "Accesorios/Monedero Clip/principal.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Clip",
+      "archivo": "principal.jpg",
+      "size": 78852,
+      "uploadPath": "Accesorios/Monedero Clip/principal.jpg",
+      "uploadedAt": "2025-09-23T06:29:26.074Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Motita\\Beige.jpg",
+      "bucketPath": "Accesorios/Monedero Motita/Beige.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Motita",
+      "archivo": "Beige.jpg",
+      "size": 749557,
+      "uploadPath": "Accesorios/Monedero Motita/Beige.jpg",
+      "uploadedAt": "2025-09-23T06:29:26.777Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Motita\\Cafe chocolate.jpg",
+      "bucketPath": "Accesorios/Monedero Motita/Cafe chocolate.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Motita",
+      "archivo": "Cafe chocolate.jpg",
+      "size": 245464,
+      "uploadPath": "Accesorios/Monedero Motita/Cafe chocolate.jpg",
+      "uploadedAt": "2025-09-23T06:29:27.280Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Motita\\Ladrillo.jpg",
+      "bucketPath": "Accesorios/Monedero Motita/Ladrillo.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Motita",
+      "archivo": "Ladrillo.jpg",
+      "size": 240969,
+      "uploadPath": "Accesorios/Monedero Motita/Ladrillo.jpg",
+      "uploadedAt": "2025-09-23T06:29:28.836Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Motita\\Miel.jpg",
+      "bucketPath": "Accesorios/Monedero Motita/Miel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Motita",
+      "archivo": "Miel.jpg",
+      "size": 320638,
+      "uploadPath": "Accesorios/Monedero Motita/Miel.jpg",
+      "uploadedAt": "2025-09-23T06:29:29.292Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Motita\\Negro.jpg",
+      "bucketPath": "Accesorios/Monedero Motita/Negro.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Motita",
+      "archivo": "Negro.jpg",
+      "size": 244609,
+      "uploadPath": "Accesorios/Monedero Motita/Negro.jpg",
+      "uploadedAt": "2025-09-23T06:29:29.596Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Motita\\principal.jpg",
+      "bucketPath": "Accesorios/Monedero Motita/principal.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Motita",
+      "archivo": "principal.jpg",
+      "size": 74893,
+      "uploadPath": "Accesorios/Monedero Motita/principal.jpg",
+      "uploadedAt": "2025-09-23T06:29:29.835Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacable Chico\\Azul.jpg",
+      "bucketPath": "Accesorios/Portacable Chico/Azul.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacable Chico",
+      "archivo": "Azul.jpg",
+      "size": 1564013,
+      "uploadPath": "Accesorios/Portacable Chico/Azul.jpg",
+      "uploadedAt": "2025-09-23T06:29:30.282Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacable Chico\\Camel.jpg",
+      "bucketPath": "Accesorios/Portacable Chico/Camel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacable Chico",
+      "archivo": "Camel.jpg",
+      "size": 1706133,
+      "uploadPath": "Accesorios/Portacable Chico/Camel.jpg",
+      "uploadedAt": "2025-09-23T06:29:31.846Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacable Chico\\Gris.jpg",
+      "bucketPath": "Accesorios/Portacable Chico/Gris.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacable Chico",
+      "archivo": "Gris.jpg",
+      "size": 1511469,
+      "uploadPath": "Accesorios/Portacable Chico/Gris.jpg",
+      "uploadedAt": "2025-09-23T06:29:32.144Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacable Chico\\Ladrillo.jpg",
+      "bucketPath": "Accesorios/Portacable Chico/Ladrillo.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacable Chico",
+      "archivo": "Ladrillo.jpg",
+      "size": 1507233,
+      "uploadPath": "Accesorios/Portacable Chico/Ladrillo.jpg",
+      "uploadedAt": "2025-09-23T06:29:32.569Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacable Chico\\Negro.jpg",
+      "bucketPath": "Accesorios/Portacable Chico/Negro.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacable Chico",
+      "archivo": "Negro.jpg",
+      "size": 1143526,
+      "uploadPath": "Accesorios/Portacable Chico/Negro.jpg",
+      "uploadedAt": "2025-09-23T06:29:32.963Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacable Chico\\principal.jpg",
+      "bucketPath": "Accesorios/Portacable Chico/principal.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacable Chico",
+      "archivo": "principal.jpg",
+      "size": 40592,
+      "uploadPath": "Accesorios/Portacable Chico/principal.jpg",
+      "uploadedAt": "2025-09-23T06:29:34.131Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacable Chico\\Tinta.jpg",
+      "bucketPath": "Accesorios/Portacable Chico/Tinta.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacable Chico",
+      "archivo": "Tinta.jpg",
+      "size": 1621480,
+      "uploadPath": "Accesorios/Portacable Chico/Tinta.jpg",
+      "uploadedAt": "2025-09-23T06:29:34.518Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacables Grande\\Azul.jpg",
+      "bucketPath": "Accesorios/Portacables Grande/Azul.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacables Grande",
+      "archivo": "Azul.jpg",
+      "size": 1526207,
+      "uploadPath": "Accesorios/Portacables Grande/Azul.jpg",
+      "uploadedAt": "2025-09-23T06:29:34.831Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacables Grande\\Camel.jpg",
+      "bucketPath": "Accesorios/Portacables Grande/Camel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacables Grande",
+      "archivo": "Camel.jpg",
+      "size": 1050555,
+      "uploadPath": "Accesorios/Portacables Grande/Camel.jpg",
+      "uploadedAt": "2025-09-23T06:29:35.295Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacables Grande\\Gris Claro.jpg",
+      "bucketPath": "Accesorios/Portacables Grande/Gris Claro.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacables Grande",
+      "archivo": "Gris Claro.jpg",
+      "size": 937627,
+      "uploadPath": "Accesorios/Portacables Grande/Gris Claro.jpg",
+      "uploadedAt": "2025-09-23T06:29:35.816Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacables Grande\\Ladrillo.jpg",
+      "bucketPath": "Accesorios/Portacables Grande/Ladrillo.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacables Grande",
+      "archivo": "Ladrillo.jpg",
+      "size": 769787,
+      "uploadPath": "Accesorios/Portacables Grande/Ladrillo.jpg",
+      "uploadedAt": "2025-09-23T06:29:37.176Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacables Grande\\Negro.jpg",
+      "bucketPath": "Accesorios/Portacables Grande/Negro.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacables Grande",
+      "archivo": "Negro.jpg",
+      "size": 1387325,
+      "uploadPath": "Accesorios/Portacables Grande/Negro.jpg",
+      "uploadedAt": "2025-09-23T06:29:38.075Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacables Grande\\principal.jpg",
+      "bucketPath": "Accesorios/Portacables Grande/principal.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacables Grande",
+      "archivo": "principal.jpg",
+      "size": 73200,
+      "uploadPath": "Accesorios/Portacables Grande/principal.jpg",
+      "uploadedAt": "2025-09-23T06:29:38.344Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacables Grande\\Tinta.jpg",
+      "bucketPath": "Accesorios/Portacables Grande/Tinta.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacables Grande",
+      "archivo": "Tinta.jpg",
+      "size": 1263757,
+      "uploadPath": "Accesorios/Portacables Grande/Tinta.jpg",
+      "uploadedAt": "2025-09-23T06:29:39.143Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portapasaportes\\Cafe y miel.jpg",
+      "bucketPath": "Accesorios/Portapasaportes/Cafe y miel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portapasaportes",
+      "archivo": "Cafe y miel.jpg",
+      "size": 1089611,
+      "uploadPath": "Accesorios/Portapasaportes/Cafe y miel.jpg",
+      "uploadedAt": "2025-09-23T06:29:39.528Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portapasaportes\\Gris y Miel.jpg",
+      "bucketPath": "Accesorios/Portapasaportes/Gris y Miel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portapasaportes",
+      "archivo": "Gris y Miel.jpg",
+      "size": 1080052,
+      "uploadPath": "Accesorios/Portapasaportes/Gris y Miel.jpg",
+      "uploadedAt": "2025-09-23T06:29:40.977Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portapasaportes\\Miel y gris.jpg",
+      "bucketPath": "Accesorios/Portapasaportes/Miel y gris.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portapasaportes",
+      "archivo": "Miel y gris.jpg",
+      "size": 1129511,
+      "uploadPath": "Accesorios/Portapasaportes/Miel y gris.jpg",
+      "uploadedAt": "2025-09-23T06:29:41.314Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portapasaportes\\Miel y Naranja.jpg",
+      "bucketPath": "Accesorios/Portapasaportes/Miel y Naranja.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portapasaportes",
+      "archivo": "Miel y Naranja.jpg",
+      "size": 1006761,
+      "uploadPath": "Accesorios/Portapasaportes/Miel y Naranja.jpg",
+      "uploadedAt": "2025-09-23T06:29:41.619Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portapasaportes\\Miel y Negro.jpg",
+      "bucketPath": "Accesorios/Portapasaportes/Miel y Negro.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portapasaportes",
+      "archivo": "Miel y Negro.jpg",
+      "size": 1316409,
+      "uploadPath": "Accesorios/Portapasaportes/Miel y Negro.jpg",
+      "uploadedAt": "2025-09-23T06:29:41.950Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portapasaportes\\Negro y miel.jpg",
+      "bucketPath": "Accesorios/Portapasaportes/Negro y miel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portapasaportes",
+      "archivo": "Negro y miel.jpg",
+      "size": 1304475,
+      "uploadPath": "Accesorios/Portapasaportes/Negro y miel.jpg",
+      "uploadedAt": "2025-09-23T06:29:42.316Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portapasaportes\\principal.jpg",
+      "bucketPath": "Accesorios/Portapasaportes/principal.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portapasaportes",
+      "archivo": "principal.jpg",
+      "size": 71357,
+      "uploadPath": "Accesorios/Portapasaportes/principal.jpg",
+      "uploadedAt": "2025-09-23T06:29:43.571Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Tarjetero Boton\\Azul.jpg",
+      "bucketPath": "Accesorios/Tarjetero Boton/Azul.jpg",
+      "categoria": "Accesorios",
+      "producto": "Tarjetero Boton",
+      "archivo": "Azul.jpg",
+      "size": 1273576,
+      "uploadPath": "Accesorios/Tarjetero Boton/Azul.jpg",
+      "uploadedAt": "2025-09-23T06:29:43.948Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Tarjetero Boton\\Camel.jpg",
+      "bucketPath": "Accesorios/Tarjetero Boton/Camel.jpg",
+      "categoria": "Accesorios",
+      "producto": "Tarjetero Boton",
+      "archivo": "Camel.jpg",
+      "size": 1151722,
+      "uploadPath": "Accesorios/Tarjetero Boton/Camel.jpg",
+      "uploadedAt": "2025-09-23T06:29:44.217Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Tarjetero Boton\\Gris.jpg",
+      "bucketPath": "Accesorios/Tarjetero Boton/Gris.jpg",
+      "categoria": "Accesorios",
+      "producto": "Tarjetero Boton",
+      "archivo": "Gris.jpg",
+      "size": 1256551,
+      "uploadPath": "Accesorios/Tarjetero Boton/Gris.jpg",
+      "uploadedAt": "2025-09-23T06:29:44.558Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Tarjetero Boton\\Ladrillo.jpg",
+      "bucketPath": "Accesorios/Tarjetero Boton/Ladrillo.jpg",
+      "categoria": "Accesorios",
+      "producto": "Tarjetero Boton",
+      "archivo": "Ladrillo.jpg",
+      "size": 719291,
+      "uploadPath": "Accesorios/Tarjetero Boton/Ladrillo.jpg",
+      "uploadedAt": "2025-09-23T06:29:44.856Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Tarjetero Boton\\Negro.jpg",
+      "bucketPath": "Accesorios/Tarjetero Boton/Negro.jpg",
+      "categoria": "Accesorios",
+      "producto": "Tarjetero Boton",
+      "archivo": "Negro.jpg",
+      "size": 1523969,
+      "uploadPath": "Accesorios/Tarjetero Boton/Negro.jpg",
+      "uploadedAt": "2025-09-23T06:29:46.208Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Tarjetero Boton\\Perla.jpg",
+      "bucketPath": "Accesorios/Tarjetero Boton/Perla.jpg",
+      "categoria": "Accesorios",
+      "producto": "Tarjetero Boton",
+      "archivo": "Perla.jpg",
+      "size": 1117518,
+      "uploadPath": "Accesorios/Tarjetero Boton/Perla.jpg",
+      "uploadedAt": "2025-09-23T06:29:46.568Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Tarjetero Boton\\principal.jpg",
+      "bucketPath": "Accesorios/Tarjetero Boton/principal.jpg",
+      "categoria": "Accesorios",
+      "producto": "Tarjetero Boton",
+      "archivo": "principal.jpg",
+      "size": 57997,
+      "uploadPath": "Accesorios/Tarjetero Boton/principal.jpg",
+      "uploadedAt": "2025-09-23T06:29:46.806Z"
+    },
+    {
+      "localPath": "scraper\\Backpacks\\Backpack Mini\\Gris y Miel.png",
+      "bucketPath": "Backpacks/Backpack Mini/Gris y Miel.png",
+      "categoria": "Backpacks",
+      "producto": "Backpack Mini",
+      "archivo": "Gris y Miel.png",
+      "size": 1171595,
+      "uploadPath": "Backpacks/Backpack Mini/Gris y Miel.png",
+      "uploadedAt": "2025-09-23T06:29:47.161Z"
+    },
+    {
+      "localPath": "scraper\\Backpacks\\Backpack Mini\\Miel y gris.png",
+      "bucketPath": "Backpacks/Backpack Mini/Miel y gris.png",
+      "categoria": "Backpacks",
+      "producto": "Backpack Mini",
+      "archivo": "Miel y gris.png",
+      "size": 995934,
+      "uploadPath": "Backpacks/Backpack Mini/Miel y gris.png",
+      "uploadedAt": "2025-09-23T06:29:47.516Z"
+    },
+    {
+      "localPath": "scraper\\Backpacks\\Backpack Mini\\Negro y miel.png",
+      "bucketPath": "Backpacks/Backpack Mini/Negro y miel.png",
+      "categoria": "Backpacks",
+      "producto": "Backpack Mini",
+      "archivo": "Negro y miel.png",
+      "size": 1050983,
+      "uploadPath": "Backpacks/Backpack Mini/Negro y miel.png",
+      "uploadedAt": "2025-09-23T06:29:49.019Z"
+    },
+    {
+      "localPath": "scraper\\Backpacks\\Backpack Mini\\principal.jpg",
+      "bucketPath": "Backpacks/Backpack Mini/principal.jpg",
+      "categoria": "Backpacks",
+      "producto": "Backpack Mini",
+      "archivo": "principal.jpg",
+      "size": 63147,
+      "uploadPath": "Backpacks/Backpack Mini/principal.jpg",
+      "uploadedAt": "2025-09-23T06:29:49.195Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Bolsa Mediana con bolsillo piel al frente\\Azul y miel.png",
+      "bucketPath": "Bolsas Cruzadas/Bolsa Mediana con bolsillo piel al frente/Azul y miel.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Bolsa Mediana con bolsillo piel al frente",
+      "archivo": "Azul y miel.png",
+      "size": 1072919,
+      "uploadPath": "Bolsas Cruzadas/Bolsa Mediana con bolsillo piel al frente/Azul y miel.png",
+      "uploadedAt": "2025-09-23T06:29:51.695Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Bolsa Mediana con bolsillo piel al frente\\Gris y Miel.png",
+      "bucketPath": "Bolsas Cruzadas/Bolsa Mediana con bolsillo piel al frente/Gris y Miel.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Bolsa Mediana con bolsillo piel al frente",
+      "archivo": "Gris y Miel.png",
+      "size": 1218545,
+      "uploadPath": "Bolsas Cruzadas/Bolsa Mediana con bolsillo piel al frente/Gris y Miel.png",
+      "uploadedAt": "2025-09-23T06:29:53.017Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Bolsa Mediana con bolsillo piel al frente\\Negro y miel.jpg",
+      "bucketPath": "Bolsas Cruzadas/Bolsa Mediana con bolsillo piel al frente/Negro y miel.jpg",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Bolsa Mediana con bolsillo piel al frente",
+      "archivo": "Negro y miel.jpg",
+      "size": 428232,
+      "uploadPath": "Bolsas Cruzadas/Bolsa Mediana con bolsillo piel al frente/Negro y miel.jpg",
+      "uploadedAt": "2025-09-23T06:29:53.532Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Bolsa Mediana con bolsillo piel al frente\\principal.png",
+      "bucketPath": "Bolsas Cruzadas/Bolsa Mediana con bolsillo piel al frente/principal.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Bolsa Mediana con bolsillo piel al frente",
+      "archivo": "principal.png",
+      "size": 306886,
+      "uploadPath": "Bolsas Cruzadas/Bolsa Mediana con bolsillo piel al frente/principal.png",
+      "uploadedAt": "2025-09-23T06:29:53.768Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Bolsa Mediana con bolsillo piel al frente\\Tinto y miel.png",
+      "bucketPath": "Bolsas Cruzadas/Bolsa Mediana con bolsillo piel al frente/Tinto y miel.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Bolsa Mediana con bolsillo piel al frente",
+      "archivo": "Tinto y miel.png",
+      "size": 1033023,
+      "uploadPath": "Bolsas Cruzadas/Bolsa Mediana con bolsillo piel al frente/Tinto y miel.png",
+      "uploadedAt": "2025-09-23T06:29:54.100Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Cangurera\\Cobre Rosado.png",
+      "bucketPath": "Bolsas Cruzadas/Cangurera/Cobre Rosado.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Cangurera",
+      "archivo": "Cobre Rosado.png",
+      "size": 730081,
+      "uploadPath": "Bolsas Cruzadas/Cangurera/Cobre Rosado.png",
+      "uploadedAt": "2025-09-23T06:29:55.742Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Cangurera\\Negro.png",
+      "bucketPath": "Bolsas Cruzadas/Cangurera/Negro.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Cangurera",
+      "archivo": "Negro.png",
+      "size": 484749,
+      "uploadPath": "Bolsas Cruzadas/Cangurera/Negro.png",
+      "uploadedAt": "2025-09-23T06:29:56.015Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Cangurera\\principal.png",
+      "bucketPath": "Bolsas Cruzadas/Cangurera/principal.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Cangurera",
+      "archivo": "principal.png",
+      "size": 260760,
+      "uploadPath": "Bolsas Cruzadas/Cangurera/principal.png",
+      "uploadedAt": "2025-09-23T06:29:56.401Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Clutch Chica con Base\\Cobre Rosado.png",
+      "bucketPath": "Bolsas Cruzadas/Clutch Chica con Base/Cobre Rosado.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Clutch Chica con Base",
+      "archivo": "Cobre Rosado.png",
+      "size": 624988,
+      "uploadPath": "Bolsas Cruzadas/Clutch Chica con Base/Cobre Rosado.png",
+      "uploadedAt": "2025-09-23T06:29:57.943Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Clutch Chica con Base\\Negro.png",
+      "bucketPath": "Bolsas Cruzadas/Clutch Chica con Base/Negro.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Clutch Chica con Base",
+      "archivo": "Negro.png",
+      "size": 472464,
+      "uploadPath": "Bolsas Cruzadas/Clutch Chica con Base/Negro.png",
+      "uploadedAt": "2025-09-23T06:29:58.231Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Clutch Chica con Base\\Plata.png",
+      "bucketPath": "Bolsas Cruzadas/Clutch Chica con Base/Plata.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Clutch Chica con Base",
+      "archivo": "Plata.png",
+      "size": 634951,
+      "uploadPath": "Bolsas Cruzadas/Clutch Chica con Base/Plata.png",
+      "uploadedAt": "2025-09-23T06:29:58.562Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Clutch Chica con Base\\principal.png",
+      "bucketPath": "Bolsas Cruzadas/Clutch Chica con Base/principal.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Clutch Chica con Base",
+      "archivo": "principal.png",
+      "size": 113145,
+      "uploadPath": "Bolsas Cruzadas/Clutch Chica con Base/principal.png",
+      "uploadedAt": "2025-09-23T06:29:58.773Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Clutch Chica Plana\\Cobre Rosado.png",
+      "bucketPath": "Bolsas Cruzadas/Clutch Chica Plana/Cobre Rosado.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Clutch Chica Plana",
+      "archivo": "Cobre Rosado.png",
+      "size": 596262,
+      "uploadPath": "Bolsas Cruzadas/Clutch Chica Plana/Cobre Rosado.png",
+      "uploadedAt": "2025-09-23T06:30:00.220Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Clutch Chica Plana\\Negro.png",
+      "bucketPath": "Bolsas Cruzadas/Clutch Chica Plana/Negro.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Clutch Chica Plana",
+      "archivo": "Negro.png",
+      "size": 663817,
+      "uploadPath": "Bolsas Cruzadas/Clutch Chica Plana/Negro.png",
+      "uploadedAt": "2025-09-23T06:30:00.534Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Clutch Chica Plana\\Oro Plata.png",
+      "bucketPath": "Bolsas Cruzadas/Clutch Chica Plana/Oro Plata.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Clutch Chica Plana",
+      "archivo": "Oro Plata.png",
+      "size": 638547,
+      "uploadPath": "Bolsas Cruzadas/Clutch Chica Plana/Oro Plata.png",
+      "uploadedAt": "2025-09-23T06:30:00.847Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Clutch Chica Plana\\principal.png",
+      "bucketPath": "Bolsas Cruzadas/Clutch Chica Plana/principal.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Clutch Chica Plana",
+      "archivo": "principal.png",
+      "size": 323326,
+      "uploadPath": "Bolsas Cruzadas/Clutch Chica Plana/principal.png",
+      "uploadedAt": "2025-09-23T06:30:01.261Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Clutch Grande con strap\\principal.png",
+      "bucketPath": "Bolsas Cruzadas/Clutch Grande con strap/principal.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Clutch Grande con strap",
+      "archivo": "principal.png",
+      "size": 172072,
+      "uploadPath": "Bolsas Cruzadas/Clutch Grande con strap/principal.png",
+      "uploadedAt": "2025-09-23T06:30:04.247Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Bolsa Ovalada lisa\\Azul Denim.png",
+      "bucketPath": "Bolsas de mano/Bolsa Ovalada lisa/Azul Denim.png",
+      "categoria": "Bolsas de mano",
+      "producto": "Bolsa Ovalada lisa",
+      "archivo": "Azul Denim.png",
+      "size": 771146,
+      "uploadPath": "Bolsas de mano/Bolsa Ovalada lisa/Azul Denim.png",
+      "uploadedAt": "2025-09-23T06:30:04.912Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Bolsa Ovalada lisa\\Gris.png",
+      "bucketPath": "Bolsas de mano/Bolsa Ovalada lisa/Gris.png",
+      "categoria": "Bolsas de mano",
+      "producto": "Bolsa Ovalada lisa",
+      "archivo": "Gris.png",
+      "size": 387467,
+      "uploadPath": "Bolsas de mano/Bolsa Ovalada lisa/Gris.png",
+      "uploadedAt": "2025-09-23T06:30:06.355Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Bolsa Ovalada lisa\\Ladrillo.png",
+      "bucketPath": "Bolsas de mano/Bolsa Ovalada lisa/Ladrillo.png",
+      "categoria": "Bolsas de mano",
+      "producto": "Bolsa Ovalada lisa",
+      "archivo": "Ladrillo.png",
+      "size": 782597,
+      "uploadPath": "Bolsas de mano/Bolsa Ovalada lisa/Ladrillo.png",
+      "uploadedAt": "2025-09-23T06:30:07.692Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Bolsa Ovalada lisa\\Miel.png",
+      "bucketPath": "Bolsas de mano/Bolsa Ovalada lisa/Miel.png",
+      "categoria": "Bolsas de mano",
+      "producto": "Bolsa Ovalada lisa",
+      "archivo": "Miel.png",
+      "size": 423029,
+      "uploadPath": "Bolsas de mano/Bolsa Ovalada lisa/Miel.png",
+      "uploadedAt": "2025-09-23T06:30:08.177Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Bolsa Ovalada lisa\\Negro.png",
+      "bucketPath": "Bolsas de mano/Bolsa Ovalada lisa/Negro.png",
+      "categoria": "Bolsas de mano",
+      "producto": "Bolsa Ovalada lisa",
+      "archivo": "Negro.png",
+      "size": 642609,
+      "uploadPath": "Bolsas de mano/Bolsa Ovalada lisa/Negro.png",
+      "uploadedAt": "2025-09-23T06:30:08.476Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Bolsa Ovalada lisa\\Pelo (tono puede variar).png",
+      "bucketPath": "Bolsas de mano/Bolsa Ovalada lisa/Pelo (tono puede variar).png",
+      "categoria": "Bolsas de mano",
+      "producto": "Bolsa Ovalada lisa",
+      "archivo": "Pelo (tono puede variar).png",
+      "size": 938040,
+      "uploadPath": "Bolsas de mano/Bolsa Ovalada lisa/Pelo (tono puede variar).png",
+      "uploadedAt": "2025-09-23T06:30:09.094Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Bolsa Ovalada lisa\\principal.png",
+      "bucketPath": "Bolsas de mano/Bolsa Ovalada lisa/principal.png",
+      "categoria": "Bolsas de mano",
+      "producto": "Bolsa Ovalada lisa",
+      "archivo": "principal.png",
+      "size": 241252,
+      "uploadPath": "Bolsas de mano/Bolsa Ovalada lisa/principal.png",
+      "uploadedAt": "2025-09-23T06:30:09.352Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Bolsa Ovalada lisa\\Tinta.png",
+      "bucketPath": "Bolsas de mano/Bolsa Ovalada lisa/Tinta.png",
+      "categoria": "Bolsas de mano",
+      "producto": "Bolsa Ovalada lisa",
+      "archivo": "Tinta.png",
+      "size": 585301,
+      "uploadPath": "Bolsas de mano/Bolsa Ovalada lisa/Tinta.png",
+      "uploadedAt": "2025-09-23T06:30:10.688Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Cartera tipo Sobre\\Cobre Rosado.png",
+      "bucketPath": "Bolsas de mano/Cartera tipo Sobre/Cobre Rosado.png",
+      "categoria": "Bolsas de mano",
+      "producto": "Cartera tipo Sobre",
+      "archivo": "Cobre Rosado.png",
+      "size": 972157,
+      "uploadPath": "Bolsas de mano/Cartera tipo Sobre/Cobre Rosado.png",
+      "uploadedAt": "2025-09-23T06:30:11.168Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Cartera tipo Sobre\\Negro.png",
+      "bucketPath": "Bolsas de mano/Cartera tipo Sobre/Negro.png",
+      "categoria": "Bolsas de mano",
+      "producto": "Cartera tipo Sobre",
+      "archivo": "Negro.png",
+      "size": 667184,
+      "uploadPath": "Bolsas de mano/Cartera tipo Sobre/Negro.png",
+      "uploadedAt": "2025-09-23T06:30:11.432Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Cartera tipo Sobre\\Oro Mate.png",
+      "bucketPath": "Bolsas de mano/Cartera tipo Sobre/Oro Mate.png",
+      "categoria": "Bolsas de mano",
+      "producto": "Cartera tipo Sobre",
+      "archivo": "Oro Mate.png",
+      "size": 744249,
+      "uploadPath": "Bolsas de mano/Cartera tipo Sobre/Oro Mate.png",
+      "uploadedAt": "2025-09-23T06:30:11.949Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Cartera tipo Sobre\\Oro Plata.png",
+      "bucketPath": "Bolsas de mano/Cartera tipo Sobre/Oro Plata.png",
+      "categoria": "Bolsas de mano",
+      "producto": "Cartera tipo Sobre",
+      "archivo": "Oro Plata.png",
+      "size": 514506,
+      "uploadPath": "Bolsas de mano/Cartera tipo Sobre/Oro Plata.png",
+      "uploadedAt": "2025-09-23T06:30:13.242Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Cartera tipo Sobre\\principal.png",
+      "bucketPath": "Bolsas de mano/Cartera tipo Sobre/principal.png",
+      "categoria": "Bolsas de mano",
+      "producto": "Cartera tipo Sobre",
+      "archivo": "principal.png",
+      "size": 157483,
+      "uploadPath": "Bolsas de mano/Cartera tipo Sobre/principal.png",
+      "uploadedAt": "2025-09-23T06:30:13.516Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Cartera tipo Sobre\\Tinta.png",
+      "bucketPath": "Bolsas de mano/Cartera tipo Sobre/Tinta.png",
+      "categoria": "Bolsas de mano",
+      "producto": "Cartera tipo Sobre",
+      "archivo": "Tinta.png",
+      "size": 766629,
+      "uploadPath": "Bolsas de mano/Cartera tipo Sobre/Tinta.png",
+      "uploadedAt": "2025-09-23T06:30:13.886Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Cilindro Jareta\\Azul marino y blanco grueso.jpg",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Cilindro Jareta/Azul marino y blanco grueso.jpg",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Cilindro Jareta",
+      "archivo": "Azul marino y blanco grueso.jpg",
+      "size": 269398,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Cilindro Jareta/Azul marino y blanco grueso.jpg",
+      "uploadedAt": "2025-09-23T06:30:14.169Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Cilindro Jareta\\Camel y blanco.jpg",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Cilindro Jareta/Camel y blanco.jpg",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Cilindro Jareta",
+      "archivo": "Camel y blanco.jpg",
+      "size": 357066,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Cilindro Jareta/Camel y blanco.jpg",
+      "uploadedAt": "2025-09-23T06:30:14.772Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Cilindro Jareta\\Gris claro negro grueso.jpg",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Cilindro Jareta/Gris claro negro grueso.jpg",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Cilindro Jareta",
+      "archivo": "Gris claro negro grueso.jpg",
+      "size": 350162,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Cilindro Jareta/Gris claro negro grueso.jpg",
+      "uploadedAt": "2025-09-23T06:30:16.107Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Cilindro Jareta\\Gris y blanco.jpg",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Cilindro Jareta/Gris y blanco.jpg",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Cilindro Jareta",
+      "archivo": "Gris y blanco.jpg",
+      "size": 385609,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Cilindro Jareta/Gris y blanco.jpg",
+      "uploadedAt": "2025-09-23T06:30:16.322Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Cilindro Jareta\\Marino y Blanco.jpg",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Cilindro Jareta/Marino y Blanco.jpg",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Cilindro Jareta",
+      "archivo": "Marino y Blanco.jpg",
+      "size": 239490,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Cilindro Jareta/Marino y Blanco.jpg",
+      "uploadedAt": "2025-09-23T06:30:16.674Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Cilindro Jareta\\Negro y blanco.jpg",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Cilindro Jareta/Negro y blanco.jpg",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Cilindro Jareta",
+      "archivo": "Negro y blanco.jpg",
+      "size": 242859,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Cilindro Jareta/Negro y blanco.jpg",
+      "uploadedAt": "2025-09-23T06:30:16.998Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Cilindro Jareta\\principal.jpg",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Cilindro Jareta/principal.jpg",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Cilindro Jareta",
+      "archivo": "principal.jpg",
+      "size": 44315,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Cilindro Jareta/principal.jpg",
+      "uploadedAt": "2025-09-23T06:30:17.207Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa de Playa Gigante\\Blanco y camel franjas.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa de Playa Gigante/Blanco y camel franjas.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa de Playa Gigante",
+      "archivo": "Blanco y camel franjas.png",
+      "size": 956492,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa de Playa Gigante/Blanco y camel franjas.png",
+      "uploadedAt": "2025-09-23T06:30:18.834Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa de Playa Gigante\\Blanco y gris franjas.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa de Playa Gigante/Blanco y gris franjas.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa de Playa Gigante",
+      "archivo": "Blanco y gris franjas.png",
+      "size": 1022181,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa de Playa Gigante/Blanco y gris franjas.png",
+      "uploadedAt": "2025-09-23T06:30:19.339Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa de Playa Gigante\\Blanco y negro franjas.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa de Playa Gigante/Blanco y negro franjas.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa de Playa Gigante",
+      "archivo": "Blanco y negro franjas.png",
+      "size": 1036405,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa de Playa Gigante/Blanco y negro franjas.png",
+      "uploadedAt": "2025-09-23T06:30:19.637Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa de Playa Gigante\\Gris y azul tupido.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa de Playa Gigante/Gris y azul tupido.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa de Playa Gigante",
+      "archivo": "Gris y azul tupido.png",
+      "size": 1198038,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa de Playa Gigante/Gris y azul tupido.png",
+      "uploadedAt": "2025-09-23T06:30:19.974Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa de Playa Gigante\\principal.jpg",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa de Playa Gigante/principal.jpg",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa de Playa Gigante",
+      "archivo": "principal.jpg",
+      "size": 163124,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa de Playa Gigante/principal.jpg",
+      "uploadedAt": "2025-09-23T06:30:20.368Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa de Playa mediana\\Blanco y negro.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa de Playa mediana/Blanco y negro.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa de Playa mediana",
+      "archivo": "Blanco y negro.png",
+      "size": 809903,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa de Playa mediana/Blanco y negro.png",
+      "uploadedAt": "2025-09-23T06:30:21.711Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa de Playa mediana\\Negro y blanco.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa de Playa mediana/Negro y blanco.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa de Playa mediana",
+      "archivo": "Negro y blanco.png",
+      "size": 784870,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa de Playa mediana/Negro y blanco.png",
+      "uploadedAt": "2025-09-23T06:30:22.020Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa de Playa mediana\\principal.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa de Playa mediana/principal.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa de Playa mediana",
+      "archivo": "principal.png",
+      "size": 805378,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa de Playa mediana/principal.png",
+      "uploadedAt": "2025-09-23T06:30:22.367Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa de Playa mediana\\Tinto y blanco.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa de Playa mediana/Tinto y blanco.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa de Playa mediana",
+      "archivo": "Tinto y blanco.png",
+      "size": 654264,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa de Playa mediana/Tinto y blanco.png",
+      "uploadedAt": "2025-09-23T06:30:22.653Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Telar de pedal cruzada\\Camel y blanco delgado.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Camel y blanco delgado.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Telar de pedal cruzada",
+      "archivo": "Camel y blanco delgado.png",
+      "size": 899866,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Camel y blanco delgado.png",
+      "uploadedAt": "2025-09-23T06:30:22.974Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Telar de pedal cruzada\\Camel y Blanco franjas.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Camel y Blanco franjas.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Telar de pedal cruzada",
+      "archivo": "Camel y Blanco franjas.png",
+      "size": 759466,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Camel y Blanco franjas.png",
+      "uploadedAt": "2025-09-23T06:30:24.249Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Telar de pedal cruzada\\Gris y azul franjas.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Gris y azul franjas.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Telar de pedal cruzada",
+      "archivo": "Gris y azul franjas.png",
+      "size": 922391,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Gris y azul franjas.png",
+      "uploadedAt": "2025-09-23T06:30:24.564Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Telar de pedal cruzada\\Gris y azul tupido.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Gris y azul tupido.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Telar de pedal cruzada",
+      "archivo": "Gris y azul tupido.png",
+      "size": 831222,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Gris y azul tupido.png",
+      "uploadedAt": "2025-09-23T06:30:24.889Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Telar de pedal cruzada\\Gris y blanco franjas.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Gris y blanco franjas.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Telar de pedal cruzada",
+      "archivo": "Gris y blanco franjas.png",
+      "size": 783320,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Gris y blanco franjas.png",
+      "uploadedAt": "2025-09-23T06:30:25.199Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Telar de pedal cruzada\\Gris y blanco.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Gris y blanco.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Telar de pedal cruzada",
+      "archivo": "Gris y blanco.png",
+      "size": 850630,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Gris y blanco.png",
+      "uploadedAt": "2025-09-23T06:30:25.644Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Telar de pedal cruzada\\Gris y negro.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Gris y negro.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Telar de pedal cruzada",
+      "archivo": "Gris y negro.png",
+      "size": 943576,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Gris y negro.png",
+      "uploadedAt": "2025-09-23T06:30:27.318Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Telar de pedal cruzada\\Negro y blanco delgado.png",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Negro y blanco delgado.png",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Telar de pedal cruzada",
+      "archivo": "Negro y blanco delgado.png",
+      "size": 496186,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/Negro y blanco delgado.png",
+      "uploadedAt": "2025-09-23T06:30:27.601Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de Textil y Piel\\Bolsa Telar de pedal cruzada\\principal.jpg",
+      "bucketPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/principal.jpg",
+      "categoria": "Bolsas de Textil y Piel",
+      "producto": "Bolsa Telar de pedal cruzada",
+      "archivo": "principal.jpg",
+      "size": 108281,
+      "uploadPath": "Bolsas de Textil y Piel/Bolsa Telar de pedal cruzada/principal.jpg",
+      "uploadedAt": "2025-09-23T06:30:27.823Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante horizontal\\Azul Denim.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante horizontal/Azul Denim.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante horizontal",
+      "archivo": "Azul Denim.png",
+      "size": 988406,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante horizontal/Azul Denim.png",
+      "uploadedAt": "2025-09-23T06:30:28.174Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante horizontal\\Gris.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante horizontal/Gris.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante horizontal",
+      "archivo": "Gris.png",
+      "size": 947232,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante horizontal/Gris.png",
+      "uploadedAt": "2025-09-23T06:30:28.519Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante horizontal\\Miel.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante horizontal/Miel.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante horizontal",
+      "archivo": "Miel.png",
+      "size": 1105619,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante horizontal/Miel.png",
+      "uploadedAt": "2025-09-23T06:30:29.842Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante horizontal\\Negro.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante horizontal/Negro.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante horizontal",
+      "archivo": "Negro.png",
+      "size": 925286,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante horizontal/Negro.png",
+      "uploadedAt": "2025-09-23T06:30:30.411Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante horizontal\\principal.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante horizontal/principal.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante horizontal",
+      "archivo": "principal.png",
+      "size": 204795,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante horizontal/principal.png",
+      "uploadedAt": "2025-09-23T06:30:30.683Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante horizontal\\Tinta.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante horizontal/Tinta.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante horizontal",
+      "archivo": "Tinta.png",
+      "size": 1142907,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante horizontal/Tinta.png",
+      "uploadedAt": "2025-09-23T06:30:31.048Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante horizontal\\Verde.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante horizontal/Verde.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante horizontal",
+      "archivo": "Verde.png",
+      "size": 1070370,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante horizontal/Verde.png",
+      "uploadedAt": "2025-09-23T06:30:31.433Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante Vertical\\Azul oscuro.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante Vertical/Azul oscuro.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante Vertical",
+      "archivo": "Azul oscuro.png",
+      "size": 722802,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante Vertical/Azul oscuro.png",
+      "uploadedAt": "2025-09-23T06:30:32.774Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante Vertical\\Azul.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante Vertical/Azul.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante Vertical",
+      "archivo": "Azul.png",
+      "size": 892791,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante Vertical/Azul.png",
+      "uploadedAt": "2025-09-23T06:30:33.087Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante Vertical\\Gris.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante Vertical/Gris.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante Vertical",
+      "archivo": "Gris.png",
+      "size": 711972,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante Vertical/Gris.png",
+      "uploadedAt": "2025-09-23T06:30:33.634Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante Vertical\\Miel.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante Vertical/Miel.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante Vertical",
+      "archivo": "Miel.png",
+      "size": 665146,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante Vertical/Miel.png",
+      "uploadedAt": "2025-09-23T06:30:33.957Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante Vertical\\Negro.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante Vertical/Negro.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante Vertical",
+      "archivo": "Negro.png",
+      "size": 852386,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante Vertical/Negro.png",
+      "uploadedAt": "2025-09-23T06:30:34.343Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante Vertical\\principal.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante Vertical/principal.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante Vertical",
+      "archivo": "principal.png",
+      "size": 405295,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante Vertical/principal.png",
+      "uploadedAt": "2025-09-23T06:30:35.702Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante Vertical\\Tinta.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante Vertical/Tinta.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante Vertical",
+      "archivo": "Tinta.png",
+      "size": 830629,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante Vertical/Tinta.png",
+      "uploadedAt": "2025-09-23T06:30:36.024Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante Vertical\\Verde.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante Vertical/Verde.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante Vertical",
+      "archivo": "Verde.png",
+      "size": 1478429,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante Vertical/Verde.png",
+      "uploadedAt": "2025-09-23T06:30:36.379Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante vertical Pelo y Miel\\Negro.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante vertical Pelo y Miel/Negro.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante vertical Pelo y Miel",
+      "archivo": "Negro.png",
+      "size": 276421,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante vertical Pelo y Miel/Negro.png",
+      "uploadedAt": "2025-09-23T06:30:36.795Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa Gigante vertical Pelo y Miel\\principal.png",
+      "bucketPath": "Bolsas Grandes/Bolsa Gigante vertical Pelo y Miel/principal.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa Gigante vertical Pelo y Miel",
+      "archivo": "principal.png",
+      "size": 276421,
+      "uploadPath": "Bolsas Grandes/Bolsa Gigante vertical Pelo y Miel/principal.png",
+      "uploadedAt": "2025-09-23T06:30:37.079Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa grande con Jareta\\Cafe gamuza.png",
+      "bucketPath": "Bolsas Grandes/Bolsa grande con Jareta/Cafe gamuza.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa grande con Jareta",
+      "archivo": "Cafe gamuza.png",
+      "size": 833751,
+      "uploadPath": "Bolsas Grandes/Bolsa grande con Jareta/Cafe gamuza.png",
+      "uploadedAt": "2025-09-23T06:30:38.357Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa grande con Jareta\\Ladrillo.png",
+      "bucketPath": "Bolsas Grandes/Bolsa grande con Jareta/Ladrillo.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa grande con Jareta",
+      "archivo": "Ladrillo.png",
+      "size": 545008,
+      "uploadPath": "Bolsas Grandes/Bolsa grande con Jareta/Ladrillo.png",
+      "uploadedAt": "2025-09-23T06:30:38.788Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa grande con Jareta\\Mostaza.png",
+      "bucketPath": "Bolsas Grandes/Bolsa grande con Jareta/Mostaza.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa grande con Jareta",
+      "archivo": "Mostaza.png",
+      "size": 550630,
+      "uploadPath": "Bolsas Grandes/Bolsa grande con Jareta/Mostaza.png",
+      "uploadedAt": "2025-09-23T06:30:39.109Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa grande con Jareta\\Negro.png",
+      "bucketPath": "Bolsas Grandes/Bolsa grande con Jareta/Negro.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa grande con Jareta",
+      "archivo": "Negro.png",
+      "size": 388393,
+      "uploadPath": "Bolsas Grandes/Bolsa grande con Jareta/Negro.png",
+      "uploadedAt": "2025-09-23T06:30:39.434Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa grande con Jareta\\principal.png",
+      "bucketPath": "Bolsas Grandes/Bolsa grande con Jareta/principal.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa grande con Jareta",
+      "archivo": "principal.png",
+      "size": 148655,
+      "uploadPath": "Bolsas Grandes/Bolsa grande con Jareta/principal.png",
+      "uploadedAt": "2025-09-23T06:30:40.719Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa grande con Jareta\\Tinta.png",
+      "bucketPath": "Bolsas Grandes/Bolsa grande con Jareta/Tinta.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa grande con Jareta",
+      "archivo": "Tinta.png",
+      "size": 531225,
+      "uploadPath": "Bolsas Grandes/Bolsa grande con Jareta/Tinta.png",
+      "uploadedAt": "2025-09-23T06:30:41.047Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa grande con Jareta\\Tinto gamuza.png",
+      "bucketPath": "Bolsas Grandes/Bolsa grande con Jareta/Tinto gamuza.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa grande con Jareta",
+      "archivo": "Tinto gamuza.png",
+      "size": 621689,
+      "uploadPath": "Bolsas Grandes/Bolsa grande con Jareta/Tinto gamuza.png",
+      "uploadedAt": "2025-09-23T06:30:41.322Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsas Gigante Plana\\Cafe chocolate.png",
+      "bucketPath": "Bolsas Grandes/Bolsas Gigante Plana/Cafe chocolate.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsas Gigante Plana",
+      "archivo": "Cafe chocolate.png",
+      "size": 440562,
+      "uploadPath": "Bolsas Grandes/Bolsas Gigante Plana/Cafe chocolate.png",
+      "uploadedAt": "2025-09-23T06:30:41.609Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsas Gigante Plana\\Camel.png",
+      "bucketPath": "Bolsas Grandes/Bolsas Gigante Plana/Camel.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsas Gigante Plana",
+      "archivo": "Camel.png",
+      "size": 521760,
+      "uploadPath": "Bolsas Grandes/Bolsas Gigante Plana/Camel.png",
+      "uploadedAt": "2025-09-23T06:30:43.013Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsas Gigante Plana\\Negro.png",
+      "bucketPath": "Bolsas Grandes/Bolsas Gigante Plana/Negro.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsas Gigante Plana",
+      "archivo": "Negro.png",
+      "size": 432930,
+      "uploadPath": "Bolsas Grandes/Bolsas Gigante Plana/Negro.png",
+      "uploadedAt": "2025-09-23T06:30:43.293Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsas Gigante Plana\\principal.png",
+      "bucketPath": "Bolsas Grandes/Bolsas Gigante Plana/principal.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsas Gigante Plana",
+      "archivo": "principal.png",
+      "size": 229939,
+      "uploadPath": "Bolsas Grandes/Bolsas Gigante Plana/principal.png",
+      "uploadedAt": "2025-09-23T06:30:43.587Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsas Gigante Plana\\Tinta.png",
+      "bucketPath": "Bolsas Grandes/Bolsas Gigante Plana/Tinta.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsas Gigante Plana",
+      "archivo": "Tinta.png",
+      "size": 481907,
+      "uploadPath": "Bolsas Grandes/Bolsas Gigante Plana/Tinta.png",
+      "uploadedAt": "2025-09-23T06:30:44.097Z"
+    },
+    {
+      "localPath": "scraper\\Botelleras\\Botelleras\\Miel.jpg",
+      "bucketPath": "Botelleras/Botelleras/Miel.jpg",
+      "categoria": "Botelleras",
+      "producto": "Botelleras",
+      "archivo": "Miel.jpg",
+      "size": 1292182,
+      "uploadPath": "Botelleras/Botelleras/Miel.jpg",
+      "uploadedAt": "2025-09-23T06:30:45.561Z"
+    },
+    {
+      "localPath": "scraper\\Botelleras\\Botelleras\\principal.jpg",
+      "bucketPath": "Botelleras/Botelleras/principal.jpg",
+      "categoria": "Botelleras",
+      "producto": "Botelleras",
+      "archivo": "principal.jpg",
+      "size": 42677,
+      "uploadPath": "Botelleras/Botelleras/principal.jpg",
+      "uploadedAt": "2025-09-23T06:30:45.735Z"
+    },
+    {
+      "localPath": "scraper\\Hogar\\Portavasos\\default.jpg",
+      "bucketPath": "Hogar/Portavasos/default.jpg",
+      "categoria": "Hogar",
+      "producto": "Portavasos",
+      "archivo": "default.jpg",
+      "size": 70976,
+      "uploadPath": "Hogar/Portavasos/default.jpg",
+      "uploadedAt": "2025-09-23T06:30:46.020Z"
+    },
+    {
+      "localPath": "scraper\\Hogar\\Portavasos\\principal.jpg",
+      "bucketPath": "Hogar/Portavasos/principal.jpg",
+      "categoria": "Hogar",
+      "producto": "Portavasos",
+      "archivo": "principal.jpg",
+      "size": 70976,
+      "uploadPath": "Hogar/Portavasos/principal.jpg",
+      "uploadedAt": "2025-09-23T06:30:46.375Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Geometrico Gigante\\Blanco.jpg",
+      "bucketPath": "Joyeria/Arete Geometrico Gigante/Blanco.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Geometrico Gigante",
+      "archivo": "Blanco.jpg",
+      "size": 519977,
+      "uploadPath": "Joyeria/Arete Geometrico Gigante/Blanco.jpg",
+      "uploadedAt": "2025-09-23T06:30:46.667Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Geometrico Gigante\\cobre.jpg",
+      "bucketPath": "Joyeria/Arete Geometrico Gigante/cobre.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Geometrico Gigante",
+      "archivo": "cobre.jpg",
+      "size": 568566,
+      "uploadPath": "Joyeria/Arete Geometrico Gigante/cobre.jpg",
+      "uploadedAt": "2025-09-23T06:30:48.247Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Geometrico Gigante\\Negro.jpg",
+      "bucketPath": "Joyeria/Arete Geometrico Gigante/Negro.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Geometrico Gigante",
+      "archivo": "Negro.jpg",
+      "size": 604628,
+      "uploadPath": "Joyeria/Arete Geometrico Gigante/Negro.jpg",
+      "uploadedAt": "2025-09-23T06:30:48.769Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Geometrico Gigante\\principal.jpg",
+      "bucketPath": "Joyeria/Arete Geometrico Gigante/principal.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Geometrico Gigante",
+      "archivo": "principal.jpg",
+      "size": 69182,
+      "uploadPath": "Joyeria/Arete Geometrico Gigante/principal.jpg",
+      "uploadedAt": "2025-09-23T06:30:48.994Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Geometrico Gigante\\Tinta.jpg",
+      "bucketPath": "Joyeria/Arete Geometrico Gigante/Tinta.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Geometrico Gigante",
+      "archivo": "Tinta.jpg",
+      "size": 552894,
+      "uploadPath": "Joyeria/Arete Geometrico Gigante/Tinta.jpg",
+      "uploadedAt": "2025-09-23T06:30:49.277Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Gota\\Beige.jpg",
+      "bucketPath": "Joyeria/Arete Piel Gota/Beige.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Gota",
+      "archivo": "Beige.jpg",
+      "size": 503071,
+      "uploadPath": "Joyeria/Arete Piel Gota/Beige.jpg",
+      "uploadedAt": "2025-09-23T06:30:52.172Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Gota\\cobre.jpg",
+      "bucketPath": "Joyeria/Arete Piel Gota/cobre.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Gota",
+      "archivo": "cobre.jpg",
+      "size": 597960,
+      "uploadPath": "Joyeria/Arete Piel Gota/cobre.jpg",
+      "uploadedAt": "2025-09-23T06:30:52.696Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Gota\\Ladrillo.jpg",
+      "bucketPath": "Joyeria/Arete Piel Gota/Ladrillo.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Gota",
+      "archivo": "Ladrillo.jpg",
+      "size": 508064,
+      "uploadPath": "Joyeria/Arete Piel Gota/Ladrillo.jpg",
+      "uploadedAt": "2025-09-23T06:30:52.970Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Gota\\Miel.jpg",
+      "bucketPath": "Joyeria/Arete Piel Gota/Miel.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Gota",
+      "archivo": "Miel.jpg",
+      "size": 556289,
+      "uploadPath": "Joyeria/Arete Piel Gota/Miel.jpg",
+      "uploadedAt": "2025-09-23T06:30:53.276Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Gota\\Negro.jpg",
+      "bucketPath": "Joyeria/Arete Piel Gota/Negro.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Gota",
+      "archivo": "Negro.jpg",
+      "size": 501994,
+      "uploadPath": "Joyeria/Arete Piel Gota/Negro.jpg",
+      "uploadedAt": "2025-09-23T06:30:54.592Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Gota\\Oro Mate.jpg",
+      "bucketPath": "Joyeria/Arete Piel Gota/Oro Mate.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Gota",
+      "archivo": "Oro Mate.jpg",
+      "size": 609877,
+      "uploadPath": "Joyeria/Arete Piel Gota/Oro Mate.jpg",
+      "uploadedAt": "2025-09-23T06:30:54.861Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Gota\\principal.jpg",
+      "bucketPath": "Joyeria/Arete Piel Gota/principal.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Gota",
+      "archivo": "principal.jpg",
+      "size": 68081,
+      "uploadPath": "Joyeria/Arete Piel Gota/principal.jpg",
+      "uploadedAt": "2025-09-23T06:30:55.227Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Poligono Chico\\Blanco y negro.jpg",
+      "bucketPath": "Joyeria/Arete Piel Poligono Chico/Blanco y negro.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Poligono Chico",
+      "archivo": "Blanco y negro.jpg",
+      "size": 496232,
+      "uploadPath": "Joyeria/Arete Piel Poligono Chico/Blanco y negro.jpg",
+      "uploadedAt": "2025-09-23T06:30:55.531Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Poligono Chico\\Blanco y Plateado.jpg",
+      "bucketPath": "Joyeria/Arete Piel Poligono Chico/Blanco y Plateado.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Poligono Chico",
+      "archivo": "Blanco y Plateado.jpg",
+      "size": 492978,
+      "uploadPath": "Joyeria/Arete Piel Poligono Chico/Blanco y Plateado.jpg",
+      "uploadedAt": "2025-09-23T06:30:56.857Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Poligono Chico\\Blanco y Rosado.jpg",
+      "bucketPath": "Joyeria/Arete Piel Poligono Chico/Blanco y Rosado.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Poligono Chico",
+      "archivo": "Blanco y Rosado.jpg",
+      "size": 608910,
+      "uploadPath": "Joyeria/Arete Piel Poligono Chico/Blanco y Rosado.jpg",
+      "uploadedAt": "2025-09-23T06:30:57.073Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Poligono Chico\\Cafe gamuza y Camel.jpg",
+      "bucketPath": "Joyeria/Arete Piel Poligono Chico/Cafe gamuza y Camel.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Poligono Chico",
+      "archivo": "Cafe gamuza y Camel.jpg",
+      "size": 511395,
+      "uploadPath": "Joyeria/Arete Piel Poligono Chico/Cafe gamuza y Camel.jpg",
+      "uploadedAt": "2025-09-23T06:30:57.351Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Poligono Chico\\Cafe oscuro y Cobre.jpg",
+      "bucketPath": "Joyeria/Arete Piel Poligono Chico/Cafe oscuro y Cobre.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Poligono Chico",
+      "archivo": "Cafe oscuro y Cobre.jpg",
+      "size": 577509,
+      "uploadPath": "Joyeria/Arete Piel Poligono Chico/Cafe oscuro y Cobre.jpg",
+      "uploadedAt": "2025-09-23T06:30:57.645Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Poligono Chico\\Cafe y oro.jpg",
+      "bucketPath": "Joyeria/Arete Piel Poligono Chico/Cafe y oro.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Poligono Chico",
+      "archivo": "Cafe y oro.jpg",
+      "size": 565892,
+      "uploadPath": "Joyeria/Arete Piel Poligono Chico/Cafe y oro.jpg",
+      "uploadedAt": "2025-09-23T06:30:57.929Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Poligono Chico\\Gris y negro.jpg",
+      "bucketPath": "Joyeria/Arete Piel Poligono Chico/Gris y negro.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Poligono Chico",
+      "archivo": "Gris y negro.jpg",
+      "size": 604313,
+      "uploadPath": "Joyeria/Arete Piel Poligono Chico/Gris y negro.jpg",
+      "uploadedAt": "2025-09-23T06:30:59.279Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Poligono Chico\\Ladrillo y camel.jpg",
+      "bucketPath": "Joyeria/Arete Piel Poligono Chico/Ladrillo y camel.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Poligono Chico",
+      "archivo": "Ladrillo y camel.jpg",
+      "size": 531233,
+      "uploadPath": "Joyeria/Arete Piel Poligono Chico/Ladrillo y camel.jpg",
+      "uploadedAt": "2025-09-23T06:30:59.523Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Poligono Chico\\Negro y cobre.jpg",
+      "bucketPath": "Joyeria/Arete Piel Poligono Chico/Negro y cobre.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Poligono Chico",
+      "archivo": "Negro y cobre.jpg",
+      "size": 593368,
+      "uploadPath": "Joyeria/Arete Piel Poligono Chico/Negro y cobre.jpg",
+      "uploadedAt": "2025-09-23T06:30:59.840Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Poligono Chico\\Negro y Gris.jpg",
+      "bucketPath": "Joyeria/Arete Piel Poligono Chico/Negro y Gris.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Poligono Chico",
+      "archivo": "Negro y Gris.jpg",
+      "size": 547704,
+      "uploadPath": "Joyeria/Arete Piel Poligono Chico/Negro y Gris.jpg",
+      "uploadedAt": "2025-09-23T06:31:00.204Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Poligono Chico\\Oro mate y negro.jpg",
+      "bucketPath": "Joyeria/Arete Piel Poligono Chico/Oro mate y negro.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Poligono Chico",
+      "archivo": "Oro mate y negro.jpg",
+      "size": 561303,
+      "uploadPath": "Joyeria/Arete Piel Poligono Chico/Oro mate y negro.jpg",
+      "uploadedAt": "2025-09-23T06:31:00.483Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Poligono Chico\\Oro y cafe oscuro.jpg",
+      "bucketPath": "Joyeria/Arete Piel Poligono Chico/Oro y cafe oscuro.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Poligono Chico",
+      "archivo": "Oro y cafe oscuro.jpg",
+      "size": 571001,
+      "uploadPath": "Joyeria/Arete Piel Poligono Chico/Oro y cafe oscuro.jpg",
+      "uploadedAt": "2025-09-23T06:31:02.001Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Poligono Chico\\principal.jpg",
+      "bucketPath": "Joyeria/Arete Piel Poligono Chico/principal.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Poligono Chico",
+      "archivo": "principal.jpg",
+      "size": 65541,
+      "uploadPath": "Joyeria/Arete Piel Poligono Chico/principal.jpg",
+      "uploadedAt": "2025-09-23T06:31:02.380Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Poligono Chico\\Tinto y blanco.jpg",
+      "bucketPath": "Joyeria/Arete Piel Poligono Chico/Tinto y blanco.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Poligono Chico",
+      "archivo": "Tinto y blanco.jpg",
+      "size": 469889,
+      "uploadPath": "Joyeria/Arete Piel Poligono Chico/Tinto y blanco.jpg",
+      "uploadedAt": "2025-09-23T06:31:02.632Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete dos Lineas\\Gris.jpg",
+      "bucketPath": "Joyeria/Brazalete dos Lineas/Gris.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete dos Lineas",
+      "archivo": "Gris.jpg",
+      "size": 1386250,
+      "uploadPath": "Joyeria/Brazalete dos Lineas/Gris.jpg",
+      "uploadedAt": "2025-09-23T06:31:06.348Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete dos Lineas\\Miel.jpg",
+      "bucketPath": "Joyeria/Brazalete dos Lineas/Miel.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete dos Lineas",
+      "archivo": "Miel.jpg",
+      "size": 1352791,
+      "uploadPath": "Joyeria/Brazalete dos Lineas/Miel.jpg",
+      "uploadedAt": "2025-09-23T06:31:06.730Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete dos Lineas\\Negro.jpg",
+      "bucketPath": "Joyeria/Brazalete dos Lineas/Negro.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete dos Lineas",
+      "archivo": "Negro.jpg",
+      "size": 1681131,
+      "uploadPath": "Joyeria/Brazalete dos Lineas/Negro.jpg",
+      "uploadedAt": "2025-09-23T06:31:07.061Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete dos Lineas\\principal.jpg",
+      "bucketPath": "Joyeria/Brazalete dos Lineas/principal.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete dos Lineas",
+      "archivo": "principal.jpg",
+      "size": 82452,
+      "uploadPath": "Joyeria/Brazalete dos Lineas/principal.jpg",
+      "uploadedAt": "2025-09-23T06:31:07.306Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Hombre\\Cafe chocolate.jpg",
+      "bucketPath": "Joyeria/Brazalete Hombre/Cafe chocolate.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Hombre",
+      "archivo": "Cafe chocolate.jpg",
+      "size": 1632743,
+      "uploadPath": "Joyeria/Brazalete Hombre/Cafe chocolate.jpg",
+      "uploadedAt": "2025-09-23T06:31:07.608Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Hombre\\Gris.jpg",
+      "bucketPath": "Joyeria/Brazalete Hombre/Gris.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Hombre",
+      "archivo": "Gris.jpg",
+      "size": 1467171,
+      "uploadPath": "Joyeria/Brazalete Hombre/Gris.jpg",
+      "uploadedAt": "2025-09-23T06:31:08.986Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Hombre\\Miel.jpg",
+      "bucketPath": "Joyeria/Brazalete Hombre/Miel.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Hombre",
+      "archivo": "Miel.jpg",
+      "size": 1455520,
+      "uploadPath": "Joyeria/Brazalete Hombre/Miel.jpg",
+      "uploadedAt": "2025-09-23T06:31:09.335Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Hombre\\principal.jpg",
+      "bucketPath": "Joyeria/Brazalete Hombre/principal.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Hombre",
+      "archivo": "principal.jpg",
+      "size": 80727,
+      "uploadPath": "Joyeria/Brazalete Hombre/principal.jpg",
+      "uploadedAt": "2025-09-23T06:31:09.548Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete lineas Delgadas\\Azul Denim.jpg",
+      "bucketPath": "Joyeria/Brazalete lineas Delgadas/Azul Denim.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete lineas Delgadas",
+      "archivo": "Azul Denim.jpg",
+      "size": 1351754,
+      "uploadPath": "Joyeria/Brazalete lineas Delgadas/Azul Denim.jpg",
+      "uploadedAt": "2025-09-23T06:31:09.899Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete lineas Delgadas\\Beige.jpg",
+      "bucketPath": "Joyeria/Brazalete lineas Delgadas/Beige.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete lineas Delgadas",
+      "archivo": "Beige.jpg",
+      "size": 1277413,
+      "uploadPath": "Joyeria/Brazalete lineas Delgadas/Beige.jpg",
+      "uploadedAt": "2025-09-23T06:31:10.229Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete lineas Delgadas\\cobre.jpg",
+      "bucketPath": "Joyeria/Brazalete lineas Delgadas/cobre.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete lineas Delgadas",
+      "archivo": "cobre.jpg",
+      "size": 1148422,
+      "uploadPath": "Joyeria/Brazalete lineas Delgadas/cobre.jpg",
+      "uploadedAt": "2025-09-23T06:31:11.651Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete lineas Delgadas\\Ladrillo.jpg",
+      "bucketPath": "Joyeria/Brazalete lineas Delgadas/Ladrillo.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete lineas Delgadas",
+      "archivo": "Ladrillo.jpg",
+      "size": 1353958,
+      "uploadPath": "Joyeria/Brazalete lineas Delgadas/Ladrillo.jpg",
+      "uploadedAt": "2025-09-23T06:31:12.036Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete lineas Delgadas\\Miel.jpg",
+      "bucketPath": "Joyeria/Brazalete lineas Delgadas/Miel.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete lineas Delgadas",
+      "archivo": "Miel.jpg",
+      "size": 1423769,
+      "uploadPath": "Joyeria/Brazalete lineas Delgadas/Miel.jpg",
+      "uploadedAt": "2025-09-23T06:31:12.379Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete lineas Delgadas\\Negro.jpg",
+      "bucketPath": "Joyeria/Brazalete lineas Delgadas/Negro.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete lineas Delgadas",
+      "archivo": "Negro.jpg",
+      "size": 1847027,
+      "uploadPath": "Joyeria/Brazalete lineas Delgadas/Negro.jpg",
+      "uploadedAt": "2025-09-23T06:31:12.830Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete lineas Delgadas\\Oro Mate.jpg",
+      "bucketPath": "Joyeria/Brazalete lineas Delgadas/Oro Mate.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete lineas Delgadas",
+      "archivo": "Oro Mate.jpg",
+      "size": 1236412,
+      "uploadPath": "Joyeria/Brazalete lineas Delgadas/Oro Mate.jpg",
+      "uploadedAt": "2025-09-23T06:31:13.106Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete lineas Delgadas\\Oro Plata.jpg",
+      "bucketPath": "Joyeria/Brazalete lineas Delgadas/Oro Plata.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete lineas Delgadas",
+      "archivo": "Oro Plata.jpg",
+      "size": 1320361,
+      "uploadPath": "Joyeria/Brazalete lineas Delgadas/Oro Plata.jpg",
+      "uploadedAt": "2025-09-23T06:31:14.417Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete lineas Delgadas\\principal.jpg",
+      "bucketPath": "Joyeria/Brazalete lineas Delgadas/principal.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete lineas Delgadas",
+      "archivo": "principal.jpg",
+      "size": 81178,
+      "uploadPath": "Joyeria/Brazalete lineas Delgadas/principal.jpg",
+      "uploadedAt": "2025-09-23T06:31:14.608Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete lineas Delgadas\\Tinta.jpg",
+      "bucketPath": "Joyeria/Brazalete lineas Delgadas/Tinta.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete lineas Delgadas",
+      "archivo": "Tinta.jpg",
+      "size": 1457767,
+      "uploadPath": "Joyeria/Brazalete lineas Delgadas/Tinta.jpg",
+      "uploadedAt": "2025-09-23T06:31:14.952Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Liso\\Azul Denim.jpg",
+      "bucketPath": "Joyeria/Brazalete Liso/Azul Denim.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Liso",
+      "archivo": "Azul Denim.jpg",
+      "size": 1678949,
+      "uploadPath": "Joyeria/Brazalete Liso/Azul Denim.jpg",
+      "uploadedAt": "2025-09-23T06:31:15.542Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Liso\\Azul.jpg",
+      "bucketPath": "Joyeria/Brazalete Liso/Azul.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Liso",
+      "archivo": "Azul.jpg",
+      "size": 1666743,
+      "uploadPath": "Joyeria/Brazalete Liso/Azul.jpg",
+      "uploadedAt": "2025-09-23T06:31:15.857Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Liso\\Gris.jpg",
+      "bucketPath": "Joyeria/Brazalete Liso/Gris.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Liso",
+      "archivo": "Gris.jpg",
+      "size": 1390750,
+      "uploadPath": "Joyeria/Brazalete Liso/Gris.jpg",
+      "uploadedAt": "2025-09-23T06:31:17.404Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Liso\\Miel.jpg",
+      "bucketPath": "Joyeria/Brazalete Liso/Miel.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Liso",
+      "archivo": "Miel.jpg",
+      "size": 1494730,
+      "uploadPath": "Joyeria/Brazalete Liso/Miel.jpg",
+      "uploadedAt": "2025-09-23T06:31:17.750Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Liso\\Negro.jpg",
+      "bucketPath": "Joyeria/Brazalete Liso/Negro.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Liso",
+      "archivo": "Negro.jpg",
+      "size": 1591394,
+      "uploadPath": "Joyeria/Brazalete Liso/Negro.jpg",
+      "uploadedAt": "2025-09-23T06:31:18.360Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Liso\\Oro Mate.jpg",
+      "bucketPath": "Joyeria/Brazalete Liso/Oro Mate.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Liso",
+      "archivo": "Oro Mate.jpg",
+      "size": 1300532,
+      "uploadPath": "Joyeria/Brazalete Liso/Oro Mate.jpg",
+      "uploadedAt": "2025-09-23T06:31:18.731Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Liso\\principal.jpg",
+      "bucketPath": "Joyeria/Brazalete Liso/principal.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Liso",
+      "archivo": "principal.jpg",
+      "size": 121794,
+      "uploadPath": "Joyeria/Brazalete Liso/principal.jpg",
+      "uploadedAt": "2025-09-23T06:31:20.139Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Liso\\Tinta.jpg",
+      "bucketPath": "Joyeria/Brazalete Liso/Tinta.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Liso",
+      "archivo": "Tinta.jpg",
+      "size": 1545737,
+      "uploadPath": "Joyeria/Brazalete Liso/Tinta.jpg",
+      "uploadedAt": "2025-09-23T06:31:20.458Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Piel Pelo\\principal.jpg",
+      "bucketPath": "Joyeria/Brazalete Piel Pelo/principal.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Piel Pelo",
+      "archivo": "principal.jpg",
+      "size": 86364,
+      "uploadPath": "Joyeria/Brazalete Piel Pelo/principal.jpg",
+      "uploadedAt": "2025-09-23T06:31:20.723Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Piel Pelo\\Tonos claros.jpg",
+      "bucketPath": "Joyeria/Brazalete Piel Pelo/Tonos claros.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Piel Pelo",
+      "archivo": "Tonos claros.jpg",
+      "size": 1463157,
+      "uploadPath": "Joyeria/Brazalete Piel Pelo/Tonos claros.jpg",
+      "uploadedAt": "2025-09-23T06:31:21.049Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Piel Pelo\\Tonos oscuros.jpg",
+      "bucketPath": "Joyeria/Brazalete Piel Pelo/Tonos oscuros.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Piel Pelo",
+      "archivo": "Tonos oscuros.jpg",
+      "size": 1554195,
+      "uploadPath": "Joyeria/Brazalete Piel Pelo/Tonos oscuros.jpg",
+      "uploadedAt": "2025-09-23T06:31:22.395Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel grande\\Camel.jpeg",
+      "bucketPath": "Portacel/Portacel grande/Camel.jpeg",
+      "categoria": "Portacel",
+      "producto": "Portacel grande",
+      "archivo": "Camel.jpeg",
+      "size": 196017,
+      "uploadPath": "Portacel/Portacel grande/Camel.jpeg",
+      "uploadedAt": "2025-09-23T06:31:22.976Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel grande\\Gris.jpeg",
+      "bucketPath": "Portacel/Portacel grande/Gris.jpeg",
+      "categoria": "Portacel",
+      "producto": "Portacel grande",
+      "archivo": "Gris.jpeg",
+      "size": 226087,
+      "uploadPath": "Portacel/Portacel grande/Gris.jpeg",
+      "uploadedAt": "2025-09-23T06:31:23.204Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel grande\\Ladrillo.jpeg",
+      "bucketPath": "Portacel/Portacel grande/Ladrillo.jpeg",
+      "categoria": "Portacel",
+      "producto": "Portacel grande",
+      "archivo": "Ladrillo.jpeg",
+      "size": 273367,
+      "uploadPath": "Portacel/Portacel grande/Ladrillo.jpeg",
+      "uploadedAt": "2025-09-23T06:31:24.496Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel grande\\Negro.jpeg",
+      "bucketPath": "Portacel/Portacel grande/Negro.jpeg",
+      "categoria": "Portacel",
+      "producto": "Portacel grande",
+      "archivo": "Negro.jpeg",
+      "size": 263477,
+      "uploadPath": "Portacel/Portacel grande/Negro.jpeg",
+      "uploadedAt": "2025-09-23T06:31:24.962Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel grande\\principal.jpg",
+      "bucketPath": "Portacel/Portacel grande/principal.jpg",
+      "categoria": "Portacel",
+      "producto": "Portacel grande",
+      "archivo": "principal.jpg",
+      "size": 97344,
+      "uploadPath": "Portacel/Portacel grande/principal.jpg",
+      "uploadedAt": "2025-09-23T06:31:25.195Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel grande\\Tinta.jpeg",
+      "bucketPath": "Portacel/Portacel grande/Tinta.jpeg",
+      "categoria": "Portacel",
+      "producto": "Portacel grande",
+      "archivo": "Tinta.jpeg",
+      "size": 279191,
+      "uploadPath": "Portacel/Portacel grande/Tinta.jpeg",
+      "uploadedAt": "2025-09-23T06:31:25.866Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Pelo\\Pelo tonos blancos.png",
+      "bucketPath": "Portacel/Portacel Pelo/Pelo tonos blancos.png",
+      "categoria": "Portacel",
+      "producto": "Portacel Pelo",
+      "archivo": "Pelo tonos blancos.png",
+      "size": 697580,
+      "uploadPath": "Portacel/Portacel Pelo/Pelo tonos blancos.png",
+      "uploadedAt": "2025-09-23T06:31:26.488Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Pelo\\principal.jpg",
+      "bucketPath": "Portacel/Portacel Pelo/principal.jpg",
+      "categoria": "Portacel",
+      "producto": "Portacel Pelo",
+      "archivo": "principal.jpg",
+      "size": 99636,
+      "uploadPath": "Portacel/Portacel Pelo/principal.jpg",
+      "uploadedAt": "2025-09-23T06:31:27.972Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel liso\\Azul.png",
+      "bucketPath": "Portacel/Portacel Piel liso/Azul.png",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel liso",
+      "archivo": "Azul.png",
+      "size": 339609,
+      "uploadPath": "Portacel/Portacel Piel liso/Azul.png",
+      "uploadedAt": "2025-09-23T06:31:28.242Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel liso\\Blanco.png",
+      "bucketPath": "Portacel/Portacel Piel liso/Blanco.png",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel liso",
+      "archivo": "Blanco.png",
+      "size": 422163,
+      "uploadPath": "Portacel/Portacel Piel liso/Blanco.png",
+      "uploadedAt": "2025-09-23T06:31:28.517Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel liso\\Gris gamuza.png",
+      "bucketPath": "Portacel/Portacel Piel liso/Gris gamuza.png",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel liso",
+      "archivo": "Gris gamuza.png",
+      "size": 547277,
+      "uploadPath": "Portacel/Portacel Piel liso/Gris gamuza.png",
+      "uploadedAt": "2025-09-23T06:31:29.000Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel liso\\Gris.png",
+      "bucketPath": "Portacel/Portacel Piel liso/Gris.png",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel liso",
+      "archivo": "Gris.png",
+      "size": 449785,
+      "uploadPath": "Portacel/Portacel Piel liso/Gris.png",
+      "uploadedAt": "2025-09-23T06:31:30.423Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel liso\\Negro.png",
+      "bucketPath": "Portacel/Portacel Piel liso/Negro.png",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel liso",
+      "archivo": "Negro.png",
+      "size": 466868,
+      "uploadPath": "Portacel/Portacel Piel liso/Negro.png",
+      "uploadedAt": "2025-09-23T06:31:30.716Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel liso\\principal.jpg",
+      "bucketPath": "Portacel/Portacel Piel liso/principal.jpg",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel liso",
+      "archivo": "principal.jpg",
+      "size": 96475,
+      "uploadPath": "Portacel/Portacel Piel liso/principal.jpg",
+      "uploadedAt": "2025-09-23T06:31:30.995Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel liso\\Rojo.png",
+      "bucketPath": "Portacel/Portacel Piel liso/Rojo.png",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel liso",
+      "archivo": "Rojo.png",
+      "size": 524747,
+      "uploadPath": "Portacel/Portacel Piel liso/Rojo.png",
+      "uploadedAt": "2025-09-23T06:31:31.395Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel liso\\Verde gamuza.png",
+      "bucketPath": "Portacel/Portacel Piel liso/Verde gamuza.png",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel liso",
+      "archivo": "Verde gamuza.png",
+      "size": 586389,
+      "uploadPath": "Portacel/Portacel Piel liso/Verde gamuza.png",
+      "uploadedAt": "2025-09-23T06:31:31.761Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel Textil\\Piel cafe textil beige y blanco lluvia.png",
+      "bucketPath": "Portacel/Portacel Piel Textil/Piel cafe textil beige y blanco lluvia.png",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel Textil",
+      "archivo": "Piel cafe textil beige y blanco lluvia.png",
+      "size": 788262,
+      "uploadPath": "Portacel/Portacel Piel Textil/Piel cafe textil beige y blanco lluvia.png",
+      "uploadedAt": "2025-09-23T06:31:33.093Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel Textil\\Piel ladrillo textil beige y blanco.png",
+      "bucketPath": "Portacel/Portacel Piel Textil/Piel ladrillo textil beige y blanco.png",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel Textil",
+      "archivo": "Piel ladrillo textil beige y blanco.png",
+      "size": 795033,
+      "uploadPath": "Portacel/Portacel Piel Textil/Piel ladrillo textil beige y blanco.png",
+      "uploadedAt": "2025-09-23T06:31:33.378Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel Textil\\Piel negra lineas negra sobre gris.png",
+      "bucketPath": "Portacel/Portacel Piel Textil/Piel negra lineas negra sobre gris.png",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel Textil",
+      "archivo": "Piel negra lineas negra sobre gris.png",
+      "size": 490788,
+      "uploadPath": "Portacel/Portacel Piel Textil/Piel negra lineas negra sobre gris.png",
+      "uploadedAt": "2025-09-23T06:31:33.735Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel Textil\\Piel negra textil negro franja blanca.png",
+      "bucketPath": "Portacel/Portacel Piel Textil/Piel negra textil negro franja blanca.png",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel Textil",
+      "archivo": "Piel negra textil negro franja blanca.png",
+      "size": 474990,
+      "uploadPath": "Portacel/Portacel Piel Textil/Piel negra textil negro franja blanca.png",
+      "uploadedAt": "2025-09-23T06:31:34.281Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel Textil\\Piel negra, textil gris y blanco.png",
+      "bucketPath": "Portacel/Portacel Piel Textil/Piel negra, textil gris y blanco.png",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel Textil",
+      "archivo": "Piel negra, textil gris y blanco.png",
+      "size": 463716,
+      "uploadPath": "Portacel/Portacel Piel Textil/Piel negra, textil gris y blanco.png",
+      "uploadedAt": "2025-09-23T06:31:34.580Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel Textil\\principal.jpg",
+      "bucketPath": "Portacel/Portacel Piel Textil/principal.jpg",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel Textil",
+      "archivo": "principal.jpg",
+      "size": 107240,
+      "uploadPath": "Portacel/Portacel Piel Textil/principal.jpg",
+      "uploadedAt": "2025-09-23T06:31:35.808Z"
+    }
+  ],
+  "failed": [
+    {
+      "localPath": "scraper\\Accesorios\\Cartera Liga\\Café.jpg",
+      "bucketPath": "Accesorios/Cartera Liga/Café.jpg",
+      "categoria": "Accesorios",
+      "producto": "Cartera Liga",
+      "archivo": "Café.jpg",
+      "size": 1350816,
+      "error": "Invalid key: Accesorios/Cartera Liga/Café.jpg",
+      "failedAt": "2025-09-23T06:29:07.214Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Motita\\Café Oscuro.jpg",
+      "bucketPath": "Accesorios/Monedero Motita/Café Oscuro.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Motita",
+      "archivo": "Café Oscuro.jpg",
+      "size": 341879,
+      "error": "Invalid key: Accesorios/Monedero Motita/Café Oscuro.jpg",
+      "failedAt": "2025-09-23T06:29:27.387Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Monedero Motita\\Café.jpg",
+      "bucketPath": "Accesorios/Monedero Motita/Café.jpg",
+      "categoria": "Accesorios",
+      "producto": "Monedero Motita",
+      "archivo": "Café.jpg",
+      "size": 279768,
+      "error": "Invalid key: Accesorios/Monedero Motita/Café.jpg",
+      "failedAt": "2025-09-23T06:29:27.509Z"
+    },
+    {
+      "localPath": "scraper\\Accesorios\\Portacable Chico\\Café Oscuro.jpg",
+      "bucketPath": "Accesorios/Portacable Chico/Café Oscuro.jpg",
+      "categoria": "Accesorios",
+      "producto": "Portacable Chico",
+      "archivo": "Café Oscuro.jpg",
+      "size": 1578048,
+      "error": "Invalid key: Accesorios/Portacable Chico/Café Oscuro.jpg",
+      "failedAt": "2025-09-23T06:29:31.474Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Bolsa botón madera\\Café.png",
+      "bucketPath": "Bolsas Cruzadas/Bolsa botón madera/Café.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Bolsa botón madera",
+      "archivo": "Café.png",
+      "size": 910559,
+      "error": "Invalid key: Bolsas Cruzadas/Bolsa botón madera/Café.png",
+      "failedAt": "2025-09-23T06:29:49.304Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Bolsa botón madera\\Camel.png",
+      "bucketPath": "Bolsas Cruzadas/Bolsa botón madera/Camel.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Bolsa botón madera",
+      "archivo": "Camel.png",
+      "size": 955211,
+      "error": "Invalid key: Bolsas Cruzadas/Bolsa botón madera/Camel.png",
+      "failedAt": "2025-09-23T06:29:49.416Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Bolsa botón madera\\Gris.png",
+      "bucketPath": "Bolsas Cruzadas/Bolsa botón madera/Gris.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Bolsa botón madera",
+      "archivo": "Gris.png",
+      "size": 847560,
+      "error": "Invalid key: Bolsas Cruzadas/Bolsa botón madera/Gris.png",
+      "failedAt": "2025-09-23T06:29:49.713Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Bolsa botón madera\\Hueso.png",
+      "bucketPath": "Bolsas Cruzadas/Bolsa botón madera/Hueso.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Bolsa botón madera",
+      "archivo": "Hueso.png",
+      "size": 856581,
+      "error": "Invalid key: Bolsas Cruzadas/Bolsa botón madera/Hueso.png",
+      "failedAt": "2025-09-23T06:29:51.048Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Bolsa botón madera\\Negro.png",
+      "bucketPath": "Bolsas Cruzadas/Bolsa botón madera/Negro.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Bolsa botón madera",
+      "archivo": "Negro.png",
+      "size": 511355,
+      "error": "Invalid key: Bolsas Cruzadas/Bolsa botón madera/Negro.png",
+      "failedAt": "2025-09-23T06:29:51.158Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Bolsa botón madera\\principal.jpg",
+      "bucketPath": "Bolsas Cruzadas/Bolsa botón madera/principal.jpg",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Bolsa botón madera",
+      "archivo": "principal.jpg",
+      "size": 45089,
+      "error": "Invalid key: Bolsas Cruzadas/Bolsa botón madera/principal.jpg",
+      "failedAt": "2025-09-23T06:29:51.249Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Bolsa botón madera\\Rojo.png",
+      "bucketPath": "Bolsas Cruzadas/Bolsa botón madera/Rojo.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Bolsa botón madera",
+      "archivo": "Rojo.png",
+      "size": 1028807,
+      "error": "Invalid key: Bolsas Cruzadas/Bolsa botón madera/Rojo.png",
+      "failedAt": "2025-09-23T06:29:51.404Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Cangurera\\Café Claro.png",
+      "bucketPath": "Bolsas Cruzadas/Cangurera/Café Claro.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Cangurera",
+      "archivo": "Café Claro.png",
+      "size": 904707,
+      "error": "Invalid key: Bolsas Cruzadas/Cangurera/Café Claro.png",
+      "failedAt": "2025-09-23T06:29:54.210Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Cangurera\\Café Oscuro.png",
+      "bucketPath": "Bolsas Cruzadas/Cangurera/Café Oscuro.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Cangurera",
+      "archivo": "Café Oscuro.png",
+      "size": 687633,
+      "error": "Invalid key: Bolsas Cruzadas/Cangurera/Café Oscuro.png",
+      "failedAt": "2025-09-23T06:29:55.395Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Cangurera\\Oro Pálido.png",
+      "bucketPath": "Bolsas Cruzadas/Cangurera/Oro Pálido.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Cangurera",
+      "archivo": "Oro Pálido.png",
+      "size": 552174,
+      "error": "Invalid key: Bolsas Cruzadas/Cangurera/Oro Pálido.png",
+      "failedAt": "2025-09-23T06:29:56.125Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Clutch Chica con Base\\Café.png",
+      "bucketPath": "Bolsas Cruzadas/Clutch Chica con Base/Café.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Clutch Chica con Base",
+      "archivo": "Café.png",
+      "size": 395489,
+      "error": "Invalid key: Bolsas Cruzadas/Clutch Chica con Base/Café.png",
+      "failedAt": "2025-09-23T06:29:57.538Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Clutch Chica Plana\\Café.png",
+      "bucketPath": "Bolsas Cruzadas/Clutch Chica Plana/Café.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Clutch Chica Plana",
+      "archivo": "Café.png",
+      "size": 631873,
+      "error": "Invalid key: Bolsas Cruzadas/Clutch Chica Plana/Café.png",
+      "failedAt": "2025-09-23T06:29:59.911Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Clutch Grande con strap\\Café Claro.png",
+      "bucketPath": "Bolsas Cruzadas/Clutch Grande con strap/Café Claro.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Clutch Grande con strap",
+      "archivo": "Café Claro.png",
+      "size": 670217,
+      "error": "Invalid key: Bolsas Cruzadas/Clutch Grande con strap/Café Claro.png",
+      "failedAt": "2025-09-23T06:30:02.418Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Cruzadas\\Clutch Grande con strap\\Café Oscuro.png",
+      "bucketPath": "Bolsas Cruzadas/Clutch Grande con strap/Café Oscuro.png",
+      "categoria": "Bolsas Cruzadas",
+      "producto": "Clutch Grande con strap",
+      "archivo": "Café Oscuro.png",
+      "size": 455546,
+      "error": "Invalid key: Bolsas Cruzadas/Clutch Grande con strap/Café Oscuro.png",
+      "failedAt": "2025-09-23T06:30:02.530Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas de mano\\Cartera tipo Sobre\\Café.png",
+      "bucketPath": "Bolsas de mano/Cartera tipo Sobre/Café.png",
+      "categoria": "Bolsas de mano",
+      "producto": "Cartera tipo Sobre",
+      "archivo": "Café.png",
+      "size": 564544,
+      "error": "Invalid key: Bolsas de mano/Cartera tipo Sobre/Café.png",
+      "failedAt": "2025-09-23T06:30:10.827Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsa grande con Jareta\\Café.png",
+      "bucketPath": "Bolsas Grandes/Bolsa grande con Jareta/Café.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsa grande con Jareta",
+      "archivo": "Café.png",
+      "size": 559452,
+      "error": "Invalid key: Bolsas Grandes/Bolsa grande con Jareta/Café.png",
+      "failedAt": "2025-09-23T06:30:38.519Z"
+    },
+    {
+      "localPath": "scraper\\Bolsas Grandes\\Bolsas Gigante Plana\\Café Claro.png",
+      "bucketPath": "Bolsas Grandes/Bolsas Gigante Plana/Café Claro.png",
+      "categoria": "Bolsas Grandes",
+      "producto": "Bolsas Gigante Plana",
+      "archivo": "Café Claro.png",
+      "size": 505402,
+      "error": "Invalid key: Bolsas Grandes/Bolsas Gigante Plana/Café Claro.png",
+      "failedAt": "2025-09-23T06:30:41.731Z"
+    },
+    {
+      "localPath": "scraper\\Botelleras\\Botelleras\\Café Oscuro.jpg",
+      "bucketPath": "Botelleras/Botelleras/Café Oscuro.jpg",
+      "categoria": "Botelleras",
+      "producto": "Botelleras",
+      "archivo": "Café Oscuro.jpg",
+      "size": 462433,
+      "error": "Invalid key: Botelleras/Botelleras/Café Oscuro.jpg",
+      "failedAt": "2025-09-23T06:30:44.222Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Geometrico Gigante\\Café.jpg",
+      "bucketPath": "Joyeria/Arete Geometrico Gigante/Café.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Geometrico Gigante",
+      "archivo": "Café.jpg",
+      "size": 518012,
+      "error": "Invalid key: Joyeria/Arete Geometrico Gigante/Café.jpg",
+      "failedAt": "2025-09-23T06:30:47.763Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Balancín Oval\\Beige.jpg",
+      "bucketPath": "Joyeria/Arete Piel Balancín Oval/Beige.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Balancín Oval",
+      "archivo": "Beige.jpg",
+      "size": 582118,
+      "error": "Invalid key: Joyeria/Arete Piel Balancín Oval/Beige.jpg",
+      "failedAt": "2025-09-23T06:30:50.433Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Balancín Oval\\cobre.jpg",
+      "bucketPath": "Joyeria/Arete Piel Balancín Oval/cobre.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Balancín Oval",
+      "archivo": "cobre.jpg",
+      "size": 550696,
+      "error": "Invalid key: Joyeria/Arete Piel Balancín Oval/cobre.jpg",
+      "failedAt": "2025-09-23T06:30:50.532Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Balancín Oval\\Miel.jpg",
+      "bucketPath": "Joyeria/Arete Piel Balancín Oval/Miel.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Balancín Oval",
+      "archivo": "Miel.jpg",
+      "size": 605799,
+      "error": "Invalid key: Joyeria/Arete Piel Balancín Oval/Miel.jpg",
+      "failedAt": "2025-09-23T06:30:50.662Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Balancín Oval\\principal.jpg",
+      "bucketPath": "Joyeria/Arete Piel Balancín Oval/principal.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Balancín Oval",
+      "archivo": "principal.jpg",
+      "size": 65986,
+      "error": "Invalid key: Joyeria/Arete Piel Balancín Oval/principal.jpg",
+      "failedAt": "2025-09-23T06:30:50.756Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Balancín Oval\\Tinta.jpg",
+      "bucketPath": "Joyeria/Arete Piel Balancín Oval/Tinta.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Balancín Oval",
+      "archivo": "Tinta.jpg",
+      "size": 568129,
+      "error": "Invalid key: Joyeria/Arete Piel Balancín Oval/Tinta.jpg",
+      "failedAt": "2025-09-23T06:30:50.918Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Gota\\Café Oscuro.jpg",
+      "bucketPath": "Joyeria/Arete Piel Gota/Café Oscuro.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Gota",
+      "archivo": "Café Oscuro.jpg",
+      "size": 565420,
+      "error": "Invalid key: Joyeria/Arete Piel Gota/Café Oscuro.jpg",
+      "failedAt": "2025-09-23T06:30:52.379Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Gota\\Oro Pálido.jpg",
+      "bucketPath": "Joyeria/Arete Piel Gota/Oro Pálido.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Gota",
+      "archivo": "Oro Pálido.jpg",
+      "size": 532704,
+      "error": "Invalid key: Joyeria/Arete Piel Gota/Oro Pálido.jpg",
+      "failedAt": "2025-09-23T06:30:54.996Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Péndulo\\Beige.jpg",
+      "bucketPath": "Joyeria/Arete Piel Péndulo/Beige.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Péndulo",
+      "archivo": "Beige.jpg",
+      "size": 575092,
+      "error": "Invalid key: Joyeria/Arete Piel Péndulo/Beige.jpg",
+      "failedAt": "2025-09-23T06:31:02.748Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Péndulo\\Café Claro.jpg",
+      "bucketPath": "Joyeria/Arete Piel Péndulo/Café Claro.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Péndulo",
+      "archivo": "Café Claro.jpg",
+      "size": 524573,
+      "error": "Invalid key: Joyeria/Arete Piel Péndulo/Café Claro.jpg",
+      "failedAt": "2025-09-23T06:31:02.937Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Péndulo\\cobre.jpg",
+      "bucketPath": "Joyeria/Arete Piel Péndulo/cobre.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Péndulo",
+      "archivo": "cobre.jpg",
+      "size": 510173,
+      "error": "Invalid key: Joyeria/Arete Piel Péndulo/cobre.jpg",
+      "failedAt": "2025-09-23T06:31:04.073Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Péndulo\\Ladrillo.jpg",
+      "bucketPath": "Joyeria/Arete Piel Péndulo/Ladrillo.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Péndulo",
+      "archivo": "Ladrillo.jpg",
+      "size": 578214,
+      "error": "Invalid key: Joyeria/Arete Piel Péndulo/Ladrillo.jpg",
+      "failedAt": "2025-09-23T06:31:04.170Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Péndulo\\Miel.jpg",
+      "bucketPath": "Joyeria/Arete Piel Péndulo/Miel.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Péndulo",
+      "archivo": "Miel.jpg",
+      "size": 485121,
+      "error": "Invalid key: Joyeria/Arete Piel Péndulo/Miel.jpg",
+      "failedAt": "2025-09-23T06:31:04.358Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Péndulo\\Negro.jpg",
+      "bucketPath": "Joyeria/Arete Piel Péndulo/Negro.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Péndulo",
+      "archivo": "Negro.jpg",
+      "size": 528081,
+      "error": "Invalid key: Joyeria/Arete Piel Péndulo/Negro.jpg",
+      "failedAt": "2025-09-23T06:31:04.479Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Arete Piel Péndulo\\principal.jpg",
+      "bucketPath": "Joyeria/Arete Piel Péndulo/principal.jpg",
+      "categoria": "Joyeria",
+      "producto": "Arete Piel Péndulo",
+      "archivo": "principal.jpg",
+      "size": 59688,
+      "error": "Invalid key: Joyeria/Arete Piel Péndulo/principal.jpg",
+      "failedAt": "2025-09-23T06:31:04.750Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Liso\\Café Claro.jpg",
+      "bucketPath": "Joyeria/Brazalete Liso/Café Claro.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Liso",
+      "archivo": "Café Claro.jpg",
+      "size": 1421820,
+      "error": "Invalid key: Joyeria/Brazalete Liso/Café Claro.jpg",
+      "failedAt": "2025-09-23T06:31:17.002Z"
+    },
+    {
+      "localPath": "scraper\\Joyeria\\Brazalete Liso\\Oro Pálido.jpg",
+      "bucketPath": "Joyeria/Brazalete Liso/Oro Pálido.jpg",
+      "categoria": "Joyeria",
+      "producto": "Brazalete Liso",
+      "archivo": "Oro Pálido.jpg",
+      "size": 1623305,
+      "error": "Invalid key: Joyeria/Brazalete Liso/Oro Pálido.jpg",
+      "failedAt": "2025-09-23T06:31:19.882Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel grande\\Café Claro.jpeg",
+      "bucketPath": "Portacel/Portacel grande/Café Claro.jpeg",
+      "categoria": "Portacel",
+      "producto": "Portacel grande",
+      "archivo": "Café Claro.jpeg",
+      "size": 272838,
+      "error": "Invalid key: Portacel/Portacel grande/Café Claro.jpeg",
+      "failedAt": "2025-09-23T06:31:22.553Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel grande\\Café Oscuro.jpeg",
+      "bucketPath": "Portacel/Portacel grande/Café Oscuro.jpeg",
+      "categoria": "Portacel",
+      "producto": "Portacel grande",
+      "archivo": "Café Oscuro.jpeg",
+      "size": 268397,
+      "error": "Invalid key: Portacel/Portacel grande/Café Oscuro.jpeg",
+      "failedAt": "2025-09-23T06:31:22.668Z"
+    },
+    {
+      "localPath": "scraper\\Portacel\\Portacel Piel liso\\Café.png",
+      "bucketPath": "Portacel/Portacel Piel liso/Café.png",
+      "categoria": "Portacel",
+      "producto": "Portacel Piel liso",
+      "archivo": "Café.png",
+      "size": 435863,
+      "error": "Invalid key: Portacel/Portacel Piel liso/Café.png",
+      "failedAt": "2025-09-23T06:31:28.649Z"
+    }
+  ]
+}

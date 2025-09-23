@@ -1,0 +1,3442 @@
+{
+  "timestamp": "2025-09-23T05:16:28.342Z",
+  "summary": {
+    "highConfidence": 194,
+    "mediumConfidence": 0,
+    "lowConfidence": 0,
+    "unmapped": 0,
+    "total": 194
+  },
+  "variantStats": {
+    "mainImages": 0,
+    "variantImages": 194,
+    "uniqueVariants": 30,
+    "topVariants": [
+      {
+        "name": "Estándar",
+        "count": 34
+      },
+      {
+        "name": "Negro y Blanco",
+        "count": 30
+      },
+      {
+        "name": "Tinto y Blanco",
+        "count": 23
+      },
+      {
+        "name": "Tinto y Miel",
+        "count": 11
+      },
+      {
+        "name": "Miel y Negro",
+        "count": 11
+      },
+      {
+        "name": "Negro y Cobre",
+        "count": 10
+      },
+      {
+        "name": "Azul",
+        "count": 9
+      },
+      {
+        "name": "Gris",
+        "count": 9
+      },
+      {
+        "name": "Gris y Azul Tupido",
+        "count": 6
+      },
+      {
+        "name": "Gris Oscuro",
+        "count": 6
+      },
+      {
+        "name": "Perla",
+        "count": 5
+      },
+      {
+        "name": "Café Gamuza y Camel",
+        "count": 4
+      },
+      {
+        "name": "Marrón",
+        "count": 4
+      },
+      {
+        "name": "Plata",
+        "count": 4
+      },
+      {
+        "name": "Café y Beige",
+        "count": 4
+      },
+      {
+        "name": "Camel",
+        "count": 4
+      },
+      {
+        "name": "Blanco y Azul Franjas Delgadas",
+        "count": 3
+      },
+      {
+        "name": "Negro",
+        "count": 3
+      },
+      {
+        "name": "Blanco y Camel Franjas",
+        "count": 2
+      },
+      {
+        "name": "Piel Café Textil Beige y Blanco Lluvia",
+        "count": 2
+      },
+      {
+        "name": "Gris Claro",
+        "count": 1
+      },
+      {
+        "name": "Miel y Naranja",
+        "count": 1
+      },
+      {
+        "name": "Ladrillo/Camel/Perla",
+        "count": 1
+      },
+      {
+        "name": "Gris y Negro",
+        "count": 1
+      },
+      {
+        "name": "Especial 101",
+        "count": 1
+      },
+      {
+        "name": "Gris Gamuza",
+        "count": 1
+      },
+      {
+        "name": "Ladrillo y Perla",
+        "count": 1
+      },
+      {
+        "name": "Oro Pálido/Perla/Ladrillo",
+        "count": 1
+      },
+      {
+        "name": "Café y Oro",
+        "count": 1
+      },
+      {
+        "name": "Camel y Blanco Delgado",
+        "count": 1
+      }
+    ]
+  },
+  "mappings": {
+    "highConfidence": [
+      {
+        "source": "Joyeria/Aretes/arete-piel-gota/full/Arete_Piel_Gota_22.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-gota/variants/Arete_Piel_Gota_22.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-gota",
+        "productPath": "Joyeria/Aretes/arete-piel-gota",
+        "fileName": "Arete_Piel_Gota_22.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-gota",
+          "variantNumber": 22,
+          "variantName": "Perla",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Gota_22"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-gota/full/Arete_Piel_Gota_49.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-gota/variants/Arete_Piel_Gota_49.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-gota",
+        "productPath": "Joyeria/Aretes/arete-piel-gota",
+        "fileName": "Arete_Piel_Gota_49.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-gota",
+          "variantNumber": 49,
+          "variantName": "Tinto y Miel",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Gota_49"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-gota/full/Arete_Piel_Gota_56.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-gota/variants/Arete_Piel_Gota_56.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-gota",
+        "productPath": "Joyeria/Aretes/arete-piel-gota",
+        "fileName": "Arete_Piel_Gota_56.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-gota",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Gota_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-gota/full/Arete_Piel_Gota_63.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-gota/variants/Arete_Piel_Gota_63.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-gota",
+        "productPath": "Joyeria/Aretes/arete-piel-gota",
+        "fileName": "Arete_Piel_Gota_63.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-gota",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Gota_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-gota/full/Arete_Piel_Gota_7.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-gota/variants/Arete_Piel_Gota_7.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-gota",
+        "productPath": "Joyeria/Aretes/arete-piel-gota",
+        "fileName": "Arete_Piel_Gota_7.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-gota",
+          "variantNumber": 7,
+          "variantName": "Gris y Azul Tupido",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Gota_7"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-gota/full/Arete_Piel_Gota_73.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-gota/variants/Arete_Piel_Gota_73.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-gota",
+        "productPath": "Joyeria/Aretes/arete-piel-gota",
+        "fileName": "Arete_Piel_Gota_73.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-gota",
+          "variantNumber": 73,
+          "variantName": "Blanco y Azul Franjas Delgadas",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Gota_73"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-gota/full/Arete_Piel_Gota_75.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-gota/variants/Arete_Piel_Gota_75.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-gota",
+        "productPath": "Joyeria/Aretes/arete-piel-gota",
+        "fileName": "Arete_Piel_Gota_75.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-gota",
+          "variantNumber": 75,
+          "variantName": "Café Gamuza y Camel",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Gota_75"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_28_1.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/variants/Arete_Piel_Poligono_Chico_28_1.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "productPath": "Joyeria/Aretes/arete-piel-poligono-chico",
+        "fileName": "Arete_Piel_Poligono_Chico_28_1.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-poligono-chico",
+          "variantNumber": 28,
+          "variantName": "Azul",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Poligono_Chico_28_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_28.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/variants/Arete_Piel_Poligono_Chico_28.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "productPath": "Joyeria/Aretes/arete-piel-poligono-chico",
+        "fileName": "Arete_Piel_Poligono_Chico_28.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-poligono-chico",
+          "variantNumber": 28,
+          "variantName": "Azul",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Poligono_Chico_28"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_32_1.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/variants/Arete_Piel_Poligono_Chico_32_1.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "productPath": "Joyeria/Aretes/arete-piel-poligono-chico",
+        "fileName": "Arete_Piel_Poligono_Chico_32_1.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-poligono-chico",
+          "variantNumber": 32,
+          "variantName": "Marrón",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Poligono_Chico_32_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_32.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/variants/Arete_Piel_Poligono_Chico_32.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "productPath": "Joyeria/Aretes/arete-piel-poligono-chico",
+        "fileName": "Arete_Piel_Poligono_Chico_32.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-poligono-chico",
+          "variantNumber": 32,
+          "variantName": "Marrón",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Poligono_Chico_32"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_63_1.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/variants/Arete_Piel_Poligono_Chico_63_1.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "productPath": "Joyeria/Aretes/arete-piel-poligono-chico",
+        "fileName": "Arete_Piel_Poligono_Chico_63_1.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-poligono-chico",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Poligono_Chico_63_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_63_2.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/variants/Arete_Piel_Poligono_Chico_63_2.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "productPath": "Joyeria/Aretes/arete-piel-poligono-chico",
+        "fileName": "Arete_Piel_Poligono_Chico_63_2.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-poligono-chico",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Poligono_Chico_63_2"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_63_3.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/variants/Arete_Piel_Poligono_Chico_63_3.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "productPath": "Joyeria/Aretes/arete-piel-poligono-chico",
+        "fileName": "Arete_Piel_Poligono_Chico_63_3.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-poligono-chico",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Poligono_Chico_63_3"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_63.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/variants/Arete_Piel_Poligono_Chico_63.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "productPath": "Joyeria/Aretes/arete-piel-poligono-chico",
+        "fileName": "Arete_Piel_Poligono_Chico_63.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-poligono-chico",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Poligono_Chico_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_7.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/variants/Arete_Piel_Poligono_Chico_7.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "productPath": "Joyeria/Aretes/arete-piel-poligono-chico",
+        "fileName": "Arete_Piel_Poligono_Chico_7.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-poligono-chico",
+          "variantNumber": 7,
+          "variantName": "Gris y Azul Tupido",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Poligono_Chico_7"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_75.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/variants/Arete_Piel_Poligono_Chico_75.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "productPath": "Joyeria/Aretes/arete-piel-poligono-chico",
+        "fileName": "Arete_Piel_Poligono_Chico_75.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-poligono-chico",
+          "variantNumber": 75,
+          "variantName": "Café Gamuza y Camel",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Poligono_Chico_75"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_85.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/variants/Arete_Piel_Poligono_Chico_85.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "productPath": "Joyeria/Aretes/arete-piel-poligono-chico",
+        "fileName": "Arete_Piel_Poligono_Chico_85.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-poligono-chico",
+          "variantNumber": 85,
+          "variantName": "Plata",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Poligono_Chico_85"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_9_1.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/variants/Arete_Piel_Poligono_Chico_9_1.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "productPath": "Joyeria/Aretes/arete-piel-poligono-chico",
+        "fileName": "Arete_Piel_Poligono_Chico_9_1.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-poligono-chico",
+          "variantNumber": 9,
+          "variantName": "Miel y Negro",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Poligono_Chico_9_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_9_2.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/variants/Arete_Piel_Poligono_Chico_9_2.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "productPath": "Joyeria/Aretes/arete-piel-poligono-chico",
+        "fileName": "Arete_Piel_Poligono_Chico_9_2.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-poligono-chico",
+          "variantNumber": 9,
+          "variantName": "Miel y Negro",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Poligono_Chico_9_2"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_9.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/variants/Arete_Piel_Poligono_Chico_9.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "productPath": "Joyeria/Aretes/arete-piel-poligono-chico",
+        "fileName": "Arete_Piel_Poligono_Chico_9.jpg",
+        "variantInfo": {
+          "productBaseName": "arete-piel-poligono-chico",
+          "variantNumber": 9,
+          "variantName": "Miel y Negro",
+          "hasVariant": true,
+          "originalName": "Arete_Piel_Poligono_Chico_9"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-dos-lineas/full/Brazalete_dos_Lineas_37.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-dos-lineas/variants/Brazalete_dos_Lineas_37.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-dos-lineas",
+        "productPath": "Joyeria/Brazaletes/brazalete-dos-lineas",
+        "fileName": "Brazalete_dos_Lineas_37.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-dos-lineas",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Brazalete_dos_Lineas_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-dos-lineas/full/Brazalete_dos_Lineas_56.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-dos-lineas/variants/Brazalete_dos_Lineas_56.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-dos-lineas",
+        "productPath": "Joyeria/Brazaletes/brazalete-dos-lineas",
+        "fileName": "Brazalete_dos_Lineas_56.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-dos-lineas",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Brazalete_dos_Lineas_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-dos-lineas/full/Brazalete_dos_Lineas_63.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-dos-lineas/variants/Brazalete_dos_Lineas_63.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-dos-lineas",
+        "productPath": "Joyeria/Brazaletes/brazalete-dos-lineas",
+        "fileName": "Brazalete_dos_Lineas_63.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-dos-lineas",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Brazalete_dos_Lineas_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-hombre/full/Brazalete_Hombre_18.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-hombre/variants/Brazalete_Hombre_18.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-hombre",
+        "productPath": "Joyeria/Brazaletes/brazalete-hombre",
+        "fileName": "Brazalete_Hombre_18.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-hombre",
+          "variantNumber": 18,
+          "variantName": "Café y Beige",
+          "hasVariant": true,
+          "originalName": "Brazalete_Hombre_18"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-hombre/full/Brazalete_Hombre_37.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-hombre/variants/Brazalete_Hombre_37.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-hombre",
+        "productPath": "Joyeria/Brazaletes/brazalete-hombre",
+        "fileName": "Brazalete_Hombre_37.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-hombre",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Brazalete_Hombre_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-hombre/full/Brazalete_Hombre_56.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-hombre/variants/Brazalete_Hombre_56.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-hombre",
+        "productPath": "Joyeria/Brazaletes/brazalete-hombre",
+        "fileName": "Brazalete_Hombre_56.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-hombre",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Brazalete_Hombre_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_3.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/variants/Brazalete_lineas_Delgadas_3.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "productPath": "Joyeria/Brazaletes/brazalete-lineas-delgadas",
+        "fileName": "Brazalete_lineas_Delgadas_3.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-lineas-delgadas",
+          "variantNumber": 3,
+          "variantName": "Negro",
+          "hasVariant": true,
+          "originalName": "Brazalete_lineas_Delgadas_3"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_32.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/variants/Brazalete_lineas_Delgadas_32.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "productPath": "Joyeria/Brazaletes/brazalete-lineas-delgadas",
+        "fileName": "Brazalete_lineas_Delgadas_32.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-lineas-delgadas",
+          "variantNumber": 32,
+          "variantName": "Marrón",
+          "hasVariant": true,
+          "originalName": "Brazalete_lineas_Delgadas_32"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_49.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/variants/Brazalete_lineas_Delgadas_49.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "productPath": "Joyeria/Brazaletes/brazalete-lineas-delgadas",
+        "fileName": "Brazalete_lineas_Delgadas_49.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-lineas-delgadas",
+          "variantNumber": 49,
+          "variantName": "Tinto y Miel",
+          "hasVariant": true,
+          "originalName": "Brazalete_lineas_Delgadas_49"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_56.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/variants/Brazalete_lineas_Delgadas_56.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "productPath": "Joyeria/Brazaletes/brazalete-lineas-delgadas",
+        "fileName": "Brazalete_lineas_Delgadas_56.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-lineas-delgadas",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Brazalete_lineas_Delgadas_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_63.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/variants/Brazalete_lineas_Delgadas_63.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "productPath": "Joyeria/Brazaletes/brazalete-lineas-delgadas",
+        "fileName": "Brazalete_lineas_Delgadas_63.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-lineas-delgadas",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Brazalete_lineas_Delgadas_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_7.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/variants/Brazalete_lineas_Delgadas_7.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "productPath": "Joyeria/Brazaletes/brazalete-lineas-delgadas",
+        "fileName": "Brazalete_lineas_Delgadas_7.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-lineas-delgadas",
+          "variantNumber": 7,
+          "variantName": "Gris y Azul Tupido",
+          "hasVariant": true,
+          "originalName": "Brazalete_lineas_Delgadas_7"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_73.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/variants/Brazalete_lineas_Delgadas_73.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "productPath": "Joyeria/Brazaletes/brazalete-lineas-delgadas",
+        "fileName": "Brazalete_lineas_Delgadas_73.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-lineas-delgadas",
+          "variantNumber": 73,
+          "variantName": "Blanco y Azul Franjas Delgadas",
+          "hasVariant": true,
+          "originalName": "Brazalete_lineas_Delgadas_73"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_78.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/variants/Brazalete_lineas_Delgadas_78.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "productPath": "Joyeria/Brazaletes/brazalete-lineas-delgadas",
+        "fileName": "Brazalete_lineas_Delgadas_78.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-lineas-delgadas",
+          "variantNumber": 78,
+          "variantName": "Gris Claro",
+          "hasVariant": true,
+          "originalName": "Brazalete_lineas_Delgadas_78"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_94.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/variants/Brazalete_lineas_Delgadas_94.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "productPath": "Joyeria/Brazaletes/brazalete-lineas-delgadas",
+        "fileName": "Brazalete_lineas_Delgadas_94.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-lineas-delgadas",
+          "variantNumber": 94,
+          "variantName": "Negro y Cobre",
+          "hasVariant": true,
+          "originalName": "Brazalete_lineas_Delgadas_94"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_1.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/variants/Brazalete_Liso_1.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "productPath": "Joyeria/Brazaletes/brazalete-liso",
+        "fileName": "Brazalete_Liso_1.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-liso",
+          "variantNumber": 1,
+          "variantName": "Gris",
+          "hasVariant": true,
+          "originalName": "Brazalete_Liso_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_19.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/variants/Brazalete_Liso_19.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "productPath": "Joyeria/Brazaletes/brazalete-liso",
+        "fileName": "Brazalete_Liso_19.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-liso",
+          "variantNumber": 19,
+          "variantName": "Camel",
+          "hasVariant": true,
+          "originalName": "Brazalete_Liso_19"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_3.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/variants/Brazalete_Liso_3.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "productPath": "Joyeria/Brazaletes/brazalete-liso",
+        "fileName": "Brazalete_Liso_3.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-liso",
+          "variantNumber": 3,
+          "variantName": "Negro",
+          "hasVariant": true,
+          "originalName": "Brazalete_Liso_3"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_37.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/variants/Brazalete_Liso_37.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "productPath": "Joyeria/Brazaletes/brazalete-liso",
+        "fileName": "Brazalete_Liso_37.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-liso",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Brazalete_Liso_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_56.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/variants/Brazalete_Liso_56.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "productPath": "Joyeria/Brazaletes/brazalete-liso",
+        "fileName": "Brazalete_Liso_56.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-liso",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Brazalete_Liso_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_63.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/variants/Brazalete_Liso_63.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "productPath": "Joyeria/Brazaletes/brazalete-liso",
+        "fileName": "Brazalete_Liso_63.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-liso",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Brazalete_Liso_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_73.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/variants/Brazalete_Liso_73.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "productPath": "Joyeria/Brazaletes/brazalete-liso",
+        "fileName": "Brazalete_Liso_73.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-liso",
+          "variantNumber": 73,
+          "variantName": "Blanco y Azul Franjas Delgadas",
+          "hasVariant": true,
+          "originalName": "Brazalete_Liso_73"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_75.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/variants/Brazalete_Liso_75.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "productPath": "Joyeria/Brazaletes/brazalete-liso",
+        "fileName": "Brazalete_Liso_75.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-liso",
+          "variantNumber": 75,
+          "variantName": "Café Gamuza y Camel",
+          "hasVariant": true,
+          "originalName": "Brazalete_Liso_75"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_94.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/variants/Brazalete_Liso_94.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "productPath": "Joyeria/Brazaletes/brazalete-liso",
+        "fileName": "Brazalete_Liso_94.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-liso",
+          "variantNumber": 94,
+          "variantName": "Negro y Cobre",
+          "hasVariant": true,
+          "originalName": "Brazalete_Liso_94"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-piel-pelo/full/Brazalete_Piel_Pelo_80_1.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-piel-pelo/variants/Brazalete_Piel_Pelo_80_1.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-piel-pelo",
+        "productPath": "Joyeria/Brazaletes/brazalete-piel-pelo",
+        "fileName": "Brazalete_Piel_Pelo_80_1.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-piel-pelo",
+          "variantNumber": 80,
+          "variantName": "Gris Oscuro",
+          "hasVariant": true,
+          "originalName": "Brazalete_Piel_Pelo_80_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-piel-pelo/full/Brazalete_Piel_Pelo_80_2.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-piel-pelo/variants/Brazalete_Piel_Pelo_80_2.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-piel-pelo",
+        "productPath": "Joyeria/Brazaletes/brazalete-piel-pelo",
+        "fileName": "Brazalete_Piel_Pelo_80_2.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-piel-pelo",
+          "variantNumber": 80,
+          "variantName": "Gris Oscuro",
+          "hasVariant": true,
+          "originalName": "Brazalete_Piel_Pelo_80_2"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-piel-pelo/full/Brazalete_Piel_Pelo_80.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-piel-pelo/variants/Brazalete_Piel_Pelo_80.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-piel-pelo",
+        "productPath": "Joyeria/Brazaletes/brazalete-piel-pelo",
+        "fileName": "Brazalete_Piel_Pelo_80.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-piel-pelo",
+          "variantNumber": 80,
+          "variantName": "Gris Oscuro",
+          "hasVariant": true,
+          "originalName": "Brazalete_Piel_Pelo_80"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-piel-pelo/full/Brazalete_Piel_Pelo_98.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-piel-pelo/variants/Brazalete_Piel_Pelo_98.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-piel-pelo",
+        "productPath": "Joyeria/Brazaletes/brazalete-piel-pelo",
+        "fileName": "Brazalete_Piel_Pelo_98.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-piel-pelo",
+          "variantNumber": 98,
+          "variantName": "Miel y Naranja",
+          "hasVariant": true,
+          "originalName": "Brazalete_Piel_Pelo_98"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Joyeria/Brazaletes/brazalete-piel-pelo/full/Brazalete_Piel_Pelo_99.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-piel-pelo/variants/Brazalete_Piel_Pelo_99.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-piel-pelo",
+        "productPath": "Joyeria/Brazaletes/brazalete-piel-pelo",
+        "fileName": "Brazalete_Piel_Pelo_99.jpg",
+        "variantInfo": {
+          "productBaseName": "brazalete-piel-pelo",
+          "variantNumber": 99,
+          "variantName": "Ladrillo/Camel/Perla",
+          "hasVariant": true,
+          "originalName": "Brazalete_Piel_Pelo_99"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Backpacks/backpack-mini/full/Backpack_Mini_37_1.jpg",
+        "destination": "Backpacks/backpack-mini/variants/Backpack_Mini_37_1.jpg",
+        "category": "Backpacks",
+        "product": "backpack-mini",
+        "productPath": "Backpacks/backpack-mini",
+        "fileName": "Backpack_Mini_37_1.jpg",
+        "variantInfo": {
+          "productBaseName": "backpack-mini",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Backpack_Mini_37_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Backpacks/backpack-mini/full/Backpack_Mini_37.jpg",
+        "destination": "Backpacks/backpack-mini/variants/Backpack_Mini_37.jpg",
+        "category": "Backpacks",
+        "product": "backpack-mini",
+        "productPath": "Backpacks/backpack-mini",
+        "fileName": "Backpack_Mini_37.jpg",
+        "variantInfo": {
+          "productBaseName": "backpack-mini",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Backpack_Mini_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Backpacks/backpack-mini/full/Backpack_Mini_63.jpg",
+        "destination": "Backpacks/backpack-mini/variants/Backpack_Mini_63.jpg",
+        "category": "Backpacks",
+        "product": "backpack-mini",
+        "productPath": "Backpacks/backpack-mini",
+        "fileName": "Backpack_Mini_63.jpg",
+        "variantInfo": {
+          "productBaseName": "backpack-mini",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Backpack_Mini_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Cruzadas/bolsa-mediana-con-bolsillo-piel-al-frente/full/Bolsa_Mediana_con_bolsillo_piel_al_frente_37.jpg",
+        "destination": "Bolsas Cruzadas/bolsa-mediana-con-bolsillo-piel-al-frente/variants/Bolsa_Mediana_con_bolsillo_piel_al_frente_37.jpg",
+        "category": "Bolsas Cruzadas",
+        "product": "bolsa-mediana-con-bolsillo-piel-al-frente",
+        "productPath": "Bolsas Cruzadas/bolsa-mediana-con-bolsillo-piel-al-frente",
+        "fileName": "Bolsa_Mediana_con_bolsillo_piel_al_frente_37.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-mediana-con-bolsillo-piel-al-frente",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Bolsa_Mediana_con_bolsillo_piel_al_frente_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Cruzadas/bolsa-mediana-con-bolsillo-piel-al-frente/full/Bolsa_Mediana_con_bolsillo_piel_al_frente_56.jpg",
+        "destination": "Bolsas Cruzadas/bolsa-mediana-con-bolsillo-piel-al-frente/variants/Bolsa_Mediana_con_bolsillo_piel_al_frente_56.jpg",
+        "category": "Bolsas Cruzadas",
+        "product": "bolsa-mediana-con-bolsillo-piel-al-frente",
+        "productPath": "Bolsas Cruzadas/bolsa-mediana-con-bolsillo-piel-al-frente",
+        "fileName": "Bolsa_Mediana_con_bolsillo_piel_al_frente_56.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-mediana-con-bolsillo-piel-al-frente",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Bolsa_Mediana_con_bolsillo_piel_al_frente_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Cruzadas/bolsa-mediana-con-bolsillo-piel-al-frente/full/Bolsa_Mediana_con_bolsillo_piel_al_frente_63.jpg",
+        "destination": "Bolsas Cruzadas/bolsa-mediana-con-bolsillo-piel-al-frente/variants/Bolsa_Mediana_con_bolsillo_piel_al_frente_63.jpg",
+        "category": "Bolsas Cruzadas",
+        "product": "bolsa-mediana-con-bolsillo-piel-al-frente",
+        "productPath": "Bolsas Cruzadas/bolsa-mediana-con-bolsillo-piel-al-frente",
+        "fileName": "Bolsa_Mediana_con_bolsillo_piel_al_frente_63.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-mediana-con-bolsillo-piel-al-frente",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Bolsa_Mediana_con_bolsillo_piel_al_frente_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Cruzadas/clutch-grande-con-strap/full/Clutch_Grande_con_strap_19.jpg",
+        "destination": "Bolsas Cruzadas/clutch-grande-con-strap/variants/Clutch_Grande_con_strap_19.jpg",
+        "category": "Bolsas Cruzadas",
+        "product": "clutch-grande-con-strap",
+        "productPath": "Bolsas Cruzadas/clutch-grande-con-strap",
+        "fileName": "Clutch_Grande_con_strap_19.jpg",
+        "variantInfo": {
+          "productBaseName": "clutch-grande-con-strap",
+          "variantNumber": 19,
+          "variantName": "Camel",
+          "hasVariant": true,
+          "originalName": "Clutch_Grande_con_strap_19"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Cruzadas/clutch-grande-con-strap/full/Clutch_Grande_con_strap_22.jpg",
+        "destination": "Bolsas Cruzadas/clutch-grande-con-strap/variants/Clutch_Grande_con_strap_22.jpg",
+        "category": "Bolsas Cruzadas",
+        "product": "clutch-grande-con-strap",
+        "productPath": "Bolsas Cruzadas/clutch-grande-con-strap",
+        "fileName": "Clutch_Grande_con_strap_22.jpg",
+        "variantInfo": {
+          "productBaseName": "clutch-grande-con-strap",
+          "variantNumber": 22,
+          "variantName": "Perla",
+          "hasVariant": true,
+          "originalName": "Clutch_Grande_con_strap_22"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Cruzadas/clutch-grande-con-strap/full/Clutch_Grande_con_strap_32.jpg",
+        "destination": "Bolsas Cruzadas/clutch-grande-con-strap/variants/Clutch_Grande_con_strap_32.jpg",
+        "category": "Bolsas Cruzadas",
+        "product": "clutch-grande-con-strap",
+        "productPath": "Bolsas Cruzadas/clutch-grande-con-strap",
+        "fileName": "Clutch_Grande_con_strap_32.jpg",
+        "variantInfo": {
+          "productBaseName": "clutch-grande-con-strap",
+          "variantNumber": 32,
+          "variantName": "Marrón",
+          "hasVariant": true,
+          "originalName": "Clutch_Grande_con_strap_32"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Cruzadas/clutch-grande-con-strap/full/Clutch_Grande_con_strap_75.jpg",
+        "destination": "Bolsas Cruzadas/clutch-grande-con-strap/variants/Clutch_Grande_con_strap_75.jpg",
+        "category": "Bolsas Cruzadas",
+        "product": "clutch-grande-con-strap",
+        "productPath": "Bolsas Cruzadas/clutch-grande-con-strap",
+        "fileName": "Clutch_Grande_con_strap_75.jpg",
+        "variantInfo": {
+          "productBaseName": "clutch-grande-con-strap",
+          "variantNumber": 75,
+          "variantName": "Café Gamuza y Camel",
+          "hasVariant": true,
+          "originalName": "Clutch_Grande_con_strap_75"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/full/Bolsa_Cilindro_Jareta_37.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/variants/Bolsa_Cilindro_Jareta_37.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-cilindro-jareta",
+        "productPath": "Bolsas de Textil y Piel/bolsa-cilindro-jareta",
+        "fileName": "Bolsa_Cilindro_Jareta_37.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-cilindro-jareta",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Bolsa_Cilindro_Jareta_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/full/Bolsa_Cilindro_Jareta_39.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/variants/Bolsa_Cilindro_Jareta_39.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-cilindro-jareta",
+        "productPath": "Bolsas de Textil y Piel/bolsa-cilindro-jareta",
+        "fileName": "Bolsa_Cilindro_Jareta_39.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-cilindro-jareta",
+          "variantNumber": 39,
+          "variantName": "Gris y Negro",
+          "hasVariant": true,
+          "originalName": "Bolsa_Cilindro_Jareta_39"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/full/Bolsa_Cilindro_Jareta_63_1.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/variants/Bolsa_Cilindro_Jareta_63_1.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-cilindro-jareta",
+        "productPath": "Bolsas de Textil y Piel/bolsa-cilindro-jareta",
+        "fileName": "Bolsa_Cilindro_Jareta_63_1.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-cilindro-jareta",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Bolsa_Cilindro_Jareta_63_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/full/Bolsa_Cilindro_Jareta_63.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/variants/Bolsa_Cilindro_Jareta_63.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-cilindro-jareta",
+        "productPath": "Bolsas de Textil y Piel/bolsa-cilindro-jareta",
+        "fileName": "Bolsa_Cilindro_Jareta_63.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-cilindro-jareta",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Bolsa_Cilindro_Jareta_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/full/Bolsa_Cilindro_Jareta_9_1.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/variants/Bolsa_Cilindro_Jareta_9_1.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-cilindro-jareta",
+        "productPath": "Bolsas de Textil y Piel/bolsa-cilindro-jareta",
+        "fileName": "Bolsa_Cilindro_Jareta_9_1.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-cilindro-jareta",
+          "variantNumber": 9,
+          "variantName": "Miel y Negro",
+          "hasVariant": true,
+          "originalName": "Bolsa_Cilindro_Jareta_9_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/full/Bolsa_Cilindro_Jareta_9_2.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/variants/Bolsa_Cilindro_Jareta_9_2.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-cilindro-jareta",
+        "productPath": "Bolsas de Textil y Piel/bolsa-cilindro-jareta",
+        "fileName": "Bolsa_Cilindro_Jareta_9_2.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-cilindro-jareta",
+          "variantNumber": 9,
+          "variantName": "Miel y Negro",
+          "hasVariant": true,
+          "originalName": "Bolsa_Cilindro_Jareta_9_2"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/full/Bolsa_Cilindro_Jareta_9.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/variants/Bolsa_Cilindro_Jareta_9.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-cilindro-jareta",
+        "productPath": "Bolsas de Textil y Piel/bolsa-cilindro-jareta",
+        "fileName": "Bolsa_Cilindro_Jareta_9.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-cilindro-jareta",
+          "variantNumber": 9,
+          "variantName": "Miel y Negro",
+          "hasVariant": true,
+          "originalName": "Bolsa_Cilindro_Jareta_9"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-de-playa-gigante/full/Bolsa_de_Playa_Gigante_37_1.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-de-playa-gigante/variants/Bolsa_de_Playa_Gigante_37_1.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-de-playa-gigante",
+        "productPath": "Bolsas de Textil y Piel/bolsa-de-playa-gigante",
+        "fileName": "Bolsa_de_Playa_Gigante_37_1.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-de-playa-gigante",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Bolsa_de_Playa_Gigante_37_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-de-playa-gigante/full/Bolsa_de_Playa_Gigante_37.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-de-playa-gigante/variants/Bolsa_de_Playa_Gigante_37.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-de-playa-gigante",
+        "productPath": "Bolsas de Textil y Piel/bolsa-de-playa-gigante",
+        "fileName": "Bolsa_de_Playa_Gigante_37.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-de-playa-gigante",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Bolsa_de_Playa_Gigante_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-de-playa-gigante/full/Bolsa_de_Playa_Gigante_63.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-de-playa-gigante/variants/Bolsa_de_Playa_Gigante_63.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-de-playa-gigante",
+        "productPath": "Bolsas de Textil y Piel/bolsa-de-playa-gigante",
+        "fileName": "Bolsa_de_Playa_Gigante_63.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-de-playa-gigante",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Bolsa_de_Playa_Gigante_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-de-playa-gigante/full/Bolsa_de_Playa_Gigante_9.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-de-playa-gigante/variants/Bolsa_de_Playa_Gigante_9.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-de-playa-gigante",
+        "productPath": "Bolsas de Textil y Piel/bolsa-de-playa-gigante",
+        "fileName": "Bolsa_de_Playa_Gigante_9.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-de-playa-gigante",
+          "variantNumber": 9,
+          "variantName": "Miel y Negro",
+          "hasVariant": true,
+          "originalName": "Bolsa_de_Playa_Gigante_9"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-de-playa-mediana/full/Bolsa_de_Playa_mediana_63_1.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-de-playa-mediana/variants/Bolsa_de_Playa_mediana_63_1.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-de-playa-mediana",
+        "productPath": "Bolsas de Textil y Piel/bolsa-de-playa-mediana",
+        "fileName": "Bolsa_de_Playa_mediana_63_1.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-de-playa-mediana",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Bolsa_de_Playa_mediana_63_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-de-playa-mediana/full/Bolsa_de_Playa_mediana_63.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-de-playa-mediana/variants/Bolsa_de_Playa_mediana_63.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-de-playa-mediana",
+        "productPath": "Bolsas de Textil y Piel/bolsa-de-playa-mediana",
+        "fileName": "Bolsa_de_Playa_mediana_63.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-de-playa-mediana",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Bolsa_de_Playa_mediana_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-de-playa-mediana/full/Bolsa_de_Playa_mediana_9.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-de-playa-mediana/variants/Bolsa_de_Playa_mediana_9.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-de-playa-mediana",
+        "productPath": "Bolsas de Textil y Piel/bolsa-de-playa-mediana",
+        "fileName": "Bolsa_de_Playa_mediana_9.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-de-playa-mediana",
+          "variantNumber": 9,
+          "variantName": "Miel y Negro",
+          "hasVariant": true,
+          "originalName": "Bolsa_de_Playa_mediana_9"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_37_1.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/variants/Bolsa_Telar_de_pedal_cruzada_37_1.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "productPath": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada",
+        "fileName": "Bolsa_Telar_de_pedal_cruzada_37_1.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-telar-de-pedal-cruzada",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Bolsa_Telar_de_pedal_cruzada_37_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_37_2.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/variants/Bolsa_Telar_de_pedal_cruzada_37_2.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "productPath": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada",
+        "fileName": "Bolsa_Telar_de_pedal_cruzada_37_2.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-telar-de-pedal-cruzada",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Bolsa_Telar_de_pedal_cruzada_37_2"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_37_3.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/variants/Bolsa_Telar_de_pedal_cruzada_37_3.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "productPath": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada",
+        "fileName": "Bolsa_Telar_de_pedal_cruzada_37_3.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-telar-de-pedal-cruzada",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Bolsa_Telar_de_pedal_cruzada_37_3"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_37.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/variants/Bolsa_Telar_de_pedal_cruzada_37.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "productPath": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada",
+        "fileName": "Bolsa_Telar_de_pedal_cruzada_37.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-telar-de-pedal-cruzada",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Bolsa_Telar_de_pedal_cruzada_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_63_1.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/variants/Bolsa_Telar_de_pedal_cruzada_63_1.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "productPath": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada",
+        "fileName": "Bolsa_Telar_de_pedal_cruzada_63_1.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-telar-de-pedal-cruzada",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Bolsa_Telar_de_pedal_cruzada_63_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_63.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/variants/Bolsa_Telar_de_pedal_cruzada_63.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "productPath": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada",
+        "fileName": "Bolsa_Telar_de_pedal_cruzada_63.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-telar-de-pedal-cruzada",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Bolsa_Telar_de_pedal_cruzada_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_9_1.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/variants/Bolsa_Telar_de_pedal_cruzada_9_1.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "productPath": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada",
+        "fileName": "Bolsa_Telar_de_pedal_cruzada_9_1.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-telar-de-pedal-cruzada",
+          "variantNumber": 9,
+          "variantName": "Miel y Negro",
+          "hasVariant": true,
+          "originalName": "Bolsa_Telar_de_pedal_cruzada_9_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_9.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/variants/Bolsa_Telar_de_pedal_cruzada_9.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "productPath": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada",
+        "fileName": "Bolsa_Telar_de_pedal_cruzada_9.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-telar-de-pedal-cruzada",
+          "variantNumber": 9,
+          "variantName": "Miel y Negro",
+          "hasVariant": true,
+          "originalName": "Bolsa_Telar_de_pedal_cruzada_9"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-gigante-horizontal/full/Bolsa_Gigante_horizontal_3.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-horizontal/variants/Bolsa_Gigante_horizontal_3.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-horizontal",
+        "productPath": "Bolsas Grandes/bolsa-gigante-horizontal",
+        "fileName": "Bolsa_Gigante_horizontal_3.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-gigante-horizontal",
+          "variantNumber": 3,
+          "variantName": "Negro",
+          "hasVariant": true,
+          "originalName": "Bolsa_Gigante_horizontal_3"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-gigante-horizontal/full/Bolsa_Gigante_horizontal_37.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-horizontal/variants/Bolsa_Gigante_horizontal_37.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-horizontal",
+        "productPath": "Bolsas Grandes/bolsa-gigante-horizontal",
+        "fileName": "Bolsa_Gigante_horizontal_37.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-gigante-horizontal",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Bolsa_Gigante_horizontal_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-gigante-horizontal/full/Bolsa_Gigante_horizontal_56.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-horizontal/variants/Bolsa_Gigante_horizontal_56.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-horizontal",
+        "productPath": "Bolsas Grandes/bolsa-gigante-horizontal",
+        "fileName": "Bolsa_Gigante_horizontal_56.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-gigante-horizontal",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Bolsa_Gigante_horizontal_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-gigante-horizontal/full/Bolsa_Gigante_horizontal_94.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-horizontal/variants/Bolsa_Gigante_horizontal_94.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-horizontal",
+        "productPath": "Bolsas Grandes/bolsa-gigante-horizontal",
+        "fileName": "Bolsa_Gigante_horizontal_94.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-gigante-horizontal",
+          "variantNumber": 94,
+          "variantName": "Negro y Cobre",
+          "hasVariant": true,
+          "originalName": "Bolsa_Gigante_horizontal_94"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_1_1.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/variants/Bolsa_Gigante_Vertical_1_1.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "productPath": "Bolsas Grandes/bolsa-gigante-vertical",
+        "fileName": "Bolsa_Gigante_Vertical_1_1.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-gigante-vertical",
+          "variantNumber": 1,
+          "variantName": "Gris",
+          "hasVariant": true,
+          "originalName": "Bolsa_Gigante_Vertical_1_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_1.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/variants/Bolsa_Gigante_Vertical_1.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "productPath": "Bolsas Grandes/bolsa-gigante-vertical",
+        "fileName": "Bolsa_Gigante_Vertical_1.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-gigante-vertical",
+          "variantNumber": 1,
+          "variantName": "Gris",
+          "hasVariant": true,
+          "originalName": "Bolsa_Gigante_Vertical_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_37.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/variants/Bolsa_Gigante_Vertical_37.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "productPath": "Bolsas Grandes/bolsa-gigante-vertical",
+        "fileName": "Bolsa_Gigante_Vertical_37.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-gigante-vertical",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Bolsa_Gigante_Vertical_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_56.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/variants/Bolsa_Gigante_Vertical_56.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "productPath": "Bolsas Grandes/bolsa-gigante-vertical",
+        "fileName": "Bolsa_Gigante_Vertical_56.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-gigante-vertical",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Bolsa_Gigante_Vertical_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_63.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/variants/Bolsa_Gigante_Vertical_63.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "productPath": "Bolsas Grandes/bolsa-gigante-vertical",
+        "fileName": "Bolsa_Gigante_Vertical_63.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-gigante-vertical",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Bolsa_Gigante_Vertical_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_80_1.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/variants/Bolsa_Gigante_Vertical_80_1.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "productPath": "Bolsas Grandes/bolsa-gigante-vertical",
+        "fileName": "Bolsa_Gigante_Vertical_80_1.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-gigante-vertical",
+          "variantNumber": 80,
+          "variantName": "Gris Oscuro",
+          "hasVariant": true,
+          "originalName": "Bolsa_Gigante_Vertical_80_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_80.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/variants/Bolsa_Gigante_Vertical_80.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "productPath": "Bolsas Grandes/bolsa-gigante-vertical",
+        "fileName": "Bolsa_Gigante_Vertical_80.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-gigante-vertical",
+          "variantNumber": 80,
+          "variantName": "Gris Oscuro",
+          "hasVariant": true,
+          "originalName": "Bolsa_Gigante_Vertical_80"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_94.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/variants/Bolsa_Gigante_Vertical_94.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "productPath": "Bolsas Grandes/bolsa-gigante-vertical",
+        "fileName": "Bolsa_Gigante_Vertical_94.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-gigante-vertical",
+          "variantNumber": 94,
+          "variantName": "Negro y Cobre",
+          "hasVariant": true,
+          "originalName": "Bolsa_Gigante_Vertical_94"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-grande-con-jareta/full/Bolsa_grande_con_Jareta_101.jpg",
+        "destination": "Bolsas Grandes/bolsa-grande-con-jareta/variants/Bolsa_grande_con_Jareta_101.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-grande-con-jareta",
+        "productPath": "Bolsas Grandes/bolsa-grande-con-jareta",
+        "fileName": "Bolsa_grande_con_Jareta_101.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-grande-con-jareta",
+          "variantNumber": 101,
+          "variantName": "Especial 101",
+          "hasVariant": true,
+          "originalName": "Bolsa_grande_con_Jareta_101"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-grande-con-jareta/full/Bolsa_grande_con_Jareta_49.jpg",
+        "destination": "Bolsas Grandes/bolsa-grande-con-jareta/variants/Bolsa_grande_con_Jareta_49.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-grande-con-jareta",
+        "productPath": "Bolsas Grandes/bolsa-grande-con-jareta",
+        "fileName": "Bolsa_grande_con_Jareta_49.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-grande-con-jareta",
+          "variantNumber": 49,
+          "variantName": "Tinto y Miel",
+          "hasVariant": true,
+          "originalName": "Bolsa_grande_con_Jareta_49"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-grande-con-jareta/full/Bolsa_grande_con_Jareta_63.jpg",
+        "destination": "Bolsas Grandes/bolsa-grande-con-jareta/variants/Bolsa_grande_con_Jareta_63.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-grande-con-jareta",
+        "productPath": "Bolsas Grandes/bolsa-grande-con-jareta",
+        "fileName": "Bolsa_grande_con_Jareta_63.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-grande-con-jareta",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Bolsa_grande_con_Jareta_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-grande-con-jareta/full/Bolsa_grande_con_Jareta_94.jpg",
+        "destination": "Bolsas Grandes/bolsa-grande-con-jareta/variants/Bolsa_grande_con_Jareta_94.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-grande-con-jareta",
+        "productPath": "Bolsas Grandes/bolsa-grande-con-jareta",
+        "fileName": "Bolsa_grande_con_Jareta_94.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-grande-con-jareta",
+          "variantNumber": 94,
+          "variantName": "Negro y Cobre",
+          "hasVariant": true,
+          "originalName": "Bolsa_grande_con_Jareta_94"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsa-grande-con-jareta/full/Bolsa_grande_con_Jareta_95.jpg",
+        "destination": "Bolsas Grandes/bolsa-grande-con-jareta/variants/Bolsa_grande_con_Jareta_95.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-grande-con-jareta",
+        "productPath": "Bolsas Grandes/bolsa-grande-con-jareta",
+        "fileName": "Bolsa_grande_con_Jareta_95.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsa-grande-con-jareta",
+          "variantNumber": 95,
+          "variantName": "Gris Gamuza",
+          "hasVariant": true,
+          "originalName": "Bolsa_grande_con_Jareta_95"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsas-gigante-plana/full/Bolsas_Gigante_Plana_18.jpg",
+        "destination": "Bolsas Grandes/bolsas-gigante-plana/variants/Bolsas_Gigante_Plana_18.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsas-gigante-plana",
+        "productPath": "Bolsas Grandes/bolsas-gigante-plana",
+        "fileName": "Bolsas_Gigante_Plana_18.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsas-gigante-plana",
+          "variantNumber": 18,
+          "variantName": "Café y Beige",
+          "hasVariant": true,
+          "originalName": "Bolsas_Gigante_Plana_18"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsas-gigante-plana/full/Bolsas_Gigante_Plana_19.jpg",
+        "destination": "Bolsas Grandes/bolsas-gigante-plana/variants/Bolsas_Gigante_Plana_19.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsas-gigante-plana",
+        "productPath": "Bolsas Grandes/bolsas-gigante-plana",
+        "fileName": "Bolsas_Gigante_Plana_19.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsas-gigante-plana",
+          "variantNumber": 19,
+          "variantName": "Camel",
+          "hasVariant": true,
+          "originalName": "Bolsas_Gigante_Plana_19"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsas-gigante-plana/full/Bolsas_Gigante_Plana_28.jpg",
+        "destination": "Bolsas Grandes/bolsas-gigante-plana/variants/Bolsas_Gigante_Plana_28.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsas-gigante-plana",
+        "productPath": "Bolsas Grandes/bolsas-gigante-plana",
+        "fileName": "Bolsas_Gigante_Plana_28.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsas-gigante-plana",
+          "variantNumber": 28,
+          "variantName": "Azul",
+          "hasVariant": true,
+          "originalName": "Bolsas_Gigante_Plana_28"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsas-gigante-plana/full/Bolsas_Gigante_Plana_63.jpg",
+        "destination": "Bolsas Grandes/bolsas-gigante-plana/variants/Bolsas_Gigante_Plana_63.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsas-gigante-plana",
+        "productPath": "Bolsas Grandes/bolsas-gigante-plana",
+        "fileName": "Bolsas_Gigante_Plana_63.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsas-gigante-plana",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Bolsas_Gigante_Plana_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Bolsas Grandes/bolsas-gigante-plana/full/Bolsas_Gigante_Plana_94.jpg",
+        "destination": "Bolsas Grandes/bolsas-gigante-plana/variants/Bolsas_Gigante_Plana_94.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsas-gigante-plana",
+        "productPath": "Bolsas Grandes/bolsas-gigante-plana",
+        "fileName": "Bolsas_Gigante_Plana_94.jpg",
+        "variantInfo": {
+          "productBaseName": "bolsas-gigante-plana",
+          "variantNumber": 94,
+          "variantName": "Negro y Cobre",
+          "hasVariant": true,
+          "originalName": "Bolsas_Gigante_Plana_94"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Botelleras/botelleras/full/Botelleras_56.jpg",
+        "destination": "Botelleras/botelleras/variants/Botelleras_56.jpg",
+        "category": "Botelleras",
+        "product": "botelleras",
+        "productPath": "Botelleras/botelleras",
+        "fileName": "Botelleras_56.jpg",
+        "variantInfo": {
+          "productBaseName": "botelleras",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Botelleras_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Carteras/cartera-con-costura/full/Cartera_con_Costura_37.jpg",
+        "destination": "Accesorios/Carteras/cartera-con-costura/variants/Cartera_con_Costura_37.jpg",
+        "category": "Accesorios",
+        "product": "cartera-con-costura",
+        "productPath": "Accesorios/Carteras/cartera-con-costura",
+        "fileName": "Cartera_con_Costura_37.jpg",
+        "variantInfo": {
+          "productBaseName": "cartera-con-costura",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Cartera_con_Costura_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Carteras/cartera-con-costura/full/Cartera_con_Costura_56.jpg",
+        "destination": "Accesorios/Carteras/cartera-con-costura/variants/Cartera_con_Costura_56.jpg",
+        "category": "Accesorios",
+        "product": "cartera-con-costura",
+        "productPath": "Accesorios/Carteras/cartera-con-costura",
+        "fileName": "Cartera_con_Costura_56.jpg",
+        "variantInfo": {
+          "productBaseName": "cartera-con-costura",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Cartera_con_Costura_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Carteras/cartera-con-costura/full/Cartera_con_Costura_63.jpg",
+        "destination": "Accesorios/Carteras/cartera-con-costura/variants/Cartera_con_Costura_63.jpg",
+        "category": "Accesorios",
+        "product": "cartera-con-costura",
+        "productPath": "Accesorios/Carteras/cartera-con-costura",
+        "fileName": "Cartera_con_Costura_63.jpg",
+        "variantInfo": {
+          "productBaseName": "cartera-con-costura",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Cartera_con_Costura_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_1.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/variants/Cartera_Liga_1.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "productPath": "Accesorios/Carteras/cartera-liga",
+        "fileName": "Cartera_Liga_1.jpg",
+        "variantInfo": {
+          "productBaseName": "cartera-liga",
+          "variantNumber": 1,
+          "variantName": "Gris",
+          "hasVariant": true,
+          "originalName": "Cartera_Liga_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_100.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/variants/Cartera_Liga_100.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "productPath": "Accesorios/Carteras/cartera-liga",
+        "fileName": "Cartera_Liga_100.jpg",
+        "variantInfo": {
+          "productBaseName": "cartera-liga",
+          "variantNumber": 100,
+          "variantName": "Ladrillo y Perla",
+          "hasVariant": true,
+          "originalName": "Cartera_Liga_100"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_37.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/variants/Cartera_Liga_37.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "productPath": "Accesorios/Carteras/cartera-liga",
+        "fileName": "Cartera_Liga_37.jpg",
+        "variantInfo": {
+          "productBaseName": "cartera-liga",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Cartera_Liga_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_56.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/variants/Cartera_Liga_56.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "productPath": "Accesorios/Carteras/cartera-liga",
+        "fileName": "Cartera_Liga_56.jpg",
+        "variantInfo": {
+          "productBaseName": "cartera-liga",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Cartera_Liga_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_63.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/variants/Cartera_Liga_63.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "productPath": "Accesorios/Carteras/cartera-liga",
+        "fileName": "Cartera_Liga_63.jpg",
+        "variantInfo": {
+          "productBaseName": "cartera-liga",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Cartera_Liga_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_83.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/variants/Cartera_Liga_83.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "productPath": "Accesorios/Carteras/cartera-liga",
+        "fileName": "Cartera_Liga_83.jpg",
+        "variantInfo": {
+          "productBaseName": "cartera-liga",
+          "variantNumber": 83,
+          "variantName": "Blanco y Camel Franjas",
+          "hasVariant": true,
+          "originalName": "Cartera_Liga_83"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_84.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/variants/Cartera_Liga_84.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "productPath": "Accesorios/Carteras/cartera-liga",
+        "fileName": "Cartera_Liga_84.jpg",
+        "variantInfo": {
+          "productBaseName": "cartera-liga",
+          "variantNumber": 84,
+          "variantName": "Piel Café Textil Beige y Blanco Lluvia",
+          "hasVariant": true,
+          "originalName": "Cartera_Liga_84"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_9.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/variants/Cartera_Liga_9.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "productPath": "Accesorios/Carteras/cartera-liga",
+        "fileName": "Cartera_Liga_9.jpg",
+        "variantInfo": {
+          "productBaseName": "cartera-liga",
+          "variantNumber": 9,
+          "variantName": "Miel y Negro",
+          "hasVariant": true,
+          "originalName": "Cartera_Liga_9"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_94.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/variants/Cartera_Liga_94.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "productPath": "Accesorios/Carteras/cartera-liga",
+        "fileName": "Cartera_Liga_94.jpg",
+        "variantInfo": {
+          "productBaseName": "cartera-liga",
+          "variantNumber": 94,
+          "variantName": "Negro y Cobre",
+          "hasVariant": true,
+          "originalName": "Cartera_Liga_94"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_37_1.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/variants/Llavero_Corto_37_1.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "productPath": "Accesorios/Llavero/llavero-corto",
+        "fileName": "Llavero_Corto_37_1.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-corto",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Llavero_Corto_37_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_37.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/variants/Llavero_Corto_37.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "productPath": "Accesorios/Llavero/llavero-corto",
+        "fileName": "Llavero_Corto_37.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-corto",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Llavero_Corto_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_49.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/variants/Llavero_Corto_49.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "productPath": "Accesorios/Llavero/llavero-corto",
+        "fileName": "Llavero_Corto_49.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-corto",
+          "variantNumber": 49,
+          "variantName": "Tinto y Miel",
+          "hasVariant": true,
+          "originalName": "Llavero_Corto_49"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_56_1.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/variants/Llavero_Corto_56_1.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "productPath": "Accesorios/Llavero/llavero-corto",
+        "fileName": "Llavero_Corto_56_1.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-corto",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Llavero_Corto_56_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_56_2.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/variants/Llavero_Corto_56_2.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "productPath": "Accesorios/Llavero/llavero-corto",
+        "fileName": "Llavero_Corto_56_2.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-corto",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Llavero_Corto_56_2"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_56_3.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/variants/Llavero_Corto_56_3.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "productPath": "Accesorios/Llavero/llavero-corto",
+        "fileName": "Llavero_Corto_56_3.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-corto",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Llavero_Corto_56_3"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_56.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/variants/Llavero_Corto_56.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "productPath": "Accesorios/Llavero/llavero-corto",
+        "fileName": "Llavero_Corto_56.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-corto",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Llavero_Corto_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_63_1.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/variants/Llavero_Corto_63_1.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "productPath": "Accesorios/Llavero/llavero-corto",
+        "fileName": "Llavero_Corto_63_1.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-corto",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Llavero_Corto_63_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_63.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/variants/Llavero_Corto_63.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "productPath": "Accesorios/Llavero/llavero-corto",
+        "fileName": "Llavero_Corto_63.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-corto",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Llavero_Corto_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-largo/full/Llavero_Largo_37_1.jpg",
+        "destination": "Accesorios/Llavero/llavero-largo/variants/Llavero_Largo_37_1.jpg",
+        "category": "Accesorios",
+        "product": "llavero-largo",
+        "productPath": "Accesorios/Llavero/llavero-largo",
+        "fileName": "Llavero_Largo_37_1.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-largo",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Llavero_Largo_37_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-largo/full/Llavero_Largo_37.jpg",
+        "destination": "Accesorios/Llavero/llavero-largo/variants/Llavero_Largo_37.jpg",
+        "category": "Accesorios",
+        "product": "llavero-largo",
+        "productPath": "Accesorios/Llavero/llavero-largo",
+        "fileName": "Llavero_Largo_37.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-largo",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Llavero_Largo_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-largo/full/Llavero_Largo_56_1.jpg",
+        "destination": "Accesorios/Llavero/llavero-largo/variants/Llavero_Largo_56_1.jpg",
+        "category": "Accesorios",
+        "product": "llavero-largo",
+        "productPath": "Accesorios/Llavero/llavero-largo",
+        "fileName": "Llavero_Largo_56_1.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-largo",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Llavero_Largo_56_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-largo/full/Llavero_Largo_56_2.jpg",
+        "destination": "Accesorios/Llavero/llavero-largo/variants/Llavero_Largo_56_2.jpg",
+        "category": "Accesorios",
+        "product": "llavero-largo",
+        "productPath": "Accesorios/Llavero/llavero-largo",
+        "fileName": "Llavero_Largo_56_2.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-largo",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Llavero_Largo_56_2"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-largo/full/Llavero_Largo_56.jpg",
+        "destination": "Accesorios/Llavero/llavero-largo/variants/Llavero_Largo_56.jpg",
+        "category": "Accesorios",
+        "product": "llavero-largo",
+        "productPath": "Accesorios/Llavero/llavero-largo",
+        "fileName": "Llavero_Largo_56.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-largo",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Llavero_Largo_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-largo/full/Llavero_Largo_62.jpg",
+        "destination": "Accesorios/Llavero/llavero-largo/variants/Llavero_Largo_62.jpg",
+        "category": "Accesorios",
+        "product": "llavero-largo",
+        "productPath": "Accesorios/Llavero/llavero-largo",
+        "fileName": "Llavero_Largo_62.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-largo",
+          "variantNumber": 62,
+          "variantName": "Oro Pálido/Perla/Ladrillo",
+          "hasVariant": true,
+          "originalName": "Llavero_Largo_62"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Llavero/llavero-largo/full/Llavero_Largo_63.jpg",
+        "destination": "Accesorios/Llavero/llavero-largo/variants/Llavero_Largo_63.jpg",
+        "category": "Accesorios",
+        "product": "llavero-largo",
+        "productPath": "Accesorios/Llavero/llavero-largo",
+        "fileName": "Llavero_Largo_63.jpg",
+        "variantInfo": {
+          "productBaseName": "llavero-largo",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Llavero_Largo_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-cierre/full/Monedero_Cierre_1.jpg",
+        "destination": "Accesorios/Monederos/monedero-cierre/variants/Monedero_Cierre_1.jpg",
+        "category": "Accesorios",
+        "product": "monedero-cierre",
+        "productPath": "Accesorios/Monederos/monedero-cierre",
+        "fileName": "Monedero_Cierre_1.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-cierre",
+          "variantNumber": 1,
+          "variantName": "Gris",
+          "hasVariant": true,
+          "originalName": "Monedero_Cierre_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-cierre/full/Monedero_Cierre_18.jpg",
+        "destination": "Accesorios/Monederos/monedero-cierre/variants/Monedero_Cierre_18.jpg",
+        "category": "Accesorios",
+        "product": "monedero-cierre",
+        "productPath": "Accesorios/Monederos/monedero-cierre",
+        "fileName": "Monedero_Cierre_18.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-cierre",
+          "variantNumber": 18,
+          "variantName": "Café y Beige",
+          "hasVariant": true,
+          "originalName": "Monedero_Cierre_18"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-cierre/full/Monedero_Cierre_37.jpg",
+        "destination": "Accesorios/Monederos/monedero-cierre/variants/Monedero_Cierre_37.jpg",
+        "category": "Accesorios",
+        "product": "monedero-cierre",
+        "productPath": "Accesorios/Monederos/monedero-cierre",
+        "fileName": "Monedero_Cierre_37.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-cierre",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Monedero_Cierre_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-cierre/full/Monedero_Cierre_49.jpg",
+        "destination": "Accesorios/Monederos/monedero-cierre/variants/Monedero_Cierre_49.jpg",
+        "category": "Accesorios",
+        "product": "monedero-cierre",
+        "productPath": "Accesorios/Monederos/monedero-cierre",
+        "fileName": "Monedero_Cierre_49.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-cierre",
+          "variantNumber": 49,
+          "variantName": "Tinto y Miel",
+          "hasVariant": true,
+          "originalName": "Monedero_Cierre_49"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-cierre/full/Monedero_Cierre_56.jpg",
+        "destination": "Accesorios/Monederos/monedero-cierre/variants/Monedero_Cierre_56.jpg",
+        "category": "Accesorios",
+        "product": "monedero-cierre",
+        "productPath": "Accesorios/Monederos/monedero-cierre",
+        "fileName": "Monedero_Cierre_56.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-cierre",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Monedero_Cierre_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-cierre/full/Monedero_Cierre_63.jpg",
+        "destination": "Accesorios/Monederos/monedero-cierre/variants/Monedero_Cierre_63.jpg",
+        "category": "Accesorios",
+        "product": "monedero-cierre",
+        "productPath": "Accesorios/Monederos/monedero-cierre",
+        "fileName": "Monedero_Cierre_63.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-cierre",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Monedero_Cierre_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-cierre/full/Monedero_Cierre_85.jpg",
+        "destination": "Accesorios/Monederos/monedero-cierre/variants/Monedero_Cierre_85.jpg",
+        "category": "Accesorios",
+        "product": "monedero-cierre",
+        "productPath": "Accesorios/Monederos/monedero-cierre",
+        "fileName": "Monedero_Cierre_85.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-cierre",
+          "variantNumber": 85,
+          "variantName": "Plata",
+          "hasVariant": true,
+          "originalName": "Monedero_Cierre_85"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-clip/full/Monedero_Clip_1.jpg",
+        "destination": "Accesorios/Monederos/monedero-clip/variants/Monedero_Clip_1.jpg",
+        "category": "Accesorios",
+        "product": "monedero-clip",
+        "productPath": "Accesorios/Monederos/monedero-clip",
+        "fileName": "Monedero_Clip_1.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-clip",
+          "variantNumber": 1,
+          "variantName": "Gris",
+          "hasVariant": true,
+          "originalName": "Monedero_Clip_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-clip/full/Monedero_Clip_28.jpg",
+        "destination": "Accesorios/Monederos/monedero-clip/variants/Monedero_Clip_28.jpg",
+        "category": "Accesorios",
+        "product": "monedero-clip",
+        "productPath": "Accesorios/Monederos/monedero-clip",
+        "fileName": "Monedero_Clip_28.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-clip",
+          "variantNumber": 28,
+          "variantName": "Azul",
+          "hasVariant": true,
+          "originalName": "Monedero_Clip_28"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-clip/full/Monedero_Clip_35.jpg",
+        "destination": "Accesorios/Monederos/monedero-clip/variants/Monedero_Clip_35.jpg",
+        "category": "Accesorios",
+        "product": "monedero-clip",
+        "productPath": "Accesorios/Monederos/monedero-clip",
+        "fileName": "Monedero_Clip_35.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-clip",
+          "variantNumber": 35,
+          "variantName": "Café y Oro",
+          "hasVariant": true,
+          "originalName": "Monedero_Clip_35"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-clip/full/Monedero_Clip_37.jpg",
+        "destination": "Accesorios/Monederos/monedero-clip/variants/Monedero_Clip_37.jpg",
+        "category": "Accesorios",
+        "product": "monedero-clip",
+        "productPath": "Accesorios/Monederos/monedero-clip",
+        "fileName": "Monedero_Clip_37.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-clip",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Monedero_Clip_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-clip/full/Monedero_Clip_49.jpg",
+        "destination": "Accesorios/Monederos/monedero-clip/variants/Monedero_Clip_49.jpg",
+        "category": "Accesorios",
+        "product": "monedero-clip",
+        "productPath": "Accesorios/Monederos/monedero-clip",
+        "fileName": "Monedero_Clip_49.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-clip",
+          "variantNumber": 49,
+          "variantName": "Tinto y Miel",
+          "hasVariant": true,
+          "originalName": "Monedero_Clip_49"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-clip/full/Monedero_Clip_56.jpg",
+        "destination": "Accesorios/Monederos/monedero-clip/variants/Monedero_Clip_56.jpg",
+        "category": "Accesorios",
+        "product": "monedero-clip",
+        "productPath": "Accesorios/Monederos/monedero-clip",
+        "fileName": "Monedero_Clip_56.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-clip",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Monedero_Clip_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-clip/full/Monedero_Clip_85.jpg",
+        "destination": "Accesorios/Monederos/monedero-clip/variants/Monedero_Clip_85.jpg",
+        "category": "Accesorios",
+        "product": "monedero-clip",
+        "productPath": "Accesorios/Monederos/monedero-clip",
+        "fileName": "Monedero_Clip_85.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-clip",
+          "variantNumber": 85,
+          "variantName": "Plata",
+          "hasVariant": true,
+          "originalName": "Monedero_Clip_85"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-motita/full/Monedero_Motita_18.jpg",
+        "destination": "Accesorios/Monederos/monedero-motita/variants/Monedero_Motita_18.jpg",
+        "category": "Accesorios",
+        "product": "monedero-motita",
+        "productPath": "Accesorios/Monederos/monedero-motita",
+        "fileName": "Monedero_Motita_18.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-motita",
+          "variantNumber": 18,
+          "variantName": "Café y Beige",
+          "hasVariant": true,
+          "originalName": "Monedero_Motita_18"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-motita/full/Monedero_Motita_22.jpg",
+        "destination": "Accesorios/Monederos/monedero-motita/variants/Monedero_Motita_22.jpg",
+        "category": "Accesorios",
+        "product": "monedero-motita",
+        "productPath": "Accesorios/Monederos/monedero-motita",
+        "fileName": "Monedero_Motita_22.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-motita",
+          "variantNumber": 22,
+          "variantName": "Perla",
+          "hasVariant": true,
+          "originalName": "Monedero_Motita_22"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-motita/full/Monedero_Motita_28.jpg",
+        "destination": "Accesorios/Monederos/monedero-motita/variants/Monedero_Motita_28.jpg",
+        "category": "Accesorios",
+        "product": "monedero-motita",
+        "productPath": "Accesorios/Monederos/monedero-motita",
+        "fileName": "Monedero_Motita_28.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-motita",
+          "variantNumber": 28,
+          "variantName": "Azul",
+          "hasVariant": true,
+          "originalName": "Monedero_Motita_28"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-motita/full/Monedero_Motita_49.jpg",
+        "destination": "Accesorios/Monederos/monedero-motita/variants/Monedero_Motita_49.jpg",
+        "category": "Accesorios",
+        "product": "monedero-motita",
+        "productPath": "Accesorios/Monederos/monedero-motita",
+        "fileName": "Monedero_Motita_49.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-motita",
+          "variantNumber": 49,
+          "variantName": "Tinto y Miel",
+          "hasVariant": true,
+          "originalName": "Monedero_Motita_49"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-motita/full/Monedero_Motita_56.jpg",
+        "destination": "Accesorios/Monederos/monedero-motita/variants/Monedero_Motita_56.jpg",
+        "category": "Accesorios",
+        "product": "monedero-motita",
+        "productPath": "Accesorios/Monederos/monedero-motita",
+        "fileName": "Monedero_Motita_56.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-motita",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Monedero_Motita_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-motita/full/Monedero_Motita_63.jpg",
+        "destination": "Accesorios/Monederos/monedero-motita/variants/Monedero_Motita_63.jpg",
+        "category": "Accesorios",
+        "product": "monedero-motita",
+        "productPath": "Accesorios/Monederos/monedero-motita",
+        "fileName": "Monedero_Motita_63.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-motita",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Monedero_Motita_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Monederos/monedero-motita/full/Monedero_Motita_7.jpg",
+        "destination": "Accesorios/Monederos/monedero-motita/variants/Monedero_Motita_7.jpg",
+        "category": "Accesorios",
+        "product": "monedero-motita",
+        "productPath": "Accesorios/Monederos/monedero-motita",
+        "fileName": "Monedero_Motita_7.jpg",
+        "variantInfo": {
+          "productBaseName": "monedero-motita",
+          "variantNumber": 7,
+          "variantName": "Gris y Azul Tupido",
+          "hasVariant": true,
+          "originalName": "Monedero_Motita_7"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portacables/portacable-chico/full/Portacable_Chico_1.jpg",
+        "destination": "Accesorios/Portacables/portacable-chico/variants/Portacable_Chico_1.jpg",
+        "category": "Accesorios",
+        "product": "portacable-chico",
+        "productPath": "Accesorios/Portacables/portacable-chico",
+        "fileName": "Portacable_Chico_1.jpg",
+        "variantInfo": {
+          "productBaseName": "portacable-chico",
+          "variantNumber": 1,
+          "variantName": "Gris",
+          "hasVariant": true,
+          "originalName": "Portacable_Chico_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portacables/portacable-chico/full/Portacable_Chico_22.jpg",
+        "destination": "Accesorios/Portacables/portacable-chico/variants/Portacable_Chico_22.jpg",
+        "category": "Accesorios",
+        "product": "portacable-chico",
+        "productPath": "Accesorios/Portacables/portacable-chico",
+        "fileName": "Portacable_Chico_22.jpg",
+        "variantInfo": {
+          "productBaseName": "portacable-chico",
+          "variantNumber": 22,
+          "variantName": "Perla",
+          "hasVariant": true,
+          "originalName": "Portacable_Chico_22"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portacables/portacable-chico/full/Portacable_Chico_28.jpg",
+        "destination": "Accesorios/Portacables/portacable-chico/variants/Portacable_Chico_28.jpg",
+        "category": "Accesorios",
+        "product": "portacable-chico",
+        "productPath": "Accesorios/Portacables/portacable-chico",
+        "fileName": "Portacable_Chico_28.jpg",
+        "variantInfo": {
+          "productBaseName": "portacable-chico",
+          "variantNumber": 28,
+          "variantName": "Azul",
+          "hasVariant": true,
+          "originalName": "Portacable_Chico_28"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portacables/portacable-chico/full/Portacable_Chico_37.jpg",
+        "destination": "Accesorios/Portacables/portacable-chico/variants/Portacable_Chico_37.jpg",
+        "category": "Accesorios",
+        "product": "portacable-chico",
+        "productPath": "Accesorios/Portacables/portacable-chico",
+        "fileName": "Portacable_Chico_37.jpg",
+        "variantInfo": {
+          "productBaseName": "portacable-chico",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Portacable_Chico_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portacables/portacable-chico/full/Portacable_Chico_49.jpg",
+        "destination": "Accesorios/Portacables/portacable-chico/variants/Portacable_Chico_49.jpg",
+        "category": "Accesorios",
+        "product": "portacable-chico",
+        "productPath": "Accesorios/Portacables/portacable-chico",
+        "fileName": "Portacable_Chico_49.jpg",
+        "variantInfo": {
+          "productBaseName": "portacable-chico",
+          "variantNumber": 49,
+          "variantName": "Tinto y Miel",
+          "hasVariant": true,
+          "originalName": "Portacable_Chico_49"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portacables/portacable-chico/full/Portacable_Chico_63.jpg",
+        "destination": "Accesorios/Portacables/portacable-chico/variants/Portacable_Chico_63.jpg",
+        "category": "Accesorios",
+        "product": "portacable-chico",
+        "productPath": "Accesorios/Portacables/portacable-chico",
+        "fileName": "Portacable_Chico_63.jpg",
+        "variantInfo": {
+          "productBaseName": "portacable-chico",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Portacable_Chico_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portacables/portacable-chico/full/Portacable_Chico_94.jpg",
+        "destination": "Accesorios/Portacables/portacable-chico/variants/Portacable_Chico_94.jpg",
+        "category": "Accesorios",
+        "product": "portacable-chico",
+        "productPath": "Accesorios/Portacables/portacable-chico",
+        "fileName": "Portacable_Chico_94.jpg",
+        "variantInfo": {
+          "productBaseName": "portacable-chico",
+          "variantNumber": 94,
+          "variantName": "Negro y Cobre",
+          "hasVariant": true,
+          "originalName": "Portacable_Chico_94"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portacables/portacables-grande/full/Portacables_Grande_1.jpg",
+        "destination": "Accesorios/Portacables/portacables-grande/variants/Portacables_Grande_1.jpg",
+        "category": "Accesorios",
+        "product": "portacables-grande",
+        "productPath": "Accesorios/Portacables/portacables-grande",
+        "fileName": "Portacables_Grande_1.jpg",
+        "variantInfo": {
+          "productBaseName": "portacables-grande",
+          "variantNumber": 1,
+          "variantName": "Gris",
+          "hasVariant": true,
+          "originalName": "Portacables_Grande_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portacables/portacables-grande/full/Portacables_Grande_28.jpg",
+        "destination": "Accesorios/Portacables/portacables-grande/variants/Portacables_Grande_28.jpg",
+        "category": "Accesorios",
+        "product": "portacables-grande",
+        "productPath": "Accesorios/Portacables/portacables-grande",
+        "fileName": "Portacables_Grande_28.jpg",
+        "variantInfo": {
+          "productBaseName": "portacables-grande",
+          "variantNumber": 28,
+          "variantName": "Azul",
+          "hasVariant": true,
+          "originalName": "Portacables_Grande_28"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portacables/portacables-grande/full/Portacables_Grande_37.jpg",
+        "destination": "Accesorios/Portacables/portacables-grande/variants/Portacables_Grande_37.jpg",
+        "category": "Accesorios",
+        "product": "portacables-grande",
+        "productPath": "Accesorios/Portacables/portacables-grande",
+        "fileName": "Portacables_Grande_37.jpg",
+        "variantInfo": {
+          "productBaseName": "portacables-grande",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Portacables_Grande_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portacables/portacables-grande/full/Portacables_Grande_49.jpg",
+        "destination": "Accesorios/Portacables/portacables-grande/variants/Portacables_Grande_49.jpg",
+        "category": "Accesorios",
+        "product": "portacables-grande",
+        "productPath": "Accesorios/Portacables/portacables-grande",
+        "fileName": "Portacables_Grande_49.jpg",
+        "variantInfo": {
+          "productBaseName": "portacables-grande",
+          "variantNumber": 49,
+          "variantName": "Tinto y Miel",
+          "hasVariant": true,
+          "originalName": "Portacables_Grande_49"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portacables/portacables-grande/full/Portacables_Grande_63.jpg",
+        "destination": "Accesorios/Portacables/portacables-grande/variants/Portacables_Grande_63.jpg",
+        "category": "Accesorios",
+        "product": "portacables-grande",
+        "productPath": "Accesorios/Portacables/portacables-grande",
+        "fileName": "Portacables_Grande_63.jpg",
+        "variantInfo": {
+          "productBaseName": "portacables-grande",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Portacables_Grande_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portacables/portacables-grande/full/Portacables_Grande_94.jpg",
+        "destination": "Accesorios/Portacables/portacables-grande/variants/Portacables_Grande_94.jpg",
+        "category": "Accesorios",
+        "product": "portacables-grande",
+        "productPath": "Accesorios/Portacables/portacables-grande",
+        "fileName": "Portacables_Grande_94.jpg",
+        "variantInfo": {
+          "productBaseName": "portacables-grande",
+          "variantNumber": 94,
+          "variantName": "Negro y Cobre",
+          "hasVariant": true,
+          "originalName": "Portacables_Grande_94"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portapasaportes/full/Portapasaportes_37_1.jpg",
+        "destination": "Accesorios/Portapasaportes/variants/Portapasaportes_37_1.jpg",
+        "category": "Accesorios",
+        "product": "Portapasaportes",
+        "productPath": "Accesorios/Portapasaportes",
+        "fileName": "Portapasaportes_37_1.jpg",
+        "variantInfo": {
+          "productBaseName": "portapasaportes",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Portapasaportes_37_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portapasaportes/full/Portapasaportes_37.jpg",
+        "destination": "Accesorios/Portapasaportes/variants/Portapasaportes_37.jpg",
+        "category": "Accesorios",
+        "product": "Portapasaportes",
+        "productPath": "Accesorios/Portapasaportes",
+        "fileName": "Portapasaportes_37.jpg",
+        "variantInfo": {
+          "productBaseName": "portapasaportes",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Portapasaportes_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portapasaportes/full/Portapasaportes_56_1.jpg",
+        "destination": "Accesorios/Portapasaportes/variants/Portapasaportes_56_1.jpg",
+        "category": "Accesorios",
+        "product": "Portapasaportes",
+        "productPath": "Accesorios/Portapasaportes",
+        "fileName": "Portapasaportes_56_1.jpg",
+        "variantInfo": {
+          "productBaseName": "portapasaportes",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Portapasaportes_56_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portapasaportes/full/Portapasaportes_56.jpg",
+        "destination": "Accesorios/Portapasaportes/variants/Portapasaportes_56.jpg",
+        "category": "Accesorios",
+        "product": "Portapasaportes",
+        "productPath": "Accesorios/Portapasaportes",
+        "fileName": "Portapasaportes_56.jpg",
+        "variantInfo": {
+          "productBaseName": "portapasaportes",
+          "variantNumber": 56,
+          "variantName": "Tinto y Blanco",
+          "hasVariant": true,
+          "originalName": "Portapasaportes_56"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portapasaportes/full/Portapasaportes_63_1.jpg",
+        "destination": "Accesorios/Portapasaportes/variants/Portapasaportes_63_1.jpg",
+        "category": "Accesorios",
+        "product": "Portapasaportes",
+        "productPath": "Accesorios/Portapasaportes",
+        "fileName": "Portapasaportes_63_1.jpg",
+        "variantInfo": {
+          "productBaseName": "portapasaportes",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Portapasaportes_63_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Portapasaportes/full/Portapasaportes_63.jpg",
+        "destination": "Accesorios/Portapasaportes/variants/Portapasaportes_63.jpg",
+        "category": "Accesorios",
+        "product": "Portapasaportes",
+        "productPath": "Accesorios/Portapasaportes",
+        "fileName": "Portapasaportes_63.jpg",
+        "variantInfo": {
+          "productBaseName": "portapasaportes",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Portapasaportes_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Tarjeteros/tarjetero-boton/full/Tarjetero_Boton_1.jpg",
+        "destination": "Accesorios/Tarjeteros/tarjetero-boton/variants/Tarjetero_Boton_1.jpg",
+        "category": "Accesorios",
+        "product": "tarjetero-boton",
+        "productPath": "Accesorios/Tarjeteros/tarjetero-boton",
+        "fileName": "Tarjetero_Boton_1.jpg",
+        "variantInfo": {
+          "productBaseName": "tarjetero-boton",
+          "variantNumber": 1,
+          "variantName": "Gris",
+          "hasVariant": true,
+          "originalName": "Tarjetero_Boton_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Tarjeteros/tarjetero-boton/full/Tarjetero_Boton_28.jpg",
+        "destination": "Accesorios/Tarjeteros/tarjetero-boton/variants/Tarjetero_Boton_28.jpg",
+        "category": "Accesorios",
+        "product": "tarjetero-boton",
+        "productPath": "Accesorios/Tarjeteros/tarjetero-boton",
+        "fileName": "Tarjetero_Boton_28.jpg",
+        "variantInfo": {
+          "productBaseName": "tarjetero-boton",
+          "variantNumber": 28,
+          "variantName": "Azul",
+          "hasVariant": true,
+          "originalName": "Tarjetero_Boton_28"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Tarjeteros/tarjetero-boton/full/Tarjetero_Boton_37.jpg",
+        "destination": "Accesorios/Tarjeteros/tarjetero-boton/variants/Tarjetero_Boton_37.jpg",
+        "category": "Accesorios",
+        "product": "tarjetero-boton",
+        "productPath": "Accesorios/Tarjeteros/tarjetero-boton",
+        "fileName": "Tarjetero_Boton_37.jpg",
+        "variantInfo": {
+          "productBaseName": "tarjetero-boton",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Tarjetero_Boton_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Tarjeteros/tarjetero-boton/full/Tarjetero_Boton_49.jpg",
+        "destination": "Accesorios/Tarjeteros/tarjetero-boton/variants/Tarjetero_Boton_49.jpg",
+        "category": "Accesorios",
+        "product": "tarjetero-boton",
+        "productPath": "Accesorios/Tarjeteros/tarjetero-boton",
+        "fileName": "Tarjetero_Boton_49.jpg",
+        "variantInfo": {
+          "productBaseName": "tarjetero-boton",
+          "variantNumber": 49,
+          "variantName": "Tinto y Miel",
+          "hasVariant": true,
+          "originalName": "Tarjetero_Boton_49"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Tarjeteros/tarjetero-boton/full/Tarjetero_Boton_63.jpg",
+        "destination": "Accesorios/Tarjeteros/tarjetero-boton/variants/Tarjetero_Boton_63.jpg",
+        "category": "Accesorios",
+        "product": "tarjetero-boton",
+        "productPath": "Accesorios/Tarjeteros/tarjetero-boton",
+        "fileName": "Tarjetero_Boton_63.jpg",
+        "variantInfo": {
+          "productBaseName": "tarjetero-boton",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Tarjetero_Boton_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Accesorios/Tarjeteros/tarjetero-boton/full/Tarjetero_Boton_85.jpg",
+        "destination": "Accesorios/Tarjeteros/tarjetero-boton/variants/Tarjetero_Boton_85.jpg",
+        "category": "Accesorios",
+        "product": "tarjetero-boton",
+        "productPath": "Accesorios/Tarjeteros/tarjetero-boton",
+        "fileName": "Tarjetero_Boton_85.jpg",
+        "variantInfo": {
+          "productBaseName": "tarjetero-boton",
+          "variantNumber": 85,
+          "variantName": "Plata",
+          "hasVariant": true,
+          "originalName": "Tarjetero_Boton_85"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-grande/full/Portacel_grande_19.jpg",
+        "destination": "Portacel/portacel-grande/variants/Portacel_grande_19.jpg",
+        "category": "Portacel",
+        "product": "portacel-grande",
+        "productPath": "Portacel/portacel-grande",
+        "fileName": "Portacel_grande_19.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-grande",
+          "variantNumber": 19,
+          "variantName": "Camel",
+          "hasVariant": true,
+          "originalName": "Portacel_grande_19"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-grande/full/Portacel_grande_22.jpg",
+        "destination": "Portacel/portacel-grande/variants/Portacel_grande_22.jpg",
+        "category": "Portacel",
+        "product": "portacel-grande",
+        "productPath": "Portacel/portacel-grande",
+        "fileName": "Portacel_grande_22.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-grande",
+          "variantNumber": 22,
+          "variantName": "Perla",
+          "hasVariant": true,
+          "originalName": "Portacel_grande_22"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-grande/full/Portacel_grande_28.jpg",
+        "destination": "Portacel/portacel-grande/variants/Portacel_grande_28.jpg",
+        "category": "Portacel",
+        "product": "portacel-grande",
+        "productPath": "Portacel/portacel-grande",
+        "fileName": "Portacel_grande_28.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-grande",
+          "variantNumber": 28,
+          "variantName": "Azul",
+          "hasVariant": true,
+          "originalName": "Portacel_grande_28"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-grande/full/Portacel_grande_37.jpg",
+        "destination": "Portacel/portacel-grande/variants/Portacel_grande_37.jpg",
+        "category": "Portacel",
+        "product": "portacel-grande",
+        "productPath": "Portacel/portacel-grande",
+        "fileName": "Portacel_grande_37.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-grande",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Portacel_grande_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-grande/full/Portacel_grande_49.jpg",
+        "destination": "Portacel/portacel-grande/variants/Portacel_grande_49.jpg",
+        "category": "Portacel",
+        "product": "portacel-grande",
+        "productPath": "Portacel/portacel-grande",
+        "fileName": "Portacel_grande_49.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-grande",
+          "variantNumber": 49,
+          "variantName": "Tinto y Miel",
+          "hasVariant": true,
+          "originalName": "Portacel_grande_49"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-grande/full/Portacel_grande_63.jpg",
+        "destination": "Portacel/portacel-grande/variants/Portacel_grande_63.jpg",
+        "category": "Portacel",
+        "product": "portacel-grande",
+        "productPath": "Portacel/portacel-grande",
+        "fileName": "Portacel_grande_63.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-grande",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Portacel_grande_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-grande/full/Portacel_grande_94.jpg",
+        "destination": "Portacel/portacel-grande/variants/Portacel_grande_94.jpg",
+        "category": "Portacel",
+        "product": "portacel-grande",
+        "productPath": "Portacel/portacel-grande",
+        "fileName": "Portacel_grande_94.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-grande",
+          "variantNumber": 94,
+          "variantName": "Negro y Cobre",
+          "hasVariant": true,
+          "originalName": "Portacel_grande_94"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-pelo/full/Portacel_Pelo_80.jpg",
+        "destination": "Portacel/portacel-pelo/variants/Portacel_Pelo_80.jpg",
+        "category": "Portacel",
+        "product": "portacel-pelo",
+        "productPath": "Portacel/portacel-pelo",
+        "fileName": "Portacel_Pelo_80.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-pelo",
+          "variantNumber": 80,
+          "variantName": "Gris Oscuro",
+          "hasVariant": true,
+          "originalName": "Portacel_Pelo_80"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-pelo/full/Portacel_Pelo_83.jpg",
+        "destination": "Portacel/portacel-pelo/variants/Portacel_Pelo_83.jpg",
+        "category": "Portacel",
+        "product": "portacel-pelo",
+        "productPath": "Portacel/portacel-pelo",
+        "fileName": "Portacel_Pelo_83.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-pelo",
+          "variantNumber": 83,
+          "variantName": "Blanco y Camel Franjas",
+          "hasVariant": true,
+          "originalName": "Portacel_Pelo_83"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-pelo/full/Portacel_Pelo_84.jpg",
+        "destination": "Portacel/portacel-pelo/variants/Portacel_Pelo_84.jpg",
+        "category": "Portacel",
+        "product": "portacel-pelo",
+        "productPath": "Portacel/portacel-pelo",
+        "fileName": "Portacel_Pelo_84.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-pelo",
+          "variantNumber": 84,
+          "variantName": "Piel Café Textil Beige y Blanco Lluvia",
+          "hasVariant": true,
+          "originalName": "Portacel_Pelo_84"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-piel-textil/full/Portacel_Piel_Textil_37.jpg",
+        "destination": "Portacel/portacel-piel-textil/variants/Portacel_Piel_Textil_37.jpg",
+        "category": "Portacel",
+        "product": "portacel-piel-textil",
+        "productPath": "Portacel/portacel-piel-textil",
+        "fileName": "Portacel_Piel_Textil_37.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-piel-textil",
+          "variantNumber": 37,
+          "variantName": "Negro y Blanco",
+          "hasVariant": true,
+          "originalName": "Portacel_Piel_Textil_37"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-piel-textil/full/Portacel_Piel_Textil_63.jpg",
+        "destination": "Portacel/portacel-piel-textil/variants/Portacel_Piel_Textil_63.jpg",
+        "category": "Portacel",
+        "product": "portacel-piel-textil",
+        "productPath": "Portacel/portacel-piel-textil",
+        "fileName": "Portacel_Piel_Textil_63.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-piel-textil",
+          "variantNumber": 63,
+          "variantName": "Estándar",
+          "hasVariant": true,
+          "originalName": "Portacel_Piel_Textil_63"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-piel-textil/full/Portacel_Piel_Textil_7_1.jpg",
+        "destination": "Portacel/portacel-piel-textil/variants/Portacel_Piel_Textil_7_1.jpg",
+        "category": "Portacel",
+        "product": "portacel-piel-textil",
+        "productPath": "Portacel/portacel-piel-textil",
+        "fileName": "Portacel_Piel_Textil_7_1.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-piel-textil",
+          "variantNumber": 7,
+          "variantName": "Gris y Azul Tupido",
+          "hasVariant": true,
+          "originalName": "Portacel_Piel_Textil_7_1"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-piel-textil/full/Portacel_Piel_Textil_7.jpg",
+        "destination": "Portacel/portacel-piel-textil/variants/Portacel_Piel_Textil_7.jpg",
+        "category": "Portacel",
+        "product": "portacel-piel-textil",
+        "productPath": "Portacel/portacel-piel-textil",
+        "fileName": "Portacel_Piel_Textil_7.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-piel-textil",
+          "variantNumber": 7,
+          "variantName": "Gris y Azul Tupido",
+          "hasVariant": true,
+          "originalName": "Portacel_Piel_Textil_7"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      },
+      {
+        "source": "Portacel/portacel-piel-textil/full/Portacel_Piel_Textil_89.jpg",
+        "destination": "Portacel/portacel-piel-textil/variants/Portacel_Piel_Textil_89.jpg",
+        "category": "Portacel",
+        "product": "portacel-piel-textil",
+        "productPath": "Portacel/portacel-piel-textil",
+        "fileName": "Portacel_Piel_Textil_89.jpg",
+        "variantInfo": {
+          "productBaseName": "portacel-piel-textil",
+          "variantNumber": 89,
+          "variantName": "Camel y Blanco Delgado",
+          "hasVariant": true,
+          "originalName": "Portacel_Piel_Textil_89"
+        },
+        "score": 100,
+        "destinationFolder": "variants"
+      }
+    ],
+    "mediumConfidence": [],
+    "lowConfidence": [],
+    "unmapped": []
+  }
+}

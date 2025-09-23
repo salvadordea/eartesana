@@ -1,0 +1,107 @@
+{
+  "categories": [
+    {
+      "name": "Accesorios",
+      "slug": "accesorios",
+      "products": [
+        {
+          "name": "Monedero MotitaMXN $480.00",
+          "slug": "monedero-motita",
+          "variants": [
+            "Beige",
+            "Café",
+            "Chocolate",
+            "Negro"
+          ],
+          "images": [
+            "http://estudioartesana.local/wp-content/uploads/2024/06/20240622_144116-600x800.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/20240622_144116-300x300.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/Monedero-clip-cat-300x300.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/20240622_141038-300x300.jpg",
+            "http://estudioartesana.local/wp-content/plugins/translatepress-multilingual/assets/flags/4x3/es_ES.svg",
+            "http://estudioartesana.local/wp-content/plugins/translatepress-multilingual/assets/flags/4x3/en_US.svg"
+          ],
+          "downloaded_images": []
+        },
+        {
+          "name": "Monedero ClipMXN $480.00",
+          "slug": "monedero-clip",
+          "variants": [
+            "Azul",
+            "Gris"
+          ],
+          "images": [
+            "http://estudioartesana.local/wp-content/uploads/2024/06/Monedero-clip-cat-600x790.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/07/Clip-monedero-gal-1-600x450.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/07/Clip-monedero-gal-2-600x800.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/20240622_144116-300x300.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/Monedero-clip-cat-300x300.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/20240622_141038-300x300.jpg",
+            "http://estudioartesana.local/wp-content/plugins/translatepress-multilingual/assets/flags/4x3/es_ES.svg",
+            "http://estudioartesana.local/wp-content/plugins/translatepress-multilingual/assets/flags/4x3/en_US.svg"
+          ],
+          "downloaded_images": []
+        },
+        {
+          "name": "Monedero CierreMXN $480.00",
+          "slug": "monedero-cierre",
+          "variants": [
+            "Chocolate",
+            "Negro",
+            "Azul",
+            "Gris"
+          ],
+          "images": [
+            "http://estudioartesana.local/wp-content/uploads/2024/06/20240622_141038-600x800.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/20240622_144116-300x300.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/Monedero-clip-cat-300x300.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/20240622_141038-300x300.jpg",
+            "http://estudioartesana.local/wp-content/plugins/translatepress-multilingual/assets/flags/4x3/es_ES.svg",
+            "http://estudioartesana.local/wp-content/plugins/translatepress-multilingual/assets/flags/4x3/en_US.svg"
+          ],
+          "downloaded_images": []
+        },
+        {
+          "name": "Tarjetero BotonMXN $350.00",
+          "slug": "tarjetero-boton",
+          "variants": [
+            "Negro",
+            "Azul",
+            "Gris"
+          ],
+          "images": [
+            "http://estudioartesana.local/wp-content/uploads/2024/07/Tarjetero-boton-600x800.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/07/Tarjetero-boton-300x300.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/20240623_184339-300x300.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/20240623_191935-300x300.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/07/PRINCIPAL-SUBCATEGORIA-300x300.jpg",
+            "http://estudioartesana.local/wp-content/plugins/translatepress-multilingual/assets/flags/4x3/es_ES.svg",
+            "http://estudioartesana.local/wp-content/plugins/translatepress-multilingual/assets/flags/4x3/en_US.svg"
+          ],
+          "downloaded_images": []
+        },
+        {
+          "name": "Llavero CortoMXN $270.00",
+          "slug": "llavero-corto",
+          "variants": [
+            "Negro",
+            "Gris"
+          ],
+          "images": [
+            "http://estudioartesana.local/wp-content/uploads/2024/06/20240622_152342-600x787.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/20240622_152048-600x800.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/20240622_151935-600x800.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/20240622_152342-300x300.jpg",
+            "http://estudioartesana.local/wp-content/uploads/2024/06/Llavero-largo-cat-300x300.jpg",
+            "http://estudioartesana.local/wp-content/plugins/translatepress-multilingual/assets/flags/4x3/es_ES.svg",
+            "http://estudioartesana.local/wp-content/plugins/translatepress-multilingual/assets/flags/4x3/en_US.svg"
+          ],
+          "downloaded_images": []
+        }
+      ]
+    }
+  ],
+  "total_products": 5,
+  "total_images": 0,
+  "errors": []
+}

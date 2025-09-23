@@ -1365,31 +1365,57 @@
                 const variantsCell = document.createElement('td');
                 variantsCell.colSpan = 8;
                 
-                const variantsHtml = product.variants.map(variant => `
-                    <div class="variant-row">
-                        <div class="variant-info">
-                            <span class="variant-name">${variant.name || variant.variant_name || 'Sin nombre'}</span>
-                            ${variant.sku ? `<span class="variant-sku">${variant.sku}</span>` : ''}
+                const variantsHtml = product.variants.map(variant => {
+                    // Generar URL de imagen para la variante usando estructura anidada
+                    let variantImageUrl = variant.image_url;
+                    
+                    if (!variantImageUrl && product.categories.length > 0) {
+                        const categoryName = product.categories[0].name;
+                        // Mapear el slug del producto a la ruta específica
+                        const productSlug = product.slug || 'unknown';
+                        variantImageUrl = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${categoryName}/${productSlug}/variants/${variant.name || variant.variant_name || variant.id}.jpg`;
+                    }
+                    
+                    // Fallback si no hay imagen específica de variante
+                    if (!variantImageUrl) {
+                        variantImageUrl = '../assets/images/placeholder-product.jpg';
+                    }
+                    
+                    return `
+                        <div class="variant-row">
+                            <div class="variant-image">
+                                <img src="${variantImageUrl}" alt="${variant.name || 'Variante'}" class="variant-thumb" 
+                                     onerror="this.src='../assets/images/placeholder-product.jpg'" 
+                                     style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px; margin-right: 10px;">
+                            </div>
+                            <div class="variant-info">
+                                <span class="variant-name">${variant.name || variant.variant_name || 'Sin nombre'}</span>
+                                ${variant.sku ? `<span class="variant-sku">${variant.sku}</span>` : ''}
+                            </div>
+                            <div class="quick-edit">
+                                <input type="number" class="variant-stock-input" value="${variant.stock || 0}" min="0"
+                                       onchange="updateVariantStock(${product.id}, '${variant.id}', this.value)">
+                                <button onclick="updateVariantStock(${product.id}, '${variant.id}', this.previousElementSibling.value)">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                            <div class="variant-actions">
+                                <button class="btn btn-small btn-info" onclick="showVariantImageModal(${product.id}, '${variant.id}')" 
+                                        title="Cambiar Imagen">
+                                    <i class="fas fa-image"></i>
+                                </button>
+                                <button class="btn btn-small btn-warning" onclick="showEditVariantModal(${product.id}, '${variant.id}')" 
+                                        title="Editar Variante">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-small btn-danger" onclick="deleteVariant(${product.id}, '${variant.id}')" 
+                                        title="Eliminar Variante">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="quick-edit">
-                            <input type="number" class="variant-stock-input" value="${variant.stock || 0}" min="0"
-                                   onchange="updateVariantStock(${product.id}, '${variant.id}', this.value)">
-                            <button onclick="updateVariantStock(${product.id}, '${variant.id}', this.previousElementSibling.value)">
-                                <i class="fas fa-check"></i>
-                            </button>
-                        </div>
-                        <div class="variant-actions">
-                            <button class="btn btn-small btn-warning" onclick="showEditVariantModal(${product.id}, '${variant.id}')" 
-                                    title="Editar Variante">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-small btn-danger" onclick="deleteVariant(${product.id}, '${variant.id}')" 
-                                    title="Eliminar Variante">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
 
                 variantsCell.innerHTML = variantsHtml;
                 variantsContainer.appendChild(variantsCell);

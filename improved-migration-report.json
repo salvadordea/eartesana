@@ -1,0 +1,1568 @@
+{
+  "timestamp": "2025-09-23T05:00:40.601Z",
+  "algorithm": "improved-fuzzy-matching",
+  "summary": {
+    "total": 194,
+    "toMigrate": 194,
+    "unmapped": 0,
+    "multipleMatches": 0
+  },
+  "migrationMap": {
+    "toMigrate": [
+      {
+        "source": "Arete_Piel_Gota_22.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-gota/full/Arete_Piel_Gota_22.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-gota",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Gota_49.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-gota/full/Arete_Piel_Gota_49.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-gota",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Gota_56.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-gota/full/Arete_Piel_Gota_56.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-gota",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Gota_63.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-gota/full/Arete_Piel_Gota_63.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-gota",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Gota_7.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-gota/full/Arete_Piel_Gota_7.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-gota",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Gota_73.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-gota/full/Arete_Piel_Gota_73.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-gota",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Gota_75.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-gota/full/Arete_Piel_Gota_75.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-gota",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Poligono_Chico_28_1.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_28_1.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Poligono_Chico_28.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_28.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Poligono_Chico_32_1.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_32_1.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Poligono_Chico_32.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_32.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Poligono_Chico_63_1.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_63_1.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Poligono_Chico_63_2.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_63_2.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Poligono_Chico_63_3.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_63_3.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Poligono_Chico_63.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_63.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Poligono_Chico_7.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_7.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Poligono_Chico_75.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_75.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Poligono_Chico_85.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_85.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Poligono_Chico_9_1.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_9_1.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Poligono_Chico_9_2.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_9_2.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Arete_Piel_Poligono_Chico_9.jpg",
+        "destination": "Joyeria/Aretes/arete-piel-poligono-chico/full/Arete_Piel_Poligono_Chico_9.jpg",
+        "category": "Joyeria",
+        "product": "arete-piel-poligono-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Backpack_Mini_37_1.jpg",
+        "destination": "Backpacks/backpack-mini/full/Backpack_Mini_37_1.jpg",
+        "category": "Backpacks",
+        "product": "backpack-mini",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Backpack_Mini_37.jpg",
+        "destination": "Backpacks/backpack-mini/full/Backpack_Mini_37.jpg",
+        "category": "Backpacks",
+        "product": "backpack-mini",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Backpack_Mini_63.jpg",
+        "destination": "Backpacks/backpack-mini/full/Backpack_Mini_63.jpg",
+        "category": "Backpacks",
+        "product": "backpack-mini",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Cilindro_Jareta_37.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/full/Bolsa_Cilindro_Jareta_37.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-cilindro-jareta",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Cilindro_Jareta_39.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/full/Bolsa_Cilindro_Jareta_39.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-cilindro-jareta",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Cilindro_Jareta_63_1.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/full/Bolsa_Cilindro_Jareta_63_1.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-cilindro-jareta",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Cilindro_Jareta_63.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/full/Bolsa_Cilindro_Jareta_63.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-cilindro-jareta",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Cilindro_Jareta_9_1.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/full/Bolsa_Cilindro_Jareta_9_1.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-cilindro-jareta",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Cilindro_Jareta_9_2.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/full/Bolsa_Cilindro_Jareta_9_2.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-cilindro-jareta",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Cilindro_Jareta_9.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-cilindro-jareta/full/Bolsa_Cilindro_Jareta_9.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-cilindro-jareta",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_de_Playa_Gigante_37_1.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-de-playa-gigante/full/Bolsa_de_Playa_Gigante_37_1.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-de-playa-gigante",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_de_Playa_Gigante_37.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-de-playa-gigante/full/Bolsa_de_Playa_Gigante_37.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-de-playa-gigante",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_de_Playa_Gigante_63.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-de-playa-gigante/full/Bolsa_de_Playa_Gigante_63.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-de-playa-gigante",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_de_Playa_Gigante_9.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-de-playa-gigante/full/Bolsa_de_Playa_Gigante_9.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-de-playa-gigante",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_de_Playa_mediana_63_1.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-de-playa-mediana/full/Bolsa_de_Playa_mediana_63_1.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-de-playa-mediana",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_de_Playa_mediana_63.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-de-playa-mediana/full/Bolsa_de_Playa_mediana_63.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-de-playa-mediana",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_de_Playa_mediana_9.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-de-playa-mediana/full/Bolsa_de_Playa_mediana_9.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-de-playa-mediana",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Gigante_horizontal_3.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-horizontal/full/Bolsa_Gigante_horizontal_3.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-horizontal",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Gigante_horizontal_37.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-horizontal/full/Bolsa_Gigante_horizontal_37.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-horizontal",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Gigante_horizontal_56.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-horizontal/full/Bolsa_Gigante_horizontal_56.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-horizontal",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Gigante_horizontal_94.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-horizontal/full/Bolsa_Gigante_horizontal_94.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-horizontal",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Gigante_Vertical_1_1.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_1_1.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Gigante_Vertical_1.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_1.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Gigante_Vertical_37.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_37.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Gigante_Vertical_56.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_56.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Gigante_Vertical_63.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_63.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Gigante_Vertical_80_1.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_80_1.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Gigante_Vertical_80.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_80.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Gigante_Vertical_94.jpg",
+        "destination": "Bolsas Grandes/bolsa-gigante-vertical/full/Bolsa_Gigante_Vertical_94.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-gigante-vertical",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_grande_con_Jareta_101.jpg",
+        "destination": "Bolsas Grandes/bolsa-grande-con-jareta/full/Bolsa_grande_con_Jareta_101.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-grande-con-jareta",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_grande_con_Jareta_49.jpg",
+        "destination": "Bolsas Grandes/bolsa-grande-con-jareta/full/Bolsa_grande_con_Jareta_49.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-grande-con-jareta",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_grande_con_Jareta_63.jpg",
+        "destination": "Bolsas Grandes/bolsa-grande-con-jareta/full/Bolsa_grande_con_Jareta_63.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-grande-con-jareta",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_grande_con_Jareta_94.jpg",
+        "destination": "Bolsas Grandes/bolsa-grande-con-jareta/full/Bolsa_grande_con_Jareta_94.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-grande-con-jareta",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_grande_con_Jareta_95.jpg",
+        "destination": "Bolsas Grandes/bolsa-grande-con-jareta/full/Bolsa_grande_con_Jareta_95.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsa-grande-con-jareta",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Mediana_con_bolsillo_piel_al_frente_37.jpg",
+        "destination": "Bolsas Cruzadas/bolsa-mediana-con-bolsillo-piel-al-frente/full/Bolsa_Mediana_con_bolsillo_piel_al_frente_37.jpg",
+        "category": "Bolsas Cruzadas",
+        "product": "bolsa-mediana-con-bolsillo-piel-al-frente",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Mediana_con_bolsillo_piel_al_frente_56.jpg",
+        "destination": "Bolsas Cruzadas/bolsa-mediana-con-bolsillo-piel-al-frente/full/Bolsa_Mediana_con_bolsillo_piel_al_frente_56.jpg",
+        "category": "Bolsas Cruzadas",
+        "product": "bolsa-mediana-con-bolsillo-piel-al-frente",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Mediana_con_bolsillo_piel_al_frente_63.jpg",
+        "destination": "Bolsas Cruzadas/bolsa-mediana-con-bolsillo-piel-al-frente/full/Bolsa_Mediana_con_bolsillo_piel_al_frente_63.jpg",
+        "category": "Bolsas Cruzadas",
+        "product": "bolsa-mediana-con-bolsillo-piel-al-frente",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Telar_de_pedal_cruzada_37_1.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_37_1.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Telar_de_pedal_cruzada_37_2.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_37_2.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Telar_de_pedal_cruzada_37_3.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_37_3.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Telar_de_pedal_cruzada_37.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_37.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Telar_de_pedal_cruzada_63_1.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_63_1.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Telar_de_pedal_cruzada_63.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_63.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Telar_de_pedal_cruzada_9_1.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_9_1.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsa_Telar_de_pedal_cruzada_9.jpg",
+        "destination": "Bolsas de Textil y Piel/bolsa-telar-de-pedal-cruzada/full/Bolsa_Telar_de_pedal_cruzada_9.jpg",
+        "category": "Bolsas de Textil y Piel",
+        "product": "bolsa-telar-de-pedal-cruzada",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsas_Gigante_Plana_18.jpg",
+        "destination": "Bolsas Grandes/bolsas-gigante-plana/full/Bolsas_Gigante_Plana_18.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsas-gigante-plana",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsas_Gigante_Plana_19.jpg",
+        "destination": "Bolsas Grandes/bolsas-gigante-plana/full/Bolsas_Gigante_Plana_19.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsas-gigante-plana",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsas_Gigante_Plana_28.jpg",
+        "destination": "Bolsas Grandes/bolsas-gigante-plana/full/Bolsas_Gigante_Plana_28.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsas-gigante-plana",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsas_Gigante_Plana_63.jpg",
+        "destination": "Bolsas Grandes/bolsas-gigante-plana/full/Bolsas_Gigante_Plana_63.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsas-gigante-plana",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Bolsas_Gigante_Plana_94.jpg",
+        "destination": "Bolsas Grandes/bolsas-gigante-plana/full/Bolsas_Gigante_Plana_94.jpg",
+        "category": "Bolsas Grandes",
+        "product": "bolsas-gigante-plana",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Botelleras_56.jpg",
+        "destination": "Botelleras/botelleras/full/Botelleras_56.jpg",
+        "category": "Botelleras",
+        "product": "botelleras",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_dos_Lineas_37.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-dos-lineas/full/Brazalete_dos_Lineas_37.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-dos-lineas",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_dos_Lineas_56.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-dos-lineas/full/Brazalete_dos_Lineas_56.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-dos-lineas",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_dos_Lineas_63.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-dos-lineas/full/Brazalete_dos_Lineas_63.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-dos-lineas",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Hombre_18.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-hombre/full/Brazalete_Hombre_18.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-hombre",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Hombre_37.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-hombre/full/Brazalete_Hombre_37.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-hombre",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Hombre_56.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-hombre/full/Brazalete_Hombre_56.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-hombre",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_lineas_Delgadas_3.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_3.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_lineas_Delgadas_32.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_32.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_lineas_Delgadas_49.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_49.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_lineas_Delgadas_56.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_56.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_lineas_Delgadas_63.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_63.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_lineas_Delgadas_7.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_7.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_lineas_Delgadas_73.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_73.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_lineas_Delgadas_78.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_78.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_lineas_Delgadas_94.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-lineas-delgadas/full/Brazalete_lineas_Delgadas_94.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-lineas-delgadas",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Liso_1.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_1.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Liso_19.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_19.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Liso_3.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_3.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Liso_37.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_37.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Liso_56.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_56.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Liso_63.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_63.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Liso_73.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_73.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Liso_75.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_75.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Liso_94.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-liso/full/Brazalete_Liso_94.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-liso",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Piel_Pelo_80_1.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-piel-pelo/full/Brazalete_Piel_Pelo_80_1.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-piel-pelo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Piel_Pelo_80_2.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-piel-pelo/full/Brazalete_Piel_Pelo_80_2.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-piel-pelo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Piel_Pelo_80.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-piel-pelo/full/Brazalete_Piel_Pelo_80.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-piel-pelo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Piel_Pelo_98.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-piel-pelo/full/Brazalete_Piel_Pelo_98.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-piel-pelo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Brazalete_Piel_Pelo_99.jpg",
+        "destination": "Joyeria/Brazaletes/brazalete-piel-pelo/full/Brazalete_Piel_Pelo_99.jpg",
+        "category": "Joyeria",
+        "product": "brazalete-piel-pelo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Cartera_con_Costura_37.jpg",
+        "destination": "Accesorios/Carteras/cartera-con-costura/full/Cartera_con_Costura_37.jpg",
+        "category": "Accesorios",
+        "product": "cartera-con-costura",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Cartera_con_Costura_56.jpg",
+        "destination": "Accesorios/Carteras/cartera-con-costura/full/Cartera_con_Costura_56.jpg",
+        "category": "Accesorios",
+        "product": "cartera-con-costura",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Cartera_con_Costura_63.jpg",
+        "destination": "Accesorios/Carteras/cartera-con-costura/full/Cartera_con_Costura_63.jpg",
+        "category": "Accesorios",
+        "product": "cartera-con-costura",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Cartera_Liga_1.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_1.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Cartera_Liga_100.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_100.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Cartera_Liga_37.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_37.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Cartera_Liga_56.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_56.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Cartera_Liga_63.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_63.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Cartera_Liga_83.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_83.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Cartera_Liga_84.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_84.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Cartera_Liga_9.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_9.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Cartera_Liga_94.jpg",
+        "destination": "Accesorios/Carteras/cartera-liga/full/Cartera_Liga_94.jpg",
+        "category": "Accesorios",
+        "product": "cartera-liga",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Clutch_Grande_con_strap_19.jpg",
+        "destination": "Bolsas Cruzadas/clutch-grande-con-strap/full/Clutch_Grande_con_strap_19.jpg",
+        "category": "Bolsas Cruzadas",
+        "product": "clutch-grande-con-strap",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Clutch_Grande_con_strap_22.jpg",
+        "destination": "Bolsas Cruzadas/clutch-grande-con-strap/full/Clutch_Grande_con_strap_22.jpg",
+        "category": "Bolsas Cruzadas",
+        "product": "clutch-grande-con-strap",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Clutch_Grande_con_strap_32.jpg",
+        "destination": "Bolsas Cruzadas/clutch-grande-con-strap/full/Clutch_Grande_con_strap_32.jpg",
+        "category": "Bolsas Cruzadas",
+        "product": "clutch-grande-con-strap",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Clutch_Grande_con_strap_75.jpg",
+        "destination": "Bolsas Cruzadas/clutch-grande-con-strap/full/Clutch_Grande_con_strap_75.jpg",
+        "category": "Bolsas Cruzadas",
+        "product": "clutch-grande-con-strap",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Corto_37_1.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_37_1.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Corto_37.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_37.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Corto_49.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_49.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Corto_56_1.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_56_1.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Corto_56_2.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_56_2.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Corto_56_3.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_56_3.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Corto_56.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_56.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Corto_63_1.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_63_1.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Corto_63.jpg",
+        "destination": "Accesorios/Llavero/llavero-corto/full/Llavero_Corto_63.jpg",
+        "category": "Accesorios",
+        "product": "llavero-corto",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Largo_37_1.jpg",
+        "destination": "Accesorios/Llavero/llavero-largo/full/Llavero_Largo_37_1.jpg",
+        "category": "Accesorios",
+        "product": "llavero-largo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Largo_37.jpg",
+        "destination": "Accesorios/Llavero/llavero-largo/full/Llavero_Largo_37.jpg",
+        "category": "Accesorios",
+        "product": "llavero-largo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Largo_56_1.jpg",
+        "destination": "Accesorios/Llavero/llavero-largo/full/Llavero_Largo_56_1.jpg",
+        "category": "Accesorios",
+        "product": "llavero-largo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Largo_56_2.jpg",
+        "destination": "Accesorios/Llavero/llavero-largo/full/Llavero_Largo_56_2.jpg",
+        "category": "Accesorios",
+        "product": "llavero-largo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Largo_56.jpg",
+        "destination": "Accesorios/Llavero/llavero-largo/full/Llavero_Largo_56.jpg",
+        "category": "Accesorios",
+        "product": "llavero-largo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Largo_62.jpg",
+        "destination": "Accesorios/Llavero/llavero-largo/full/Llavero_Largo_62.jpg",
+        "category": "Accesorios",
+        "product": "llavero-largo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Llavero_Largo_63.jpg",
+        "destination": "Accesorios/Llavero/llavero-largo/full/Llavero_Largo_63.jpg",
+        "category": "Accesorios",
+        "product": "llavero-largo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Cierre_1.jpg",
+        "destination": "Accesorios/Monederos/monedero-cierre/full/Monedero_Cierre_1.jpg",
+        "category": "Accesorios",
+        "product": "monedero-cierre",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Cierre_18.jpg",
+        "destination": "Accesorios/Monederos/monedero-cierre/full/Monedero_Cierre_18.jpg",
+        "category": "Accesorios",
+        "product": "monedero-cierre",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Cierre_37.jpg",
+        "destination": "Accesorios/Monederos/monedero-cierre/full/Monedero_Cierre_37.jpg",
+        "category": "Accesorios",
+        "product": "monedero-cierre",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Cierre_49.jpg",
+        "destination": "Accesorios/Monederos/monedero-cierre/full/Monedero_Cierre_49.jpg",
+        "category": "Accesorios",
+        "product": "monedero-cierre",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Cierre_56.jpg",
+        "destination": "Accesorios/Monederos/monedero-cierre/full/Monedero_Cierre_56.jpg",
+        "category": "Accesorios",
+        "product": "monedero-cierre",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Cierre_63.jpg",
+        "destination": "Accesorios/Monederos/monedero-cierre/full/Monedero_Cierre_63.jpg",
+        "category": "Accesorios",
+        "product": "monedero-cierre",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Cierre_85.jpg",
+        "destination": "Accesorios/Monederos/monedero-cierre/full/Monedero_Cierre_85.jpg",
+        "category": "Accesorios",
+        "product": "monedero-cierre",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Clip_1.jpg",
+        "destination": "Accesorios/Monederos/monedero-clip/full/Monedero_Clip_1.jpg",
+        "category": "Accesorios",
+        "product": "monedero-clip",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Clip_28.jpg",
+        "destination": "Accesorios/Monederos/monedero-clip/full/Monedero_Clip_28.jpg",
+        "category": "Accesorios",
+        "product": "monedero-clip",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Clip_35.jpg",
+        "destination": "Accesorios/Monederos/monedero-clip/full/Monedero_Clip_35.jpg",
+        "category": "Accesorios",
+        "product": "monedero-clip",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Clip_37.jpg",
+        "destination": "Accesorios/Monederos/monedero-clip/full/Monedero_Clip_37.jpg",
+        "category": "Accesorios",
+        "product": "monedero-clip",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Clip_49.jpg",
+        "destination": "Accesorios/Monederos/monedero-clip/full/Monedero_Clip_49.jpg",
+        "category": "Accesorios",
+        "product": "monedero-clip",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Clip_56.jpg",
+        "destination": "Accesorios/Monederos/monedero-clip/full/Monedero_Clip_56.jpg",
+        "category": "Accesorios",
+        "product": "monedero-clip",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Clip_85.jpg",
+        "destination": "Accesorios/Monederos/monedero-clip/full/Monedero_Clip_85.jpg",
+        "category": "Accesorios",
+        "product": "monedero-clip",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Motita_18.jpg",
+        "destination": "Accesorios/Monederos/monedero-motita/full/Monedero_Motita_18.jpg",
+        "category": "Accesorios",
+        "product": "monedero-motita",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Motita_22.jpg",
+        "destination": "Accesorios/Monederos/monedero-motita/full/Monedero_Motita_22.jpg",
+        "category": "Accesorios",
+        "product": "monedero-motita",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Motita_28.jpg",
+        "destination": "Accesorios/Monederos/monedero-motita/full/Monedero_Motita_28.jpg",
+        "category": "Accesorios",
+        "product": "monedero-motita",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Motita_49.jpg",
+        "destination": "Accesorios/Monederos/monedero-motita/full/Monedero_Motita_49.jpg",
+        "category": "Accesorios",
+        "product": "monedero-motita",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Motita_56.jpg",
+        "destination": "Accesorios/Monederos/monedero-motita/full/Monedero_Motita_56.jpg",
+        "category": "Accesorios",
+        "product": "monedero-motita",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Motita_63.jpg",
+        "destination": "Accesorios/Monederos/monedero-motita/full/Monedero_Motita_63.jpg",
+        "category": "Accesorios",
+        "product": "monedero-motita",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Monedero_Motita_7.jpg",
+        "destination": "Accesorios/Monederos/monedero-motita/full/Monedero_Motita_7.jpg",
+        "category": "Accesorios",
+        "product": "monedero-motita",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacable_Chico_1.jpg",
+        "destination": "Accesorios/Portacables/portacable-chico/full/Portacable_Chico_1.jpg",
+        "category": "Accesorios",
+        "product": "portacable-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacable_Chico_22.jpg",
+        "destination": "Accesorios/Portacables/portacable-chico/full/Portacable_Chico_22.jpg",
+        "category": "Accesorios",
+        "product": "portacable-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacable_Chico_28.jpg",
+        "destination": "Accesorios/Portacables/portacable-chico/full/Portacable_Chico_28.jpg",
+        "category": "Accesorios",
+        "product": "portacable-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacable_Chico_37.jpg",
+        "destination": "Accesorios/Portacables/portacable-chico/full/Portacable_Chico_37.jpg",
+        "category": "Accesorios",
+        "product": "portacable-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacable_Chico_49.jpg",
+        "destination": "Accesorios/Portacables/portacable-chico/full/Portacable_Chico_49.jpg",
+        "category": "Accesorios",
+        "product": "portacable-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacable_Chico_63.jpg",
+        "destination": "Accesorios/Portacables/portacable-chico/full/Portacable_Chico_63.jpg",
+        "category": "Accesorios",
+        "product": "portacable-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacable_Chico_94.jpg",
+        "destination": "Accesorios/Portacables/portacable-chico/full/Portacable_Chico_94.jpg",
+        "category": "Accesorios",
+        "product": "portacable-chico",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacables_Grande_1.jpg",
+        "destination": "Accesorios/Portacables/portacables-grande/full/Portacables_Grande_1.jpg",
+        "category": "Accesorios",
+        "product": "portacables-grande",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacables_Grande_28.jpg",
+        "destination": "Accesorios/Portacables/portacables-grande/full/Portacables_Grande_28.jpg",
+        "category": "Accesorios",
+        "product": "portacables-grande",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacables_Grande_37.jpg",
+        "destination": "Accesorios/Portacables/portacables-grande/full/Portacables_Grande_37.jpg",
+        "category": "Accesorios",
+        "product": "portacables-grande",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacables_Grande_49.jpg",
+        "destination": "Accesorios/Portacables/portacables-grande/full/Portacables_Grande_49.jpg",
+        "category": "Accesorios",
+        "product": "portacables-grande",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacables_Grande_63.jpg",
+        "destination": "Accesorios/Portacables/portacables-grande/full/Portacables_Grande_63.jpg",
+        "category": "Accesorios",
+        "product": "portacables-grande",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacables_Grande_94.jpg",
+        "destination": "Accesorios/Portacables/portacables-grande/full/Portacables_Grande_94.jpg",
+        "category": "Accesorios",
+        "product": "portacables-grande",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_grande_19.jpg",
+        "destination": "Portacel/portacel-grande/full/Portacel_grande_19.jpg",
+        "category": "Portacel",
+        "product": "portacel-grande",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_grande_22.jpg",
+        "destination": "Portacel/portacel-grande/full/Portacel_grande_22.jpg",
+        "category": "Portacel",
+        "product": "portacel-grande",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_grande_28.jpg",
+        "destination": "Portacel/portacel-grande/full/Portacel_grande_28.jpg",
+        "category": "Portacel",
+        "product": "portacel-grande",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_grande_37.jpg",
+        "destination": "Portacel/portacel-grande/full/Portacel_grande_37.jpg",
+        "category": "Portacel",
+        "product": "portacel-grande",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_grande_49.jpg",
+        "destination": "Portacel/portacel-grande/full/Portacel_grande_49.jpg",
+        "category": "Portacel",
+        "product": "portacel-grande",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_grande_63.jpg",
+        "destination": "Portacel/portacel-grande/full/Portacel_grande_63.jpg",
+        "category": "Portacel",
+        "product": "portacel-grande",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_grande_94.jpg",
+        "destination": "Portacel/portacel-grande/full/Portacel_grande_94.jpg",
+        "category": "Portacel",
+        "product": "portacel-grande",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_Pelo_80.jpg",
+        "destination": "Portacel/portacel-pelo/full/Portacel_Pelo_80.jpg",
+        "category": "Portacel",
+        "product": "portacel-pelo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_Pelo_83.jpg",
+        "destination": "Portacel/portacel-pelo/full/Portacel_Pelo_83.jpg",
+        "category": "Portacel",
+        "product": "portacel-pelo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_Pelo_84.jpg",
+        "destination": "Portacel/portacel-pelo/full/Portacel_Pelo_84.jpg",
+        "category": "Portacel",
+        "product": "portacel-pelo",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_Piel_Textil_37.jpg",
+        "destination": "Portacel/portacel-piel-textil/full/Portacel_Piel_Textil_37.jpg",
+        "category": "Portacel",
+        "product": "portacel-piel-textil",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_Piel_Textil_63.jpg",
+        "destination": "Portacel/portacel-piel-textil/full/Portacel_Piel_Textil_63.jpg",
+        "category": "Portacel",
+        "product": "portacel-piel-textil",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_Piel_Textil_7_1.jpg",
+        "destination": "Portacel/portacel-piel-textil/full/Portacel_Piel_Textil_7_1.jpg",
+        "category": "Portacel",
+        "product": "portacel-piel-textil",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_Piel_Textil_7.jpg",
+        "destination": "Portacel/portacel-piel-textil/full/Portacel_Piel_Textil_7.jpg",
+        "category": "Portacel",
+        "product": "portacel-piel-textil",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portacel_Piel_Textil_89.jpg",
+        "destination": "Portacel/portacel-piel-textil/full/Portacel_Piel_Textil_89.jpg",
+        "category": "Portacel",
+        "product": "portacel-piel-textil",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portapasaportes_37_1.jpg",
+        "destination": "Accesorios/Portapasaportes/full/Portapasaportes_37_1.jpg",
+        "category": "Accesorios",
+        "product": "Portapasaportes",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portapasaportes_37.jpg",
+        "destination": "Accesorios/Portapasaportes/full/Portapasaportes_37.jpg",
+        "category": "Accesorios",
+        "product": "Portapasaportes",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portapasaportes_56_1.jpg",
+        "destination": "Accesorios/Portapasaportes/full/Portapasaportes_56_1.jpg",
+        "category": "Accesorios",
+        "product": "Portapasaportes",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portapasaportes_56.jpg",
+        "destination": "Accesorios/Portapasaportes/full/Portapasaportes_56.jpg",
+        "category": "Accesorios",
+        "product": "Portapasaportes",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portapasaportes_63_1.jpg",
+        "destination": "Accesorios/Portapasaportes/full/Portapasaportes_63_1.jpg",
+        "category": "Accesorios",
+        "product": "Portapasaportes",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Portapasaportes_63.jpg",
+        "destination": "Accesorios/Portapasaportes/full/Portapasaportes_63.jpg",
+        "category": "Accesorios",
+        "product": "Portapasaportes",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Tarjetero_Boton_1.jpg",
+        "destination": "Accesorios/Tarjeteros/tarjetero-boton/full/Tarjetero_Boton_1.jpg",
+        "category": "Accesorios",
+        "product": "tarjetero-boton",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Tarjetero_Boton_28.jpg",
+        "destination": "Accesorios/Tarjeteros/tarjetero-boton/full/Tarjetero_Boton_28.jpg",
+        "category": "Accesorios",
+        "product": "tarjetero-boton",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Tarjetero_Boton_37.jpg",
+        "destination": "Accesorios/Tarjeteros/tarjetero-boton/full/Tarjetero_Boton_37.jpg",
+        "category": "Accesorios",
+        "product": "tarjetero-boton",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Tarjetero_Boton_49.jpg",
+        "destination": "Accesorios/Tarjeteros/tarjetero-boton/full/Tarjetero_Boton_49.jpg",
+        "category": "Accesorios",
+        "product": "tarjetero-boton",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Tarjetero_Boton_63.jpg",
+        "destination": "Accesorios/Tarjeteros/tarjetero-boton/full/Tarjetero_Boton_63.jpg",
+        "category": "Accesorios",
+        "product": "tarjetero-boton",
+        "score": 80,
+        "matchType": "Alta confianza"
+      },
+      {
+        "source": "Tarjetero_Boton_85.jpg",
+        "destination": "Accesorios/Tarjeteros/tarjetero-boton/full/Tarjetero_Boton_85.jpg",
+        "category": "Accesorios",
+        "product": "tarjetero-boton",
+        "score": 80,
+        "matchType": "Alta confianza"
+      }
+    ],
+    "unmapped": [],
+    "multipleMatches": []
+  }
+}

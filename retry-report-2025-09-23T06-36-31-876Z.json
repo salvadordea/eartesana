@@ -1,0 +1,309 @@
+{
+  "timestamp": "2025-09-23T06:36:31.875Z",
+  "originalFailedCount": 42,
+  "results": {
+    "successful": 42,
+    "failed": 0,
+    "notFound": 0
+  },
+  "details": {
+    "successful": [
+      {
+        "success": true,
+        "originalPath": "Accesorios/Cartera Liga/Café.jpg",
+        "normalizedPath": "Accesorios/Cartera Liga/Cafe.jpg",
+        "uploadedPath": "Accesorios/Cartera Liga/Cafe.jpg",
+        "size": 1350816
+      },
+      {
+        "success": true,
+        "originalPath": "Accesorios/Monedero Motita/Café Oscuro.jpg",
+        "normalizedPath": "Accesorios/Monedero Motita/Cafe Oscuro.jpg",
+        "uploadedPath": "Accesorios/Monedero Motita/Cafe Oscuro.jpg",
+        "size": 341879
+      },
+      {
+        "success": true,
+        "originalPath": "Accesorios/Monedero Motita/Café.jpg",
+        "normalizedPath": "Accesorios/Monedero Motita/Cafe.jpg",
+        "uploadedPath": "Accesorios/Monedero Motita/Cafe.jpg",
+        "size": 279768
+      },
+      {
+        "success": true,
+        "originalPath": "Accesorios/Portacable Chico/Café Oscuro.jpg",
+        "normalizedPath": "Accesorios/Portacable Chico/Cafe Oscuro.jpg",
+        "uploadedPath": "Accesorios/Portacable Chico/Cafe Oscuro.jpg",
+        "size": 1578048
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Cruzadas/Bolsa botón madera/Café.png",
+        "normalizedPath": "Bolsas Cruzadas/Bolsa boton madera/Cafe.png",
+        "uploadedPath": "Bolsas Cruzadas/Bolsa boton madera/Cafe.png",
+        "size": 910559
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Cruzadas/Bolsa botón madera/Camel.png",
+        "normalizedPath": "Bolsas Cruzadas/Bolsa boton madera/Camel.png",
+        "uploadedPath": "Bolsas Cruzadas/Bolsa boton madera/Camel.png",
+        "size": 955211
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Cruzadas/Bolsa botón madera/Gris.png",
+        "normalizedPath": "Bolsas Cruzadas/Bolsa boton madera/Gris.png",
+        "uploadedPath": "Bolsas Cruzadas/Bolsa boton madera/Gris.png",
+        "size": 847560
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Cruzadas/Bolsa botón madera/Hueso.png",
+        "normalizedPath": "Bolsas Cruzadas/Bolsa boton madera/Hueso.png",
+        "uploadedPath": "Bolsas Cruzadas/Bolsa boton madera/Hueso.png",
+        "size": 856581
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Cruzadas/Bolsa botón madera/Negro.png",
+        "normalizedPath": "Bolsas Cruzadas/Bolsa boton madera/Negro.png",
+        "uploadedPath": "Bolsas Cruzadas/Bolsa boton madera/Negro.png",
+        "size": 511355
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Cruzadas/Bolsa botón madera/principal.jpg",
+        "normalizedPath": "Bolsas Cruzadas/Bolsa boton madera/principal.jpg",
+        "uploadedPath": "Bolsas Cruzadas/Bolsa boton madera/principal.jpg",
+        "size": 45089
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Cruzadas/Bolsa botón madera/Rojo.png",
+        "normalizedPath": "Bolsas Cruzadas/Bolsa boton madera/Rojo.png",
+        "uploadedPath": "Bolsas Cruzadas/Bolsa boton madera/Rojo.png",
+        "size": 1028807
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Cruzadas/Cangurera/Café Claro.png",
+        "normalizedPath": "Bolsas Cruzadas/Cangurera/Cafe Claro.png",
+        "uploadedPath": "Bolsas Cruzadas/Cangurera/Cafe Claro.png",
+        "size": 904707
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Cruzadas/Cangurera/Café Oscuro.png",
+        "normalizedPath": "Bolsas Cruzadas/Cangurera/Cafe Oscuro.png",
+        "uploadedPath": "Bolsas Cruzadas/Cangurera/Cafe Oscuro.png",
+        "size": 687633
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Cruzadas/Cangurera/Oro Pálido.png",
+        "normalizedPath": "Bolsas Cruzadas/Cangurera/Oro Palido.png",
+        "uploadedPath": "Bolsas Cruzadas/Cangurera/Oro Palido.png",
+        "size": 552174
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Cruzadas/Clutch Chica con Base/Café.png",
+        "normalizedPath": "Bolsas Cruzadas/Clutch Chica con Base/Cafe.png",
+        "uploadedPath": "Bolsas Cruzadas/Clutch Chica con Base/Cafe.png",
+        "size": 395489
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Cruzadas/Clutch Chica Plana/Café.png",
+        "normalizedPath": "Bolsas Cruzadas/Clutch Chica Plana/Cafe.png",
+        "uploadedPath": "Bolsas Cruzadas/Clutch Chica Plana/Cafe.png",
+        "size": 631873
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Cruzadas/Clutch Grande con strap/Café Claro.png",
+        "normalizedPath": "Bolsas Cruzadas/Clutch Grande con strap/Cafe Claro.png",
+        "uploadedPath": "Bolsas Cruzadas/Clutch Grande con strap/Cafe Claro.png",
+        "size": 670217
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Cruzadas/Clutch Grande con strap/Café Oscuro.png",
+        "normalizedPath": "Bolsas Cruzadas/Clutch Grande con strap/Cafe Oscuro.png",
+        "uploadedPath": "Bolsas Cruzadas/Clutch Grande con strap/Cafe Oscuro.png",
+        "size": 455546
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas de mano/Cartera tipo Sobre/Café.png",
+        "normalizedPath": "Bolsas de mano/Cartera tipo Sobre/Cafe.png",
+        "uploadedPath": "Bolsas de mano/Cartera tipo Sobre/Cafe.png",
+        "size": 564544
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Grandes/Bolsa grande con Jareta/Café.png",
+        "normalizedPath": "Bolsas Grandes/Bolsa grande con Jareta/Cafe.png",
+        "uploadedPath": "Bolsas Grandes/Bolsa grande con Jareta/Cafe.png",
+        "size": 559452
+      },
+      {
+        "success": true,
+        "originalPath": "Bolsas Grandes/Bolsas Gigante Plana/Café Claro.png",
+        "normalizedPath": "Bolsas Grandes/Bolsas Gigante Plana/Cafe Claro.png",
+        "uploadedPath": "Bolsas Grandes/Bolsas Gigante Plana/Cafe Claro.png",
+        "size": 505402
+      },
+      {
+        "success": true,
+        "originalPath": "Botelleras/Botelleras/Café Oscuro.jpg",
+        "normalizedPath": "Botelleras/Botelleras/Cafe Oscuro.jpg",
+        "uploadedPath": "Botelleras/Botelleras/Cafe Oscuro.jpg",
+        "size": 462433
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Geometrico Gigante/Café.jpg",
+        "normalizedPath": "Joyeria/Arete Geometrico Gigante/Cafe.jpg",
+        "uploadedPath": "Joyeria/Arete Geometrico Gigante/Cafe.jpg",
+        "size": 518012
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Piel Balancín Oval/Beige.jpg",
+        "normalizedPath": "Joyeria/Arete Piel Balancin Oval/Beige.jpg",
+        "uploadedPath": "Joyeria/Arete Piel Balancin Oval/Beige.jpg",
+        "size": 582118
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Piel Balancín Oval/cobre.jpg",
+        "normalizedPath": "Joyeria/Arete Piel Balancin Oval/cobre.jpg",
+        "uploadedPath": "Joyeria/Arete Piel Balancin Oval/cobre.jpg",
+        "size": 550696
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Piel Balancín Oval/Miel.jpg",
+        "normalizedPath": "Joyeria/Arete Piel Balancin Oval/Miel.jpg",
+        "uploadedPath": "Joyeria/Arete Piel Balancin Oval/Miel.jpg",
+        "size": 605799
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Piel Balancín Oval/principal.jpg",
+        "normalizedPath": "Joyeria/Arete Piel Balancin Oval/principal.jpg",
+        "uploadedPath": "Joyeria/Arete Piel Balancin Oval/principal.jpg",
+        "size": 65986
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Piel Balancín Oval/Tinta.jpg",
+        "normalizedPath": "Joyeria/Arete Piel Balancin Oval/Tinta.jpg",
+        "uploadedPath": "Joyeria/Arete Piel Balancin Oval/Tinta.jpg",
+        "size": 568129
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Piel Gota/Café Oscuro.jpg",
+        "normalizedPath": "Joyeria/Arete Piel Gota/Cafe Oscuro.jpg",
+        "uploadedPath": "Joyeria/Arete Piel Gota/Cafe Oscuro.jpg",
+        "size": 565420
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Piel Gota/Oro Pálido.jpg",
+        "normalizedPath": "Joyeria/Arete Piel Gota/Oro Palido.jpg",
+        "uploadedPath": "Joyeria/Arete Piel Gota/Oro Palido.jpg",
+        "size": 532704
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Piel Péndulo/Beige.jpg",
+        "normalizedPath": "Joyeria/Arete Piel Pendulo/Beige.jpg",
+        "uploadedPath": "Joyeria/Arete Piel Pendulo/Beige.jpg",
+        "size": 575092
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Piel Péndulo/Café Claro.jpg",
+        "normalizedPath": "Joyeria/Arete Piel Pendulo/Cafe Claro.jpg",
+        "uploadedPath": "Joyeria/Arete Piel Pendulo/Cafe Claro.jpg",
+        "size": 524573
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Piel Péndulo/cobre.jpg",
+        "normalizedPath": "Joyeria/Arete Piel Pendulo/cobre.jpg",
+        "uploadedPath": "Joyeria/Arete Piel Pendulo/cobre.jpg",
+        "size": 510173
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Piel Péndulo/Ladrillo.jpg",
+        "normalizedPath": "Joyeria/Arete Piel Pendulo/Ladrillo.jpg",
+        "uploadedPath": "Joyeria/Arete Piel Pendulo/Ladrillo.jpg",
+        "size": 578214
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Piel Péndulo/Miel.jpg",
+        "normalizedPath": "Joyeria/Arete Piel Pendulo/Miel.jpg",
+        "uploadedPath": "Joyeria/Arete Piel Pendulo/Miel.jpg",
+        "size": 485121
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Piel Péndulo/Negro.jpg",
+        "normalizedPath": "Joyeria/Arete Piel Pendulo/Negro.jpg",
+        "uploadedPath": "Joyeria/Arete Piel Pendulo/Negro.jpg",
+        "size": 528081
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Arete Piel Péndulo/principal.jpg",
+        "normalizedPath": "Joyeria/Arete Piel Pendulo/principal.jpg",
+        "uploadedPath": "Joyeria/Arete Piel Pendulo/principal.jpg",
+        "size": 59688
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Brazalete Liso/Café Claro.jpg",
+        "normalizedPath": "Joyeria/Brazalete Liso/Cafe Claro.jpg",
+        "uploadedPath": "Joyeria/Brazalete Liso/Cafe Claro.jpg",
+        "size": 1421820
+      },
+      {
+        "success": true,
+        "originalPath": "Joyeria/Brazalete Liso/Oro Pálido.jpg",
+        "normalizedPath": "Joyeria/Brazalete Liso/Oro Palido.jpg",
+        "uploadedPath": "Joyeria/Brazalete Liso/Oro Palido.jpg",
+        "size": 1623305
+      },
+      {
+        "success": true,
+        "originalPath": "Portacel/Portacel grande/Café Claro.jpeg",
+        "normalizedPath": "Portacel/Portacel grande/Cafe Claro.jpeg",
+        "uploadedPath": "Portacel/Portacel grande/Cafe Claro.jpeg",
+        "size": 272838
+      },
+      {
+        "success": true,
+        "originalPath": "Portacel/Portacel grande/Café Oscuro.jpeg",
+        "normalizedPath": "Portacel/Portacel grande/Cafe Oscuro.jpeg",
+        "uploadedPath": "Portacel/Portacel grande/Cafe Oscuro.jpeg",
+        "size": 268397
+      },
+      {
+        "success": true,
+        "originalPath": "Portacel/Portacel Piel liso/Café.png",
+        "normalizedPath": "Portacel/Portacel Piel liso/Cafe.png",
+        "uploadedPath": "Portacel/Portacel Piel liso/Cafe.png",
+        "size": 435863
+      }
+    ],
+    "failed": [],
+    "notFound": []
+  }
+}
