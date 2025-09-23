@@ -12,7 +12,55 @@ class ProductoManager {
         this.selectedQuantity = 1;
         this.currentImageIndex = 0;
         this.images = [];
-        
+
+        // Mapeos para Supabase bucket - copiados desde admin logic
+        this.CATEGORY_MAPPING = {
+            'Joyeria': 'Joyeria',
+            'Portacel': 'Portacel',
+            'Bolsas Grandes': 'Bolsas Grandes',
+            'Bolsas Cruzadas': 'Bolsas Cruzadas',
+            'Bolsas de mano': 'Bolsas de mano',
+            'Accesorios': 'Accesorios'
+        };
+
+        this.COMPLETE_PRODUCT_MAPPING = {
+            'Arete Piel Balancín Oval': 'Arete Piel Balancin Oval',
+            'Arete Piel Gota': 'Arete Piel Gota',
+            'Arete Piel Péndulo': 'Arete Piel Pendulo',
+            'Brazalete Piel Pelo': 'Brazalete Piel Pelo',
+            'Brazalete Liso': 'Brazalete Liso',
+            'Brazalete Hombre': 'Brazalete Hombre',
+            'Brazalete dos Lineas': 'Brazalete dos Lineas',
+            'Brazalete lineas Delgadas': 'Brazalete lineas Delgadas',
+            'Collar Piel Cuadro': 'Collar Piel Cuadro',
+            'Collar Piel Oval': 'Collar Piel Oval',
+            'Collar Nudo': 'Collar Nudo',
+            'Collar Corto': 'Collar Corto',
+            'Collar largo': 'Collar largo',
+            'Collar Nudos Oval': 'Collar Nudos Oval',
+            'Colgante Piel': 'Colgante Piel',
+            'Anillo de Piel': 'Anillo de Piel',
+            'Anillo Doble': 'Anillo Doble',
+            'Bolsa Cruzada Broche': 'Bolsa Cruzada Broche',
+            'Bolsa Cruzada Solapa': 'Bolsa Cruzada Solapa',
+            'Bolsa Grande Broche': 'Bolsa Grande Broche',
+            'Bolsa Grande': 'Bolsa Grande',
+            'Bolsa de Mano': 'Bolsa de Mano',
+            'Clutch Broche Grande': 'Clutch Broche Grande',
+            'Clutch Broche Chico': 'Clutch Broche Chico',
+            'Clutch Chica Plana': 'Clutch Chica Plana',
+            'Cartera con Costura': 'Cartera con Costura',
+            'Cangurera': 'Cangurera',
+            'Portacel Piel liso': 'Portacel Piel liso',
+            'Bolsa Cilindro Jareta': 'Bolsa Cilindro Jareta',
+            'Monedero Clip': 'Monedero Clip',
+            'Llavero Corto': 'Llavero Corto',
+            'Portacables Grande': 'Portacables Grande',
+            'Portapasaportes': 'Portapasaportes',
+            'Monedero Cierre': 'Monedero Cierre',
+            'Monedero Motita': 'Monedero Motita'
+        };
+
         this.init();
     }
 
@@ -134,6 +182,9 @@ class ProductoManager {
     }
 
     renderProduct() {
+        console.log(`🎨 renderProduct llamado, producto:`, this.product);
+        console.log(`📦 Variaciones del producto:`, this.product.variations);
+
         this.updateBreadcrumb();
         this.renderProductImages();
         this.renderProductInfo();
@@ -333,47 +384,25 @@ class ProductoManager {
         const variantsContainer = document.getElementById('productVariants');
         if (!variantsContainer) return;
 
-        let variantsHTML = '';
-        
-        // Agrupar variantes por color
-        const colorVariants = this.product.variations.filter(variant => variant.color && variant.colorHex);
-        if (colorVariants.length > 0) {
-            variantsHTML += `
-                <div class="variant-group">
-                    <h4>Color</h4>
-                    <div class="color-variants" data-variant-type="color">
-                        ${colorVariants.map(variant => `
-                            <div class="color-option ${variant.inStock ? '' : 'out-of-stock'}" 
-                                 data-variant-id="${variant.id}"
-                                 onclick="productoManager.selectVariant('${variant.id}', 'color')">
-                                <div class="color-swatch" style="background-color: ${variant.colorHex}"></div>
-                                <span class="color-name">${variant.color}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }
+        console.log(`🎨 Renderizando ${this.product.variations.length} variantes:`, this.product.variations);
 
-        // Agrupar variantes sin color (otros tipos)
-        const otherVariants = this.product.variations.filter(variant => !variant.color);
-        if (otherVariants.length > 0) {
-            variantsHTML += `
-                <div class="variant-group">
-                    <h4>Variantes</h4>
-                    <div class="variant-options" data-variant-type="variant">
-                        ${otherVariants.map(variant => `
-                            <div class="variant-option ${variant.inStock ? '' : 'unavailable'}" 
-                                 data-variant-id="${variant.id}"
-                                 onclick="productoManager.selectVariant('${variant.id}', 'variant')">
-                                ${variant.name}
-                                ${!variant.inStock ? '<span class="unavailable-text">No disponible</span>' : ''}
-                            </div>
-                        `).join('')}
-                    </div>
+        // Simplificar: tratar todas las variantes como variantes con imágenes
+        const variantsHTML = `
+            <div class="variant-group">
+                <h4>Variantes</h4>
+                <div class="variant-options" data-variant-type="variant">
+                    ${this.product.variations.map(variant => `
+                        <div class="variant-option ${variant.inStock ? '' : 'unavailable'}"
+                             data-variant-id="${variant.id}"
+                             data-variant-name="${variant.name}"
+                             onclick="productoManager.selectVariant('${variant.id}', 'variant')">
+                            ${variant.name}
+                            ${!variant.inStock ? '<span class="unavailable-text">No disponible</span>' : ''}
+                        </div>
+                    `).join('')}
                 </div>
-            `;
-        }
+            </div>
+        `;
 
         variantsContainer.innerHTML = variantsHTML;
     }
@@ -520,10 +549,23 @@ class ProductoManager {
             }
         });
 
-        // Image zoom
+        // Image zoom and reset to main image on double click
         document.addEventListener('click', (e) => {
             if (e.target.matches('#currentProductImage')) {
                 this.openImageZoom();
+            }
+        });
+
+        // Double click to reset to main image
+        document.addEventListener('dblclick', (e) => {
+            if (e.target.matches('#currentProductImage')) {
+                this.resetToMainImage();
+                // Deselect all variants
+                document.querySelectorAll('.variant-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.selectedVariant = null;
+                console.log(`🔄 Double-click: Reset to main image`);
             }
         });
     }
@@ -558,41 +600,166 @@ class ProductoManager {
 
     // Variant Selection
     selectVariant(variantId, type) {
-        // Remover selección previa del mismo tipo
-        if (type === 'color') {
-            document.querySelectorAll('.color-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-        } else {
-            document.querySelectorAll(`[data-variant-type="${type}"] .variant-option`).forEach(opt => {
-                opt.classList.remove('selected');
-            });
+        console.log(`🎯 selectVariant llamado: variantId=${variantId}, type=${type}`);
+
+        const variantElement = document.querySelector(`[data-variant-id="${variantId}"]`);
+        if (!variantElement) {
+            console.log(`❌ No se encontró elemento con data-variant-id="${variantId}"`);
+            return;
         }
 
-        // Seleccionar nueva variante
-        const variantElement = document.querySelector(`[data-variant-id="${variantId}"]`);
-        if (!variantElement) return;
-
-        const isOutOfStock = variantElement.classList.contains('out-of-stock') || 
+        const isOutOfStock = variantElement.classList.contains('out-of-stock') ||
                             variantElement.classList.contains('unavailable');
 
-        if (!isOutOfStock) {
+        if (isOutOfStock) {
+            console.log(`⚠️ Variante fuera de stock: ${variantId}`);
+            return;
+        }
+
+        // Verificar si la variante ya está seleccionada para permitir deselección
+        const isAlreadySelected = variantElement.classList.contains('selected');
+        console.log(`🔄 Variante ${variantId} ya seleccionada: ${isAlreadySelected}`);
+
+        // Remover selección previa de todas las variantes
+        document.querySelectorAll('.variant-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+
+        if (isAlreadySelected) {
+            // Deseleccionar - volver a imagen principal
+            this.selectedVariant = null;
+            this.resetToMainImage();
+            console.log(`🔄 Variante deseleccionada, volviendo a imagen principal`);
+        } else {
+            // Seleccionar nueva variante
             variantElement.classList.add('selected');
-            
+
             // Actualizar variante seleccionada
             this.selectedVariant = this.product.variations.find(v => v.id === variantId);
-            
-            // Actualizar precio y stock si la variante lo requiere
+
             if (this.selectedVariant) {
+                console.log(`✅ Variante seleccionada:`, this.selectedVariant);
+
+                // Actualizar precio y stock si la variante lo requiere
                 this.updatePriceWithVariant();
                 this.updateStockDisplay(this.selectedVariant.stock);
-                
-                // Si la variante tiene imagen, actualizarla
+
+                // Cambiar imagen usando el nombre de la variante
+                if (this.selectedVariant.name) {
+                    console.log(`🖼️ Cambiando imagen para variante: ${this.selectedVariant.name}`);
+                    this.updateMainImageForVariant(this.selectedVariant.name);
+                } else {
+                    console.log(`⚠️ selectedVariant.name no existe:`, this.selectedVariant);
+                }
+
+                // Si la variante tiene imagen específica, actualizarla (respaldo)
                 if (this.selectedVariant.image) {
                     this.selectImage(this.images.indexOf(this.selectedVariant.image));
                 }
             }
         }
+    }
+
+    updateMainImageForVariant(variantName) {
+        console.log(`📸 updateMainImageForVariant llamado con variante: ${variantName}`);
+
+        if (!variantName || !this.product) {
+            console.log(`❌ Falta variantName (${variantName}) o product:`, this.product);
+            return;
+        }
+
+        // Usar los mapeos exactos como en admin/inventario
+        const mappedCategory = this.getMappedCategory();
+        const mappedProduct = this.getMappedProduct();
+        // Mantener el nombre de la variante tal como viene (con espacios y casing original)
+        const variantNameExact = variantName;
+
+        console.log(`🔧 Mapeos utilizados: category="${mappedCategory}", product="${mappedProduct}", variant="${variantNameExact}"`);
+
+        // Estructura exacta como admin: ${bucketCategory}/${bucketProduct}/${variantName}.jpg
+        const variantImagePath = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${mappedCategory}/${mappedProduct}/${variantNameExact}.jpg`;
+        console.log(`🌐 URL de imagen construida: ${variantImagePath}`);
+
+        // Crear una nueva imagen para verificar si existe
+        const testImage = new Image();
+
+        testImage.onload = () => {
+            // La imagen existe, actualizar la imagen principal
+            const mainImage = document.getElementById('currentProductImage');
+            if (mainImage) {
+                mainImage.src = variantImagePath;
+                mainImage.alt = `${this.product.name} - ${variantName}`;
+            }
+            console.log(`✅ Imagen actualizada para variante ${variantName}: ${variantImagePath}`);
+        };
+
+        testImage.onerror = () => {
+            // La imagen no existe, intentar con formato PNG
+            const pngImagePath = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${mappedCategory}/${mappedProduct}/${variantNameExact}.png`;
+            const testPngImage = new Image();
+
+            testPngImage.onload = () => {
+                const mainImage = document.getElementById('currentProductImage');
+                if (mainImage) {
+                    mainImage.src = pngImagePath;
+                    mainImage.alt = `${this.product.name} - ${variantName}`;
+                }
+                console.log(`✅ Imagen PNG actualizada para variante ${variantName}: ${pngImagePath}`);
+            };
+
+            testPngImage.onerror = () => {
+                console.log(`⚠️ No se encontró imagen para variante ${variantName}, manteniendo imagen principal`);
+            };
+
+            testPngImage.src = pngImagePath;
+        };
+
+        testImage.src = variantImagePath;
+    }
+
+    resetToMainImage() {
+        // Volver a la imagen principal (principal.jpg)
+        if (!this.product) return;
+
+        const mappedCategory = this.getMappedCategory();
+        const mappedProduct = this.getMappedProduct();
+
+        const mainImagePath = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${mappedCategory}/${mappedProduct}/principal.jpg`;
+        console.log(`🏠 URL de imagen principal construida: ${mainImagePath}`);
+        const testImage = new Image();
+
+        testImage.onload = () => {
+            const mainImage = document.getElementById('currentProductImage');
+            if (mainImage) {
+                mainImage.src = mainImagePath;
+                mainImage.alt = this.product.name;
+            }
+            console.log(`✅ Imagen principal restaurada: ${mainImagePath}`);
+        };
+
+        testImage.onerror = () => {
+            // Si no existe principal.jpg, intentar con principal.png
+            const pngImagePath = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${mappedCategory}/${mappedProduct}/principal.png`;
+            const testPngImage = new Image();
+
+            testPngImage.onload = () => {
+                const mainImage = document.getElementById('currentProductImage');
+                if (mainImage) {
+                    mainImage.src = pngImagePath;
+                    mainImage.alt = this.product.name;
+                }
+                console.log(`✅ Imagen principal PNG restaurada: ${pngImagePath}`);
+            };
+
+            testPngImage.onerror = () => {
+                // Fallback a la imagen que ya está cargada (probablemente desde mainImage)
+                console.log(`⚠️ No se encontró imagen principal para ${this.product.name}, manteniendo imagen actual`);
+            };
+
+            testPngImage.src = pngImagePath;
+        };
+
+        testImage.src = mainImagePath;
     }
 
     updatePriceWithVariant() {
@@ -697,6 +864,55 @@ class ProductoManager {
         if (productTabs) {
             productTabs.style.display = 'block';
         }
+    }
+
+    sanitizeProductName(productName) {
+        return productName
+            .toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, '') // Remover caracteres especiales
+            .replace(/\s+/g, '-') // Reemplazar espacios con guiones
+            .replace(/-+/g, '-') // Remover múltiples guiones consecutivos
+            .replace(/^-|-$/g, ''); // Remover guiones al inicio y final
+    }
+
+    getMappedCategory() {
+        // Intentar obtener la primera categoría del producto
+        let categoryName = null;
+
+        if (this.product.categories && this.product.categories.length > 0) {
+            categoryName = this.product.categories[0];
+        } else if (this.product.category && this.product.category.name) {
+            categoryName = this.product.category.name;
+        } else {
+            // Fallback: usar el breadcrumb de categoría si está disponible
+            const breadcrumbCategory = document.getElementById('breadcrumb-category');
+            if (breadcrumbCategory && breadcrumbCategory.textContent && breadcrumbCategory.textContent !== 'Categoría') {
+                categoryName = breadcrumbCategory.textContent;
+            }
+        }
+
+        // Usar el mapeo de categorías como en admin
+        if (categoryName && this.CATEGORY_MAPPING[categoryName]) {
+            console.log(`📂 Categoria mapeada: ${categoryName} → ${this.CATEGORY_MAPPING[categoryName]}`);
+            return this.CATEGORY_MAPPING[categoryName];
+        }
+
+        // Fallback si no encontramos mapeo
+        console.log(`⚠️ Categoria no encontrada en mapeo: ${categoryName}, usando "Accesorios"`);
+        return 'Accesorios'; // Fallback para Monedero Clip
+    }
+
+    getMappedProduct() {
+        const productName = this.product.name;
+
+        if (this.COMPLETE_PRODUCT_MAPPING[productName]) {
+            console.log(`📦 Producto mapeado: ${productName} → ${this.COMPLETE_PRODUCT_MAPPING[productName]}`);
+            return this.COMPLETE_PRODUCT_MAPPING[productName];
+        }
+
+        // Fallback: usar el nombre original
+        console.log(`⚠️ Producto no encontrado en mapeo: ${productName}, usando nombre original`);
+        return productName;
     }
 
     capitalizeFirst(str) {
