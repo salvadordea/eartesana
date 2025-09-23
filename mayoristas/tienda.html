@@ -497,6 +497,202 @@
         .cart-summary.visible {
             transform: translateY(0);
         }
+        
+        /* Floating Cart Panel */
+        .floating-cart {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 350px;
+            max-height: 70vh;
+            background: var(--dark-surface);
+            border: 2px solid var(--silver-accent);
+            border-radius: 12px;
+            box-shadow: var(--shadow-dark);
+            z-index: 1001;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .floating-cart.visible {
+            transform: translateX(0);
+            display: block;
+        }
+        
+        .floating-cart-header {
+            background: var(--gradient-silver);
+            color: var(--dark-bg);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .floating-cart-body {
+            max-height: 50vh;
+            overflow-y: auto;
+            padding: 0;
+        }
+        
+        .floating-cart-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border-color);
+            gap: 12px;
+        }
+        
+        .floating-cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .floating-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .floating-item-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--silver-accent);
+            margin: 0 0 4px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .floating-item-details {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        .floating-item-price {
+            font-size: 12px;
+            color: var(--success-color);
+            font-weight: 600;
+        }
+        
+        .floating-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .floating-qty-btn {
+            background: var(--dark-surface-light);
+            border: 1px solid var(--border-color);
+            color: var(--silver-accent);
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .floating-qty-btn:hover {
+            background: var(--silver-accent);
+            color: var(--dark-bg);
+        }
+        
+        .floating-qty-display {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-primary);
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        .floating-cart-footer {
+            padding: 15px 20px;
+            border-top: 1px solid var(--border-color);
+            background: var(--dark-surface-light);
+        }
+        
+        .floating-cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .floating-total-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .floating-total-amount {
+            color: var(--silver-accent);
+            font-size: 16px;
+        }
+        
+        .floating-checkout-btn {
+            width: 100%;
+            background: var(--gradient-silver);
+            color: var(--dark-bg);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-checkout-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Cart Toggle Button */
+        .cart-toggle-btn {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-silver);
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: var(--shadow-dark);
+            z-index: 1002;
+            transition: all 0.3s ease;
+            transform: scale(0);
+        }
+        
+        .cart-toggle-btn.visible {
+            transform: scale(1);
+        }
+        
+        .cart-toggle-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger-color);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 10px;
+            min-width: 20px;
+            text-align: center;
+        }
 
         .cart-summary-content {
             max-width: 1400px;
@@ -549,38 +745,107 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        /* Variants */
+        /* Product Rows and Variants Collapsible */
+        .product-main-row {
+            background: var(--dark-surface) !important;
+            border-bottom: 2px solid var(--border-color);
+            font-weight: 600;
+        }
+        
+        .product-main-row:hover {
+            background: var(--dark-surface-light) !important;
+        }
+        
+        .product-main-row td {
+            padding: 18px 12px !important;
+            vertical-align: middle;
+        }
+        
         .variant-row {
             background: var(--dark-surface-light) !important;
             border-left: 3px solid var(--silver-accent);
+            display: none;
+            transition: all 0.3s ease;
+        }
+        
+        .variant-row.expanded {
+            display: table-row;
         }
 
         .variant-row td:first-child {
-            padding-left: 30px;
+            padding-left: 40px;
+            border-left: 2px solid var(--silver-accent);
+            position: relative;
+        }
+        
+        .variant-row td:first-child::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--silver-accent);
+            opacity: 0.3;
         }
 
         .variant-name {
             color: var(--text-secondary);
-            font-size: 14px;
+            font-size: 13px;
             font-style: italic;
+            margin-top: 4px;
         }
-
-        .toggle-variants {
+        
+        .product-expand-btn {
             background: none;
             border: none;
             color: var(--silver-accent);
             cursor: pointer;
-            padding: 5px;
-            border-radius: 4px;
+            padding: 8px;
+            border-radius: 50%;
             transition: all 0.3s ease;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            margin-right: 8px;
         }
-
-        .toggle-variants:hover {
+        
+        .product-expand-btn:hover {
             background: var(--dark-surface-light);
+            transform: scale(1.1);
         }
-
-        .variants-expanded .toggle-variants {
+        
+        .product-expand-btn.expanded {
             transform: rotate(90deg);
+            background: var(--silver-accent);
+            color: var(--dark-bg);
+        }
+        
+        .product-expand-btn.expanded:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        .product-summary {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .product-variant-count {
+            background: var(--silver-accent);
+            color: var(--dark-bg);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .product-total-stock {
+            color: var(--text-secondary);
+            font-size: 12px;
         }
 
         /* Loading */
@@ -1346,6 +1611,52 @@
         </div>
     </section>
 
+    <!-- Cart Summary Bar -->
+    <div id="cartSummaryBar" class="cart-summary">
+        <div class="cart-summary-content">
+            <div class="cart-info">
+                <div class="cart-stat">
+                    <p class="cart-stat-label">Artículos</p>
+                    <p class="cart-stat-value" id="cartItemsCount">0 productos</p>
+                </div>
+                <div class="cart-stat">
+                    <p class="cart-stat-label">Total</p>
+                    <p class="cart-stat-value" id="cartTotal">$0.00</p>
+                </div>
+            </div>
+            <button class="checkout-btn" onclick="openCart()">
+                <i class="fas fa-shopping-cart"></i>
+                Ver Carrito
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Cart Panel -->
+    <div id="floatingCart" class="floating-cart">
+        <div class="floating-cart-header">
+            <h3>Mi Carrito</h3>
+            <button class="modal-close" onclick="toggleFloatingCart()">&times;</button>
+        </div>
+        <div class="floating-cart-body" id="floatingCartBody">
+            <!-- Cart items will be populated here -->
+        </div>
+        <div class="floating-cart-footer">
+            <div class="floating-cart-total">
+                <span class="floating-total-label">Total:</span>
+                <span class="floating-total-amount" id="floatingCartTotal">$0.00</span>
+            </div>
+            <button class="floating-checkout-btn" onclick="proceedToCheckout()" id="floatingCheckoutBtn">
+                <i class="fas fa-credit-card"></i> Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Cart Toggle Button -->
+    <button id="cartToggleBtn" class="cart-toggle-btn" onclick="toggleFloatingCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge" id="floatingCartBadge">0</span>
+    </button>
+
     <!-- Shopping Cart Modal -->
     <div id="cartModal" class="modal cart-modal">
         <div class="modal-content">
@@ -1358,7 +1669,7 @@
                     <div class="empty-cart">
                         <i class="fas fa-shopping-cart"></i>
                         <p>Tu carrito está vacío</p>
-                        <small>Agrega productos con el pedido mínimo de 10 piezas</small>
+                        <small>Agrega variantes al carrito mayorista</small>
                     </div>
                 </div>
                 <div class="cart-summary">
@@ -1400,10 +1711,11 @@
     <script>
         // Wholesale Store Configuration
         const WHOLESALE_DISCOUNT = 0.20; // 20% discount
-        const MIN_QUANTITY = 10; // Minimum 10 pieces per product
+        const MIN_QUANTITY = 1; // Minimum 1 piece per variant
         let wholesalerCart = [];
         let currentUser = null;
         let allProducts = []; // Store all loaded products
+        let allVariants = []; // Store all loaded variants for wholesale
         let supabase = null;
         let currentView = 'table'; // 'table' or 'cards'
         
@@ -1490,23 +1802,61 @@
                 
                 console.log('🔄 Loading products for wholesale...');
                 
-                // Usar el nuevo sistema de productos con variantes
+                // Usar el sistema de productos con variantes para mayoristas
                 if (window.ProductVariantsManager) {
-                    const result = await window.ProductVariantsManager.getSimpleProducts(supabase);
+                    const result = await window.ProductVariantsManager.getProductsWithVariants(supabase);
                     
-                    console.log(`✅ Loaded ${result.length} products for wholesale`);
+                    console.log(`✅ Loaded ${result.products.length} products with ${result.stats.totalVariants} variants for wholesale`);
                     
-                    // Transform products for wholesale display
-                    allProducts = result.map(product => ({
-                        id: product.id,
-                        name: product.name,
-                        regularPrice: product.price,
-                        image: getProductImageUrl(product.main_image_url),
-                        stock: product.stock || 0,
-                        category: product.category,
-                        description: product.description,
-                        slug: product.slug
-                    }));
+                    // Transform all variants for wholesale display
+                    allVariants = [];
+                    allProducts = result.products; // Keep products for reference
+                    
+                    result.products.forEach(product => {
+                        if (product.has_variants && product.variants.length > 0) {
+                            // Add each variant as a separate item
+                            product.variants.forEach(variant => {
+                                allVariants.push({
+                                    id: variant.id,
+                                    variantId: variant.id,
+                                    productId: product.id,
+                                    name: `${product.name}`,
+                                    variantName: variant.variant_name || variant.name || 'Variante',
+                                    variantValue: variant.variant_value || '',
+                                    fullName: `${product.name} - ${variant.variant_name || variant.name || 'Variante'}`,
+                                    regularPrice: variant.price || product.price,
+                                    image: getVariantImageUrl(variant.image_url, product.main_image_url),
+                                    stock: variant.stock || 0,
+                                    category: product.category,
+                                    sku: variant.sku || `${product.id}-${variant.id}`,
+                                    description: product.description,
+                                    slug: product.slug,
+                                    isVariant: true,
+                                    parentProduct: product.name
+                                });
+                            });
+                        } else {
+                            // Add product without variants as a single item
+                            allVariants.push({
+                                id: `product-${product.id}`,
+                                variantId: null,
+                                productId: product.id,
+                                name: product.name,
+                                variantName: null,
+                                variantValue: null,
+                                fullName: product.name,
+                                regularPrice: product.price,
+                                image: getProductImageUrl(product.main_image_url),
+                                stock: product.calculated_stock || product.total_stock || 0,
+                                category: product.category,
+                                sku: `${product.id}`,
+                                description: product.description,
+                                slug: product.slug,
+                                isVariant: false,
+                                parentProduct: product.name
+                            });
+                        }
+                    });
                 } else {
                     // Fallback al método anterior si no está disponible el manager
                     const { data: products, error } = await supabase
@@ -1545,9 +1895,9 @@
                     throw new Error('No se encontraron productos disponibles');
                 }
                 
-                // Hide loading and show products
+                // Hide loading and show variants
                 loadingElement.style.display = 'none';
-                renderWholesaleProducts(allProducts);
+                renderWholesaleVariants(allVariants);
                 
             } catch (error) {
                 console.error('❌ Error loading wholesale products:', error);
@@ -1585,9 +1935,73 @@
             // Fallback to local path
             return `../assets/images/productos/${imageId}`;
         }
+        
+        // Get variant image URL with fallback to product image
+        function getVariantImageUrl(variantImageUrl, productImageUrl) {
+            // Try variant image first
+            if (variantImageUrl) {
+                if (variantImageUrl.startsWith('http')) {
+                    return variantImageUrl;
+                }
+                
+                // If variant image exists, use it
+                if (window.EstudioArtesanaConfig?.cloudinary?.cloudName) {
+                    return `https://res.cloudinary.com/${window.EstudioArtesanaConfig.cloudinary.cloudName}/image/upload/c_fill,w_300,h_300,q_auto,f_auto/${variantImageUrl}`;
+                }
+            }
+            
+            // Fallback to product main image
+            return getProductImageUrl(productImageUrl);
+        }
 
-        // Render products with wholesale prices in table format
-        function renderWholesaleProducts(products) {
+        // Group products for collapsible display
+        function groupVariantsByProduct() {
+            const productGroups = {};
+            
+            allProducts.forEach(product => {
+                const productVariants = allVariants.filter(v => v.productId === product.id);
+                
+                if (productVariants.length > 0) {
+                    // Calculate totals for the product
+                    const totalStock = productVariants.reduce((sum, v) => sum + v.stock, 0);
+                    const avgPrice = productVariants.reduce((sum, v) => sum + v.regularPrice, 0) / productVariants.length;
+                    
+                    productGroups[product.id] = {
+                        product,
+                        variants: productVariants,
+                        totalStock,
+                        avgPrice,
+                        hasVariants: productVariants.length > 1 || (productVariants.length === 1 && productVariants[0].isVariant)
+                    };
+                }
+            });
+            
+            return productGroups;
+        }
+        
+        // Toggle product variants visibility
+        function toggleProductVariants(productId) {
+            const expandBtn = document.getElementById(`expand-${productId}`);
+            const variantRows = document.querySelectorAll(`tr[data-parent-product="${productId}"]`);
+            const isExpanded = expandBtn.classList.contains('expanded');
+            
+            if (isExpanded) {
+                // Collapse variants
+                expandBtn.classList.remove('expanded');
+                variantRows.forEach(row => {
+                    row.classList.remove('expanded');
+                });
+            } else {
+                // Expand variants
+                expandBtn.classList.add('expanded');
+                variantRows.forEach(row => {
+                    row.classList.add('expanded');
+                });
+            }
+        }
+        
+        // Render products with collapsible variants
+        function renderWholesaleVariants(variants) {
             const tableBody = document.getElementById('productsTableBody');
             const productsSection = document.getElementById('productsSection');
             const productsCount = document.getElementById('productsCount');
@@ -1596,32 +2010,44 @@
             // Show the products section
             productsSection.style.display = 'block';
             
+            // Group variants by product
+            const productGroups = groupVariantsByProduct();
+            const productCount = Object.keys(productGroups).length;
+            
             // Update stats
             if (productsCount) {
-                productsCount.textContent = `${products.length} productos`;
+                productsCount.textContent = `${productCount} productos (${variants.length} variantes)`;
             }
             
             if (totalStock) {
-                const total = products.reduce((sum, p) => sum + p.stock, 0);
+                const total = variants.reduce((sum, v) => sum + v.stock, 0);
                 totalStock.textContent = `${total} piezas disponibles`;
             }
             
-            // Populate table rows
-            tableBody.innerHTML = products.map(product => {
-                const wholesalePrice = calculateWholesalePrice(product.regularPrice);
-                const savings = product.regularPrice - wholesalePrice;
-                const defaultQuantity = MIN_QUANTITY;
-                const defaultSubtotal = wholesalePrice * defaultQuantity;
+            // Render product rows with collapsible variants
+            const rows = [];
+            
+            Object.values(productGroups).forEach(group => {
+                const { product, variants: productVariants, totalStock, avgPrice, hasVariants } = group;
+                const wholesalePrice = calculateWholesalePrice(avgPrice);
+                const savings = avgPrice - wholesalePrice;
                 
-                return `
-                    <tr class="product-row ${product.stock < MIN_QUANTITY ? 'low-stock-row' : ''}" data-product-id="${product.id}">
+                // Main product row
+                rows.push(`
+                    <tr class="product-main-row" data-product-id="${product.id}">
                         <td class="product-cell">
-                            <div class="product-info-cell">
-                                <img src="${product.image}" alt="${product.name}" class="product-thumb" 
+                            <div class="product-summary">
+                                ${hasVariants ? `
+                                    <button class="product-expand-btn" id="expand-${product.id}" onclick="toggleProductVariants(${product.id})">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                ` : ''}
+                                <img src="${getProductImageUrl(product.main_image_url)}" alt="${product.name}" class="product-thumb" 
                                      onerror="this.src='../assets/images/categories/backpacks.jpg'">
                                 <div class="product-details">
                                     <h4 class="product-name">${product.name}</h4>
-                                    <span class="product-sku">SKU: ${product.id.toString().padStart(6, '0')}</span>
+                                    ${hasVariants ? `<span class="product-variant-count">${productVariants.length} variantes</span>` : ''}
+                                    <span class="product-total-stock">${totalStock} piezas total</span>
                                 </div>
                             </div>
                         </td>
@@ -1629,7 +2055,8 @@
                             <span class="category-badge">${product.category}</span>
                         </td>
                         <td class="regular-price-cell">
-                            <span class="price-crossed">${formatPrice(product.regularPrice)}</span>
+                            <span class="price-crossed">${formatPrice(avgPrice)}</span>
+                            ${hasVariants ? '<small>Promedio</small>' : ''}
                         </td>
                         <td class="wholesale-price-cell">
                             <span class="price-wholesale">${formatPrice(wholesalePrice)}</span>
@@ -1637,41 +2064,107 @@
                         </td>
                         <td class="savings-cell">
                             <span class="savings-amount">${formatPrice(savings)}</span>
+                            ${hasVariants ? '<small>Promedio</small>' : ''}
                         </td>
                         <td class="stock-cell">
-                            <div class="stock-info ${product.stock < MIN_QUANTITY ? 'low-stock' : product.stock > 50 ? 'high-stock' : 'normal-stock'}">
+                            <div class="stock-info ${totalStock < MIN_QUANTITY ? 'low-stock' : totalStock > 50 ? 'high-stock' : 'normal-stock'}">
                                 <i class="fas fa-boxes"></i>
-                                <span>${product.stock} pzs</span>
-                                ${product.stock < MIN_QUANTITY ? '<i class="fas fa-exclamation-triangle warning-icon"></i>' : ''}
+                                <span>${totalStock} pzs</span>
                             </div>
                         </td>
-                        <td class="quantity-cell">
-                            <div class="quantity-controls">
-                                <button type="button" class="qty-btn qty-decrease" onclick="decreaseQuantity(${product.id})" ${product.stock < MIN_QUANTITY ? 'disabled' : ''}>
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <input type="number" id="qty-${product.id}" class="qty-input" value="${MIN_QUANTITY}" 
-                                       min="${MIN_QUANTITY}" max="${product.stock}" 
-                                       onchange="updateRowSubtotal(${product.id})" ${product.stock < MIN_QUANTITY ? 'disabled' : ''}>
-                                <button type="button" class="qty-btn qty-increase" onclick="increaseQuantity(${product.id})" ${product.stock < MIN_QUANTITY ? 'disabled' : ''}>
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td class="subtotal-cell">
-                            <span class="subtotal-amount" id="subtotal-${product.id}">${formatPrice(defaultSubtotal)}</span>
-                        </td>
-                        <td class="action-cell">
-                            <button class="add-to-order-btn ${product.stock < MIN_QUANTITY ? 'disabled' : ''}" 
-                                    onclick="addToWholesaleCart(${product.id})"
-                                    ${product.stock < MIN_QUANTITY ? 'disabled' : ''}>
-                                <i class="fas fa-plus"></i>
-                                ${product.stock < MIN_QUANTITY ? 'Sin Stock' : 'Agregar'}
-                            </button>
+                        <td colspan="3" class="text-center">
+                            ${hasVariants ? 
+                                '<small class="text-muted">Expandir para ver variantes</small>' :
+                                `<div class="quantity-controls">
+                                    <button type="button" class="qty-btn qty-decrease" onclick="decreaseVariantQuantity('${productVariants[0].id}')" ${totalStock < MIN_QUANTITY ? 'disabled' : ''}>
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" id="qty-${productVariants[0].id}" class="qty-input" value="${MIN_QUANTITY}" 
+                                           min="${MIN_QUANTITY}" max="${totalStock}" 
+                                           onchange="updateVariantSubtotal('${productVariants[0].id}')" ${totalStock < MIN_QUANTITY ? 'disabled' : ''}>
+                                    <button type="button" class="qty-btn qty-increase" onclick="increaseVariantQuantity('${productVariants[0].id}')" ${totalStock < MIN_QUANTITY ? 'disabled' : ''}>
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>`
+                            }
                         </td>
                     </tr>
-                `;
-            }).join('');
+                `);
+                
+                // Variant rows (hidden by default if multiple variants)
+                productVariants.forEach(variant => {
+                    const vWholesalePrice = calculateWholesalePrice(variant.regularPrice);
+                    const vSavings = variant.regularPrice - vWholesalePrice;
+                    const defaultQuantity = MIN_QUANTITY;
+                    const defaultSubtotal = vWholesalePrice * defaultQuantity;
+                    
+                    const displayName = variant.isVariant && variant.variantName 
+                        ? `${variant.variantName}${variant.variantValue ? `: ${variant.variantValue}` : ''}`
+                        : variant.name;
+                    
+                    rows.push(`
+                        <tr class="variant-row ${!hasVariants ? 'expanded' : ''}" 
+                             data-variant-id="${variant.id}" 
+                             data-product-id="${variant.productId}" 
+                             data-parent-product="${product.id}">
+                            <td class="product-cell">
+                                <div class="product-info-cell">
+                                    <img src="${variant.image}" alt="${displayName}" class="product-thumb" 
+                                         onerror="this.src='../assets/images/categories/backpacks.jpg'">
+                                    <div class="product-details">
+                                        <h4 class="product-name">${displayName}</h4>
+                                        <span class="product-sku">SKU: ${variant.sku}</span>
+                                        ${variant.isVariant ? `<small class="variant-name">Variante de ${variant.parentProduct}</small>` : ''}
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="category-cell">–</td>
+                            <td class="regular-price-cell">
+                                <span class="price-crossed">${formatPrice(variant.regularPrice)}</span>
+                            </td>
+                            <td class="wholesale-price-cell">
+                                <span class="price-wholesale">${formatPrice(vWholesalePrice)}</span>
+                            </td>
+                            <td class="savings-cell">
+                                <span class="savings-amount">${formatPrice(vSavings)}</span>
+                            </td>
+                            <td class="stock-cell">
+                                <div class="stock-info ${variant.stock < MIN_QUANTITY ? 'low-stock' : variant.stock > 50 ? 'high-stock' : 'normal-stock'}">
+                                    <i class="fas fa-boxes"></i>
+                                    <span>${variant.stock} pzs</span>
+                                    ${variant.stock < MIN_QUANTITY ? '<i class="fas fa-exclamation-triangle warning-icon"></i>' : ''}
+                                </div>
+                            </td>
+                            <td class="quantity-cell">
+                                <div class="quantity-controls">
+                                    <button type="button" class="qty-btn qty-decrease" onclick="decreaseVariantQuantity('${variant.id}')" ${variant.stock < MIN_QUANTITY ? 'disabled' : ''}>
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" id="qty-${variant.id}" class="qty-input" value="${MIN_QUANTITY}" 
+                                           min="${MIN_QUANTITY}" max="${variant.stock}" 
+                                           onchange="updateVariantSubtotal('${variant.id}')" ${variant.stock < MIN_QUANTITY ? 'disabled' : ''}>
+                                    <button type="button" class="qty-btn qty-increase" onclick="increaseVariantQuantity('${variant.id}')" ${variant.stock < MIN_QUANTITY ? 'disabled' : ''}>
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="subtotal-cell">
+                                <span class="subtotal-amount" id="subtotal-${variant.id}">${formatPrice(defaultSubtotal)}</span>
+                            </td>
+                            <td class="action-cell">
+                                <button class="add-to-order-btn ${variant.stock < MIN_QUANTITY ? 'disabled' : ''}" 
+                                        onclick="addVariantToWholesaleCart('${variant.id}')"
+                                        ${variant.stock < MIN_QUANTITY ? 'disabled' : ''}>
+                                    <i class="fas fa-plus"></i>
+                                    ${variant.stock < MIN_QUANTITY ? 'Sin Stock' : 'Agregar'}
+                                </button>
+                            </td>
+                        </tr>
+                    `);
+                });
+            });
+            
+            tableBody.innerHTML = rows.join('');
         }
 
         // Quantity controls
@@ -1746,28 +2239,27 @@
             let addedCount = 0;
             
             rows.forEach(row => {
-                const productId = parseInt(row.dataset.productId);
-                const quantityInput = document.getElementById(`qty-${productId}`);
+                const variantId = row.dataset.variantId;
+                const quantityInput = document.getElementById(`qty-${variantId}`);
                 const addButton = row.querySelector('.add-to-order-btn');
                 
-                if (quantityInput && !addButton.disabled) {
+                if (quantityInput && addButton && !addButton.disabled) {
                     const quantity = parseInt(quantityInput.value);
-                    
                     if (quantity >= MIN_QUANTITY) {
-                        // Find product from loaded products
-                        const product = allProducts.find(p => p.id === productId);
-                        if (product) {
-                            const existingItem = wholesalerCart.find(item => item.id === productId);
-                            
+                        const variant = allVariants.find(v => String(v.id) === String(variantId));
+                        if (variant) {
+                            const existingItem = wholesalerCart.find(item => String(item.id) === String(variantId));
                             if (existingItem) {
                                 existingItem.quantity += quantity;
                             } else {
                                 wholesalerCart.push({
-                                    id: productId,
-                                    name: product.name,
-                                    regularPrice: product.regularPrice,
-                                    wholesalePrice: calculateWholesalePrice(product.regularPrice),
-                                    quantity: quantity
+                                    id: String(variantId),
+                                    productId: variant.productId,
+                                    name: variant.fullName,
+                                    regularPrice: variant.regularPrice,
+                                    wholesalePrice: calculateWholesalePrice(variant.regularPrice),
+                                    quantity,
+                                    sku: variant.sku
                                 });
                             }
                             addedCount++;
@@ -1775,6 +2267,7 @@
                     }
                 }
             });
+            saveCart();
             
             if (addedCount > 0) {
                 updateCartDisplay();
@@ -1796,52 +2289,48 @@
         }
 
         // Add to wholesale cart
-        function addToWholesaleCart(productId) {
-            const quantityInput = document.getElementById(`qty-${productId}`);
+        function addVariantToWholesaleCart(variantId) {
+            const quantityInput = document.getElementById(`qty-${variantId}`);
             const quantity = parseInt(quantityInput.value);
-            
             if (quantity < MIN_QUANTITY) {
-                alert(`El pedido mínimo es de ${MIN_QUANTITY} piezas por producto.`);
+                alert(`El pedido mínimo es de ${MIN_QUANTITY} piezas por variante.`);
                 return;
             }
-
-            // Find product from loaded products
-            const product = allProducts.find(p => p.id === productId);
-            if (!product) return;
-
-            // Check if already in cart
-            const existingItem = wholesalerCart.find(item => item.id === productId);
-            
+            const variant = allVariants.find(v => String(v.id) === String(variantId));
+            if (!variant) return;
+            const existingItem = wholesalerCart.find(item => String(item.id) === String(variantId));
             if (existingItem) {
                 existingItem.quantity += quantity;
             } else {
                 wholesalerCart.push({
-                    id: productId,
-                    name: product.name,
-                    regularPrice: product.regularPrice,
-                    wholesalePrice: calculateWholesalePrice(product.regularPrice),
-                    quantity: quantity
+                    id: String(variantId),
+                    productId: variant.productId,
+                    name: variant.fullName,
+                    regularPrice: variant.regularPrice,
+                    wholesalePrice: calculateWholesalePrice(variant.regularPrice),
+                    quantity,
+                    sku: variant.sku
                 });
             }
-
+            saveCart();
             updateCartDisplay();
             showCartSummaryBar();
-            
-            // Success feedback
-            const button = event.target.closest('.add-to-cart-btn');
-            const originalText = button.innerHTML;
-            button.innerHTML = '<i class="fas fa-check"></i> Agregado';
-            button.style.backgroundColor = '#28a745';
-            
-            setTimeout(() => {
-                button.innerHTML = originalText;
-                button.style.backgroundColor = '';
-            }, 2000);
+            const button = event.target.closest('.add-to-order-btn');
+            if (button) {
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> Agregado';
+                button.style.backgroundColor = '#28a745';
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.backgroundColor = '';
+                }, 2000);
+            }
         }
 
         // Update cart display
         function updateCartDisplay() {
             const totalItems = wholesalerCart.reduce((sum, item) => sum + item.quantity, 0);
+            const total = wholesalerCart.reduce((sum, item) => sum + (item.wholesalePrice * item.quantity), 0);
             
             // Update cart count if element exists
             const cartCount = document.getElementById('cartCount');
@@ -1858,10 +2347,38 @@
             }
             
             if (cartTotal) {
-                const total = wholesalerCart.reduce((sum, item) => sum + (item.wholesalePrice * item.quantity), 0);
                 cartTotal.textContent = formatPrice(total);
             }
             
+            // Update floating cart elements
+            const floatingCartBadge = document.getElementById('floatingCartBadge');
+            const floatingCartTotal = document.getElementById('floatingCartTotal');
+            const cartToggleBtn = document.getElementById('cartToggleBtn');
+            
+            if (floatingCartBadge) {
+                floatingCartBadge.textContent = totalItems;
+            }
+            
+            if (floatingCartTotal) {
+                floatingCartTotal.textContent = formatPrice(total);
+            }
+            
+            // Show/hide cart toggle button based on cart contents
+            if (cartToggleBtn) {
+                if (totalItems > 0) {
+                    cartToggleBtn.classList.add('visible');
+                } else {
+                    cartToggleBtn.classList.remove('visible');
+                }
+            }
+            
+            // Update floating cart body if it's visible
+            const floatingCart = document.getElementById('floatingCart');
+            if (floatingCart && floatingCart.classList.contains('visible')) {
+                renderFloatingCartItems();
+            }
+            
+            saveCart();
             console.log(`🛒 Cart updated: ${totalItems} items`);
         }
 
@@ -1898,7 +2415,7 @@
                     <div class="empty-cart">
                         <i class="fas fa-shopping-cart"></i>
                         <p>Tu carrito está vacío</p>
-                        <small>Agrega productos con el pedido mínimo de ${MIN_QUANTITY} piezas</small>
+                        <small>Agrega variantes al carrito mayorista</small>
                     </div>
                 `;
                 document.getElementById('checkoutBtn').disabled = true;
@@ -1913,14 +2430,15 @@
                             <span class="regular-price">${formatPrice(item.regularPrice)}</span>
                             <span class="wholesale-price">${formatPrice(item.wholesalePrice)}</span>
                         </div>
+                        ${item.sku ? `<small class="product-sku">SKU: ${item.sku}</small>` : ''}
                     </div>
                     <div class="item-quantity">
-                        <button onclick="updateCartQuantity(${item.id}, -1)">-</button>
+                        <button onclick="updateCartQuantity('${item.id}', -1)">-</button>
                         <span>${item.quantity}</span>
-                        <button onclick="updateCartQuantity(${item.id}, 1)">+</button>
+                        <button onclick="updateCartQuantity('${item.id}', 1)">+</button>
                     </div>
                     <div class="item-total">${formatPrice(item.wholesalePrice * item.quantity)}</div>
-                    <button class="remove-item" onclick="removeFromCart(${item.id})">
+                    <button class="remove-item" onclick="removeFromCart('${item.id}')">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
@@ -1942,8 +2460,8 @@
         }
 
         // Update cart item quantity
-        function updateCartQuantity(productId, change) {
-            const item = wholesalerCart.find(item => item.id === productId);
+        function updateCartQuantity(itemId, change) {
+            const item = wholesalerCart.find(item => String(item.id) === String(itemId));
             if (!item) return;
 
             item.quantity += change;
@@ -1954,14 +2472,16 @@
 
             renderCartItems();
             updateCartDisplay();
+            saveCart();
         }
 
         // Remove from cart
-        function removeFromCart(productId) {
-            wholesalerCart = wholesalerCart.filter(item => item.id !== productId);
+        function removeFromCart(itemId) {
+            wholesalerCart = wholesalerCart.filter(item => String(item.id) !== String(itemId));
             renderCartItems();
             updateCartDisplay();
             showCartSummaryBar();
+            saveCart();
         }
 
         // Proceed to checkout
@@ -2023,6 +2543,138 @@
             // Implement search functionality
         }
 
+        function saveCart() {
+            try { localStorage.setItem('wholesaleCart', JSON.stringify(wholesalerCart)); } catch (e) { console.warn('No se pudo guardar el carrito', e); }
+        }
+        function loadCart() {
+            try { const raw = localStorage.getItem('wholesaleCart'); if (raw) wholesalerCart = JSON.parse(raw) || []; } catch (e) { wholesalerCart = []; }
+        }
+        
+        // Variant quantity helpers
+        function increaseVariantQuantity(variantId) {
+            const input = document.getElementById(`qty-${variantId}`);
+            if (!input) return;
+            const max = parseInt(input.max);
+            const current = parseInt(input.value);
+            if (current < max) input.value = current + 1;
+            updateVariantSubtotal(variantId);
+        }
+        function decreaseVariantQuantity(variantId) {
+            const input = document.getElementById(`qty-${variantId}`);
+            if (!input) return;
+            const min = parseInt(input.min);
+            const current = parseInt(input.value);
+            if (current > min) input.value = current - 1;
+            updateVariantSubtotal(variantId);
+        }
+        function updateVariantSubtotal(variantId) {
+            const input = document.getElementById(`qty-${variantId}`);
+            const subtotalElement = document.getElementById(`subtotal-${variantId}`);
+            if (!input || !subtotalElement) return;
+            const variant = allVariants.find(v => String(v.id) === String(variantId));
+            if (!variant) return;
+            const qty = parseInt(input.value);
+            const wholesalePrice = calculateWholesalePrice(variant.regularPrice);
+            const subtotal = wholesalePrice * qty;
+            subtotalElement.textContent = formatPrice(subtotal);
+        }
+        
+        // Toggle floating cart visibility
+        function toggleFloatingCart() {
+            const floatingCart = document.getElementById('floatingCart');
+            const cartToggleBtn = document.getElementById('cartToggleBtn');
+            
+            if (floatingCart.classList.contains('visible')) {
+                // Hide floating cart
+                floatingCart.classList.remove('visible');
+                if (cartToggleBtn.classList.contains('visible')) {
+                    cartToggleBtn.style.transform = 'scale(1)';
+                }
+            } else {
+                // Show floating cart
+                floatingCart.classList.add('visible');
+                renderFloatingCartItems();
+                if (cartToggleBtn.classList.contains('visible')) {
+                    cartToggleBtn.style.transform = 'scale(0.8)';
+                }
+            }
+        }
+        
+        // Render floating cart items
+        function renderFloatingCartItems() {
+            const floatingCartBody = document.getElementById('floatingCartBody');
+            const floatingCheckoutBtn = document.getElementById('floatingCheckoutBtn');
+            
+            if (wholesalerCart.length === 0) {
+                floatingCartBody.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Tu carrito está vacío</p>
+                        <small>Agrega productos al carrito</small>
+                    </div>
+                `;
+                
+                if (floatingCheckoutBtn) {
+                    floatingCheckoutBtn.disabled = true;
+                }
+                return;
+            }
+            
+            floatingCartBody.innerHTML = wholesalerCart.map(item => `
+                <div class="floating-cart-item">
+                    <div class="floating-item-info">
+                        <h4 class="floating-item-name" title="${item.name}">${item.name}</h4>
+                        <p class="floating-item-details">SKU: ${item.sku || 'N/A'}</p>
+                        <div class="floating-item-price">${formatPrice(item.wholesalePrice)}</div>
+                    </div>
+                    <div class="floating-item-controls">
+                        <button class="floating-qty-btn" onclick="updateFloatingCartQuantity('${item.id}', -1)" title="Disminuir cantidad">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span class="floating-qty-display">${item.quantity}</span>
+                        <button class="floating-qty-btn" onclick="updateFloatingCartQuantity('${item.id}', 1)" title="Aumentar cantidad">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            if (floatingCheckoutBtn) {
+                floatingCheckoutBtn.disabled = false;
+            }
+        }
+        
+        // Update cart quantity from floating cart
+        function updateFloatingCartQuantity(itemId, change) {
+            const item = wholesalerCart.find(item => String(item.id) === String(itemId));
+            if (!item) return;
+            
+            const newQuantity = item.quantity + change;
+            
+            if (newQuantity < MIN_QUANTITY) {
+                // Remove item if quantity would be less than minimum
+                if (confirm('¿Eliminar este producto del carrito?')) {
+                    removeFromCart(itemId);
+                }
+                return;
+            }
+            
+            item.quantity = newQuantity;
+            
+            // Re-render floating cart and update all displays
+            renderFloatingCartItems();
+            updateCartDisplay();
+            showCartSummaryBar();
+            
+            // Update modal if it's open
+            const cartModal = document.getElementById('cartModal');
+            if (cartModal && cartModal.classList.contains('show')) {
+                renderCartItems();
+            }
+            
+            saveCart();
+        }
+        
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             if (!checkWholesaleAuth()) return;
@@ -2038,6 +2690,7 @@
                 document.getElementById('apiError').style.display = 'block';
             }
             
+            loadCart();
             updateCartDisplay();
             showCartSummaryBar();
 

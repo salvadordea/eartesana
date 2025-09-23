@@ -429,11 +429,11 @@ class SupabaseAPI {
             inStock: product.in_stock,
             totalSales: product.total_sales,
             averageRating: product.average_rating,
-            mainImage: this.processImageUrl(product.main_image_url),
+            mainImage: this.processImageUrl(product.main_image_url, product.name),
             permalink: product.permalink,
             categories: product.categories || [],
             category_ids: product.category_ids || [],
-            images: (product.images || []).map(img => this.processImageUrl(img)),
+            images: (product.images || []).map(img => this.processImageUrl(img, product.name)),
             createdAt: product.created_at
         };
     }
@@ -441,9 +441,17 @@ class SupabaseAPI {
     /**
      * Procesar URLs de imágenes para manejar fallbacks
      */
-    processImageUrl(imageUrl) {
+    processImageUrl(imageUrl, productName = '') {
+        // Si no hay imageUrl, generar la ruta por defecto usando principal.jpg
         if (!imageUrl) {
-            // Usar placeholder desde Supabase Storage
+            if (productName) {
+                // Convertir nombre del producto a formato de carpeta (sin espacios, lowercase)
+                const folderName = this.sanitizeProductName(productName);
+                const defaultImagePath = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${folderName}/principal.jpg`;
+                console.log(`📸 Usando imagen por defecto: ${defaultImagePath}`);
+                return defaultImagePath;
+            }
+            // Fallback general si no hay nombre de producto
             return 'https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/placeholder-product.jpg';
         }
         
@@ -459,6 +467,18 @@ class SupabaseAPI {
         
         // Para cualquier otra URL, retornarla tal como está
         return imageUrl;
+    }
+
+    /**
+     * Sanitizar nombre de producto para generar nombre de carpeta
+     */
+    sanitizeProductName(productName) {
+        return productName
+            .toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, '') // Remover caracteres especiales
+            .replace(/\s+/g, '-') // Reemplazar espacios con guiones
+            .replace(/-+/g, '-') // Remover múltiples guiones consecutivos
+            .replace(/^-|-$/g, ''); // Remover guiones al inicio y final
     }
 
     /**

@@ -57,6 +57,57 @@
                     </div>
 
                     <form class="checkout-form" id="checkoutForm">
+                        <style>
+                            /* Payment Instructions Styles */
+                            .payment-instructions {
+                                background: var(--dark-surface-light);
+                                border: 1px solid var(--border-color);
+                                border-radius: 8px;
+                                padding: 20px;
+                                margin-top: 20px;
+                            }
+
+                            .payment-instructions h4 {
+                                color: var(--silver-accent);
+                                margin: 0 0 15px;
+                                display: flex;
+                                align-items: center;
+                                gap: 8px;
+                            }
+
+                            .payment-instructions ul {
+                                margin: 0;
+                                padding-left: 20px;
+                                list-style-type: none;
+                            }
+
+                            .payment-instructions li {
+                                color: var(--text-secondary);
+                                margin-bottom: 10px;
+                                position: relative;
+                            }
+
+                            .payment-instructions li:before {
+                                content: '•';
+                                position: absolute;
+                                left: -15px;
+                                color: var(--silver-accent);
+                            }
+
+                            .bank-info {
+                                background: var(--dark-bg);
+                                border: 1px solid var(--border-color);
+                                border-radius: 8px;
+                                padding: 15px;
+                                margin: 15px 0;
+                                font-family: 'Courier New', monospace;
+                            }
+
+                            .bank-info strong {
+                                color: var(--silver-accent);
+                                margin-right: 5px;
+                            }
+                        </style>
                         <!-- Contact Information -->
                         <div class="form-section">
                             <h3><i class="fas fa-user"></i> Información de Contacto</h3>
@@ -158,29 +209,26 @@
                             <h3><i class="fas fa-credit-card"></i> Método de Pago</h3>
                             <div class="payment-options">
                                 <label class="payment-option">
-                                    <input type="radio" name="paymentMethod" value="credit_30" checked>
-                                    <span class="payment-icon"><i class="fas fa-calendar-alt"></i></span>
-                                    <div class="payment-text">
-                                        <strong>Crédito a 30 Días</strong>
-                                        <small>Pago posterior con términos mayoristas</small>
-                                    </div>
-                                </label>
-                                <label class="payment-option">
-                                    <input type="radio" name="paymentMethod" value="bank_transfer">
+                                    <input type="radio" name="paymentMethod" value="transferencia" checked>
                                     <span class="payment-icon"><i class="fas fa-university"></i></span>
                                     <div class="payment-text">
                                         <strong>Transferencia Bancaria</strong>
-                                        <small>Pago inmediato por transferencia</small>
+                                        <small>Pago por transferencia con términos de crédito a 30 días</small>
                                     </div>
                                 </label>
                                 <label class="payment-option">
-                                    <input type="radio" name="paymentMethod" value="credit_card">
-                                    <span class="payment-icon"><i class="fas fa-credit-card"></i></span>
+                                    <input type="radio" name="paymentMethod" value="efectivo_contra_entrega">
+                                    <span class="payment-icon"><i class="fas fa-hand-holding-usd"></i></span>
                                     <div class="payment-text">
-                                        <strong>Tarjeta de Crédito</strong>
-                                        <small>Pago inmediato con tarjeta</small>
+                                        <strong>Efectivo Contra Entrega</strong>
+                                        <small>Pago en efectivo al recibir el pedido</small>
                                     </div>
                                 </label>
+                            </div>
+
+                            <!-- Payment Instructions -->
+                            <div id="paymentInstructions" class="payment-instructions" style="display: none;">
+                                <!-- Instructions will be shown based on selected payment method -->
                             </div>
                         </div>
 
@@ -692,9 +740,8 @@
             document.getElementById('orderTotal').textContent = `$${orderData.total.toFixed(2)}`;
             
             const paymentMethods = {
-                'credit_30': 'Crédito a 30 días',
-                'bank_transfer': 'Transferencia bancaria',
-                'credit_card': 'Tarjeta de crédito'
+                'transferencia': 'Transferencia bancaria (crédito 30 días)',
+                'efectivo_contra_entrega': 'Efectivo contra entrega'
             };
             document.getElementById('orderPaymentMethod').textContent = paymentMethods[orderData.paymentMethod];
             
@@ -735,6 +782,46 @@
         }
 
         // Initialize checkout
+        // Update payment instructions
+        function updatePaymentInstructions() {
+            const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            const instructionsDiv = document.getElementById('paymentInstructions');
+
+            if (selectedMethod === 'transferencia') {
+                instructionsDiv.innerHTML = `
+                    <h4><i class="fas fa-info-circle"></i> Instrucciones para Transferencia</h4>
+                    <ul>
+                        <li>Realiza tu transferencia a los siguientes datos bancarios:</li>
+                    </ul>
+                    <div class="bank-info">
+                        <p><strong>Banco:</strong> BBVA</p>
+                        <p><strong>Cuenta:</strong> 012180015512345678</p>
+                        <p><strong>CLABE:</strong> 012180015512345678</p>
+                        <p><strong>Beneficiario:</strong> Estudio Artesana SA de CV</p>
+                        <p><strong>RFC:</strong> EAR123456789</p>
+                    </div>
+                    <ul>
+                        <li>Términos de pago a 30 días</li>
+                        <li>Envía tu comprobante de pago al correo: pagos@estudioartesana.com</li>
+                        <li>Tu pedido será procesado al confirmar el pago</li>
+                    </ul>
+                `;
+            } else if (selectedMethod === 'efectivo_contra_entrega') {
+                instructionsDiv.innerHTML = `
+                    <h4><i class="fas fa-info-circle"></i> Instrucciones para Pago Contra Entrega</h4>
+                    <ul>
+                        <li>Prepara el pago en efectivo por el monto total del pedido</li>
+                        <li>El pago se realizará al momento de recibir tu pedido</li>
+                        <li>Te contactaremos para coordinar la entrega</li>
+                        <li>Por favor ten el monto exacto disponible</li>
+                        <li>Recibirás un comprobante de pago al momento de la entrega</li>
+                    </ul>
+                `;
+            }
+
+            instructionsDiv.style.display = 'block';
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🛒 Checkout mayoristas inicializado');
             
@@ -744,6 +831,14 @@
             
             // Setup form interactions
             document.getElementById('sameAsShipping').addEventListener('change', toggleBillingAddress);
+            
+            // Setup payment method instructions
+            document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+                radio.addEventListener('change', updatePaymentInstructions);
+            });
+            
+            // Show initial payment instructions
+            updatePaymentInstructions();
             
             // Close modal when clicking outside
             document.addEventListener('click', function(e) {

@@ -326,51 +326,59 @@ class ProductoManager {
     }
 
     renderVariants() {
-        if (!this.product.variants || this.product.variants.length === 0) {
+        if (!this.product.variations || this.product.variations.length === 0) {
             return;
         }
 
         const variantsContainer = document.getElementById('productVariants');
         if (!variantsContainer) return;
 
-        // Agrupar variantes por tipo (color, tamaño, etc.)
-        const variantGroups = this.groupVariantsByType();
-
         let variantsHTML = '';
-        Object.keys(variantGroups).forEach(type => {
+        
+        // Agrupar variantes por color
+        const colorVariants = this.product.variations.filter(variant => variant.color && variant.colorHex);
+        if (colorVariants.length > 0) {
             variantsHTML += `
                 <div class="variant-group">
-                    <h4>${this.capitalizeFirst(type)}</h4>
-                    <div class="variant-options" data-variant-type="${type}">
-                        ${variantGroups[type].map(variant => `
-                            <div class="variant-option ${variant.available ? '' : 'unavailable'}" 
+                    <h4>Color</h4>
+                    <div class="color-variants" data-variant-type="color">
+                        ${colorVariants.map(variant => `
+                            <div class="color-option ${variant.inStock ? '' : 'out-of-stock'}" 
                                  data-variant-id="${variant.id}"
-                                 onclick="productoManager.selectVariant('${variant.id}', '${type}')">
-                                ${variant.name}
-                                ${!variant.available ? '<span class="unavailable-text">No disponible</span>' : ''}
+                                 onclick="productoManager.selectVariant('${variant.id}', 'color')">
+                                <div class="color-swatch" style="background-color: ${variant.colorHex}"></div>
+                                <span class="color-name">${variant.color}</span>
                             </div>
                         `).join('')}
                     </div>
                 </div>
             `;
-        });
+        }
+
+        // Agrupar variantes sin color (otros tipos)
+        const otherVariants = this.product.variations.filter(variant => !variant.color);
+        if (otherVariants.length > 0) {
+            variantsHTML += `
+                <div class="variant-group">
+                    <h4>Variantes</h4>
+                    <div class="variant-options" data-variant-type="variant">
+                        ${otherVariants.map(variant => `
+                            <div class="variant-option ${variant.inStock ? '' : 'unavailable'}" 
+                                 data-variant-id="${variant.id}"
+                                 onclick="productoManager.selectVariant('${variant.id}', 'variant')">
+                                ${variant.name}
+                                ${!variant.inStock ? '<span class="unavailable-text">No disponible</span>' : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
 
         variantsContainer.innerHTML = variantsHTML;
     }
 
-    groupVariantsByType() {
-        const groups = {};
-        
-        this.product.variants.forEach(variant => {
-            const type = variant.type || 'opciones';
-            if (!groups[type]) {
-                groups[type] = [];
-            }
-            groups[type].push(variant);
-        });
-
-        return groups;
-    }
+    // Eliminamos groupVariantsByType() ya que ahora manejamos las variantes directamente
 
     renderProductTabs() {
         // Tab de descripción
@@ -551,21 +559,38 @@ class ProductoManager {
     // Variant Selection
     selectVariant(variantId, type) {
         // Remover selección previa del mismo tipo
-        document.querySelectorAll(`[data-variant-type="${type}"] .variant-option`).forEach(opt => {
-            opt.classList.remove('selected');
-        });
+        if (type === 'color') {
+            document.querySelectorAll('.color-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+        } else {
+            document.querySelectorAll(`[data-variant-type="${type}"] .variant-option`).forEach(opt => {
+                opt.classList.remove('selected');
+            });
+        }
 
         // Seleccionar nueva variante
         const variantElement = document.querySelector(`[data-variant-id="${variantId}"]`);
-        if (variantElement && !variantElement.classList.contains('unavailable')) {
+        if (!variantElement) return;
+
+        const isOutOfStock = variantElement.classList.contains('out-of-stock') || 
+                            variantElement.classList.contains('unavailable');
+
+        if (!isOutOfStock) {
             variantElement.classList.add('selected');
             
             // Actualizar variante seleccionada
-            this.selectedVariant = this.product.variants.find(v => v.id === variantId);
+            this.selectedVariant = this.product.variations.find(v => v.id === variantId);
             
-            // Actualizar precio si la variante tiene precio diferente
-            if (this.selectedVariant && this.selectedVariant.priceModifier) {
+            // Actualizar precio y stock si la variante lo requiere
+            if (this.selectedVariant) {
                 this.updatePriceWithVariant();
+                this.updateStockDisplay(this.selectedVariant.stock);
+                
+                // Si la variante tiene imagen, actualizarla
+                if (this.selectedVariant.image) {
+                    this.selectImage(this.images.indexOf(this.selectedVariant.image));
+                }
             }
         }
     }

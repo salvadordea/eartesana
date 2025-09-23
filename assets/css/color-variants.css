@@ -1,0 +1,78 @@
+/* Color Variants - Estudio Artesana */
+
+/* Color Option Container */
+.color-variants {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+/* Individual Color Option */
+.color-option {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.color-option:hover {
+    transform: scale(1.1);
+}
+
+.color-option.selected {
+    border-color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+/* Color Swatch */
+.color-swatch {
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+}
+
+/* Color Name Tooltip */
+.color-name {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.color-option:hover .color-name {
+    opacity: 1;
+    visibility: visible;
+    bottom: -30px;
+}
+
+/* Stock Status */
+.color-option.out-of-stock {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.color-option.out-of-stock::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -15%;
+    width: 130%;
+    height: 2px;
+    background: #ff4444;
+    transform: rotate(-45deg);
+}
