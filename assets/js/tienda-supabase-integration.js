@@ -4,6 +4,15 @@
  * Script que conecta la funcionalidad de la tienda con Supabase API
  */
 
+// Global state management for persistent data across navigation
+window.EstArtesanaGlobalState = window.EstArtesanaGlobalState || {
+    products: [],
+    categories: [],
+    isDataLoaded: false,
+    lastLoadTime: null,
+    cacheExpiryMinutes: 5 // Cache expires after 5 minutes
+};
+
 class TiendaSupabaseIntegration {
     constructor() {
         this.currentFilters = {
@@ -20,32 +29,419 @@ class TiendaSupabaseIntegration {
         this.currentSort = 'title-asc';
         this.allProducts = [];
         this.allCategories = [];
-        
+
+        // Optimistic Loading System
+        this.isInitialized = false;
+        this.pendingCategorySelection = null;
+        this.initializationPromise = null;
+
+        // Enhanced Performance Optimization
+        this.filteredProductsCache = new Map(); // Cache filtered results
+        this.preloadedCategories = new Set(); // Track preloaded categories
+        this.searchCache = new Map(); // Cache search results
+        this.categoryCache = new Map(); // Cache category-specific results
+        this.lastCacheCleanup = Date.now(); // Track cache cleanup time
+
+        // Check if we have cached data
+        this.globalState = window.EstArtesanaGlobalState;
+        this.hasCachedData = this.checkCachedData();
+
         console.log('🛒 Integración Tienda-Supabase inicializada');
+        if (this.hasCachedData) {
+            console.log('🚀 Datos en caché encontrados, inicialización rápida disponible');
+        }
     }
 
     async init() {
         console.log('🔄 Inicializando tienda...');
-        
+
         try {
             // Verificar que el API esté disponible
             if (!window.artesanaAPI) {
                 throw new Error('API de Supabase no disponible');
             }
 
-            // Cargar datos iniciales
-            await this.loadCategories();
-            await this.loadProducts();
-            
-            // Configurar event listeners
-            this.setupEventListeners();
-            
-            console.log('✅ Tienda inicializada correctamente');
-            
+            // Leer filtros iniciales desde URL
+            this.readInitialFiltersFromURL();
+
+            // Load data - use cache if available for fast initialization
+            if (this.hasCachedData) {
+                console.log('⚡ Inicialización rápida usando datos en caché');
+
+                // Load from cache immediately
+                this.loadFromCache();
+
+                // Set up UI immediately
+                this.renderCategoriesGrid();
+                this.setupEventListeners();
+                this.initializeSearch();
+
+                // Mark as initialized immediately
+                this.isInitialized = true;
+                this.executePendingActions();
+
+                console.log('🚀 Tienda inicializada instantáneamente desde caché');
+
+                // Start preloading popular categories in background
+                this.preloadPopularCategories();
+
+                // Optionally refresh data in background (without blocking UI)
+                this.refreshDataInBackground();
+
+            } else {
+                console.log('📥 Primera carga - obteniendo datos frescos');
+
+                // First time load or cache expired
+                await this.loadCategories();
+                await this.loadProducts();
+
+                // Save to cache for next time
+                this.saveToCache();
+
+                // Configure event listeners
+                this.setupEventListeners();
+                this.initializeSearch();
+
+                // Mark as initialized and execute pending actions
+                this.isInitialized = true;
+                this.executePendingActions();
+
+                console.log('✅ Tienda inicializada correctamente con datos frescos');
+
+                // Start preloading popular categories in background
+                this.preloadPopularCategories();
+            }
+
         } catch (error) {
             console.error('❌ Error inicializando tienda:', error);
             this.showError('Error cargando la tienda');
         }
+    }
+
+    readInitialFiltersFromURL() {
+        try {
+            const params = new URLSearchParams(window.location.search);
+
+            // Leer parámetros de categoría
+            const categoryParam = params.get('category') || params.get('categoria');
+            if (categoryParam) {
+                this.currentFilters.category = categoryParam;
+                console.log(`🔍 Categoría desde URL: ${categoryParam}`);
+            }
+
+            // Leer parámetro de búsqueda
+            const searchParam = params.get('search') || params.get('s');
+            if (searchParam) {
+                this.currentFilters.search = searchParam;
+                console.log(`🔍 Búsqueda desde URL: ${searchParam}`);
+            }
+
+        } catch (error) {
+            console.warn('⚠️ Error leyendo parámetros URL:', error);
+        }
+    }
+
+    // Cache Management Methods
+    checkCachedData() {
+        if (!this.globalState.isDataLoaded) return false;
+
+        // Check if cache has expired
+        if (this.globalState.lastLoadTime) {
+            const now = new Date();
+            const cacheTime = new Date(this.globalState.lastLoadTime);
+            const diffMinutes = (now - cacheTime) / (1000 * 60);
+
+            if (diffMinutes > this.globalState.cacheExpiryMinutes) {
+                console.log(`⏰ Cache expired (${diffMinutes.toFixed(1)} minutes old), will refresh data`);
+                this.globalState.isDataLoaded = false;
+                return false;
+            }
+        }
+
+        return this.globalState.products.length > 0 && this.globalState.categories.length > 0;
+    }
+
+    loadFromCache() {
+        console.log('⚡ Cargando datos desde caché...');
+
+        this.allProducts = [...this.globalState.products];
+        this.allCategories = [...this.globalState.categories];
+
+        console.log(`📦 ${this.allProducts.length} productos cargados desde caché`);
+        console.log(`📂 ${this.allCategories.length} categorías cargadas desde caché`);
+    }
+
+    saveToCache() {
+        console.log('💾 Guardando datos en caché...');
+
+        this.globalState.products = [...this.allProducts];
+        this.globalState.categories = [...this.allCategories];
+        this.globalState.isDataLoaded = true;
+        this.globalState.lastLoadTime = new Date().toISOString();
+
+        console.log('✅ Datos guardados en caché global');
+    }
+
+    async refreshDataInBackground() {
+        console.log('🔄 Actualizando datos en segundo plano...');
+
+        try {
+            // Use requestIdleCallback for non-blocking background updates
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(async () => {
+                    await this.performBackgroundRefresh();
+                }, { timeout: 5000 });
+            } else {
+                // Fallback for browsers without requestIdleCallback
+                setTimeout(() => this.performBackgroundRefresh(), 2000);
+            }
+
+        } catch (error) {
+            console.warn('⚠️ Error iniciando actualización en segundo plano:', error);
+        }
+    }
+
+    async performBackgroundRefresh() {
+        try {
+            // Load fresh data without affecting UI
+            const freshProducts = [];
+            const freshCategories = [];
+
+            // Get fresh data with timeout to prevent hanging
+            const fetchWithTimeout = (promise, timeout = 10000) => {
+                return Promise.race([
+                    promise,
+                    new Promise((_, reject) =>
+                        setTimeout(() => reject(new Error('Timeout')), timeout)
+                    )
+                ]);
+            };
+
+            // Fetch categories and products in parallel
+            const [categoriesResponse, productsResponse] = await Promise.allSettled([
+                fetchWithTimeout(window.artesanaAPI.getCategories()),
+                fetchWithTimeout(window.artesanaAPI.getProducts(1, 100))
+            ]);
+
+            // Process categories
+            if (categoriesResponse.status === 'fulfilled') {
+                freshCategories.push(...categoriesResponse.value.categories);
+            } else {
+                console.warn('⚠️ Background categories refresh failed:', categoriesResponse.reason);
+            }
+
+            // Process products
+            if (productsResponse.status === 'fulfilled') {
+                freshProducts.push(...productsResponse.value.products);
+            } else {
+                console.warn('⚠️ Background products refresh failed:', productsResponse.reason);
+            }
+
+            // Only update cache if we got fresh data
+            if (freshCategories.length > 0 && freshProducts.length > 0) {
+                // Update global cache
+                this.globalState.products = freshProducts;
+                this.globalState.categories = freshCategories;
+                this.globalState.lastLoadTime = new Date().toISOString();
+
+                // Invalidate old filtered caches to force refresh with new data
+                this.invalidateCache();
+
+                // Optionally update local arrays if user isn't actively interacting
+                if (!this.isUserInteracting()) {
+                    this.allProducts = [...freshProducts];
+                    this.allCategories = [...freshCategories];
+                    this.updateCategoryBadges(); // Update counts with fresh data
+                }
+
+                console.log('✅ Datos actualizados en segundo plano');
+            } else {
+                console.log('⚠️ No se obtuvieron datos frescos completos, manteniendo cache');
+            }
+
+        } catch (error) {
+            console.warn('⚠️ Error actualizando datos en segundo plano:', error);
+            // Fail silently - user already has cached data working
+        }
+    }
+
+    // Check if user is actively interacting (to avoid disrupting experience)
+    isUserInteracting() {
+        // Check if user has active filters, search, or recent navigation
+        const hasFilters = this.currentFilters.category ||
+                          this.currentFilters.search ||
+                          this.currentFilters.minPrice ||
+                          this.currentFilters.maxPrice;
+
+        // Check if user was active in the last 30 seconds
+        const lastActivity = this.lastUserActivity || 0;
+        const isRecentlyActive = (Date.now() - lastActivity) < 30000;
+
+        return hasFilters || isRecentlyActive;
+    }
+
+    // Track user activity for smarter background updates
+    trackUserActivity() {
+        this.lastUserActivity = Date.now();
+    }
+
+    // Format price with comma separators and superscript cents
+    formatPrice(price) {
+        if (!price) return '$0.00';
+
+        const numPrice = parseFloat(price);
+        if (isNaN(numPrice)) return '$0.00';
+
+        // Format with comma separators
+        const formatted = numPrice.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+        // Split into dollars and cents
+        const [dollars, cents] = formatted.split('.');
+
+        // Return with superscript cents
+        return `$${dollars}.<sup>${cents}</sup>`;
+    }
+
+    updateURL() {
+        try {
+            const params = new URLSearchParams();
+
+            if (this.currentFilters.category) {
+                params.set('category', this.currentFilters.category);
+            }
+
+            if (this.currentFilters.search) {
+                params.set('search', this.currentFilters.search);
+            }
+
+            const newUrl = params.toString() ?
+                `${window.location.pathname}?${params.toString()}` :
+                window.location.pathname;
+
+            window.history.replaceState({}, '', newUrl);
+
+        } catch (error) {
+            console.warn('⚠️ Error actualizando URL:', error);
+        }
+    }
+
+    // Optimistic Loading Methods
+    executePendingActions() {
+        if (this.pendingCategorySelection) {
+            console.log(`🚀 Ejecutando selección pendiente: ${this.pendingCategorySelection}`);
+
+            const categoryName = this.pendingCategorySelection;
+            this.pendingCategorySelection = null;
+
+            // Clear any loading messages
+            this.clearLoadingStates();
+
+            // Execute the category selection
+            this.selectCategoryImmediate(categoryName);
+        }
+    }
+
+    clearLoadingStates() {
+        // Clear category loading states
+        const loadingMessages = document.querySelectorAll('.category-loading-message');
+        loadingMessages.forEach(msg => msg.remove());
+
+        // Clear product loading states
+        const productsLoading = document.getElementById('productsLoading');
+        if (productsLoading) {
+            productsLoading.style.display = 'none';
+        }
+    }
+
+    showCategoryLoadingState(categoryName) {
+        // Hide categories grid
+        this.hideCategoriesWithAnimation();
+
+        // Show loading message in products container
+        const productsContainer = document.getElementById('productsContainer');
+        const productsGrid = document.getElementById('productsGrid');
+
+        if (productsContainer && productsGrid) {
+            // Clear existing content
+            productsGrid.innerHTML = '';
+
+            // Show loading message
+            const loadingMessage = document.createElement('div');
+            loadingMessage.className = 'category-loading-message';
+            loadingMessage.innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <div style="display: inline-block; margin-bottom: 20px;">
+                        <div class="spinner" style="border: 3px solid #f3f3f3; border-top: 3px solid #333; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;"></div>
+                    </div>
+                    <h3>Cargando productos de ${categoryName}...</h3>
+                    <p>Un momento por favor</p>
+                </div>
+
+                <style>
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+                </style>
+            `;
+
+            productsGrid.appendChild(loadingMessage);
+            this.showProductsSection();
+        }
+    }
+
+    // Métodos auxiliares para normalización de categorías
+    normalizeCategoryName(categoryName) {
+        if (!categoryName) return '';
+
+        return categoryName
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, ' ') // Reemplazar múltiples espacios por uno solo
+            .replace(/[áàäâ]/g, 'a')
+            .replace(/[éèëê]/g, 'e')
+            .replace(/[íìïî]/g, 'i')
+            .replace(/[óòöô]/g, 'o')
+            .replace(/[úùüû]/g, 'u')
+            .replace(/ñ/g, 'n');
+    }
+
+    categoryNamesMatch(cat1, cat2) {
+        // Mapeo de nombres alternativos comunes
+        const categoryAliases = {
+            'portacel': ['portacelular', 'porta cel', 'porta celular', 'portacell'],
+            'bolsas de mano': ['bolsas mano', 'bolsademano'],
+            'bolsas grandes': ['bolsas grande', 'bolsa grande'],
+            'bolsas cruzadas': ['bolsas cruzada', 'bolsa cruzada'],
+            'botelleras': ['botellera', 'porta botellas'],
+            'joyeria': ['joyería', 'jewelry'],
+            'accesorios': ['accesorio']
+        };
+
+        // Verificar si coinciden con alias
+        for (const [canonical, aliases] of Object.entries(categoryAliases)) {
+            if ((cat1 === canonical || aliases.includes(cat1)) &&
+                (cat2 === canonical || aliases.includes(cat2))) {
+                return true;
+            }
+        }
+
+        // Verificar coincidencia parcial para categorías compuestas
+        const words1 = cat1.split(' ');
+        const words2 = cat2.split(' ');
+
+        // Si una categoría está contenida en la otra
+        if (words1.length > 1 && words2.length === 1) {
+            return words1.includes(words2[0]);
+        }
+        if (words2.length > 1 && words1.length === 1) {
+            return words2.includes(words1[0]);
+        }
+
+        return false;
     }
 
     async loadCategories() {
@@ -81,9 +477,12 @@ class TiendaSupabaseIntegration {
             console.log('🔍 DIAGNÓSTICO - Categorías del primer producto:', this.allProducts[0]?.categories);
             console.log('🔍 DIAGNÓSTICO - Category_ids del primer producto:', this.allProducts[0]?.category_ids);
             
+            // Update category badges with real counts now that products are loaded
+            this.updateCategoryBadges();
+
             // NO renderizar productos inicialmente, solo cargar los datos
             console.log(`✅ ${this.allProducts.length} productos cargados`);
-            
+
         } catch (error) {
             console.error('❌ Error cargando productos:', error);
             this.showProductsError();
@@ -146,22 +545,83 @@ class TiendaSupabaseIntegration {
         console.log('🎯 Orden final de categorías en grid:', categoriesWithProducts.map(cat => cat.name));
 
         categoriesGrid.innerHTML = categoriesWithProducts.map(category => {
-            const productCount = this.getProductCountForCategory(category.id);
+            // Progressive enhancement: show placeholder count if products not loaded yet
+            let badgeHTML = '';
+            if (this.allProducts.length > 0) {
+                // Products loaded - show real count
+                const productCount = this.getProductCountForCategory(category.id);
+                if (productCount > 0) {
+                    badgeHTML = `<div class="category-badge">${productCount}</div>`;
+                }
+            } else {
+                // Products not loaded yet - show placeholder
+                badgeHTML = `<div class="category-badge category-badge-placeholder">⋯</div>`;
+            }
+
             return `
-                <div class="category-card" onclick="tiendaIntegration.selectCategory('${category.name}')">
+                <div class="category-card" data-category-name="${category.name}">
                     <div class="category-image">
-                        <img src="${category.image || 'assets/images/category-placeholder.jpg'}" 
+                        <img src="${category.image || 'assets/images/category-placeholder.jpg'}"
                              alt="${category.name}" loading="lazy">
                     </div>
                     <div class="category-info">
                         <h3 class="category-name">${category.name}</h3>
                     </div>
-                    ${productCount > 0 ? `<div class="category-badge">${productCount}</div>` : ''}
+                    ${badgeHTML}
                 </div>
             `;
         }).join('');
 
+        // Add event listeners to category cards
+        this.attachCategoryCardListeners();
+
         categoriesGrid.style.display = 'grid';
+    }
+
+    updateCategoryBadges() {
+        // Update placeholders with real product counts
+        const categoryCards = document.querySelectorAll('.category-card[data-category-name]');
+
+        categoryCards.forEach(card => {
+            const categoryName = card.getAttribute('data-category-name');
+            const category = this.allCategories.find(cat => cat.name === categoryName);
+
+            if (category) {
+                const productCount = this.getProductCountForCategory(category.id);
+                const badge = card.querySelector('.category-badge');
+
+                if (badge) {
+                    if (productCount > 0) {
+                        badge.textContent = productCount;
+                        badge.className = 'category-badge'; // Remove placeholder class
+                    } else {
+                        badge.remove(); // Remove badge if no products
+                    }
+                }
+            }
+        });
+
+        console.log('🔄 Category badges updated with real product counts');
+    }
+
+    attachCategoryCardListeners() {
+        const categoryCards = document.querySelectorAll('.category-card[data-category-name]');
+
+        categoryCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                const categoryName = card.getAttribute('data-category-name');
+                console.log(`🎯 Category card clicked: ${categoryName}`);
+
+                if (categoryName) {
+                    this.selectCategory(categoryName);
+                }
+            });
+
+            // Add hover effect for better UX
+            card.style.cursor = 'pointer';
+        });
+
+        console.log(`✅ Attached listeners to ${categoryCards.length} category cards`);
     }
 
     renderCategoriesFilters() {
@@ -291,22 +751,466 @@ class TiendaSupabaseIntegration {
                     </div>
                     <h3 class="product-title">${product.name}</h3>
                     <div class="product-price">
-                        ${product.onSale && product.salePrice ? 
-                            `<span class="sale-price">$${product.salePrice}</span>
-                             <span class="regular-price">$${product.price}</span>` :
-                            `<span class="current-price">$${product.price}</span>`
+                        ${product.onSale && product.salePrice ?
+                            `<span class="sale-price">${this.formatPrice(product.salePrice)}</span>
+                             <span class="regular-price">${this.formatPrice(product.price)}</span>` :
+                            `<span class="current-price">${this.formatPrice(product.price)}</span>`
                         }
                     </div>
                     <div class="product-rating">
                         ${this.renderStars(product.averageRating || 4.8)}
                         <span class="rating-count">(${product.totalSales || 0})</span>
                     </div>
-                    ${!product.inStock ? '<span class="out-of-stock">Sin stock</span>' : ''}
+                    <div class="product-stock">
+                        ${this.renderStockStatus(product.totalStock, product.hasVariants)}
+                    </div>
                 </div>
             </div>
         `).join('');
 
         productsGrid.style.display = 'grid';
+    }
+
+    // Optimized instant product rendering with enhanced lazy loading
+    renderProductsInstant() {
+        const productsGrid = document.getElementById('productsGrid');
+        const productsLoading = document.getElementById('productsLoading');
+        const productsResults = document.getElementById('productsResults');
+
+        if (!productsGrid) return;
+
+        // Try to get cached results first with TTL
+        const cacheKey = this.getCacheKey();
+        let filteredProducts = this.getCachedResults(cacheKey);
+
+        if (!filteredProducts) {
+            // Apply filters and cache the result with timestamp
+            filteredProducts = this.applyFilters(this.allProducts);
+            filteredProducts = this.applySorting(filteredProducts);
+            this.setCachedResults(cacheKey, filteredProducts);
+            console.log(`🔄 Results computed and cached: ${filteredProducts.length} products`);
+        } else {
+            console.log(`⚡ Using cached results: ${filteredProducts.length} products`);
+        }
+
+        // Update results counter
+        if (productsResults) {
+            const resultsCount = productsResults.querySelector('.results-count');
+            if (resultsCount) {
+                resultsCount.textContent = `${filteredProducts.length} producto${filteredProducts.length !== 1 ? 's' : ''} encontrado${filteredProducts.length !== 1 ? 's' : ''}`;
+            }
+        }
+
+        // Handle no results
+        if (filteredProducts.length === 0) {
+            if (productsLoading) productsLoading.style.display = 'none';
+            document.getElementById('noResults')?.style.setProperty('display', 'block');
+            productsGrid.style.display = 'none';
+            return;
+        }
+
+        document.getElementById('noResults')?.style.setProperty('display', 'none');
+
+        // Show skeleton loading for instant feedback
+        this.showSkeletonLoading(productsGrid, Math.min(12, filteredProducts.length));
+
+        // Progressive loading with better UX
+        setTimeout(() => {
+            this.renderProductsProgressive(filteredProducts, productsGrid, productsLoading);
+        }, 50); // Small delay to show skeleton briefly
+    }
+
+    // Progressive product rendering for better perceived performance
+    renderProductsProgressive(filteredProducts, productsGrid, productsLoading) {
+        // Hide loading spinner
+        if (productsLoading) productsLoading.style.display = 'none';
+
+        // Clear grid and show first batch
+        productsGrid.innerHTML = '';
+
+        const batchSize = 6; // Render 6 products at a time for smoother experience
+        let currentIndex = 0;
+
+        const renderBatch = () => {
+            const fragment = document.createDocumentFragment();
+            const endIndex = Math.min(currentIndex + batchSize, filteredProducts.length);
+
+            for (let i = currentIndex; i < endIndex; i++) {
+                const productCard = this.createProductCard(filteredProducts[i]);
+                fragment.appendChild(productCard);
+            }
+
+            productsGrid.appendChild(fragment);
+            productsGrid.style.display = 'grid';
+
+            currentIndex = endIndex;
+
+            // Continue rendering if more products remain
+            if (currentIndex < filteredProducts.length) {
+                // Use requestIdleCallback for non-blocking rendering
+                if ('requestIdleCallback' in window) {
+                    requestIdleCallback(() => renderBatch(), { timeout: 100 });
+                } else {
+                    // Fallback for browsers without requestIdleCallback
+                    setTimeout(renderBatch, 16); // ~60fps
+                }
+            } else {
+                console.log(`✅ ${filteredProducts.length} products rendered progressively`);
+            }
+        };
+
+        // Start progressive rendering
+        renderBatch();
+    }
+
+    // Show skeleton loading for instant feedback
+    showSkeletonLoading(productsGrid, count) {
+        const skeletonHtml = Array(count).fill(0).map(() => `
+            <div class="product-card skeleton-card">
+                <div class="product-image skeleton-shimmer">
+                    <div class="skeleton-placeholder"></div>
+                </div>
+                <div class="product-info">
+                    <div class="skeleton-text skeleton-shimmer" style="width: 60%; height: 12px; margin-bottom: 8px;"></div>
+                    <div class="skeleton-text skeleton-shimmer" style="width: 100%; height: 16px; margin-bottom: 12px;"></div>
+                    <div class="skeleton-text skeleton-shimmer" style="width: 40%; height: 14px;"></div>
+                </div>
+            </div>
+        `).join('');
+
+        productsGrid.innerHTML = skeletonHtml;
+        productsGrid.style.display = 'grid';
+
+        // Add skeleton CSS if not already added
+        this.addSkeletonCSS();
+    }
+
+    // Add skeleton loading styles
+    addSkeletonCSS() {
+        if (document.getElementById('skeleton-styles')) return;
+
+        const style = document.createElement('style');
+        style.id = 'skeleton-styles';
+        style.textContent = `
+            .skeleton-card {
+                pointer-events: none;
+            }
+
+            .skeleton-shimmer {
+                background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+                background-size: 200% 100%;
+                animation: shimmer 1.5s infinite;
+            }
+
+            .skeleton-placeholder {
+                width: 100%;
+                height: 200px;
+                border-radius: 4px;
+            }
+
+            .skeleton-text {
+                border-radius: 4px;
+            }
+
+            @keyframes shimmer {
+                0% { background-position: -200% 0; }
+                100% { background-position: 200% 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // Optimized product card creation using DOM methods (faster than innerHTML)
+    createProductCard(product) {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.onclick = () => window.location.href = `producto.html?id=${product.id}`;
+
+        // Create image container
+        const imageDiv = document.createElement('div');
+        imageDiv.className = 'product-image';
+
+        const img = document.createElement('img');
+        img.src = product.mainImage || 'assets/images/product-placeholder.jpg';
+        img.alt = product.name;
+        img.loading = 'lazy';
+        imageDiv.appendChild(img);
+
+        // Add badges if present
+        if (product.onSale) {
+            const saleBadge = document.createElement('span');
+            saleBadge.className = 'sale-badge';
+            saleBadge.textContent = 'En Oferta';
+            imageDiv.appendChild(saleBadge);
+        }
+
+        if (product.featured) {
+            const featuredBadge = document.createElement('span');
+            featuredBadge.className = 'featured-badge';
+            featuredBadge.textContent = 'Destacado';
+            imageDiv.appendChild(featuredBadge);
+        }
+
+        // Create product info
+        const infoDiv = document.createElement('div');
+        infoDiv.className = 'product-info';
+
+        // Category
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'product-categories';
+        const categorySpan = document.createElement('span');
+        categorySpan.className = 'product-category';
+        categorySpan.textContent = product.category_id ?
+            this.getCategoryNameById(product.category_id) : 'Sin categoría';
+        categoryDiv.appendChild(categorySpan);
+
+        // Title
+        const title = document.createElement('h3');
+        title.className = 'product-title';
+        title.textContent = product.name;
+
+        // Price
+        const priceDiv = document.createElement('div');
+        priceDiv.className = 'product-price';
+
+        if (product.onSale && product.salePrice) {
+            const salePrice = document.createElement('span');
+            salePrice.className = 'sale-price';
+            salePrice.innerHTML = this.formatPrice(product.salePrice);
+
+            const regularPrice = document.createElement('span');
+            regularPrice.className = 'regular-price';
+            regularPrice.innerHTML = this.formatPrice(product.price);
+
+            priceDiv.appendChild(salePrice);
+            priceDiv.appendChild(regularPrice);
+        } else {
+            const currentPrice = document.createElement('span');
+            currentPrice.className = 'current-price';
+            currentPrice.innerHTML = this.formatPrice(product.price);
+            priceDiv.appendChild(currentPrice);
+        }
+
+        // Rating (use innerHTML for stars as it's more readable)
+        const ratingDiv = document.createElement('div');
+        ratingDiv.className = 'product-rating';
+        ratingDiv.innerHTML = `
+            ${this.renderStars(product.averageRating || 4.8)}
+            <span class="rating-count">(${product.totalSales || 0})</span>
+        `;
+
+        // Stock (use innerHTML for complex content)
+        const stockDiv = document.createElement('div');
+        stockDiv.className = 'product-stock';
+        stockDiv.innerHTML = this.renderStockStatus(product.totalStock, product.hasVariants);
+
+        // Assemble card
+        infoDiv.appendChild(categoryDiv);
+        infoDiv.appendChild(title);
+        infoDiv.appendChild(priceDiv);
+        infoDiv.appendChild(ratingDiv);
+        infoDiv.appendChild(stockDiv);
+
+        card.appendChild(imageDiv);
+        card.appendChild(infoDiv);
+
+        return card;
+    }
+
+    // Load remaining products in background
+    loadRemainingProducts(remainingProducts, productsGrid) {
+        const fragment = document.createDocumentFragment();
+
+        remainingProducts.forEach(product => {
+            const productCard = this.createProductCard(product);
+            fragment.appendChild(productCard);
+        });
+
+        // Add remaining products to grid
+        productsGrid.appendChild(fragment);
+    }
+
+    // Search functionality
+    searchProducts(query = null) {
+        const searchInput = document.getElementById('searchInput');
+        const searchQuery = query || (searchInput ? searchInput.value.trim() : '');
+
+        console.log(`🔍 Búsqueda ejecutada: "${searchQuery}"`);
+
+        // Update search filter
+        this.currentFilters.search = searchQuery;
+        this.updateURL();
+
+        // Clear category filter if searching (show all categories in results)
+        if (searchQuery) {
+            this.currentFilters.category = null;
+            // Update active filter in sidebar
+            const categoryFilters = document.querySelectorAll('#sidebarCategoryFilters .category-filter');
+            categoryFilters.forEach(filter => filter.classList.remove('active'));
+            document.querySelector('#sidebarCategoryFilters .category-filter[data-category=""]')?.classList.add('active');
+        }
+
+        // Render results instantly using our optimized method
+        this.renderProductsInstant();
+
+        // Show products section and hide categories if search has results
+        if (searchQuery) {
+            this.hideCategoriesWithAnimation();
+            this.showProductsSection();
+
+            // Scroll to top for search results
+            requestAnimationFrame(() => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        } else {
+            // If search is cleared, show categories again
+            this.showCategoriesWithAnimation();
+            this.hideProductsSection();
+        }
+    }
+
+    // Initialize search functionality
+    initializeSearch() {
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = searchInput?.parentElement.querySelector('button');
+
+        if (searchInput) {
+            // Handle Enter key
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.searchProducts();
+                }
+            });
+
+            // Handle real-time search (debounced)
+            let searchTimeout;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    this.searchProducts(e.target.value);
+                }, 300); // 300ms debounce
+            });
+        }
+
+        if (searchButton) {
+            searchButton.onclick = () => this.searchProducts();
+        }
+
+        // Make search function globally available for compatibility
+        window.searchProducts = () => this.searchProducts();
+
+        console.log('🔍 Search functionality initialized');
+    }
+
+    // Enhanced performance optimization methods
+    getCacheKey() {
+        return JSON.stringify({
+            category: this.currentFilters.category,
+            search: this.currentFilters.search,
+            minPrice: this.currentFilters.minPrice,
+            maxPrice: this.currentFilters.maxPrice,
+            onSale: this.currentFilters.onSale,
+            featured: this.currentFilters.featured,
+            inStock: this.currentFilters.inStock,
+            sort: this.currentSort
+        });
+    }
+
+    // Smart cache management with TTL
+    getCachedResults(key, ttlMinutes = 5) {
+        const cached = this.filteredProductsCache.get(key);
+        if (!cached) return null;
+
+        const now = Date.now();
+        const age = (now - cached.timestamp) / (1000 * 60);
+
+        if (age > ttlMinutes) {
+            this.filteredProductsCache.delete(key);
+            return null;
+        }
+
+        return cached.data;
+    }
+
+    // Cache with timestamp for TTL
+    setCachedResults(key, data) {
+        this.filteredProductsCache.set(key, {
+            data: data,
+            timestamp: Date.now()
+        });
+
+        // Cleanup old cache entries periodically
+        if (Date.now() - this.lastCacheCleanup > 300000) { // 5 minutes
+            this.cleanupOldCache();
+        }
+    }
+
+    // Remove expired cache entries
+    cleanupOldCache() {
+        const now = Date.now();
+        const maxAge = 10 * 60 * 1000; // 10 minutes
+
+        for (const [key, cached] of this.filteredProductsCache) {
+            if (now - cached.timestamp > maxAge) {
+                this.filteredProductsCache.delete(key);
+            }
+        }
+
+        this.lastCacheCleanup = now;
+        console.log('🧹 Cache cleanup completed');
+    }
+
+    // Invalidate specific cache entries
+    invalidateCache(pattern = null) {
+        if (pattern) {
+            // Invalidate specific pattern (e.g., category-related caches)
+            for (const key of this.filteredProductsCache.keys()) {
+                if (key.includes(pattern)) {
+                    this.filteredProductsCache.delete(key);
+                }
+            }
+        } else {
+            // Clear all caches
+            this.filteredProductsCache.clear();
+            this.searchCache.clear();
+            this.categoryCache.clear();
+        }
+    }
+
+    // Preload popular categories in background
+    preloadPopularCategories() {
+        if (!this.isInitialized || this.allProducts.length === 0) return;
+
+        // List of popular categories to preload
+        const popularCategories = ['Joyería', 'Bolsas Grandes', 'Accesorios', 'PORTACEL'];
+
+        popularCategories.forEach(categoryName => {
+            if (!this.preloadedCategories.has(categoryName)) {
+                requestIdleCallback(() => {
+                    console.log(`🔄 Preloading category: ${categoryName}`);
+
+                    // Simulate filtering for this category
+                    const tempFilters = { ...this.currentFilters, category: categoryName };
+                    const filtered = this.allProducts.filter(product => {
+                        return product.categories && product.categories.some(cat =>
+                            cat.toLowerCase() === categoryName.toLowerCase()
+                        );
+                    });
+
+                    const sorted = this.applySorting(filtered);
+                    const cacheKey = JSON.stringify({ ...tempFilters, sort: this.currentSort });
+
+                    this.filteredProductsCache.set(cacheKey, sorted);
+                    this.preloadedCategories.add(categoryName);
+
+                    console.log(`✅ Preloaded ${sorted.length} products for ${categoryName}`);
+                });
+            }
+        });
     }
 
     renderStars(rating) {
@@ -330,22 +1234,63 @@ class TiendaSupabaseIntegration {
         return starsHtml;
     }
 
+    renderStockStatus(totalStock, hasVariants) {
+        // Debug stock value
+        console.log(`🔍 Stock Debug - totalStock: ${totalStock}, type: ${typeof totalStock}, hasVariants: ${hasVariants}`);
+
+        let stock = 0;
+
+        // Handle different stock value types
+        if (typeof totalStock === 'string') {
+            stock = parseInt(totalStock, 10);
+        } else if (typeof totalStock === 'number') {
+            stock = Math.floor(totalStock);
+        }
+
+        // If still NaN, default to 0
+        if (isNaN(stock)) {
+            console.warn(`⚠️ Invalid stock value: ${totalStock}, defaulting to 0`);
+            stock = 0;
+        }
+
+        console.log(`✅ Final stock value: ${stock}`);
+
+        if (stock === 0) {
+            return '<span class="stock-status out-of-stock"><i class="fas fa-times-circle"></i> Sin stock</span>';
+        } else if (stock <= 3) {
+            return `<span class="stock-status low-stock"><i class="fas fa-exclamation-triangle"></i> Stock bajo (${stock})</span>`;
+        } else if (stock <= 10) {
+            return `<span class="stock-status medium-stock"><i class="fas fa-check-circle"></i> Disponible (${stock})</span>`;
+        } else {
+            return `<span class="stock-status in-stock"><i class="fas fa-check-circle"></i> En stock ${hasVariants ? '(variantes)' : `(${stock})`}</span>`;
+        }
+    }
+
     applyFilters(products) {
         console.log('🔍 DIAGNÓSTICO - Aplicando filtros:', this.currentFilters);
         console.log('🔍 DIAGNÓSTICO - Total productos antes de filtrar:', products.length);
         
         const filteredProducts = products.filter(product => {
-            // Filtro por categoría usando categories array desde products_full
+            // Filtro por categoría (mejorado para manejar inconsistencias)
             if (this.currentFilters.category) {
-                const categoryMatches = product.categories && product.categories.some(cat => 
-                    cat.toLowerCase() === this.currentFilters.category.toLowerCase()
-                );
-                
+                const categoryMatches = product.categories && product.categories.some(cat => {
+                    // Normalizar nombres de categoría para comparación flexible
+                    const normalizedCat = this.normalizeCategoryName(cat);
+                    const normalizedFilter = this.normalizeCategoryName(this.currentFilters.category);
+
+                    // Comparación exacta normalizada
+                    if (normalizedCat === normalizedFilter) return true;
+
+                    // Comparación con nombres comunes alternativos
+                    return this.categoryNamesMatch(normalizedCat, normalizedFilter);
+                });
+
                 if (!categoryMatches) {
-                    console.log(`❌ Producto "${product.name}" NO coincide con categoría "${this.currentFilters.category}". Categorías del producto:`, product.categories);
+                    // Solo mostrar logs en desarrollo, no en producción
+                    if (window.location.hostname === 'localhost') {
+                        console.log(`❌ Producto "${product.name}" NO coincide con categoría "${this.currentFilters.category}". Categorías del producto:`, product.categories);
+                    }
                     return false;
-                } else {
-                    console.log(`✅ Producto "${product.name}" SÍ coincide con categoría "${this.currentFilters.category}"`);
                 }
             }
 
@@ -379,7 +1324,7 @@ class TiendaSupabaseIntegration {
             if (this.currentFilters.featured && !product.featured) {
                 return false;
             }
-            if (this.currentFilters.inStock && !product.inStock) {
+            if (this.currentFilters.inStock && (product.totalStock || 0) <= 0) {
                 return false;
             }
 
@@ -420,12 +1365,13 @@ class TiendaSupabaseIntegration {
         const searchInput = document.getElementById('searchInput');
         if (searchInput) {
             searchInput.addEventListener('input', (e) => {
+                this.trackUserActivity(); // Track user interaction
                 this.currentFilters.search = e.target.value;
-                
+
                 if (e.target.value.trim() !== '') {
                     // Si hay búsqueda, ocultar categorías y mostrar productos
                     this.hideCategoriesWithAnimation();
-                    
+
                     setTimeout(() => {
                         this.renderProducts();
                         this.showProductsSection();
@@ -453,15 +1399,16 @@ class TiendaSupabaseIntegration {
         const applyPriceFilter = document.getElementById('applyPriceFilter');
         if (applyPriceFilter) {
             applyPriceFilter.addEventListener('click', () => {
+                this.trackUserActivity(); // Track user interaction
                 const minPrice = document.getElementById('minPrice')?.value;
                 const maxPrice = document.getElementById('maxPrice')?.value;
-                
+
                 this.currentFilters.minPrice = minPrice ? parseFloat(minPrice) : null;
                 this.currentFilters.maxPrice = maxPrice ? parseFloat(maxPrice) : null;
-                
+
                 // Ocultar categorías y mostrar productos
                 this.hideCategoriesWithAnimation();
-                
+
                 setTimeout(() => {
                     this.renderProducts();
                     this.showProductsSection();
@@ -476,6 +1423,7 @@ class TiendaSupabaseIntegration {
 
         if (onSaleFilter) {
             onSaleFilter.addEventListener('change', (e) => {
+                this.trackUserActivity(); // Track user interaction
                 this.currentFilters.onSale = e.target.checked;
                 this.renderProducts();
             });
@@ -483,6 +1431,7 @@ class TiendaSupabaseIntegration {
 
         if (featuredFilter) {
             featuredFilter.addEventListener('change', (e) => {
+                this.trackUserActivity(); // Track user interaction
                 this.currentFilters.featured = e.target.checked;
                 this.renderProducts();
             });
@@ -490,6 +1439,7 @@ class TiendaSupabaseIntegration {
 
         if (inStockFilter) {
             inStockFilter.addEventListener('change', (e) => {
+                this.trackUserActivity(); // Track user interaction
                 this.currentFilters.inStock = e.target.checked;
                 this.renderProducts();
             });
@@ -499,6 +1449,7 @@ class TiendaSupabaseIntegration {
         const sortProducts = document.getElementById('sortProducts');
         if (sortProducts) {
             sortProducts.addEventListener('change', (e) => {
+                this.trackUserActivity(); // Track user interaction
                 this.currentSort = e.target.value;
                 this.renderProducts();
             });
@@ -521,26 +1472,50 @@ class TiendaSupabaseIntegration {
         }
     }
 
-    // Nueva función para seleccionar categoría con animación
+    // Nueva función para seleccionar categoría con animación y optimistic loading
     selectCategory(categoryName) {
         console.log(`🎯 Categoría seleccionada: ${categoryName}`);
-        
-        // Ocultar grid de categorías con animación
+
+        // Check if tienda is initialized
+        if (!this.isInitialized) {
+            console.log(`⏳ Tienda no inicializada, guardando selección pendiente: ${categoryName}`);
+
+            // Store pending selection
+            this.pendingCategorySelection = categoryName;
+
+            // Show loading state immediately
+            this.showCategoryLoadingState(categoryName);
+
+            return; // Exit early, will be executed later
+        }
+
+        // Execute immediately if initialized
+        this.selectCategoryImmediate(categoryName);
+    }
+
+    // Immediate category selection (used after initialization)
+    selectCategoryImmediate(categoryName) {
+        console.log(`🚀 Ejecutando selección inmediata: ${categoryName}`);
+
+        // Set filter immediately
+        this.currentFilters.category = categoryName;
+        this.updateURL();
+
+        // Start rendering products immediately (no delay)
+        this.renderProductsInstant();
+        this.renderCategoriesFilters();
+
+        // Hide categories and show products simultaneously
         this.hideCategoriesWithAnimation();
-        
-        // Establecer filtro de categoría y cargar productos después de la animación
-        setTimeout(() => {
-            this.currentFilters.category = categoryName;
-            this.renderProducts();
-            this.renderCategoriesFilters();
-            this.showProductsSection();
-            
-            // Scroll suave a la sección de productos
-            document.getElementById('productsContainer')?.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start' 
+        this.showProductsSection();
+
+        // Smooth scroll to top of page after category selection
+        requestAnimationFrame(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
-        }, 500); // Esperar que termine la animación de ocultación
+        });
     }
     
     // Función legacy para compatibilidad
@@ -660,40 +1635,55 @@ class TiendaSupabaseIntegration {
     // Función para manejar clicks en filtros de categoría del sidebar
     handleCategoryFilterClick(categoryName) {
         console.log(`🏷️ Filtro de categoría seleccionado: ${categoryName}`);
-        
+
+        // Check if tienda is initialized (same as selectCategory for consistency)
+        if (!this.isInitialized && categoryName) {
+            console.log(`⏳ Tienda no inicializada, guardando selección pendiente: ${categoryName}`);
+
+            // Store pending selection
+            this.pendingCategorySelection = categoryName;
+
+            // Show loading state immediately
+            this.showCategoryLoadingState(categoryName);
+
+            return; // Exit early, will be executed later
+        }
+
         // Actualizar filtro actual
         this.currentFilters.category = categoryName || null;
-        
+        this.updateURL();
+
         // Actualizar clases activas en la UI
         const categoryFilters = document.querySelectorAll('#sidebarCategoryFilters .category-filter');
         categoryFilters.forEach(filter => {
             filter.classList.remove('active');
         });
-        
+
         // Agregar clase activa al filtro seleccionado
         const selectedFilter = document.querySelector(`#sidebarCategoryFilters .category-filter[data-category="${categoryName}"]`);
         if (selectedFilter) {
             selectedFilter.classList.add('active');
         }
-        
+
         // Si no hay categoría seleccionada, mostrar categorías y ocultar productos
         if (!categoryName) {
             this.showCategoriesWithAnimation();
             this.hideProductsSection();
         } else {
-            // Ocultar categorías y mostrar productos filtrados
+            // Render products instantly (no delay)
+            this.renderProductsInstant();
+
+            // Hide categories and show products simultaneously
             this.hideCategoriesWithAnimation();
-            
-            setTimeout(() => {
-                this.renderProducts();
-                this.showProductsSection();
-                
-                // Scroll suave a la sección de productos
-                document.getElementById('productsContainer')?.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
+            this.showProductsSection();
+
+            // Smooth scroll to top of page after category selection
+            requestAnimationFrame(() => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
                 });
-            }, 500);
+            });
         }
     }
 

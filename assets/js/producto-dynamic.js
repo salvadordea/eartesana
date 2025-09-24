@@ -295,8 +295,12 @@ class ProductoManager {
 
         // Descripción corta
         const shortDescElement = document.getElementById('productShortDescription');
-        if (shortDescElement && this.product.shortDescription) {
-            shortDescElement.textContent = this.product.shortDescription;
+        if (shortDescElement) {
+            const shortDesc = this.product.shortDescription || this.product.description || 'Sin descripción disponible.';
+
+            // Replace the loading text with actual description
+            shortDescElement.innerHTML = `<p>${shortDesc}</p>`;
+            console.log(`📝 Short description updated: ${shortDesc}`);
         }
     }
 
@@ -308,15 +312,35 @@ class ProductoManager {
         const originalPrice = this.product.originalPrice;
         const onSale = this.product.onSale && originalPrice && originalPrice > price;
 
-        let priceHTML = `<span class="current-price">$${price.toFixed(2)}</span>`;
+        let priceHTML = `<span class="current-price">${this.formatPrice(price)}</span>`;
 
         if (onSale) {
-            priceHTML += `<span class="original-price">$${originalPrice.toFixed(2)}</span>`;
+            priceHTML += `<span class="original-price">${this.formatPrice(originalPrice)}</span>`;
             const discount = Math.round(((originalPrice - price) / originalPrice) * 100);
             priceHTML += `<span class="discount-badge">-${discount}%</span>`;
         }
 
         priceContainer.innerHTML = priceHTML;
+    }
+
+    // Format price with comma separators and superscript cents
+    formatPrice(price) {
+        if (!price) return '$0.00';
+
+        const numPrice = parseFloat(price);
+        if (isNaN(numPrice)) return '$0.00';
+
+        // Format with comma separators
+        const formatted = numPrice.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+        // Split into dollars and cents
+        const [dollars, cents] = formatted.split('.');
+
+        // Return with superscript cents
+        return `$${dollars}.<sup>${cents}</sup>`;
     }
 
     updateStockDisplay() {
@@ -526,7 +550,7 @@ class ProductoManager {
                 <div class="product-info">
                     <h4 class="product-name">${product.name}</h4>
                     <div class="product-price">
-                        <span class="price">$${price.toFixed(2)}</span>
+                        <span class="price">${this.formatPrice(price)}</span>
                     </div>
                 </div>
             </div>
@@ -733,7 +757,7 @@ class ProductoManager {
 
         const currentPriceElement = document.querySelector('.current-price');
         if (currentPriceElement) {
-            currentPriceElement.textContent = `$${finalPrice.toFixed(2)}`;
+            currentPriceElement.innerHTML = this.formatPrice(finalPrice);
         }
     }
 

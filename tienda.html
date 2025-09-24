@@ -15,7 +15,7 @@
     <!-- Los estilos de integración API se manejan desde tienda.css -->
 
     <!-- Image Format Detection -->
-    <script src="./assets/js/image-format-detector.js"></script>
+    <script src="./assets/js/image-detector-jpg-only.js"></script>
 </head>
 <body>
     <!-- Header Universal Container -->
@@ -238,29 +238,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Contacto</h4>
-                    <p>Email: info@estudioartesana.com</p>
-                    <p>Teléfono: +52 123 456 7890</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Síguenos</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Estudio Artesana. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer will be loaded dynamically by footer-universal.js -->
 
     <!-- Scripts -->
     <script src="./assets/js/config.js"></script>
@@ -388,5 +366,8 @@
             }
         }
     </script>
+
+    <!-- Universal Footer - Load footer dynamically -->
+    <script src="assets/js/footer-universal.js"></script>
 </body>
 </html>

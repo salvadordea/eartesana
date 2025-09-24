@@ -7,7 +7,7 @@
 class UniversalFooter {
     constructor() {
         this.storageKey = 'contactInfo';
-        this.footerPath = 'components/footer.html'; // Ruta por defecto
+        this.footerPath = 'components/universal-footer.html'; // Ruta por defecto
         this.fallbackData = {
             // Social Media
             instagramUrl: '#',
@@ -29,13 +29,13 @@ class UniversalFooter {
      */
     getFooterPath() {
         const path = window.location.pathname;
-        
+
         if (path.includes('/admin/')) {
-            return '../components/footer.html';
+            return '../components/universal-footer.html';
         } else if (path.includes('/pages/')) {
-            return '../components/footer.html';
+            return '../components/universal-footer.html';
         } else {
-            return 'components/footer.html';
+            return 'components/universal-footer.html';
         }
     }
     
@@ -193,7 +193,7 @@ class UniversalFooter {
             
             // Intentar con ruta alternativa
             try {
-                const altResponse = await fetch('components/footer.html');
+                const altResponse = await fetch('components/universal-footer.html');
                 if (altResponse.ok) {
                     const altFooterHTML = await altResponse.text();
                     document.body.insertAdjacentHTML('beforeend', altFooterHTML);

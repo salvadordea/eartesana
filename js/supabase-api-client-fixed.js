@@ -38,9 +38,11 @@ class SupabaseAPIFixed {
             // Aplicar paginación
             const offset = (page - 1) * limit;
             const paginatedProducts = productsWithCategories.slice(offset, offset + limit);
-            
-            // Transformar al formato esperado por el frontend
-            const transformedProducts = paginatedProducts.map(this.transformProduct.bind(this));
+
+            // Transformar al formato esperado por el frontend con stock calculado
+            const transformedProducts = await Promise.all(
+                paginatedProducts.map(product => this.transformProductAsync(product))
+            );
             
             console.log(`✅ ${transformedProducts.length} productos obtenidos con categorías`);
             console.log('🔍 EJEMPLO - Primer producto:', transformedProducts[0]);
@@ -59,32 +61,120 @@ class SupabaseAPIFixed {
     }
 
     /**
-     * Obtener productos usando la vista products_full que ya incluye categories
+     * Obtener productos usando query directa optimizada (batch category loading)
      */
     async getProductsWithCategoriesJoin() {
         try {
-            console.log('🔄 Obteniendo productos desde products_full...');
-            
-            // Usar products_full que ya incluye categories y category_ids
-            const productsResponse = await fetch(`${this.baseUrl}/rest/v1/products_full?order=name`, {
+            console.log('🔄 Obteniendo productos con query optimizada...');
+
+            // Query básica siguiendo patrón mayoristas
+            const url = `${this.baseUrl}/rest/v1/products?select=id,name,price,total_stock,has_variants,main_image_url,description,slug&status=eq.active&order=name`;
+
+            console.log('🔗 URL Query:', url);
+
+            const productsResponse = await fetch(url, {
                 method: 'GET',
                 headers: this.headers
             });
 
             if (!productsResponse.ok) {
-                throw new Error(`Error obteniendo productos: ${productsResponse.status}`);
+                const errorText = await productsResponse.text();
+                console.error('❌ Error response:', errorText);
+                throw new Error(`Error obteniendo productos: ${productsResponse.status} - ${errorText}`);
             }
 
             const products = await productsResponse.json();
-            console.log(`📦 ${products.length} productos obtenidos desde products_full`);
+            console.log(`📦 ${products.length} productos obtenidos`);
 
-            // Los productos ya vienen con categories y category_ids
-            console.log('🔍 DIAGNÓSTICO - Producto ejemplo:', products[0]);
+            // OPTIMIZACIÓN: Cargar todas las relaciones producto-categoría en una sola query
+            try {
+                const batchCategoryUrl = `${this.baseUrl}/rest/v1/product_categories?select=product_id,categories(id,name,slug)`;
+
+                const batchResponse = await fetch(batchCategoryUrl, {
+                    method: 'GET',
+                    headers: this.headers
+                });
+
+                if (batchResponse.ok) {
+                    const allProductCategories = await batchResponse.json();
+
+                    // Crear mapa de categorías por producto
+                    const categoryMap = new Map();
+                    allProductCategories.forEach(pc => {
+                        if (!categoryMap.has(pc.product_id)) {
+                            categoryMap.set(pc.product_id, {
+                                categories: [],
+                                category_ids: []
+                            });
+                        }
+                        categoryMap.get(pc.product_id).categories.push(pc.categories.name);
+                        categoryMap.get(pc.product_id).category_ids.push(pc.categories.id);
+                    });
+
+                    // Asignar categorías a cada producto
+                    products.forEach(product => {
+                        const productCats = categoryMap.get(product.id);
+                        if (productCats) {
+                            product.categories = productCats.categories;
+                            product.category_ids = productCats.category_ids;
+                        } else {
+                            product.categories = [];
+                            product.category_ids = [];
+                        }
+                    });
+
+                    console.log('✅ Categorías cargadas en batch mode');
+                } else {
+                    console.warn('⚠️ Error cargando categorías en batch, usando fallback individual');
+                    // Fallback al método anterior solo si falla el batch
+                    await this.loadCategoriesIndividually(products);
+                }
+            } catch (error) {
+                console.warn('⚠️ Error en batch loading, usando fallback:', error);
+                await this.loadCategoriesIndividually(products);
+            }
+
+            console.log('🔍 DIAGNÓSTICO - Producto ejemplo con categorías:', products[0]);
             return products;
 
         } catch (error) {
-            console.error('❌ Error obteniendo productos desde products_full:', error);
+            console.error('❌ Error obteniendo productos con query directa:', error);
             throw error;
+        }
+    }
+
+    /**
+     * Fallback method for individual category loading
+     */
+    async loadCategoriesIndividually(products) {
+        for (let product of products) {
+            try {
+                const categoryUrl = `${this.baseUrl}/rest/v1/product_categories?select=categories(id,name,slug)&product_id=eq.${product.id}`;
+
+                const categoriesResponse = await fetch(categoryUrl, {
+                    method: 'GET',
+                    headers: this.headers
+                });
+
+                if (categoriesResponse.ok) {
+                    const productCategories = await categoriesResponse.json();
+
+                    if (productCategories && productCategories.length > 0) {
+                        product.categories = productCategories.map(pc => pc.categories.name);
+                        product.category_ids = productCategories.map(pc => pc.categories.id);
+                    } else {
+                        product.categories = [];
+                        product.category_ids = [];
+                    }
+                } else {
+                    product.categories = [];
+                    product.category_ids = [];
+                }
+            } catch (error) {
+                console.warn(`⚠️ Error cargando categorías para producto ${product.id}:`, error);
+                product.categories = [];
+                product.category_ids = [];
+            }
         }
     }
 
@@ -106,7 +196,7 @@ class SupabaseAPIFixed {
             }
 
             // Transformar al formato esperado
-            let transformedProduct = this.transformProduct(product);
+            let transformedProduct = await this.transformProductAsync(product);
             
             // Obtener variantes del producto
             const variants = await this.getProductVariants(id);
@@ -145,7 +235,9 @@ class SupabaseAPIFixed {
             const limitedProducts = filteredProducts.slice(0, limit);
             
             // Transformar al formato esperado
-            const transformedProducts = limitedProducts.map(this.transformProduct.bind(this));
+            const transformedProducts = await Promise.all(
+                limitedProducts.map(product => this.transformProductAsync(product))
+            );
             
             console.log(`✅ ${transformedProducts.length} productos encontrados`);
             
@@ -179,7 +271,9 @@ class SupabaseAPIFixed {
             const limitedProducts = categoryProducts.slice(0, limit);
             
             // Transformar al formato esperado
-            const transformedProducts = limitedProducts.map(this.transformProduct.bind(this));
+            const transformedProducts = await Promise.all(
+                limitedProducts.map(product => this.transformProductAsync(product))
+            );
             
             console.log(`✅ ${transformedProducts.length} productos obtenidos de la categoría "${categoryName}"`);
             
@@ -224,7 +318,9 @@ class SupabaseAPIFixed {
                 .slice(0, limit); // Aplicar límite
             
             // Transformar al formato esperado
-            const transformedProducts = relatedProducts.map(this.transformProduct.bind(this));
+            const transformedProducts = await Promise.all(
+                relatedProducts.map(product => this.transformProductAsync(product))
+            );
             
             console.log(`✅ ${transformedProducts.length} productos relacionados obtenidos`);
             
@@ -319,7 +415,85 @@ class SupabaseAPIFixed {
     // ==========================================
 
     /**
-     * Transformar producto al formato del frontend
+     * Calcular stock total incluyendo variantes
+     */
+    async calculateTotalStock(product) {
+        console.log(`🔢 Calculating stock for product: ${product.name}, has_variants: ${product.has_variants}, total_stock: ${product.total_stock}`);
+
+        if (!product.has_variants) {
+            const stock = parseInt(product.total_stock) || 0;
+            console.log(`📦 Simple product stock: ${stock}`);
+            return stock;
+        }
+
+        try {
+            // Si tiene variantes, sumar stock de todas las variantes activas
+            const variantsResponse = await fetch(`${this.baseUrl}/rest/v1/product_variants?select=stock&product_id=eq.${product.id}&is_active=eq.true`, {
+                method: 'GET',
+                headers: this.headers
+            });
+
+            if (variantsResponse.ok) {
+                const variants = await variantsResponse.json();
+                const totalVariantStock = variants.reduce((sum, variant) => {
+                    const variantStock = parseInt(variant.stock) || 0;
+                    console.log(`🔹 Variant stock: ${variantStock}`);
+                    return sum + variantStock;
+                }, 0);
+                console.log(`🔢 Producto ${product.name}: stock total de variantes = ${totalVariantStock}`);
+                return totalVariantStock;
+            } else {
+                console.warn(`⚠️ No se pudieron cargar variantes para producto ${product.id}, usando stock base`);
+                const fallbackStock = parseInt(product.total_stock) || 0;
+                console.log(`📦 Fallback stock: ${fallbackStock}`);
+                return fallbackStock;
+            }
+        } catch (error) {
+            console.error(`❌ Error calculando stock de variantes para producto ${product.id}:`, error);
+            const errorFallbackStock = parseInt(product.total_stock) || 0;
+            console.log(`📦 Error fallback stock: ${errorFallbackStock}`);
+            return errorFallbackStock;
+        }
+    }
+
+    /**
+     * Transformar producto al formato del frontend con stock calculado
+     */
+    async transformProductAsync(product) {
+        const calculatedStock = await this.calculateTotalStock(product);
+
+        return {
+            id: product.id,
+            name: product.name,
+            slug: product.slug,
+            description: product.description,
+            shortDescription: product.short_description,
+            price: product.price,
+            regularPrice: product.regular_price,
+            salePrice: product.sale_price,
+            onSale: product.on_sale,
+            type: product.type,
+            status: product.status,
+            featured: product.featured,
+            inStock: product.in_stock,
+            // Proper stock handling with variant support
+            totalStock: calculatedStock,
+            hasVariants: product.has_variants || false,
+            totalSales: product.total_sales || 0,
+            averageRating: product.average_rating || 4.8,
+            mainImage: this.processImageUrl(product.main_image_url),
+            permalink: product.permalink,
+            categories: product.categories || [],
+            category_ids: product.category_ids || [],
+            // Para compatibilidad con la lógica de frontend
+            category_id: product.category_ids && product.category_ids.length > 0 ? product.category_ids[0] : null,
+            images: (product.images || []).map(img => this.processImageUrl(img)),
+            createdAt: product.created_at
+        };
+    }
+
+    /**
+     * Transformar producto al formato del frontend (versión síncrona)
      */
     transformProduct(product) {
         return {
@@ -336,6 +510,9 @@ class SupabaseAPIFixed {
             status: product.status,
             featured: product.featured,
             inStock: product.in_stock,
+            // Proper stock handling with variant support (follows mayoristas pattern)
+            totalStock: product.calculated_stock || product.total_stock || 0,
+            hasVariants: product.has_variants || false,
             totalSales: product.total_sales || 0,
             averageRating: product.average_rating || 4.8,
             mainImage: this.processImageUrl(product.main_image_url),

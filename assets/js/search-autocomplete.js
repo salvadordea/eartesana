@@ -259,7 +259,17 @@ class SearchAutocomplete {
         if (typeof price !== 'number') {
             return '0.00';
         }
-        return price.toFixed(2);
+        // Format with comma separators
+        const formatted = price.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+        // Split into dollars and cents for superscript
+        const [dollars, cents] = formatted.split('.');
+
+        // Return formatted with superscript cents (without $ sign as it's added elsewhere)
+        return `${dollars}.<sup>${cents}</sup>`;
     }
 
     highlightText(text, query) {

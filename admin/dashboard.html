@@ -2133,6 +2133,11 @@
                     key: 'contactInfo',
                     newValue: JSON.stringify(contactData)
                 }));
+
+                // Also dispatch custom event for footer updates
+                window.dispatchEvent(new CustomEvent('contactInfoUpdated', {
+                    detail: contactData
+                }));
             } catch (error) {
                 console.warn('No se pudo disparar evento de storage:', error);
             }

@@ -22,19 +22,18 @@
                     </a>
                 </div>
             </div>
-            
+
             <!-- Columna 2: Enlaces Rápidos -->
             <div class="footer-section links-section">
                 <h4>Enlaces Rápidos</h4>
                 <ul class="footer-links">
                     <li><a href="/index.html" class="footer-link">Inicio</a></li>
-                    <li><a href="/tienda/index.html" class="footer-link">Tienda</a></li>
-                    <li><a href="/pages/sobre-nosotros/index.html" class="footer-link">Nosotros</a></li>
-                    <li><a href="/pages/mayoristas/index.html" class="footer-link">Mayoristas</a></li>
+                    <li><a href="/tienda.html" class="footer-link">Tienda</a></li>
+                    <li><a href="/mayoristas/index.html" class="footer-link">Mayoristas</a></li>
                     <li><a href="#contacto" class="footer-link">Contacto</a></li>
                 </ul>
             </div>
-            
+
             <!-- Columna 3: Información Legal -->
             <div class="footer-section legal-section">
                 <h4>Información</h4>
@@ -46,8 +45,8 @@
                     <li><a href="/pages/politicas/cuidados.html" class="footer-link">Cuidado de Productos</a></li>
                 </ul>
             </div>
-            
-            <!-- Columna 4: Contacto -->
+
+            <!-- Columna 4: Contacto (Fed by Admin Dashboard) -->
             <div class="footer-section contact-section">
                 <h4>Contacto</h4>
                 <div class="contact-info">
@@ -73,7 +72,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Footer Bottom -->
         <div class="footer-bottom">
             <div class="footer-bottom-content">
@@ -90,10 +89,11 @@
 
 <style>
 .universal-footer {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-    color: white;
-    padding: 50px 0 0;
+    background: #000000;
+    color: #ffffff;
+    padding: 60px 0 0;
     margin-top: auto;
+    font-family: 'Lato', sans-serif;
 }
 
 .universal-footer .container {
@@ -104,31 +104,33 @@
 
 .footer-content {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 40px;
     margin-bottom: 40px;
 }
 
 .footer-section h3,
 .footer-section h4 {
-    color: #D4AF37;
-    margin-bottom: 20px;
-    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 25px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .footer-section h3 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     letter-spacing: 1px;
 }
 
 .footer-section h4 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 .footer-description {
-    color: #bdc3c7;
-    line-height: 1.6;
-    margin-bottom: 25px;
+    color: #cccccc;
+    line-height: 1.7;
+    margin-bottom: 30px;
     font-size: 0.95rem;
 }
 
@@ -141,75 +143,85 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: rgba(212, 175, 55, 0.1);
-    border: 2px solid #D4AF37;
+    width: 45px;
+    height: 45px;
+    background: transparent;
+    border: 2px solid #c0c0c0;
     border-radius: 50%;
-    color: #D4AF37;
+    color: #c0c0c0;
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     transition: all 0.3s ease;
 }
 
 .social-link:hover {
-    background: #D4AF37;
-    color: #2c3e50;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+    background: #c0c0c0;
+    color: #000000;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(192, 192, 192, 0.3);
 }
 
 .footer-links {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .footer-links li {
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 }
 
 .footer-link {
-    color: #bdc3c7;
+    color: #cccccc;
     text-decoration: none;
     font-size: 0.95rem;
     transition: all 0.3s ease;
     display: block;
+    position: relative;
 }
 
 .footer-link:hover {
-    color: #D4AF37;
-    padding-left: 5px;
+    color: #ffffff;
+    padding-left: 8px;
+}
+
+.footer-link:hover::before {
+    content: '→';
+    position: absolute;
+    left: -15px;
+    color: #c0c0c0;
 }
 
 .contact-info {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 18px;
 }
 
 .contact-item {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    color: #bdc3c7;
+    gap: 15px;
+    color: #cccccc;
     font-size: 0.95rem;
 }
 
 .contact-item i {
-    color: #D4AF37;
-    width: 18px;
+    color: #c0c0c0;
+    width: 20px;
     flex-shrink: 0;
-    margin-top: 2px;
+    margin-top: 3px;
+    font-size: 1.1rem;
 }
 
 .contact-item a {
-    color: #bdc3c7;
+    color: #cccccc;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .contact-item a:hover {
-    color: #D4AF37;
+    color: #ffffff;
 }
 
 .contact-item.hours {
@@ -227,8 +239,8 @@
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(212, 175, 55, 0.2);
-    padding: 25px 0;
+    border-top: 1px solid #333333;
+    padding: 30px 0;
 }
 
 .footer-bottom-content {
@@ -240,7 +252,7 @@
 }
 
 .footer-bottom-content p {
-    color: #bdc3c7;
+    color: #cccccc;
     margin: 0;
     font-size: 0.9rem;
 }
@@ -253,18 +265,18 @@
 }
 
 .footer-bottom-links a {
-    color: #bdc3c7;
+    color: #cccccc;
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.3s ease;
 }
 
 .footer-bottom-links a:hover {
-    color: #D4AF37;
+    color: #ffffff;
 }
 
 .separator {
-    color: rgba(212, 175, 55, 0.5);
+    color: #c0c0c0;
 }
 
 /* Responsive Design */
@@ -321,3 +333,128 @@
     }
 }
 </style>
+
+<script>
+/**
+ * Universal Footer Dynamic Content Loader
+ * Connects footer with admin dashboard contact info
+ */
+class UniversalFooter {
+    constructor() {
+        this.contactData = null;
+        console.log('🦶 Universal Footer initialized');
+    }
+
+    init() {
+        this.loadContactInfo();
+        this.setupStorageListener();
+    }
+
+    // Load contact information from admin dashboard
+    loadContactInfo() {
+        try {
+            // Load from localStorage (set by admin dashboard)
+            const savedContactInfo = localStorage.getItem('contactInfo');
+
+            if (savedContactInfo) {
+                this.contactData = JSON.parse(savedContactInfo);
+                this.updateFooterContent();
+                console.log('📞 Footer contact info loaded from admin dashboard');
+            } else {
+                console.log('📞 No saved contact info found, using defaults');
+            }
+        } catch (error) {
+            console.warn('⚠️ Error loading footer contact info:', error);
+        }
+    }
+
+    // Update footer content with admin data
+    updateFooterContent() {
+        if (!this.contactData) return;
+
+        // Update email
+        const emailLink = document.getElementById('footerEmailLink');
+        if (emailLink && this.contactData.contactEmail) {
+            emailLink.textContent = this.contactData.contactEmail;
+            emailLink.href = `mailto:${this.contactData.contactEmail}`;
+        }
+
+        // Update phone
+        const phoneLink = document.getElementById('footerPhoneLink');
+        if (phoneLink && this.contactData.phoneNumber) {
+            phoneLink.textContent = this.contactData.phoneNumber;
+            phoneLink.href = `tel:${this.contactData.phoneNumber.replace(/\s/g, '')}`;
+        }
+
+        // Update location
+        const locationText = document.getElementById('footerLocationText');
+        if (locationText && this.contactData.locationText) {
+            locationText.textContent = this.contactData.locationText;
+        }
+
+        // Update business hours
+        const businessHours = document.getElementById('footerBusinessHours');
+        if (businessHours && this.contactData.businessHours) {
+            const hours = this.contactData.businessHours.split('\n');
+            businessHours.innerHTML = hours.map(hour => `<span>${hour}</span>`).join('');
+        }
+
+        // Update social media links
+        this.updateSocialLinks();
+
+        console.log('✅ Footer content updated with admin data');
+    }
+
+    // Update social media links
+    updateSocialLinks() {
+        if (!this.contactData) return;
+
+        // Instagram
+        const instagramLink = document.getElementById('footerInstagramLink');
+        if (instagramLink && this.contactData.instagramUrl) {
+            instagramLink.href = this.contactData.instagramUrl;
+            instagramLink.style.display = 'flex';
+        }
+
+        // Facebook
+        const facebookLink = document.getElementById('footerFacebookLink');
+        if (facebookLink && this.contactData.facebookUrl) {
+            facebookLink.href = this.contactData.facebookUrl;
+            facebookLink.style.display = 'flex';
+        }
+
+        // WhatsApp
+        const whatsappLink = document.getElementById('footerWhatsAppLink');
+        if (whatsappLink && this.contactData.whatsappNumber) {
+            const cleanNumber = this.contactData.whatsappNumber.replace(/\D/g, '');
+            whatsappLink.href = `https://wa.me/${cleanNumber}`;
+            whatsappLink.style.display = 'flex';
+        }
+    }
+
+    // Listen for changes from admin dashboard
+    setupStorageListener() {
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'contactInfo') {
+                console.log('📞 Contact info updated from admin dashboard');
+                this.loadContactInfo();
+            }
+        });
+
+        // Also listen for custom events (for same-tab updates)
+        window.addEventListener('contactInfoUpdated', (e) => {
+            console.log('📞 Contact info updated via custom event');
+            this.loadContactInfo();
+        });
+    }
+}
+
+// Initialize footer when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    const footer = new UniversalFooter();
+    footer.init();
+
+    // Make globally available for debugging
+    window.universalFooter = footer;
+});
+</script>
