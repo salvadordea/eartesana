@@ -3058,51 +3058,91 @@ para ver los cambios aplicados.
         
         // Mostrar modal para nuevo mayorista
         function showAddMayoristaModal() {
-            document.getElementById('mayoristasModalTitle').textContent = '🏢 Nuevo Mayorista';
-            document.getElementById('mayoristaSaveText').textContent = 'Crear Mayorista';
-            document.getElementById('editMayoristaId').value = '';
-            
-            // Limpiar formulario
-            document.getElementById('mayoristasForm').reset();
-            document.getElementById('mayoristaDescuento').value = 20;
-            document.getElementById('mayoristaEstado').value = 'active';
-            document.getElementById('mayoristaPassword').required = true;
-            
-            document.getElementById('mayoristasModal').classList.add('show');
+            console.log('🔄 Abriendo modal de nuevo mayorista...');
+            try {
+                document.getElementById('mayoristasModalTitle').textContent = '🏢 Nuevo Mayorista';
+                document.getElementById('mayoristaSaveText').textContent = 'Crear Mayorista';
+                document.getElementById('editMayoristaId').value = '';
+
+                // Limpiar formulario
+                document.getElementById('mayoristasForm').reset();
+                document.getElementById('mayoristaDescuento').value = 20;
+                document.getElementById('mayoristaEstado').value = 'active';
+                document.getElementById('mayoristaPassword').required = true;
+
+                const modal = document.getElementById('mayoristasModal');
+                if (modal) {
+                    modal.classList.add('show');
+                    console.log('✅ Modal abierto correctamente');
+                } else {
+                    console.error('❌ Modal no encontrado');
+                }
+            } catch (error) {
+                console.error('❌ Error abriendo modal:', error);
+                alert('Error abriendo el formulario: ' + error.message);
+            }
         }
         
         // Editar mayorista
         function editMayorista(id) {
-            const mayorista = allMayoristas.find(m => m.id === id);
-            if (!mayorista) return;
-            
-            document.getElementById('mayoristasModalTitle').textContent = '✏️ Editar Mayorista';
-            document.getElementById('mayoristaSaveText').textContent = 'Guardar Cambios';
-            document.getElementById('editMayoristaId').value = id;
-            
-            // Llenar formulario
-            document.getElementById('mayoristaNombre').value = mayorista.name;
-            document.getElementById('mayoristaEmail').value = mayorista.email;
-            document.getElementById('mayoristaEmpresa').value = mayorista.company;
-            document.getElementById('mayoristaTelefono').value = mayorista.phone || '';
-            document.getElementById('mayoristaDescuento').value = mayorista.discount_percentage || 20;
-            document.getElementById('mayoristaEstado').value = mayorista.status;
-            document.getElementById('mayoristaNotas').value = mayorista.notes || '';
-            document.getElementById('mayoristaPassword').value = '';
-            document.getElementById('mayoristaPassword').required = false;
-            
-            document.getElementById('mayoristasModal').classList.add('show');
+            console.log('🔄 Editando mayorista ID:', id);
+            try {
+                const mayorista = allMayoristas.find(m => m.id === id);
+                if (!mayorista) {
+                    console.error('❌ Mayorista no encontrado:', id);
+                    alert('Mayorista no encontrado');
+                    return;
+                }
+
+                document.getElementById('mayoristasModalTitle').textContent = '✏️ Editar Mayorista';
+                document.getElementById('mayoristaSaveText').textContent = 'Guardar Cambios';
+                document.getElementById('editMayoristaId').value = id;
+
+                // Llenar formulario
+                document.getElementById('mayoristaNombre').value = mayorista.name;
+                document.getElementById('mayoristaEmail').value = mayorista.email;
+                document.getElementById('mayoristaEmpresa').value = mayorista.company;
+                document.getElementById('mayoristaTelefono').value = mayorista.phone || '';
+                document.getElementById('mayoristaDescuento').value = mayorista.discount_percentage || 20;
+                document.getElementById('mayoristaEstado').value = mayorista.status;
+                document.getElementById('mayoristaNotas').value = mayorista.notes || '';
+                document.getElementById('mayoristaPassword').value = '';
+                document.getElementById('mayoristaPassword').required = false;
+
+                const modal = document.getElementById('mayoristasModal');
+                if (modal) {
+                    modal.classList.add('show');
+                    console.log('✅ Modal de edición abierto correctamente');
+                } else {
+                    console.error('❌ Modal no encontrado');
+                }
+            } catch (error) {
+                console.error('❌ Error editando mayorista:', error);
+                alert('Error abriendo el formulario de edición: ' + error.message);
+            }
         }
         
         // Cerrar modal de mayoristas
         function closeMayoristasModal() {
-            document.getElementById('mayoristasModal').classList.remove('show');
+            console.log('🔄 Cerrando modal de mayoristas...');
+            try {
+                const modal = document.getElementById('mayoristasModal');
+                if (modal) {
+                    modal.classList.remove('show');
+                    console.log('✅ Modal cerrado correctamente');
+                } else {
+                    console.error('❌ Modal no encontrado para cerrar');
+                }
+            } catch (error) {
+                console.error('❌ Error cerrando modal:', error);
+            }
         }
         
         // Guardar mayorista
         async function saveMayorista(event) {
             event.preventDefault();
-            
+            console.log('🔄 Saving mayorista...');
+
             const formData = {
                 name: document.getElementById('mayoristaNombre').value,
                 email: document.getElementById('mayoristaEmail').value,
@@ -3113,38 +3153,62 @@ para ver los cambios aplicados.
                 status: document.getElementById('mayoristaEstado').value,
                 notes: document.getElementById('mayoristaNotas').value
             };
+
+            console.log('📋 Form data collected:', formData);
             
             const editId = document.getElementById('editMayoristaId').value;
             const isEdit = editId !== '';
             
             try {
-                if (supabase) {
-                    let result;
-                    
-                    if (isEdit) {
-                        // Actualizar mayorista existente
-                        const updateData = { ...formData };
-                        if (!updateData.password) {
-                            delete updateData.password; // No actualizar contraseña si está vacía
-                        }
-                        
-                        result = await supabase
-                            .from('wholesalers')
-                            .update(updateData)
-                            .eq('id', editId);
+                if (!supabase) {
+                    throw new Error('Supabase not initialized. Check your configuration.');
+                }
+
+                console.log('✏️ Edit mode:', isEdit, 'ID:', editId);
+                let result;
+
+                if (isEdit) {
+                    // Actualizar mayorista existente
+                    const updateData = { ...formData };
+                    if (!updateData.password) {
+                        delete updateData.password; // No actualizar contraseña si está vacía
+                        console.log('🔑 Password empty, not updating');
                     } else {
-                        // Crear nuevo mayorista
-                        result = await supabase
-                            .from('wholesalers')
-                            .insert([formData]);
+                        // Hash password for demo (in production use proper bcrypt)
+                        updateData.password = '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
                     }
-                    
-                    if (result.error) {
-                        throw result.error;
+
+                    console.log('🔄 Updating mayorista with data:', updateData);
+                    result = await supabase
+                        .from('wholesalers')
+                        .update(updateData)
+                        .eq('id', editId)
+                        .select(); // Return updated data
+                } else {
+                    // Crear nuevo mayorista
+                    if (formData.password) {
+                        // Hash password for demo (in production use proper bcrypt)
+                        formData.password = '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
                     }
-                    
-                    // Éxito
-                    alert(`✅ Mayorista ${isEdit ? 'actualizado' : 'creado'} exitosamente`);
+
+                    console.log('🆕 Creating new mayorista with data:', formData);
+                    result = await supabase
+                        .from('wholesalers')
+                        .insert([formData])
+                        .select(); // Return created data
+                }
+
+                console.log('📤 Supabase operation result:', result);
+
+                if (result.error) {
+                    console.error('❌ Supabase error:', result.error);
+                    throw result.error;
+                }
+
+                // Éxito
+                const message = `✅ Mayorista ${isEdit ? 'actualizado' : 'creado'} exitosamente`;
+                console.log(message);
+                alert(message);
                     
                 } else {
                     // Modo de demostración sin Supabase

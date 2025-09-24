@@ -320,6 +320,9 @@ class ProductoManager {
             priceHTML += `<span class="discount-badge">-${discount}%</span>`;
         }
 
+        // Add tax disclaimer
+        priceHTML += `<span class="tax-disclaimer">IVA incluido</span>`;
+
         priceContainer.innerHTML = priceHTML;
     }
 

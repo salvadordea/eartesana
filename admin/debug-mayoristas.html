@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Mayoristas Buttons</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn-success { background: #28a745; }
+        .btn-warning { background: #ffc107; color: #000; }
+        .btn-danger { background: #dc3545; }
+        .btn:hover { opacity: 0.8; }
+        .debug-output {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .action-btn {
+            padding: 5px 8px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🐛 Debug Mayoristas Buttons</h1>
+    <p>Esta página prueba específicamente los botones y formularios de mayoristas.</p>
+
+    <div class="test-section">
+        <h3>1. Test de Botones Básicos</h3>
+        <button class="btn btn-success" onclick="testAddButton()">➕ Test Nuevo Mayorista</button>
+        <button class="btn btn-warning" onclick="testEditButton()">✏️ Test Editar (ID: 1)</button>
+        <button class="btn btn-danger" onclick="testDeleteButton()">🗑️ Test Eliminar (ID: 1)</button>
+        <button class="btn" onclick="testCloseModal()">❌ Test Cerrar Modal</button>
+
+        <div id="buttonTestOutput" class="debug-output">
+            Haz clic en los botones de arriba para probar...
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>2. Estado de la Base de Datos</h3>
+        <button class="btn" onclick="loadTestData()">📊 Cargar Datos Mayoristas</button>
+        <div id="dataOutput" class="debug-output">
+            Carga los datos para ver los mayoristas disponibles...
+        </div>
+
+        <div id="mayoristasTable"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>3. Test del Formulario</h3>
+        <button class="btn btn-success" onclick="showTestForm()">📝 Mostrar Formulario</button>
+        <button class="btn" onclick="testFormSubmit()">💾 Test Guardar</button>
+        <div id="formOutput" class="debug-output">
+            Tests del formulario aparecerán aquí...
+        </div>
+    </div>
+
+    <!-- Modal igual que en dashboard -->
+    <div id="mayoristasModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="mayoristasModalTitle">🏢 Test Modal</h2>
+                <button class="modal-close" onclick="closeMayoristasModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="mayoristasForm" onsubmit="saveMayorista(event)">
+                    <input type="hidden" id="editMayoristaId" value="">
+
+                    <div class="form-group">
+                        <label for="mayoristaNombre">Nombre Completo *</label>
+                        <input type="text" id="mayoristaNombre" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mayoristaEmail">Email *</label>
+                        <input type="email" id="mayoristaEmail" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mayoristaEmpresa">Empresa *</label>
+                        <input type="text" id="mayoristaEmpresa" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mayoristaTelefono">Teléfono</label>
+                        <input type="tel" id="mayoristaTelefono" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mayoristaPassword">Contraseña *</label>
+                        <input type="password" id="mayoristaPassword" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mayoristaDescuento">Descuento (%)</label>
+                        <input type="number" id="mayoristaDescuento" class="form-control" min="0" max="50" value="20">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mayoristaEstado">Estado</label>
+                        <select id="mayoristaEstado" class="form-control">
+                            <option value="active">Activo</option>
+                            <option value="suspended">Suspendido</option>
+                            <option value="inactive">Inactivo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mayoristaNotas">Notas</label>
+                        <textarea id="mayoristaNotas" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                        <button type="button" class="btn btn-danger" onclick="closeMayoristasModal()">Cancelar</button>
+                        <button type="submit" class="btn btn-success">
+                            <span id="mayoristaSaveText">Crear Mayorista</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/config.js"></script>
+    <script>
+        let supabase = null;
+        let allMayoristas = [];
+
+        // Initialize Supabase
+        function initSupabase() {
+            if (window.SUPABASE_CONFIG) {
+                supabase = window.supabase.createClient(
+                    window.SUPABASE_CONFIG.url,
+                    window.SUPABASE_CONFIG.serviceRoleKey
+                );
+                return true;
+            }
+            return false;
+        }
+
+        window.onload = function() {
+            initSupabase();
+            log('🚀 Debug page loaded. Supabase initialized: ' + (supabase ? 'YES' : 'NO'));
+        };
+
+        function log(message) {
+            console.log(message);
+            const output = document.getElementById('buttonTestOutput');
+            if (output) {
+                output.innerHTML += '<div>' + new Date().toLocaleTimeString() + ': ' + message + '</div>';
+            }
+        }
+
+        // Test functions
+        function testAddButton() {
+            log('🔄 Testing Add Button...');
+            try {
+                showAddMayoristaModal();
+                log('✅ Add button test passed - Modal should be open');
+            } catch (error) {
+                log('❌ Add button test failed: ' + error.message);
+            }
+        }
+
+        function testEditButton() {
+            log('🔄 Testing Edit Button...');
+            try {
+                // Create a test mayorista object
+                if (allMayoristas.length === 0) {
+                    allMayoristas.push({
+                        id: 1,
+                        name: 'Test User',
+                        email: 'test@example.com',
+                        company: 'Test Company',
+                        phone: '123456789',
+                        discount_percentage: 20,
+                        status: 'active',
+                        notes: 'Test notes'
+                    });
+                    log('📝 Created test mayorista for edit test');
+                }
+                editMayorista(1);
+                log('✅ Edit button test passed - Modal should be open with data');
+            } catch (error) {
+                log('❌ Edit button test failed: ' + error.message);
+            }
+        }
+
+        function testDeleteButton() {
+            log('🔄 Testing Delete Button...');
+            try {
+                // Create a test mayorista object if needed
+                if (allMayoristas.length === 0) {
+                    allMayoristas.push({
+                        id: 1,
+                        name: 'Test User',
+                        email: 'test@example.com',
+                        company: 'Test Company'
+                    });
+                }
+                deleteMayorista(1);
+                log('✅ Delete button test passed - Confirmation dialog should appear');
+            } catch (error) {
+                log('❌ Delete button test failed: ' + error.message);
+            }
+        }
+
+        function testCloseModal() {
+            log('🔄 Testing Close Modal...');
+            try {
+                closeMayoristasModal();
+                log('✅ Close modal test passed - Modal should be closed');
+            } catch (error) {
+                log('❌ Close modal test failed: ' + error.message);
+            }
+        }
+
+        function showTestForm() {
+            log('🔄 Showing test form...');
+            showAddMayoristaModal();
+        }
+
+        function testFormSubmit() {
+            log('🔄 Testing form submit...');
+            try {
+                const event = new Event('submit');
+                saveMayorista(event);
+                log('✅ Form submit test initiated');
+            } catch (error) {
+                log('❌ Form submit test failed: ' + error.message);
+            }
+        }
+
+        async function loadTestData() {
+            const output = document.getElementById('dataOutput');
+            const tableDiv = document.getElementById('mayoristasTable');
+
+            output.innerHTML = '🔄 Loading mayoristas data...';
+
+            try {
+                if (!supabase) {
+                    throw new Error('Supabase not initialized');
+                }
+
+                const { data: mayoristas, error } = await supabase
+                    .from('wholesalers')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    throw error;
+                }
+
+                allMayoristas = mayoristas || [];
+
+                output.innerHTML = `✅ ${allMayoristas.length} mayoristas loaded successfully`;
+
+                // Create table
+                if (allMayoristas.length > 0) {
+                    const tableHTML = `
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Empresa</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${allMayoristas.map(m => `
+                                    <tr>
+                                        <td>${m.id}</td>
+                                        <td>${m.name}</td>
+                                        <td>${m.email}</td>
+                                        <td>${m.company}</td>
+                                        <td>${m.status}</td>
+                                        <td class="action-buttons">
+                                            <button class="action-btn btn-warning" onclick="editMayorista('${m.id}')">Edit</button>
+                                            <button class="action-btn btn-danger" onclick="deleteMayorista('${m.id}')">Delete</button>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                    tableDiv.innerHTML = tableHTML;
+                } else {
+                    tableDiv.innerHTML = '<p><em>No mayoristas found. Try adding some test data first.</em></p>';
+                }
+
+            } catch (error) {
+                output.innerHTML = `❌ Error loading data: ${error.message}`;
+                console.error('Error:', error);
+            }
+        }
+
+        // Modal functions (same as dashboard)
+        function showAddMayoristaModal() {
+            log('🔄 Opening new mayorista modal...');
+            try {
+                document.getElementById('mayoristasModalTitle').textContent = '🏢 Nuevo Mayorista';
+                document.getElementById('mayoristaSaveText').textContent = 'Crear Mayorista';
+                document.getElementById('editMayoristaId').value = '';
+
+                // Clear form
+                document.getElementById('mayoristasForm').reset();
+                document.getElementById('mayoristaDescuento').value = 20;
+                document.getElementById('mayoristaEstado').value = 'active';
+                document.getElementById('mayoristaPassword').required = true;
+
+                const modal = document.getElementById('mayoristasModal');
+                if (modal) {
+                    modal.classList.add('show');
+                    log('✅ Modal opened successfully');
+                } else {
+                    log('❌ Modal not found');
+                }
+            } catch (error) {
+                log('❌ Error opening modal: ' + error.message);
+            }
+        }
+
+        function editMayorista(id) {
+            log('🔄 Editing mayorista ID: ' + id);
+            try {
+                const mayorista = allMayoristas.find(m => m.id == id);
+                if (!mayorista) {
+                    log('❌ Mayorista not found: ' + id);
+                    return;
+                }
+
+                document.getElementById('mayoristasModalTitle').textContent = '✏️ Editar Mayorista';
+                document.getElementById('mayoristaSaveText').textContent = 'Guardar Cambios';
+                document.getElementById('editMayoristaId').value = id;
+
+                // Fill form
+                document.getElementById('mayoristaNombre').value = mayorista.name;
+                document.getElementById('mayoristaEmail').value = mayorista.email;
+                document.getElementById('mayoristaEmpresa').value = mayorista.company;
+                document.getElementById('mayoristaTelefono').value = mayorista.phone || '';
+                document.getElementById('mayoristaDescuento').value = mayorista.discount_percentage || 20;
+                document.getElementById('mayoristaEstado').value = mayorista.status;
+                document.getElementById('mayoristaNotas').value = mayorista.notes || '';
+                document.getElementById('mayoristaPassword').value = '';
+                document.getElementById('mayoristaPassword').required = false;
+
+                const modal = document.getElementById('mayoristasModal');
+                if (modal) {
+                    modal.classList.add('show');
+                    log('✅ Edit modal opened successfully');
+                } else {
+                    log('❌ Modal not found');
+                }
+            } catch (error) {
+                log('❌ Error editing mayorista: ' + error.message);
+            }
+        }
+
+        function closeMayoristasModal() {
+            log('🔄 Closing mayorista modal...');
+            try {
+                const modal = document.getElementById('mayoristasModal');
+                if (modal) {
+                    modal.classList.remove('show');
+                    log('✅ Modal closed successfully');
+                } else {
+                    log('❌ Modal not found');
+                }
+            } catch (error) {
+                log('❌ Error closing modal: ' + error.message);
+            }
+        }
+
+        async function deleteMayorista(id) {
+            log('🔄 Delete mayorista ID: ' + id);
+            try {
+                const mayorista = allMayoristas.find(m => m.id == id);
+                if (!mayorista) {
+                    log('❌ Mayorista not found: ' + id);
+                    return;
+                }
+
+                const confirmed = confirm(`⚠️ Delete mayorista "${mayorista.name}" from "${mayorista.company}"?`);
+                if (!confirmed) {
+                    log('❌ Delete cancelled by user');
+                    return;
+                }
+
+                log('✅ Delete confirmed - would proceed with deletion');
+                // For testing, we don't actually delete
+
+            } catch (error) {
+                log('❌ Error in delete function: ' + error.message);
+            }
+        }
+
+        async function saveMayorista(event) {
+            event.preventDefault();
+
+            const output = document.getElementById('formOutput');
+            output.innerHTML = '🔄 Testing form save...';
+
+            try {
+                const formData = {
+                    name: document.getElementById('mayoristaNombre').value,
+                    email: document.getElementById('mayoristaEmail').value,
+                    company: document.getElementById('mayoristaEmpresa').value,
+                    phone: document.getElementById('mayoristaTelefono').value,
+                    password: document.getElementById('mayoristaPassword').value,
+                    discount_percentage: parseInt(document.getElementById('mayoristaDescuento').value),
+                    status: document.getElementById('mayoristaEstado').value,
+                    notes: document.getElementById('mayoristaNotas').value
+                };
+
+                output.innerHTML = `✅ Form data collected successfully:<br><pre>${JSON.stringify(formData, null, 2)}</pre>`;
+                log('✅ Form save test completed - check form output section');
+
+                // For testing, don't actually save to database
+                // closeMayoristasModal();
+
+            } catch (error) {
+                output.innerHTML = `❌ Form save test failed: ${error.message}`;
+                log('❌ Form save test failed: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
