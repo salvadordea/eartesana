@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Multi-Format Image Support - Estudio Artesana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .test-results {
+            margin-top: 20px;
+        }
+        .test-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+        .test-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 1px solid #ddd;
+        }
+        .test-info {
+            flex: 1;
+        }
+        .status {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .status.loading {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .stats {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .log {
+            background: #212529;
+            color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Multi-Format Image Support Test</h1>
+    <p>Testing the new image format detection system across different file types.</p>
+
+    <!-- Image Format Detector -->
+    <script src="./assets/js/image-format-detector.js"></script>
+
+    <div class="test-section">
+        <h2>📊 Format Detection Statistics</h2>
+        <div id="stats" class="stats">
+            Initializing...
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🖼️ Image Format Tests</h2>
+        <p>Testing various product images with different formats:</p>
+        <div id="test-results" class="test-results">
+            <!-- Test results will be populated here -->
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>📝 Debug Log</h2>
+        <div id="debug-log" class="log">
+            Initializing tests...
+        </div>
+    </div>
+
+    <script>
+        // Test cases - mix of known and unknown images
+        const testCases = [
+            {
+                name: 'Bolsas Grandes - Principal',
+                basePath: 'Bolsas Grandes/Bolsa Gigante horizontal/principal',
+                expected: 'Should find .png or .jpg format'
+            },
+            {
+                name: 'Joyeria - Variant',
+                basePath: 'Joyeria/Arete Piel Gota/Miel',
+                expected: 'Should find variant image in any format'
+            },
+            {
+                name: 'Accesorios - Product',
+                basePath: 'Accesorios/Monedero Clip/principal',
+                expected: 'Should find principal image'
+            },
+            {
+                name: 'Non-existent Product',
+                basePath: 'Unknown/Product/variant',
+                expected: 'Should fallback to placeholder'
+            },
+            {
+                name: 'Portacel - Variant',
+                basePath: 'Portacel/Portacel Piel liso/Azul',
+                expected: 'Should find .png format'
+            }
+        ];
+
+        let testResults = [];
+        let debugLog = [];
+
+        function addToLog(message) {
+            debugLog.push(`[${new Date().toLocaleTimeString()}] ${message}`);
+            document.getElementById('debug-log').innerHTML = debugLog.join('\n');
+            document.getElementById('debug-log').scrollTop = document.getElementById('debug-log').scrollHeight;
+        }
+
+        function updateStats() {
+            if (!window.imageDetector) {
+                document.getElementById('stats').innerHTML = 'Image detector not loaded!';
+                return;
+            }
+
+            const stats = window.imageDetector.getCacheStats();
+            document.getElementById('stats').innerHTML = `
+                <strong>Cache Statistics:</strong><br>
+                Total requests: ${stats.total}<br>
+                Successful: ${stats.successful}<br>
+                Failed: ${stats.failed}<br>
+                Hit rate: ${stats.hitRate}
+            `;
+        }
+
+        function createTestItem(testCase, status = 'loading', imageUrl = null, actualFormat = null) {
+            const statusClass = status === 'success' ? 'success' : status === 'error' ? 'error' : 'loading';
+
+            return `
+                <div class="test-item">
+                    <img src="${imageUrl || './assets/images/placeholder-product.jpg'}"
+                         alt="${testCase.name}" class="test-image">
+                    <div class="test-info">
+                        <strong>${testCase.name}</strong><br>
+                        <small>Path: ${testCase.basePath}</small><br>
+                        <small>Expected: ${testCase.expected}</small>
+                        ${actualFormat ? `<br><small>Found: ${actualFormat}</small>` : ''}
+                    </div>
+                    <span class="status ${statusClass}">
+                        ${status === 'loading' ? 'Testing...' :
+                          status === 'success' ? 'Found' : 'Not Found'}
+                    </span>
+                </div>
+            `;
+        }
+
+        async function runTests() {
+            addToLog('Starting multi-format image tests...');
+
+            if (!window.imageDetector) {
+                addToLog('ERROR: Image detector not available!');
+                return;
+            }
+
+            // Initialize test results display
+            const resultsContainer = document.getElementById('test-results');
+            resultsContainer.innerHTML = testCases.map(testCase =>
+                createTestItem(testCase)
+            ).join('');
+
+            // Run each test
+            for (let i = 0; i < testCases.length; i++) {
+                const testCase = testCases[i];
+                addToLog(`Testing: ${testCase.name} (${testCase.basePath})`);
+
+                try {
+                    const result = await new Promise((resolve) => {
+                        window.imageDetector.detectBestFormat(
+                            testCase.basePath,
+                            (url) => {
+                                const format = url.split('.').pop();
+                                addToLog(`✅ Found ${testCase.name}: ${format.toUpperCase()} format`);
+                                resolve({ success: true, url, format });
+                            },
+                            (fallbackUrl) => {
+                                addToLog(`❌ Not found ${testCase.name}: using fallback`);
+                                resolve({ success: false, url: fallbackUrl, format: 'fallback' });
+                            }
+                        );
+                    });
+
+                    // Update the display
+                    const testItems = resultsContainer.querySelectorAll('.test-item');
+                    testItems[i].innerHTML = createTestItem(
+                        testCase,
+                        result.success ? 'success' : 'error',
+                        result.url,
+                        result.format
+                    ).replace('<div class="test-item">', '').replace('</div>', '');
+
+                    testResults.push({
+                        ...testCase,
+                        ...result
+                    });
+
+                } catch (error) {
+                    addToLog(`💥 Error testing ${testCase.name}: ${error.message}`);
+                    testResults.push({
+                        ...testCase,
+                        success: false,
+                        error: error.message
+                    });
+                }
+
+                // Update stats after each test
+                updateStats();
+
+                // Small delay between tests
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+
+            addToLog('All tests completed!');
+            generateSummary();
+        }
+
+        function generateSummary() {
+            const successful = testResults.filter(r => r.success).length;
+            const total = testResults.length;
+
+            addToLog('');
+            addToLog('=== TEST SUMMARY ===');
+            addToLog(`Tests passed: ${successful}/${total}`);
+            addToLog(`Success rate: ${((successful/total) * 100).toFixed(1)}%`);
+
+            const formatCounts = {};
+            testResults.forEach(result => {
+                if (result.success && result.format !== 'fallback') {
+                    formatCounts[result.format] = (formatCounts[result.format] || 0) + 1;
+                }
+            });
+
+            addToLog('');
+            addToLog('Formats found:');
+            Object.entries(formatCounts).forEach(([format, count]) => {
+                addToLog(`  ${format.toUpperCase()}: ${count} files`);
+            });
+
+            updateStats();
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            addToLog('Initializing multi-format test suite...');
+
+            if (!window.imageDetector) {
+                addToLog('Waiting for image detector to load...');
+                setTimeout(() => {
+                    if (window.imageDetector) {
+                        addToLog('Image detector loaded successfully!');
+                        runTests();
+                    } else {
+                        addToLog('ERROR: Image detector failed to load!');
+                    }
+                }, 500);
+            } else {
+                addToLog('Image detector already loaded!');
+                runTests();
+            }
+        });
+    </script>
+</body>
+</html>

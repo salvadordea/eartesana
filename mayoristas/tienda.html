@@ -1522,6 +1522,9 @@
             }
         }
     </style>
+
+    <!-- Image Format Detection -->
+    <script src="../assets/js/image-format-detector.js"></script>
 </head>
 <body class="wholesale-mode">
     <!-- Header Simple -->
@@ -1916,6 +1919,35 @@
             }
         }
         
+        // Multi-format image loading helper for mayoristas
+        function loadImageWithFormats(imgElement, productName, type) {
+            if (!window.imageDetector) {
+                // Fallback if detector not loaded
+                imgElement.src = '../assets/images/categories/backpacks.jpg';
+                return;
+            }
+
+            // Attempt to build a path from the product name
+            const sanitizedName = productName.replace(/[^a-zA-Z0-9\s]/g, '').trim();
+
+            if (type === 'product') {
+                // Try to find principal image
+                const basePath = `${sanitizedName}/principal`;
+                window.imageDetector.loadImage(
+                    basePath,
+                    (url) => {
+                        imgElement.src = url;
+                    },
+                    () => {
+                        imgElement.src = '../assets/images/categories/backpacks.jpg';
+                    }
+                );
+            } else {
+                // For variants, use fallback
+                imgElement.src = '../assets/images/categories/backpacks.jpg';
+            }
+        }
+
         // Get product image URL using Cloudinary or fallback
         function getProductImageUrl(imageId) {
             if (!imageId) {
@@ -2042,8 +2074,8 @@
                                         <i class="fas fa-chevron-right"></i>
                                     </button>
                                 ` : ''}
-                                <img src="${getProductImageUrl(product.main_image_url)}" alt="${product.name}" class="product-thumb" 
-                                     onerror="this.src='../assets/images/categories/backpacks.jpg'">
+                                <img src="${getProductImageUrl(product.main_image_url)}" alt="${product.name}" class="product-thumb"
+                                     onerror="loadImageWithFormats(this, '${product.name}', 'product')">
                                 <div class="product-details">
                                     <h4 class="product-name">${product.name}</h4>
                                     ${hasVariants ? `<span class="product-variant-count">${productVariants.length} variantes</span>` : ''}
@@ -2109,8 +2141,8 @@
                              data-parent-product="${product.id}">
                             <td class="product-cell">
                                 <div class="product-info-cell">
-                                    <img src="${variant.image}" alt="${displayName}" class="product-thumb" 
-                                         onerror="this.src='../assets/images/categories/backpacks.jpg'">
+                                    <img src="${variant.image}" alt="${displayName}" class="product-thumb"
+                                         onerror="loadImageWithFormats(this, '${displayName}', 'variant')">
                                     <div class="product-details">
                                         <h4 class="product-name">${displayName}</h4>
                                         <span class="product-sku">SKU: ${variant.sku}</span>

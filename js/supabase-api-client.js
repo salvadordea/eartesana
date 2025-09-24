@@ -447,9 +447,18 @@ class SupabaseAPI {
             if (productName) {
                 // Convertir nombre del producto a formato de carpeta (sin espacios, lowercase)
                 const folderName = this.sanitizeProductName(productName);
-                const defaultImagePath = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${folderName}/principal.jpg`;
-                console.log(`📸 Usando imagen por defecto: ${defaultImagePath}`);
-                return defaultImagePath;
+                // Use format detection for principal images when available
+                if (typeof window !== 'undefined' && window.imageDetector) {
+                    const basePath = `${folderName}/principal`;
+                    // Return a promise-like approach or fallback to .jpg for now
+                    const defaultImagePath = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${folderName}/principal.jpg`;
+                    console.log(`📸 Usando imagen por defecto (detectará formatos automáticamente): ${basePath}`);
+                    return defaultImagePath;
+                } else {
+                    const defaultImagePath = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${folderName}/principal.jpg`;
+                    console.log(`📸 Usando imagen por defecto: ${defaultImagePath}`);
+                    return defaultImagePath;
+                }
             }
             // Fallback general si no hay nombre de producto
             return 'https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/placeholder-product.jpg';

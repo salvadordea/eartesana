@@ -20,6 +20,10 @@ class ProductoManager {
             'Bolsas Grandes': 'Bolsas Grandes',
             'Bolsas Cruzadas': 'Bolsas Cruzadas',
             'Bolsas de mano': 'Bolsas de mano',
+            'Bolsas de Textil y Piel': 'Bolsas de Textil y Piel',
+            'Backpacks': 'Backpacks',
+            'Botelleras': 'Botelleras',
+            'Hogar': 'Hogar',
             'Accesorios': 'Accesorios'
         };
 
@@ -644,21 +648,43 @@ class ProductoManager {
                 this.updatePriceWithVariant();
                 this.updateStockDisplay(this.selectedVariant.stock);
 
-                // Cambiar imagen usando el nombre de la variante
-                if (this.selectedVariant.name) {
-                    console.log(`🖼️ Cambiando imagen para variante: ${this.selectedVariant.name}`);
+                // Si la variante ya tiene una imagen URL (desde la API), usarla directamente
+                if (this.selectedVariant.image) {
+                    // Properly encode URL to handle spaces and special characters
+                    const encodedImageUrl = this.encodeImageUrl(this.selectedVariant.image);
+                    console.log(`🖼️ Usando imagen directa de la variante: ${this.selectedVariant.image}`);
+                    console.log(`🔗 URL codificada: ${encodedImageUrl}`);
+
+                    // Verificar si la imagen existe, si no, probar fallbacks
+                    const testImage = new Image();
+                    testImage.onload = () => {
+                        const mainImage = document.getElementById('currentProductImage');
+                        if (mainImage) {
+                            mainImage.src = encodedImageUrl;
+                            mainImage.alt = `${this.product.name} - ${this.selectedVariant.name}`;
+                        }
+                        console.log(`✅ Imagen directa cargada exitosamente`);
+                    };
+
+                    testImage.onerror = () => {
+                        console.log(`⚠️ Imagen directa falló, probando fallbacks...`);
+                        // Si la imagen directa no funciona, usar el sistema de fallback
+                        this.updateMainImageForVariant(this.selectedVariant.name);
+                    };
+
+                    testImage.src = encodedImageUrl;
+                } else if (this.selectedVariant.name) {
+                    // Fallback: construir URL usando mapeos
+                    console.log(`🖼️ Construyendo imagen para variante: ${this.selectedVariant.name}`);
                     this.updateMainImageForVariant(this.selectedVariant.name);
                 } else {
-                    console.log(`⚠️ selectedVariant.name no existe:`, this.selectedVariant);
-                }
-
-                // Si la variante tiene imagen específica, actualizarla (respaldo)
-                if (this.selectedVariant.image) {
-                    this.selectImage(this.images.indexOf(this.selectedVariant.image));
+                    console.log(`⚠️ selectedVariant sin image ni name:`, this.selectedVariant);
                 }
             }
         }
     }
+
+    // Old image detection functions removed - now using window.imageDetector
 
     updateMainImageForVariant(variantName) {
         console.log(`📸 updateMainImageForVariant llamado con variante: ${variantName}`);
@@ -668,98 +694,36 @@ class ProductoManager {
             return;
         }
 
-        // Usar los mapeos exactos como en admin/inventario
+        // Direct JPG loading since all images are now converted
         const mappedCategory = this.getMappedCategory();
         const mappedProduct = this.getMappedProduct();
-        // Mantener el nombre de la variante tal como viene (con espacios y casing original)
-        const variantNameExact = variantName;
+        const variantClean = this.normalizeText(variantName);
 
-        console.log(`🔧 Mapeos utilizados: category="${mappedCategory}", product="${mappedProduct}", variant="${variantNameExact}"`);
+        const jpgUrl = `${this.supabaseUrl}/storage/v1/object/public/product-images/${encodeURIComponent(mappedCategory)}/${encodeURIComponent(mappedProduct)}/${encodeURIComponent(variantClean)}.jpg`;
 
-        // Estructura exacta como admin: ${bucketCategory}/${bucketProduct}/${variantName}.jpg
-        const variantImagePath = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${mappedCategory}/${mappedProduct}/${variantNameExact}.jpg`;
-        console.log(`🌐 URL de imagen construida: ${variantImagePath}`);
-
-        // Crear una nueva imagen para verificar si existe
-        const testImage = new Image();
-
-        testImage.onload = () => {
-            // La imagen existe, actualizar la imagen principal
-            const mainImage = document.getElementById('currentProductImage');
-            if (mainImage) {
-                mainImage.src = variantImagePath;
-                mainImage.alt = `${this.product.name} - ${variantName}`;
-            }
-            console.log(`✅ Imagen actualizada para variante ${variantName}: ${variantImagePath}`);
-        };
-
-        testImage.onerror = () => {
-            // La imagen no existe, intentar con formato PNG
-            const pngImagePath = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${mappedCategory}/${mappedProduct}/${variantNameExact}.png`;
-            const testPngImage = new Image();
-
-            testPngImage.onload = () => {
-                const mainImage = document.getElementById('currentProductImage');
-                if (mainImage) {
-                    mainImage.src = pngImagePath;
-                    mainImage.alt = `${this.product.name} - ${variantName}`;
-                }
-                console.log(`✅ Imagen PNG actualizada para variante ${variantName}: ${pngImagePath}`);
-            };
-
-            testPngImage.onerror = () => {
-                console.log(`⚠️ No se encontró imagen para variante ${variantName}, manteniendo imagen principal`);
-            };
-
-            testPngImage.src = pngImagePath;
-        };
-
-        testImage.src = variantImagePath;
+        const mainImage = document.getElementById('currentProductImage');
+        if (mainImage) {
+            mainImage.src = jpgUrl;
+            mainImage.alt = `${this.product.name} - ${variantName}`;
+            console.log(`✅ Imagen de variante cargada: ${jpgUrl}`);
+        }
     }
 
     resetToMainImage() {
-        // Volver a la imagen principal (principal.jpg)
+        // Direct JPG loading for main image
         if (!this.product) return;
 
         const mappedCategory = this.getMappedCategory();
         const mappedProduct = this.getMappedProduct();
 
-        const mainImagePath = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${mappedCategory}/${mappedProduct}/principal.jpg`;
-        console.log(`🏠 URL de imagen principal construida: ${mainImagePath}`);
-        const testImage = new Image();
+        const jpgUrl = `${this.supabaseUrl}/storage/v1/object/public/product-images/${encodeURIComponent(mappedCategory)}/${encodeURIComponent(mappedProduct)}/Principal.jpg`;
 
-        testImage.onload = () => {
-            const mainImage = document.getElementById('currentProductImage');
-            if (mainImage) {
-                mainImage.src = mainImagePath;
-                mainImage.alt = this.product.name;
-            }
-            console.log(`✅ Imagen principal restaurada: ${mainImagePath}`);
-        };
-
-        testImage.onerror = () => {
-            // Si no existe principal.jpg, intentar con principal.png
-            const pngImagePath = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${mappedCategory}/${mappedProduct}/principal.png`;
-            const testPngImage = new Image();
-
-            testPngImage.onload = () => {
-                const mainImage = document.getElementById('currentProductImage');
-                if (mainImage) {
-                    mainImage.src = pngImagePath;
-                    mainImage.alt = this.product.name;
-                }
-                console.log(`✅ Imagen principal PNG restaurada: ${pngImagePath}`);
-            };
-
-            testPngImage.onerror = () => {
-                // Fallback a la imagen que ya está cargada (probablemente desde mainImage)
-                console.log(`⚠️ No se encontró imagen principal para ${this.product.name}, manteniendo imagen actual`);
-            };
-
-            testPngImage.src = pngImagePath;
-        };
-
-        testImage.src = mainImagePath;
+        const mainImage = document.getElementById('currentProductImage');
+        if (mainImage) {
+            mainImage.src = jpgUrl;
+            mainImage.alt = this.product.name;
+            console.log(`✅ Imagen principal restaurada: ${jpgUrl}`);
+        }
     }
 
     updatePriceWithVariant() {
@@ -849,6 +813,36 @@ class ProductoManager {
     }
 
     // Utility Methods
+    encodeImageUrl(url) {
+        // Split URL into parts and encode each path segment individually
+        // This handles spaces and special characters properly
+        const urlParts = url.split('/');
+        const baseIndex = urlParts.findIndex(part => part === 'product-images');
+
+        if (baseIndex !== -1 && baseIndex < urlParts.length - 1) {
+            // Encode only the path parts after 'product-images'
+            for (let i = baseIndex + 1; i < urlParts.length; i++) {
+                if (i === urlParts.length - 1) {
+                    // For the file name, encode everything except the extension
+                    const fileName = urlParts[i];
+                    const lastDotIndex = fileName.lastIndexOf('.');
+                    if (lastDotIndex > 0) {
+                        const name = fileName.substring(0, lastDotIndex);
+                        const ext = fileName.substring(lastDotIndex);
+                        urlParts[i] = encodeURIComponent(name) + ext;
+                    } else {
+                        urlParts[i] = encodeURIComponent(fileName);
+                    }
+                } else {
+                    // For folder names, encode the entire segment
+                    urlParts[i] = encodeURIComponent(urlParts[i]);
+                }
+            }
+        }
+
+        return urlParts.join('/');
+    }
+
     hideLoading() {
         const loadingElements = document.querySelectorAll('.product-loading');
         loadingElements.forEach(el => el.style.display = 'none');
@@ -866,6 +860,15 @@ class ProductoManager {
         }
     }
 
+    normalizeText(text) {
+        // Normalizar texto removiendo acentos y caracteres especiales
+        return text
+            .normalize('NFD') // Descomponer caracteres con acentos
+            .replace(/[\u0300-\u036f]/g, '') // Remover marcas diacríticas (acentos)
+            .toLowerCase()
+            .trim();
+    }
+
     sanitizeProductName(productName) {
         return productName
             .toLowerCase()
@@ -876,20 +879,41 @@ class ProductoManager {
     }
 
     getMappedCategory() {
+        console.log(`🔍 Analizando estructura de categorías del producto:`, {
+            'product.categories': this.product.categories,
+            'product.category': this.product.category,
+            'product.category_ids': this.product.category_ids,
+            'todas las propiedades': Object.keys(this.product)
+        });
+
         // Intentar obtener la primera categoría del producto
         let categoryName = null;
 
         if (this.product.categories && this.product.categories.length > 0) {
             categoryName = this.product.categories[0];
+            console.log(`📂 Categoria desde product.categories[0]: ${categoryName}`);
         } else if (this.product.category && this.product.category.name) {
             categoryName = this.product.category.name;
+            console.log(`📂 Categoria desde product.category.name: ${categoryName}`);
         } else {
             // Fallback: usar el breadcrumb de categoría si está disponible
             const breadcrumbCategory = document.getElementById('breadcrumb-category');
             if (breadcrumbCategory && breadcrumbCategory.textContent && breadcrumbCategory.textContent !== 'Categoría') {
                 categoryName = breadcrumbCategory.textContent;
+                console.log(`📂 Categoria desde breadcrumb: ${categoryName}`);
+            } else {
+                // Último fallback: buscar en la URL si viene de tienda con filtro de categoría
+                const urlParams = new URLSearchParams(window.location.search);
+                const categoryFromUrl = urlParams.get('categoria');
+                if (categoryFromUrl) {
+                    categoryName = decodeURIComponent(categoryFromUrl);
+                    console.log(`📂 Categoria desde URL: ${categoryName}`);
+                }
             }
         }
+
+        console.log(`🎯 Categoria detectada: "${categoryName}"`);
+        console.log(`🗺️ Mapeos disponibles:`, Object.keys(this.CATEGORY_MAPPING));
 
         // Usar el mapeo de categorías como en admin
         if (categoryName && this.CATEGORY_MAPPING[categoryName]) {
@@ -898,7 +922,7 @@ class ProductoManager {
         }
 
         // Fallback si no encontramos mapeo
-        console.log(`⚠️ Categoria no encontrada en mapeo: ${categoryName}, usando "Accesorios"`);
+        console.log(`⚠️ Categoria no encontrada en mapeo: "${categoryName}", usando "Accesorios"`);
         return 'Accesorios'; // Fallback para Monedero Clip
     }
 

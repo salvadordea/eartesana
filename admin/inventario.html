@@ -957,6 +957,9 @@
             white-space: nowrap;
         }
     </style>
+
+    <!-- Image Format Detection -->
+    <script src="../assets/js/image-format-detector.js"></script>
 </head>
 <body>
     <div class="container">
@@ -1123,6 +1126,26 @@
         let currentEditingVariant = null;
         let isImageUploading = false;
         let selectedImageFile = null;
+
+        // Multi-format image loading helper
+        function loadVariantImageWithFormats(imgElement, category, product, variant) {
+            if (!window.imageDetector) {
+                // Fallback if detector not loaded
+                imgElement.src = '../assets/images/placeholder-product.jpg';
+                return;
+            }
+
+            const basePath = `${category}/${product}/${variant}`;
+            window.imageDetector.loadImage(
+                basePath,
+                (url) => {
+                    imgElement.src = url;
+                },
+                () => {
+                    imgElement.src = '../assets/images/placeholder-product.jpg';
+                }
+            );
+        }
 
         // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
@@ -1373,7 +1396,9 @@
                         const categoryName = product.categories[0].name;
                         // Mapear el slug del producto a la ruta específica
                         const productSlug = product.slug || 'unknown';
-                        variantImageUrl = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${categoryName}/${productSlug}/variants/${variant.name || variant.variant_name || variant.id}.jpg`;
+                        const variantName = variant.name || variant.variant_name || variant.id;
+                        // Try multiple formats instead of just .jpg
+                        variantImageUrl = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${categoryName}/${productSlug}/${variantName}.jpg`;
                     }
                     
                     // Fallback si no hay imagen específica de variante
@@ -1384,8 +1409,8 @@
                     return `
                         <div class="variant-row">
                             <div class="variant-image">
-                                <img src="${variantImageUrl}" alt="${variant.name || 'Variante'}" class="variant-thumb" 
-                                     onerror="this.src='../assets/images/placeholder-product.jpg'" 
+                                <img src="${variantImageUrl}" alt="${variant.name || 'Variante'}" class="variant-thumb"
+                                     onerror="loadVariantImageWithFormats(this, '${categoryName}', '${productSlug}', '${variantName}')"
                                      style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px; margin-right: 10px;">
                             </div>
                             <div class="variant-info">
