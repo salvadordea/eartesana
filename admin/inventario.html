@@ -1127,6 +1127,49 @@
         let isImageUploading = false;
         let selectedImageFile = null;
 
+        // Test function to verify Supabase connection
+        async function testSupabaseConnection() {
+            try {
+                console.log('🔍 Testing Supabase connection...');
+                const { data, error } = await supabase
+                    .from('products')
+                    .select('id, name, total_stock')
+                    .limit(1);
+
+                if (error) {
+                    console.error('❌ Supabase connection test failed:', error);
+                    return false;
+                }
+
+                console.log('✅ Supabase connection test successful:', data);
+                return true;
+            } catch (error) {
+                console.error('❌ Supabase connection test error:', error);
+                return false;
+            }
+        }
+
+        // Debug function to check variant IDs in database
+        async function checkVariantIds(productId = 1) {
+            try {
+                console.log(`🔍 Checking variant IDs for product ${productId}...`);
+                const { data, error } = await supabase
+                    .from('product_variants')
+                    .select('id, product_id, name, variant_name, sku, stock')
+                    .eq('product_id', productId);
+
+                if (error) {
+                    console.error('❌ Error fetching variants:', error);
+                    return;
+                }
+
+                console.log('📋 Variants in database:', data);
+                return data;
+            } catch (error) {
+                console.error('❌ Error checking variant IDs:', error);
+            }
+        }
+
         // Multi-format image loading helper
         function loadVariantImageWithFormats(imgElement, category, product, variant) {
             if (!window.imageDetector) {
@@ -1338,7 +1381,8 @@
                         `<div class="quick-edit">
                             <input type="number" value="${product.total_stock || 0}" min="0" 
                                    onchange="updateProductStock(${product.id}, this.value)">
-                            <button onclick="updateProductStock(${product.id}, this.previousElementSibling.value)">
+                            <button onclick="updateProductStock(${product.id}, this.previousElementSibling.value)"
+                                    title="Guardar cambios de stock">
                                 <i class="fas fa-check"></i>
                             </button>
                          </div>`
@@ -1389,14 +1433,18 @@
                 variantsCell.colSpan = 8;
                 
                 const variantsHtml = product.variants.map(variant => {
+                    // Debug: Log variant data structure
+                    console.log('🔍 Variant data for product', product.id, ':', variant);
+
                     // Generar URL de imagen para la variante usando estructura anidada
                     let variantImageUrl = variant.image_url;
-                    
+
+                    // Declare variables outside the conditional to make them available in the template
+                    const categoryName = product.categories.length > 0 ? product.categories[0].name : 'unknown';
+                    const productSlug = product.slug || 'unknown';
+                    const variantName = variant.name || variant.variant_name || variant.id;
+
                     if (!variantImageUrl && product.categories.length > 0) {
-                        const categoryName = product.categories[0].name;
-                        // Mapear el slug del producto a la ruta específica
-                        const productSlug = product.slug || 'unknown';
-                        const variantName = variant.name || variant.variant_name || variant.id;
                         // Try multiple formats instead of just .jpg
                         variantImageUrl = `https://yrmfrfpyqctvwyhrhivl.supabase.co/storage/v1/object/public/product-images/${categoryName}/${productSlug}/${variantName}.jpg`;
                     }
@@ -1420,7 +1468,8 @@
                             <div class="quick-edit">
                                 <input type="number" class="variant-stock-input" value="${variant.stock || 0}" min="0"
                                        onchange="updateVariantStock(${product.id}, '${variant.id}', this.value)">
-                                <button onclick="updateVariantStock(${product.id}, '${variant.id}', this.previousElementSibling.value)">
+                                <button onclick="updateVariantStock(${product.id}, '${variant.id}', this.previousElementSibling.value)"
+                                        title="Guardar cambios de stock de variante">
                                     <i class="fas fa-check"></i>
                                 </button>
                             </div>
@@ -1934,36 +1983,70 @@
 
         async function updateProductStock(productId, newStock) {
             try {
-                const { error } = await supabase
+                console.log(`🔄 Actualizando stock del producto ${productId} a ${newStock}`);
+
+                // Verify Supabase client is available
+                if (!supabase) {
+                    throw new Error('Cliente de Supabase no disponible');
+                }
+
+                const parsedStock = parseInt(newStock);
+                if (isNaN(parsedStock) || parsedStock < 0) {
+                    throw new Error('Stock debe ser un número válido mayor o igual a 0');
+                }
+
+                const { data, error } = await supabase
                     .from('products')
-                    .update({ total_stock: parseInt(newStock) })
-                    .eq('id', productId);
+                    .update({ total_stock: parsedStock })
+                    .eq('id', productId)
+                    .select();
 
-                if (error) throw error;
+                if (error) {
+                    console.error('❌ Error de Supabase:', error);
+                    throw error;
+                }
 
-                showSuccess('Stock actualizado correctamente');
+                console.log('✅ Stock actualizado en Supabase:', data);
+                showSuccess(`Stock actualizado correctamente a ${parsedStock} unidades`);
                 await loadProducts();
-                
+
             } catch (error) {
-                console.error('Error updating stock:', error);
+                console.error('❌ Error updating stock:', error);
                 showError('Error actualizando stock: ' + error.message);
             }
         }
 
         async function updateVariantStock(productId, variantId, newStock) {
             try {
-                const { error } = await supabase
+                console.log(`🔄 Actualizando stock de variante ${variantId} del producto ${productId} a ${newStock}`);
+
+                // Verify Supabase client is available
+                if (!supabase) {
+                    throw new Error('Cliente de Supabase no disponible');
+                }
+
+                const parsedStock = parseInt(newStock);
+                if (isNaN(parsedStock) || parsedStock < 0) {
+                    throw new Error('Stock debe ser un número válido mayor o igual a 0');
+                }
+
+                const { data, error } = await supabase
                     .from('product_variants')
-                    .update({ stock: parseInt(newStock) })
-                    .eq('id', variantId);
+                    .update({ stock: parsedStock })
+                    .eq('id', variantId)
+                    .select();
 
-                if (error) throw error;
+                if (error) {
+                    console.error('❌ Error de Supabase al actualizar variante:', error);
+                    throw error;
+                }
 
-                showSuccess('Stock de variante actualizado correctamente');
+                console.log('✅ Stock de variante actualizado en Supabase:', data);
+                showSuccess(`Stock de variante actualizado correctamente a ${parsedStock} unidades`);
                 await loadProducts(); // Esto recalculará el total automáticamente
-                
+
             } catch (error) {
-                console.error('Error updating variant stock:', error);
+                console.error('❌ Error updating variant stock:', error);
                 showError('Error actualizando stock de variante: ' + error.message);
             }
         }

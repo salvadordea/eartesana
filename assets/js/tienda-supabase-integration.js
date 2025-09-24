@@ -22,7 +22,7 @@ class TiendaSupabaseIntegration {
             maxPrice: null,
             onSale: false,
             featured: false,
-            inStock: true
+            inStock: false // Changed: don't filter by stock by default
         };
         this.currentPage = 1;
         this.itemsPerPage = 12;
@@ -1103,7 +1103,48 @@ class TiendaSupabaseIntegration {
         // Make search function globally available for compatibility
         window.searchProducts = () => this.searchProducts();
 
+        // Initialize view toggle
+        this.setupViewToggle();
+
         console.log('🔍 Search functionality initialized');
+    }
+
+    // Setup view toggle functionality
+    setupViewToggle() {
+        const viewButtons = document.querySelectorAll('.view-btn');
+        const productsGrid = document.getElementById('productsGrid');
+
+        console.log(`🔍 View toggle setup - buttons: ${viewButtons.length}, grid:`, productsGrid);
+
+        if (!viewButtons.length || !productsGrid) {
+            console.warn('⚠️ View toggle elements not found');
+            return;
+        }
+
+        viewButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const viewType = btn.getAttribute('data-view');
+
+                // Update button states
+                viewButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Update grid layout
+                if (viewType === 'list') {
+                    productsGrid.classList.add('list-view');
+                    productsGrid.classList.remove('grid-view');
+                } else {
+                    productsGrid.classList.add('grid-view');
+                    productsGrid.classList.remove('list-view');
+                }
+
+                console.log(`🔄 View changed to: ${viewType}`);
+            });
+        });
+
+        // Set initial grid view
+        productsGrid.classList.add('grid-view');
+        console.log('👁️ View toggle initialized');
     }
 
     // Enhanced performance optimization methods
@@ -1235,7 +1276,13 @@ class TiendaSupabaseIntegration {
     }
 
     renderStockStatus(totalStock, hasVariants) {
-        // Debug stock value
+        // For products with variants, don't show stock status in the product card
+        // Stock status should only be shown when a specific variant is selected
+        if (hasVariants) {
+            return ''; // Return empty string - no stock indicator for variant products in grid
+        }
+
+        // Debug stock value for simple products only
         console.log(`🔍 Stock Debug - totalStock: ${totalStock}, type: ${typeof totalStock}, hasVariants: ${hasVariants}`);
 
         let stock = 0;
@@ -1262,7 +1309,7 @@ class TiendaSupabaseIntegration {
         } else if (stock <= 10) {
             return `<span class="stock-status medium-stock"><i class="fas fa-check-circle"></i> Disponible (${stock})</span>`;
         } else {
-            return `<span class="stock-status in-stock"><i class="fas fa-check-circle"></i> En stock ${hasVariants ? '(variantes)' : `(${stock})`}</span>`;
+            return `<span class="stock-status in-stock"><i class="fas fa-check-circle"></i> En stock (${stock})</span>`;
         }
     }
 
@@ -1590,7 +1637,7 @@ class TiendaSupabaseIntegration {
             maxPrice: null,
             onSale: false,
             featured: false,
-            inStock: true
+            inStock: false // Changed: don't filter by stock by default
         };
 
         // Reset form elements
@@ -1606,7 +1653,7 @@ class TiendaSupabaseIntegration {
         if (maxPrice) maxPrice.value = '';
         if (onSaleFilter) onSaleFilter.checked = false;
         if (featuredFilter) featuredFilter.checked = false;
-        if (inStockFilter) inStockFilter.checked = true;
+        if (inStockFilter) inStockFilter.checked = false; // Changed: don't filter by stock initially
 
         // Mostrar categorías de nuevo con animación
         this.showCategoriesWithAnimation();

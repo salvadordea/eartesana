@@ -418,11 +418,34 @@ class SupabaseAPIFixed {
      * Calcular stock total incluyendo variantes
      */
     async calculateTotalStock(product) {
-        console.log(`🔢 Calculating stock for product: ${product.name}, has_variants: ${product.has_variants}, total_stock: ${product.total_stock}`);
+        console.log(`🔢 Calculating stock for product: ${product.name}`);
+        console.log(`🔍 Product details:`, {
+            id: product.id,
+            name: product.name,
+            status: product.status,
+            has_variants: product.has_variants,
+            total_stock: product.total_stock,
+            total_stock_type: typeof product.total_stock,
+            is_total_stock_null: product.total_stock === null,
+            is_total_stock_undefined: product.total_stock === undefined
+        });
 
         if (!product.has_variants) {
-            const stock = parseInt(product.total_stock) || 0;
-            console.log(`📦 Simple product stock: ${stock}`);
+            // For simple products, be more aggressive with fallbacks
+            let stock = 0;
+
+            if (product.total_stock !== null && product.total_stock !== undefined) {
+                stock = parseInt(product.total_stock) || 0;
+            }
+
+            // Only assign fallback stock if total_stock is null/undefined (missing data)
+            // Don't assign fallback for products that legitimately have 0 stock
+            if (stock === 0 && product.total_stock === null && (product.status === 'publish' || product.status === 'published')) {
+                stock = 1; // Minimal fallback stock for products with missing data
+                console.log(`📦 Assigning fallback stock (${stock}) to published product with null stock data`);
+            }
+
+            console.log(`📦 Simple product final stock: ${stock} (original: ${product.total_stock})`);
             return stock;
         }
 
@@ -435,23 +458,35 @@ class SupabaseAPIFixed {
 
             if (variantsResponse.ok) {
                 const variants = await variantsResponse.json();
+                console.log(`🔍 Found ${variants.length} active variants`);
+
                 const totalVariantStock = variants.reduce((sum, variant) => {
                     const variantStock = parseInt(variant.stock) || 0;
-                    console.log(`🔹 Variant stock: ${variantStock}`);
+                    console.log(`🔹 Variant stock: ${variantStock} (raw: ${variant.stock})`);
                     return sum + variantStock;
                 }, 0);
                 console.log(`🔢 Producto ${product.name}: stock total de variantes = ${totalVariantStock}`);
+
+                // Only provide fallback stock if there are NO variants but product claims to have variants
+                // (this indicates missing data, not legitimate 0 stock)
+                if (variants.length === 0 && (product.status === 'publish' || product.status === 'published')) {
+                    console.log(`📦 No active variants found but product claims to have variants, assigning fallback stock of 1`);
+                    return 1;
+                }
+
                 return totalVariantStock;
             } else {
                 console.warn(`⚠️ No se pudieron cargar variantes para producto ${product.id}, usando stock base`);
+                // Use actual total_stock or 0 (no artificial stock assignment)
                 const fallbackStock = parseInt(product.total_stock) || 0;
-                console.log(`📦 Fallback stock: ${fallbackStock}`);
+                console.log(`📦 API error fallback stock: ${fallbackStock} (product status: ${product.status})`);
                 return fallbackStock;
             }
         } catch (error) {
             console.error(`❌ Error calculando stock de variantes para producto ${product.id}:`, error);
+            // Use actual total_stock or 0 (no artificial stock assignment)
             const errorFallbackStock = parseInt(product.total_stock) || 0;
-            console.log(`📦 Error fallback stock: ${errorFallbackStock}`);
+            console.log(`📦 Error fallback stock: ${errorFallbackStock} (product status: ${product.status})`);
             return errorFallbackStock;
         }
     }

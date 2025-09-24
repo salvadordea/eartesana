@@ -343,11 +343,28 @@ class ProductoManager {
         return `$${dollars}.<sup>${cents}</sup>`;
     }
 
-    updateStockDisplay() {
+    updateStockDisplay(variantStock = null) {
         const stockElement = document.getElementById('productStock');
         if (!stockElement) return;
 
-        const stock = this.product.stock || 0;
+        // For products with variants, only show stock when a variant is selected
+        const hasVariants = this.product.variations && this.product.variations.length > 0;
+
+        if (hasVariants && variantStock === null) {
+            // Hide stock indicator for variant products when no variant is selected
+            stockElement.innerHTML = '';
+
+            // Keep add to cart button enabled but with neutral text
+            const addToCartBtn = document.getElementById('addToCartBtn');
+            if (addToCartBtn) {
+                addToCartBtn.disabled = false;
+                addToCartBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Agregar al carrito';
+            }
+            return;
+        }
+
+        // Use variant stock if provided, otherwise use product stock
+        const stock = variantStock !== null ? variantStock : (this.product.stock || 0);
         const inStock = stock > 0;
 
         stockElement.innerHTML = `
@@ -357,11 +374,11 @@ class ProductoManager {
             </div>
         `;
 
-        // Actualizar botón de agregar al carrito
+        // Update add to cart button
         const addToCartBtn = document.getElementById('addToCartBtn');
         if (addToCartBtn) {
             addToCartBtn.disabled = !inStock;
-            addToCartBtn.textContent = inStock ? 'Agregar al Carrito' : 'Agotado';
+            addToCartBtn.innerHTML = inStock ? '<i class="fas fa-shopping-cart"></i> Agregar al carrito' : 'Agotado';
         }
     }
 
@@ -593,6 +610,7 @@ class ProductoManager {
                     opt.classList.remove('selected');
                 });
                 this.selectedVariant = null;
+                this.updateStockDisplay(); // Hide stock indicator when variants are deselected
                 console.log(`🔄 Double-click: Reset to main image`);
             }
         });
@@ -657,6 +675,7 @@ class ProductoManager {
             // Deseleccionar - volver a imagen principal
             this.selectedVariant = null;
             this.resetToMainImage();
+            this.updateStockDisplay(); // Hide stock indicator when no variant is selected
             console.log(`🔄 Variante deseleccionada, volviendo a imagen principal`);
         } else {
             // Seleccionar nueva variante

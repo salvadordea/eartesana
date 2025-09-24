@@ -6,6 +6,7 @@ body {
     color: #fff;
 }
 
+
 /* Breadcrumbs */
 .breadcrumbs {
     background-color: #111;
@@ -106,6 +107,11 @@ body {
     background: #333;
     font-size: 14px;
     cursor: pointer;
+    color: #fff;
+}
+
+.sort-dropdown select option {
+    background: #333;
     color: #fff;
 }
 
@@ -1588,9 +1594,16 @@ body {
 
 /* Mobile: Hide regular search, show mobile elements */
 @media (max-width: 768px) {
-    /* Hide the top search bar */
+    /* Show the search bar on mobile */
     .search-bar {
-        display: none !important;
+        display: block !important;
+        padding: 15px 0;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
     }
     
     /* HIDE SIDEBAR COMPLETELY IN MOBILE */
@@ -1604,16 +1617,14 @@ body {
         gap: 0 !important;
     }
     
-    /* Show mobile toggle button */
+    /* Hide mobile toggle button */
     .mobile-search-toggle {
-        display: block;
-        padding: 15px 0;
-        background: transparent;
+        display: none;
     }
     
-    /* Show mobile search container when needed */
+    /* Hide mobile search container - use regular search instead */
     .mobile-search-container {
-        display: block;
+        display: none;
     }
     
     /* Reorder elements in shop-main using flexbox */
@@ -1622,25 +1633,21 @@ body {
         flex-direction: column;
     }
     
-    /* Order for mobile layout: Search → Categories → Products */
-    .mobile-search-container {
-        order: 1; /* Search toggle first */
-    }
-    
+    /* Order for mobile layout: Categories → Products */
     .main-categories {
-        order: 2; /* Categories second */
+        order: 1; /* Categories first */
     }
     
     .products-results {
-        order: 3;
+        order: 2;
     }
     
     .products-container {
-        order: 4;
+        order: 3;
     }
     
     .pagination {
-        order: 5;
+        order: 4;
     }
 }
 

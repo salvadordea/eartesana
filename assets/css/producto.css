@@ -265,6 +265,14 @@ body {
     color: var(--secondary-color);
 }
 
+.tax-disclaimer {
+    font-size: 0.85rem;
+    color: #ccc;
+    font-weight: 400;
+    font-style: italic;
+    text-transform: lowercase;
+}
+
 .original-price {
     font-size: 1.4rem;
     color: #666;
@@ -1190,6 +1198,10 @@ body {
     .current-price {
         font-size: 1.6rem;
     }
+
+    .tax-disclaimer {
+        font-size: 0.8rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1207,6 +1219,10 @@ body {
     
     .current-price {
         font-size: 1.4rem;
+    }
+
+    .tax-disclaimer {
+        font-size: 0.75rem;
     }
     
     .action-buttons {
@@ -1247,6 +1263,10 @@ body {
     
     .current-price {
         font-size: 1.2rem;
+    }
+
+    .tax-disclaimer {
+        font-size: 0.7rem;
     }
     
     .quantity-selector {
@@ -2190,6 +2210,10 @@ body {
     
     .current-price {
         font-size: 1.5rem;
+    }
+
+    .tax-disclaimer {
+        font-size: 0.75rem;
     }
     
     .product-actions {

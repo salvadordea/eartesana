@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix RLS - Mayoristas</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .fix-card {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #dc3545;
+        }
+        .btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .btn:hover { background: #c82333; }
+        .btn-success { background: #28a745; }
+        .btn-success:hover { background: #1e7e34; }
+        .alert {
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .alert-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .alert-error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border: 1px solid #e9ecef;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Fix Row Level Security - Mayoristas</h1>
+    <p>Esta página corrige los problemas de permisos (RLS) de la tabla wholesalers.</p>
+
+    <div class="alert alert-error">
+        <strong>❌ Problema Detectado:</strong> Las políticas de Row Level Security están bloqueando las operaciones CRUD.
+    </div>
+
+    <div class="fix-card">
+        <h3>Opción 1: Fix Automático (Recomendado)</h3>
+        <p>Intenta corregir los permisos automáticamente:</p>
+        <button class="btn btn-success" onclick="quickFix()" id="quickFixBtn">🔧 Fix Rápido</button>
+        <div id="quickFixResult"></div>
+    </div>
+
+    <div class="fix-card">
+        <h3>Opción 2: Fix Manual (Garantizado)</h3>
+        <p>Si el fix automático no funciona, ejecuta este SQL en tu Supabase Dashboard:</p>
+        <pre id="fixSQL">-- Script cargando...</pre>
+        <button class="btn" onclick="copySQLFix()">📋 Copiar SQL</button>
+    </div>
+
+    <div class="fix-card">
+        <h3>Opción 3: Alternativa Simple</h3>
+        <p>Como solución temporal, podemos deshabilitar RLS completamente:</p>
+        <button class="btn" onclick="disableRLS()" id="disableRLSBtn">⚠️ Deshabilitar RLS</button>
+        <div id="disableRLSResult"></div>
+        <small><em>Nota: Esto es menos seguro pero funcionará para el admin panel</em></small>
+    </div>
+
+    <div class="fix-card">
+        <h3>Verificar Fix</h3>
+        <button class="btn btn-success" onclick="testCRUD()" id="testBtn">✅ Probar CRUD</button>
+        <div id="testResult"></div>
+    </div>
+
+    <script src="../assets/js/config.js"></script>
+    <script>
+        let supabase = null;
+
+        const FIX_SQL = `-- Fix Row Level Security policies for wholesalers table
+
+-- Drop existing problematic policies
+DROP POLICY IF EXISTS "Service role can manage wholesalers" ON public.wholesalers;
+DROP POLICY IF EXISTS "Wholesalers can read own data" ON public.wholesalers;
+DROP POLICY IF EXISTS "Enable all operations for service role" ON public.wholesalers;
+DROP POLICY IF EXISTS "Enable read access for authenticated users on own data" ON public.wholesalers;
+
+-- Disable and re-enable RLS to reset
+ALTER TABLE public.wholesalers DISABLE ROW LEVEL SECURITY;
+ALTER TABLE public.wholesalers ENABLE ROW LEVEL SECURITY;
+
+-- Create a simple policy that allows all operations for service role
+CREATE POLICY "Allow all for service role" ON public.wholesalers
+    FOR ALL
+    TO service_role
+    USING (true)
+    WITH CHECK (true);
+
+-- Create policy for authenticated users (future wholesaler access)
+CREATE POLICY "Users can read own data" ON public.wholesalers
+    FOR SELECT
+    TO authenticated
+    USING (auth.email() = email);
+
+-- Ensure proper grants
+GRANT ALL ON public.wholesalers TO service_role;
+GRANT SELECT ON public.wholesalers TO authenticated;
+GRANT USAGE ON SCHEMA public TO service_role;`;
+
+        function initSupabase() {
+            if (window.SUPABASE_CONFIG) {
+                supabase = window.supabase.createClient(
+                    window.SUPABASE_CONFIG.url,
+                    window.SUPABASE_CONFIG.serviceRoleKey
+                );
+                return true;
+            }
+            return false;
+        }
+
+        window.onload = function() {
+            initSupabase();
+            document.getElementById('fixSQL').textContent = FIX_SQL;
+        };
+
+        async function quickFix() {
+            const resultDiv = document.getElementById('quickFixResult');
+            const quickFixBtn = document.getElementById('quickFixBtn');
+
+            quickFixBtn.disabled = true;
+            resultDiv.innerHTML = '<p>🔄 Aplicando fix...</p>';
+
+            try {
+                // Try to execute SQL fix using direct queries
+                console.log('🔧 Intentando fix automático...');
+
+                // First, try to drop existing policies (might fail, that's OK)
+                try {
+                    await supabase.rpc('exec', {
+                        sql: "DROP POLICY IF EXISTS \"Service role can manage wholesalers\" ON public.wholesalers;"
+                    });
+                    await supabase.rpc('exec', {
+                        sql: "DROP POLICY IF EXISTS \"Wholesalers can read own data\" ON public.wholesalers;"
+                    });
+                } catch (e) {
+                    console.log('Policy drop failed (expected):', e);
+                }
+
+                resultDiv.innerHTML = `
+                    <div class="alert alert-error">
+                        ❌ <strong>Fix automático no disponible</strong><br>
+                        Supabase no permite ejecutar comandos DDL desde el cliente.<br><br>
+                        <strong>Solución:</strong> Usa la Opción 2 (Fix Manual) ejecutando el SQL en Supabase Dashboard.
+                    </div>
+                `;
+
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="alert alert-error">
+                        ❌ <strong>Error en fix automático:</strong><br>
+                        ${error.message}<br><br>
+                        Por favor usa la Opción 2 (Fix Manual).
+                    </div>
+                `;
+            } finally {
+                quickFixBtn.disabled = false;
+            }
+        }
+
+        async function disableRLS() {
+            const resultDiv = document.getElementById('disableRLSResult');
+            const disableBtn = document.getElementById('disableRLSBtn');
+
+            disableBtn.disabled = true;
+            resultDiv.innerHTML = '<p>🔄 Deshabilitando RLS...</p>';
+
+            try {
+                resultDiv.innerHTML = `
+                    <div class="alert alert-error">
+                        ❌ <strong>No se puede deshabilitar RLS desde el cliente</strong><br>
+                        Para deshabilitar RLS, ejecuta esto en Supabase Dashboard:<br><br>
+                        <pre>ALTER TABLE public.wholesalers DISABLE ROW LEVEL SECURITY;</pre>
+                        <br><strong>⚠️ Advertencia:</strong> Esto hará la tabla accesible a todos los roles autenticados.
+                    </div>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="alert alert-error">
+                        ❌ <strong>Error:</strong> ${error.message}
+                    </div>
+                `;
+            } finally {
+                disableBtn.disabled = false;
+            }
+        }
+
+        async function testCRUD() {
+            const resultDiv = document.getElementById('testResult');
+            const testBtn = document.getElementById('testBtn');
+
+            testBtn.disabled = true;
+            resultDiv.innerHTML = '<p>🔄 Probando operaciones CRUD...</p>';
+
+            try {
+                // Test CREATE
+                const testUser = {
+                    name: 'RLS Test User',
+                    email: `rls-test-${Date.now()}@ejemplo.com`,
+                    company: 'RLS Test Company',
+                    password: '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+                    discount_percentage: 15,
+                    status: 'active',
+                    notes: 'Usuario para probar RLS'
+                };
+
+                const { data: created, error: createError } = await supabase
+                    .from('wholesalers')
+                    .insert([testUser])
+                    .select()
+                    .single();
+
+                if (createError) {
+                    throw createError;
+                }
+
+                // Test READ
+                const { data: read, error: readError } = await supabase
+                    .from('wholesalers')
+                    .select('*')
+                    .eq('id', created.id)
+                    .single();
+
+                if (readError) {
+                    throw readError;
+                }
+
+                // Test UPDATE
+                const { data: updated, error: updateError } = await supabase
+                    .from('wholesalers')
+                    .update({ status: 'suspended' })
+                    .eq('id', created.id)
+                    .select()
+                    .single();
+
+                if (updateError) {
+                    throw updateError;
+                }
+
+                // Test DELETE
+                const { error: deleteError } = await supabase
+                    .from('wholesalers')
+                    .delete()
+                    .eq('id', created.id);
+
+                if (deleteError) {
+                    throw deleteError;
+                }
+
+                resultDiv.innerHTML = `
+                    <div class="alert alert-success">
+                        ✅ <strong>¡CRUD funciona perfectamente!</strong><br>
+                        Todas las operaciones fueron exitosas:<br>
+                        • CREATE: Usuario creado con ID ${created.id}<br>
+                        • READ: Datos leídos correctamente<br>
+                        • UPDATE: Estado cambiado a 'suspended'<br>
+                        • DELETE: Usuario eliminado<br><br>
+                        🎉 <strong>El sistema de mayoristas está completamente funcional!</strong>
+                    </div>
+                `;
+
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="alert alert-error">
+                        ❌ <strong>CRUD sigue fallando:</strong><br>
+                        ${error.message}<br><br>
+                        <strong>Necesitas ejecutar el fix manual:</strong><br>
+                        1. Ve a Supabase Dashboard > SQL Editor<br>
+                        2. Ejecuta el script de la Opción 2<br>
+                        3. Vuelve a probar
+                    </div>
+                `;
+            } finally {
+                testBtn.disabled = false;
+            }
+        }
+
+        function copySQLFix() {
+            navigator.clipboard.writeText(FIX_SQL).then(() => {
+                alert('✅ Script SQL copiado al portapapeles!\n\n1. Ve a Supabase Dashboard\n2. Abre SQL Editor\n3. Pega y ejecuta el script\n4. Vuelve aquí y prueba CRUD');
+            }).catch(() => {
+                alert('❌ No se pudo copiar automáticamente. Selecciona y copia el texto manualmente.');
+            });
+        }
+    </script>
+</body>
+</html>

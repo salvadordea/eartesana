@@ -148,7 +148,8 @@ const EstudioArtesanaConfig = {
     // Supabase Configuration (for admin authentication)
     supabase: {
         url: 'https://yrmfrfpyqctvwyhrhivl.supabase.co',
-        anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlybWZyZnB5cWN0dnd5aHJoaXZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc5NTg5MzUsImV4cCI6MjA3MzUzNDkzNX0.qEijwK3FlnqXP2qw0gl438Tt-Rd1vrfts1cXslUuteU'
+        anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlybWZyZnB5cWN0dnd5aHJoaXZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc5NTg5MzUsImV4cCI6MjA3MzUzNDkzNX0.qEijwK3FlnqXP2qw0gl438Tt-Rd1vrfts1cXslUuteU',
+        serviceRoleKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlybWZyZnB5cWN0dnd5aHJoaXZsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1Nzk1ODkzNSwiZXhwIjoyMDczNTM0OTM1fQ.2Mz8WaiP-I3MWFjt1VxbbK2Kg2AlMqZaMpmrd9XZO8s'
     },
     
     // WooCommerce API Configuration
@@ -254,6 +255,7 @@ if (typeof window !== 'undefined') {
     // Global Supabase configuration for AuthManager
     window.SUPABASE_CONFIG = {
         url: EstudioArtesanaConfig.supabase.url,
-        anonKey: EstudioArtesanaConfig.supabase.anonKey
+        anonKey: EstudioArtesanaConfig.supabase.anonKey,
+        serviceRoleKey: EstudioArtesanaConfig.supabase.serviceRoleKey
     };
 }

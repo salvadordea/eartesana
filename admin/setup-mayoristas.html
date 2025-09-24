@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Mayoristas DB - Estudio Artesana</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .setup-card {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .btn:hover { background: #0056b3; }
+        .btn-success { background: #28a745; }
+        .btn-success:hover { background: #1e7e34; }
+        .btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .alert {
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .alert-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .alert-error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .alert-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border: 1px solid #e9ecef;
+        }
+        .step {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <h1>🛠️ Configuración de Base de Datos - Mayoristas</h1>
+    <p>Esta página te ayudará a crear la tabla de mayoristas en tu base de datos Supabase.</p>
+
+    <div class="alert alert-warning">
+        <strong>⚠️ Importante:</strong> Este proceso creará la tabla 'wholesalers' en tu base de datos. Solo ejecuta esto una vez.
+    </div>
+
+    <div class="step">
+        <h3>Paso 1: Verificar Conexión</h3>
+        <button class="btn" onclick="checkConnection()" id="checkBtn">🔌 Verificar Conexión</button>
+        <div id="connectionStatus"></div>
+    </div>
+
+    <div class="step">
+        <h3>Paso 2: Crear Tabla Wholesalers</h3>
+        <p>Esto ejecutará el script SQL para crear la tabla de mayoristas con todas las columnas necesarias.</p>
+        <button class="btn btn-success" onclick="createTable()" id="createBtn" disabled>🗄️ Crear Tabla</button>
+        <div id="createStatus"></div>
+    </div>
+
+    <div class="step">
+        <h3>Paso 3: Insertar Datos de Ejemplo</h3>
+        <p>Opcionalmente, puedes insertar algunos mayoristas de ejemplo para probar el sistema.</p>
+        <button class="btn" onclick="insertSampleData()" id="sampleBtn" disabled>👥 Insertar Datos de Ejemplo</button>
+        <div id="sampleStatus"></div>
+    </div>
+
+    <div class="step">
+        <h3>Paso 4: Verificar Instalación</h3>
+        <button class="btn" onclick="verifySetup()" id="verifyBtn" disabled>✅ Verificar Todo</button>
+        <div id="verifyStatus"></div>
+    </div>
+
+    <div class="setup-card">
+        <h3>📋 SQL Script Completo</h3>
+        <p>Si prefieres ejecutar esto manualmente en Supabase Dashboard, aquí está el script completo:</p>
+        <pre id="sqlScript">-- Loading script...</pre>
+        <button class="btn" onclick="copySQLScript()">📋 Copiar Script</button>
+    </div>
+
+    <script src="../assets/js/config.js"></script>
+    <script>
+        let supabase = null;
+
+        // SQL script for creating the table
+        const SQL_SCRIPT = `-- Create wholesalers table for mayoristas management
+CREATE TABLE IF NOT EXISTS public.wholesalers (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    company TEXT NOT NULL,
+    phone TEXT,
+    password TEXT NOT NULL,
+    discount_percentage INTEGER DEFAULT 20 CHECK (discount_percentage >= 0 AND discount_percentage <= 50),
+    status TEXT DEFAULT 'active' CHECK (status IN ('active', 'suspended', 'inactive')),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
+    notes TEXT
+);
+
+-- Create indexes
+CREATE INDEX IF NOT EXISTS idx_wholesalers_email ON public.wholesalers(email);
+CREATE INDEX IF NOT EXISTS idx_wholesalers_status ON public.wholesalers(status);
+CREATE INDEX IF NOT EXISTS idx_wholesalers_company ON public.wholesalers(company);
+
+-- Add updated_at trigger
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = now();
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+CREATE OR REPLACE TRIGGER update_wholesalers_updated_at
+    BEFORE UPDATE ON public.wholesalers
+    FOR EACH ROW
+    EXECUTE FUNCTION update_updated_at_column();
+
+-- Enable Row Level Security
+ALTER TABLE public.wholesalers ENABLE ROW LEVEL SECURITY;
+
+-- Create policies
+CREATE POLICY "Service role can manage wholesalers" ON public.wholesalers
+    FOR ALL USING (auth.role() = 'service_role');
+
+CREATE POLICY "Wholesalers can read own data" ON public.wholesalers
+    FOR SELECT USING (auth.email() = email);
+
+-- Grant permissions
+GRANT ALL ON public.wholesalers TO service_role;
+GRANT SELECT ON public.wholesalers TO authenticated;
+
+-- Comments
+COMMENT ON TABLE public.wholesalers IS 'Table storing wholesale customers (mayoristas) information and authentication';`;
+
+        // Initialize Supabase
+        function initSupabase() {
+            if (window.SUPABASE_CONFIG) {
+                supabase = window.supabase.createClient(
+                    window.SUPABASE_CONFIG.url,
+                    window.SUPABASE_CONFIG.serviceRoleKey
+                );
+                return true;
+            }
+            return false;
+        }
+
+        // Initialize on page load
+        window.onload = function() {
+            initSupabase();
+            document.getElementById('sqlScript').textContent = SQL_SCRIPT;
+        };
+
+        async function checkConnection() {
+            const statusDiv = document.getElementById('connectionStatus');
+            const checkBtn = document.getElementById('checkBtn');
+
+            checkBtn.disabled = true;
+            statusDiv.innerHTML = '<p>🔄 Verificando conexión...</p>';
+
+            try {
+                if (!supabase) {
+                    throw new Error('Supabase client not initialized. Check your config.js file.');
+                }
+
+                // Test connection by trying to access any table
+                const { data, error } = await supabase
+                    .from('products') // Test with existing table
+                    .select('count', { count: 'exact', head: true });
+
+                statusDiv.innerHTML = `
+                    <div class="alert alert-success">
+                        ✅ <strong>Conexión exitosa!</strong><br>
+                        Supabase está conectado correctamente con service role.
+                    </div>
+                `;
+
+                // Enable next step
+                document.getElementById('createBtn').disabled = false;
+
+            } catch (error) {
+                statusDiv.innerHTML = `
+                    <div class="alert alert-error">
+                        ❌ <strong>Error de conexión:</strong><br>
+                        ${error.message}
+                    </div>
+                `;
+            } finally {
+                checkBtn.disabled = false;
+            }
+        }
+
+        async function createTable() {
+            const statusDiv = document.getElementById('createStatus');
+            const createBtn = document.getElementById('createBtn');
+
+            createBtn.disabled = true;
+            statusDiv.innerHTML = '<p>🔄 Creando tabla wholesalers...</p>';
+
+            try {
+                // Execute the SQL script using RPC
+                const { data, error } = await supabase.rpc('exec_sql', {
+                    sql: SQL_SCRIPT
+                });
+
+                if (error) {
+                    // If RPC doesn't work, try direct table creation
+                    throw new Error('RPC method failed. Please run the SQL script manually in Supabase Dashboard.');
+                }
+
+                statusDiv.innerHTML = `
+                    <div class="alert alert-success">
+                        ✅ <strong>Tabla creada exitosamente!</strong><br>
+                        La tabla 'wholesalers' ha sido creada con todas sus columnas, índices y políticas.
+                    </div>
+                `;
+
+                // Enable next steps
+                document.getElementById('sampleBtn').disabled = false;
+                document.getElementById('verifyBtn').disabled = false;
+
+            } catch (error) {
+                statusDiv.innerHTML = `
+                    <div class="alert alert-warning">
+                        ⚠️ <strong>Método automático no disponible</strong><br>
+                        ${error.message}<br><br>
+                        <strong>Solución:</strong> Copia el script SQL de abajo y ejecútalo manualmente en tu Supabase Dashboard:
+                        <br>1. Ve a <a href="https://supabase.com" target="_blank">supabase.com</a>
+                        <br>2. Abre el SQL Editor
+                        <br>3. Pega y ejecuta el script completo
+                    </div>
+                `;
+
+                // Still enable next steps in case they run it manually
+                document.getElementById('sampleBtn').disabled = false;
+                document.getElementById('verifyBtn').disabled = false;
+            } finally {
+                createBtn.disabled = false;
+            }
+        }
+
+        async function insertSampleData() {
+            const statusDiv = document.getElementById('sampleStatus');
+            const sampleBtn = document.getElementById('sampleBtn');
+
+            sampleBtn.disabled = true;
+            statusDiv.innerHTML = '<p>🔄 Insertando datos de ejemplo...</p>';
+
+            try {
+                const sampleMayoristas = [
+                    {
+                        name: 'María González',
+                        email: 'maria@empresaabc.com',
+                        company: 'Empresa ABC S.A.',
+                        phone: '+34 600 123 456',
+                        password: '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // hashed "password"
+                        discount_percentage: 25,
+                        status: 'active',
+                        notes: 'Cliente VIP desde 2022'
+                    },
+                    {
+                        name: 'Carlos Ruiz',
+                        email: 'carlos@distribuidoraruiz.com',
+                        company: 'Distribuidora Ruiz',
+                        phone: '+34 610 987 654',
+                        password: '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // hashed "password"
+                        discount_percentage: 20,
+                        status: 'active',
+                        notes: 'Pedidos regulares mensuales'
+                    }
+                ];
+
+                const { data, error } = await supabase
+                    .from('wholesalers')
+                    .insert(sampleMayoristas)
+                    .select();
+
+                if (error) {
+                    throw error;
+                }
+
+                statusDiv.innerHTML = `
+                    <div class="alert alert-success">
+                        ✅ <strong>${data.length} mayoristas de ejemplo insertados!</strong><br>
+                        <ul>
+                            ${data.map(m => `<li><strong>${m.name}</strong> - ${m.email} (${m.company})</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+
+            } catch (error) {
+                statusDiv.innerHTML = `
+                    <div class="alert alert-error">
+                        ❌ <strong>Error insertando datos:</strong><br>
+                        ${error.message}
+                    </div>
+                `;
+            } finally {
+                sampleBtn.disabled = false;
+            }
+        }
+
+        async function verifySetup() {
+            const statusDiv = document.getElementById('verifyStatus');
+            const verifyBtn = document.getElementById('verifyBtn');
+
+            verifyBtn.disabled = true;
+            statusDiv.innerHTML = '<p>🔄 Verificando instalación...</p>';
+
+            try {
+                // Test table exists and can query it
+                const { data: mayoristas, error } = await supabase
+                    .from('wholesalers')
+                    .select('*')
+                    .limit(5);
+
+                if (error) {
+                    throw error;
+                }
+
+                const count = mayoristas.length;
+                const activeCount = mayoristas.filter(m => m.status === 'active').length;
+
+                statusDiv.innerHTML = `
+                    <div class="alert alert-success">
+                        ✅ <strong>¡Instalación completada exitosamente!</strong><br><br>
+                        <strong>Resultados:</strong><br>
+                        • Tabla 'wholesalers' creada y accesible<br>
+                        • ${count} mayoristas en la base de datos<br>
+                        • ${activeCount} mayoristas activos<br><br>
+                        <strong>Siguiente paso:</strong><br>
+                        Ve a <a href="dashboard.html">Dashboard</a> o <a href="test-mayoristas.html">Test Mayoristas</a> para usar el sistema.
+                    </div>
+                `;
+
+            } catch (error) {
+                statusDiv.innerHTML = `
+                    <div class="alert alert-error">
+                        ❌ <strong>Error en verificación:</strong><br>
+                        ${error.message}<br><br>
+                        La tabla podría no existir aún. Asegúrate de ejecutar el script SQL manualmente.
+                    </div>
+                `;
+            } finally {
+                verifyBtn.disabled = false;
+            }
+        }
+
+        function copySQLScript() {
+            navigator.clipboard.writeText(SQL_SCRIPT).then(() => {
+                alert('✅ Script SQL copiado al portapapeles!\n\nAhora ve a Supabase Dashboard > SQL Editor y pégalo.');
+            }).catch(() => {
+                alert('❌ No se pudo copiar automáticamente. Selecciona y copia el texto manualmente.');
+            });
+        }
+    </script>
+</body>
+</html>

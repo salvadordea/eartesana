@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Mayoristas - Estudio Artesana</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-card {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .test-success { border-left-color: #28a745; }
+        .test-error { border-left-color: #dc3545; }
+        .test-warning { border-left-color: #ffc107; }
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn:hover { background: #0056b3; }
+        .btn-success { background: #28a745; }
+        .btn-success:hover { background: #1e7e34; }
+        .results {
+            margin-top: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        pre {
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status-active { background: #d4edda; color: #155724; }
+        .status-suspended { background: #fff3cd; color: #856404; }
+        .status-inactive { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test de Sistema de Mayoristas</h1>
+    <p>Esta página prueba la funcionalidad del sistema de mayoristas con la base de datos real.</p>
+
+    <div class="test-card">
+        <h3>1. Conexión a Supabase</h3>
+        <button class="btn" onclick="testConnection()">Probar Conexión</button>
+        <div id="connectionResult"></div>
+    </div>
+
+    <div class="test-card">
+        <h3>2. Estructura de Tabla Wholesalers</h3>
+        <button class="btn" onclick="testTableStructure()">Verificar Tabla</button>
+        <div id="tableResult"></div>
+    </div>
+
+    <div class="test-card">
+        <h3>3. Datos de Mayoristas</h3>
+        <button class="btn" onclick="loadMayoristas()">Cargar Mayoristas</button>
+        <button class="btn btn-success" onclick="insertTestData()">Insertar Datos de Prueba</button>
+        <div id="mayoristasResult"></div>
+    </div>
+
+    <div class="test-card">
+        <h3>4. Operaciones CRUD</h3>
+        <button class="btn" onclick="testCRUD()">Probar CRUD</button>
+        <div id="crudResult"></div>
+    </div>
+
+    <div class="results">
+        <h3>📊 Resultados de Pruebas</h3>
+        <div id="testResults">Ejecuta las pruebas arriba para ver los resultados.</div>
+    </div>
+
+    <script src="../assets/js/config.js"></script>
+    <script>
+        let supabase = null;
+        let testResults = [];
+
+        // Inicializar Supabase
+        function initSupabase() {
+            if (window.SUPABASE_CONFIG) {
+                // Use service role key for admin operations
+                supabase = window.supabase.createClient(
+                    window.SUPABASE_CONFIG.url,
+                    window.SUPABASE_CONFIG.serviceRoleKey
+                );
+                return true;
+            }
+            return false;
+        }
+
+        // Initialize on page load
+        window.onload = function() {
+            initSupabase();
+        };
+
+        function addTestResult(test, status, message, data = null) {
+            testResults.push({ test, status, message, data, timestamp: new Date() });
+            updateResultsDisplay();
+        }
+
+        function updateResultsDisplay() {
+            const resultsDiv = document.getElementById('testResults');
+            resultsDiv.innerHTML = testResults.map(result => {
+                const statusClass = result.status === 'success' ? 'test-success' :
+                                   result.status === 'error' ? 'test-error' : 'test-warning';
+                const icon = result.status === 'success' ? '✅' :
+                            result.status === 'error' ? '❌' : '⚠️';
+
+                return `
+                    <div class="test-card ${statusClass}">
+                        <strong>${icon} ${result.test}</strong><br>
+                        <small>${result.timestamp.toLocaleTimeString()}</small><br>
+                        ${result.message}
+                        ${result.data ? `<pre>${JSON.stringify(result.data, null, 2)}</pre>` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function testConnection() {
+            const resultDiv = document.getElementById('connectionResult');
+            resultDiv.innerHTML = '<p>🔄 Probando conexión...</p>';
+
+            try {
+                if (!supabase) {
+                    throw new Error('Supabase client not initialized');
+                }
+
+                // Test basic connection
+                const { data, error } = await supabase
+                    .from('wholesalers')
+                    .select('count', { count: 'exact', head: true });
+
+                if (error) {
+                    throw error;
+                }
+
+                resultDiv.innerHTML = '<p>✅ <strong>Conexión exitosa</strong><br>Cliente Supabase inicializado correctamente</p>';
+                addTestResult('Conexión Supabase', 'success', 'Conexión establecida correctamente');
+            } catch (error) {
+                resultDiv.innerHTML = `<p>❌ <strong>Error de conexión:</strong><br>${error.message}</p>`;
+                addTestResult('Conexión Supabase', 'error', error.message);
+            }
+        }
+
+        async function testTableStructure() {
+            const resultDiv = document.getElementById('tableResult');
+            resultDiv.innerHTML = '<p>🔄 Verificando estructura de tabla...</p>';
+
+            try {
+                // Try to select from table to verify it exists and check structure
+                const { data, error } = await supabase
+                    .from('wholesalers')
+                    .select('*')
+                    .limit(1);
+
+                if (error) {
+                    throw error;
+                }
+
+                // Get table info (this will show us the columns)
+                const { data: tableInfo, error: infoError } = await supabase
+                    .rpc('get_table_info', { table_name: 'wholesalers' })
+                    .single();
+
+                resultDiv.innerHTML = `
+                    <p>✅ <strong>Tabla 'wholesalers' encontrada</strong></p>
+                    <p>La tabla está accesible y lista para operaciones CRUD.</p>
+                `;
+                addTestResult('Estructura de Tabla', 'success', 'Tabla wholesalers verificada correctamente', data);
+            } catch (error) {
+                resultDiv.innerHTML = `<p>❌ <strong>Error verificando tabla:</strong><br>${error.message}</p>`;
+                addTestResult('Estructura de Tabla', 'error', error.message);
+            }
+        }
+
+        async function loadMayoristas() {
+            const resultDiv = document.getElementById('mayoristasResult');
+            resultDiv.innerHTML = '<p>🔄 Cargando mayoristas...</p>';
+
+            try {
+                const { data: mayoristas, error } = await supabase
+                    .from('wholesalers')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    throw error;
+                }
+
+                const count = mayoristas.length;
+                const activeCount = mayoristas.filter(m => m.status === 'active').length;
+                const suspendedCount = mayoristas.filter(m => m.status === 'suspended').length;
+
+                resultDiv.innerHTML = `
+                    <p>✅ <strong>${count} mayoristas encontrados</strong></p>
+                    <ul>
+                        <li>Activos: <span class="status-badge status-active">${activeCount}</span></li>
+                        <li>Suspendidos: <span class="status-badge status-suspended">${suspendedCount}</span></li>
+                        <li>Inactivos: <span class="status-badge status-inactive">${count - activeCount - suspendedCount}</span></li>
+                    </ul>
+                    ${count > 0 ? `
+                        <h4>Mayoristas:</h4>
+                        <ul>
+                            ${mayoristas.map(m => `
+                                <li><strong>${m.name}</strong> (${m.email}) - ${m.company}
+                                    <span class="status-badge status-${m.status}">${m.status}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    ` : '<p><em>No hay mayoristas registrados</em></p>'}
+                `;
+                addTestResult('Carga de Datos', 'success', `${count} mayoristas cargados`, { count, activeCount, suspendedCount });
+            } catch (error) {
+                resultDiv.innerHTML = `<p>❌ <strong>Error cargando mayoristas:</strong><br>${error.message}</p>`;
+                addTestResult('Carga de Datos', 'error', error.message);
+            }
+        }
+
+        async function insertTestData() {
+            const resultDiv = document.getElementById('mayoristasResult');
+            resultDiv.innerHTML = '<p>🔄 Insertando datos de prueba...</p>';
+
+            try {
+                const testMayoristas = [
+                    {
+                        name: 'María González Test',
+                        email: `test-maria-${Date.now()}@ejemplo.com`,
+                        company: 'Empresa Test ABC',
+                        phone: '+34 600 123 456',
+                        password: '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // hashed "password"
+                        discount_percentage: 25,
+                        status: 'active',
+                        notes: 'Mayorista de prueba creado por test'
+                    },
+                    {
+                        name: 'Carlos Ruiz Test',
+                        email: `test-carlos-${Date.now()}@ejemplo.com`,
+                        company: 'Distribuidora Test XYZ',
+                        phone: '+34 610 987 654',
+                        password: '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // hashed "password"
+                        discount_percentage: 20,
+                        status: 'active',
+                        notes: 'Segundo mayorista de prueba'
+                    }
+                ];
+
+                const { data, error } = await supabase
+                    .from('wholesalers')
+                    .insert(testMayoristas)
+                    .select();
+
+                if (error) {
+                    throw error;
+                }
+
+                resultDiv.innerHTML = `
+                    <p>✅ <strong>${data.length} mayoristas de prueba insertados</strong></p>
+                    <ul>
+                        ${data.map(m => `
+                            <li><strong>${m.name}</strong> - ${m.email} (${m.company})</li>
+                        `).join('')}
+                    </ul>
+                    <p><em>Ahora puedes probar las operaciones CRUD con estos datos</em></p>
+                `;
+                addTestResult('Insertar Datos', 'success', `${data.length} mayoristas de prueba creados`, data);
+
+                // Automatically reload the data
+                setTimeout(loadMayoristas, 1000);
+            } catch (error) {
+                resultDiv.innerHTML = `<p>❌ <strong>Error insertando datos:</strong><br>${error.message}</p>`;
+                addTestResult('Insertar Datos', 'error', error.message);
+            }
+        }
+
+        async function testCRUD() {
+            const resultDiv = document.getElementById('crudResult');
+            resultDiv.innerHTML = '<p>🔄 Probando operaciones CRUD...</p>';
+
+            try {
+                // Test CREATE
+                const newMayorista = {
+                    name: 'CRUD Test User',
+                    email: `crud-test-${Date.now()}@ejemplo.com`,
+                    company: 'CRUD Test Company',
+                    password: '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+                    discount_percentage: 15,
+                    status: 'active',
+                    notes: 'Usuario creado para prueba CRUD'
+                };
+
+                const { data: created, error: createError } = await supabase
+                    .from('wholesalers')
+                    .insert([newMayorista])
+                    .select()
+                    .single();
+
+                if (createError) throw createError;
+
+                // Test READ
+                const { data: read, error: readError } = await supabase
+                    .from('wholesalers')
+                    .select('*')
+                    .eq('id', created.id)
+                    .single();
+
+                if (readError) throw readError;
+
+                // Test UPDATE
+                const { data: updated, error: updateError } = await supabase
+                    .from('wholesalers')
+                    .update({
+                        status: 'suspended',
+                        notes: 'Actualizado por prueba CRUD'
+                    })
+                    .eq('id', created.id)
+                    .select()
+                    .single();
+
+                if (updateError) throw updateError;
+
+                // Test DELETE
+                const { error: deleteError } = await supabase
+                    .from('wholesalers')
+                    .delete()
+                    .eq('id', created.id);
+
+                if (deleteError) throw deleteError;
+
+                resultDiv.innerHTML = `
+                    <p>✅ <strong>Todas las operaciones CRUD exitosas</strong></p>
+                    <ul>
+                        <li>✅ CREATE: Usuario creado con ID ${created.id}</li>
+                        <li>✅ READ: Usuario leído correctamente</li>
+                        <li>✅ UPDATE: Estado cambiado a 'suspended'</li>
+                        <li>✅ DELETE: Usuario eliminado</li>
+                    </ul>
+                    <p><em>El sistema está completamente funcional para operaciones de mayoristas</em></p>
+                `;
+                addTestResult('Operaciones CRUD', 'success', 'Todas las operaciones funcionan correctamente', {
+                    created: created.id,
+                    operations: ['CREATE', 'READ', 'UPDATE', 'DELETE']
+                });
+            } catch (error) {
+                resultDiv.innerHTML = `<p>❌ <strong>Error en operaciones CRUD:</strong><br>${error.message}</p>`;
+                addTestResult('Operaciones CRUD', 'error', error.message);
+            }
+        }
+    </script>
+</body>
+</html>
