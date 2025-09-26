@@ -797,30 +797,65 @@ class ProductoManager {
     }
 
     // Cart Management
-    addToCart() {
+    async addToCart() {
         if (!this.product || (this.product.stock && this.product.stock <= 0)) {
             this.showNotification('Producto no disponible', 'error');
             return;
         }
 
-        const cartItem = {
-            id: this.product.id,
-            name: this.product.name,
-            price: this.product.price,
-            image: this.images[0],
-            quantity: this.selectedQuantity,
-            variant: this.selectedVariant
-        };
+        // Use the CartManager if available
+        if (window.cartManager) {
+            try {
+                const variantId = this.selectedVariant?.id || null;
+                const quantity = this.selectedQuantity || 1;
 
-        // Usar la funcionalidad del API client si está disponible
-        if (window.artesanaAPI && window.artesanaAPI.addToCart) {
-            window.artesanaAPI.addToCart(this.product.id, this.selectedQuantity);
+                // Prepare product data
+                const productData = {
+                    id: this.product.id,
+                    name: this.product.name,
+                    price: this.product.price,
+                    image: this.images[0],
+                    slug: this.product.slug,
+                    short_description: this.product.shortDescription || this.product.description
+                };
+
+                const result = await window.cartManager.addProduct(
+                    this.product.id,
+                    variantId,
+                    quantity,
+                    productData
+                );
+
+                if (result.success) {
+                    this.showNotification('Producto agregado al carrito', 'success');
+
+                    // Open cart sidebar briefly to show the addition
+                    if (window.cartUI) {
+                        setTimeout(() => {
+                            window.cartUI.openCart();
+                        }, 500);
+                    }
+                } else {
+                    this.showNotification(result.message || 'Error agregando producto', 'error');
+                }
+
+            } catch (error) {
+                console.error('❌ Error agregando al carrito:', error);
+                this.showNotification('Error agregando producto al carrito', 'error');
+            }
         } else {
-            // Implementación manual del carrito
+            // Fallback to manual cart implementation
+            const cartItem = {
+                id: this.product.id,
+                name: this.product.name,
+                price: this.product.price,
+                image: this.images[0],
+                quantity: this.selectedQuantity,
+                variant: this.selectedVariant
+            };
             this.addToCartManual(cartItem);
+            this.showNotification('Producto agregado al carrito', 'success');
         }
-
-        this.showNotification('Producto agregado al carrito', 'success');
     }
 
     addToCartManual(item) {

@@ -1117,6 +1117,109 @@
         // Crear cliente de Supabase
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+        // Session restoration for authenticated operations
+        async function restoreSupabaseSession() {
+            try {
+                console.log('🔄 Restoring Supabase session for authenticated operations...');
+
+                const adminSession = localStorage.getItem('adminSession');
+                if (!adminSession) {
+                    console.log('❌ No admin session found in localStorage');
+                    return false;
+                }
+
+                const sessionData = JSON.parse(adminSession);
+
+                // Check if this was a Supabase authenticated login
+                if (sessionData.source === 'supabase_auth' && sessionData.supabaseSession) {
+                    console.log('🔑 Restoring Supabase Auth session...');
+
+                    // Set the session in the Supabase client
+                    const { data, error } = await supabase.auth.setSession({
+                        access_token: sessionData.supabaseSession.access_token,
+                        refresh_token: sessionData.supabaseSession.refresh_token
+                    });
+
+                    if (error) {
+                        console.error('❌ Error restoring Supabase session:', error);
+
+                        // If session is invalid, clear it and redirect to login
+                        if (error.message.includes('expired') || error.message.includes('invalid')) {
+                            localStorage.removeItem('adminSession');
+                            showError('Su sesión ha expirado. Redirigiendo al login...');
+                            setTimeout(() => {
+                                window.location.replace('../index.html');
+                            }, 2000);
+                            return false;
+                        }
+                    } else if (data.session) {
+                        console.log('✅ Supabase session restored successfully');
+                        console.log('👤 Authenticated user:', data.session.user.email);
+                        return true;
+                    }
+                } else if (sessionData.source === 'local' || sessionData.source === 'local_fallback') {
+                    console.log('⚠️ Local session detected - database operations may be limited');
+                    return false;
+                }
+
+                return false;
+            } catch (error) {
+                console.error('❌ Error during session restoration:', error);
+                return false;
+            }
+        }
+
+        // Session monitoring for authenticated operations
+        function setupSessionMonitoring() {
+            // Monitor auth state changes
+            if (supabase.auth.onAuthStateChange) {
+                supabase.auth.onAuthStateChange((event, session) => {
+                    console.log('🔄 Auth state changed:', event, session ? session.user.email : 'No session');
+
+                    if (event === 'SIGNED_OUT' || (event === 'TOKEN_REFRESHED' && !session)) {
+                        console.warn('⚠️ Session lost - redirecting to homepage');
+                        showError('Sesión expirada. Redirigiendo...');
+                        setTimeout(() => {
+                            localStorage.removeItem('adminSession');
+                            window.location.replace('../index.html');
+                        }, 2000);
+                    } else if (event === 'TOKEN_REFRESHED' && session) {
+                        console.log('✅ Session token refreshed successfully');
+                        // Update localStorage with new session data
+                        const adminSession = localStorage.getItem('adminSession');
+                        if (adminSession) {
+                            try {
+                                const sessionData = JSON.parse(adminSession);
+                                sessionData.supabaseSession = session;
+                                localStorage.setItem('adminSession', JSON.stringify(sessionData));
+                            } catch (error) {
+                                console.error('Error updating session data:', error);
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Enhanced error handler for authentication-related errors
+        function handleAuthError(error, context = '') {
+            console.error(`❌ Auth error in ${context}:`, error);
+
+            if (error.message.includes('JWT') ||
+                error.message.includes('expired') ||
+                error.message.includes('invalid_token') ||
+                error.message.includes('not_authenticated')) {
+
+                showError('Su sesión ha expirado. Redirigiendo al login...');
+                localStorage.removeItem('adminSession');
+                setTimeout(() => {
+                    window.location.replace('../index.html');
+                }, 2000);
+                return true; // Handled
+            }
+            return false; // Not handled
+        }
+
         // Variables globales
         let currentProducts = [];
         let currentCategories = [];
@@ -1179,20 +1282,40 @@
             }
 
             const basePath = `${category}/${product}/${variant}`;
-            window.imageDetector.loadImage(
-                basePath,
-                (url) => {
-                    imgElement.src = url;
-                },
-                () => {
-                    imgElement.src = '../assets/images/placeholder-product.jpg';
-                }
-            );
+
+            // Check if imageDetector is available
+            if (window.imageDetector && typeof window.imageDetector.loadImage === 'function') {
+                window.imageDetector.loadImage(
+                    basePath,
+                    (url) => {
+                        imgElement.src = url;
+                    },
+                    () => {
+                        imgElement.src = '../assets/images/placeholder-product.jpg';
+                    }
+                );
+            } else {
+                // Fallback when imageDetector is not available
+                imgElement.src = '../assets/images/placeholder-product.jpg';
+            }
         }
 
         // Inicialización
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
             console.log('🚀 Iniciando panel de inventario completo...');
+
+            // First, try to restore Supabase session for authenticated operations
+            const sessionRestored = await restoreSupabaseSession();
+
+            if (sessionRestored) {
+                console.log('✅ Authenticated session active - full functionality available');
+            } else {
+                console.log('⚠️ No authenticated session - some operations may be limited');
+            }
+
+            // Setup session monitoring for real-time auth state changes
+            setupSessionMonitoring();
+
             loadDashboardData();
             setupEventListeners();
         });
@@ -2018,11 +2141,33 @@
 
         async function updateVariantStock(productId, variantId, newStock) {
             try {
-                console.log(`🔄 Actualizando stock de variante ${variantId} del producto ${productId} a ${newStock}`);
+                console.log(`🔄 [AUTH ENABLED v3] Actualizando stock de variante ${variantId} del producto ${productId} a ${newStock}`);
 
                 // Verify Supabase client is available
                 if (!supabase) {
                     throw new Error('Cliente de Supabase no disponible');
+                }
+
+                // Check if we have an authenticated session
+                const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+
+                if (!session) {
+                    console.warn('⚠️ No authenticated session found, attempting to restore...');
+                    const sessionRestored = await restoreSupabaseSession();
+
+                    if (!sessionRestored) {
+                        throw new Error('No hay una sesión autenticada. Las operaciones de actualización requieren autenticación.');
+                    }
+
+                    // Verify session was restored
+                    const { data: { session: newSession } } = await supabase.auth.getSession();
+                    if (!newSession) {
+                        throw new Error('No se pudo establecer la sesión autenticada');
+                    }
+
+                    console.log('✅ Session restored successfully for update operation');
+                } else {
+                    console.log('✅ Authenticated session confirmed:', session.user.email);
                 }
 
                 const parsedStock = parseInt(newStock);
@@ -2030,24 +2175,93 @@
                     throw new Error('Stock debe ser un número válido mayor o igual a 0');
                 }
 
-                const { data, error } = await supabase
+                // First, try to find the variant by checking if it exists
+                console.log(`🔍 Verificando si existe la variante ${variantId} para producto ${productId}`);
+
+                const { data: checkData, error: checkError } = await supabase
+                    .from('product_variants')
+                    .select('id, stock, product_id')
+                    .eq('id', variantId)
+                    .single();
+
+                if (checkError || !checkData) {
+                    // If variant doesn't exist with this ID, try alternative matching
+                    console.log('⚠️ Variante no encontrada con ID directo, intentando con product_id y SKU/nombre');
+
+                    // Try to match by product_id and other criteria
+                    const { data: altCheckData, error: altCheckError } = await supabase
+                        .from('product_variants')
+                        .select('id, stock, product_id, sku, variant_name')
+                        .eq('product_id', productId);
+
+                    if (altCheckError) {
+                        throw new Error(`Error buscando variantes del producto: ${altCheckError.message}`);
+                    }
+
+                    console.log('🔍 Variantes encontradas para el producto:', altCheckData);
+
+                    // If we have variants but couldn't match by variantId, show detailed error
+                    if (altCheckData && altCheckData.length > 0) {
+                        console.error(`❌ Variante ${variantId} no existe. Variantes disponibles:`, altCheckData.map(v => ({ id: v.id, sku: v.sku, name: v.variant_name })));
+                        throw new Error(`Variante ${variantId} no encontrada. Revisar ID de variante.`);
+                    } else {
+                        throw new Error(`No hay variantes para el producto ${productId}`);
+                    }
+                }
+
+                console.log(`✅ Variante encontrada:`, checkData);
+
+                // Update the variant stock (completely remove SELECT to avoid RLS issues)
+                const { error } = await supabase
                     .from('product_variants')
                     .update({ stock: parsedStock })
-                    .eq('id', variantId)
-                    .select();
+                    .eq('id', variantId);
 
                 if (error) {
                     console.error('❌ Error de Supabase al actualizar variante:', error);
-                    throw error;
+
+                    // Handle authentication errors specially
+                    const authHandled = handleAuthError(error, 'updateVariantStock');
+                    if (!authHandled) {
+                        throw error;
+                    }
+                    return; // Exit if auth error was handled
                 }
 
-                console.log('✅ Stock de variante actualizado en Supabase:', data);
+                console.log(`✅ Update completed successfully`);
+
+                // Verify the update by checking the database again
+                const { data: verifyData, error: verifyError } = await supabase
+                    .from('product_variants')
+                    .select('id, stock')
+                    .eq('id', variantId)
+                    .single();
+
+                if (verifyError) {
+                    console.warn('⚠️ Could not verify update:', verifyError);
+                    // If we can't verify, assume the update worked since we didn't get an error
+                } else {
+                    console.log(`🔍 Verification: Variant ${variantId} now has stock: ${verifyData.stock}`);
+
+                    // Check if the update actually took effect
+                    if (verifyData.stock !== parsedStock) {
+                        throw new Error(`Update failed - expected stock ${parsedStock} but database shows ${verifyData.stock}`);
+                    }
+                }
+
+                console.log(`✅ Stock de variante ${variantId} actualizado exitosamente a ${parsedStock} unidades`);
                 showSuccess(`Stock de variante actualizado correctamente a ${parsedStock} unidades`);
+
                 await loadProducts(); // Esto recalculará el total automáticamente
 
             } catch (error) {
                 console.error('❌ Error updating variant stock:', error);
-                showError('Error actualizando stock de variante: ' + error.message);
+
+                // Try to handle authentication errors
+                const authHandled = handleAuthError(error, 'updateVariantStock');
+                if (!authHandled) {
+                    showError('Error actualizando stock de variante: ' + error.message);
+                }
             }
         }
 
@@ -3330,5 +3544,8 @@
         console.log('📡 Supabase URL:', SUPABASE_URL);
         console.log('📱 Sistema de vistas móviles habilitado');
     </script>
+
+    <!-- Admin Authentication Guard -->
+    <script src="admin-auth-guard.js"></script>
 </body>
 </html>

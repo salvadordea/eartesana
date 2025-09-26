@@ -210,18 +210,50 @@
         // Verificar si ya hay una sesión activa
         async function checkExistingSession() {
             try {
+                // Check if logout is in progress
+                const logoutInProgress = localStorage.getItem('adminLogoutInProgress');
+                if (logoutInProgress) {
+                    console.log('🔄 Logout en progreso, saltando verificación de sesión existente');
+                    localStorage.removeItem('adminLogoutInProgress');
+                    return;
+                }
+
                 // Verificar si hay intento de loop infinito
                 const lastLoginCheck = localStorage.getItem('lastLoginCheck');
                 const now = Date.now();
-                
-                if (lastLoginCheck && (now - parseInt(lastLoginCheck)) < 1000) {
+
+                if (lastLoginCheck && (now - parseInt(lastLoginCheck)) < 1500) {
                     console.warn('⚠️ Detectado posible loop en login, deteniendo verificaciones');
                     localStorage.removeItem('lastLoginCheck');
+                    // Set a flag to prevent immediate checks
+                    localStorage.setItem('adminLoginLoopDetected', now.toString());
                     return;
                 }
-                
+
+                // Check if we recently detected a loop
+                const loopDetected = localStorage.getItem('adminLoginLoopDetected');
+                if (loopDetected && (now - parseInt(loopDetected)) < 5000) {
+                    console.warn('⚠️ Loop detectado recientemente en login, esperando...');
+                    return;
+                }
+
                 localStorage.setItem('lastLoginCheck', now.toString());
                 
+                // Check if user recently logged out (within last 10 seconds)
+                const recentLogout = localStorage.getItem('adminRecentLogout');
+                if (recentLogout && (now - parseInt(recentLogout)) < 10000) {
+                    console.log('🚪 Recent logout detected, staying on login page');
+                    localStorage.removeItem('adminRecentLogout');
+                    // Clear any remaining session data from the logout
+                    localStorage.removeItem('adminSession');
+                    if (supabase) {
+                        try {
+                            await supabase.auth.signOut();
+                        } catch (e) { /* ignore */ }
+                    }
+                    return;
+                }
+
                 // Verificar sesión local primero
                 const localSession = localStorage.getItem('adminSession');
                 if (localSession) {
@@ -241,7 +273,7 @@
                         localStorage.removeItem('adminSession');
                     }
                 }
-                
+
                 // Verificar sesión de Supabase
                 if (supabase) {
                     const { data: { session }, error } = await supabase.auth.getSession();
@@ -254,14 +286,16 @@
                     }
                 }
                 
-                // Limpiar contador de verificaciones
+                // Limpiar contador de verificaciones y flags de loop
                 setTimeout(() => {
                     localStorage.removeItem('lastLoginCheck');
-                }, 2000);
+                    localStorage.removeItem('adminLoginLoopDetected');
+                }, 3000);
                 
             } catch (error) {
                 console.log('❌ Error verificando sesión:', error);
                 localStorage.removeItem('lastLoginCheck');
+                localStorage.removeItem('adminLoginLoopDetected');
             }
         }
 

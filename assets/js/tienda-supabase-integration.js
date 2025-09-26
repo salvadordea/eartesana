@@ -1004,17 +1004,147 @@ class TiendaSupabaseIntegration {
         stockDiv.className = 'product-stock';
         stockDiv.innerHTML = this.renderStockStatus(product.totalStock, product.hasVariants);
 
+        // Add to Cart button
+        const cartButton = document.createElement('button');
+        cartButton.className = 'product-cart-btn';
+        cartButton.innerHTML = '<i class="fas fa-shopping-cart"></i> Agregar al Carrito';
+
+        // Prevent card click when clicking cart button
+        cartButton.onclick = (e) => {
+            e.stopPropagation();
+            this.addProductToCart(product);
+        };
+
         // Assemble card
         infoDiv.appendChild(categoryDiv);
         infoDiv.appendChild(title);
         infoDiv.appendChild(priceDiv);
         infoDiv.appendChild(ratingDiv);
         infoDiv.appendChild(stockDiv);
+        infoDiv.appendChild(cartButton);
 
         card.appendChild(imageDiv);
         card.appendChild(infoDiv);
 
         return card;
+    }
+
+    // Add product to cart from tienda grid
+    async addProductToCart(product) {
+        try {
+            console.log('🛒 Adding product to cart from tienda:', product.name);
+
+            if (window.cartManager) {
+                // Use CartManager
+                const productData = {
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.mainImage,
+                    slug: product.slug,
+                    short_description: product.shortDescription || product.description
+                };
+
+                const result = await window.cartManager.addProduct(
+                    product.id,
+                    null, // No variant for grid add to cart
+                    1,    // Quantity 1
+                    productData
+                );
+
+                if (result.success) {
+                    this.showCartNotification('Producto agregado al carrito', 'success');
+
+                    // Open cart sidebar briefly
+                    if (window.cartUI) {
+                        setTimeout(() => {
+                            window.cartUI.openCart();
+                        }, 300);
+                    }
+                } else {
+                    this.showCartNotification(result.message || 'Error agregando producto', 'error');
+                }
+
+            } else {
+                // Fallback to manual cart
+                this.addToCartManual(product);
+            }
+
+        } catch (error) {
+            console.error('❌ Error adding product to cart:', error);
+            this.showCartNotification('Error agregando producto al carrito', 'error');
+        }
+    }
+
+    // Manual cart implementation fallback
+    addToCartManual(product) {
+        try {
+            let cart = JSON.parse(localStorage.getItem('artesana_cart') || '[]');
+
+            const existingItemIndex = cart.findIndex(item => item.id === product.id);
+
+            if (existingItemIndex >= 0) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.mainImage,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem('artesana_cart', JSON.stringify(cart));
+            this.showCartNotification('Producto agregado al carrito', 'success');
+
+        } catch (error) {
+            console.error('❌ Error with manual cart:', error);
+            this.showCartNotification('Error agregando producto', 'error');
+        }
+    }
+
+    // Show cart notification
+    showCartNotification(message, type = 'info') {
+        // Use cartUI notification if available
+        if (window.cartUI && window.cartUI.showNotification) {
+            window.cartUI.showNotification(message, type);
+            return;
+        }
+
+        // Fallback notification
+        const notification = document.createElement('div');
+        notification.className = `tienda-notification notification-${type}`;
+        notification.innerHTML = `
+            <div class="notification-icon">
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-times-circle' : 'fa-info-circle'}"></i>
+            </div>
+            <span>${message}</span>
+        `;
+
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#17a2b8'};
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            animation: slideInRight 0.3s ease;
+        `;
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
     }
 
     // Load remaining products in background

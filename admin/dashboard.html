@@ -1489,25 +1489,42 @@
 
         function checkAuth() {
             try {
+                // Check if logout is in progress
+                const logoutInProgress = localStorage.getItem('adminLogoutInProgress');
+                if (logoutInProgress) {
+                    console.log('🔄 Logout en progreso, saltando verificación de autenticación');
+                    localStorage.removeItem('adminLogoutInProgress');
+                    return false;
+                }
+
                 const session = localStorage.getItem('adminSession');
-                
+
                 // Verificar si hay intento de loop infinito
                 const lastAuthCheck = localStorage.getItem('lastAuthCheck');
                 const now = Date.now();
-                
-                if (lastAuthCheck && (now - parseInt(lastAuthCheck)) < 1000) {
+
+                if (lastAuthCheck && (now - parseInt(lastAuthCheck)) < 1500) {
                     console.warn('⚠️ Detectado posible loop de autenticación, deteniendo redirecciones');
                     localStorage.removeItem('adminSession');
                     localStorage.removeItem('lastAuthCheck');
+                    // Set a flag to prevent immediate redirect loops
+                    localStorage.setItem('adminAuthLoopDetected', now.toString());
                     return false;
                 }
-                
+
+                // Check if we recently detected a loop
+                const loopDetected = localStorage.getItem('adminAuthLoopDetected');
+                if (loopDetected && (now - parseInt(loopDetected)) < 5000) {
+                    console.warn('⚠️ Loop detectado recientemente, esperando antes de verificar autenticación');
+                    return false;
+                }
+
                 localStorage.setItem('lastAuthCheck', now.toString());
-                
+
                 if (!session) {
-                    console.log('🔒 No hay sesión admin, redirigiendo a login');
+                    console.log('🔒 No hay sesión admin, redirigiendo a homepage');
                     setTimeout(() => {
-                        window.location.replace('login.html');
+                        window.location.replace('../index.html');
                     }, 100);
                     return false;
                 }
@@ -1518,7 +1535,7 @@
                     console.log('🔒 Sesión admin no válida (not logged in)');
                     localStorage.removeItem('adminSession');
                     setTimeout(() => {
-                        window.location.replace('login.html');
+                        window.location.replace('../index.html');
                     }, 100);
                     return false;
                 }
@@ -1527,7 +1544,7 @@
                     console.log('🔒 Sesión admin expirada');
                     localStorage.removeItem('adminSession');
                     setTimeout(() => {
-                        window.location.replace('login.html');
+                        window.location.replace('../index.html');
                     }, 100);
                     return false;
                 }
@@ -1537,10 +1554,11 @@
                 updateUserInfo();
                 console.log('✅ Autenticación admin válida:', sessionData.email || sessionData.username);
                 
-                // Limpiar contador de verificaciones
+                // Limpiar contador de verificaciones y flags de loop
                 setTimeout(() => {
                     localStorage.removeItem('lastAuthCheck');
-                }, 2000);
+                    localStorage.removeItem('adminAuthLoopDetected');
+                }, 3000);
                 
                 return true;
                 
@@ -1548,8 +1566,9 @@
                 console.error('❌ Error en checkAuth:', error);
                 localStorage.removeItem('adminSession');
                 localStorage.removeItem('lastAuthCheck');
+                localStorage.removeItem('adminAuthLoopDetected');
                 setTimeout(() => {
-                    window.location.replace('login.html');
+                    window.location.replace('../index.html');
                 }, 100);
                 return false;
             }
@@ -1591,43 +1610,54 @@
             if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
                 try {
                     console.log('🔄 Iniciando proceso de logout admin...');
-                    
-                    // 1. Limpiar solo la sesión de admin (no todas las sesiones)
-                    localStorage.removeItem('adminSession');
-                    
-                    // 2. Si hay sesión de Supabase, cerrarla también
-                    if (supabase) {
-                        try {
-                            await supabase.auth.signOut();
-                            console.log('✅ Sesión de Supabase cerrada');
-                        } catch (supabaseError) {
-                            console.warn('⚠️ Error cerrando sesión de Supabase:', supabaseError);
-                        }
-                    }
-                    
-                    // 3. Limpiar solo claves específicas de admin (no mayoristas ni usuarios)
-                    const keysToRemove = [];
-                    for (let i = 0; i < localStorage.length; i++) {
-                        const key = localStorage.key(i);
-                        if (key && key.startsWith('admin')) {
-                            keysToRemove.push(key);
-                        }
-                    }
+
+                    // 1. Set logout flags to prevent auth checks during logout
+                    localStorage.setItem('adminLogoutInProgress', 'true');
+                    localStorage.setItem('adminRecentLogout', Date.now().toString());
+
+                    // 2. Clear all auth-related localStorage items
+                    const keysToRemove = ['adminSession', 'lastAuthCheck', 'lastLoginCheck', 'adminAuthLoopDetected'];
                     keysToRemove.forEach(key => {
                         console.log(`🗑️ Removiendo clave: ${key}`);
                         localStorage.removeItem(key);
                     });
-                    
-                    console.log('✅ Logout completado, redirigiendo...');
-                    
-                    // 4. Redirigir inmediatamente sin setTimeout para evitar loops
-                    window.location.replace('login.html');
-                    
+
+                    // 3. Close Supabase session if exists (with timeout)
+                    if (window.supabase) {
+                        try {
+                            console.log('🔄 Cerrando sesión de Supabase...');
+                            const signOutPromise = window.supabase.auth.signOut();
+                            const timeoutPromise = new Promise((resolve) => {
+                                setTimeout(() => resolve({ timeout: true }), 3000);
+                            });
+
+                            const result = await Promise.race([signOutPromise, timeoutPromise]);
+                            if (result?.timeout) {
+                                console.warn('⚠️ Timeout cerrando sesión de Supabase');
+                            } else {
+                                console.log('✅ Sesión de Supabase cerrada');
+                            }
+                        } catch (supabaseError) {
+                            console.warn('⚠️ Error cerrando sesión de Supabase:', supabaseError);
+                        }
+                    }
+
+                    console.log('✅ Logout completado, redirigiendo a homepage...');
+
+                    // 4. Small delay to ensure cleanup completes, then redirect
+                    setTimeout(() => {
+                        window.location.replace('../index.html');
+                    }, 100);
+
                 } catch (error) {
                     console.error('❌ Error durante logout:', error);
-                    // Forzar logout con limpieza mínima
+                    // Force logout with minimal cleanup
+                    localStorage.setItem('adminLogoutInProgress', 'true');
+                    localStorage.setItem('adminRecentLogout', Date.now().toString());
                     localStorage.removeItem('adminSession');
-                    window.location.replace('login.html');
+                    localStorage.removeItem('lastAuthCheck');
+                    localStorage.removeItem('lastLoginCheck');
+                    window.location.replace('../index.html');
                 }
             }
         }
@@ -3209,29 +3239,10 @@ para ver los cambios aplicados.
                 const message = `✅ Mayorista ${isEdit ? 'actualizado' : 'creado'} exitosamente`;
                 console.log(message);
                 alert(message);
-                    
-                } else {
-                    // Modo de demostración sin Supabase
-                    if (isEdit) {
-                        const index = allMayoristas.findIndex(m => m.id == editId);
-                        if (index !== -1) {
-                            allMayoristas[index] = { ...allMayoristas[index], ...formData };
-                        }
-                    } else {
-                        const newMayorista = {
-                            id: Math.max(...allMayoristas.map(m => m.id), 0) + 1,
-                            ...formData,
-                            created_at: new Date().toISOString()
-                        };
-                        allMayoristas.unshift(newMayorista);
-                    }
-                    
-                    alert(`✅ Mayorista ${isEdit ? 'actualizado' : 'creado'} exitosamente (Modo demostración)`);
-                }
-                
+
                 // Cerrar modal y actualizar tabla
                 closeMayoristasModal();
-                loadMayoristasData();
+                await loadMayoristasData(); // Wait for data reload
                 
             } catch (error) {
                 console.error('Error guardando mayorista:', error);
@@ -3314,8 +3325,16 @@ para ver los cambios aplicados.
         
         // Eliminar mayorista
         async function deleteMayorista(id) {
-            const mayorista = allMayoristas.find(m => m.id === id);
-            if (!mayorista) return;
+            console.log('🗑️ Deleting mayorista ID:', id);
+
+            const mayorista = allMayoristas.find(m => m.id == id);
+            if (!mayorista) {
+                console.error('❌ Mayorista not found:', id);
+                alert('Error: Mayorista no encontrado');
+                return;
+            }
+
+            console.log('🔍 Found mayorista to delete:', mayorista);
             
             const confirmMsg = `⚠️ ELIMINAR MAYORISTA\n\n¿Estás seguro de que quieres eliminar al mayorista:\n\n👤 ${mayorista.name}\n🏢 ${mayorista.company}\n📧 ${mayorista.email}\n\n❌ Esta acción NO SE PUEDE DESHACER.\n\n¿Continuar?`;
             
@@ -3324,23 +3343,26 @@ para ver los cambios aplicados.
             }
             
             try {
-                if (supabase) {
-                    const { error } = await supabase
-                        .from('wholesalers')
-                        .delete()
-                        .eq('id', id);
-                    
-                    if (error) throw error;
-                } else {
-                    // Modo demostración
-                    const index = allMayoristas.findIndex(m => m.id === id);
-                    if (index !== -1) {
-                        allMayoristas.splice(index, 1);
-                    }
+                if (!supabase) {
+                    throw new Error('Supabase not initialized');
                 }
-                
-                alert(`✅ Mayorista eliminado exitosamente`);
-                loadMayoristasData();
+
+                console.log('🔄 Executing delete operation...');
+                const { error } = await supabase
+                    .from('wholesalers')
+                    .delete()
+                    .eq('id', id);
+
+                if (error) {
+                    console.error('❌ Supabase delete error:', error);
+                    throw error;
+                }
+
+                console.log('✅ Delete successful');
+                alert('✅ Mayorista eliminado exitosamente');
+
+                // Reload data to reflect changes
+                await loadMayoristasData();
                 
             } catch (error) {
                 console.error('Error eliminando mayorista:', error);

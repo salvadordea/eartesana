@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Estudio Artesana</title>
+    <meta name="description" content="Finalizar compra en Estudio Artesana - Productos artesanales únicos">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/cart.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Checkout Styles -->
+    <style>
+        .checkout-container {
+            min-height: 100vh;
+            background: #f8f9fa;
+            padding: 40px 0;
+        }
+
+        .checkout-header {
+            background: white;
+            padding: 20px 0;
+            border-bottom: 1px solid #dee2e6;
+            margin-bottom: 40px;
+        }
+
+        .checkout-header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+        }
+
+        .checkout-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .checkout-form {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            margin: 0 0 20px 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #333;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s ease;
+            background: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .checkout-summary {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .summary-header {
+            margin: 0 0 20px 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #333;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .order-items {
+            margin-bottom: 20px;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 50px;
+            height: 50px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .item-name {
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+            margin: 0 0 4px 0;
+            line-height: 1.3;
+        }
+
+        .item-quantity {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .item-price {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .order-total {
+            border-top: 2px solid #e9ecef;
+            padding-top: 16px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .total-row.final {
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .checkout-btn:hover:not(:disabled) {
+            background: #218838;
+            transform: translateY(-1px);
+        }
+
+        .checkout-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .back-to-cart {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            transition: color 0.2s ease;
+        }
+
+        .back-to-cart:hover {
+            color: #0056b3;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-cart i {
+            font-size: 4rem;
+            color: #dee2e6;
+            margin-bottom: 20px;
+        }
+
+        .empty-cart h2 {
+            margin: 0 0 12px 0;
+            color: #333;
+        }
+
+        .empty-cart p {
+            color: #6c757d;
+            margin: 0 0 30px 0;
+        }
+
+        .btn-shop {
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .checkout-summary {
+                position: static;
+                order: -1;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .checkout-container {
+                padding: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Universal Container -->
+    <div id="universal-header-container">
+        <!-- El header se carga dinámicamente aquí -->
+    </div>
+
+    <div class="checkout-container">
+        <!-- Checkout Header -->
+        <div class="checkout-header">
+            <div class="container">
+                <h1>
+                    <i class="fas fa-credit-card"></i>
+                    Finalizar Compra
+                </h1>
+            </div>
+        </div>
+
+        <!-- Checkout Content -->
+        <div class="checkout-content" id="checkoutContent">
+            <!-- Loading State -->
+            <div id="checkoutLoading" class="text-center">
+                <div class="loading-spinner"></div>
+                <p>Cargando checkout...</p>
+            </div>
+
+            <!-- Empty Cart State -->
+            <div id="emptyCartState" class="empty-cart" style="display: none; grid-column: 1 / -1;">
+                <i class="fas fa-shopping-bag"></i>
+                <h2>Tu carrito está vacío</h2>
+                <p>Agrega algunos productos para continuar con tu compra</p>
+                <a href="tienda.html" class="btn-shop">
+                    <i class="fas fa-arrow-left"></i>
+                    Ir a la Tienda
+                </a>
+            </div>
+
+            <!-- Checkout Form -->
+            <div id="checkoutForm" class="checkout-form" style="display: none;">
+                <a href="#" id="backToCart" class="back-to-cart">
+                    <i class="fas fa-arrow-left"></i>
+                    Volver al carrito
+                </a>
+
+                <form id="orderForm">
+                    <!-- Customer Information -->
+                    <div class="form-section">
+                        <h2>
+                            <i class="fas fa-user"></i>
+                            Información de Contacto
+                        </h2>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" class="form-input" required
+                                   placeholder="tu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono *</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" required
+                                   placeholder="+52 555 123 4567">
+                        </div>
+                    </div>
+
+                    <!-- Shipping Information -->
+                    <div class="form-section">
+                        <h2>
+                            <i class="fas fa-truck"></i>
+                            Información de Envío
+                        </h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">Nombre *</label>
+                                <input type="text" id="firstName" name="firstName" class="form-input" required
+                                       placeholder="Juan">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Apellido *</label>
+                                <input type="text" id="lastName" name="lastName" class="form-input" required
+                                       placeholder="Pérez">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Dirección *</label>
+                            <input type="text" id="address" name="address" class="form-input" required
+                                   placeholder="Calle 123, Col. Centro">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">Ciudad *</label>
+                                <input type="text" id="city" name="city" class="form-input" required
+                                       placeholder="Ciudad de México">
+                            </div>
+                            <div class="form-group">
+                                <label for="postalCode">Código Postal *</label>
+                                <input type="text" id="postalCode" name="postalCode" class="form-input" required
+                                       placeholder="12345">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">Estado *</label>
+                            <input type="text" id="state" name="state" class="form-input" required
+                                   placeholder="CDMX">
+                        </div>
+                    </div>
+
+                    <!-- Order Notes -->
+                    <div class="form-section">
+                        <h2>
+                            <i class="fas fa-comment"></i>
+                            Notas del Pedido
+                        </h2>
+                        <div class="form-group">
+                            <label for="orderNotes">Comentarios adicionales (opcional)</label>
+                            <textarea id="orderNotes" name="orderNotes" class="form-input" rows="4"
+                                      placeholder="Instrucciones especiales para la entrega..."></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Order Summary -->
+            <div id="orderSummary" class="checkout-summary" style="display: none;">
+                <h2 class="summary-header">
+                    <i class="fas fa-receipt"></i>
+                    Resumen del Pedido
+                </h2>
+
+                <div id="orderItems" class="order-items">
+                    <!-- Order items will be populated here -->
+                </div>
+
+                <div class="order-total">
+                    <div class="total-row">
+                        <span>Subtotal:</span>
+                        <span id="orderSubtotal">$0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>IVA (16%):</span>
+                        <span id="orderTax">$0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Envío:</span>
+                        <span id="orderShipping">Gratis</span>
+                    </div>
+                    <div class="total-row final">
+                        <span>Total:</span>
+                        <span id="orderTotal">$0.00</span>
+                    </div>
+                </div>
+
+                <button id="placeOrderBtn" class="checkout-btn" type="button">
+                    <i class="fas fa-credit-card"></i>
+                    Realizar Pedido
+                </button>
+
+                <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; font-size: 12px; color: #6c757d;">
+                    <i class="fas fa-info-circle"></i>
+                    Al realizar tu pedido, recibirás un email de confirmación con los detalles y opciones de pago.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically by footer-universal.js -->
+
+    <!-- Scripts -->
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/cloudinary-config.js"></script>
+
+    <!-- Header Universal (DEBE CARGARSE PRIMERO) -->
+    <script src="./assets/js/universal-header.js"></script>
+
+    <!-- Cart System Scripts -->
+    <script src="js/cart-manager.js"></script>
+    <script src="assets/js/cart-ui.js"></script>
+
+    <!-- Checkout Script -->
+    <script>
+        class CheckoutManager {
+            constructor() {
+                this.cartData = null;
+                this.orderData = {};
+
+                console.log('🛒 CheckoutManager inicializado');
+                this.initialize();
+            }
+
+            async initialize() {
+                // Wait for CartManager
+                await this.waitForCartManager();
+
+                // Load cart data
+                this.loadCartData();
+
+                // Setup event listeners
+                this.setupEventListeners();
+            }
+
+            async waitForCartManager() {
+                return new Promise((resolve) => {
+                    const checkCartManager = () => {
+                        if (window.cartManager) {
+                            resolve();
+                        } else {
+                            setTimeout(checkCartManager, 100);
+                        }
+                    };
+                    checkCartManager();
+                });
+            }
+
+            loadCartData() {
+                if (window.cartManager) {
+                    this.cartData = window.cartManager.getCartSummary();
+
+                    if (this.cartData.items.length === 0) {
+                        this.showEmptyCart();
+                    } else {
+                        this.showCheckout();
+                    }
+                }
+            }
+
+            setupEventListeners() {
+                // Back to cart
+                const backToCart = document.getElementById('backToCart');
+                if (backToCart) {
+                    backToCart.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (window.cartUI) {
+                            window.cartUI.openCart();
+                        }
+                        window.history.back();
+                    });
+                }
+
+                // Place order
+                const placeOrderBtn = document.getElementById('placeOrderBtn');
+                if (placeOrderBtn) {
+                    placeOrderBtn.addEventListener('click', () => this.placeOrder());
+                }
+
+                // Form validation
+                const form = document.getElementById('orderForm');
+                if (form) {
+                    form.addEventListener('input', () => this.validateForm());
+                }
+            }
+
+            showEmptyCart() {
+                document.getElementById('checkoutLoading').style.display = 'none';
+                document.getElementById('emptyCartState').style.display = 'block';
+            }
+
+            showCheckout() {
+                document.getElementById('checkoutLoading').style.display = 'none';
+                document.getElementById('checkoutForm').style.display = 'block';
+                document.getElementById('orderSummary').style.display = 'block';
+
+                this.populateOrderSummary();
+            }
+
+            populateOrderSummary() {
+                const itemsContainer = document.getElementById('orderItems');
+
+                itemsContainer.innerHTML = this.cartData.items.map(item => `
+                    <div class="order-item">
+                        <div class="item-image">
+                            <img src="${item.product_snapshot?.image || 'assets/images/placeholder-product.jpg'}"
+                                 alt="${item.product_snapshot?.name || 'Producto'}">
+                        </div>
+                        <div class="item-details">
+                            <div class="item-name">${item.product_snapshot?.name || 'Producto'}</div>
+                            <div class="item-quantity">Cantidad: ${item.quantity}</div>
+                        </div>
+                        <div class="item-price">${this.formatPrice(item.total_price)}</div>
+                    </div>
+                `).join('');
+
+                // Update totals
+                const subtotal = this.cartData.totals.subtotal;
+                const tax = subtotal * 0.16; // IVA 16%
+                const shipping = 0; // Free shipping
+                const total = subtotal + tax + shipping;
+
+                document.getElementById('orderSubtotal').textContent = this.formatPrice(subtotal);
+                document.getElementById('orderTax').textContent = this.formatPrice(tax);
+                document.getElementById('orderShipping').textContent = shipping > 0 ? this.formatPrice(shipping) : 'Gratis';
+                document.getElementById('orderTotal').textContent = this.formatPrice(total);
+            }
+
+            validateForm() {
+                const form = document.getElementById('orderForm');
+                const placeOrderBtn = document.getElementById('placeOrderBtn');
+
+                const isValid = form.checkValidity();
+                placeOrderBtn.disabled = !isValid;
+
+                return isValid;
+            }
+
+            async placeOrder() {
+                if (!this.validateForm()) {
+                    alert('Por favor, completa todos los campos requeridos.');
+                    return;
+                }
+
+                const placeOrderBtn = document.getElementById('placeOrderBtn');
+                placeOrderBtn.disabled = true;
+                placeOrderBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+
+                try {
+                    // Collect form data
+                    const formData = new FormData(document.getElementById('orderForm'));
+                    this.orderData = Object.fromEntries(formData);
+
+                    // Add cart data
+                    this.orderData.items = this.cartData.items;
+                    this.orderData.totals = this.cartData.totals;
+
+                    // Simulate order processing
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+
+                    // Clear cart
+                    if (window.cartManager) {
+                        await window.cartManager.clearCart();
+                    }
+
+                    // Show success message
+                    alert('¡Pedido realizado exitosamente! Recibirás un email de confirmación pronto.');
+
+                    // Redirect to success page or home
+                    window.location.href = 'index.html';
+
+                } catch (error) {
+                    console.error('❌ Error placing order:', error);
+                    alert('Error procesando el pedido. Por favor, inténtalo de nuevo.');
+                } finally {
+                    placeOrderBtn.disabled = false;
+                    placeOrderBtn.innerHTML = '<i class="fas fa-credit-card"></i> Realizar Pedido';
+                }
+            }
+
+            formatPrice(price) {
+                if (!price) return '$0.00';
+                const numPrice = parseFloat(price);
+                if (isNaN(numPrice)) return '$0.00';
+
+                return new Intl.NumberFormat('es-MX', {
+                    style: 'currency',
+                    currency: 'MXN',
+                    minimumFractionDigits: 2
+                }).format(numPrice);
+            }
+        }
+
+        // Initialize checkout when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new CheckoutManager();
+        });
+    </script>
+
+    <!-- Universal Footer - Load footer dynamically -->
+    <script src="assets/js/footer-universal.js"></script>
+</body>
+</html>

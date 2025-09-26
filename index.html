@@ -978,6 +978,72 @@
                 right: -10px;
             }
         }
+
+        /* Admin Recovery Link Styles */
+        .admin-recovery {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .admin-recovery-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #6c757d;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 12px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .admin-recovery-btn:hover {
+            opacity: 1;
+            color: white;
+        }
+
+        .admin-recovery-btn i {
+            font-size: 10px;
+        }
     </style>
+
+    <!-- Admin Recovery Link for logged out users -->
+    <div id="adminRecovery" class="admin-recovery" style="display: none;">
+        <a href="admin/login.html" class="admin-recovery-btn" title="Acceso Administrativo">
+            <i class="fas fa-tools"></i>
+            Admin
+        </a>
+    </div>
+
+    <script>
+        // Show admin recovery link if user recently logged out
+        function checkAdminRecovery() {
+            const recentLogout = localStorage.getItem('adminRecentLogout');
+            const logoutInProgress = localStorage.getItem('adminLogoutInProgress');
+            const now = Date.now();
+
+            // Show recovery link for 60 seconds after logout
+            if ((recentLogout && (now - parseInt(recentLogout)) < 60000) || logoutInProgress) {
+                document.getElementById('adminRecovery').style.display = 'block';
+
+                // Auto-hide after 60 seconds
+                setTimeout(() => {
+                    const recoveryEl = document.getElementById('adminRecovery');
+                    if (recoveryEl) {
+                        recoveryEl.style.display = 'none';
+                    }
+                    localStorage.removeItem('adminRecentLogout');
+                    localStorage.removeItem('adminLogoutInProgress');
+                }, 60000);
+            }
+        }
+
+        // Check on page load
+        setTimeout(checkAdminRecovery, 1000);
+    </script>
 </body>
 </html>

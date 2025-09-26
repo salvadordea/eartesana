@@ -1,0 +1,131 @@
+<!-- CART SIDEBAR TEMPLATE - ESTUDIO ARTESANA -->
+<!-- This template provides a reusable cart sidebar/modal for all pages -->
+
+<div id="cartSidebarOverlay" class="cart-overlay">
+    <div id="cartSidebar" class="cart-sidebar">
+        <!-- Cart Header -->
+        <div class="cart-header">
+            <h3 class="cart-title">
+                <i class="fas fa-shopping-cart"></i>
+                Mi Carrito
+            </h3>
+            <button id="closeCartBtn" class="cart-close-btn" aria-label="Cerrar carrito">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Cart Content -->
+        <div class="cart-content">
+            <!-- Loading State -->
+            <div id="cartLoading" class="cart-loading">
+                <div class="loading-spinner"></div>
+                <p>Cargando carrito...</p>
+            </div>
+
+            <!-- Empty Cart State -->
+            <div id="cartEmpty" class="cart-empty" style="display: none;">
+                <div class="empty-cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <h4>Tu carrito está vacío</h4>
+                <p>¡Descubre nuestros productos artesanales únicos!</p>
+                <button id="continueShoppingBtn" class="btn-continue-shopping">
+                    <i class="fas fa-arrow-left"></i>
+                    Continuar Comprando
+                </button>
+            </div>
+
+            <!-- Cart Items -->
+            <div id="cartItems" class="cart-items" style="display: none;">
+                <!-- Cart items will be populated dynamically -->
+            </div>
+
+            <!-- Cart Summary -->
+            <div id="cartSummary" class="cart-summary" style="display: none;">
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>IVA incluido:</span>
+                    <span id="cartTax">$0.00</span>
+                </div>
+                <div class="summary-row total-row">
+                    <strong>Total:</strong>
+                    <strong id="cartTotal">$0.00</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart Footer -->
+        <div id="cartFooter" class="cart-footer" style="display: none;">
+            <button id="continueShoppingFooterBtn" class="btn-secondary">
+                <i class="fas fa-arrow-left"></i>
+                Seguir Comprando
+            </button>
+            <button id="proceedToCheckoutBtn" class="btn-primary">
+                <i class="fas fa-credit-card"></i>
+                Proceder al Checkout
+            </button>
+        </div>
+
+        <!-- Error State -->
+        <div id="cartError" class="cart-error" style="display: none;">
+            <div class="error-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h4>Error cargando el carrito</h4>
+            <p id="cartErrorMessage">Ha ocurrido un error. Por favor, inténtalo de nuevo.</p>
+            <button id="retryCartBtn" class="btn-retry">
+                <i class="fas fa-redo"></i>
+                Reintentar
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Item Template -->
+<template id="cartItemTemplate">
+    <div class="cart-item" data-product-id="" data-variant-id="">
+        <div class="item-image">
+            <img src="" alt="" loading="lazy">
+        </div>
+        <div class="item-details">
+            <h4 class="item-name"></h4>
+            <p class="item-variant"></p>
+            <div class="item-price">
+                <span class="unit-price"></span>
+                <span class="tax-note">IVA incluido</span>
+            </div>
+        </div>
+        <div class="item-quantity">
+            <button class="quantity-btn decrease-btn" type="button" aria-label="Disminuir cantidad">
+                <i class="fas fa-minus"></i>
+            </button>
+            <input type="number" class="quantity-input" min="1" max="99" value="1" readonly>
+            <button class="quantity-btn increase-btn" type="button" aria-label="Aumentar cantidad">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+        <div class="item-total"></div>
+        <button class="item-remove" type="button" aria-label="Eliminar producto">
+            <i class="fas fa-trash-alt"></i>
+        </button>
+    </div>
+</template>
+
+<!-- Cart Success Notification Template -->
+<template id="cartNotificationTemplate">
+    <div class="cart-notification">
+        <div class="notification-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="notification-content">
+            <h4></h4>
+            <p></p>
+        </div>
+        <button class="notification-close" aria-label="Cerrar notificación">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+</template>

@@ -1134,6 +1134,35 @@ body {
     padding: 20px;
 }
 
+/* Product Cart Button */
+.product-cart-btn {
+    width: 100%;
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.product-cart-btn:hover {
+    background: #1e7e34;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.product-cart-btn:active {
+    transform: translateY(0);
+}
+
 .product-category {
     font-size: 12px;
     color: #999;
