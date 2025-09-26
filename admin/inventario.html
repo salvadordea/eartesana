@@ -316,9 +316,7 @@
             background: #f0f0f0;
         }
 
-        .variants-expanded .toggle-variants {
-            transform: rotate(90deg);
-        }
+        /* Removed rotation - now using proper up/down arrow icons */
 
         /* Modal Styles */
         .modal-overlay {
@@ -1225,6 +1223,8 @@
         let currentCategories = [];
         let selectedProducts = new Set();
         let filteredProducts = [];
+        // Track which product variants are expanded to preserve state during reloads
+        let expandedVariants = [];
         let currentEditingProduct = null;
         let currentEditingVariant = null;
         let isImageUploading = false;
@@ -1404,6 +1404,9 @@
                 filteredProducts = products;
                 renderProductsTable();
                 updateDashboardStats();
+
+                // Restore expanded variants state after table rebuild
+                restoreExpandedVariants();
 
             } catch (error) {
                 console.error('❌ Error en loadProducts:', error);
@@ -1633,14 +1636,45 @@
         function toggleVariants(productId) {
             const variantsRow = document.querySelector(`tr.variants-container[data-product-id="${productId}"]`);
             const toggleBtn = document.querySelector(`tr[data-product-id="${productId}"] .toggle-variants`);
-            
+            const chevronIcon = toggleBtn.querySelector('i');
+
             if (variantsRow.style.display === 'none') {
+                // Expanding - show variants
                 variantsRow.style.display = 'table-row';
                 toggleBtn.classList.add('variants-expanded');
+                // Change to up arrow when expanded
+                chevronIcon.className = 'fas fa-chevron-up';
+                // Track expansion state
+                if (!expandedVariants.includes(productId)) {
+                    expandedVariants.push(productId);
+                }
             } else {
+                // Collapsing - hide variants
                 variantsRow.style.display = 'none';
                 toggleBtn.classList.remove('variants-expanded');
+                // Change to right arrow when collapsed
+                chevronIcon.className = 'fas fa-chevron-right';
+                // Remove from expansion state
+                expandedVariants = expandedVariants.filter(id => id !== productId);
             }
+        }
+
+        function restoreExpandedVariants() {
+            // Restore expansion state for all previously expanded variants
+            expandedVariants.forEach(productId => {
+                const variantsRow = document.querySelector(`tr.variants-container[data-product-id="${productId}"]`);
+                const toggleBtn = document.querySelector(`tr[data-product-id="${productId}"] .toggle-variants`);
+                const chevronIcon = toggleBtn ? toggleBtn.querySelector('i') : null;
+
+                if (variantsRow && toggleBtn && chevronIcon) {
+                    // Restore expanded state
+                    variantsRow.style.display = 'table-row';
+                    toggleBtn.classList.add('variants-expanded');
+                    chevronIcon.className = 'fas fa-chevron-up';
+
+                    console.log(`🔄 Restored expanded state for product ${productId}`);
+                }
+            });
         }
 
         function updateDashboardStats() {
@@ -3504,12 +3538,16 @@
         const originalRenderProductsTable = renderProductsTable;
         renderProductsTable = function() {
             originalRenderProductsTable();
-            
+
             // Si estamos en vista móvil de cards, también actualizar las cards
             const mobileView = document.getElementById('mobileView');
             if (mobileView && mobileView.style.display !== 'none') {
                 renderProductCards();
             }
+
+            // Always restore expanded variants state after table render
+            // (This is called when filters change, not just loadProducts)
+            setTimeout(() => restoreExpandedVariants(), 50);
         };
         
         // Detectar cambio de tamaño de ventana para ajustar vista automáticamente

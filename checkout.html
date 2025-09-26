@@ -466,6 +466,7 @@
 
     <!-- Cart System Scripts -->
     <script src="js/cart-manager.js"></script>
+    <script src="assets/js/stock-validator.js"></script>
     <script src="assets/js/cart-ui.js"></script>
 
     <!-- Checkout Script -->
@@ -612,8 +613,8 @@
                     this.orderData.items = this.cartData.items;
                     this.orderData.totals = this.cartData.totals;
 
-                    // Simulate order processing
-                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    // Process inventory deduction
+                    await this.processInventoryDeduction();
 
                     // Clear cart
                     if (window.cartManager) {
@@ -633,6 +634,66 @@
                     placeOrderBtn.disabled = false;
                     placeOrderBtn.innerHTML = '<i class="fas fa-credit-card"></i> Realizar Pedido';
                 }
+            }
+
+            async processInventoryDeduction() {
+                console.log('🔄 Processing inventory deduction...');
+
+                if (!window.supabase) {
+                    throw new Error('Supabase client not available');
+                }
+
+                const supabase = window.supabase;
+
+                // Process each cart item
+                for (const item of this.cartData.items) {
+                    try {
+                        // Get current stock for the variant
+                        const { data: variant, error: fetchError } = await supabase
+                            .from('product_variants')
+                            .select('stock, variant_name')
+                            .eq('id', item.variant_id)
+                            .single();
+
+                        if (fetchError) {
+                            console.error('❌ Error fetching variant stock:', fetchError);
+                            throw new Error(`Error verificando stock del producto: ${item.product_snapshot?.name}`);
+                        }
+
+                        if (!variant) {
+                            throw new Error(`Variante no encontrada para: ${item.product_snapshot?.name}`);
+                        }
+
+                        // Check if we have enough stock
+                        if (variant.stock < item.quantity) {
+                            throw new Error(`Stock insuficiente para ${item.product_snapshot?.name}. Stock disponible: ${variant.stock}, solicitado: ${item.quantity}`);
+                        }
+
+                        // Calculate new stock
+                        const newStock = variant.stock - item.quantity;
+
+                        console.log(`📦 Deducting ${item.quantity} from ${variant.variant_name || 'default'}: ${variant.stock} → ${newStock}`);
+
+                        // Update stock in database
+                        const { error: updateError } = await supabase
+                            .from('product_variants')
+                            .update({ stock: newStock })
+                            .eq('id', item.variant_id);
+
+                        if (updateError) {
+                            console.error('❌ Error updating variant stock:', updateError);
+                            throw new Error(`Error actualizando stock de: ${item.product_snapshot?.name}`);
+                        }
+
+                        console.log(`✅ Stock updated successfully for ${item.product_snapshot?.name}`);
+
+                    } catch (itemError) {
+                        console.error('❌ Error processing item:', item, itemError);
+                        throw itemError;
+                    }
+                }
+
+                console.log('✅ Inventory deduction completed successfully');
             }
 
             formatPrice(price) {

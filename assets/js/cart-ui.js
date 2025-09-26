@@ -417,14 +417,34 @@ class CartUI {
     }
 
     /**
-     * Update item quantity
+     * Update item quantity with stock validation
      */
     async updateItemQuantity(productId, variantId, newQuantity) {
         if (this.cartManager) {
+            // Validate stock before updating
+            if (window.stockValidator && newQuantity > 0) {
+                const stockCheck = await window.stockValidator.checkVariantStock(variantId, newQuantity);
+
+                if (!stockCheck.hasStock) {
+                    const stockMsg = window.stockValidator.getStockMessage(stockCheck.availableStock, newQuantity);
+                    this.showNotification(stockMsg.message, 'error');
+
+                    // If no stock at all, don't update
+                    if (stockCheck.availableStock === 0) {
+                        return;
+                    }
+
+                    // Otherwise, update to max available
+                    newQuantity = stockCheck.availableStock;
+                }
+            }
+
             const result = await this.cartManager.updateQuantity(productId, variantId, newQuantity);
 
             if (result.success) {
                 this.showNotification('Cantidad actualizada', 'success');
+                // Refresh cart display to show any stock warnings
+                this.updateCartUI(this.cartManager.getCartSummary());
             } else {
                 this.showNotification('Error actualizando cantidad', 'error');
             }
