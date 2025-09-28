@@ -38,7 +38,12 @@ body {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 80px;
-  align-items: center;
+  align-items: start;
+}
+
+.story-section {
+  padding-top: 0;
+  margin-top: 0;
 }
 
 /* Images on the left - take up 2/3 of the space */

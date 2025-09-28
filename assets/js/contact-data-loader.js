@@ -16,12 +16,15 @@ class ContactDataLoader {
             trustIcon3Text: 'Calidad Premium',
             trustIcon3Icon: 'fas fa-shield-alt',
             shippingDisclaimer: '*En compras superiores a $2,000.00',
-            
+
+            // Promotional Banner
+            promoDiscount: '25% OFF',
+
             // Social Media
             instagramUrl: '#',
             facebookUrl: '#',
             whatsappNumber: '+5212345678490',
-            
+
             // Contact Cards
             locationText: 'Ciudad de México, México',
             phoneNumber: '+52 123 456 7890',
@@ -87,6 +90,17 @@ class ContactDataLoader {
         }
 
         console.log('✅ Trust icons actualizados');
+    }
+
+    /**
+     * Aplicar descuento promocional
+     */
+    applyPromoDiscount(data) {
+        const promoDiscountElement = document.querySelector('.promo-discount');
+        if (promoDiscountElement && data.promoDiscount) {
+            promoDiscountElement.textContent = data.promoDiscount;
+        }
+        console.log('✅ Descuento promocional actualizado');
     }
 
     /**
@@ -175,12 +189,13 @@ class ContactDataLoader {
      */
     applyData() {
         const contactData = this.loadContactData();
-        
+
         try {
             this.applyTrustIcons(contactData);
+            this.applyPromoDiscount(contactData);
             this.applySocialMedia(contactData);
             this.applyContactCards(contactData);
-            
+
             console.log('✅ Todos los datos de contacto aplicados correctamente');
         } catch (error) {
             console.error('❌ Error al aplicar datos de contacto:', error);

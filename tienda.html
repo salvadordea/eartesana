@@ -9,6 +9,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./assets/css/styles.css">
     <link rel="stylesheet" href="./assets/css/tienda.css">
+    <link rel="stylesheet" href="./assets/css/whatsapp-badge.css">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -30,9 +31,9 @@
     <section class="breadcrumbs">
         <div class="container">
             <nav class="breadcrumb-nav">
-                <a href="./index.html">Inicio</a>
+                <a href="./index.html" data-translate="shop.breadcrumb_home">Inicio</a>
                 <i class="fas fa-chevron-right"></i>
-                <span>Tienda</span>
+                <span data-translate="shop.breadcrumb_shop">Tienda</span>
             </nav>
         </div>
     </section>
@@ -42,8 +43,8 @@
         <div class="container">
             <div class="shop-header-content">
                 <div class="shop-title">
-                    <h1>Nuestra Tienda</h1>
-                    <p>Productos artesanales únicos hechos con técnicas ancestrales</p>
+                    <h1 data-translate="shop.title">Nuestra Tienda</h1>
+                    <p data-translate="shop.subtitle">Productos artesanales únicos hechos con técnicas ancestrales</p>
                 </div>
                 
                 <div class="shop-controls">
@@ -58,12 +59,12 @@
                     
                     <div class="sort-dropdown">
                         <select id="sortProducts">
-                            <option value="date-desc">Más recientes</option>
+                            <option value="date-desc" data-translate="shop.sort_newest">Más recientes</option>
                             <option value="date-asc">Más antiguos</option>
-                            <option value="price-asc">Precio: menor a mayor</option>
-                            <option value="price-desc">Precio: mayor a menor</option>
-                            <option value="title-asc" selected>Nombre: A-Z</option>
-                            <option value="title-desc">Nombre: Z-A</option>
+                            <option value="price-asc" data-translate="shop.sort_price_low">Precio: menor a mayor</option>
+                            <option value="price-desc" data-translate="shop.sort_price_high">Precio: mayor a menor</option>
+                            <option value="title-asc" selected data-translate="shop.sort_name_az">Nombre: A-Z</option>
+                            <option value="title-desc" data-translate="shop.sort_name_za">Nombre: Z-A</option>
                             <option value="popularity">Más populares</option>
                         </select>
                     </div>
@@ -78,7 +79,7 @@
         <div class="container">
             <div class="search-container">
                 <div class="search-box-modern">
-                    <input type="text" id="searchInput" placeholder="Buscar productos, categorías..." autocomplete="off">
+                    <input type="text" id="searchInput" placeholder="Buscar productos, categorías..." data-translate-attr="placeholder" data-translate="shop.search_placeholder" autocomplete="off">
                     <button type="button" onclick="searchProducts()">
                         <i class="fas fa-search"></i>
                     </button>
@@ -96,10 +97,10 @@
                 <aside class="shop-sidebar">
                     <!-- Category Filters -->
                     <div class="filter-section">
-                        <h3>Categorías</h3>
+                        <h3 data-translate="shop.filter_by_category">Categorías</h3>
                         <div class="category-filters" id="sidebarCategoryFilters">
                             <div class="filter-loading" id="categoryFiltersLoading">
-                                Cargando categorías...
+                                <span data-translate="shop.loading_products">Cargando categorías...</span>
                             </div>
                         </div>
                     </div>
@@ -231,6 +232,9 @@
     <!-- Supabase API Client (CORREGIDO) -->
     <script src="js/supabase-api-client-fixed.js"></script>
     
+    <!-- WhatsApp Floating Badge -->
+    <script src="./assets/js/whatsapp-badge.js"></script>
+
     <!-- Main Scripts (mantener solo los necesarios) -->
     <script src="./assets/js/main.js"></script>
     
@@ -291,5 +295,8 @@
 
     <!-- Universal Footer - Load footer dynamically -->
     <script src="assets/js/footer-universal.js"></script>
+
+    <!-- Translation System -->
+    <script src="assets/js/translation-system.js"></script>
 </body>
 </html>

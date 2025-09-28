@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Language Selector - Estudio Artesana</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/modern-home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Lato', sans-serif;
+            padding: 20px;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 100px auto 0;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+        }
+        h1, h2 {
+            color: #C0C0C0;
+            margin-bottom: 20px;
+        }
+        .header-mock {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 15px 20px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .header-icon {
+            color: #fff;
+            font-size: 18px;
+            padding: 8px;
+        }
+        .nav-list {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 20px;
+        }
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .test-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        .test-item strong {
+            color: #C0C0C0;
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mock Header for Testing -->
+    <div class="header-mock">
+        <div class="logo">
+            <span style="color: #C0C0C0; font-weight: bold;">ESTUDIO ARTESANA</span>
+        </div>
+        <nav>
+            <ul class="nav-list">
+                <li><a href="#" class="nav-link" data-translate="navigation.inicio">INICIO</a></li>
+                <li><a href="#" class="nav-link" data-translate="navigation.tienda">TIENDA</a></li>
+                <li><a href="#" class="nav-link" data-translate="navigation.sobre_nosotros">SOBRE NOSOTROS</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <!-- Language selector will be injected here by TranslationSystem -->
+            <a href="#" class="header-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+            <a href="#" class="header-icon">
+                <i class="fas fa-search"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h1 data-translate="sections.featured_products">Language Selector Test Page</h1>
+
+        <div class="test-section">
+            <h2>🧪 Translation Test Elements</h2>
+
+            <div class="test-item">
+                <strong>Navigation Items:</strong>
+                <ul>
+                    <li><span data-translate="navigation.inicio">INICIO</span></li>
+                    <li><span data-translate="navigation.tienda">TIENDA</span></li>
+                    <li><span data-translate="navigation.sobre_nosotros">SOBRE NOSOTROS</span></li>
+                    <li><span data-translate="navigation.mayoristas">MAYORISTAS</span></li>
+                    <li><span data-translate="navigation.contacto">CONTACTO</span></li>
+                </ul>
+            </div>
+
+            <div class="test-item">
+                <strong>Hero Section:</strong>
+                <p data-translate="hero.title">LEGADO ANCESTRAL TRANSFORMADO EN DISEÑO</p>
+                <p data-translate="hero.subtitle">Cada pieza cuenta una historia única, fusionando tradición artesanal con elegancia contemporánea</p>
+            </div>
+
+            <div class="test-item">
+                <strong>Trust Elements:</strong>
+                <ul>
+                    <li><span data-translate="hero.trust_shipping">Envío Gratis*</span></li>
+                    <li><span data-translate="hero.trust_handmade">Hecho a Mano</span></li>
+                    <li><span data-translate="hero.trust_quality">Calidad Premium</span></li>
+                </ul>
+            </div>
+
+            <div class="test-item">
+                <strong>Common Elements:</strong>
+                <ul>
+                    <li>Language: <span data-translate="common.language">Language</span></li>
+                    <li>Spanish: <span data-translate="common.spanish">Español</span></li>
+                    <li>English: <span data-translate="common.english">English</span></li>
+                    <li>Search: <input type="text" placeholder="Buscar productos..." data-translate-attr="placeholder" data-translate="common.search_placeholder" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px; border-radius: 4px;"></li>
+                </ul>
+            </div>
+
+            <div class="test-item">
+                <strong>Contact Form Elements:</strong>
+                <ul>
+                    <li><span data-translate="contact.get_in_touch">¿Tienes alguna pregunta?</span></li>
+                    <li><span data-translate="contact.send_message">Enviar mensaje</span></li>
+                    <li>Select:
+                        <select style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 4px; border-radius: 4px;">
+                            <option data-translate="contact.select_subject">Selecciona un asunto</option>
+                            <option data-translate="contact.product_inquiry">Consulta sobre producto</option>
+                            <option data-translate="contact.wholesale_sales">Ventas mayoristas</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="test-item">
+                <strong>Account Section:</strong>
+                <ul>
+                    <li><span data-translate="account.title">Mi Cuenta</span></li>
+                    <li><span data-translate="account.exclusive_offers">Ofertas Exclusivas</span></li>
+                    <li><span data-translate="account.new_customer">¿Nuevo Cliente?</span></li>
+                    <li><span data-translate="account.create_account">Crear Mi Cuenta</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>📱 Instructions</h2>
+            <ul>
+                <li>Look for the language selector in the top-right header area</li>
+                <li>It should show a globe icon, "Language" text, and ES/EN buttons with flags</li>
+                <li>Click between ES and EN to see all text content translate</li>
+                <li>Test on mobile by resizing your browser window</li>
+                <li>The language preference should persist after page reload</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h2>🔧 Debug Info</h2>
+            <div id="debug-info">
+                <p>Current Language: <span id="current-lang">Loading...</span></p>
+                <p>Translation System Status: <span id="system-status">Loading...</span></p>
+                <p>Available Languages: <span id="available-langs">ES, EN</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Translation System -->
+    <script src="assets/js/translation-system.js"></script>
+
+    <script>
+        // Debug information update
+        function updateDebugInfo() {
+            if (window.TranslationSystem) {
+                document.getElementById('current-lang').textContent = window.TranslationSystem.getCurrentLanguage();
+                document.getElementById('system-status').textContent = window.TranslationSystem.isInitialized ? 'Initialized' : 'Loading...';
+            }
+        }
+
+        // Update debug info every second
+        setInterval(updateDebugInfo, 1000);
+
+        // Listen for language changes
+        window.addEventListener('languageChanged', (e) => {
+            console.log('🌐 Language changed event detected:', e.detail);
+            updateDebugInfo();
+        });
+
+        // Initial update
+        setTimeout(updateDebugInfo, 500);
+    </script>
+</body>
+</html>

@@ -97,7 +97,28 @@ body {
     font-size: 1.1rem;
 }
 
-/* Shipping Disclaimer */
+/* Shipping Trust Item Styles */
+.shipping-trust-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.trust-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.shipping-disclaimer-inline {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-secondary);
+    font-size: 0.7rem;
+    margin-top: -2px;
+}
+
+/* Legacy Shipping Disclaimer */
 .shipping-disclaimer {
     margin-top: 8px;
     color: rgba(255, 255, 255, 0.7);

@@ -33,7 +33,7 @@ class UniversalFooter {
         if (path.includes('/admin/')) {
             return '../components/universal-footer.html';
         } else if (path.includes('/pages/')) {
-            return '../components/universal-footer.html';
+            return '../../components/universal-footer.html';
         } else {
             return 'components/universal-footer.html';
         }

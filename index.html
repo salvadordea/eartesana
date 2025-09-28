@@ -6,6 +6,7 @@
     <title>Estudio Artesana - Legado ancestral transformado en diseño</title>
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/modern-home.css">
+    <link rel="stylesheet" href="assets/css/whatsapp-badge.css">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -23,7 +24,6 @@
 
     <!-- Monthly Promotion Banner -->
     <div class="monthly-promo-banner" id="monthlyPromoBanner">
-        <span class="promo-text">Enero 2025</span>
         <span class="promo-discount">25% OFF</span>
         <button class="promo-close" onclick="closePromoBanner()">&times;</button>
     </div>
@@ -40,22 +40,22 @@
                 <!-- Navigation -->
                 <nav class="nav">
                     <ul class="nav-list">
-                        <li class="nav-item"><a href="#inicio" class="nav-link active">INICIO</a></li>
+                        <li class="nav-item"><a href="#inicio" class="nav-link active" data-translate="navigation.inicio">INICIO</a></li>
                         <li class="nav-item dropdown">
-                            <a href="tienda/index.html" class="nav-link">TIENDA</a>
+                            <a href="tienda/index.html" class="nav-link" data-translate="navigation.tienda">TIENDA</a>
                             <i class="fas fa-chevron-down nav-arrow"></i>
                             <div class="dropdown-menu" id="tiendaDropdown">
-                                <a href="tienda/index.html" class="dropdown-link">Todos los productos</a>
+                                <a href="tienda/index.html" class="dropdown-link" data-translate="navigation.todos_productos">Todos los productos</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="dropdown-categories" id="dropdownCategories">
                                     <!-- Categories will be loaded here -->
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item"><a href="pages/sobre-nosotros/index.html" class="nav-link">SOBRE NOSOTROS</a></li>
-                        <li class="nav-item"><a href="pages/mayoristas/index.html" class="nav-link">MAYORISTAS</a></li>
-                        <li class="nav-item"><a href="#contacto" class="nav-link">CONTACTO</a></li>
-                        <li class="nav-item"><a href="micuenta.html" class="nav-link">MI CUENTA</a></li>
+                        <li class="nav-item"><a href="pages/sobre-nosotros/index.html" class="nav-link" data-translate="navigation.sobre_nosotros">SOBRE NOSOTROS</a></li>
+                        <li class="nav-item"><a href="pages/mayoristas/index.html" class="nav-link" data-translate="navigation.mayoristas">MAYORISTAS</a></li>
+                        <li class="nav-item"><a href="#contacto" class="nav-link" data-translate="navigation.contacto">CONTACTO</a></li>
+                        <li class="nav-item"><a href="micuenta.html" class="nav-link" data-translate="navigation.mi_cuenta">MI CUENTA</a></li>
                     </ul>
                 </nav>
 
@@ -113,29 +113,27 @@
                     <p class="hero-description">Descubre piezas únicas que honran la tradición artesanal mexicana con un enfoque contemporáneo y elegante.</p>
                     
                     <div class="hero-actions">
-                        <a href="tienda/index.html" class="btn-primary">Explorar Colección</a>
-                        <a href="pages/sobre-nosotros/index.html" class="btn-secondary">Nuestra Historia</a>
+                        <a href="tienda/index.html" class="btn-primary" data-translate="hero.cta_primary">Explorar Colección</a>
+                        <a href="pages/sobre-nosotros/index.html" class="btn-secondary" data-translate="hero.cta_secondary">Nuestra Historia</a>
                     </div>
                     
                     <!-- Trust Elements -->
                     <div class="trust-elements">
-                        <div class="trust-item">
+                        <div class="trust-item shipping-trust-item">
                             <i class="fas fa-truck"></i>
-                            <span>Envío Gratis*</span>
+                            <div class="trust-text">
+                                <span data-translate="hero.trust_shipping">Envío Gratis*</span>
+                                <small class="shipping-disclaimer-inline">*En compras superiores a $2,000.00</small>
+                            </div>
                         </div>
                         <div class="trust-item">
                             <i class="fas fa-hand-holding-heart"></i>
-                            <span>Hecho a Mano</span>
+                            <span data-translate="hero.trust_handmade">Hecho a Mano</span>
                         </div>
                         <div class="trust-item">
                             <i class="fas fa-shield-alt"></i>
-                            <span>Calidad Premium</span>
+                            <span data-translate="hero.trust_quality">Calidad Premium</span>
                         </div>
-                    </div>
-                    
-                    <!-- Shipping Disclaimer -->
-                    <div class="shipping-disclaimer">
-                        <small>*En compras superiores a $2,000.00</small>
                     </div>
                     
                     <!-- Social Media -->
@@ -167,14 +165,14 @@
     <section class="categories-section modern">
         <div class="container">
             <div class="section-header centered">
-                <h2 class="section-title">Nuestras Categorías</h2>
-                <p class="section-subtitle">Explora nuestra colección de artesanías mexicanas contemporáneas</p>
+                <h2 class="section-title" data-translate="sections.categories_title">Nuestras Categorías</h2>
+                <p class="section-subtitle" data-translate="sections.categories_subtitle">Explora nuestra colección de artesanías mexicanas contemporáneas</p>
             </div>
-            
+
             <!-- Loading State -->
             <div class="categories-loading" id="homeCategoriesLoading">
                 <div class="loading-spinner"></div>
-                <p>Cargando categorías...</p>
+                <p data-translate="sections.loading_categories">Cargando categorías...</p>
             </div>
 
             <!-- Categories Grid -->
@@ -216,8 +214,8 @@
     <section class="brand-values-section">
         <div class="container">
             <div class="section-header centered">
-                <h2 class="section-title">Por Qué Elegir Estudio Artesana</h2>
-                <p class="section-subtitle">Comprometidos con la excelencia y la tradición artesanal</p>
+                <h2 class="section-title" data-translate="sections.why_choose_title">Por Qué Elegir Estudio Artesana</h2>
+                <p class="section-subtitle" data-translate="sections.why_choose_subtitle">Comprometidos con la excelencia y la tradición artesanal</p>
             </div>
 
             <div class="values-grid">
@@ -225,32 +223,32 @@
                     <div class="value-icon">
                         <i class="fas fa-hand-holding-heart"></i>
                     </div>
-                    <h3 class="value-title">Hecho a Mano</h3>
-                    <p class="value-description">Cada pieza es única, creada con técnicas tradicionales por maestros artesanos mexicanos.</p>
+                    <h3 class="value-title" data-translate="sections.handmade_title">Hecho a Mano</h3>
+                    <p class="value-description" data-translate="sections.handmade_description">Cada pieza es única, creada con técnicas tradicionales por maestros artesanos mexicanos.</p>
                 </div>
 
                 <div class="value-item">
                     <div class="value-icon">
                         <i class="fas fa-leaf"></i>
                     </div>
-                    <h3 class="value-title">Sostenible</h3>
-                    <p class="value-description">Materiales naturales y procesos respetuosos con el medio ambiente.</p>
+                    <h3 class="value-title" data-translate="sections.sustainable_title">Sostenible</h3>
+                    <p class="value-description" data-translate="sections.sustainable_description">Materiales naturales y procesos respetuosos con el medio ambiente.</p>
                 </div>
 
                 <div class="value-item">
                     <div class="value-icon">
                         <i class="fas fa-award"></i>
                     </div>
-                    <h3 class="value-title">Calidad Premium</h3>
-                    <p class="value-description">Estándares de calidad excepcionales en cada detalle y acabado.</p>
+                    <h3 class="value-title" data-translate="sections.premium_quality_title">Calidad Premium</h3>
+                    <p class="value-description" data-translate="sections.premium_quality_description">Estándares de calidad excepcionales en cada detalle y acabado.</p>
                 </div>
 
                 <div class="value-item">
                     <div class="value-icon">
                         <i class="fas fa-history"></i>
                     </div>
-                    <h3 class="value-title">Tradición</h3>
-                    <p class="value-description">Preservamos y honramos las técnicas ancestrales de la artesanía mexicana.</p>
+                    <h3 class="value-title" data-translate="sections.tradition_title">Tradición</h3>
+                    <p class="value-description" data-translate="sections.tradition_description">Preservamos y honramos las técnicas ancestrales de la artesanía mexicana.</p>
                 </div>
             </div>
         </div>
@@ -265,37 +263,37 @@
                 <!-- Contact Form -->
                 <div class="contact-form-home">
                     <div class="section-header">
-                        <h2 class="section-title">¿Tienes alguna pregunta?</h2>
-                        <p class="section-subtitle">Contáctanos y te responderemos lo más pronto posible</p>
+                        <h2 class="section-title" data-translate="contact.get_in_touch">¿Tienes alguna pregunta?</h2>
+                        <p class="section-subtitle" data-translate="contact.contact_us">Contáctanos y te responderemos lo más pronto posible</p>
                     </div>
-                    
+
                     <form class="home-contact-form" id="homeContactForm">
                         <div class="form-row">
                             <div class="form-group">
-                                <input type="text" id="homeName" name="name" placeholder="Nombre completo" required>
+                                <input type="text" id="homeName" name="name" placeholder="Nombre completo" data-translate-attr="placeholder" data-translate="contact.full_name_placeholder" required>
                             </div>
                             <div class="form-group">
-                                <input type="email" id="homeEmail" name="email" placeholder="Correo electrónico" required>
+                                <input type="email" id="homeEmail" name="email" placeholder="Correo electrónico" data-translate-attr="placeholder" data-translate="contact.email_placeholder" required>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <select id="homeSubject" name="subject" required>
-                                <option value="">Selecciona un asunto</option>
-                                <option value="consulta-producto">Consulta sobre producto</option>
-                                <option value="pedido">Consulta sobre pedido</option>
-                                <option value="mayorista">Ventas mayoristas</option>
-                                <option value="otro">Otro</option>
+                                <option value="" data-translate="contact.select_subject">Selecciona un asunto</option>
+                                <option value="consulta-producto" data-translate="contact.product_inquiry">Consulta sobre producto</option>
+                                <option value="pedido" data-translate="contact.order_inquiry">Consulta sobre pedido</option>
+                                <option value="mayorista" data-translate="contact.wholesale_sales">Ventas mayoristas</option>
+                                <option value="otro" data-translate="contact.other">Otro</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group">
-                            <textarea id="homeMessage" name="message" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                            <textarea id="homeMessage" name="message" rows="4" placeholder="Escribe tu mensaje aquí..." data-translate-attr="placeholder" data-translate="contact.message_placeholder" required></textarea>
                         </div>
-                        
+
                         <button type="submit" class="submit-btn-home">
                             <i class="fas fa-paper-plane"></i>
-                            Enviar mensaje
+                            <span data-translate="contact.send_message">Enviar mensaje</span>
                         </button>
                     </form>
                 </div>
@@ -308,44 +306,44 @@
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div class="info-content-home">
-                                <h3>Ubicación</h3>
-                                <p>Ciudad de México, México</p>
+                                <h3 data-translate="contact.location_label">Ubicación</h3>
+                                <p data-translate="contact.location">Ciudad de México, México</p>
                             </div>
                         </div>
-                        
+
                         <div class="info-card-home">
                             <div class="info-icon-home">
                                 <i class="fas fa-phone"></i>
                             </div>
                             <div class="info-content-home">
-                                <h3>Teléfono</h3>
+                                <h3 data-translate="contact.phone_label">Teléfono</h3>
                                 <p><a href="tel:+5212345678490">+52 123 456 7890</a></p>
                             </div>
                         </div>
-                        
+
                         <div class="info-card-home">
                             <div class="info-icon-home">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div class="info-content-home">
-                                <h3>Email</h3>
+                                <h3 data-translate="contact.email_label">Email</h3>
                                 <p><a href="mailto:info@estudioartesana.com">info@estudioartesana.com</a></p>
                             </div>
                         </div>
-                        
+
                         <div class="info-card-home">
                             <div class="info-icon-home">
                                 <i class="fas fa-clock"></i>
                             </div>
                             <div class="info-content-home">
-                                <h3>Horarios</h3>
-                                <p>Lun - Vie: 9:00 AM - 6:00 PM<br>Sáb: 10:00 AM - 4:00 PM</p>
+                                <h3 data-translate="contact.hours_label">Horarios</h3>
+                                <p data-translate="contact.hours">Lun - Vie: 9:00 AM - 6:00 PM<br>Sáb: 10:00 AM - 4:00 PM</p>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="contact-cta">
-                        <a href="pages/contacto/index.html" class="btn-secondary full-contact">Ver página completa de contacto</a>
+                        <a href="pages/contacto/index.html" class="btn-secondary full-contact" data-translate="contact.full_contact_page">Ver página completa de contacto</a>
                     </div>
                 </div>
             </div>
@@ -357,46 +355,46 @@
         <div class="container">
             <div class="account-cta-content">
                 <div class="section-header centered">
-                    <h2 class="section-title">Mi Cuenta</h2>
-                    <p class="section-subtitle">Accede a tu cuenta o créala para disfrutar de beneficios exclusivos</p>
+                    <h2 class="section-title" data-translate="account.title">Mi Cuenta</h2>
+                    <p class="section-subtitle" data-translate="account.subtitle">Accede a tu cuenta o créala para disfrutar de beneficios exclusivos</p>
                 </div>
                 
                 <div class="account-benefits">
                     <div class="benefit-grid">
                         <div class="benefit-card">
                             <i class="fas fa-gift"></i>
-                            <h3>Ofertas Exclusivas</h3>
-                            <p>Descuentos y promociones especiales solo para clientes registrados</p>
+                            <h3 data-translate="account.exclusive_offers">Ofertas Exclusivas</h3>
+                            <p data-translate="account.exclusive_offers_desc">Descuentos y promociones especiales solo para clientes registrados</p>
                         </div>
                         
                         <div class="benefit-card">
                             <i class="fas fa-shopping-cart"></i>
-                            <h3>Historial de Pedidos</h3>
-                            <p>Revisa y gestiona todos tus pedidos desde un solo lugar</p>
+                            <h3 data-translate="account.order_history">Historial de Pedidos</h3>
+                            <p data-translate="account.order_history_desc">Revisa y gestiona todos tus pedidos desde un solo lugar</p>
                         </div>
                         
                         <div class="benefit-card">
                             <i class="fas fa-map-marker-alt"></i>
-                            <h3>Direcciones Guardadas</h3>
-                            <p>Gestiona tus direcciones de envío y facturación fácilmente</p>
+                            <h3 data-translate="account.saved_addresses">Direcciones Guardadas</h3>
+                            <p data-translate="account.saved_addresses_desc">Gestiona tus direcciones de envío y facturación fácilmente</p>
                         </div>
                         
                         <div class="benefit-card">
                             <i class="fas fa-heart"></i>
-                            <h3>Lista de Deseos</h3>
-                            <p>Guarda tus productos favoritos para comprarlos después</p>
+                            <h3 data-translate="account.wishlist">Lista de Deseos</h3>
+                            <p data-translate="account.wishlist_desc">Guarda tus productos favoritos para comprarlos después</p>
                         </div>
                         
                         <div class="benefit-card">
                             <i class="fas fa-bell"></i>
-                            <h3>Notificaciones</h3>
-                            <p>Sé el primero en conocer nuevos productos y ofertas</p>
+                            <h3 data-translate="account.notifications">Notificaciones</h3>
+                            <p data-translate="account.notifications_desc">Sé el primero en conocer nuevos productos y ofertas</p>
                         </div>
                         
                         <div class="benefit-card">
                             <i class="fas fa-user-cog"></i>
-                            <h3>Perfil Personalizado</h3>
-                            <p>Gestiona toda tu información personal y preferencias</p>
+                            <h3 data-translate="account.custom_profile">Perfil Personalizado</h3>
+                            <p data-translate="account.custom_profile_desc">Gestiona toda tu información personal y preferencias</p>
                         </div>
                     </div>
                 </div>
@@ -407,11 +405,11 @@
                             <div class="action-icon">
                                 <i class="fas fa-user-plus"></i>
                             </div>
-                            <h3>¿Nuevo Cliente?</h3>
-                            <p>Únete a nuestra comunidad y crea tu cuenta para empezar a disfrutar de todos los beneficios.</p>
+                            <h3 data-translate="account.new_customer">¿Nuevo Cliente?</h3>
+                            <p data-translate="account.new_customer_desc">Únete a nuestra comunidad y crea tu cuenta para empezar a disfrutar de todos los beneficios.</p>
                             <a href="micuenta.html" class="btn-primary action-btn">
                                 <i class="fas fa-user-plus"></i>
-                                Crear Mi Cuenta
+                                <span data-translate="account.create_account">Crear Mi Cuenta</span>
                             </a>
                         </div>
                         
@@ -419,11 +417,11 @@
                             <div class="action-icon">
                                 <i class="fas fa-sign-in-alt"></i>
                             </div>
-                            <h3>¿Ya Tienes Cuenta?</h3>
-                            <p>Inicia sesión para acceder a tu panel personal, pedidos, direcciones y más.</p>
+                            <h3 data-translate="account.existing_customer">¿Ya Tienes Cuenta?</h3>
+                            <p data-translate="account.existing_customer_desc">Inicia sesión para acceder a tu panel personal, pedidos, direcciones y más.</p>
                             <a href="micuenta.html" class="btn-outline action-btn">
                                 <i class="fas fa-sign-in-alt"></i>
-                                Iniciar Sesión
+                                <span data-translate="account.login">Iniciar Sesión</span>
                             </a>
                         </div>
                     </div>
@@ -471,7 +469,13 @@
     
     <!-- Universal Footer - Load footer dynamically -->
     <script src="assets/js/footer-universal.js"></script>
-    
+
+    <!-- WhatsApp Floating Badge -->
+    <script src="assets/js/whatsapp-badge.js"></script>
+
+    <!-- Translation System -->
+    <script src="assets/js/translation-system.js"></script>
+
     <!-- Main Site JavaScript -->
     <script src="assets/js/main.js"></script>
     

@@ -20,6 +20,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../../assets/css/styles.css">
     <link rel="stylesheet" href="../../assets/css/mayoristas.css">
+    <link rel="stylesheet" href="../../assets/css/whatsapp-badge.css">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -42,22 +43,22 @@
                 <!-- Navigation -->
                 <nav class="nav">
                     <ul class="nav-list">
-                        <li class="nav-item"><a href="../../index.html" class="nav-link">INICIO</a></li>
+                        <li class="nav-item"><a href="../../index.html" class="nav-link" data-translate="navigation.inicio">INICIO</a></li>
                         <li class="nav-item dropdown">
-                            <a href="../../tienda/index.html" class="nav-link">TIENDA</a>
+                            <a href="../../tienda/index.html" class="nav-link" data-translate="navigation.tienda">TIENDA</a>
                             <i class="fas fa-chevron-down nav-arrow"></i>
                             <div class="dropdown-menu" id="tiendaDropdown">
-                                <a href="../../tienda/index.html" class="dropdown-link">Todos los productos</a>
+                                <a href="../../tienda/index.html" class="dropdown-link" data-translate="navigation.todos_productos">Todos los productos</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="dropdown-categories" id="dropdownCategories">
                                     <!-- Categories will be loaded here -->
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item"><a href="../sobre-nosotros/index.html" class="nav-link">SOBRE NOSOTROS</a></li>
-                        <li class="nav-item"><a href="index.html" class="nav-link active">MAYORISTAS</a></li>
-                        <li class="nav-item"><a href="#contacto" class="nav-link">CONTACTO</a></li>
-                        <li class="nav-item"><a href="../../micuenta.html" class="nav-link">MI CUENTA</a></li>
+                        <li class="nav-item"><a href="../sobre-nosotros/index.html" class="nav-link" data-translate="navigation.sobre_nosotros">SOBRE NOSOTROS</a></li>
+                        <li class="nav-item"><a href="index.html" class="nav-link active" data-translate="navigation.mayoristas">MAYORISTAS</a></li>
+                        <li class="nav-item"><a href="#contacto" class="nav-link" data-translate="navigation.contacto">CONTACTO</a></li>
+                        <li class="nav-item"><a href="../../micuenta.html" class="nav-link" data-translate="navigation.mi_cuenta">MI CUENTA</a></li>
                     </ul>
                 </nav>
                 
@@ -382,75 +383,23 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <span>ESTUDIO ARTESANA</span>
-                    </div>
-                    <p class="footer-description">
-                        Creamos productos artesanales únicos que combinan la tradición con el diseño contemporáneo.
-                    </p>
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Facebook">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Pinterest">
-                            <i class="fab fa-pinterest"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Enlaces Rápidos</h4>
-                    <ul class="footer-links">
-                        <li><a href="../../index.html">Inicio</a></li>
-                        <li><a href="../../tienda/index.html">Tienda</a></li>
-                        <li><a href="../sobre-nosotros/index.html">Sobre Nosotros</a></li>
-                        <li><a href="index.html">Mayoristas</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Categorías</h4>
-                    <ul class="footer-links">
-                        <li><a href="../../tienda/index.html?categoria=bolsas">Bolsas</a></li>
-                        <li><a href="../../tienda/index.html?categoria=accesorios">Accesorios</a></li>
-                        <li><a href="../../tienda/index.html?categoria=joyeria">Joyería</a></li>
-                        <li><a href="../../tienda/index.html?categoria=cuadernos">Cuadernos</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Contacto</h4>
-                    <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> mayoristas@estudioartesana.com</p>
-                        <p><i class="fas fa-phone"></i> +52 555 123 4567</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Ciudad de México, México</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 Estudio Artesana. Todos los derechos reservados.</p>
-                <div class="footer-bottom-links">
-                    <a href="../politicas/privacidad.html">Política de Privacidad</a>
-                    <a href="../politicas/terminos.html">Términos y Condiciones</a>
-                    <a href="../politicas/mayoristas.html">Términos Mayoristas</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer será cargado dinámicamente por footer-universal.js -->
+    <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
     <script src="../../assets/js/config.js"></script>
     <script src="../../assets/js/woocommerce-api.js"></script>
     <script src="../../assets/js/dropdown-categories.js"></script>
     <script src="../../assets/js/main.js"></script>
+
+    <!-- Universal Footer - Load footer dynamically -->
+    <script src="../../assets/js/footer-universal.js"></script>
+
+    <!-- WhatsApp Floating Badge -->
+    <script src="../../assets/js/whatsapp-badge.js"></script>
+
+    <!-- Translation System -->
+    <script src="../../assets/js/translation-system.js"></script>
     
     <!-- Login Styles -->
     <style>

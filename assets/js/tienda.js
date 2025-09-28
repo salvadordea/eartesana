@@ -222,9 +222,12 @@ class EstudioArtesanaTienda {
         
         this.categories.forEach(category => {
             const isActive = this.currentFilters.category === category.id ? 'active' : '';
+            const translatedName = window.TranslationSystem ?
+                window.TranslationSystem.translateCategory(category.name) :
+                category.name;
             html += `
                 <div class="category-filter ${isActive}" data-category="${category.id}">
-                    <span>${category.name}</span>
+                    <span>${translatedName}</span>
                     <span class="category-count">${category.count || 0}</span>
                 </div>
             `;
@@ -605,7 +608,10 @@ class EstudioArtesanaTienda {
         this.updateCartCount();
         
         // Show success message
-        this.showCartMessage(`${product.name} agregado al carrito`);
+        const addedMessage = window.TranslationSystem ?
+            window.TranslationSystem.t('shop.added_to_cart', 'agregado al carrito') :
+            'agregado al carrito';
+        this.showCartMessage(`${product.name} ${addedMessage}`);
     }
     
     loadCartFromStorage() {
@@ -843,8 +849,8 @@ class EstudioArtesanaTienda {
                         </div>
                     </div>
                     <div class="category-info">
-                        <h3 class="category-name">${category.name}</h3>
-                        <p class="category-count">${category.count || 0} productos</p>
+                        <h3 class="category-name">${window.TranslationSystem ? window.TranslationSystem.translateCategory(category.name) : category.name}</h3>
+                        <p class="category-count">${category.count || 0} ${window.TranslationSystem ? window.TranslationSystem.translateShopText('category_products', 'productos') : 'productos'}</p>
                     </div>
                     ${category.count > 10 ? '<div class="category-badge">Popular</div>' : ''}
                 </div>
