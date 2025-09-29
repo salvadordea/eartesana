@@ -395,6 +395,11 @@ class ProductDetailPage {
         });
         
         this.productVariants.innerHTML = variantsHTML;
+
+        // Trigger translation system
+        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+            window.TranslationSystem.applyTranslations();
+        }
         
         // Bind variant events
         this.bindVariantEvents();
@@ -600,8 +605,13 @@ class ProductDetailPage {
             `).join('');
             
             this.productSpecs.innerHTML = specsHTML;
+
+        // Trigger translation system
+        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+            window.TranslationSystem.applyTranslations();
+        }
         } else {
-            this.productSpecs.innerHTML = '<p>No hay especificaciones disponibles.</p>';
+            this.productSpecs.innerHTML = `<p>${window.t ? window.t('product.no_specifications') : 'No hay especificaciones disponibles.'}</p>`;
         }
     }
     
@@ -661,25 +671,25 @@ class ProductDetailPage {
         }
         
         if (this.product.categories && this.product.categories.length > 0) {
-            specs.push({ 
-                label: 'Categoría', 
+            specs.push({
+                label: window.t ? window.t('product.category') : 'Categoría',
                 value: this.product.categories.map(c => c.name).join(', ')
             });
         }
         
         if (this.product.tags && this.product.tags.length > 0) {
-            specs.push({ 
-                label: 'Etiquetas', 
+            specs.push({
+                label: window.t ? window.t('product.tags') : 'Etiquetas',
                 value: this.product.tags.map(t => t.name).join(', ')
             });
         }
         
         // Stock status
         if (this.product.stock_status) {
-            const stockText = this.product.stock_status === 'instock' ? 'En Stock' : 
-                           this.product.stock_status === 'outofstock' ? 'Agotado' : 
-                           this.product.stock_status === 'onbackorder' ? 'En Pedido' : 'No disponible';
-            specs.push({ label: 'Disponibilidad', value: stockText });
+            const stockText = this.product.stock_status === 'instock' ? (window.t ? window.t('product.in_stock') : 'En Stock') :
+                           this.product.stock_status === 'outofstock' ? (window.t ? window.t('product.out_of_stock') : 'Agotado') :
+                           this.product.stock_status === 'onbackorder' ? (window.t ? window.t('product.on_backorder') : 'En Pedido') : (window.t ? window.t('product.not_available') : 'No disponible');
+            specs.push({ label: window.t ? window.t('product.availability') : 'Disponibilidad', value: stockText });
         }
         
         return specs;
@@ -724,6 +734,11 @@ class ProductDetailPage {
         
         const productsHTML = products.map(product => this.createProductCard(product)).join('');
         this.relatedProductsGrid.innerHTML = productsHTML;
+
+        // Trigger translation system
+        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+            window.TranslationSystem.applyTranslations();
+        }
         // Section is already visible by default in HTML
         
         // Bind product card events
@@ -845,7 +860,7 @@ class ProductDetailPage {
     
     showAddToCartFeedback() {
         const originalText = this.addToCartBtn.innerHTML;
-        this.addToCartBtn.innerHTML = '<i class="fas fa-check"></i><span>¡Agregado!</span>';
+        this.addToCartBtn.innerHTML = `<i class="fas fa-check"></i><span>${window.t ? window.t('product.added_to_cart') : '¡Agregado!'}</span>`;
         this.addToCartBtn.disabled = true;
         
         setTimeout(() => {
@@ -944,11 +959,11 @@ class ProductDetailPage {
         this.addToCartBtn.disabled = !hasRequiredVariants || !isInStock;
         
         if (!isInStock) {
-            this.addToCartBtn.innerHTML = '<i class="fas fa-ban"></i><span>Agotado</span>';
+            this.addToCartBtn.innerHTML = `<i class="fas fa-ban"></i><span>${window.t ? window.t('product.out_of_stock_btn') : 'Agotado'}</span>`;
         } else if (!hasRequiredVariants) {
-            this.addToCartBtn.innerHTML = '<i class="fas fa-shopping-cart"></i><span>Selecciona opciones</span>';
+            this.addToCartBtn.innerHTML = `<i class="fas fa-shopping-cart"></i><span>${window.t ? window.t('product.select_options') : 'Selecciona opciones'}</span>`;
         } else {
-            this.addToCartBtn.innerHTML = '<i class="fas fa-shopping-cart"></i><span>Agregar al Carrito</span>';
+            this.addToCartBtn.innerHTML = `<i class="fas fa-shopping-cart"></i><span>${window.t ? window.t('product.add_to_cart') : 'Agregar al Carrito'}</span>`;
         }
     }
     

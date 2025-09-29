@@ -83,10 +83,16 @@ class HomeCategoriesLoader {
         
         this.categoriesGrid.innerHTML = html;
         this.hideLoading();
-        
+
+        // Trigger translation system to translate dynamic content
+        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+            console.log('🌐 Applying translations to home categories');
+            window.TranslationSystem.applyTranslations();
+        }
+
         // Bind click events
         this.bindCategoryEvents();
-        
+
         // Trigger animations
         setTimeout(() => {
             this.animateCards();
@@ -97,7 +103,8 @@ class HomeCategoriesLoader {
         const image = this.getCategoryImage(category);
         const badgeText = this.getBadgeText(category.count);
         const description = this.getCategoryDescription(category);
-        
+        const translationKey = this.getCategoryTranslationKey(category.name);
+
         return `
             <div class="modern-category-card fade-in delay-${Math.min(index + 1, 4)}" data-category-id="${category.id}">
                 <div class="modern-category-image">
@@ -105,10 +112,28 @@ class HomeCategoriesLoader {
                     ${badgeText ? `<div class="category-badge">${badgeText}</div>` : ''}
                 </div>
                 <div class="modern-category-content">
-                    <h3 class="modern-category-title">${category.name}</h3>
+                    <h3 class="modern-category-title" ${translationKey ? `data-translate="${translationKey}"` : ''}>${category.name}</h3>
                 </div>
             </div>
         `;
+    }
+
+    // Map category names to translation keys
+    getCategoryTranslationKey(categoryName) {
+        const mapping = {
+            'Joyería': 'categories.joyeria',
+            'Accesorios': 'categories.accesorios',
+            'BOLSAS DE MANO': 'categories.bolsas',
+            'BOLSAS TEXTIL Y PIEL': 'categories.bolsas',
+            'Bolsas Cruzadas': 'categories.bolsas',
+            'Cuadernos': 'categories.cuadernos',
+            'Decoración': 'categories.decoracion',
+            'Textiles': 'categories.textiles',
+            'Cerámica': 'categories.ceramica',
+            'Bolsas': 'categories.bolsas'
+        };
+
+        return mapping[categoryName] || null;
     }
     
     getCategoryImage(category) {

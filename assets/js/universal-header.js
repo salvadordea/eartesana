@@ -240,17 +240,42 @@ class UniversalHeader {
             
             if (categories && categories.length > 0) {
                 const categoriesHTML = categories.slice(0, 8).map(category => `
-                    <a href="${this.generateUrls().TIENDA_URL}?categoria=${category.id}" class="dropdown-link">
+                    <a href="${this.generateUrls().TIENDA_URL}?categoria=${category.id}" class="dropdown-link" ${this.getCategoryTranslationKey(category.name) ? `data-translate="${this.getCategoryTranslationKey(category.name)}"` : ''}>
                         ${category.name} (${category.count})
                     </a>
                 `).join('');
                 
                 dropdownCategories.innerHTML = categoriesHTML;
+
+                // Trigger translation system to translate dropdown categories
+                if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+                    console.log('🌐 Applying translations to header dropdown categories');
+                    window.TranslationSystem.applyTranslations();
+                }
+
                 console.log('📂 Categorías cargadas en dropdown del header');
             }
         } catch (error) {
             console.warn('⚠️ No se pudieron cargar categorías en header:', error.message);
         }
+    }
+
+    // Map category names to translation keys
+    getCategoryTranslationKey(categoryName) {
+        const mapping = {
+            'Joyería': 'categories.joyeria',
+            'Accesorios': 'categories.accesorios',
+            'BOLSAS DE MANO': 'categories.bolsas',
+            'BOLSAS TEXTIL Y PIEL': 'categories.bolsas',
+            'Bolsas Cruzadas': 'categories.bolsas',
+            'Cuadernos': 'categories.cuadernos',
+            'Decoración': 'categories.decoracion',
+            'Textiles': 'categories.textiles',
+            'Cerámica': 'categories.ceramica',
+            'Bolsas': 'categories.bolsas'
+        };
+
+        return mapping[categoryName] || null;
     }
 }
 

@@ -376,8 +376,8 @@ class TiendaSupabaseIntegration {
                     <div style="display: inline-block; margin-bottom: 20px;">
                         <div class="spinner" style="border: 3px solid #f3f3f3; border-top: 3px solid #333; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;"></div>
                     </div>
-                    <h3>Cargando productos de ${categoryName}...</h3>
-                    <p>Un momento por favor</p>
+                    <h3>${window.t ? window.t('shop.loading_products_category') : 'Cargando productos de'} ${categoryName}...</h3>
+                    <p>${window.t ? window.t('shop.please_wait') : 'Un momento por favor'}</p>
                 </div>
 
                 <style>
@@ -565,12 +565,18 @@ class TiendaSupabaseIntegration {
                              alt="${category.name}" loading="lazy">
                     </div>
                     <div class="category-info">
-                        <h3 class="category-name">${category.name}</h3>
+                        <h3 class="category-name" ${this.getCategoryTranslationKey(category.name) ? `data-translate="${this.getCategoryTranslationKey(category.name)}"` : ''}>${category.name}</h3>
                     </div>
                     ${badgeHTML}
                 </div>
             `;
         }).join('');
+
+        // Trigger translation system to translate dynamic content
+        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+            console.log('🌐 Applying translations to tienda categories');
+            window.TranslationSystem.applyTranslations();
+        }
 
         // Add event listeners to category cards
         this.attachCategoryCardListeners();
@@ -664,17 +670,41 @@ class TiendaSupabaseIntegration {
 
         filtersContainer.innerHTML = `
             <div class="category-filter ${!this.currentFilters.category ? 'active' : ''}" data-category="" onclick="tiendaIntegration.handleCategoryFilterClick('')">
-                <span class="category-filter-name">Todas las categorías</span>
+                <span class="category-filter-name" data-translate="categories.all">Todas las categorías</span>
                 <span class="category-count">${this.allProducts.length}</span>
             </div>
             ${categoriesWithProducts.map(category => `
                 <div class="category-filter ${this.currentFilters.category === category.name ? 'active' : ''}" 
                      data-category="${category.name}" onclick="tiendaIntegration.handleCategoryFilterClick('${category.name}')">
-                    <span class="category-filter-name">${category.name}</span>
+                    <span class="category-filter-name" ${this.getCategoryTranslationKey(category.name) ? `data-translate="${this.getCategoryTranslationKey(category.name)}"` : ''}>${category.name}</span>
                     <span class="category-count">${this.getProductCountForCategory(category.id)}</span>
                 </div>
             `).join('')}
         `;
+
+        // Trigger translation system to translate sidebar filters
+        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+            console.log('🌐 Applying translations to tienda sidebar filters');
+            window.TranslationSystem.applyTranslations();
+        }
+    }
+
+    // Map category names to translation keys
+    getCategoryTranslationKey(categoryName) {
+        const mapping = {
+            'Joyería': 'categories.joyeria',
+            'Accesorios': 'categories.accesorios',
+            'BOLSAS DE MANO': 'categories.bolsas',
+            'BOLSAS TEXTIL Y PIEL': 'categories.bolsas',
+            'Bolsas Cruzadas': 'categories.bolsas',
+            'Cuadernos': 'categories.cuadernos',
+            'Decoración': 'categories.decoracion',
+            'Textiles': 'categories.textiles',
+            'Cerámica': 'categories.ceramica',
+            'Bolsas': 'categories.bolsas'
+        };
+
+        return mapping[categoryName] || null;
     }
 
     getProductCountForCategory(categoryId) {
@@ -739,14 +769,14 @@ class TiendaSupabaseIntegration {
                 <div class="product-image">
                     <img src="${product.mainImage || 'assets/images/product-placeholder.jpg'}" 
                          alt="${product.name}" loading="lazy">
-                    ${product.onSale ? '<span class="sale-badge">En Oferta</span>' : ''}
-                    ${product.featured ? '<span class="featured-badge">Destacado</span>' : ''}
+                    ${product.onSale ? `<span class="sale-badge" data-translate="shop.sale">${window.t ? window.t('shop.sale') : 'En Oferta'}</span>` : ''}
+                    ${product.featured ? `<span class="featured-badge" data-translate="shop.featured">${window.t ? window.t('shop.featured') : 'Destacado'}</span>` : ''}
                 </div>
                 <div class="product-info">
                     <div class="product-categories">
                         ${product.category_id ? 
                             `<span class="product-category">${this.getCategoryNameById(product.category_id)}</span>` :
-                            `<span class="product-category">Sin categoría</span>`
+                            `<span class="product-category" data-translate="categories.uncategorized">${window.t ? window.t('categories.uncategorized') : 'Sin categoría'}</span>`
                         }
                     </div>
                     <h3 class="product-title">${product.name}</h3>
@@ -767,6 +797,12 @@ class TiendaSupabaseIntegration {
                 </div>
             </div>
         `).join('');
+
+        // Trigger translation system to translate product content
+        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+            console.log('🌐 Applying translations to products grid');
+            window.TranslationSystem.applyTranslations();
+        }
 
         productsGrid.style.display = 'grid';
     }
@@ -841,6 +877,13 @@ class TiendaSupabaseIntegration {
             }
 
             productsGrid.appendChild(fragment);
+
+            // Trigger translation system to translate newly added products
+            if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+                console.log('🌐 Applying translations to newly added products');
+                window.TranslationSystem.applyTranslations();
+            }
+
             productsGrid.style.display = 'grid';
 
             currentIndex = endIndex;
@@ -940,14 +983,16 @@ class TiendaSupabaseIntegration {
         if (product.onSale) {
             const saleBadge = document.createElement('span');
             saleBadge.className = 'sale-badge';
-            saleBadge.textContent = 'En Oferta';
+            saleBadge.setAttribute('data-translate', 'shop.sale');
+            saleBadge.textContent = window.t ? window.t('shop.sale') : 'En Oferta';
             imageDiv.appendChild(saleBadge);
         }
 
         if (product.featured) {
             const featuredBadge = document.createElement('span');
             featuredBadge.className = 'featured-badge';
-            featuredBadge.textContent = 'Destacado';
+            featuredBadge.setAttribute('data-translate', 'shop.featured');
+            featuredBadge.textContent = window.t ? window.t('shop.featured') : 'Destacado';
             imageDiv.appendChild(featuredBadge);
         }
 
@@ -960,8 +1005,12 @@ class TiendaSupabaseIntegration {
         categoryDiv.className = 'product-categories';
         const categorySpan = document.createElement('span');
         categorySpan.className = 'product-category';
-        categorySpan.textContent = product.category_id ?
-            this.getCategoryNameById(product.category_id) : 'Sin categoría';
+        if (product.category_id) {
+            categorySpan.textContent = this.getCategoryNameById(product.category_id);
+        } else {
+            categorySpan.setAttribute('data-translate', 'categories.uncategorized');
+            categorySpan.textContent = window.t ? window.t('categories.uncategorized') : 'Sin categoría';
+        }
         categoryDiv.appendChild(categorySpan);
 
         // Title
@@ -1007,7 +1056,8 @@ class TiendaSupabaseIntegration {
         // Add to Cart button
         const cartButton = document.createElement('button');
         cartButton.className = 'product-cart-btn';
-        cartButton.innerHTML = '<i class="fas fa-shopping-cart"></i> Agregar al Carrito';
+        cartButton.setAttribute('data-translate', 'shop.add_to_cart');
+        cartButton.innerHTML = `<i class="fas fa-shopping-cart"></i> ${window.t ? window.t('shop.add_to_cart') : 'Agregar al Carrito'}`;
 
         // Prevent card click when clicking cart button
         cartButton.onclick = (e) => {
@@ -1433,13 +1483,13 @@ class TiendaSupabaseIntegration {
         console.log(`✅ Final stock value: ${stock}`);
 
         if (stock === 0) {
-            return '<span class="stock-status out-of-stock"><i class="fas fa-times-circle"></i> Sin stock</span>';
+            return `<span class="stock-status out-of-stock" data-translate="shop.out_of_stock"><i class="fas fa-times-circle"></i> ${window.t ? window.t('shop.out_of_stock') : 'Sin stock'}</span>`;
         } else if (stock <= 3) {
-            return `<span class="stock-status low-stock"><i class="fas fa-exclamation-triangle"></i> Stock bajo (${stock})</span>`;
+            return `<span class="stock-status low-stock"><i class="fas fa-exclamation-triangle"></i> ${window.t ? window.t('shop.stock_low') : 'Stock bajo'} (${stock})</span>`;
         } else if (stock <= 10) {
-            return `<span class="stock-status medium-stock"><i class="fas fa-check-circle"></i> Disponible (${stock})</span>`;
+            return `<span class="stock-status medium-stock"><i class="fas fa-check-circle"></i> ${window.t ? window.t('shop.available') : 'Disponible'} (${stock})</span>`;
         } else {
-            return `<span class="stock-status in-stock"><i class="fas fa-check-circle"></i> En stock (${stock})</span>`;
+            return `<span class="stock-status in-stock" data-translate="shop.in_stock"><i class="fas fa-check-circle"></i> ${window.t ? window.t('shop.in_stock') : 'En stock'} (${stock})</span>`;
         }
     }
 

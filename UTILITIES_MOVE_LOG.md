@@ -137,6 +137,41 @@ tests/debug-woo.html
 
 All database-related files are now consolidated in the `sql/` directory.
 
+## Report JSON Files Move
+
+**Date:** 2025-09-29 (same session)
+**Action:** Moved historical report JSON files to `utilities/` directory
+
+### JSON Files Moved to utilities/
+- `migration-report.json` → `utilities/migration-report.json` (Migration processing report)
+- `improved-migration-report.json` → `utilities/improved-migration-report.json` (Updated migration report)
+- `variant-analysis-report.json` → `utilities/variant-analysis-report.json` (Product variant analysis)
+- `scraping_report.json` → `utilities/scraping_report.json` (Web scraping results)
+- `upload-report-2025-09-23T06-31-35-811Z.json` → `utilities/upload-report-2025-09-23T06-31-35-811Z.json` (File upload report)
+- `retry-report-2025-09-23T06-36-31-876Z.json` → `utilities/retry-report-2025-09-23T06-36-31-876Z.json` (Upload retry report)
+
+### JSON Files That Remained in Root
+Essential configuration files stayed in root:
+- `package.json` - NPM package configuration (required in root)
+- `package-lock.json` - NPM dependencies lock file (required in root)
+- `vercel.json` - Vercel deployment configuration (required in root)
+
+## Legacy HTML Files Move
+
+**Date:** 2025-09-29 (same session)
+**Action:** Moved legacy/duplicate HTML files and folders to `tests/` directory
+
+### Files/Folders Moved to tests/
+- `monedero_motita_page.html` → `tests/monedero_motita_page.html` (Legacy WordPress export page)
+- `mi-cuenta.html` → `tests/mi-cuenta.html` (Duplicate account page - `micuenta.html` is the active version)
+- `tienda/` → `tests/tienda/` (Redirect-only folder - redundant since `tienda.html` exists in root)
+
+### Analysis Results
+- **`micuenta.html`** - KEPT (Active account page, referenced throughout site)
+- **`mi-cuenta.html`** - MOVED (Alternative/duplicate implementation)
+- **`monedero_motita_page.html`** - MOVED (Legacy WordPress export with old URLs)
+- **`tienda/` folder** - MOVED (Contains only redirect files to main `tienda.html`)
+
 ## Notes
 
 - All utility scripts are one-time use or maintenance scripts

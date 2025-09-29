@@ -119,7 +119,29 @@
       "view_category": "Ver Categoría",
       "back_to_shop": "Volver a la tienda",
       "product_not_found": "Producto no encontrado",
-      "loading_error": "Error al cargar productos"
+      "loading_error": "Error al cargar productos",
+      "featured": "Destacado",
+      "stock_low": "Stock bajo",
+      "available": "Disponible",
+      "loading_products_category": "Cargando productos de",
+      "please_wait": "Un momento por favor"
+    },
+    "product": {
+      "category_label": "Categoría",
+      "product_label": "Producto",
+      "specifications": "Especificaciones",
+      "no_specifications": "No hay especificaciones disponibles.",
+      "availability": "Disponibilidad",
+      "category": "Categoría",
+      "tags": "Etiquetas",
+      "in_stock": "En Stock",
+      "out_of_stock": "Agotado",
+      "on_backorder": "En Pedido",
+      "not_available": "No disponible",
+      "added_to_cart": "¡Agregado!",
+      "select_options": "Selecciona opciones",
+      "add_to_cart": "Agregar al Carrito",
+      "out_of_stock_btn": "Agotado"
     },
     "categories": {
       "all": "Todas",
@@ -288,7 +310,29 @@
       "view_category": "View Category",
       "back_to_shop": "Back to shop",
       "product_not_found": "Product not found",
-      "loading_error": "Error loading products"
+      "loading_error": "Error loading products",
+      "featured": "Featured",
+      "stock_low": "Low stock",
+      "available": "Available",
+      "loading_products_category": "Loading products from",
+      "please_wait": "Please wait"
+    },
+    "product": {
+      "category_label": "Category",
+      "product_label": "Product",
+      "specifications": "Specifications",
+      "no_specifications": "No specifications available.",
+      "availability": "Availability",
+      "category": "Category",
+      "tags": "Tags",
+      "in_stock": "In Stock",
+      "out_of_stock": "Out of Stock",
+      "on_backorder": "On Backorder",
+      "not_available": "Not Available",
+      "added_to_cart": "Added!",
+      "select_options": "Select Options",
+      "add_to_cart": "Add to Cart",
+      "out_of_stock_btn": "Out of Stock"
     },
     "categories": {
       "all": "All",

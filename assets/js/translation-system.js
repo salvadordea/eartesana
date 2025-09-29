@@ -716,18 +716,18 @@ class TranslationSystem {
             }
 
             const href = link.getAttribute('href');
-            if (href && href.includes('index.html') || href === '#inicio') {
-                link.textContent = this.t('navigation.inicio');
+            if (href && (href.includes('index.html') || href === '#inicio')) {
+                link.textContent = this.t('navigation.inicio', 'INICIO');
             } else if (href && href.includes('tienda')) {
-                link.textContent = this.t('navigation.tienda');
+                link.textContent = this.t('navigation.tienda', 'TIENDA');
             } else if (href && href.includes('sobre-nosotros')) {
-                link.textContent = this.t('navigation.sobre_nosotros');
+                link.textContent = this.t('navigation.sobre_nosotros', 'SOBRE NOSOTROS');
             } else if (href && href.includes('mayoristas')) {
-                link.textContent = this.t('navigation.mayoristas');
+                link.textContent = this.t('navigation.mayoristas', 'MAYORISTAS');
             } else if (href && href.includes('contacto')) {
-                link.textContent = this.t('navigation.contacto');
-            } else if (href && href.includes('micuenta') || href.includes('mi-cuenta')) {
-                link.textContent = this.t('navigation.mi_cuenta');
+                link.textContent = this.t('navigation.contacto', 'CONTACTO');
+            } else if (href && (href.includes('micuenta') || href.includes('mi-cuenta'))) {
+                link.textContent = this.t('navigation.mi_cuenta', 'MI CUENTA');
             }
         });
     }

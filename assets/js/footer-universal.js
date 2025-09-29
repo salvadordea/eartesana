@@ -179,12 +179,18 @@ class UniversalFooter {
             
             // Inyectar el footer
             document.body.insertAdjacentHTML('beforeend', adjustedHTML);
-            
+
             console.log('✅ Footer universal cargado correctamente');
-            
+
             // Aplicar datos de contacto después de cargar
             setTimeout(() => {
                 this.applyContactData();
+
+                // Trigger translation system to translate footer if available
+                if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+                    console.log('🌐 Applying translations to footer');
+                    window.TranslationSystem.applyTranslations();
+                }
             }, 100);
             
         } catch (error) {
@@ -198,7 +204,15 @@ class UniversalFooter {
                     const altFooterHTML = await altResponse.text();
                     document.body.insertAdjacentHTML('beforeend', altFooterHTML);
                     console.log('✅ Footer cargado desde ruta alternativa');
-                    setTimeout(() => this.applyContactData(), 100);
+                    setTimeout(() => {
+                        this.applyContactData();
+
+                        // Trigger translation system to translate footer if available
+                        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+                            console.log('🌐 Applying translations to footer (alternative path)');
+                            window.TranslationSystem.applyTranslations();
+                        }
+                    }, 100);
                 } else {
                     throw new Error('Footer no encontrado en rutas alternativas');
                 }
