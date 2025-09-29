@@ -49,6 +49,7 @@ body {
 /* Images on the left - take up 2/3 of the space */
 .image-collage {
   order: -1; /* Move images to the left */
+  margin-top: 3rem; /* Add space after header */
 }
 
 .image-collage .collage-title {

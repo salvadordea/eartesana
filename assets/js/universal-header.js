@@ -66,7 +66,7 @@ class UniversalHeader {
         return {
             HOMEPAGE_URL: `${this.baseUrl}index.html`,
             TIENDA_URL: `${this.baseUrl}tienda.html`,
-            SOBRE_NOSOTROS_URL: `${this.baseUrl}sobre-nosotros/index.html`,
+            SOBRE_NOSOTROS_URL: `${this.baseUrl}pages/sobre-nosotros/index.html`,
             MAYORISTAS_URL: `${this.baseUrl}pages/mayoristas/index.html`,
             CONTACTO_URL: `${this.baseUrl}index.html#contacto`,
             REGISTRO_URL: `${this.baseUrl}index.html#registro`,
@@ -212,6 +212,18 @@ class UniversalHeader {
             // Timeout después de 10 segundos
             setTimeout(() => clearInterval(checkAPI), 10000);
         }
+
+        // Listen for language changes to coordinate with translation system
+        window.addEventListener('languageChanged', (event) => {
+            console.log('🌐 Universal Header: Language changed, reloading categories...');
+
+            // Wait a bit for translation system to finish, then reload categories
+            setTimeout(() => {
+                if (window.artesanaAPI) {
+                    this.loadCategoriesInDropdown();
+                }
+            }, 200);
+        });
 
         console.log('⚙️ Funcionalidad del header inicializada');
     }

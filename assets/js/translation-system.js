@@ -90,10 +90,6 @@ class TranslationSystem {
         toggle.className = 'language-toggle';
         toggle.setAttribute('aria-label', 'Language Selector');
         toggle.innerHTML = `
-            <div class="language-label">
-                <i class="fas fa-globe" aria-hidden="true"></i>
-                <span class="lang-text" data-translate="common.language">Language</span>
-            </div>
             <div class="language-buttons">
                 <button class="lang-btn ${this.currentLanguage === 'es' ? 'active' : ''}"
                         data-lang="es"
@@ -121,7 +117,20 @@ class TranslationSystem {
             }
         });
 
-        // Insert into header icons (more prominent position)
+        // Wait for header to be available and insert toggle
+        this.insertToggleIntoHeader(toggle);
+
+        // Add CSS styles
+        this.addToggleStyles();
+    }
+
+    /**
+     * Insert language toggle into header with retry mechanism
+     */
+    insertToggleIntoHeader(toggle, attempts = 0) {
+        const maxAttempts = 20; // Wait up to 10 seconds (500ms * 20)
+
+        // Try to find header icons
         const headerIcons = document.querySelector('.header-icons');
         if (headerIcons) {
             const langContainer = document.createElement('div');
@@ -130,22 +139,31 @@ class TranslationSystem {
 
             // Insert before the first icon
             headerIcons.insertBefore(langContainer, headerIcons.firstChild);
-        } else {
-            // Fallback - insert into navigation
-            const nav = document.querySelector('.nav-list');
-            if (nav) {
-                const langItem = document.createElement('li');
-                langItem.className = 'nav-item language-item';
-                langItem.appendChild(toggle);
-                nav.appendChild(langItem);
-            } else {
-                // Final fallback - add to body
-                document.body.appendChild(toggle);
-            }
+            console.log('✅ Language toggle added to header-icons');
+            return;
         }
 
-        // Add CSS styles
-        this.addToggleStyles();
+        // Try fallback - navigation
+        const nav = document.querySelector('.nav-list');
+        if (nav) {
+            const langItem = document.createElement('li');
+            langItem.className = 'nav-item language-item';
+            langItem.appendChild(toggle);
+            nav.appendChild(langItem);
+            console.log('✅ Language toggle added to navigation');
+            return;
+        }
+
+        // If header not ready yet, retry
+        if (attempts < maxAttempts) {
+            setTimeout(() => {
+                this.insertToggleIntoHeader(toggle, attempts + 1);
+            }, 500);
+        } else {
+            // Final fallback - add to body
+            console.warn('⚠️ Header not found after retries, adding toggle to body');
+            document.body.appendChild(toggle);
+        }
     }
 
     /**
@@ -687,6 +705,13 @@ class TranslationSystem {
         navLinks.forEach(link => {
             // Skip if element already has data-translate attribute (avoid double translation)
             if (link.hasAttribute('data-translate')) {
+                return;
+            }
+
+            // Skip dropdown category links (they are managed by universal header)
+            if (link.classList.contains('dropdown-link') ||
+                link.closest('.dropdown-categories') ||
+                link.closest('#dropdownCategories')) {
                 return;
             }
 
