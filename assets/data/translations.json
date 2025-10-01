@@ -55,8 +55,7 @@
       "location_label": "Ubicación",
       "phone_label": "Teléfono",
       "email_label": "Email",
-      "hours_label": "Horarios",
-      "full_contact_page": "Ver página completa de contacto"
+      "hours_label": "Horarios"
     },
     "footer": {
       "description": "Creamos productos artesanales únicos que honran la tradición mexicana con un enfoque contemporáneo y elegante.",

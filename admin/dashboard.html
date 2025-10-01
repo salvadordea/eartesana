@@ -1488,9 +1488,29 @@
 
                     <div class="promo-form">
                         <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" id="promoEnabled" style="width: auto; height: 20px; cursor: pointer;">
+                                <span>Activar Banner Promocional</span>
+                            </label>
+                            <small>Activa o desactiva el banner circular flotante</small>
+                        </div>
+
+                        <div class="form-group">
                             <label>Descuento Promocional</label>
                             <input type="text" id="promoDiscount" placeholder="25% OFF" class="form-control">
                             <small>Ej: 25% OFF, 50% DESCUENTO, OFERTA ESPECIAL</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Aclaración del Descuento <small style="color: #6c757d; font-weight: normal;">(opcional)</small></label>
+                            <input type="text" id="promoDisclaimer" placeholder="*en tu primera compra" class="form-control">
+                            <small>Texto pequeño que aparece debajo del descuento (ej: *en tu primera compra, *compras mayores a $500)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Fecha de Expiración <small style="color: #6c757d; font-weight: normal;">(opcional)</small></label>
+                            <input type="datetime-local" id="promoExpirationDate" class="form-control">
+                            <small>El banner se ocultará automáticamente después de esta fecha. Dejar vacío = sin expiración</small>
                         </div>
                     </div>
                 </div>
@@ -1526,22 +1546,22 @@
                     
                     <div class="contact-cards-form">
                         <div class="card-editor">
-                            <h4><i class="fas fa-map-marker-alt"></i> Ubicación</h4>
+                            <h4><i class="fas fa-map-marker-alt"></i> Ubicación <small style="color: #6c757d; font-weight: normal;">(opcional)</small></h4>
                             <input type="text" id="locationText" placeholder="Ciudad de México, México" class="form-control">
                         </div>
-                        
+
                         <div class="card-editor">
-                            <h4><i class="fas fa-phone"></i> Teléfono</h4>
+                            <h4><i class="fas fa-phone"></i> Teléfono <small style="color: #6c757d; font-weight: normal;">(opcional)</small></h4>
                             <input type="tel" id="phoneNumber" placeholder="+52 123 456 7890" class="form-control">
                         </div>
-                        
+
                         <div class="card-editor">
-                            <h4><i class="fas fa-envelope"></i> Email</h4>
+                            <h4><i class="fas fa-envelope"></i> Email <small style="color: #6c757d; font-weight: normal;">(opcional)</small></h4>
                             <input type="email" id="contactEmail" placeholder="info@estudioartesana.com" class="form-control">
                         </div>
-                        
+
                         <div class="card-editor">
-                            <h4><i class="fas fa-clock"></i> Horarios</h4>
+                            <h4><i class="fas fa-clock"></i> Horarios <small style="color: #6c757d; font-weight: normal;">(opcional)</small></h4>
                             <textarea id="businessHours" class="form-control" rows="3" placeholder="Lun - Vie: 9:00 AM - 6:00 PM&#10;Sáb: 10:00 AM - 4:00 PM"></textarea>
                         </div>
                     </div>
@@ -1558,6 +1578,9 @@
                 </button>
                 <button class="btn btn-warning" onclick="previewChanges()">
                     <i class="fas fa-eye"></i> Vista Previa
+                </button>
+                <button class="btn btn-info" onclick="openHomepage()" style="background: #17a2b8;">
+                    <i class="fas fa-external-link-alt"></i> Ver Sitio Web
                 </button>
             </div>
         </div>
@@ -1808,6 +1831,13 @@
                 item.classList.remove('active');
             });
             document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+
+            // Auto-load contact info when opening that section
+            if (sectionId === 'contacto') {
+                setTimeout(() => {
+                    loadContactInfoSilent();
+                }, 100);
+            }
 
             const titles = {
                 dashboard: 'Dashboard',
@@ -2268,11 +2298,60 @@
         }
 
         // ====== FUNCIONES PARA EDITOR DE CONTACTO ======
-        
-        // Cargar información de contacto actual desde index.html
+
+        // Silent version for auto-loading (no alert)
+        function loadContactInfoSilent() {
+            console.log('📞 Auto-cargando información de contacto...');
+
+            const defaultData = {
+                trustIcon1Text: 'Envío Gratis*',
+                trustIcon1Icon: 'fas fa-truck',
+                trustIcon2Text: 'Hecho a Mano',
+                trustIcon2Icon: 'fas fa-hand-holding-heart',
+                trustIcon3Text: 'Calidad Premium',
+                trustIcon3Icon: 'fas fa-shield-alt',
+                shippingDisclaimer: '*En compras superiores a $2,000.00',
+                promoEnabled: true,
+                promoDiscount: '25% OFF',
+                promoDisclaimer: '*en tu primera compra',
+                promoExpirationDate: null,
+                instagramUrl: '#',
+                facebookUrl: '#',
+                whatsappNumber: '+5212345678490',
+                locationText: 'Ciudad de México, México',
+                phoneNumber: '+52 123 456 7890',
+                contactEmail: 'info@estudioartesana.com',
+                businessHours: 'Lun - Vie: 9:00 AM - 6:00 PM\nSáb: 10:00 AM - 4:00 PM'
+            };
+
+            let dataToLoad = defaultData;
+            try {
+                const savedData = localStorage.getItem('contactInfo');
+                if (savedData) {
+                    const parsedData = JSON.parse(savedData);
+                    dataToLoad = { ...defaultData, ...parsedData };
+                    console.log('✅ Datos cargados desde localStorage');
+                }
+            } catch (error) {
+                console.error('❌ Error al cargar datos:', error);
+            }
+
+            Object.keys(dataToLoad).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (element.type === 'checkbox') {
+                        element.checked = dataToLoad[key] === true;
+                    } else {
+                        element.value = dataToLoad[key] || '';
+                    }
+                }
+            });
+        }
+
+        // Cargar información de contacto actual desde index.html (con confirmación)
         function loadContactInfo() {
-            console.log('📞 Cargando información de contacto actual...');
-            
+            console.log('📞 Cargando información de contacto guardada...');
+
             // Datos por defecto basados en index.html actual
             const defaultData = {
                 // Trust Icons
@@ -2285,7 +2364,10 @@
                 shippingDisclaimer: '*En compras superiores a $2,000.00',
 
                 // Promotional Banner
+                promoEnabled: true,
                 promoDiscount: '25% OFF',
+                promoDisclaimer: '*en tu primera compra',
+                promoExpirationDate: null,
 
                 // Social Media
                 instagramUrl: '#',
@@ -2298,16 +2380,41 @@
                 contactEmail: 'info@estudioartesana.com',
                 businessHours: 'Lun - Vie: 9:00 AM - 6:00 PM\nSáb: 10:00 AM - 4:00 PM'
             };
-            
-            // Llenar formulario con datos por defecto
-            Object.keys(defaultData).forEach(key => {
+
+            // Intentar cargar datos guardados desde localStorage
+            let dataToLoad = defaultData;
+            try {
+                const savedData = localStorage.getItem('contactInfo');
+                if (savedData) {
+                    const parsedData = JSON.parse(savedData);
+                    // Merge saved data with defaults (saved data takes priority)
+                    dataToLoad = { ...defaultData, ...parsedData };
+                    console.log('✅ Datos cargados desde localStorage:', dataToLoad);
+                } else {
+                    console.log('ℹ️ No hay datos guardados, usando valores por defecto');
+                }
+            } catch (error) {
+                console.error('❌ Error al cargar datos guardados:', error);
+                alert('⚠️ Error al cargar datos guardados. Usando valores por defecto.');
+            }
+
+            // Llenar formulario con los datos (guardados o por defecto)
+            Object.keys(dataToLoad).forEach(key => {
                 const element = document.getElementById(key);
                 if (element) {
-                    element.value = defaultData[key];
+                    if (element.type === 'checkbox') {
+                        element.checked = dataToLoad[key] === true;
+                    } else {
+                        element.value = dataToLoad[key] || '';
+                    }
                 }
             });
-            
-            alert('✅ Datos actuales cargados desde la configuración actual del sitio web');
+
+            const message = localStorage.getItem('contactInfo')
+                ? '✅ Datos cargados desde localStorage (últimos cambios guardados)'
+                : 'ℹ️ No hay datos guardados. Mostrando valores por defecto.';
+
+            alert(message);
         }
         
         // Guardar cambios - Aplicación automática
@@ -2323,7 +2430,10 @@
                 shippingDisclaimer: document.getElementById('shippingDisclaimer').value,
 
                 // Promotional Banner
+                promoEnabled: document.getElementById('promoEnabled').checked,
                 promoDiscount: document.getElementById('promoDiscount').value || '25% OFF',
+                promoDisclaimer: document.getElementById('promoDisclaimer').value || '',
+                promoExpirationDate: document.getElementById('promoExpirationDate').value || null,
 
                 // Social Media
                 instagramUrl: document.getElementById('instagramUrl').value,
@@ -2337,13 +2447,27 @@
                 businessHours: document.getElementById('businessHours').value
             };
             
-            // Validar campos obligatorios
-            const requiredFields = ['trustIcon1Text', 'trustIcon2Text', 'trustIcon3Text', 'locationText', 'phoneNumber', 'contactEmail'];
-            const missingFields = requiredFields.filter(field => !contactData[field].trim());
-            
+            // Validar solo campos críticos (trust icons son obligatorios)
+            const requiredFields = ['trustIcon1Text', 'trustIcon2Text', 'trustIcon3Text'];
+            const missingFields = requiredFields.filter(field => !contactData[field] || !contactData[field].trim());
+
             if (missingFields.length > 0) {
-                alert('❌ Por favor completa todos los campos obligatorios:\n' + missingFields.join(', '));
+                alert('❌ Por favor completa los 3 elementos de confianza (obligatorios)');
                 return;
+            }
+
+            // Advertencia si faltan datos de contacto (pero no bloquea)
+            const contactFields = {
+                'locationText': 'Ubicación',
+                'phoneNumber': 'Teléfono',
+                'contactEmail': 'Email'
+            };
+            const emptyContactFields = Object.keys(contactFields).filter(field => !contactData[field] || !contactData[field].trim());
+
+            if (emptyContactFields.length > 0) {
+                const missing = emptyContactFields.map(f => contactFields[f]).join(', ');
+                const proceed = confirm(`⚠️ ADVERTENCIA: Faltan campos de contacto:\n${missing}\n\n¿Deseas continuar de todas formas?`);
+                if (!proceed) return;
             }
             
             // Mostrar mensaje de confirmación
@@ -2402,13 +2526,13 @@
             const successMessage = `
 ✅ ¡CAMBIOS GUARDADOS EXITOSAMENTE!
 
-🔄 Los cambios se han aplicado automáticamente.
+🔄 Cambios guardados en localStorage.
 
-📱 Si tienes la página principal abierta en otra pestaña, 
-los cambios se reflejarán inmediatamente.
+📋 PARA VER LOS CAMBIOS:
+1. Haz clic en "Ver Sitio Web" (botón azul)
+2. Si ya tienes el sitio abierto, presiona F5 para recargar
 
-🌐 Si no, simplemente recarga la página principal 
-para ver los cambios aplicados.
+💡 Los cambios se aplican a: Footer y Badge de WhatsApp
 
 💾 Los cambios han sido guardados permanentemente.`;
             
@@ -2418,6 +2542,15 @@ para ver los cambios aplicados.
         }
         
         // Vista previa de cambios
+        function openHomepage() {
+            // Open homepage in a new tab (or focus existing tab)
+            const homepageUrl = window.location.origin + window.location.pathname.replace('/admin/dashboard.html', '/index.html');
+            window.open(homepageUrl, 'homepage');
+
+            // Show info message
+            alert('🌐 Abriendo el sitio web...\n\n💡 Tip: Los cambios ya están guardados en localStorage.\nSi no ves los cambios, presiona F5 para recargar la página.');
+        }
+
         function previewChanges() {
             const previewData = {
                 trustIcon1Text: document.getElementById('trustIcon1Text').value || 'Envío Gratis*',

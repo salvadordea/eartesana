@@ -24,7 +24,10 @@
 
     <!-- Monthly Promotion Banner -->
     <div class="monthly-promo-banner" id="monthlyPromoBanner">
-        <span class="promo-discount">25% OFF</span>
+        <div class="promo-content">
+            <span class="promo-discount" id="promoDiscount">25% OFF</span>
+            <span class="promo-disclaimer" id="promoDisclaimer">*en tu primera compra</span>
+        </div>
         <button class="promo-close" onclick="closePromoBanner()">&times;</button>
     </div>
 
@@ -140,13 +143,13 @@
                     <div class="hero-social">
                         <span class="social-label">Síguenos</span>
                         <div class="social-links">
-                            <a href="#" class="social-link" aria-label="Instagram">
+                            <a href="#" class="social-link" id="heroInstagramLink" aria-label="Instagram">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="#" class="social-link" aria-label="Facebook">
+                            <a href="#" class="social-link" id="heroFacebookLink" aria-label="Facebook">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="#" class="social-link" aria-label="WhatsApp">
+                            <a href="#" class="social-link" id="heroWhatsAppLink" aria-label="WhatsApp">
                                 <i class="fab fa-whatsapp"></i>
                             </a>
                         </div>
@@ -307,7 +310,7 @@
                             </div>
                             <div class="info-content-home">
                                 <h3 data-translate="contact.location_label">Ubicación</h3>
-                                <p data-translate="contact.location">Ciudad de México, México</p>
+                                <p id="contactLocationText">Ciudad de México, México</p>
                             </div>
                         </div>
 
@@ -317,7 +320,7 @@
                             </div>
                             <div class="info-content-home">
                                 <h3 data-translate="contact.phone_label">Teléfono</h3>
-                                <p><a href="tel:+5212345678490">+52 123 456 7890</a></p>
+                                <p><a href="tel:+5212345678490" id="contactPhoneLink">+52 123 456 7890</a></p>
                             </div>
                         </div>
 
@@ -327,7 +330,7 @@
                             </div>
                             <div class="info-content-home">
                                 <h3 data-translate="contact.email_label">Email</h3>
-                                <p><a href="mailto:info@estudioartesana.com">info@estudioartesana.com</a></p>
+                                <p><a href="mailto:info@estudioartesana.com" id="contactEmailLink">info@estudioartesana.com</a></p>
                             </div>
                         </div>
 
@@ -337,13 +340,9 @@
                             </div>
                             <div class="info-content-home">
                                 <h3 data-translate="contact.hours_label">Horarios</h3>
-                                <p data-translate="contact.hours">Lun - Vie: 9:00 AM - 6:00 PM<br>Sáb: 10:00 AM - 4:00 PM</p>
+                                <p id="contactBusinessHours">Lun - Vie: 9:00 AM - 6:00 PM<br>Sáb: 10:00 AM - 4:00 PM</p>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="contact-cta">
-                        <a href="pages/contacto/index.html" class="btn-secondary full-contact" data-translate="contact.full_contact_page">Ver página completa de contacto</a>
                     </div>
                 </div>
             </div>

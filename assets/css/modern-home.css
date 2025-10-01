@@ -763,6 +763,14 @@ body {
     font-weight: 400;
 }
 
+.monthly-promo-banner .promo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
 .monthly-promo-banner .promo-discount {
     display: block;
     font-size: 1.4rem;
@@ -774,6 +782,17 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.monthly-promo-banner .promo-disclaimer {
+    display: block;
+    font-size: 0.55rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    line-height: 1.2;
+    margin-top: 2px;
+    font-style: italic;
 }
 
 .monthly-promo-banner .promo-close {
@@ -833,7 +852,11 @@ body {
     .monthly-promo-banner .promo-discount {
         font-size: 1.1rem;
     }
-    
+
+    .monthly-promo-banner .promo-disclaimer {
+        font-size: 0.5rem;
+    }
+
     .monthly-promo-banner .promo-close {
         width: 18px;
         height: 18px;
@@ -859,7 +882,11 @@ body {
     .monthly-promo-banner .promo-discount {
         font-size: 1rem;
     }
-    
+
+    .monthly-promo-banner .promo-disclaimer {
+        font-size: 0.45rem;
+    }
+
     .monthly-promo-banner .promo-close {
         width: 16px;
         height: 16px;

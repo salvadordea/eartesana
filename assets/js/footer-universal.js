@@ -101,23 +101,35 @@ class UniversalFooter {
      * Aplicar datos de redes sociales al footer
      */
     applySocialMediaToFooter(data) {
-        // Facebook
-        const facebookLink = document.querySelector('footer .social-links a[aria-label="Facebook"]');
+        // Helper function to ensure URL has protocol
+        const ensureProtocol = (url) => {
+            if (!url || url === '#') return '#';
+            if (url.startsWith('http://') || url.startsWith('https://')) {
+                return url;
+            }
+            return `https://${url}`;
+        };
+
+        // Facebook - using new footer IDs
+        const facebookLink = document.getElementById('footerFacebookLink');
         if (facebookLink && data.facebookUrl) {
-            facebookLink.href = data.facebookUrl;
+            facebookLink.href = ensureProtocol(data.facebookUrl);
+            console.log('✅ Facebook actualizado:', data.facebookUrl);
         }
-        
-        // Instagram
-        const instagramLink = document.querySelector('footer .social-links a[aria-label="Instagram"]');
+
+        // Instagram - using new footer IDs
+        const instagramLink = document.getElementById('footerInstagramLink');
         if (instagramLink && data.instagramUrl) {
-            instagramLink.href = data.instagramUrl;
+            instagramLink.href = ensureProtocol(data.instagramUrl);
+            console.log('✅ Instagram actualizado:', data.instagramUrl);
         }
-        
-        // WhatsApp
-        const whatsappLink = document.querySelector('footer .social-links a[aria-label="WhatsApp"]');
+
+        // WhatsApp - using new footer IDs
+        const whatsappLink = document.getElementById('footerWhatsAppLink');
         if (whatsappLink && data.whatsappNumber) {
             const cleanNumber = data.whatsappNumber.replace(/[^\d]/g, '');
             whatsappLink.href = `https://wa.me/${cleanNumber}`;
+            console.log('✅ WhatsApp footer actualizado:', data.whatsappNumber);
         }
     }
     
@@ -125,41 +137,37 @@ class UniversalFooter {
      * Aplicar información de contacto al footer
      */
     applyContactInfoToFooter(data) {
-        // Email
-        const emailLink = document.querySelector('footer .footer-contact a[href^="mailto:"]');
+        // Email - using new footer IDs
+        const emailLink = document.getElementById('footerEmailLink');
         if (emailLink && data.contactEmail) {
             emailLink.href = `mailto:${data.contactEmail}`;
             emailLink.textContent = data.contactEmail;
+            console.log('✅ Email actualizado:', data.contactEmail);
         }
-        
-        // Teléfono
-        const phoneLink = document.querySelector('footer .footer-contact a[href^="tel:"]');
+
+        // Teléfono - using new footer IDs
+        const phoneLink = document.getElementById('footerPhoneLink');
         if (phoneLink && data.phoneNumber) {
             const cleanPhone = data.phoneNumber.replace(/[^\d+]/g, '');
             phoneLink.href = `tel:${cleanPhone}`;
             phoneLink.textContent = data.phoneNumber;
+            console.log('✅ Teléfono actualizado:', data.phoneNumber);
         }
-        
-        // Ubicación
-        const locationElement = document.querySelector('footer .footer-contact .contact-item .contact-text');
-        if (locationElement && data.locationText) {
-            // Verificar que sea el elemento de ubicación
-            const locationItem = locationElement.closest('.contact-item');
-            if (locationItem && locationItem.querySelector('i.fa-map-marker-alt')) {
-                locationElement.textContent = data.locationText;
-            }
+
+        // Ubicación - using new footer IDs
+        const locationText = document.getElementById('footerLocationText');
+        if (locationText && data.locationText) {
+            locationText.textContent = data.locationText;
+            console.log('✅ Ubicación actualizada:', data.locationText);
         }
-        
-        // Horarios
-        const hoursElements = document.querySelectorAll('footer .footer-contact .contact-item .contact-text');
-        hoursElements.forEach(element => {
-            const hoursItem = element.closest('.contact-item');
-            if (hoursItem && hoursItem.querySelector('i.fa-clock')) {
-                if (data.businessHours) {
-                    element.innerHTML = data.businessHours.replace(/\n/g, '<br>');
-                }
-            }
-        });
+
+        // Horarios - using new footer IDs
+        const businessHours = document.getElementById('footerBusinessHours');
+        if (businessHours && data.businessHours) {
+            const hours = data.businessHours.split('\n');
+            businessHours.innerHTML = hours.map(hour => `<span>${hour}</span>`).join('');
+            console.log('✅ Horarios actualizados');
+        }
     }
     
     /**

@@ -18,7 +18,10 @@ class ContactDataLoader {
             shippingDisclaimer: '*En compras superiores a $2,000.00',
 
             // Promotional Banner
+            promoEnabled: true,
             promoDiscount: '25% OFF',
+            promoDisclaimer: '*en tu primera compra',
+            promoExpirationDate: null,
 
             // Social Media
             instagramUrl: '#',
@@ -96,10 +99,52 @@ class ContactDataLoader {
      * Aplicar descuento promocional
      */
     applyPromoDiscount(data) {
-        const promoDiscountElement = document.querySelector('.promo-discount');
+        const promoBanner = document.getElementById('monthlyPromoBanner');
+
+        // Check if promo is enabled
+        const isEnabled = data.promoEnabled !== false; // Default to true if not specified
+
+        // Check if promo has expired
+        let isExpired = false;
+        if (data.promoExpirationDate) {
+            const expirationDate = new Date(data.promoExpirationDate);
+            const now = new Date();
+            isExpired = now > expirationDate;
+        }
+
+        // Show or hide banner based on enabled status and expiration
+        if (promoBanner) {
+            if (isEnabled && !isExpired) {
+                promoBanner.style.display = 'flex';
+                console.log('✅ Banner promocional activado');
+            } else {
+                promoBanner.style.display = 'none';
+                if (isExpired) {
+                    console.log('⏰ Banner promocional expirado');
+                } else {
+                    console.log('🚫 Banner promocional desactivado');
+                }
+                return; // Don't update content if hidden
+            }
+        }
+
+        // Update discount text
+        const promoDiscountElement = document.getElementById('promoDiscount') || document.querySelector('.promo-discount');
         if (promoDiscountElement && data.promoDiscount) {
             promoDiscountElement.textContent = data.promoDiscount;
         }
+
+        // Update disclaimer text (if provided)
+        const promoDisclaimerElement = document.getElementById('promoDisclaimer') || document.querySelector('.promo-disclaimer');
+        if (promoDisclaimerElement) {
+            if (data.promoDisclaimer) {
+                promoDisclaimerElement.textContent = data.promoDisclaimer;
+                promoDisclaimerElement.style.display = 'block';
+            } else {
+                promoDisclaimerElement.style.display = 'none';
+            }
+        }
+
         console.log('✅ Descuento promocional actualizado');
     }
 
@@ -107,24 +152,32 @@ class ContactDataLoader {
      * Aplicar datos de redes sociales
      */
     applySocialMedia(data) {
-        // Instagram
-        const instagramLink = document.querySelector('.social-link[aria-label="Instagram"]');
-        if (instagramLink && data.instagramUrl) {
-            instagramLink.href = data.instagramUrl;
+        // Helper function to ensure URL has protocol
+        const ensureProtocol = (url) => {
+            if (!url || url === '#') return '#';
+            if (url.startsWith('http://') || url.startsWith('https://')) {
+                return url;
+            }
+            return `https://${url}`;
+        };
+
+        // Instagram - Hero section
+        const heroInstagramLink = document.getElementById('heroInstagramLink');
+        if (heroInstagramLink && data.instagramUrl) {
+            heroInstagramLink.href = ensureProtocol(data.instagramUrl);
         }
 
-        // Facebook
-        const facebookLink = document.querySelector('.social-link[aria-label="Facebook"]');
-        if (facebookLink && data.facebookUrl) {
-            facebookLink.href = data.facebookUrl;
+        // Facebook - Hero section
+        const heroFacebookLink = document.getElementById('heroFacebookLink');
+        if (heroFacebookLink && data.facebookUrl) {
+            heroFacebookLink.href = ensureProtocol(data.facebookUrl);
         }
 
-        // WhatsApp - crear enlace correcto
-        const whatsappLink = document.querySelector('.social-link[aria-label="WhatsApp"]');
-        if (whatsappLink && data.whatsappNumber) {
-            // Limpiar número y crear enlace de WhatsApp
+        // WhatsApp - Hero section
+        const heroWhatsAppLink = document.getElementById('heroWhatsAppLink');
+        if (heroWhatsAppLink && data.whatsappNumber) {
             const cleanNumber = data.whatsappNumber.replace(/[^\d]/g, '');
-            whatsappLink.href = `https://wa.me/${cleanNumber}`;
+            heroWhatsAppLink.href = `https://wa.me/${cleanNumber}`;
         }
 
         console.log('✅ Enlaces de redes sociales actualizados');
@@ -134,37 +187,32 @@ class ContactDataLoader {
      * Aplicar datos de las tarjetas de contacto
      */
     applyContactCards(data) {
-        // Ubicación
-        const locationCard = document.querySelector('.info-card-home:nth-child(1) .info-content-home p');
-        if (locationCard && data.locationText) {
-            locationCard.textContent = data.locationText;
+        // Ubicación - using ID for consistent access
+        const locationText = document.getElementById('contactLocationText');
+        if (locationText && data.locationText) {
+            locationText.textContent = data.locationText;
         }
 
-        // Teléfono
-        const phoneCard = document.querySelector('.info-card-home:nth-child(2) .info-content-home p a');
-        const phoneText = document.querySelector('.info-card-home:nth-child(2) .info-content-home p');
-        if (phoneCard && data.phoneNumber) {
-            phoneCard.href = `tel:${data.phoneNumber.replace(/[^\d+]/g, '')}`;
-            phoneCard.textContent = data.phoneNumber;
-        } else if (phoneText && data.phoneNumber) {
-            phoneText.innerHTML = `<a href="tel:${data.phoneNumber.replace(/[^\d+]/g, '')}">${data.phoneNumber}</a>`;
+        // Teléfono - using ID for consistent access
+        const phoneLink = document.getElementById('contactPhoneLink');
+        if (phoneLink && data.phoneNumber) {
+            const cleanPhone = data.phoneNumber.replace(/[^\d+]/g, '');
+            phoneLink.href = `tel:${cleanPhone}`;
+            phoneLink.textContent = data.phoneNumber;
         }
 
-        // Email
-        const emailCard = document.querySelector('.info-card-home:nth-child(3) .info-content-home p a');
-        const emailText = document.querySelector('.info-card-home:nth-child(3) .info-content-home p');
-        if (emailCard && data.contactEmail) {
-            emailCard.href = `mailto:${data.contactEmail}`;
-            emailCard.textContent = data.contactEmail;
-        } else if (emailText && data.contactEmail) {
-            emailText.innerHTML = `<a href="mailto:${data.contactEmail}">${data.contactEmail}</a>`;
+        // Email - using ID for consistent access
+        const emailLink = document.getElementById('contactEmailLink');
+        if (emailLink && data.contactEmail) {
+            emailLink.href = `mailto:${data.contactEmail}`;
+            emailLink.textContent = data.contactEmail;
         }
 
-        // Horarios
-        const hoursCard = document.querySelector('.info-card-home:nth-child(4) .info-content-home p');
-        if (hoursCard && data.businessHours) {
+        // Horarios - using ID for consistent access
+        const businessHours = document.getElementById('contactBusinessHours');
+        if (businessHours && data.businessHours) {
             // Convertir \n a <br> para mostrar correctamente
-            hoursCard.innerHTML = data.businessHours.replace(/\n/g, '<br>');
+            businessHours.innerHTML = data.businessHours.replace(/\n/g, '<br>');
         }
 
         console.log('✅ Tarjetas de contacto actualizadas');
