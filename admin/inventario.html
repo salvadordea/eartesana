@@ -132,7 +132,7 @@
 
         .filters-row {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 200px;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 20px;
             align-items: end;
         }
@@ -1025,17 +1025,23 @@
                     <label class="filter-label">Estado de Stock</label>
                     <select class="filter-input" id="stockFilter">
                         <option value="">Todos</option>
-                        <option value="high">Stock Alto</option>
-                        <option value="medium">Stock Medio</option>
-                        <option value="low">Stock Bajo</option>
-                        <option value="out">Sin Stock</option>
+                        <option value="high">Stock Alto (≥20)</option>
+                        <option value="medium">Stock Medio (5-19)</option>
+                        <option value="low">Stock Bajo (1-4)</option>
+                        <option value="out">Sin Stock (0)</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label class="filter-label">&nbsp;</label>
-                    <button class="btn btn-primary" onclick="applyFilters()">
-                        <i class="fas fa-search"></i> Filtrar
-                    </button>
+                    <label class="filter-label">Ordenar Por</label>
+                    <select class="filter-input" id="sortFilter">
+                        <option value="category">Categoría</option>
+                        <option value="name-asc">Nombre (A-Z)</option>
+                        <option value="name-desc">Nombre (Z-A)</option>
+                        <option value="price-asc">Precio (Menor a Mayor)</option>
+                        <option value="price-desc">Precio (Mayor a Menor)</option>
+                        <option value="stock-asc">Stock (Menor a Mayor)</option>
+                        <option value="stock-desc">Stock (Mayor a Menor)</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -1325,6 +1331,7 @@
             document.getElementById('searchInput').addEventListener('input', debounce(applyFilters, 300));
             document.getElementById('categoryFilter').addEventListener('change', applyFilters);
             document.getElementById('stockFilter').addEventListener('change', applyFilters);
+            document.getElementById('sortFilter').addEventListener('change', applyFilters);
 
             // Cerrar modal al hacer clic fuera
             document.getElementById('modalOverlay').addEventListener('click', function(e) {
@@ -1402,7 +1409,10 @@
 
                 currentProducts = products;
                 filteredProducts = products;
-                renderProductsTable();
+
+                // Apply default sorting (by category)
+                applyFilters();
+
                 updateDashboardStats();
 
                 // Restore expanded variants state after table rebuild
@@ -1808,11 +1818,11 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Peso (gramos)</label>
-                                <input type="number" class="form-input" id="productWeight" min="0" placeholder="Peso en gramos">
+                                <input type="number" class="form-input" id="productWeight" min="0" placeholder="Peso en gramos para envío">
                             </div>
                             <div class="form-group full-width">
-                                <label class="form-label">Medidas</label>
-                                <input type="text" class="form-input" id="productDimensions" placeholder="Ej: 20cm x 15cm x 5cm">
+                                <label class="form-label">Dimensiones</label>
+                                <input type="text" class="form-input" id="productDimensions" placeholder="Ej: 20cm x 15cm x 5cm (para cálculo de envío)">
                             </div>
                             <div class="form-group full-width">
                                 <label class="form-label">Imagen del Producto</label>
@@ -1895,11 +1905,11 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Peso (gramos)</label>
-                                <input type="number" class="form-input" id="productWeight" min="0" value="${product.weight || ''}" placeholder="Peso en gramos">
+                                <input type="number" class="form-input" id="productWeight" min="0" value="${product.weight || ''}" placeholder="Peso en gramos para envío">
                             </div>
                             <div class="form-group full-width">
-                                <label class="form-label">Medidas</label>
-                                <input type="text" class="form-input" id="productDimensions" value="${product.dimensions || ''}" placeholder="Ej: 20cm x 15cm x 5cm">
+                                <label class="form-label">Dimensiones</label>
+                                <input type="text" class="form-input" id="productDimensions" value="${product.dimensions || ''}" placeholder="Ej: 20cm x 15cm x 5cm (para cálculo de envío)">
                             </div>
                             <div class="form-group full-width">
                                 <label class="form-label">Imagen del Producto</label>
@@ -1952,9 +1962,9 @@
                     price: parseFloat(document.getElementById('productPrice').value),
                     short_description: document.getElementById('productShortDesc').value.trim(),
                     description: document.getElementById('productDescription').value.trim(),
-                    sku: document.getElementById('productSku').value.trim(),
+                    sku: document.getElementById('productSku').value.trim() || null,
                     weight: document.getElementById('productWeight').value ? parseInt(document.getElementById('productWeight').value) : null,
-                    dimensions: document.getElementById('productDimensions').value.trim()
+                    dimensions: document.getElementById('productDimensions').value.trim() || null
                 };
 
                 // Generar slug desde el nombre
@@ -2303,16 +2313,18 @@
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const categoryFilter = document.getElementById('categoryFilter').value;
             const stockFilter = document.getElementById('stockFilter').value;
+            const sortOption = document.getElementById('sortFilter').value;
 
+            // Filtrar productos
             filteredProducts = currentProducts.filter(product => {
                 // Filtro de búsqueda
-                const matchesSearch = !searchTerm || 
+                const matchesSearch = !searchTerm ||
                     product.name.toLowerCase().includes(searchTerm) ||
                     (product.description || '').toLowerCase().includes(searchTerm) ||
                     (product.slug || '').toLowerCase().includes(searchTerm);
 
                 // Filtro de categoría
-                const matchesCategory = !categoryFilter || 
+                const matchesCategory = !categoryFilter ||
                     product.categories.some(cat => cat.id.toString() === categoryFilter);
 
                 // Filtro de stock
@@ -2330,7 +2342,59 @@
                 return matchesSearch && matchesCategory && matchesStock;
             });
 
+            // Ordenar productos
+            sortProducts(sortOption);
+
             renderProductsTable();
+        }
+
+        function sortProducts(sortOption) {
+            switch (sortOption) {
+                case 'category':
+                    // Ordenar por categoría (primera categoría alfabéticamente), luego por nombre
+                    filteredProducts.sort((a, b) => {
+                        const categoryA = a.categories[0]?.name || 'Sin categoría';
+                        const categoryB = b.categories[0]?.name || 'Sin categoría';
+                        const catCompare = categoryA.localeCompare(categoryB);
+                        if (catCompare !== 0) return catCompare;
+                        return a.name.localeCompare(b.name);
+                    });
+                    break;
+
+                case 'name-asc':
+                    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+
+                case 'name-desc':
+                    filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+
+                case 'price-asc':
+                    filteredProducts.sort((a, b) => (a.price || 0) - (b.price || 0));
+                    break;
+
+                case 'price-desc':
+                    filteredProducts.sort((a, b) => (b.price || 0) - (a.price || 0));
+                    break;
+
+                case 'stock-asc':
+                    filteredProducts.sort((a, b) => (a.total_stock || 0) - (b.total_stock || 0));
+                    break;
+
+                case 'stock-desc':
+                    filteredProducts.sort((a, b) => (b.total_stock || 0) - (a.total_stock || 0));
+                    break;
+
+                default:
+                    // Por defecto: categoría
+                    filteredProducts.sort((a, b) => {
+                        const categoryA = a.categories[0]?.name || 'Sin categoría';
+                        const categoryB = b.categories[0]?.name || 'Sin categoría';
+                        const catCompare = categoryA.localeCompare(categoryB);
+                        if (catCompare !== 0) return catCompare;
+                        return a.name.localeCompare(b.name);
+                    });
+            }
         }
 
         function toggleProductSelection(productId) {
@@ -2385,10 +2449,10 @@
             try {
                 // Crear cabeceras CSV
                 const headers = [
-                    'ID', 'Nombre', 'Precio', 'Descripción Corta', 'Descripción', 
-                    'SKU', 'Stock Total', 'Categorías', 'Peso', 'Dimensiones', 'Estado'
+                    'ID', 'Nombre', 'Precio', 'Descripción Corta', 'Descripción',
+                    'SKU', 'Stock Total', 'Peso (g)', 'Dimensiones', 'Categorías', 'Estado'
                 ];
-                
+
                 // Crear filas de datos
                 const rows = filteredProducts.map(product => [
                     product.id,
@@ -2398,9 +2462,9 @@
                     `"${(product.description || '').replace(/"/g, '""').replace(/\n/g, ' ')}"`,
                     product.sku || '',
                     product.total_stock || 0,
-                    `"${product.categories.map(c => c.name).join(', ')}"`,
                     product.weight || '',
                     product.dimensions || '',
+                    `"${product.categories.map(c => c.name).join(', ')}"`,
                     product.status || 'active'
                 ]);
                 

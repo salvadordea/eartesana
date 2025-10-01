@@ -16,7 +16,7 @@ CREATE TABLE categories (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 2. TABLA DE PRODUCTOS  
+-- 2. TABLA DE PRODUCTOS
 CREATE TABLE products (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -35,6 +35,12 @@ CREATE TABLE products (
     average_rating DECIMAL(2,1) DEFAULT 4.8,
     main_image_url TEXT,
     permalink TEXT,
+
+    -- Campos para envío y logística
+    sku VARCHAR(100), -- Stock Keeping Unit
+    weight INTEGER, -- Peso en gramos
+    dimensions VARCHAR(100), -- Dimensiones (ej: "20cm x 15cm x 5cm")
+
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
