@@ -122,10 +122,16 @@ class UniversalHeader {
             if (headerContainer) {
                 headerContainer.innerHTML = headerHtml;
                 console.log('✅ Header cargado exitosamente');
-                
+
                 // Inicializar funcionalidad del header
                 this.initializeHeaderFunctionality();
-                
+
+                // Trigger translation system to translate header
+                if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+                    console.log('🌐 Applying translations to universal header');
+                    window.TranslationSystem.applyTranslations();
+                }
+
             } else {
                 console.error('❌ No se encontró el contenedor #universal-header-container');
             }

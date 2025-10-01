@@ -57,6 +57,7 @@ body {
     align-items: center;
     padding: 18px 0;
     position: relative;
+    gap: 30px; /* Add space between logo and navigation */
 }
 
 .logo {
@@ -245,6 +246,11 @@ body {
     gap: 15px;
 }
 
+/* Language toggle spacing */
+.header-icons .language-selector-container {
+    margin-right: 20px; /* Push language toggle more to the right */
+}
+
 .header-icon {
     background: none;
     border: none;
@@ -253,10 +259,20 @@ body {
     cursor: pointer;
     transition: var(--transition);
     text-decoration: none;
+    position: relative;
 }
 
 .header-icon:hover {
     color: var(--secondary-color);
+}
+
+/* Cart icon specific styling - ensure visibility on light backgrounds */
+.cart-icon {
+    color: #2c2c2c !important;
+}
+
+.cart-icon:hover {
+    color: #C0C0C0 !important;
 }
 
 .mobile-menu-toggle {

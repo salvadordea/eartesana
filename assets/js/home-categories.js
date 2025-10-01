@@ -243,8 +243,8 @@ class HomeCategoriesLoader {
                 const category = this.categories.find(cat => cat.id == categoryId);
                 
                 if (category) {
-                    // Navigate to shop with category filter using slug for better SEO
-                    window.location.href = `${this.getTiendaPath()}?categoria=${category.slug}&nombre=${encodeURIComponent(category.name)}`;
+                    // Navigate to shop with category filter using name
+                    window.location.href = `${this.getTiendaPath()}?category=${encodeURIComponent(category.name)}`;
                 } else {
                     // Fallback to general shop page
                     window.location.href = this.getTiendaPath();

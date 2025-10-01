@@ -82,6 +82,12 @@ class TiendaSupabaseIntegration {
 
                 console.log('🚀 Tienda inicializada instantáneamente desde caché');
 
+                // Apply URL filters if present
+                if (this.currentFilters.category || this.currentFilters.search) {
+                    console.log('🔍 Aplicando filtros desde URL:', this.currentFilters);
+                    this.renderProducts();
+                }
+
                 // Start preloading popular categories in background
                 this.preloadPopularCategories();
 
@@ -107,6 +113,12 @@ class TiendaSupabaseIntegration {
                 this.executePendingActions();
 
                 console.log('✅ Tienda inicializada correctamente con datos frescos');
+
+                // Apply URL filters if present
+                if (this.currentFilters.category || this.currentFilters.search) {
+                    console.log('🔍 Aplicando filtros desde URL:', this.currentFilters);
+                    this.renderProducts();
+                }
 
                 // Start preloading popular categories in background
                 this.preloadPopularCategories();
@@ -735,8 +747,15 @@ class TiendaSupabaseIntegration {
         const productsGrid = document.getElementById('productsGrid');
         const productsLoading = document.getElementById('productsLoading');
         const productsResults = document.getElementById('productsResults');
-        
+
         if (!productsGrid) return;
+
+        // Hide categories grid if a category filter is active
+        if (this.currentFilters.category || this.currentFilters.search) {
+            this.hideCategoriesWithAnimation();
+        } else {
+            this.showCategoriesWithAnimation();
+        }
 
         // Aplicar filtros
         let filteredProducts = this.applyFilters(this.allProducts);

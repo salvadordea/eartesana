@@ -6,6 +6,7 @@
     <title>Estudio Artesana - Legado ancestral transformado en diseño</title>
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/modern-home.css">
+    <link rel="stylesheet" href="assets/css/cart.css">
     <link rel="stylesheet" href="assets/css/whatsapp-badge.css">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -32,80 +33,10 @@
     </div>
 
     <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <!-- Logo -->
-                <div class="logo">
-                    <img src="assets/images/logo.webp" alt="Estudio Artesana" class="logo-img">
-                </div>
-
-                <!-- Navigation -->
-                <nav class="nav">
-                    <ul class="nav-list">
-                        <li class="nav-item"><a href="#inicio" class="nav-link active" data-translate="navigation.inicio">INICIO</a></li>
-                        <li class="nav-item dropdown">
-                            <a href="tienda/index.html" class="nav-link" data-translate="navigation.tienda">TIENDA</a>
-                            <i class="fas fa-chevron-down nav-arrow"></i>
-                            <div class="dropdown-menu" id="tiendaDropdown">
-                                <a href="tienda/index.html" class="dropdown-link" data-translate="navigation.todos_productos">Todos los productos</a>
-                                <div class="dropdown-divider"></div>
-                                <div class="dropdown-categories" id="dropdownCategories">
-                                    <!-- Categories will be loaded here -->
-                                </div>
-                            </div>
-                        </li>
-                        <li class="nav-item"><a href="pages/sobre-nosotros/index.html" class="nav-link" data-translate="navigation.sobre_nosotros">SOBRE NOSOTROS</a></li>
-                        <li class="nav-item"><a href="pages/mayoristas/index.html" class="nav-link" data-translate="navigation.mayoristas">MAYORISTAS</a></li>
-                        <li class="nav-item"><a href="#contacto" class="nav-link" data-translate="navigation.contacto">CONTACTO</a></li>
-                        <li class="nav-item"><a href="micuenta.html" class="nav-link" data-translate="navigation.mi_cuenta">MI CUENTA</a></li>
-                    </ul>
-                </nav>
-
-                <!-- Header Icons -->
-                <div class="header-icons">
-                    <a href="#carrito" class="header-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-                    <button class="search-toggle header-icon">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    
-                    <!-- User Account Icon (shown when authenticated) -->
-                    <div class="user-account-dropdown" id="userAccountDropdown" style="display: none;">
-                        <button class="header-icon user-icon" id="userAccountBtn">
-                            <i class="fas fa-user-circle"></i>
-                        </button>
-                        <div class="user-dropdown-menu" id="userDropdownMenu">
-                            <div class="user-info">
-                                <span class="user-name" id="headerUserName">Usuario</span>
-                                <span class="user-email" id="headerUserEmail">user@example.com</span>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <a href="mi-cuenta.html" class="dropdown-link">
-                                <i class="fas fa-user-cog"></i> Mi Cuenta
-                            </a>
-                            <a href="#" class="dropdown-link" onclick="handleLogout()">
-                                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Login Button (shown when not authenticated) -->
-                    <a href="auth.html" class="header-icon login-btn" id="loginBtn" title="Iniciar Sesión">
-                        <i class="fas fa-sign-in-alt"></i>
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button class="mobile-menu-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
-    </header>
+    <!-- Header Universal Container -->
+    <div id="universal-header-container">
+        <!-- El header se carga dinámicamente aquí -->
+    </div>
 
     <!-- Hero Section -->
     <section class="hero simple">
@@ -434,13 +365,16 @@
     <!-- Configuration Scripts -->
     <script src="assets/js/config.js"></script>
     <script src="assets/js/cloudinary-config.js"></script>
-    
+
+    <!-- Universal Header (MUST LOAD FIRST) -->
+    <script src="assets/js/universal-header.js"></script>
+
     <!-- Authentication System -->
     <script src="js/auth-manager.js"></script>
-    
+
     <!-- Supabase API Client -->
     <script src="js/supabase-api-client-fixed.js"></script>
-    
+
     <!-- Logo Management -->
     <script src="assets/js/logo-manager.js"></script>
     
@@ -471,6 +405,11 @@
 
     <!-- WhatsApp Floating Badge -->
     <script src="assets/js/whatsapp-badge.js"></script>
+
+    <!-- Cart System Scripts -->
+    <script src="js/cart-manager.js"></script>
+    <script src="assets/js/stock-validator.js"></script>
+    <script src="assets/js/cart-ui.js"></script>
 
     <!-- Translation System -->
     <script src="assets/js/translation-system.js"></script>
