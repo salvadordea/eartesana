@@ -103,37 +103,32 @@ class HomeCategoriesLoader {
         const image = this.getCategoryImage(category);
         const badgeText = this.getBadgeText(category.count);
         const description = this.getCategoryDescription(category);
-        const translationKey = this.getCategoryTranslationKey(category.name);
+        const translatedName = this.getTranslatedCategoryName(category);
 
         return `
             <div class="modern-category-card fade-in delay-${Math.min(index + 1, 4)}" data-category-id="${category.id}">
                 <div class="modern-category-image">
-                    <img src="${image}" alt="${category.name}" loading="lazy">
+                    <img src="${image}" alt="${translatedName}" loading="lazy">
                     ${badgeText ? `<div class="category-badge">${badgeText}</div>` : ''}
                 </div>
                 <div class="modern-category-content">
-                    <h3 class="modern-category-title" ${translationKey ? `data-translate="${translationKey}"` : ''}>${category.name}</h3>
+                    <h3 class="modern-category-title">${translatedName}</h3>
                 </div>
             </div>
         `;
     }
 
-    // Map category names to translation keys
-    getCategoryTranslationKey(categoryName) {
-        const mapping = {
-            'Joyería': 'categories.joyeria',
-            'Accesorios': 'categories.accesorios',
-            'BOLSAS DE MANO': 'categories.bolsas',
-            'BOLSAS TEXTIL Y PIEL': 'categories.bolsas',
-            'Bolsas Cruzadas': 'categories.bolsas',
-            'Cuadernos': 'categories.cuadernos',
-            'Decoración': 'categories.decoracion',
-            'Textiles': 'categories.textiles',
-            'Cerámica': 'categories.ceramica',
-            'Bolsas': 'categories.bolsas'
-        };
+    // Get translated category name using the translation system
+    getTranslatedCategoryName(category) {
+        if (!category) return '';
 
-        return mapping[categoryName] || null;
+        // Use the translation system if available
+        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+            return window.TranslationSystem.getCategoryField(category, 'name');
+        }
+
+        // Fallback to original name
+        return category.name;
     }
     
     getCategoryImage(category) {
@@ -330,6 +325,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize home categories loader
     const homeCategoriesLoader = new HomeCategoriesLoader();
     homeCategoriesLoader.init();
+
+    // Re-render categories when language changes
+    window.addEventListener('languageChanged', () => {
+        console.log('🌐 Language changed - re-rendering home categories');
+        homeCategoriesLoader.renderHomeCategories();
+    });
 });
 
 // Add CSS for smooth animations

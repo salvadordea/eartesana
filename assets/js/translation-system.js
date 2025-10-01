@@ -668,6 +668,47 @@ class TranslationSystem {
     }
 
     /**
+     * Translate category
+     * @param {Object} category - Category object with translations
+     * @returns {Object} - Translated category fields
+     */
+    translateCategory(category) {
+        if (!category) return null;
+
+        // Default to original category content
+        let translatedContent = {
+            name: category.name,
+            description: category.description
+        };
+
+        // If category has translations and we're not in Spanish
+        if (category.translations && this.currentLanguage !== 'es') {
+            const translation = category.translations[this.currentLanguage];
+            if (translation) {
+                translatedContent = {
+                    name: translation.name || category.name,
+                    description: translation.description || category.description
+                };
+            }
+        }
+
+        return translatedContent;
+    }
+
+    /**
+     * Get translated category field
+     * @param {Object} category - Category object
+     * @param {String} field - Field name (name, description)
+     * @returns {String} - Translated field value
+     */
+    getCategoryField(category, field) {
+        if (!category) return '';
+
+        const translated = this.translateCategory(category);
+        return translated[field] || category[field] || '';
+    }
+
+    /**
      * Apply translations to elements with data-translate attribute
      */
     applyTranslations() {

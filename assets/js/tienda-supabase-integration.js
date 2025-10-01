@@ -571,13 +571,13 @@ class TiendaSupabaseIntegration {
             }
 
             return `
-                <div class="category-card" data-category-name="${category.name}">
+                <div class="category-card" data-category-name="${category.name}" data-category-id="${category.id}">
                     <div class="category-image">
                         <img src="${category.image || 'assets/images/category-placeholder.jpg'}"
-                             alt="${category.name}" loading="lazy">
+                             alt="${this.getTranslatedCategoryName(category)}" loading="lazy">
                     </div>
                     <div class="category-info">
-                        <h3 class="category-name" ${this.getCategoryTranslationKey(category.name) ? `data-translate="${this.getCategoryTranslationKey(category.name)}"` : ''}>${category.name}</h3>
+                        <h3 class="category-name">${this.getTranslatedCategoryName(category)}</h3>
                     </div>
                     ${badgeHTML}
                 </div>
@@ -686,9 +686,9 @@ class TiendaSupabaseIntegration {
                 <span class="category-count">${this.allProducts.length}</span>
             </div>
             ${categoriesWithProducts.map(category => `
-                <div class="category-filter ${this.currentFilters.category === category.name ? 'active' : ''}" 
+                <div class="category-filter ${this.currentFilters.category === category.name ? 'active' : ''}"
                      data-category="${category.name}" onclick="tiendaIntegration.handleCategoryFilterClick('${category.name}')">
-                    <span class="category-filter-name" ${this.getCategoryTranslationKey(category.name) ? `data-translate="${this.getCategoryTranslationKey(category.name)}"` : ''}>${category.name}</span>
+                    <span class="category-filter-name">${this.getTranslatedCategoryName(category)}</span>
                     <span class="category-count">${this.getProductCountForCategory(category.id)}</span>
                 </div>
             `).join('')}
@@ -2031,6 +2031,23 @@ class TiendaSupabaseIntegration {
 
         // Fallback to product short description
         return product.shortDescription || '';
+    }
+
+    /**
+     * Get translated category name based on current language
+     * @param {Object} category - Category object with translations
+     * @returns {String} - Translated category name
+     */
+    getTranslatedCategoryName(category) {
+        if (!category) return '';
+
+        // Use TranslationSystem if available
+        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+            return window.TranslationSystem.getCategoryField(category, 'name');
+        }
+
+        // Fallback to category name
+        return category.name;
     }
 }
 

@@ -134,6 +134,49 @@ class SupabaseAPIFixed {
                 await this.loadCategoriesIndividually(products);
             }
 
+            // LOAD PRODUCT TRANSLATIONS
+            try {
+                const translationsUrl = `${this.baseUrl}/rest/v1/product_translations?select=product_id,language_code,name,description,short_description`;
+
+                const translationsResponse = await fetch(translationsUrl, {
+                    method: 'GET',
+                    headers: this.headers
+                });
+
+                if (translationsResponse.ok) {
+                    const allTranslations = await translationsResponse.json();
+
+                    // Create translation map by product_id and language_code
+                    const translationMap = new Map();
+                    allTranslations.forEach(trans => {
+                        if (!translationMap.has(trans.product_id)) {
+                            translationMap.set(trans.product_id, {});
+                        }
+                        translationMap.get(trans.product_id)[trans.language_code] = {
+                            name: trans.name,
+                            description: trans.description,
+                            short_description: trans.short_description
+                        };
+                    });
+
+                    // Assign translations to each product
+                    products.forEach(product => {
+                        const productTranslations = translationMap.get(product.id);
+                        if (productTranslations) {
+                            product.translations = productTranslations;
+                        } else {
+                            product.translations = {};
+                        }
+                    });
+
+                    console.log('✅ Product translations loaded');
+                } else {
+                    console.warn('⚠️ Error loading product translations');
+                }
+            } catch (error) {
+                console.warn('⚠️ Error loading translations:', error);
+            }
+
             console.log('🔍 DIAGNÓSTICO - Producto ejemplo con categorías:', products[0]);
             return products;
 
@@ -344,7 +387,7 @@ class SupabaseAPIFixed {
     async getCategories() {
         try {
             console.log('📂 Obteniendo categorías');
-            
+
             const response = await fetch(`${this.baseUrl}/rest/v1/categories?is_active=eq.true&order=name`, {
                 method: 'GET',
                 headers: this.headers
@@ -355,19 +398,62 @@ class SupabaseAPIFixed {
             }
 
             const categories = await response.json();
-            
+
             console.log(`✅ ${categories.length} categorías obtenidas`);
-            
+
+            // LOAD CATEGORY TRANSLATIONS
+            try {
+                const translationsUrl = `${this.baseUrl}/rest/v1/category_translations?select=category_id,language_code,name,description`;
+
+                const translationsResponse = await fetch(translationsUrl, {
+                    method: 'GET',
+                    headers: this.headers
+                });
+
+                if (translationsResponse.ok) {
+                    const allTranslations = await translationsResponse.json();
+
+                    // Create translation map by category_id and language_code
+                    const translationMap = new Map();
+                    allTranslations.forEach(trans => {
+                        if (!translationMap.has(trans.category_id)) {
+                            translationMap.set(trans.category_id, {});
+                        }
+                        translationMap.get(trans.category_id)[trans.language_code] = {
+                            name: trans.name,
+                            description: trans.description
+                        };
+                    });
+
+                    // Assign translations to each category
+                    categories.forEach(category => {
+                        const categoryTranslations = translationMap.get(category.id);
+                        if (categoryTranslations) {
+                            category.translations = categoryTranslations;
+                        } else {
+                            category.translations = {};
+                        }
+                    });
+
+                    console.log('✅ Category translations loaded');
+                } else {
+                    console.warn('⚠️ Error loading category translations');
+                }
+            } catch (error) {
+                console.warn('⚠️ Error loading category translations:', error);
+            }
+
             return {
                 categories: categories.map(cat => ({
                     id: cat.id,
                     name: cat.name,
                     slug: cat.slug,
                     description: cat.description,
-                    image: cat.image_url
+                    image: cat.image_url,
+                    translations: cat.translations || {}
                 }))
             };
-            
+
         } catch (error) {
             console.error('❌ Error obteniendo categorías:', error);
             throw error;

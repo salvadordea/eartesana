@@ -123,7 +123,14 @@
       "stock_low": "Stock bajo",
       "available": "Disponible",
       "loading_products_category": "Cargando productos de",
-      "please_wait": "Un momento por favor"
+      "please_wait": "Un momento por favor",
+      "filter_price": "Precio",
+      "price_min": "Mín",
+      "price_max": "Máx",
+      "apply": "Aplicar",
+      "filters": "Filtros",
+      "on_sale": "En oferta",
+      "clear_filters": "Limpiar"
     },
     "product": {
       "category_label": "Categoría",
@@ -314,7 +321,14 @@
       "stock_low": "Low stock",
       "available": "Available",
       "loading_products_category": "Loading products from",
-      "please_wait": "Please wait"
+      "please_wait": "Please wait",
+      "filter_price": "Price",
+      "price_min": "Min",
+      "price_max": "Max",
+      "apply": "Apply",
+      "filters": "Filters",
+      "on_sale": "On sale",
+      "clear_filters": "Clear"
     },
     "product": {
       "category_label": "Category",
