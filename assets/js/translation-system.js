@@ -95,14 +95,14 @@ class TranslationSystem {
                         data-lang="es"
                         aria-label="Español"
                         title="Español">
-                    <span class="flag-icon">🇪🇸</span>
+                    <span class="flag-icon flag-mx"></span>
                     <span class="lang-code">ES</span>
                 </button>
                 <button class="lang-btn ${this.currentLanguage === 'en' ? 'active' : ''}"
                         data-lang="en"
                         aria-label="English"
                         title="English">
-                    <span class="flag-icon">🇺🇸</span>
+                    <span class="flag-icon flag-us"></span>
                     <span class="lang-code">EN</span>
                 </button>
             </div>
@@ -295,10 +295,52 @@ class TranslationSystem {
                 opacity: 0;
             }
 
-            /* Flag Icons */
+            /* Flag Icons - CSS-based flags for cross-browser compatibility */
             .flag-icon {
-                font-size: 14px;
-                filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+                width: 18px;
+                height: 13px;
+                display: inline-block;
+                border-radius: 2px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+                position: relative;
+                overflow: hidden;
+            }
+
+            /* Mexican Flag */
+            .flag-mx {
+                background: linear-gradient(to right,
+                    #006847 0%, #006847 33.33%,
+                    #ffffff 33.33%, #ffffff 66.66%,
+                    #ce1126 66.66%, #ce1126 100%);
+            }
+
+            /* US Flag - simplified version with stripes and blue canton */
+            .flag-us {
+                background:
+                    linear-gradient(to bottom,
+                        #b22234 0%, #b22234 7.69%,
+                        #ffffff 7.69%, #ffffff 15.38%,
+                        #b22234 15.38%, #b22234 23.07%,
+                        #ffffff 23.07%, #ffffff 30.76%,
+                        #b22234 30.76%, #b22234 38.45%,
+                        #ffffff 38.45%, #ffffff 46.14%,
+                        #b22234 46.14%, #b22234 53.83%,
+                        #ffffff 53.83%, #ffffff 61.52%,
+                        #b22234 61.52%, #b22234 69.21%,
+                        #ffffff 69.21%, #ffffff 76.9%,
+                        #b22234 76.9%, #b22234 84.59%,
+                        #ffffff 84.59%, #ffffff 92.28%,
+                        #b22234 92.28%, #b22234 100%);
+            }
+
+            .flag-us::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 40%;
+                height: 53.85%;
+                background: #3c3b6e;
             }
 
             .lang-code {
@@ -381,7 +423,8 @@ class TranslationSystem {
                 }
 
                 .flag-icon {
-                    font-size: 12px;
+                    width: 16px;
+                    height: 11px;
                 }
 
                 .lang-code {
