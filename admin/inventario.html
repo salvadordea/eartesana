@@ -2517,10 +2517,25 @@
 
         async function uploadImageToSupabase(file, productName) {
             try {
+                // Función para sanitizar el nombre (remover acentos y caracteres especiales)
+                const sanitizeName = (name) => {
+                    return name
+                        .toLowerCase()
+                        .normalize('NFD')                          // Normalizar caracteres Unicode
+                        .replace(/[\u0300-\u036f]/g, '')          // Remover acentos
+                        .replace(/[^a-z0-9\s-]/g, '')             // Remover caracteres especiales
+                        .replace(/\s+/g, '-')                      // Espacios a guiones
+                        .replace(/-+/g, '-')                       // Múltiples guiones a uno solo
+                        .replace(/^-|-$/g, '');                    // Remover guiones al inicio/fin
+                };
+
                 // Generar nombre único para el archivo
                 const fileExtension = file.name.split('.').pop().toLowerCase();
-                const fileName = `${productName.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}.${fileExtension}`;
+                const sanitizedName = sanitizeName(productName);
+                const fileName = `${sanitizedName}-${Date.now()}.${fileExtension}`;
                 const filePath = `productos/${fileName}`;
+
+                console.log('📤 Subiendo imagen:', filePath);
 
                 // Subir archivo
                 const { data: uploadData, error: uploadError } = await supabase.storage
@@ -2543,6 +2558,7 @@
                     throw new Error('No se pudo obtener la URL pública de la imagen');
                 }
 
+                console.log('✅ Imagen subida:', publicUrlData.publicUrl);
                 return publicUrlData.publicUrl;
             } catch (error) {
                 console.error('Error uploading image:', error);
@@ -2802,6 +2818,186 @@
                     console.error('Error deleting variant:', error);
                     showError('Error eliminando variante: ' + error.message);
                 }
+            }
+        }
+
+        // ===============================================
+        // VARIANT IMAGE MANAGEMENT
+        // ===============================================
+
+        function showVariantImageModal(productId, variantId) {
+            const product = currentProducts.find(p => p.id === productId);
+            if (!product) {
+                showError('Producto no encontrado');
+                return;
+            }
+
+            const variant = product.variants.find(v => v.id === variantId);
+            if (!variant) {
+                showError('Variante no encontrada');
+                return;
+            }
+
+            currentEditingVariant = variant;
+            currentEditingProduct = product;
+
+            const currentImageUrl = variant.image_url || '../assets/images/placeholder-product.jpg';
+
+            const modalContent = `
+                <div class="modal-header">
+                    <h2 class="modal-title"><i class="fas fa-image"></i> Cambiar Imagen de Variante</h2>
+                    <button class="modal-close" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <h4 style="margin: 0 0 5px 0; color: #2c3e50;">${product.name}</h4>
+                        <small style="color: #6c757d;">Variante: ${variant.name || variant.variant_name}</small>
+                    </div>
+
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="margin-bottom: 15px;">
+                            <strong>Imagen Actual:</strong>
+                        </div>
+                        <div style="max-width: 300px; margin: 0 auto; border: 2px solid #e9ecef; border-radius: 8px; overflow: hidden;">
+                            <img src="${currentImageUrl}" alt="${variant.name}"
+                                 style="width: 100%; height: auto; display: block;"
+                                 onerror="this.src='../assets/images/placeholder-product.jpg'">
+                        </div>
+                    </div>
+
+                    <form id="variantImageForm" onsubmit="saveVariantImage(event, ${productId}, '${variantId}')">
+                        <div class="form-group">
+                            <label class="form-label">Nueva Imagen</label>
+                            <input type="file"
+                                   class="form-input"
+                                   id="variantImageInput"
+                                   accept="image/*"
+                                   onchange="previewVariantImage(event)">
+                            <small style="color: #6c757d; display: block; margin-top: 5px;">
+                                Formatos: JPG, PNG, WEBP (max 5MB)
+                            </small>
+                        </div>
+
+                        <div id="variantImagePreview" style="display: none; text-align: center; margin-top: 15px;">
+                            <strong style="display: block; margin-bottom: 10px;">Vista Previa:</strong>
+                            <div style="max-width: 300px; margin: 0 auto; border: 2px solid #28a745; border-radius: 8px; overflow: hidden;">
+                                <img id="variantImagePreviewImg"
+                                     style="width: 100%; height: auto; display: block;">
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label class="form-label">O ingresa URL de imagen</label>
+                            <input type="url"
+                                   class="form-input"
+                                   id="variantImageUrl"
+                                   value="${variant.image_url || ''}"
+                                   placeholder="https://ejemplo.com/imagen.jpg">
+                            <small style="color: #6c757d; display: block; margin-top: 5px;">
+                                Si prefieres usar una URL externa en lugar de subir archivo
+                            </small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-modal btn-cancel" onclick="closeModal()">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    ${variant.image_url ? `
+                        <button type="button" class="btn-modal btn-danger" onclick="removeVariantImage(${productId}, '${variantId}')" style="background: #dc3545;">
+                            <i class="fas fa-trash"></i> Eliminar Imagen
+                        </button>
+                    ` : ''}
+                    <button type="submit" form="variantImageForm" class="btn-modal btn-save" id="saveVariantImageBtn">
+                        <i class="fas fa-save"></i> Guardar Imagen
+                    </button>
+                </div>
+            `;
+
+            showModal(modalContent);
+        }
+
+        function previewVariantImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('variantImagePreviewImg').src = e.target.result;
+                    document.getElementById('variantImagePreview').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        async function saveVariantImage(event, productId, variantId) {
+            event.preventDefault();
+
+            const saveBtn = document.getElementById('saveVariantImageBtn');
+            const originalText = saveBtn.innerHTML;
+
+            try {
+                saveBtn.disabled = true;
+                saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+
+                let imageUrl = document.getElementById('variantImageUrl').value.trim();
+                const imageFile = document.getElementById('variantImageInput').files[0];
+
+                // Si hay archivo, subirlo primero
+                if (imageFile) {
+                    const variantName = currentEditingVariant.name || currentEditingVariant.variant_name;
+                    imageUrl = await uploadImageToSupabase(imageFile, `${currentEditingProduct.name}-${variantName}`);
+                }
+
+                // Actualizar variante con nueva imagen
+                const { data, error } = await supabase
+                    .from('product_variants')
+                    .update({ image_url: imageUrl })
+                    .eq('id', variantId)
+                    .select()
+                    .single();
+
+                if (error) throw error;
+
+                showSuccess('Imagen de variante actualizada correctamente');
+                closeModal();
+                await loadProducts();
+
+            } catch (error) {
+                console.error('Error updating variant image:', error);
+                showError('Error actualizando imagen: ' + error.message);
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = originalText;
+            }
+        }
+
+        async function removeVariantImage(productId, variantId) {
+            if (!confirm('¿Eliminar la imagen de esta variante?')) return;
+
+            try {
+                const variant = currentProducts
+                    .find(p => p.id === productId)
+                    ?.variants.find(v => v.id === variantId);
+
+                // Si la imagen está en Supabase Storage, eliminarla
+                if (variant?.image_url && variant.image_url.includes('supabase')) {
+                    await deleteImageFromSupabase(variant.image_url);
+                }
+
+                // Actualizar variante para quitar la imagen
+                const { error } = await supabase
+                    .from('product_variants')
+                    .update({ image_url: null })
+                    .eq('id', variantId);
+
+                if (error) throw error;
+
+                showSuccess('Imagen eliminada correctamente');
+                closeModal();
+                await loadProducts();
+
+            } catch (error) {
+                console.error('Error removing variant image:', error);
+                showError('Error eliminando imagen: ' + error.message);
             }
         }
 

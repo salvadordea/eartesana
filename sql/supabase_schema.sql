@@ -319,10 +319,165 @@ CREATE POLICY "Users can update own pending applications" ON wholesale_applicati
 CREATE POLICY "Admins can manage all applications" ON wholesale_applications
     FOR ALL USING (
         EXISTS (
-            SELECT 1 FROM user_profiles 
+            SELECT 1 FROM user_profiles
             WHERE id = auth.uid() AND role = 'Admin'
         )
     );
+
+-- ===========================================
+-- POLÍTICAS RLS PARA ADMINISTRADORES - PRODUCTOS Y VARIANTES
+-- ===========================================
+
+-- Admins pueden crear productos
+CREATE POLICY "Admins can create products" ON products
+    FOR INSERT
+    WITH CHECK (
+        EXISTS (
+            SELECT 1 FROM user_profiles
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- Admins pueden actualizar productos
+CREATE POLICY "Admins can update products" ON products
+    FOR UPDATE
+    USING (
+        EXISTS (
+            SELECT 1 FROM user_profiles
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- Admins pueden eliminar productos
+CREATE POLICY "Admins can delete products" ON products
+    FOR DELETE
+    USING (
+        EXISTS (
+            SELECT 1 FROM user_profiles
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- Admins pueden crear variantes
+CREATE POLICY "Admins can create product_variants" ON product_variants
+    FOR INSERT
+    WITH CHECK (
+        EXISTS (
+            SELECT 1 FROM user_profiles
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- Admins pueden actualizar variantes
+CREATE POLICY "Admins can update product_variants" ON product_variants
+    FOR UPDATE
+    USING (
+        EXISTS (
+            SELECT 1 FROM user_profiles
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- Admins pueden eliminar variantes
+CREATE POLICY "Admins can delete product_variants" ON product_variants
+    FOR DELETE
+    USING (
+        EXISTS (
+            SELECT 1 FROM user_profiles
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- Admins pueden crear categorías
+CREATE POLICY "Admins can create categories" ON categories
+    FOR INSERT
+    WITH CHECK (
+        EXISTS (
+            SELECT 1 FROM user_profiles
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- Admins pueden actualizar categorías
+CREATE POLICY "Admins can update categories" ON categories
+    FOR UPDATE
+    USING (
+        EXISTS (
+            SELECT 1 FROM user_profiles
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- Admins pueden eliminar categorías
+CREATE POLICY "Admins can delete categories" ON categories
+    FOR DELETE
+    USING (
+        EXISTS (
+            SELECT 1 FROM user_profiles
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- Admins pueden gestionar traducciones
+CREATE POLICY "Admins can manage product_translations" ON product_translations
+    FOR ALL
+    USING (
+        EXISTS (
+            SELECT 1 FROM user_profiles
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- Admins pueden gestionar imágenes
+CREATE POLICY "Admins can manage product_images" ON product_images
+    FOR ALL
+    USING (
+        EXISTS (
+            SELECT 1 FROM user_profiles
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- Admins pueden gestionar relaciones producto-categoría
+CREATE POLICY "Admins can manage product_categories" ON product_categories
+    FOR ALL
+    USING (
+        EXISTS (
+            SELECT 1 FROM user_profiles
+            WHERE id = auth.uid() AND role = 'Admin'
+        )
+    );
+
+-- Admins pueden gestionar atributos (si la tabla existe)
+-- NOTA: Descomentar estas políticas una vez que las tablas attributes,
+-- attribute_values y variant_attributes estén creadas
+
+-- CREATE POLICY "Admins can manage attributes" ON attributes
+--     FOR ALL
+--     USING (
+--         EXISTS (
+--             SELECT 1 FROM user_profiles
+--             WHERE id = auth.uid() AND role = 'Admin'
+--         )
+--     );
+
+-- CREATE POLICY "Admins can manage attribute_values" ON attribute_values
+--     FOR ALL
+--     USING (
+--         EXISTS (
+--             SELECT 1 FROM user_profiles
+--             WHERE id = auth.uid() AND role = 'Admin'
+--         )
+--     );
+
+-- CREATE POLICY "Admins can manage variant_attributes" ON variant_attributes
+--     FOR ALL
+--     USING (
+--         EXISTS (
+--             SELECT 1 FROM user_profiles
+--             WHERE id = auth.uid() AND role = 'Admin'
+--         )
+--     );
 
 -- ===========================================
 -- TABLAS DE USUARIOS

@@ -211,15 +211,18 @@ class AdminAuthGuard {
         try {
             console.log('🔓 AdminAuthGuard: Manual logout initiated');
 
-            // Set logout in progress flag
+            // Set logout flags
             localStorage.setItem('adminLogoutInProgress', 'true');
+            localStorage.setItem('adminRecentLogout', Date.now().toString());
 
             // Clear all admin-related data
             const keysToRemove = [
                 'adminSession',
                 'lastAuthCheck',
                 'lastLoginCheck',
-                'adminAuthLoopDetected'
+                'adminAuthLoopDetected',
+                'adminLoginLoopDetected',
+                'supabase_session'
             ];
 
             keysToRemove.forEach(key => {
@@ -235,15 +238,17 @@ class AdminAuthGuard {
                 }
             }
 
-            // Redirect to homepage
-            this.redirectToPublic();
+            // Redirect to login page instead of homepage
+            window.location.replace('login.html');
 
         } catch (error) {
             console.error('❌ AdminAuthGuard: Error during logout:', error);
             // Force cleanup and redirect
             localStorage.setItem('adminLogoutInProgress', 'true');
+            localStorage.setItem('adminRecentLogout', Date.now().toString());
             localStorage.removeItem('adminSession');
-            this.redirectToPublic();
+            localStorage.removeItem('supabase_session');
+            window.location.replace('login.html');
         }
     }
 }
