@@ -994,7 +994,7 @@ class TiendaSupabaseIntegration {
 
         const img = document.createElement('img');
         img.src = product.mainImage || 'assets/images/product-placeholder.jpg';
-        img.alt = product.name;
+        img.alt = this.getTranslatedProductField(product, 'name');
         img.loading = 'lazy';
         imageDiv.appendChild(img);
 
@@ -1025,7 +1025,14 @@ class TiendaSupabaseIntegration {
         const categorySpan = document.createElement('span');
         categorySpan.className = 'product-category';
         if (product.category_id) {
-            categorySpan.textContent = this.getCategoryNameById(product.category_id);
+            const category = this.getCategoryById(product.category_id);
+            if (category) {
+                const translatedName = this.getTranslatedCategoryName(category);
+                categorySpan.textContent = translatedName;
+                console.log(`🏷️ Product category: ${product.name} -> ${category.name} -> ${translatedName}`);
+            } else {
+                categorySpan.textContent = this.getCategoryNameById(product.category_id);
+            }
         } else {
             categorySpan.setAttribute('data-translate', 'categories.uncategorized');
             categorySpan.textContent = window.t ? window.t('categories.uncategorized') : 'Sin categoría';
@@ -1035,7 +1042,7 @@ class TiendaSupabaseIntegration {
         // Title
         const title = document.createElement('h3');
         title.className = 'product-title';
-        title.textContent = product.name;
+        title.textContent = this.getTranslatedProductField(product, 'name');
 
         // Price
         const priceDiv = document.createElement('div');
@@ -1967,6 +1974,10 @@ class TiendaSupabaseIntegration {
      * Refresh product translations when language changes
      */
     refreshProductTranslations() {
+        // Clear cached filter results to force re-render with new language
+        this.cachedFilterResults.clear();
+        console.log('🗑️ Cleared cached filter results for language change');
+
         // Re-render products with new language
         const productsGrid = document.getElementById('productsGrid');
         if (productsGrid && productsGrid.style.display !== 'none') {
@@ -1980,6 +1991,10 @@ class TiendaSupabaseIntegration {
             console.log('🔄 Re-rendering categories with new translations');
             this.renderCategoriesGrid();
         }
+
+        // Always re-render sidebar filters to update category names
+        console.log('🔄 Re-rendering sidebar filters with new translations');
+        this.renderCategoriesFilters();
     }
 
     /**
@@ -2034,6 +2049,15 @@ class TiendaSupabaseIntegration {
     }
 
     /**
+     * Get category object by ID
+     * @param {Number} categoryId - Category ID
+     * @returns {Object|null} - Category object or null
+     */
+    getCategoryById(categoryId) {
+        return this.allCategories.find(cat => cat.id === categoryId) || null;
+    }
+
+    /**
      * Get translated category name based on current language
      * @param {Object} category - Category object with translations
      * @returns {String} - Translated category name
@@ -2048,6 +2072,40 @@ class TiendaSupabaseIntegration {
 
         // Fallback to category name
         return category.name;
+    }
+
+    /**
+     * Get translated product field based on current language
+     * @param {Object} product - Product object with translations
+     * @param {String} field - Field name (name, description, short_description)
+     * @returns {String} - Translated field value
+     */
+    getTranslatedProductField(product, field) {
+        if (!product) return '';
+
+        // Use TranslationSystem if available
+        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+            const currentLang = window.TranslationSystem.currentLanguage;
+
+            // If we're in Spanish, just return the original
+            if (currentLang === 'es') {
+                return product[field] || '';
+            }
+
+            // Check if product has translations for the current language
+            if (product.translations && product.translations[currentLang]) {
+                const translatedValue = product.translations[currentLang][field];
+                if (translatedValue) {
+                    console.log(`🌐 Translating product "${product.name}" field "${field}" to ${currentLang}:`, translatedValue);
+                    return translatedValue;
+                }
+            } else {
+                console.warn(`⚠️ No translations found for product "${product.name}" in language ${currentLang}`, product.translations);
+            }
+        }
+
+        // Fallback to original field
+        return product[field] || '';
     }
 }
 

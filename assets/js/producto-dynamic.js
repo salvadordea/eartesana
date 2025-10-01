@@ -66,6 +66,12 @@ class ProductoManager {
         };
 
         this.init();
+
+        // Listen for language changes
+        window.addEventListener('languageChanged', () => {
+            console.log('🌐 Language changed - refreshing product page');
+            this.renderProductInfo();
+        });
     }
 
     init() {
@@ -268,15 +274,16 @@ class ProductoManager {
         // Título del producto
         const titleElement = document.getElementById('productTitle');
         if (titleElement) {
-            titleElement.textContent = this.product.name || 'Producto sin nombre';
+            titleElement.textContent = this.getTranslatedProductField('name') || 'Producto sin nombre';
         }
 
         // Categoría
         const categoryElement = document.getElementById('productCategory');
         if (categoryElement && this.product.category) {
+            const translatedCategory = this.getTranslatedCategoryName(this.product.category);
             categoryElement.innerHTML = `
                 <a href="./tienda.html?categoria=${this.product.category}">
-                    ${this.product.category}
+                    ${translatedCategory}
                 </a>
             `;
         }
@@ -296,12 +303,60 @@ class ProductoManager {
         // Descripción corta
         const shortDescElement = document.getElementById('productShortDescription');
         if (shortDescElement) {
-            const shortDesc = this.product.shortDescription || this.product.description || 'Sin descripción disponible.';
+            const shortDesc = this.getTranslatedProductField('short_description') ||
+                             this.getTranslatedProductField('description') ||
+                             'Sin descripción disponible.';
 
             // Replace the loading text with actual description
             shortDescElement.innerHTML = `<p>${shortDesc}</p>`;
             console.log(`📝 Short description updated: ${shortDesc}`);
         }
+    }
+
+    /**
+     * Get translated product field based on current language
+     */
+    getTranslatedProductField(field) {
+        if (!this.product) return '';
+
+        // Use TranslationSystem if available
+        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+            const currentLang = window.TranslationSystem.currentLanguage;
+
+            // If we're in Spanish, just return the original
+            if (currentLang === 'es') {
+                return this.product[field] || '';
+            }
+
+            // Check if product has translations for the current language
+            if (this.product.translations && this.product.translations[currentLang]) {
+                const translatedValue = this.product.translations[currentLang][field];
+                if (translatedValue) {
+                    return translatedValue;
+                }
+            }
+        }
+
+        // Fallback to original field
+        return this.product[field] || '';
+    }
+
+    /**
+     * Get translated category name
+     */
+    getTranslatedCategoryName(categoryName) {
+        if (!categoryName) return '';
+
+        // Try to get category with translations from the API
+        if (window.artesanaAPI && window.artesanaAPI.allCategories) {
+            const category = window.artesanaAPI.allCategories.find(cat => cat.name === categoryName);
+            if (category && window.TranslationSystem && window.TranslationSystem.isInitialized) {
+                return window.TranslationSystem.getCategoryField(category, 'name');
+            }
+        }
+
+        // Fallback to original name
+        return categoryName;
     }
 
     updatePriceDisplay() {

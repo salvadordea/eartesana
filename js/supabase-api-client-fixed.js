@@ -170,8 +170,16 @@ class SupabaseAPIFixed {
                     });
 
                     console.log('✅ Product translations loaded');
+                    // Log sample product with translations
+                    if (products.length > 0) {
+                        console.log('🔍 Sample product with translations:', {
+                            id: products[0].id,
+                            name: products[0].name,
+                            translations: products[0].translations
+                        });
+                    }
                 } else {
-                    console.warn('⚠️ Error loading product translations');
+                    console.warn('⚠️ Error loading product translations:', translationsResponse.status);
                 }
             } catch (error) {
                 console.warn('⚠️ Error loading translations:', error);
@@ -609,7 +617,9 @@ class SupabaseAPIFixed {
             // Para compatibilidad con la lógica de frontend
             category_id: product.category_ids && product.category_ids.length > 0 ? product.category_ids[0] : null,
             images: (product.images || []).map(img => this.processImageUrl(img)),
-            createdAt: product.created_at
+            createdAt: product.created_at,
+            // Include translations for multi-language support
+            translations: product.translations || {}
         };
     }
 
