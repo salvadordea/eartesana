@@ -779,7 +779,7 @@ class TiendaSupabaseIntegration {
                             `<span class="product-category" data-translate="categories.uncategorized">${window.t ? window.t('categories.uncategorized') : 'Sin categoría'}</span>`
                         }
                     </div>
-                    <h3 class="product-title">${product.name}</h3>
+                    <h3 class="product-title" data-product-id="${product.id}" data-original-name="${product.name}">${this.getTranslatedProductName(product)}</h3>
                     <div class="product-price">
                         ${product.onSale && product.salePrice ?
                             `<span class="sale-price">${this.formatPrice(product.salePrice)}</span>
@@ -1697,6 +1697,12 @@ class TiendaSupabaseIntegration {
                 this.resetFilters();
             });
         }
+
+        // Listen for language changes to refresh product translations
+        window.addEventListener('languageChanged', (e) => {
+            console.log('🌐 Language changed, refreshing product translations...');
+            this.refreshProductTranslations();
+        });
     }
 
     // Nueva función para seleccionar categoría con animación y optimistic loading
@@ -1933,9 +1939,79 @@ class TiendaSupabaseIntegration {
     showProductsError() {
         const productsLoading = document.getElementById('productsLoading');
         const apiError = document.getElementById('apiError');
-        
+
         if (productsLoading) productsLoading.style.display = 'none';
         if (apiError) apiError.style.display = 'block';
+    }
+
+    /**
+     * Refresh product translations when language changes
+     */
+    refreshProductTranslations() {
+        // Re-render products with new language
+        const productsGrid = document.getElementById('productsGrid');
+        if (productsGrid && productsGrid.style.display !== 'none') {
+            console.log('🔄 Re-rendering products with new translations');
+            this.renderProducts();
+        }
+
+        // Update category grid if visible
+        const categoriesGrid = document.getElementById('categoriesGrid');
+        if (categoriesGrid && categoriesGrid.style.display !== 'none') {
+            console.log('🔄 Re-rendering categories with new translations');
+            this.renderCategoriesGrid();
+        }
+    }
+
+    /**
+     * Get translated product name based on current language
+     * @param {Object} product - Product object with translations
+     * @returns {String} - Translated product name
+     */
+    getTranslatedProductName(product) {
+        if (!product) return '';
+
+        // Use TranslationSystem if available
+        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+            return window.TranslationSystem.getProductField(product, 'name');
+        }
+
+        // Fallback to product name
+        return product.name;
+    }
+
+    /**
+     * Get translated product description
+     * @param {Object} product - Product object with translations
+     * @returns {String} - Translated product description
+     */
+    getTranslatedProductDescription(product) {
+        if (!product) return '';
+
+        // Use TranslationSystem if available
+        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+            return window.TranslationSystem.getProductField(product, 'description');
+        }
+
+        // Fallback to product description
+        return product.description || '';
+    }
+
+    /**
+     * Get translated product short description
+     * @param {Object} product - Product object with translations
+     * @returns {String} - Translated product short description
+     */
+    getTranslatedProductShortDescription(product) {
+        if (!product) return '';
+
+        // Use TranslationSystem if available
+        if (window.TranslationSystem && window.TranslationSystem.isInitialized) {
+            return window.TranslationSystem.getProductField(product, 'shortDescription');
+        }
+
+        // Fallback to product short description
+        return product.shortDescription || '';
     }
 }
 

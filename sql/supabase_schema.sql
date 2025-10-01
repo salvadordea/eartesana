@@ -39,7 +39,20 @@ CREATE TABLE products (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 3. TABLA DE IMÁGENES DE PRODUCTOS
+-- 3. TABLA DE TRADUCCIONES DE PRODUCTOS
+CREATE TABLE product_translations (
+    id BIGSERIAL PRIMARY KEY,
+    product_id BIGINT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+    language_code VARCHAR(5) NOT NULL CHECK (language_code IN ('es', 'en')),
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    short_description TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE(product_id, language_code)
+);
+
+-- 4. TABLA DE IMÁGENES DE PRODUCTOS
 CREATE TABLE product_images (
     id BIGSERIAL PRIMARY KEY,
     product_id BIGINT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
@@ -49,14 +62,14 @@ CREATE TABLE product_images (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 4. TABLA DE RELACIÓN PRODUCTO-CATEGORÍA (muchos a muchos)
+-- 5. TABLA DE RELACIÓN PRODUCTO-CATEGORÍA (muchos a muchos)
 CREATE TABLE product_categories (
     product_id BIGINT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
     category_id BIGINT NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
     PRIMARY KEY (product_id, category_id)
 );
 
--- 5. TABLA DE ATRIBUTOS (Color, Tamaño, etc.)
+-- 6. TABLA DE ATRIBUTOS (Color, Tamaño, etc.)
 CREATE TABLE attributes (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -67,7 +80,7 @@ CREATE TABLE attributes (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 6. TABLA DE VALORES DE ATRIBUTOS
+-- 7. TABLA DE VALORES DE ATRIBUTOS
 CREATE TABLE attribute_values (
     id BIGSERIAL PRIMARY KEY,
     attribute_id BIGINT NOT NULL REFERENCES attributes(id) ON DELETE CASCADE,
@@ -78,7 +91,7 @@ CREATE TABLE attribute_values (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 7. TABLA DE VARIANTES DE PRODUCTOS
+-- 8. TABLA DE VARIANTES DE PRODUCTOS
 CREATE TABLE product_variants (
     id VARCHAR(50) PRIMARY KEY, -- Formato: "660-0", "660-1"
     product_id BIGINT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
@@ -91,7 +104,7 @@ CREATE TABLE product_variants (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 8. TABLA DE RELACIÓN VARIANTE-ATRIBUTO
+-- 9. TABLA DE RELACIÓN VARIANTE-ATRIBUTO
 CREATE TABLE variant_attributes (
     variant_id VARCHAR(50) NOT NULL REFERENCES product_variants(id) ON DELETE CASCADE,
     attribute_id BIGINT NOT NULL REFERENCES attributes(id) ON DELETE CASCADE,
@@ -113,6 +126,9 @@ CREATE INDEX idx_products_slug ON products(slug);
 -- Índices para relaciones
 CREATE INDEX idx_product_categories_product ON product_categories(product_id);
 CREATE INDEX idx_product_categories_category ON product_categories(category_id);
+CREATE INDEX idx_product_translations_product ON product_translations(product_id);
+CREATE INDEX idx_product_translations_language ON product_translations(language_code);
+CREATE INDEX idx_product_translations_product_lang ON product_translations(product_id, language_code);
 CREATE INDEX idx_product_images_product ON product_images(product_id);
 CREATE INDEX idx_product_variants_product ON product_variants(product_id);
 
@@ -145,16 +161,20 @@ END;
 $$ language 'plpgsql';
 
 -- Triggers para actualizar updated_at
-CREATE TRIGGER update_products_updated_at 
-    BEFORE UPDATE ON products 
+CREATE TRIGGER update_products_updated_at
+    BEFORE UPDATE ON products
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
-CREATE TRIGGER update_categories_updated_at 
-    BEFORE UPDATE ON categories 
+CREATE TRIGGER update_categories_updated_at
+    BEFORE UPDATE ON categories
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
-CREATE TRIGGER update_variants_updated_at 
-    BEFORE UPDATE ON product_variants 
+CREATE TRIGGER update_product_translations_updated_at
+    BEFORE UPDATE ON product_translations
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_variants_updated_at
+    BEFORE UPDATE ON product_variants
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- Triggers para tablas de usuarios
@@ -203,6 +223,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 -- Habilitar RLS en todas las tablas
 ALTER TABLE categories ENABLE ROW LEVEL SECURITY;
 ALTER TABLE products ENABLE ROW LEVEL SECURITY;
+ALTER TABLE product_translations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE product_images ENABLE ROW LEVEL SECURITY;
 ALTER TABLE product_categories ENABLE ROW LEVEL SECURITY;
 ALTER TABLE attributes ENABLE ROW LEVEL SECURITY;
@@ -221,6 +242,9 @@ CREATE POLICY "Public can view active categories" ON categories
 
 CREATE POLICY "Public can view active products" ON products
     FOR SELECT USING (status = 'active');
+
+CREATE POLICY "Public can view product translations" ON product_translations
+    FOR SELECT USING (true);
 
 CREATE POLICY "Public can view product images" ON product_images
     FOR SELECT USING (true);
@@ -436,7 +460,7 @@ GROUP BY p.id;
 
 -- Vista completa de productos (la más útil para el frontend)
 CREATE VIEW products_complete AS
-SELECT 
+SELECT
     p.*,
     -- Categorías
     COALESCE(
@@ -449,7 +473,7 @@ SELECT
     ) as categories,
     -- Imágenes
     COALESCE(
-        array_agg(pi.image_url ORDER BY pi.display_order) 
+        array_agg(pi.image_url ORDER BY pi.display_order)
         FILTER (WHERE pi.image_url IS NOT NULL),
         ARRAY[]::text[]
     ) as images,
@@ -463,11 +487,24 @@ SELECT
             'image', pv.image_url
         )) FILTER (WHERE pv.id IS NOT NULL),
         ARRAY[]::jsonb[]
-    ) as variations
+    ) as variations,
+    -- Traducciones (JSON object con traducciones por idioma)
+    COALESCE(
+        jsonb_object_agg(
+            pt.language_code,
+            jsonb_build_object(
+                'name', pt.name,
+                'description', pt.description,
+                'short_description', pt.short_description
+            )
+        ) FILTER (WHERE pt.language_code IS NOT NULL),
+        '{}'::jsonb
+    ) as translations
 FROM products p
 LEFT JOIN product_categories pc ON p.id = pc.product_id
 LEFT JOIN categories c ON pc.category_id = c.id AND c.is_active = true
 LEFT JOIN product_images pi ON p.id = pi.product_id
 LEFT JOIN product_variants pv ON p.id = pv.product_id AND pv.is_active = true
+LEFT JOIN product_translations pt ON p.id = pt.product_id
 WHERE p.status = 'active'
 GROUP BY p.id;

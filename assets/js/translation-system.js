@@ -625,6 +625,49 @@ class TranslationSystem {
     }
 
     /**
+     * Translate product content (name, descriptions)
+     * @param {Object} product - Product object with translations property
+     * @returns {Object} - Object with translated name, description, shortDescription
+     */
+    translateProduct(product) {
+        if (!product) return null;
+
+        // Default to original product content
+        let translatedContent = {
+            name: product.name,
+            description: product.description,
+            shortDescription: product.shortDescription
+        };
+
+        // If product has translations and we're not in Spanish
+        if (product.translations && this.currentLanguage !== 'es') {
+            const translation = product.translations[this.currentLanguage];
+            if (translation) {
+                translatedContent = {
+                    name: translation.name || product.name,
+                    description: translation.description || product.description,
+                    shortDescription: translation.short_description || product.shortDescription
+                };
+            }
+        }
+
+        return translatedContent;
+    }
+
+    /**
+     * Get translated product field
+     * @param {Object} product - Product object
+     * @param {String} field - Field name (name, description, shortDescription)
+     * @returns {String} - Translated field value
+     */
+    getProductField(product, field) {
+        if (!product) return '';
+
+        const translated = this.translateProduct(product);
+        return translated[field] || product[field] || '';
+    }
+
+    /**
      * Apply translations to elements with data-translate attribute
      */
     applyTranslations() {

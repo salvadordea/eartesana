@@ -45,17 +45,21 @@ class SupabaseAPI {
 
             const products = await response.json();
             
-            // Obtener category_ids para cada producto
+            // Obtener category_ids y translations para cada producto
             const productsWithCategories = await Promise.all(
                 products.map(async (product) => {
-                    const categoryIds = await this.getProductCategoryIds(product.id);
+                    const [categoryIds, translations] = await Promise.all([
+                        this.getProductCategoryIds(product.id),
+                        this.getProductTranslations(product.id)
+                    ]);
                     return {
                         ...product,
-                        category_ids: categoryIds
+                        category_ids: categoryIds,
+                        translations: translations
                     };
                 })
             );
-            
+
             // Transformar datos al formato que espera el frontend
             let transformedProducts = productsWithCategories.map(this.transformProduct.bind(this));
             
@@ -101,10 +105,16 @@ class SupabaseAPI {
                 throw new Error('Producto no encontrado');
             }
 
-            let product = this.transformProduct(products[0]);
-            
-            // Obtener variantes del producto
-            const variants = await this.getProductVariants(id);
+            // Obtener traducciones y variantes del producto
+            const [translations, variants] = await Promise.all([
+                this.getProductTranslations(id),
+                this.getProductVariants(id)
+            ]);
+
+            let product = this.transformProduct({
+                ...products[0],
+                translations: translations
+            });
             product.variations = variants;
             
             // Aplicar precios de mayorista si corresponde
@@ -244,7 +254,7 @@ class SupabaseAPI {
             }
 
             const variants = await response.json();
-            
+
             // Transformar al formato esperado por el frontend
             return variants.map(variant => ({
                 id: variant.id,
@@ -254,10 +264,45 @@ class SupabaseAPI {
                 image: variant.image_url,
                 inStock: variant.stock > 0
             }));
-            
+
         } catch (error) {
             console.error('❌ Error obteniendo variantes:', error);
             return [];
+        }
+    }
+
+    /**
+     * Obtener traducciones de un producto
+     */
+    async getProductTranslations(productId) {
+        try {
+            const response = await fetch(`${this.baseUrl}/rest/v1/product_translations?product_id=eq.${productId}`, {
+                method: 'GET',
+                headers: this.headers
+            });
+
+            if (!response.ok) {
+                // Si no hay traducciones, devolver objeto vacío
+                return {};
+            }
+
+            const translations = await response.json();
+
+            // Convertir array de traducciones a objeto indexado por language_code
+            const translationsObj = {};
+            translations.forEach(t => {
+                translationsObj[t.language_code] = {
+                    name: t.name,
+                    description: t.description,
+                    short_description: t.short_description
+                };
+            });
+
+            return translationsObj;
+
+        } catch (error) {
+            console.warn('⚠️ Error obteniendo traducciones:', error);
+            return {};
         }
     }
 
@@ -434,6 +479,7 @@ class SupabaseAPI {
             categories: product.categories || [],
             category_ids: product.category_ids || [],
             images: (product.images || []).map(img => this.processImageUrl(img, product.name)),
+            translations: product.translations || {},
             createdAt: product.created_at
         };
     }
