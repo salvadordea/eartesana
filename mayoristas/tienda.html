@@ -1538,6 +1538,9 @@
                     <h3 class="user-name" id="wholesalerName">Mayorista</h3>
                     <p class="user-company">Descuento 20% aplicado</p>
                 </div>
+                <a href="mi-cuenta.html" style="color: var(--silver-accent); text-decoration: none; padding: 8px 16px; border: 1px solid var(--silver-accent); border-radius: 4px; transition: all 0.3s;">
+                    <i class="fas fa-user"></i> Mi Cuenta
+                </a>
                 <button class="logout-btn" onclick="logoutWholesaler()">
                     <i class="fas fa-sign-out-alt"></i> Salir
                 </button>
@@ -1708,8 +1711,10 @@
     <script src="../assets/js/config.js"></script>
     <script src="../assets/js/cloudinary-config.js"></script>
     <script src="../assets/js/main.js"></script>
-    <script src="../get_products_with_variants.js"></script>
-    
+
+    <!-- Product Variants Manager for Wholesale -->
+    <script src="../utilities/get_products_with_variants.js"></script>
+
     <!-- Wholesale Store Scripts -->
     <script>
         // Wholesale Store Configuration
@@ -2734,6 +2739,9 @@
             });
         });
     </script>
+
+    <!-- Translation System -->
+    <script src="../assets/js/translation-system.js"></script>
 
     <!-- Mayoristas Authentication Guard -->
     <script src="mayoristas-auth-guard.js"></script>

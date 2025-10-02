@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="../assets/css/mayoristas-checkout.css">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
 </head>
 <body class="checkout-page">
     <!-- Header Simple -->
@@ -192,7 +195,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-row">
+
+                            <!-- RFC de Público en General Toggle -->
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="publicoGeneral">
+                                    <span class="checkmark"></span>
+                                    Usar RFC de Público en General (XAXX010101000)
+                                </label>
+                            </div>
+
+                            <div class="form-row" id="rfcFieldsSection">
                                 <div class="form-group">
                                     <label for="rfc">RFC *</label>
                                     <input type="text" id="rfc" placeholder="RFC de la empresa" required>
@@ -390,6 +403,22 @@
         let checkoutCart = [];
         let currentUser = null;
         let orderTotal = 0;
+        let supabase = null;
+
+        // Initialize Supabase client
+        function initializeSupabase() {
+            if (typeof window.supabase !== 'undefined' && window.SUPABASE_CONFIG) {
+                supabase = window.supabase.createClient(
+                    window.SUPABASE_CONFIG.url,
+                    window.SUPABASE_CONFIG.anonKey
+                );
+                window.supabase = supabase; // Make it globally available
+                console.log('✅ Supabase client initialized for checkout');
+                return true;
+            }
+            console.error('❌ Supabase not available or config missing');
+            return false;
+        }
 
         // Check authentication
         function checkCheckoutAuth() {
@@ -419,17 +448,62 @@
             }
         }
 
+        // Load wholesaler profile from database
+        async function loadWholesalerProfile() {
+            if (!supabase || !currentUser) return;
+
+            try {
+                const { data, error } = await supabase
+                    .from('wholesalers')
+                    .select('*')
+                    .eq('email', currentUser.email)
+                    .single();
+
+                if (error) {
+                    console.warn('Could not load wholesaler profile:', error);
+                    return;
+                }
+
+                if (data) {
+                    console.log('✅ Wholesaler profile loaded, auto-filling form');
+
+                    // Pre-fill contact information
+                    document.getElementById('contactName').value = data.contact_name || data.name || '';
+                    document.getElementById('contactEmail').value = data.email || '';
+                    document.getElementById('contactPhone').value = data.contact_phone || data.phone || '';
+                    document.getElementById('company').value = data.company || '';
+
+                    // Pre-fill shipping address
+                    if (data.shipping_address) {
+                        document.getElementById('shippingAddress').value = data.shipping_address || '';
+                        document.getElementById('shippingCity').value = data.shipping_city || '';
+                        document.getElementById('shippingState').value = data.shipping_state || '';
+                        document.getElementById('shippingZipcode').value = data.shipping_zipcode || '';
+                    }
+
+                    // Pre-fill billing information
+                    if (data.rfc) {
+                        document.getElementById('rfc').value = data.rfc || '';
+                        document.getElementById('businessName').value = data.business_name || data.company || '';
+                        document.getElementById('billingAddress').value = data.billing_address || data.shipping_address || '';
+                        document.getElementById('billingCity').value = data.billing_city || data.shipping_city || '';
+                        document.getElementById('billingState').value = data.billing_state || data.shipping_state || '';
+                        document.getElementById('billingZipcode').value = data.billing_zipcode || data.shipping_zipcode || '';
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading wholesaler profile:', error);
+            }
+        }
+
         // Update user info
         function updateUserInfo() {
             if (currentUser) {
-                document.getElementById('checkoutWholesalerName').textContent = 
+                document.getElementById('checkoutWholesalerName').textContent =
                     currentUser.company || currentUser.name || 'Mayorista';
-                
-                // Pre-fill form with user data
-                document.getElementById('contactName').value = currentUser.name || '';
-                document.getElementById('contactEmail').value = currentUser.email || '';
-                document.getElementById('contactPhone').value = currentUser.phone || '';
-                document.getElementById('company').value = currentUser.company || '';
+
+                // Load full profile from database
+                loadWholesalerProfile();
             }
         }
 
@@ -626,11 +700,25 @@
             // Process each cart item
             for (const item of items) {
                 try {
+                    // Extract actual variant ID (handle both numeric and string formats)
+                    let actualVariantId = item.variantId || item.id;
+
+                    // If id is in format "660-3", extract the second part
+                    if (typeof actualVariantId === 'string' && actualVariantId.includes('-')) {
+                        const parts = actualVariantId.split('-');
+                        actualVariantId = parseInt(parts[parts.length - 1], 10);
+                    }
+
+                    // Convert to number if it's a string
+                    actualVariantId = typeof actualVariantId === 'string' ? parseInt(actualVariantId, 10) : actualVariantId;
+
+                    console.log(`🔍 Processing item: ${item.name}, variantId: ${actualVariantId}`);
+
                     // Get current stock for the variant
                     const { data: variant, error: fetchError } = await supabase
                         .from('product_variants')
                         .select('stock, variant_name')
-                        .eq('id', item.variantId)
+                        .eq('id', actualVariantId)
                         .single();
 
                     if (fetchError) {
@@ -656,7 +744,7 @@
                     const { error: updateError } = await supabase
                         .from('product_variants')
                         .update({ stock: newStock })
-                        .eq('id', item.variantId);
+                        .eq('id', actualVariantId);
 
                     if (updateError) {
                         console.error('❌ Error updating variant stock:', updateError);
@@ -888,9 +976,12 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🛒 Checkout mayoristas inicializado');
-            
+
+            // Initialize Supabase first
+            initializeSupabase();
+
             if (!checkCheckoutAuth()) return;
-            
+
             loadCheckoutCart();
             
             // Setup form interactions
@@ -911,6 +1002,29 @@
                 }
             });
             
+            // Handle Público en General toggle
+            document.getElementById('publicoGeneral').addEventListener('change', function() {
+                const rfcInput = document.getElementById('rfc');
+                const businessNameInput = document.getElementById('businessName');
+                const rfcFieldsSection = document.getElementById('rfcFieldsSection');
+
+                if (this.checked) {
+                    // Use Público en General RFC
+                    rfcInput.value = 'XAXX010101000';
+                    businessNameInput.value = 'PÚBLICO EN GENERAL';
+                    rfcInput.disabled = true;
+                    businessNameInput.disabled = true;
+                    rfcFieldsSection.style.opacity = '0.6';
+                } else {
+                    // Enable custom RFC
+                    rfcInput.value = '';
+                    businessNameInput.value = '';
+                    rfcInput.disabled = false;
+                    businessNameInput.disabled = false;
+                    rfcFieldsSection.style.opacity = '1';
+                }
+            });
+
             // Auto-uppercase RFC
             document.getElementById('rfc').addEventListener('input', function() {
                 this.value = this.value.toUpperCase();
