@@ -225,9 +225,20 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="../assets/js/config.js"></script>
     <script>
-        // Mock wholesaler database
+        // Initialize Supabase
+        let supabase;
+        if (window.SUPABASE_CONFIG) {
+            supabase = window.supabase.createClient(
+                window.SUPABASE_CONFIG.url,
+                window.SUPABASE_CONFIG.anonKey
+            );
+            console.log('✅ Supabase inicializado para mayoristas');
+        }
+
+        // Mock wholesaler database (fallback)
         const wholesalers = [
             {
                 id: 1,
@@ -329,28 +340,106 @@ Sábados: 10:00 AM - 2:00 PM`);
         // Login form submission
         async function handleLogin(event) {
             event.preventDefault();
-            
+
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const rememberMe = document.getElementById('rememberMe').checked;
             const loginBtn = document.getElementById('loginBtn');
-            
+
             // Disable button and show loading
             loginBtn.disabled = true;
             loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando sesión...';
-            
+
             try {
-                // Simulate API call delay
+                // Intentar autenticación con Supabase
+                if (supabase) {
+                    const { data, error } = await supabase.auth.signInWithPassword({
+                        email: email,
+                        password: password
+                    });
+
+                    if (data.user && data.session) {
+                        // Verificar rol del usuario en user_profiles
+                        const { data: profileData, error: profileError } = await supabase
+                            .from('user_profiles')
+                            .select('role, full_name, company_name, phone, wholesale_discount_percent, is_active')
+                            .eq('id', data.user.id)
+                            .single();
+
+                        if (profileError || !profileData) {
+                            console.error('Error obteniendo perfil de usuario:', profileError);
+                            throw new Error('No se pudo verificar el perfil de usuario');
+                        }
+
+                        // Verificar que el usuario sea Mayorista o Admin
+                        if (profileData.role !== 'Mayorista' && profileData.role !== 'Admin') {
+                            console.warn('⚠️ Acceso denegado: Usuario no es mayorista. Rol:', profileData.role);
+                            await supabase.auth.signOut();
+                            throw new Error('Acceso denegado: Esta sección es solo para clientes mayoristas.');
+                        }
+
+                        // Verificar que esté activo
+                        if (!profileData.is_active) {
+                            await supabase.auth.signOut();
+                            throw new Error('Tu cuenta mayorista está inactiva. Contacta a soporte para más información.');
+                        }
+
+                        // Crear sesión
+                        const sessionDuration = rememberMe ? 30 * 24 * 60 * 60 * 1000 : 8 * 60 * 60 * 1000;
+                        const sessionData = {
+                            id: data.user.id,
+                            name: profileData.full_name || data.user.email,
+                            email: data.user.email,
+                            company: profileData.company_name || 'Sin empresa',
+                            phone: profileData.phone || '',
+                            discount: profileData.wholesale_discount_percent || 0,
+                            role: profileData.role,
+                            status: 'active',
+                            isLoggedIn: true,
+                            loginTime: Date.now(),
+                            expires: Date.now() + sessionDuration,
+                            source: 'supabase_auth'
+                        };
+
+                        localStorage.setItem('wholesaleSession', JSON.stringify(sessionData));
+
+                        // Success feedback
+                        loginBtn.innerHTML = '<i class="fas fa-check"></i> ¡Acceso exitoso!';
+                        loginBtn.style.backgroundColor = '#28a745';
+
+                        // Show welcome message
+                        setTimeout(() => {
+                            alert(`¡Bienvenido/a, ${sessionData.name}! 🎉
+
+Has iniciado sesión exitosamente en tu cuenta mayorista.
+
+🏢 Empresa: ${sessionData.company}
+💼 Descuento: ${sessionData.discount}%
+📧 Email: ${sessionData.email}
+
+Serás redirigido/a a tu tienda exclusiva con precios especiales.`);
+
+                            // Redirect to wholesale store
+                            window.location.href = 'tienda.html';
+                        }, 500);
+                        return;
+                    }
+
+                    if (error) {
+                        console.error('Error de Supabase Auth:', error);
+                        // Continuar con fallback mock
+                    }
+                }
+
+                // Fallback: Mock authentication
                 await new Promise(resolve => setTimeout(resolve, 1500));
-                
-                // Check credentials (in production, this would be an API call)
+
                 const wholesaler = wholesalers.find(w => w.email === email && w.password === password);
-                
+
                 if (!wholesaler) {
                     throw new Error('Credenciales incorrectas');
                 }
-                
-                // Check if account is suspended
+
                 if (wholesaler.status === 'suspended') {
                     throw new Error(`CUENTA SUSPENDIDA
 
@@ -362,13 +451,13 @@ Para reactivar tu cuenta, por favor contacta a:
 
 Nuestro equipo te ayudará a resolver cualquier inconveniente.`);
                 }
-                
+
                 if (wholesaler.status === 'inactive') {
                     throw new Error('Tu cuenta mayorista está inactiva. Contacta a soporte para más información.');
                 }
-                
-                // Create session
-                const sessionDuration = rememberMe ? 30 * 24 * 60 * 60 * 1000 : 8 * 60 * 60 * 1000; // 30 days or 8 hours
+
+                // Create mock session
+                const sessionDuration = rememberMe ? 30 * 24 * 60 * 60 * 1000 : 8 * 60 * 60 * 1000;
                 const sessionData = {
                     id: wholesaler.id,
                     name: wholesaler.name,
@@ -376,18 +465,20 @@ Nuestro equipo te ayudará a resolver cualquier inconveniente.`);
                     company: wholesaler.company,
                     phone: wholesaler.phone,
                     discount: wholesaler.discount,
+                    role: 'Mayorista',
                     status: wholesaler.status,
                     isLoggedIn: true,
                     loginTime: Date.now(),
-                    expires: Date.now() + sessionDuration
+                    expires: Date.now() + sessionDuration,
+                    source: 'mock'
                 };
-                
+
                 localStorage.setItem('wholesaleSession', JSON.stringify(sessionData));
-                
+
                 // Success feedback
                 loginBtn.innerHTML = '<i class="fas fa-check"></i> ¡Acceso exitoso!';
                 loginBtn.style.backgroundColor = '#28a745';
-                
+
                 // Show welcome message
                 setTimeout(() => {
                     alert(`¡Bienvenido/a, ${wholesaler.name}! 🎉
@@ -399,7 +490,7 @@ Has iniciado sesión exitosamente en tu cuenta mayorista.
 📧 Email: ${wholesaler.email}
 
 Serás redirigido/a a tu tienda exclusiva con precios especiales.`);
-                    
+
                     // Redirect to wholesale store
                     window.location.href = 'tienda.html';
                 }, 500);

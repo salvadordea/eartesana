@@ -1748,17 +1748,26 @@
                 window.location.href = 'login.html';
                 return false;
             }
-            
+
             try {
                 const sessionData = JSON.parse(wholesaleSession);
                 const now = Date.now();
-                
+
                 if (!sessionData.isLoggedIn || now > sessionData.expires) {
                     localStorage.removeItem('wholesaleSession');
                     window.location.href = 'login.html';
                     return false;
                 }
-                
+
+                // Verificar que el usuario sea Mayorista o Admin
+                if (sessionData.role && sessionData.role !== 'Mayorista' && sessionData.role !== 'Admin') {
+                    console.warn('⚠️ Acceso denegado: Usuario no es mayorista. Rol:', sessionData.role);
+                    alert('Acceso denegado: Esta sección es solo para clientes mayoristas.');
+                    localStorage.removeItem('wholesaleSession');
+                    window.location.replace('../index.html');
+                    return false;
+                }
+
                 currentUser = sessionData;
                 updateUserInfo();
                 return true;

@@ -6,7 +6,8 @@
       "Bash(grep:*)",
       "Bash(find:*)",
       "Bash(mkdir:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(cmd /c:*)"
     ],
     "deny": [],
     "ask": []

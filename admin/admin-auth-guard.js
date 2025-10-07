@@ -74,6 +74,20 @@ class AdminAuthGuard {
                 return false;
             }
 
+            // Verificar que el usuario tenga rol de Admin
+            if (sessionData.role && sessionData.role !== 'Admin') {
+                console.warn('⚠️ AdminAuthGuard: Usuario no tiene permisos de administrador. Rol:', sessionData.role);
+                localStorage.removeItem('adminSession');
+                return false;
+            }
+
+            // Si no hay rol en la sesión, es una sesión antigua (fallback local) - permitir solo si es local
+            if (!sessionData.role && sessionData.source !== 'local' && sessionData.source !== 'local_fallback') {
+                console.warn('⚠️ AdminAuthGuard: Sesión sin rol verificado');
+                localStorage.removeItem('adminSession');
+                return false;
+            }
+
             // Session is valid
             console.log('✅ AdminAuthGuard: Authentication successful');
 
@@ -105,6 +119,9 @@ class AdminAuthGuard {
 
             // Log unauthorized access attempt (optional)
             this.logUnauthorizedAccess();
+
+            // Show access denied message
+            alert('Acceso denegado: No tienes permisos de administrador.\n\nSerás redirigido a la página principal.');
 
             // Use replace to prevent back button issues
             // Redirect to homepage, not login page, to prevent loops
@@ -184,6 +201,8 @@ class AdminAuthGuard {
             return {
                 email: sessionData.email || sessionData.username,
                 userId: sessionData.userId,
+                role: sessionData.role,
+                fullName: sessionData.fullName,
                 loginTime: sessionData.loginTime,
                 source: sessionData.source
             };

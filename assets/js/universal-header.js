@@ -48,14 +48,14 @@ class UniversalHeader {
      */
     detectCurrentPage() {
         const path = this.currentPath.toLowerCase();
-        
+
         if (path.includes('tienda') || path.includes('shop')) return 'tienda';
         if (path.includes('sobre-nosotros') || path.includes('about')) return 'sobre';
         if (path.includes('mayoristas') || path.includes('wholesale')) return 'mayoristas';
         if (path.includes('contacto') || path.includes('contact')) return 'contacto';
-        if (path.includes('registro') || path.includes('register')) return 'registro';
+        if (path.includes('micuenta') || path.includes('mi-cuenta') || path.includes('registro') || path.includes('register')) return 'registro';
         if (path.includes('index.html') || path === '/' || path.endsWith('/')) return 'home';
-        
+
         return 'home'; // Por defecto
     }
 
@@ -69,7 +69,7 @@ class UniversalHeader {
             SOBRE_NOSOTROS_URL: `${this.baseUrl}pages/sobre-nosotros/index.html`,
             MAYORISTAS_URL: `${this.baseUrl}pages/mayoristas/index.html`,
             CONTACTO_URL: `${this.baseUrl}index.html#contacto`,
-            REGISTRO_URL: `${this.baseUrl}index.html#registro`,
+            REGISTRO_URL: `${this.baseUrl}micuenta.html`,
             LOGO_URL: `${this.baseUrl}assets/images/logo.webp`
         };
     }

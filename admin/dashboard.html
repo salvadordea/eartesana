@@ -1787,11 +1787,33 @@
                     }, 100);
                     return false;
                 }
-                
+
+                // Verificar que el usuario tenga rol de Admin
+                if (sessionData.role && sessionData.role !== 'Admin') {
+                    console.warn('⚠️ Acceso denegado: Usuario no es administrador. Rol:', sessionData.role);
+                    alert('Acceso denegado: No tienes permisos de administrador.\n\nSerás redirigido a la página principal.');
+                    localStorage.removeItem('adminSession');
+                    setTimeout(() => {
+                        window.location.replace('../index.html');
+                    }, 100);
+                    return false;
+                }
+
+                // Si no hay rol en la sesión, es una sesión antigua (fallback local) - permitir solo si es local
+                if (!sessionData.role && sessionData.source !== 'local' && sessionData.source !== 'local_fallback') {
+                    console.warn('⚠️ Sesión sin rol verificado');
+                    alert('Acceso denegado: No tienes permisos de administrador.\n\nSerás redirigido a la página principal.');
+                    localStorage.removeItem('adminSession');
+                    setTimeout(() => {
+                        window.location.replace('../index.html');
+                    }, 100);
+                    return false;
+                }
+
                 // Sesión válida
                 currentUser = sessionData;
                 updateUserInfo();
-                console.log('✅ Autenticación admin válida:', sessionData.email || sessionData.username);
+                console.log('✅ Autenticación admin válida:', sessionData.email || sessionData.username, 'Rol:', sessionData.role);
                 
                 // Limpiar contador de verificaciones y flags de loop
                 setTimeout(() => {
