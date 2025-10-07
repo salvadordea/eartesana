@@ -712,7 +712,7 @@
             <a href="#" class="nav-item" data-section="mayoristas">
                 <i class="fas fa-users-cog"></i> Mayoristas
             </a>
-            <a href="#" class="nav-item" data-section="usuarios">
+            <a href="usuarios.html" class="nav-item">
                 <i class="fas fa-users"></i> Usuarios
             </a>
             <a href="#" class="nav-item" data-section="banner">
@@ -798,7 +798,7 @@
                     <div class="card-description">
                         Administra usuarios regulares, modifica contraseñas, suspende o elimina cuentas.
                     </div>
-                    <div class="card-action" onclick="showSection('usuarios')">
+                    <div class="card-action" onclick="window.location.href='usuarios.html'">
                         <i class="fas fa-arrow-right"></i> Gestionar Usuarios
                     </div>
                 </div>
@@ -3312,8 +3312,9 @@
             
             try {
                 const { data: mayoristas, error } = await supabase
-                    .from('wholesalers')
+                    .from('user_profiles')
                     .select('*')
+                    .eq('role', 'Mayorista')
                     .order('created_at', { ascending: false });
                 
                 if (error) {
@@ -3322,12 +3323,20 @@
                     return;
                 }
                 
-                allMayoristas = mayoristas || [];
+                // Mapear campos de user_profiles a formato esperado por la UI
+                allMayoristas = (mayoristas || []).map(m => ({
+                    ...m,
+                    name: m.full_name || m.email,
+                    company: m.company_name || 'Sin empresa',
+                    discount_percentage: m.wholesale_discount_percent || 0,
+                    status: m.is_active ? 'active' : 'inactive',
+                    notes: m.admin_notes || ''
+                }));
                 filteredMayoristas = [...allMayoristas];
-                
+
                 // Calcular estadísticas
-                mayoristasData.active = allMayoristas.filter(m => m.status === 'active').length;
-                mayoristasData.suspended = allMayoristas.filter(m => m.status === 'suspended').length;
+                mayoristasData.active = allMayoristas.filter(m => m.is_active).length;
+                mayoristasData.suspended = allMayoristas.filter(m => !m.is_active).length;
                 
                 renderMayoristasTable();
                 updateMayoristasSummary();
@@ -3554,14 +3563,15 @@
             console.log('🔄 Saving mayorista...');
 
             const formData = {
-                name: document.getElementById('mayoristaNombre').value,
+                full_name: document.getElementById('mayoristaNombre').value,
                 email: document.getElementById('mayoristaEmail').value,
-                company: document.getElementById('mayoristaEmpresa').value,
+                company_name: document.getElementById('mayoristaEmpresa').value,
                 phone: document.getElementById('mayoristaTelefono').value,
                 password: document.getElementById('mayoristaPassword').value,
-                discount_percentage: parseInt(document.getElementById('mayoristaDescuento').value),
-                status: document.getElementById('mayoristaEstado').value,
-                notes: document.getElementById('mayoristaNotas').value
+                wholesale_discount_percent: parseInt(document.getElementById('mayoristaDescuento').value),
+                is_active: (document.getElementById('mayoristaEstado').value === 'active'),
+                admin_notes: document.getElementById('mayoristaNotas').value,
+                role: 'Mayorista' // Siempre Mayorista
             };
 
             console.log('📋 Form data collected:', formData);
@@ -3590,7 +3600,7 @@
 
                     console.log('🔄 Updating mayorista with data:', updateData);
                     result = await supabase
-                        .from('wholesalers')
+                        .from('user_profiles')
                         .update(updateData)
                         .eq('id', editId)
                         .select(); // Return updated data
@@ -3603,7 +3613,7 @@
 
                     console.log('🆕 Creating new mayorista with data:', formData);
                     result = await supabase
-                        .from('wholesalers')
+                        .from('user_profiles')
                         .insert([formData])
                         .select(); // Return created data
                 }
@@ -3681,8 +3691,8 @@
             try {
                 if (supabase) {
                     const { error } = await supabase
-                        .from('wholesalers')
-                        .update({ status: newStatus })
+                        .from('user_profiles')
+                        .update({ is_active: (newStatus === 'active') })
                         .eq('id', id);
                     
                     if (error) throw error;
@@ -3729,7 +3739,7 @@
 
                 console.log('🔄 Executing delete operation...');
                 const { error } = await supabase
-                    .from('wholesalers')
+                    .from('user_profiles')
                     .delete()
                     .eq('id', id);
 
@@ -3793,13 +3803,19 @@
             }
             
             try {
+                // NOTA: user_profiles no tiene campo password (está en auth.users)
+                // Para cambiar contraseña, usar Supabase Admin API:
+                // await supabase.auth.admin.updateUserById(id, { password: newPassword })
+
                 if (supabase) {
-                    const { error } = await supabase
-                        .from('wholesalers')
-                        .update({ password: newPassword })
-                        .eq('id', id);
-                    
-                    if (error) throw error;
+                    console.warn('⚠️ Cambio de contraseña requiere Supabase Admin API');
+                    throw new Error('Por favor contacta al administrador para cambiar la contraseña');
+
+                    // TODO: Implementar con Supabase Admin API
+                    // const { error } = await supabase.auth.admin.updateUserById(id, {
+                    //     password: newPassword
+                    // });
+                    // if (error) throw error;
                 }
                 
                 const mayorista = allMayoristas.find(m => m.id == id);
