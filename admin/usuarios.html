@@ -80,6 +80,16 @@
             color: white;
         }
 
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
         .filters {
             display: flex;
             gap: 15px;
@@ -212,6 +222,8 @@
         .actions {
             display: flex;
             gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .actions button {
@@ -591,10 +603,21 @@
                                 <td>${new Date(user.created_at).toLocaleDateString()}</td>
                                 <td>
                                     <div class="actions">
-                                        <button class="btn btn-primary" onclick='editUser(${JSON.stringify(user)})'>
+                                        <button class="btn btn-primary" onclick='editUser(${JSON.stringify(user)})' title="Editar usuario">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button class="btn btn-danger" onclick="deleteUser('${user.id}', '${user.email}')">
+                                        <button class="btn btn-warning" onclick="resetPassword('${user.id}', '${user.email}')" title="Resetear contraseña">
+                                            <i class="fas fa-key"></i>
+                                        </button>
+                                        <button class="btn ${user.is_active ? 'btn-secondary' : 'btn-success'}"
+                                                onclick="toggleUserStatus('${user.id}', '${user.email}', ${user.is_active})"
+                                                title="${user.is_active ? 'Suspender usuario' : 'Activar usuario'}">
+                                            <i class="fas fa-${user.is_active ? 'ban' : 'check'}"></i>
+                                        </button>
+                                        <button class="btn btn-info" onclick="verifyUser('${user.id}', '${user.email}')" title="Verificar email">
+                                            <i class="fas fa-envelope-circle-check"></i>
+                                        </button>
+                                        <button class="btn btn-danger" onclick="deleteUser('${user.id}', '${user.email}')" title="Eliminar usuario">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
@@ -731,6 +754,106 @@
                 loadUsers();
             } catch (error) {
                 showAlert('Error eliminando usuario: ' + error.message, 'danger');
+            }
+        }
+
+        async function resetPassword(userId, email) {
+            const newPassword = prompt(`Cambiar contraseña para: ${email}\n\nIngresa la nueva contraseña (mínimo 6 caracteres):`);
+
+            if (!newPassword) {
+                return; // User cancelled
+            }
+
+            if (newPassword.length < 6) {
+                showAlert('La contraseña debe tener al menos 6 caracteres', 'danger');
+                return;
+            }
+
+            if (!confirm(`¿Confirmas cambiar la contraseña para ${email}?\n\nNueva contraseña: ${newPassword}`)) {
+                return;
+            }
+
+            try {
+                // Call Supabase REST API directly with service role
+                // Note: This requires SUPABASE_SERVICE_ROLE_KEY in config
+                const serviceKey = window.SUPABASE_CONFIG?.serviceRoleKey;
+
+                if (!serviceKey) {
+                    throw new Error('Service Role Key no configurada. Ve a Supabase Dashboard → Settings → API para obtenerla y agrégala a config.js');
+                }
+
+                const response = await fetch(
+                    `${window.SUPABASE_CONFIG.url}/auth/v1/admin/users/${userId}`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${serviceKey}`,
+                            'apikey': serviceKey
+                        },
+                        body: JSON.stringify({
+                            password: newPassword
+                        })
+                    }
+                );
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Error actualizando contraseña');
+                }
+
+                showAlert(`Contraseña actualizada exitosamente para ${email}`, 'success');
+            } catch (error) {
+                console.error('Error resetting password:', error);
+                showAlert('Error: ' + error.message, 'danger');
+            }
+        }
+
+        async function toggleUserStatus(userId, email, currentStatus) {
+            const action = currentStatus ? 'suspender' : 'activar';
+            const newStatus = !currentStatus;
+
+            if (!confirm(`¿Estás seguro de ${action} al usuario ${email}?`)) {
+                return;
+            }
+
+            try {
+                const { error } = await supabase
+                    .from('user_profiles')
+                    .update({ is_active: newStatus })
+                    .eq('id', userId);
+
+                if (error) throw error;
+
+                showAlert(`Usuario ${newStatus ? 'activado' : 'suspendido'} exitosamente`, 'success');
+                loadUsers();
+            } catch (error) {
+                showAlert('Error actualizando estado: ' + error.message, 'danger');
+            }
+        }
+
+        async function verifyUser(userId, email) {
+            if (!confirm(`¿Marcar email como verificado para: ${email}?\n\nNota: Esta acción requiere permisos de servicio. Si falla, verifica el usuario manualmente desde Supabase Dashboard.`)) {
+                return;
+            }
+
+            try {
+                // Update user_profiles metadata to mark as verified
+                const { error } = await supabase
+                    .from('user_profiles')
+                    .update({
+                        email_verified: true,
+                        updated_at: new Date().toISOString()
+                    })
+                    .eq('id', userId);
+
+                if (error) throw error;
+
+                showAlert(`Usuario marcado como verificado: ${email}`, 'success');
+                loadUsers();
+            } catch (error) {
+                console.error('Error verifying user:', error);
+                showAlert('Error: ' + error.message + '\n\nPara verificar manualmente, ve a Supabase Dashboard → Authentication → Users', 'danger');
             }
         }
 
