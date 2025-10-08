@@ -802,28 +802,13 @@
 
                 <div class="dashboard-card">
                     <div class="card-header">
-                        <div class="card-icon" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
-                            <i class="fas fa-bullhorn"></i>
-                        </div>
-                        <div class="card-title">Banner Promocional</div>
-                    </div>
-                    <div class="card-description">
-                        Modifica el contenido del banner promocional mensual que aparece en la página principal.
-                    </div>
-                    <div class="card-action" onclick="showSection('banner')">
-                        <i class="fas fa-arrow-right"></i> Editar Banner
-                    </div>
-                </div>
-
-                <div class="dashboard-card">
-                    <div class="card-header">
                         <div class="card-icon" style="background: linear-gradient(135deg, #1abc9c, #16a085);">
                             <i class="fas fa-address-card"></i>
                         </div>
                         <div class="card-title">Info de Contacto</div>
                     </div>
                     <div class="card-description">
-                        Edita las tarjetas de contacto que aparecen en la página principal.
+                        Edita las tarjetas de contacto, banner promocional y elementos de confianza de la página principal.
                     </div>
                     <div class="card-action" onclick="showSection('contacto')">
                         <i class="fas fa-arrow-right"></i> Editar Contacto
@@ -1855,6 +1840,13 @@
             if (sectionId === 'contacto') {
                 setTimeout(() => {
                     loadContactInfoSilent();
+                }, 100);
+            }
+
+            // Auto-load mayoristas when opening that section
+            if (sectionId === 'mayoristas') {
+                setTimeout(() => {
+                    initMayoristasPanel();
                 }, 100);
             }
 
@@ -3388,7 +3380,7 @@
                 const registerDate = new Date(mayorista.created_at).toLocaleDateString();
                 const statusBadge = getMayoristaStatusBadge(mayorista.status);
                 const ordersCount = Math.floor(Math.random() * 20) + 1; // Simulado
-                
+
                 return `
                     <tr>
                         <td><strong>${mayorista.name}</strong></td>
@@ -3399,25 +3391,25 @@
                         <td>${ordersCount}</td>
                         <td>
                             <div class="action-buttons">
-                                <button class="action-btn btn-primary" onclick="viewMayorista(${mayorista.id})" title="Ver Detalles">
+                                <button class="action-btn btn-primary" onclick="viewMayorista('${mayorista.id}')" title="Ver Detalles">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button class="action-btn btn-warning" onclick="editMayorista(${mayorista.id})" title="Editar">
+                                <button class="action-btn btn-warning" onclick="editMayorista('${mayorista.id}')" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="action-btn btn-success" onclick="showPasswordModal(${mayorista.id})" title="Cambiar Contraseña">
+                                <button class="action-btn btn-success" onclick="showPasswordModal('${mayorista.id}')" title="Cambiar Contraseña">
                                     <i class="fas fa-key"></i>
                                 </button>
                                 ${mayorista.status === 'active' ? `
-                                    <button class="action-btn btn-danger" onclick="suspendMayorista(${mayorista.id})" title="Suspender">
+                                    <button class="action-btn btn-danger" onclick="suspendMayorista('${mayorista.id}')" title="Suspender">
                                         <i class="fas fa-ban"></i>
                                     </button>
                                 ` : `
-                                    <button class="action-btn btn-success" onclick="activateMayorista(${mayorista.id})" title="Activar">
+                                    <button class="action-btn btn-success" onclick="activateMayorista('${mayorista.id}')" title="Activar">
                                         <i class="fas fa-check"></i>
                                     </button>
                                 `}
-                                <button class="action-btn btn-danger" onclick="deleteMayorista(${mayorista.id})" title="Eliminar">
+                                <button class="action-btn btn-danger" onclick="deleteMayorista('${mayorista.id}')" title="Eliminar">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>

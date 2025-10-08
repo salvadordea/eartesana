@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Carga de Mayoristas</title>
+    <script src="admin-auth-guard.js"></script>
+    <style>
+        body {
+            font-family: monospace;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+        }
+        .section {
+            background: #252526;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #3e3e42;
+        }
+        h2 {
+            color: #4ec9b0;
+            margin-top: 0;
+        }
+        .success {
+            color: #4ec9b0;
+        }
+        .error {
+            color: #f48771;
+        }
+        .warning {
+            color: #dcdcaa;
+        }
+        pre {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            border: 1px solid #3e3e42;
+        }
+        button {
+            background: #0e639c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1177bb;
+        }
+        .log-entry {
+            padding: 5px;
+            margin: 2px 0;
+            border-left: 3px solid #3e3e42;
+            padding-left: 10px;
+        }
+        .log-entry.error {
+            border-left-color: #f48771;
+        }
+        .log-entry.success {
+            border-left-color: #4ec9b0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #3e3e42;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background: #1e1e1e;
+            color: #4ec9b0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Debug - Carga de Mayoristas</h1>
+
+    <div class="section">
+        <h2>1. Configuración de Supabase</h2>
+        <button onclick="checkSupabaseConfig()">Verificar Configuración</button>
+        <div id="configResult"></div>
+    </div>
+
+    <div class="section">
+        <h2>2. Consulta Directa - user_profiles</h2>
+        <button onclick="testDirectQuery()">Ejecutar Query</button>
+        <div id="queryResult"></div>
+    </div>
+
+    <div class="section">
+        <h2>3. Filtro por Rol Mayorista</h2>
+        <button onclick="testMayoristaQuery()">Buscar Mayoristas</button>
+        <div id="mayoristaResult"></div>
+    </div>
+
+    <div class="section">
+        <h2>4. Todos los Roles</h2>
+        <button onclick="testAllRoles()">Ver Todos los Roles</button>
+        <div id="rolesResult"></div>
+    </div>
+
+    <div class="section">
+        <h2>5. Verificar RLS Policies</h2>
+        <button onclick="testRLS()">Verificar Permisos</button>
+        <div id="rlsResult"></div>
+    </div>
+
+    <div class="section">
+        <h2>6. Log de Actividad</h2>
+        <button onclick="clearLog()">Limpiar Log</button>
+        <div id="activityLog"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/config.js"></script>
+    <script>
+        let supabase;
+        let activityLog = [];
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            activityLog.push({ timestamp, message, type });
+            updateActivityLog();
+            console.log(`[${timestamp}] ${message}`);
+        }
+
+        function updateActivityLog() {
+            const logDiv = document.getElementById('activityLog');
+            logDiv.innerHTML = activityLog.map(entry =>
+                `<div class="log-entry ${entry.type}">[${entry.timestamp}] ${entry.type.toUpperCase()}: ${entry.message}</div>`
+            ).reverse().join('');
+        }
+
+        function clearLog() {
+            activityLog = [];
+            updateActivityLog();
+        }
+
+        async function checkSupabaseConfig() {
+            const resultDiv = document.getElementById('configResult');
+            resultDiv.innerHTML = '<p>Verificando...</p>';
+
+            try {
+                if (!window.SUPABASE_CONFIG) {
+                    resultDiv.innerHTML = '<p class="error">❌ No se encontró SUPABASE_CONFIG en window</p>';
+                    log('SUPABASE_CONFIG no está definido', 'error');
+                    return;
+                }
+
+                const config = window.SUPABASE_CONFIG;
+                resultDiv.innerHTML = `
+                    <pre class="success">✅ Configuración encontrada:
+URL: ${config.url}
+Anon Key: ${config.anonKey ? config.anonKey.substring(0, 20) + '...' : 'NO DEFINIDA'}
+Service Role Key: ${config.serviceRoleKey ? 'PRESENTE' : 'NO PRESENTE'}</pre>
+                `;
+
+                // Initialize Supabase
+                supabase = window.supabase.createClient(config.url, config.anonKey);
+                log('Supabase inicializado correctamente', 'success');
+
+                // Check auth
+                const { data: { session }, error } = await supabase.auth.getSession();
+                if (error) {
+                    resultDiv.innerHTML += `<p class="error">Error de sesión: ${error.message}</p>`;
+                    log('Error de sesión: ' + error.message, 'error');
+                } else if (session) {
+                    resultDiv.innerHTML += `<p class="success">✅ Usuario autenticado: ${session.user.email}</p>`;
+                    log('Usuario autenticado: ' + session.user.email, 'success');
+                } else {
+                    resultDiv.innerHTML += `<p class="warning">⚠️ No hay sesión activa</p>`;
+                    log('No hay sesión activa', 'warning');
+                }
+
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+                log('Error verificando configuración: ' + error.message, 'error');
+            }
+        }
+
+        async function testDirectQuery() {
+            const resultDiv = document.getElementById('queryResult');
+            resultDiv.innerHTML = '<p>Ejecutando query...</p>';
+
+            if (!supabase) {
+                resultDiv.innerHTML = '<p class="error">❌ Primero verifica la configuración de Supabase</p>';
+                return;
+            }
+
+            try {
+                log('Ejecutando query a user_profiles sin filtros', 'info');
+                const { data, error, count } = await supabase
+                    .from('user_profiles')
+                    .select('*', { count: 'exact' })
+                    .limit(10);
+
+                if (error) {
+                    resultDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>
+                        <pre>${JSON.stringify(error, null, 2)}</pre>`;
+                    log('Error en query directa: ' + error.message, 'error');
+                    return;
+                }
+
+                resultDiv.innerHTML = `
+                    <p class="success">✅ Query exitosa - ${count} registros totales</p>
+                    <p>Primeros ${data.length} registros:</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+                log(`Query exitosa: ${count} registros encontrados`, 'success');
+
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">❌ Error inesperado: ${error.message}</p>`;
+                log('Error inesperado: ' + error.message, 'error');
+            }
+        }
+
+        async function testMayoristaQuery() {
+            const resultDiv = document.getElementById('mayoristaResult');
+            resultDiv.innerHTML = '<p>Buscando mayoristas...</p>';
+
+            if (!supabase) {
+                resultDiv.innerHTML = '<p class="error">❌ Primero verifica la configuración de Supabase</p>';
+                return;
+            }
+
+            try {
+                log('Ejecutando query: SELECT * FROM user_profiles WHERE role = \'Mayorista\'', 'info');
+                const { data, error, count } = await supabase
+                    .from('user_profiles')
+                    .select('*', { count: 'exact' })
+                    .eq('role', 'Mayorista')
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    resultDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>
+                        <pre>${JSON.stringify(error, null, 2)}</pre>`;
+                    log('Error filtrando mayoristas: ' + error.message, 'error');
+                    return;
+                }
+
+                if (!data || data.length === 0) {
+                    resultDiv.innerHTML = `<p class="warning">⚠️ No se encontraron mayoristas</p>
+                        <p>Total de registros con role='Mayorista': ${count}</p>
+                        <p>Esto puede significar:</p>
+                        <ul>
+                            <li>No hay usuarios con role='Mayorista' en la base de datos</li>
+                            <li>Los usuarios tienen un rol diferente (ej: 'mayorista' en minúsculas)</li>
+                            <li>Las políticas RLS están bloqueando el acceso</li>
+                        </ul>`;
+                    log('No se encontraron mayoristas en la base de datos', 'warning');
+                    return;
+                }
+
+                resultDiv.innerHTML = `
+                    <p class="success">✅ Se encontraron ${data.length} mayoristas</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Nombre</th>
+                                <th>Empresa</th>
+                                <th>Rol</th>
+                                <th>Activo</th>
+                                <th>Descuento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.map(m => `
+                                <tr>
+                                    <td>${m.email || 'N/A'}</td>
+                                    <td>${m.full_name || 'N/A'}</td>
+                                    <td>${m.company_name || 'N/A'}</td>
+                                    <td>${m.role}</td>
+                                    <td>${m.is_active ? '✅' : '❌'}</td>
+                                    <td>${m.wholesale_discount_percent || 0}%</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    <details style="margin-top: 15px;">
+                        <summary>Ver JSON completo</summary>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </details>
+                `;
+                log(`Encontrados ${data.length} mayoristas`, 'success');
+
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">❌ Error inesperado: ${error.message}</p>`;
+                log('Error inesperado: ' + error.message, 'error');
+            }
+        }
+
+        async function testAllRoles() {
+            const resultDiv = document.getElementById('rolesResult');
+            resultDiv.innerHTML = '<p>Verificando roles...</p>';
+
+            if (!supabase) {
+                resultDiv.innerHTML = '<p class="error">❌ Primero verifica la configuración de Supabase</p>';
+                return;
+            }
+
+            try {
+                log('Consultando todos los usuarios agrupados por rol', 'info');
+                const { data, error } = await supabase
+                    .from('user_profiles')
+                    .select('role, email, full_name, company_name, is_active');
+
+                if (error) {
+                    resultDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+                    log('Error consultando roles: ' + error.message, 'error');
+                    return;
+                }
+
+                // Group by role
+                const roleGroups = {};
+                data.forEach(user => {
+                    const role = user.role || 'SIN_ROL';
+                    if (!roleGroups[role]) {
+                        roleGroups[role] = [];
+                    }
+                    roleGroups[role].push(user);
+                });
+
+                let html = '<p class="success">✅ Resumen de roles en la base de datos:</p>';
+                html += '<table><thead><tr><th>Rol</th><th>Cantidad</th><th>Usuarios</th></tr></thead><tbody>';
+
+                Object.keys(roleGroups).forEach(role => {
+                    const users = roleGroups[role];
+                    html += `<tr>
+                        <td><strong>${role}</strong></td>
+                        <td>${users.length}</td>
+                        <td>
+                            <ul style="margin: 0; padding-left: 20px;">
+                                ${users.slice(0, 5).map(u =>
+                                    `<li>${u.email} ${u.full_name ? '(' + u.full_name + ')' : ''} ${u.is_active ? '✅' : '❌'}</li>`
+                                ).join('')}
+                                ${users.length > 5 ? `<li><em>...y ${users.length - 5} más</em></li>` : ''}
+                            </ul>
+                        </td>
+                    </tr>`;
+                });
+
+                html += '</tbody></table>';
+                resultDiv.innerHTML = html;
+
+                log(`Roles encontrados: ${Object.keys(roleGroups).join(', ')}`, 'success');
+
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">❌ Error inesperado: ${error.message}</p>`;
+                log('Error inesperado: ' + error.message, 'error');
+            }
+        }
+
+        async function testRLS() {
+            const resultDiv = document.getElementById('rlsResult');
+            resultDiv.innerHTML = '<p>Verificando RLS...</p>';
+
+            if (!supabase) {
+                resultDiv.innerHTML = '<p class="error">❌ Primero verifica la configuración de Supabase</p>';
+                return;
+            }
+
+            try {
+                log('Verificando permisos RLS', 'info');
+
+                // Get current user
+                const { data: { session } } = await supabase.auth.getSession();
+
+                if (!session) {
+                    resultDiv.innerHTML = '<p class="warning">⚠️ No hay sesión activa. RLS puede estar bloqueando acceso anónimo.</p>';
+                    log('No hay sesión activa para verificar RLS', 'warning');
+                    return;
+                }
+
+                // Get user profile
+                const { data: profile, error: profileError } = await supabase
+                    .from('user_profiles')
+                    .select('*')
+                    .eq('id', session.user.id)
+                    .single();
+
+                if (profileError) {
+                    resultDiv.innerHTML = `<p class="error">❌ Error obteniendo perfil: ${profileError.message}</p>`;
+                    log('Error obteniendo perfil: ' + profileError.message, 'error');
+                    return;
+                }
+
+                resultDiv.innerHTML = `
+                    <p class="success">✅ Perfil del usuario actual:</p>
+                    <pre>${JSON.stringify(profile, null, 2)}</pre>
+                    <p>Rol actual: <strong>${profile.role}</strong></p>
+                    ${profile.role !== 'Admin' ? '<p class="warning">⚠️ Solo usuarios con rol "Admin" pueden ver todos los mayoristas si RLS está configurado así.</p>' : ''}
+                `;
+                log(`Usuario actual tiene rol: ${profile.role}`, 'success');
+
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+                log('Error verificando RLS: ' + error.message, 'error');
+            }
+        }
+
+        // Auto-initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            log('Página cargada - Debug Mayoristas', 'info');
+            checkSupabaseConfig();
+        });
+    </script>
+</body>
+</html>
