@@ -389,8 +389,57 @@ function previewSite() {
 }
 
 function clearCache() {
+    console.log('🧹 Limpiando cache del navegador...');
+
+    // Preservar datos importantes
+    const preserveKeys = ['contactInfo', 'adminSession'];
+    const preserved = {};
+
+    // Guardar datos a preservar
+    preserveKeys.forEach(key => {
+        const value = localStorage.getItem(key);
+        if (value) {
+            preserved[key] = value;
+        }
+    });
+
+    // Preservar también cache de Supabase (site_settings_*)
+    const supabaseCache = {};
+    Object.keys(localStorage).forEach(key => {
+        if (key.startsWith('site_settings_')) {
+            supabaseCache[key] = localStorage.getItem(key);
+        }
+    });
+
+    // Limpiar todo localStorage
     localStorage.clear();
-    adminManager.showNotification('Cache limpiado completamente', 'success');
+
+    // Restaurar datos preservados
+    Object.keys(preserved).forEach(key => {
+        localStorage.setItem(key, preserved[key]);
+        console.log(`✅ Preservado: ${key}`);
+    });
+
+    // Restaurar cache de Supabase
+    Object.keys(supabaseCache).forEach(key => {
+        localStorage.setItem(key, supabaseCache[key]);
+        console.log(`✅ Preservado cache de Supabase: ${key}`);
+    });
+
+    const message = `Cache limpiado exitosamente
+
+📦 Datos preservados:
+- Configuración del sitio (Supabase)
+- Información de contacto
+- Sesión de administrador
+
+🗑️ Cache eliminado:
+- Categorías temporales
+- Productos cacheados
+- Otros datos temporales`;
+
+    adminManager.showNotification('Cache limpiado (configuración preservada)', 'success');
+    console.log(message);
 }
 
 function exportConfig() {

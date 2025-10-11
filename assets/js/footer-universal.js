@@ -60,20 +60,34 @@ class UniversalFooter {
     }
     
     /**
-     * Cargar datos de contacto desde localStorage o usar fallback
+     * Cargar datos de contacto desde Supabase (con fallback a localStorage)
      */
-    loadContactData() {
+    async loadContactData() {
+        // Intentar cargar desde Supabase primero
+        if (window.SiteSettingsService) {
+            try {
+                const data = await window.SiteSettingsService.getSetting('contactInfo');
+                if (data) {
+                    console.log('👟 Footer: Datos cargados desde Supabase:', data);
+                    return { ...this.fallbackData, ...data };
+                }
+            } catch (error) {
+                console.warn('⚠️ Footer: Error al cargar desde Supabase:', error);
+            }
+        }
+
+        // Fallback: Intentar desde localStorage (cache antiguo)
         try {
             const savedData = localStorage.getItem(this.storageKey);
             if (savedData) {
                 const contactData = JSON.parse(savedData);
-                console.log('👟 Footer: Datos de contacto cargados desde admin:', contactData);
+                console.log('👟 Footer: Datos cargados desde localStorage:', contactData);
                 return { ...this.fallbackData, ...contactData };
             }
         } catch (error) {
             console.warn('⚠️ Footer: Error al cargar datos guardados:', error);
         }
-        
+
         console.log('👟 Footer: Usando datos por defecto');
         return this.fallbackData;
     }
@@ -81,16 +95,16 @@ class UniversalFooter {
     /**
      * Aplicar datos de contacto al footer
      */
-    applyContactData() {
-        const data = this.loadContactData();
-        
+    async applyContactData() {
+        const data = await this.loadContactData();
+
         try {
             // Redes sociales
             this.applySocialMediaToFooter(data);
-            
+
             // Información de contacto
             this.applyContactInfoToFooter(data);
-            
+
             console.log('✅ Footer: Datos de contacto aplicados');
         } catch (error) {
             console.error('❌ Footer: Error al aplicar datos:', error);

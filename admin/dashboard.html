@@ -688,6 +688,8 @@
     </style>
     <!-- Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Site Settings Service -->
+    <script src="../assets/js/site-settings-service.js"></script>
 </head>
 <body>
     <!-- Sidebar -->
@@ -2429,7 +2431,7 @@
         }
         
         // Guardar cambios - Aplicación automática
-        function saveContactInfo() {
+        async function saveContactInfo() {
             const contactData = {
                 // Trust Icons
                 trustIcon1Text: document.getElementById('trustIcon1Text').value,
@@ -2514,9 +2516,18 @@
                 return;
             }
             
-            // Guardar en localStorage
+            // Guardar en Supabase (todos los usuarios lo verán)
+            try {
+                await window.SiteSettingsService.setSetting('contactInfo', contactData);
+                console.log('✅ Configuración guardada en Supabase');
+            } catch (error) {
+                console.error('❌ Error guardando en Supabase:', error);
+                alert('⚠️ Error al guardar en la base de datos. Los cambios solo se guardaron localmente.');
+            }
+
+            // También guardar en localStorage como cache
             localStorage.setItem('contactInfo', JSON.stringify(contactData));
-            
+
             // Intentar refrescar index.html si está abierto en otra pestaña
             try {
                 // Disparar evento de storage para actualización en tiempo real
@@ -2532,12 +2543,13 @@
             } catch (error) {
                 console.warn('No se pudo disparar evento de storage:', error);
             }
-            
+
             // Mostrar mensaje de éxito
             const successMessage = `
 ✅ ¡CAMBIOS GUARDADOS EXITOSAMENTE!
 
-🔄 Cambios guardados en localStorage.
+🌐 Cambios guardados en la base de datos.
+💾 Todos los usuarios verán los cambios automáticamente.
 
 📋 PARA VER LOS CAMBIOS:
 1. Haz clic en "Ver Sitio Web" (botón azul)

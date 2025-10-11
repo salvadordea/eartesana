@@ -50,20 +50,33 @@ class EstudioArtesanaAPI {
     // ==========================================
 
     async getProducts(filters = {}) {
+        // Try persistent cache first (localStorage)
+        if (window.ProductsCache) {
+            const cached = window.ProductsCache.getCachedProducts(filters);
+            if (cached) {
+                return cached;
+            }
+        }
+
+        // Try in-memory cache
         const cacheKey = 'products_' + JSON.stringify(filters);
-        
         if (this.cache.has(cacheKey)) {
-            console.log('📋 Productos obtenidos desde cache');
+            console.log('📋 Productos obtenidos desde cache en memoria');
             return this.cache.get(cacheKey);
         }
 
         try {
             const queryParams = new URLSearchParams(filters).toString();
             const url = queryParams ? `/productos?${queryParams}` : '/productos';
-            
+
             const response = await this.request(url);
+
+            // Save to both caches
             this.cache.set(cacheKey, response);
-            
+            if (window.ProductsCache) {
+                window.ProductsCache.setCachedProducts(filters, response);
+            }
+
             console.log(`📦 ${response.products.length} productos cargados (${response.total} total)`);
             return response;
         } catch (error) {
@@ -73,25 +86,38 @@ class EstudioArtesanaAPI {
     }
 
     async getProduct(identifier) {
-        const cacheKey = 'product_' + identifier;
-        
         console.log('🔍 Buscando producto con ID/slug:', identifier);
-        
+
+        // Try persistent cache first (localStorage)
+        if (window.ProductsCache) {
+            const cached = window.ProductsCache.getCachedProduct(identifier);
+            if (cached) {
+                return cached;
+            }
+        }
+
+        // Try in-memory cache
+        const cacheKey = 'product_' + identifier;
         if (this.cache.has(cacheKey)) {
-            console.log('📋 Producto obtenido desde cache:', identifier);
+            console.log('📋 Producto obtenido desde cache en memoria:', identifier);
             return this.cache.get(cacheKey);
         }
 
         try {
             console.log('🌐 Haciendo petición a:', `${this.baseURL}/producto/${identifier}`);
             const product = await this.request(`/producto/${identifier}`);
-            
+
             if (!product) {
                 console.warn('⚠️ Producto no encontrado:', identifier);
                 return null;
             }
-            
+
+            // Save to both caches
             this.cache.set(cacheKey, product);
+            if (window.ProductsCache) {
+                window.ProductsCache.setCachedProduct(identifier, product);
+            }
+
             console.log('📦 Producto cargado exitosamente:', product.name);
             return product;
         } catch (error) {

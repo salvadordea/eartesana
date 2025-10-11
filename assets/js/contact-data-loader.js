@@ -37,20 +37,34 @@ class ContactDataLoader {
     }
 
     /**
-     * Cargar datos desde localStorage o usar fallback
+     * Cargar datos desde Supabase (con fallback a localStorage)
      */
-    loadContactData() {
+    async loadContactData() {
+        // Intentar cargar desde Supabase primero
+        if (window.SiteSettingsService) {
+            try {
+                const data = await window.SiteSettingsService.getSetting('contactInfo');
+                if (data) {
+                    console.log('📞 Datos de contacto cargados desde Supabase:', data);
+                    return { ...this.fallbackData, ...data };
+                }
+            } catch (error) {
+                console.warn('⚠️ Error al cargar desde Supabase, usando fallback:', error);
+            }
+        }
+
+        // Fallback: Intentar desde localStorage (cache antiguo)
         try {
             const savedData = localStorage.getItem(this.storageKey);
             if (savedData) {
                 const contactData = JSON.parse(savedData);
-                console.log('📞 Datos de contacto cargados desde panel de admin:', contactData);
+                console.log('📞 Datos de contacto cargados desde localStorage:', contactData);
                 return { ...this.fallbackData, ...contactData };
             }
         } catch (error) {
-            console.warn('⚠️ Error al cargar datos guardados del panel:', error);
+            console.warn('⚠️ Error al cargar datos guardados:', error);
         }
-        
+
         console.log('📞 Usando datos por defecto de contacto');
         return this.fallbackData;
     }
@@ -235,8 +249,8 @@ class ContactDataLoader {
     /**
      * Aplicar todos los datos cargados
      */
-    applyData() {
-        const contactData = this.loadContactData();
+    async applyData() {
+        const contactData = await this.loadContactData();
 
         try {
             this.applyTrustIcons(contactData);
