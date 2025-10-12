@@ -387,7 +387,7 @@
 .credentials span {
     font-size: 13px;
     color: #666;
-    font-family: 'Courier New', monospace;
+    font-family: monospace;
     background: #f8f9fa;
     padding: 3px 6px;
     border-radius: 3px;

@@ -319,7 +319,7 @@
     border-radius: 6px;
     padding: 1rem;
     margin: 1rem 0;
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-secondary);
 }
 
 .bank-info p {

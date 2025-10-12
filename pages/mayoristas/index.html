@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="../../assets/css/styles.css">
     <link rel="stylesheet" href="../../assets/css/mayoristas.css">
     <link rel="stylesheet" href="../../assets/css/whatsapp-badge.css">
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Favicon -->
@@ -83,36 +82,53 @@
     </header>
 
     <main class="main-content">
-        <!-- Hero Section -->
-        <section class="mayoristas-hero">
+        <!-- Main Section: Process (left) + Login (right) -->
+        <section class="mayoristas-main-section">
             <div class="container">
-                <div class="hero-content">
-                    <div class="hero-text">
-                        <h1 class="hero-title">Programa de Mayoristas</h1>
-                        <p class="hero-subtitle">Únete a nuestra red de distribuidores y accede a precios especiales para hacer crecer tu negocio</p>
-                        
-                        <div class="hero-stats">
-                            <div class="stat-item">
-                                <div class="stat-number">💼</div>
-                                <div class="stat-label">Atractivos descuentos para tu negocio</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">10+</div>
-                                <div class="stat-label">Piezas Mínimas</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">100%</div>
-                                <div class="stat-label">Artesanal</div>
-                            </div>
+                <div class="main-grid">
+                    <!-- Process Section (Left) -->
+                    <div class="process-container">
+                        <div class="section-header">
+                            <h2 class="section-title">Proceso de Registro</h2>
+                            <p class="section-subtitle">En solo 3 pasos puedes formar parte de nuestra red de mayoristas</p>
                         </div>
-                        
-                        <div class="hero-actions">
-                            <a href="#solicitar-info" class="btn-primary">Solicitar Información</a>
-                            <a href="../../tienda/index.html" class="btn-secondary">Ver Catálogo</a>
+
+                        <div class="process-steps">
+                            <div class="step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h3 class="step-title">Solicita Información</h3>
+                                    <p class="step-description">Llena nuestro formulario con la información de tu negocio</p>
+                                </div>
+                            </div>
+
+                            <div class="step-arrow">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+
+                            <div class="step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h3 class="step-title">Evaluación</h3>
+                                    <p class="step-description">Nuestro equipo evaluará tu solicitud en 2-3 días hábiles</p>
+                                </div>
+                            </div>
+
+                            <div class="step-arrow">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h3 class="step-title">Activación</h3>
+                                    <p class="step-description">Una vez aprobado, podrás realizar tu primer pedido mayorista</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <!-- Wholesale Login Form -->
+
+                    <!-- Wholesale Login Form (Right) -->
                     <div class="wholesale-login-container">
                         <div class="login-card">
                             <div class="login-header">
@@ -122,7 +138,7 @@
                                 <h3 class="login-title">Acceso Mayoristas</h3>
                                 <p class="login-subtitle">Ingresa a tu cuenta para acceder a precios especiales</p>
                             </div>
-                            
+
                             <form class="login-form" id="wholesaleLoginForm">
                                 <div class="form-group">
                                     <label for="wholesaleEmail" class="form-label">Correo Electrónico</label>
@@ -131,7 +147,7 @@
                                         <input type="email" id="wholesaleEmail" name="email" class="form-control" placeholder="tu@empresa.com" required>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="wholesalePassword" class="form-label">Contraseña</label>
                                     <div class="input-group password-toggle">
@@ -142,7 +158,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-options">
                                     <label class="checkbox-label">
                                         <input type="checkbox" id="rememberMe">
@@ -150,23 +166,23 @@
                                         Recordar sesión
                                     </label>
                                 </div>
-                                
+
                                 <button type="submit" class="login-btn">
                                     <i class="fas fa-sign-in-alt"></i>
                                     Iniciar Sesión
                                 </button>
-                                
+
                                 <div class="login-footer">
                                     <p class="forgot-password">
                                         <a href="#" onclick="showForgotPassword()">¿Olvidaste tu contraseña?</a>
                                     </p>
                                     <div class="register-link">
                                         <p>¿No tienes cuenta mayorista?</p>
-                                        <a href="#solicitar-info" class="register-btn">Solicitar Acceso</a>
+                                        <a href="mailto:info@estudioartesana.com" class="register-btn">Solicitar Acceso</a>
                                     </div>
                                 </div>
                             </form>
-                            
+
                             <!-- Alert Messages -->
                             <div id="loginAlert" class="login-alert" style="display: none;"></div>
                         </div>
@@ -174,212 +190,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Benefits Section -->
-        <section class="benefits-section">
-            <div class="container">
-                <div class="section-header centered">
-                    <h2 class="section-title">Beneficios del Programa</h2>
-                    <p class="section-subtitle">Todo lo que necesitas para hacer crecer tu negocio con productos artesanales únicos</p>
-                </div>
-                
-                <div class="benefits-grid">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <i class="fas fa-percentage"></i>
-                        </div>
-                        <h3 class="benefit-title">Descuentos Especiales</h3>
-                        <p class="benefit-description">Atractivos descuentos para tu negocio según volumen de compra</p>
-                        <ul class="benefit-list">
-                            <li>Descuentos escalados por volumen</li>
-                            <li>Precios preferenciales constantes</li>
-                            <li>Beneficios adicionales por lealtad</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <i class="fas fa-shipping-fast"></i>
-                        </div>
-                        <h3 class="benefit-title">Envío Gratuito</h3>
-                        <p class="benefit-description">Envío sin costo en todos los pedidos mayoristas</p>
-                        <ul class="benefit-list">
-                            <li>Envío gratuito a todo México</li>
-                            <li>Entrega de 5-7 días hábiles</li>
-                            <li>Embalaje especializado</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <h3 class="benefit-title">Soporte Dedicado</h3>
-                        <p class="benefit-description">Atención personalizada y asesoría especializada</p>
-                        <ul class="benefit-list">
-                            <li>Ejecutivo de cuenta dedicado</li>
-                            <li>Asesoría en selección de productos</li>
-                            <li>Soporte post-venta especializado</li>
-                        </ul>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
-
-        <!-- Requirements Section -->
-        <section class="requirements-section">
-            <div class="container">
-                <div class="requirements-content">
-                    <div class="requirements-text">
-                        <h2 class="section-title">Requisitos para Mayoristas</h2>
-                        <p class="section-subtitle">Para formar parte de nuestra red de distribuidores, necesitas cumplir con los siguientes requisitos:</p>
-                        
-                        <div class="requirements-list">
-                            <div class="requirement-item">
-                                <div class="requirement-icon">
-                                    <i class="fas fa-store"></i>
-                                </div>
-                                <div class="requirement-content">
-                                    <h3>Negocio Establecido</h3>
-                                    <p>Contar con un negocio físico u online establecido en el sector retail</p>
-                                </div>
-                            </div>
-                            
-                            <div class="requirement-item">
-                                <div class="requirement-icon">
-                                    <i class="fas fa-file-invoice"></i>
-                                </div>
-                                <div class="requirement-content">
-                                    <h3>Documentación Legal</h3>
-                                    <p>RFC activo y documentación legal de la empresa al corriente</p>
-                                </div>
-                            </div>
-                            
-                            <div class="requirement-item">
-                                <div class="requirement-icon">
-                                    <i class="fas fa-boxes"></i>
-                                </div>
-                                <div class="requirement-content">
-                                    <h3>Pedido Mínimo</h3>
-                                    <p>Capacidad de realizar pedidos mínimos de 10 piezas por producto</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Solicitud de Información Form -->
-                    <div class="requirements-form">
-                        <div class="form-card">
-                            <div class="form-header">
-                                <h3>Solicitar Información</h3>
-                                <p>Llena este formulario y nos contactaremos contigo</p>
-                            </div>
-                            
-                            <form class="info-request-form" id="infoRequestForm">
-                                <div class="form-group">
-                                    <label for="infoNombreEmpresa">Nombre de la empresa / contacto *</label>
-                                    <input type="text" id="infoNombreEmpresa" name="nombre_empresa" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="infoEmail">Correo electrónico</label>
-                                    <input type="email" id="infoEmail" name="email">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="infoTelefono">Teléfono *</label>
-                                    <input type="tel" id="infoTelefono" name="telefono" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="infoTipoNegocio">Tipo de negocio *</label>
-                                    <select id="infoTipoNegocio" name="tipo_negocio" required>
-                                        <option value="">Selecciona una opción</option>
-                                        <option value="tienda-fisica">Tienda Física</option>
-                                        <option value="tienda-online">Tienda Online</option>
-                                        <option value="boutique">Boutique</option>
-                                        <option value="galeria">Galería de Arte</option>
-                                        <option value="distribuidor">Distribuidor</option>
-                                        <option value="restaurante">Restaurante</option>
-                                        <option value="hotel">Hotel</option>
-                                        <option value="otro">Otro</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="infoVolumenCompra">Volumen de Compra Estimado Mensual *</label>
-                                    <select id="infoVolumenCompra" name="volumen_compra" required>
-                                        <option value="">Selecciona un rango</option>
-                                        <option value="10-25">10-25 piezas</option>
-                                        <option value="25-50">25-50 piezas</option>
-                                        <option value="50-100">50-100 piezas</option>
-                                        <option value="100-250">100-250 piezas</option>
-                                        <option value="250+">Más de 250 piezas</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="infoMensaje">Mensaje Adicional</label>
-                                    <textarea id="infoMensaje" name="mensaje" rows="4" placeholder="Cuéntanos sobre tu negocio y necesidades específicas..."></textarea>
-                                </div>
-                                
-                                <button type="submit" class="form-submit-btn">
-                                    <i class="fas fa-paper-plane"></i>
-                                    Solicitar Información
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Process Section -->
-        <section class="process-section">
-            <div class="container">
-                <div class="section-header centered">
-                    <h2 class="section-title">Proceso de Registro</h2>
-                    <p class="section-subtitle">En solo 3 pasos puedes formar parte de nuestra red de mayoristas</p>
-                </div>
-                
-                <div class="process-steps">
-                    <div class="step-item">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h3 class="step-title">Solicita Información</h3>
-                            <p class="step-description">Llena nuestro formulario con la información de tu negocio</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                    
-                    <div class="step-item">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h3 class="step-title">Evaluación</h3>
-                            <p class="step-description">Nuestro equipo evaluará tu solicitud en 2-3 días hábiles</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                    
-                    <div class="step-item">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h3 class="step-title">Activación</h3>
-                            <p class="step-description">Una vez aprobado, podrás realizar tu primer pedido mayorista</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
     </main>
 
     <!-- Footer -->
@@ -403,12 +213,102 @@
     
     <!-- Login Styles -->
     <style>
+        /* Main Section Layout */
+        .mayoristas-main-section {
+            padding: 80px 0;
+            background: #000;
+            min-height: calc(100vh - 80px);
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        /* Process Section Styles */
+        .process-container {
+            padding: 40px 0;
+        }
+
+        .process-container .section-header {
+            margin-bottom: 40px;
+        }
+
+        .process-container .section-title {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .process-container .section-subtitle {
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .step-item:hover .step-number {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(192, 192, 192, 0.4);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(192, 192, 192, 0.3);
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+
+        .step-description {
+            font-size: 0.95rem;
+            color: #999;
+            line-height: 1.4;
+        }
+
+        .step-arrow {
+            display: none;
+        }
+
         /* Wholesale Login Container */
         .wholesale-login-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100%;
+            align-items: flex-start;
+            padding: 40px 0;
         }
 
         .login-card {
@@ -626,148 +526,46 @@
             border: 1px solid #f5c6cb;
         }
 
-        /* Requirements Form Styles */
-        .requirements-form {
-            max-width: 500px;
-        }
-
-        .form-card {
-            background: #1a1a1a;
-            border-radius: 20px;
-            padding: 0;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            border: 1px solid #333;
-            overflow: hidden;
-        }
-
-        .form-card .form-header {
-            background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
-            color: #000;
-            text-align: center;
-            padding: 25px 30px;
-            margin-bottom: 0;
-        }
-
-        .form-card .form-header h3 {
-            font-size: 1.5rem;
-            color: #000;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .form-card .form-header p {
-            color: #2a2a2a;
-            font-size: 14px;
-            margin: 0;
-        }
-
-        .info-request-form {
-            padding: 30px;
-        }
-
-        .info-request-form .form-group {
-            margin-bottom: 20px;
-        }
-
-        .info-request-form label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #ccc;
-            font-size: 14px;
-        }
-
-        .info-request-form input,
-        .info-request-form select,
-        .info-request-form textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #333;
-            border-radius: 12px;
-            font-size: 15px;
-            font-family: inherit;
-            transition: all 0.3s ease;
-            background: #2a2a2a;
-            color: #fff;
-        }
-
-        .info-request-form input:focus,
-        .info-request-form select:focus,
-        .info-request-form textarea:focus {
-            outline: none;
-            border-color: #c0c0c0;
-            box-shadow: 0 0 0 4px rgba(192, 192, 192, 0.1);
-            transform: translateY(-1px);
-        }
-
-        .info-request-form select {
-            cursor: pointer;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            background-size: 16px;
-            padding-right: 40px;
-            appearance: none;
-        }
-
-        .info-request-form textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-submit-btn {
-            width: 100%;
-            padding: 16px 24px;
-            background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
-            color: #000;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: none;
-            letter-spacing: 0.5px;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .form-submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(192, 192, 192, 0.4);
-        }
-
-        .form-submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
         @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            /* Login container appears first on mobile */
+            .wholesale-login-container {
+                order: -1;
+            }
+
+            .mayoristas-main-section {
+                padding: 40px 0;
+            }
+
+            .process-container .section-title {
+                font-size: 2rem;
+            }
+
+            .step-item {
+                gap: 15px;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .step-title {
+                font-size: 1.2rem;
+            }
+
+            .step-description {
+                font-size: 0.85rem;
+            }
+
             .login-card {
-                margin: 20px;
+                margin: 0 20px;
                 padding: 30px 20px;
-            }
-
-            .mayoristas-hero .hero-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .hero-text {
-                text-align: center;
-            }
-
-            .form-card {
-                padding: 20px;
-            }
-
-            .requirements-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
             }
         }
     </style>
@@ -890,73 +688,6 @@
                 } catch (error) {
                     localStorage.removeItem('wholesaleSession');
                 }
-            }
-            // FAQ Accordion
-            const faqItems = document.querySelectorAll('.faq-item');
-            
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                const answer = item.querySelector('.faq-answer');
-                
-                question.addEventListener('click', function() {
-                    const isActive = item.classList.contains('active');
-                    
-                    // Close all FAQ items
-                    faqItems.forEach(faq => {
-                        faq.classList.remove('active');
-                        faq.querySelector('.faq-answer').style.maxHeight = null;
-                    });
-                    
-                    // Open clicked item if it wasn't active
-                    if (!isActive) {
-                        item.classList.add('active');
-                        answer.style.maxHeight = answer.scrollHeight + 'px';
-                    }
-                });
-            });
-            
-            // Form submission
-            const mayoristaForm = document.getElementById('mayoristaForm');
-            if (mayoristaForm) {
-                mayoristaForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const submitBtn = e.target.querySelector('.submit-btn');
-                    const originalText = submitBtn.innerHTML;
-                    
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-                    submitBtn.disabled = true;
-                    
-                    // Simulate form submission
-                    setTimeout(() => {
-                        alert('¡Solicitud enviada correctamente! Nos pondremos en contacto contigo en las próximas 24-48 horas.');
-                        this.reset();
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }, 2000);
-                });
-            }
-            
-            // Info request form submission
-            const infoRequestForm = document.getElementById('infoRequestForm');
-            if (infoRequestForm) {
-                infoRequestForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const submitBtn = e.target.querySelector('.form-submit-btn');
-                    const originalText = submitBtn.innerHTML;
-                    
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-                    submitBtn.disabled = true;
-                    
-                    // Simulate form submission
-                    setTimeout(() => {
-                        alert('¡Solicitud enviada correctamente! Nos pondremos en contacto contigo en las próximas 24-48 horas.');
-                        this.reset();
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }, 2000);
-                });
             }
         });
 

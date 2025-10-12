@@ -7,7 +7,15 @@
       "Bash(find:*)",
       "Bash(mkdir:*)",
       "Bash(cat:*)",
-      "Bash(cmd /c:*)"
+      "Bash(cmd /c:*)",
+      "Bash(for file in micuenta.html producto.html tienda.html pages/*/index.html mayoristas/*.html)",
+      "Bash(do)",
+      "Bash(if [ -f \"$file\" ])",
+      "Bash(then)",
+      "Bash(echo:*)",
+      "Bash(fi)",
+      "Bash(done)",
+      "Bash(for file in categorias.html sobre-nosotros.html)"
     ],
     "deny": [],
     "ask": []
