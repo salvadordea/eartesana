@@ -24,6 +24,24 @@ class RibbonBannerManager {
         if (closeBtn) {
             closeBtn.addEventListener('click', () => this.closeRibbon());
         }
+
+        // Event listener para copiar código de cupón
+        const copyCodeBtn = this.ribbon.querySelector('.ribbon-copy-code');
+        if (copyCodeBtn) {
+            copyCodeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.copyCouponCode(copyCodeBtn.dataset.code);
+            });
+        }
+
+        // Event listener para clic en el código de cupón
+        const couponCode = this.ribbon.querySelector('.ribbon-coupon-code');
+        if (couponCode) {
+            couponCode.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.copyCouponCode(couponCode.textContent);
+            });
+        }
     }
 
     checkVisibility() {
@@ -53,10 +71,83 @@ class RibbonBannerManager {
             this.ribbon.style.display = 'block';
             this.ribbon.style.transform = 'translateY(0)';
             this.ribbon.style.opacity = '1';
-            
+
             // Remover del localStorage
             localStorage.removeItem('promotionalRibbonClosed');
         }
+    }
+
+    /**
+     * Copy coupon code to clipboard
+     * @param {string} code - Coupon code to copy
+     */
+    async copyCouponCode(code) {
+        try {
+            await navigator.clipboard.writeText(code);
+
+            // Visual feedback
+            this.showCopyFeedback();
+
+            console.log('✅ Coupon code copied:', code);
+        } catch (err) {
+            console.error('❌ Failed to copy code:', err);
+
+            // Fallback for older browsers
+            this.copyToClipboardFallback(code);
+        }
+    }
+
+    /**
+     * Show visual feedback when code is copied
+     */
+    showCopyFeedback() {
+        const copyBtn = this.ribbon.querySelector('.ribbon-copy-code');
+        const couponCode = this.ribbon.querySelector('.ribbon-coupon-code');
+
+        if (copyBtn) {
+            const originalHTML = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
+            copyBtn.style.background = '#28a745';
+
+            setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+                copyBtn.style.background = '';
+            }, 2000);
+        } else if (couponCode) {
+            const originalBg = couponCode.style.background;
+            couponCode.style.background = '#28a745';
+            couponCode.style.transition = 'background 0.3s';
+
+            setTimeout(() => {
+                couponCode.style.background = originalBg;
+            }, 1500);
+        }
+    }
+
+    /**
+     * Fallback method for copying to clipboard (older browsers)
+     * @param {string} text - Text to copy
+     */
+    copyToClipboardFallback(text) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.top = '-9999px';
+        textArea.style.left = '-9999px';
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            document.execCommand('copy');
+            this.showCopyFeedback();
+            console.log('✅ Coupon code copied (fallback):', text);
+        } catch (err) {
+            console.error('❌ Fallback copy failed:', err);
+        }
+
+        document.body.removeChild(textArea);
     }
 }
 

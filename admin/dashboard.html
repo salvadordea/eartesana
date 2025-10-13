@@ -717,6 +717,9 @@
             <a href="usuarios.html" class="nav-item">
                 <i class="fas fa-users"></i> Usuarios
             </a>
+            <a href="cupones.html" class="nav-item">
+                <i class="fas fa-ticket-alt"></i> Cupones
+            </a>
             <a href="#" class="nav-item" data-section="contacto">
                 <i class="fas fa-address-card"></i> Info Contacto
             </a>
@@ -1422,11 +1425,12 @@
             <h2>Editor de Información de Contacto</h2>
             
             <div class="contact-editor-grid">
-                <!-- Trust Icons Section -->
+                <!-- Trust Icons Section - DESHABILITADO (Ya no existe en el nuevo Hero) -->
+                <!--
                 <div class="editor-section">
                     <h3><i class="fas fa-shield-alt"></i> Elementos de Confianza</h3>
                     <p>Edita los íconos de confianza que aparecen en la sección hero de inicio</p>
-                    
+
                     <div class="trust-icons-form">
                         <div class="form-group">
                             <label>Ícono 1 - Envío</label>
@@ -1437,7 +1441,7 @@
                                 <option value="fas fa-plane">✈️ Avión</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group">
                             <label>Ícono 2 - Artesanal</label>
                             <input type="text" id="trustIcon2Text" placeholder="Hecho a Mano" class="form-control">
@@ -1447,7 +1451,7 @@
                                 <option value="fas fa-hammer">🔨 Herramientas</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group">
                             <label>Ícono 3 - Calidad</label>
                             <input type="text" id="trustIcon3Text" placeholder="Calidad Premium" class="form-control">
@@ -1457,13 +1461,14 @@
                                 <option value="fas fa-star">⭐ Estrella</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group">
                             <label>Descargo de envío</label>
                             <input type="text" id="shippingDisclaimer" placeholder="*En compras superiores a $2,000.00" class="form-control">
                         </div>
                     </div>
                 </div>
+                -->
 
                 <!-- Promotional Banner Section -->
                 <div class="editor-section">
@@ -1745,9 +1750,9 @@
                 localStorage.setItem('lastAuthCheck', now.toString());
 
                 if (!session) {
-                    console.log('🔒 No hay sesión admin, redirigiendo a homepage');
+                    console.log('🔒 No hay sesión admin, redirigiendo a login');
                     setTimeout(() => {
-                        window.location.replace('../index.html');
+                        window.location.replace('login.html');
                     }, 100);
                     return false;
                 }
@@ -1758,7 +1763,7 @@
                     console.log('🔒 Sesión admin no válida (not logged in)');
                     localStorage.removeItem('adminSession');
                     setTimeout(() => {
-                        window.location.replace('../index.html');
+                        window.location.replace('login.html');
                     }, 100);
                     return false;
                 }
@@ -1767,7 +1772,7 @@
                     console.log('🔒 Sesión admin expirada');
                     localStorage.removeItem('adminSession');
                     setTimeout(() => {
-                        window.location.replace('../index.html');
+                        window.location.replace('login.html');
                     }, 100);
                     return false;
                 }
@@ -1813,7 +1818,7 @@
                 localStorage.removeItem('lastAuthCheck');
                 localStorage.removeItem('adminAuthLoopDetected');
                 setTimeout(() => {
-                    window.location.replace('../index.html');
+                    window.location.replace('login.html');
                 }, 100);
                 return false;
             }
@@ -1881,42 +1886,89 @@
                         localStorage.removeItem(key);
                     });
 
-                    // 3. Close Supabase session if exists (with timeout)
+                    // 3. Close Supabase session completely (global scope + manual cleanup)
                     if (window.supabase) {
                         try {
-                            console.log('🔄 Cerrando sesión de Supabase...');
-                            const signOutPromise = window.supabase.auth.signOut();
+                            console.log('🔄 Cerrando sesión de Supabase (global)...');
+
+                            // Sign out with global scope to remove ALL sessions
+                            const signOutPromise = window.supabase.auth.signOut({ scope: 'global' });
                             const timeoutPromise = new Promise((resolve) => {
-                                setTimeout(() => resolve({ timeout: true }), 3000);
+                                setTimeout(() => resolve({ timeout: true }), 5000);
                             });
 
                             const result = await Promise.race([signOutPromise, timeoutPromise]);
+
                             if (result?.timeout) {
                                 console.warn('⚠️ Timeout cerrando sesión de Supabase');
                             } else {
-                                console.log('✅ Sesión de Supabase cerrada');
+                                console.log('✅ Sesión de Supabase cerrada (global)');
                             }
+
+                            // 4. Manual cleanup: Remove ALL Supabase auth keys from localStorage
+                            console.log('🧹 Limpiando almacenamiento de Supabase manualmente...');
+                            const allKeys = Object.keys(localStorage);
+                            const supabaseKeys = allKeys.filter(key =>
+                                key.startsWith('sb-') ||
+                                key.includes('supabase') ||
+                                key.includes('auth-token')
+                            );
+
+                            supabaseKeys.forEach(key => {
+                                console.log(`🗑️ Removiendo clave de Supabase: ${key}`);
+                                localStorage.removeItem(key);
+                            });
+
+                            // 5. Verify session is cleared
+                            try {
+                                const { data: { session } } = await window.supabase.auth.getSession();
+                                if (session) {
+                                    console.warn('⚠️ Sesión aún existe después del logout, forzando limpieza adicional');
+                                    // Force clear all storage
+                                    localStorage.clear();
+                                    sessionStorage.clear();
+                                } else {
+                                    console.log('✅ Verificado: No hay sesión activa');
+                                }
+                            } catch (verifyError) {
+                                console.warn('⚠️ No se pudo verificar cierre de sesión:', verifyError);
+                            }
+
                         } catch (supabaseError) {
                             console.warn('⚠️ Error cerrando sesión de Supabase:', supabaseError);
+                            // Fallback: Force clear all Supabase keys
+                            const allKeys = Object.keys(localStorage);
+                            allKeys.filter(key => key.startsWith('sb-')).forEach(key => {
+                                localStorage.removeItem(key);
+                            });
                         }
                     }
 
-                    console.log('✅ Logout completado, redirigiendo a homepage...');
+                    console.log('✅ Logout completado, redirigiendo a login...');
 
-                    // 4. Small delay to ensure cleanup completes, then redirect
+                    // 6. Small delay to ensure cleanup completes, then redirect
                     setTimeout(() => {
-                        window.location.replace('../index.html');
-                    }, 100);
+                        window.location.replace('login.html');
+                    }, 200);
 
                 } catch (error) {
                     console.error('❌ Error durante logout:', error);
-                    // Force logout with minimal cleanup
+                    // Force logout with aggressive cleanup
                     localStorage.setItem('adminLogoutInProgress', 'true');
                     localStorage.setItem('adminRecentLogout', Date.now().toString());
+
+                    // Remove admin keys
                     localStorage.removeItem('adminSession');
                     localStorage.removeItem('lastAuthCheck');
                     localStorage.removeItem('lastLoginCheck');
-                    window.location.replace('../index.html');
+
+                    // Remove all Supabase keys
+                    const allKeys = Object.keys(localStorage);
+                    allKeys.filter(key => key.startsWith('sb-')).forEach(key => {
+                        localStorage.removeItem(key);
+                    });
+
+                    window.location.replace('login.html');
                 }
             }
         }
@@ -2367,15 +2419,6 @@
 
             // Datos por defecto basados en index.html actual
             const defaultData = {
-                // Trust Icons
-                trustIcon1Text: 'Envío Gratis*',
-                trustIcon1Icon: 'fas fa-truck',
-                trustIcon2Text: 'Hecho a Mano',
-                trustIcon2Icon: 'fas fa-hand-holding-heart',
-                trustIcon3Text: 'Calidad Premium',
-                trustIcon3Icon: 'fas fa-shield-alt',
-                shippingDisclaimer: '*En compras superiores a $2,000.00',
-
                 // Promotional Banner
                 promoEnabled: true,
                 promoDiscount: '25% OFF',
@@ -2433,15 +2476,6 @@
         // Guardar cambios - Aplicación automática
         async function saveContactInfo() {
             const contactData = {
-                // Trust Icons
-                trustIcon1Text: document.getElementById('trustIcon1Text').value,
-                trustIcon1Icon: document.getElementById('trustIcon1Icon').value,
-                trustIcon2Text: document.getElementById('trustIcon2Text').value,
-                trustIcon2Icon: document.getElementById('trustIcon2Icon').value,
-                trustIcon3Text: document.getElementById('trustIcon3Text').value,
-                trustIcon3Icon: document.getElementById('trustIcon3Icon').value,
-                shippingDisclaimer: document.getElementById('shippingDisclaimer').value,
-
                 // Promotional Banner
                 promoEnabled: document.getElementById('promoEnabled').checked,
                 promoDiscount: document.getElementById('promoDiscount').value || '25% OFF',
@@ -2459,15 +2493,6 @@
                 contactEmail: document.getElementById('contactEmail').value,
                 businessHours: document.getElementById('businessHours').value
             };
-            
-            // Validar solo campos críticos (trust icons son obligatorios)
-            const requiredFields = ['trustIcon1Text', 'trustIcon2Text', 'trustIcon3Text'];
-            const missingFields = requiredFields.filter(field => !contactData[field] || !contactData[field].trim());
-
-            if (missingFields.length > 0) {
-                alert('❌ Por favor completa los 3 elementos de confianza (obligatorios)');
-                return;
-            }
 
             // Advertencia si faltan datos de contacto (pero no bloquea)
             const contactFields = {
@@ -2482,21 +2507,16 @@
                 const proceed = confirm(`⚠️ ADVERTENCIA: Faltan campos de contacto:\n${missing}\n\n¿Deseas continuar de todas formas?`);
                 if (!proceed) return;
             }
-            
+
             // Mostrar mensaje de confirmación
             const success = confirm(`
 🚀 APLICAR CAMBIOS AUTOMÁTICAMENTE
 
 📄 RESUMEN DE CAMBIOS:
 
-🛡️ ELEMENTOS DE CONFIANZA:
-• Ícono 1: ${contactData.trustIcon1Text}
-• Ícono 2: ${contactData.trustIcon2Text}
-• Ícono 3: ${contactData.trustIcon3Text}
-• Descargo: ${contactData.shippingDisclaimer}
-
 🎯 BANNER PROMOCIONAL:
 • Descuento: ${contactData.promoDiscount}
+• Disclaimer: ${contactData.promoDisclaimer}
 
 📱 REDES SOCIALES:
 • Instagram: ${contactData.instagramUrl || 'Sin cambios'}

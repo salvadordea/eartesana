@@ -193,6 +193,39 @@
             border-top: 1px solid #e9ecef;
         }
 
+        /* Coupon Section */
+        .coupon-section {
+            margin: 20px 0;
+            padding: 20px 0;
+            border-top: 1px solid #e9ecef;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .coupon-input-group {
+            display: flex;
+            gap: 0;
+            margin-bottom: 15px;
+        }
+
+        .coupon-section input {
+            text-transform: uppercase;
+        }
+
+        .coupon-section input::placeholder {
+            text-transform: none;
+        }
+
+        .coupon-applied,
+        .coupon-error {
+            margin-top: 10px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .checkout-btn {
             width: 100%;
             background: #28a745;
@@ -422,10 +455,50 @@
                     <!-- Order items will be populated here -->
                 </div>
 
+                <!-- Cupón de Descuento -->
+                <div class="coupon-section">
+                    <h3 style="font-size: 16px; margin-bottom: 15px; color: #2c3e50;">
+                        <i class="fas fa-ticket-alt"></i> ¿Tienes un cupón?
+                    </h3>
+
+                    <div id="couponInput" class="coupon-input-group">
+                        <input type="text" id="couponCode" placeholder="Ingresa el código" style="flex: 1; padding: 10px; border: 2px solid #e9ecef; border-radius: 5px 0 0 5px; font-size: 14px; text-transform: uppercase;">
+                        <button id="applyCouponBtn" onclick="applyCoupon()" style="padding: 10px 20px; background: #D4AF37; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer; font-weight: 600;">
+                            Aplicar
+                        </button>
+                    </div>
+
+                    <div id="couponApplied" class="coupon-applied" style="display: none;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; background: #d4edda; padding: 12px; border-radius: 5px; border: 1px solid #c3e6cb;">
+                            <div>
+                                <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                                <strong id="appliedCouponCode" style="color: #155724;"></strong>
+                                <small id="appliedCouponDesc" style="display: block; color: #155724; margin-top: 3px;"></small>
+                            </div>
+                            <button onclick="removeCoupon()" style="background: none; border: none; color: #155724; cursor: pointer; font-size: 18px;" title="Remover cupón">
+                                <i class="fas fa-times-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="couponError" class="coupon-error" style="display: none;">
+                        <div style="background: #f8d7da; padding: 10px; border-radius: 5px; border: 1px solid #f5c6cb; color: #721c24; font-size: 14px;">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span id="couponErrorMessage"></span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="order-total">
                     <div class="total-row">
                         <span>Subtotal:</span>
                         <span id="orderSubtotal">$0.00</span>
+                    </div>
+                    <div class="total-row" id="discountRow" style="display: none; color: #28a745;">
+                        <span>
+                            <i class="fas fa-ticket-alt"></i> Descuento:
+                        </span>
+                        <span id="orderDiscount">-$0.00</span>
                     </div>
                     <div class="total-row">
                         <span>IVA (16%):</span>
@@ -459,6 +532,12 @@
     <!-- Scripts -->
     <script src="./assets/js/config.js"></script>
     <script src="./assets/js/cloudinary-config.js"></script>
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Coupon Service -->
+    <script src="assets/js/coupon-service.js"></script>
 
     <!-- Header Universal (DEBE CARGARSE PRIMERO) -->
     <script src="./assets/js/universal-header.js"></script>
@@ -571,16 +650,74 @@
                     </div>
                 `).join('');
 
-                // Update totals
+                // Update totals with coupon
+                this.updateTotals();
+
+                // Check if there's an applied coupon
+                if (window.CouponService) {
+                    const appliedCoupon = window.CouponService.getAppliedCoupon();
+                    if (appliedCoupon) {
+                        this.displayAppliedCoupon(appliedCoupon);
+                    }
+                }
+            }
+
+            updateTotals() {
                 const subtotal = this.cartData.totals.subtotal;
-                const tax = subtotal * 0.16; // IVA 16%
+                let discount = 0;
+
+                // Check for applied coupon
+                if (window.CouponService) {
+                    const appliedCoupon = window.CouponService.getAppliedCoupon();
+                    if (appliedCoupon) {
+                        discount = appliedCoupon.discount;
+                    }
+                }
+
+                const subtotalAfterDiscount = subtotal - discount;
+                const tax = subtotalAfterDiscount * 0.16; // IVA 16%
                 const shipping = 0; // Free shipping
-                const total = subtotal + tax + shipping;
+                const total = subtotalAfterDiscount + tax + shipping;
 
                 document.getElementById('orderSubtotal').textContent = this.formatPrice(subtotal);
+
+                // Show/hide discount row
+                const discountRow = document.getElementById('discountRow');
+                if (discount > 0) {
+                    discountRow.style.display = 'flex';
+                    document.getElementById('orderDiscount').textContent = '-' + this.formatPrice(discount);
+                } else {
+                    discountRow.style.display = 'none';
+                }
+
                 document.getElementById('orderTax').textContent = this.formatPrice(tax);
                 document.getElementById('orderShipping').textContent = shipping > 0 ? this.formatPrice(shipping) : 'Gratis';
                 document.getElementById('orderTotal').textContent = this.formatPrice(total);
+            }
+
+            displayAppliedCoupon(couponData) {
+                document.getElementById('couponInput').style.display = 'none';
+                document.getElementById('couponApplied').style.display = 'block';
+                document.getElementById('appliedCouponCode').textContent = couponData.code;
+                document.getElementById('appliedCouponDesc').textContent =
+                    window.CouponService.formatDiscount(couponData.coupon);
+            }
+
+            hideAppliedCoupon() {
+                document.getElementById('couponInput').style.display = 'flex';
+                document.getElementById('couponApplied').style.display = 'none';
+                document.getElementById('couponCode').value = '';
+            }
+
+            showCouponError(message) {
+                const errorDiv = document.getElementById('couponError');
+                const errorMsg = document.getElementById('couponErrorMessage');
+                errorMsg.textContent = message;
+                errorDiv.style.display = 'block';
+
+                setTimeout(() => {
+                    errorDiv.style.display = 'none';
+                }, 5000);
             }
 
             validateForm() {
@@ -710,9 +847,79 @@
 
         // Initialize checkout when DOM is ready
         document.addEventListener('DOMContentLoaded', () => {
-            new CheckoutManager();
+            window.checkoutManager = new CheckoutManager();
+        });
+
+        // Global functions for coupon management
+        async function applyCoupon() {
+            const codeInput = document.getElementById('couponCode');
+            const code = codeInput.value.trim();
+
+            if (!code) {
+                window.checkoutManager.showCouponError('Por favor, ingresa un código de cupón');
+                return;
+            }
+
+            // Disable button while processing
+            const btn = document.getElementById('applyCouponBtn');
+            btn.disabled = true;
+            btn.textContent = 'Aplicando...';
+
+            try {
+                const subtotal = window.checkoutManager.cartData.totals.subtotal;
+                const itemsCount = window.checkoutManager.cartData.items.length;
+
+                const result = await window.CouponService.applyCoupon(code, {
+                    total: subtotal,
+                    itemsCount: itemsCount
+                });
+
+                if (result.valid) {
+                    window.checkoutManager.displayAppliedCoupon(result);
+                    window.checkoutManager.updateTotals();
+                    document.getElementById('couponError').style.display = 'none';
+                } else {
+                    window.checkoutManager.showCouponError(
+                        window.CouponService.getErrorMessage(result.error) +
+                        (result.message && result.error === 'MIN_PURCHASE_NOT_MET' ? ': ' + result.message : '')
+                    );
+                }
+            } catch (error) {
+                console.error('Error applying coupon:', error);
+                window.checkoutManager.showCouponError('Error al aplicar el cupón. Intenta nuevamente.');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Aplicar';
+            }
+        }
+
+        function removeCoupon() {
+            if (confirm('¿Deseas remover el cupón aplicado?')) {
+                window.CouponService.removeCoupon();
+                window.checkoutManager.hideAppliedCoupon();
+                window.checkoutManager.updateTotals();
+            }
+        }
+
+        // Allow Enter key to apply coupon
+        document.addEventListener('DOMContentLoaded', () => {
+            const couponInput = document.getElementById('couponCode');
+            if (couponInput) {
+                couponInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        applyCoupon();
+                    }
+                });
+            }
         });
     </script>
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Site Settings Service (for contact info from Supabase) -->
+    <script src="assets/js/site-settings-service.js"></script>
 
     <!-- Universal Footer - Load footer dynamically -->
     <script src="assets/js/footer-universal.js"></script>

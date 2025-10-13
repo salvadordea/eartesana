@@ -46,7 +46,20 @@ class ContactDataLoader {
                 const data = await window.SiteSettingsService.getSetting('contactInfo');
                 if (data) {
                     console.log('📞 Datos de contacto cargados desde Supabase:', data);
-                    return { ...this.fallbackData, ...data };
+                    const mergedData = { ...this.fallbackData, ...data };
+
+                    // Guardar en localStorage para que otros servicios puedan usarlo
+                    try {
+                        localStorage.setItem(this.storageKey, JSON.stringify(mergedData));
+                        console.log('💾 Datos guardados en localStorage para WhatsApp badge');
+
+                        // Disparar evento personalizado para notificar a otros componentes
+                        window.dispatchEvent(new CustomEvent('contactInfoUpdated', { detail: mergedData }));
+                    } catch (e) {
+                        console.warn('⚠️ Error al guardar en localStorage:', e);
+                    }
+
+                    return mergedData;
                 }
             } catch (error) {
                 console.warn('⚠️ Error al cargar desde Supabase, usando fallback:', error);

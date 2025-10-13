@@ -214,21 +214,11 @@
     </style>
 </head>
 <body>
-    <!-- Promotional Ribbon Banner -->
-    <div class="promotional-ribbon" id="promotionalRibbon">
-        <div class="ribbon-content">
-            <div class="ribbon-text">
-                <span class="ribbon-title" id="ribbonTitle">OFERTA</span>
-                <span class="ribbon-discount" id="ribbonDiscount">20% OFF</span>
-            </div>
-        </div>
-        <button class="ribbon-close" onclick="closeRibbon()">&times;</button>
-    </div>
-
     <!-- Monthly Promotion Banner -->
-    <div class="monthly-promo-banner" id="monthlyPromoBanner">
+    <div class="monthly-promo-banner" id="monthlyPromoBanner" style="display: none;">
         <div class="promo-content">
             <span class="promo-discount" id="promoDiscount">25% OFF</span>
+            <span class="promo-code" id="promoCode" onclick="copyPromoCode()" title="Click para copiar">CODIGO</span>
             <span class="promo-disclaimer" id="promoDisclaimer">*en tu primera compra</span>
         </div>
         <button class="promo-close" onclick="closePromoBanner()">&times;</button>
@@ -568,6 +558,9 @@
     <script src="assets/js/dynamic-carousel.js"></script>
     <script src="assets/js/hero-carousel.js"></script>
 
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- Site Settings Service - Load settings from Supabase -->
     <script src="assets/js/site-settings-service.js"></script>
 
@@ -614,21 +607,50 @@
                 banner.style.transform = 'rotate(45deg) scale(0)';
                 banner.style.opacity = '0';
                 setTimeout(() => {
-                    banner.remove();
+                    banner.style.display = 'none';
                 }, 300);
 
                 // Remember user closed it (optional)
                 localStorage.setItem('monthlyPromoClosed', 'true');
             }
         }
-        
+
+        // Copy promo code to clipboard
+        async function copyPromoCode() {
+            const codeElement = document.getElementById('promoCode');
+            if (!codeElement) return;
+
+            const code = codeElement.getAttribute('data-code') || codeElement.textContent;
+
+            try {
+                await navigator.clipboard.writeText(code);
+
+                // Visual feedback - solo cambiar color, no texto
+                const originalBg = codeElement.style.background;
+                const originalBorder = codeElement.style.borderColor;
+
+                codeElement.style.background = 'rgba(40, 167, 69, 0.3)';
+                codeElement.style.borderColor = 'rgba(40, 167, 69, 0.6)';
+
+                setTimeout(() => {
+                    codeElement.style.background = originalBg;
+                    codeElement.style.borderColor = originalBorder;
+                }, 1500);
+
+                console.log('✅ Code copied:', code);
+            } catch (err) {
+                console.error('❌ Failed to copy code:', err);
+                alert('Código: ' + code);
+            }
+        }
+
         // Show banner after page load if not previously closed
         document.addEventListener('DOMContentLoaded', function() {
             const banner = document.getElementById('monthlyPromoBanner');
             const wasClosed = localStorage.getItem('monthlyPromoClosed');
-            
+
             if (banner && wasClosed === 'true') {
-                banner.remove();
+                banner.style.display = 'none';
             }
             
             // Home Contact Form

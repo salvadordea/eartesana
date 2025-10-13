@@ -7,35 +7,181 @@ class PromoManager {
     constructor() {
         this.config = null;
         this.currentPromo = null;
-        
+        this.supabase = null;
+        this.initialized = false;
+
         this.init();
     }
-    
-    init() {
+
+    async init() {
         // Wait for config to load
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             if (window.EstudioArtesanaConfig) {
                 this.config = window.EstudioArtesanaConfig.promotion;
-                this.loadPromotion();
             }
+
+            // Initialize Supabase if available
+            if (window.SUPABASE_CONFIG && window.supabase) {
+                try {
+                    this.supabase = window.supabase.createClient(
+                        window.SUPABASE_CONFIG.url,
+                        window.SUPABASE_CONFIG.anonKey
+                    );
+                    this.initialized = true;
+                    console.log('✅ PromoManager: Supabase initialized');
+                } catch (error) {
+                    console.warn('⚠️ PromoManager: Supabase initialization failed:', error);
+                }
+            }
+
+            await this.loadPromotion();
         });
     }
     
-    loadPromotion() {
+    async loadPromotion() {
+        // Try to load coupon from database first
+        if (this.initialized) {
+            const couponPromo = await this.loadCouponFromDatabase();
+            if (couponPromo) {
+                this.currentPromo = couponPromo;
+                this.renderPromotion(couponPromo);
+                this.applyTheme(couponPromo.theme || 'default');
+                return;
+            }
+        }
+
+        // Fallback to config.js promotion
         if (!this.config || !this.config.active) {
             this.hidePromoBanner();
             return;
         }
-        
+
         // Get current promotion (you can extend this to auto-detect by date)
         this.currentPromo = this.getCurrentPromo();
-        
+
         if (this.currentPromo) {
             this.renderPromotion(this.currentPromo);
             this.applyTheme(this.currentPromo.theme || 'default');
         }
     }
     
+    /**
+     * Load active coupon from database for banner display
+     * @returns {Promise<Object|null>} Coupon formatted as promotion
+     */
+    async loadCouponFromDatabase() {
+        if (!this.supabase) {
+            return null;
+        }
+
+        try {
+            const now = new Date().toISOString();
+
+            // Query active coupons enabled for banner
+            const { data: coupons, error } = await this.supabase
+                .from('coupons')
+                .select('*')
+                .eq('show_in_banner', true)
+                .eq('is_active', true)
+                .lte('valid_from', now)
+                .gte('valid_until', now)
+                .order('banner_priority', { ascending: false })
+                .order('valid_until', { ascending: true })
+                .limit(1);
+
+            if (error) {
+                console.error('❌ PromoManager: Error loading coupon:', error);
+                return null;
+            }
+
+            if (!coupons || coupons.length === 0) {
+                console.log('ℹ️ PromoManager: No active banner coupons found');
+                return null;
+            }
+
+            const coupon = coupons[0];
+
+            // Track banner view
+            this.trackBannerView(coupon.id);
+
+            // Format coupon as promotion object
+            return this.formatCouponAsPromo(coupon);
+
+        } catch (error) {
+            console.error('❌ PromoManager: Error in loadCouponFromDatabase:', error);
+            return null;
+        }
+    }
+
+    /**
+     * Format coupon data as promotion object
+     * @param {Object} coupon - Coupon from database
+     * @returns {Object} Promotion object
+     */
+    formatCouponAsPromo(coupon) {
+        // Calculate days until expiry
+        const now = new Date();
+        const expiryDate = new Date(coupon.valid_until);
+        const daysLeft = Math.ceil((expiryDate - now) / (1000 * 60 * 60 * 24));
+
+        // Build expiry text
+        let expiryText = '';
+        if (daysLeft === 0) {
+            expiryText = '¡Expira hoy!';
+        } else if (daysLeft === 1) {
+            expiryText = '¡Expira mañana!';
+        } else if (daysLeft <= 7) {
+            expiryText = `Expira en ${daysLeft} días`;
+        } else {
+            expiryText = `Válido hasta ${expiryDate.toLocaleDateString('es-MX')}`;
+        }
+
+        // Build discount text
+        let discountText = '';
+        if (coupon.discount_type === 'percentage') {
+            discountText = `${coupon.discount_value}% OFF`;
+        } else {
+            discountText = `$${coupon.discount_value} OFF`;
+        }
+
+        // Build description
+        let description = coupon.description || discountText;
+        if (coupon.min_purchase_amount) {
+            description += ` en compras mayores a $${coupon.min_purchase_amount}`;
+        }
+
+        return {
+            id: coupon.id,
+            title: '¡CUPÓN ESPECIAL!',
+            description: description,
+            code: coupon.code,
+            expiry: expiryText,
+            ctaText: '¡Compra Ahora!',
+            ctaLink: 'tienda.html',
+            icon: 'fas fa-ticket-alt',
+            theme: 'default',
+            discount: discountText,
+            expiresInDays: daysLeft,
+            isCoupon: true // Flag to identify database coupons
+        };
+    }
+
+    /**
+     * Track banner view in database
+     * @param {string} couponId - Coupon ID
+     */
+    async trackBannerView(couponId) {
+        if (!this.supabase) return;
+
+        try {
+            await this.supabase.rpc('increment_banner_views', {
+                p_coupon_id: couponId
+            });
+        } catch (error) {
+            console.warn('⚠️ Could not track banner view:', error);
+        }
+    }
+
     getCurrentPromo() {
         // For now, return the main promotion
         // You can extend this to switch based on current date/month
@@ -73,28 +219,35 @@ class PromoManager {
     }
     
     renderPromotion(promo) {
-        // Update banner content
-        const elements = {
-            title: document.getElementById('promoTitle'),
-            description: document.getElementById('promoDescription'), 
-            code: document.getElementById('promoCode'),
-            expiry: document.getElementById('promoExpiry'),
-            btn: document.getElementById('promoBtn'),
-            icon: document.querySelector('.promo-icon i')
-        };
-        
-        // Update content
-        if (elements.title) elements.title.textContent = promo.title;
-        if (elements.description) elements.description.textContent = promo.description;
-        if (elements.code) elements.code.textContent = `Código: ${promo.code}`;
-        if (elements.expiry) elements.expiry.textContent = promo.expiry;
-        if (elements.btn) {
-            elements.btn.textContent = promo.ctaText;
-            elements.btn.href = promo.ctaLink;
+        // Update monthly-promo-banner content
+        const banner = document.getElementById('monthlyPromoBanner');
+        const discount = document.getElementById('promoDiscount');
+        const code = document.getElementById('promoCode');
+        const disclaimer = document.getElementById('promoDisclaimer');
+
+        if (!banner) return;
+
+        // Update discount text
+        if (discount) {
+            discount.textContent = promo.discount || promo.description;
         }
-        if (elements.icon) {
-            elements.icon.className = promo.icon;
+
+        // Update code
+        if (code) {
+            code.textContent = promo.code;
+            code.setAttribute('data-code', promo.code); // Store for copy function
         }
+
+        // Update disclaimer
+        if (disclaimer) {
+            disclaimer.textContent = promo.expiry || '';
+            disclaimer.style.display = promo.expiry ? 'block' : 'none';
+        }
+
+        // Show banner
+        banner.style.display = 'flex';
+
+        console.log('✅ Banner rendered with coupon:', promo.code);
     }
     
     applyTheme(theme) {
@@ -146,7 +299,7 @@ class PromoManager {
     }
     
     hidePromoBanner() {
-        const banner = document.getElementById('promoBanner');
+        const banner = document.getElementById('monthlyPromoBanner');
         if (banner) {
             banner.style.display = 'none';
         }

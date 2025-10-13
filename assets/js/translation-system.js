@@ -380,7 +380,7 @@ class TranslationSystem {
                 .language-selector-container {
                     position: fixed;
                     top: 15px;
-                    right: 70px;
+                    right: 125px;
                     z-index: 1001;
                     margin-right: 0;
                 }
@@ -413,7 +413,7 @@ class TranslationSystem {
 
             @media (max-width: 480px) {
                 .language-selector-container {
-                    right: 15px;
+                    right: 70px;
                     top: 12px;
                 }
 

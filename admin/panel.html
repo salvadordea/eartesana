@@ -312,23 +312,6 @@
 
                 <div class="dashboard-card">
                     <div class="card-header">
-                        <div class="card-icon" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
-                            <i class="fas fa-bullhorn"></i>
-                        </div>
-                        <div>
-                            <div class="card-title">Banner Promocional</div>
-                        </div>
-                    </div>
-                    <div class="card-description">
-                        Modifica el contenido del banner promocional mensual que aparece en la página principal y tienda.
-                    </div>
-                    <div class="card-action" onclick="showSection('banner')">
-                        <i class="fas fa-arrow-right"></i> Editar Banner
-                    </div>
-                </div>
-
-                <div class="dashboard-card">
-                    <div class="card-header">
                         <div class="card-icon" style="background: linear-gradient(135deg, #1abc9c, #16a085);">
                             <i class="fas fa-address-card"></i>
                         </div>
@@ -389,11 +372,6 @@
         <div id="usuarios" class="content-area">
             <h2>Gestión de Usuarios</h2>
             <p>Próximamente: Administración de usuarios regulares...</p>
-        </div>
-
-        <div id="banner" class="content-area">
-            <h2>Editor de Banner Promocional</h2>
-            <p>Próximamente: Editor del banner monthly-promo...</p>
         </div>
 
         <div id="contacto" class="content-area">
@@ -479,7 +457,6 @@
                 inventory: 'Gestión de Inventario',
                 mayoristas: 'Administración de Mayoristas',
                 usuarios: 'Gestión de Usuarios',
-                banner: 'Editor de Banner Promocional',
                 contacto: 'Editor de Información de Contacto',
                 setup: 'Configuración del Sistema'
             };
@@ -830,29 +807,6 @@
                     </button>
                     <button class="btn btn-success" onclick="saveSettings()">
                         <i class="fas fa-save"></i> Guardar Config
-                    </button>
-                </div>
-            </div>
-
-            <!-- Promociones -->
-            <div class="admin-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
-                    <h3 class="card-title">Promoción Actual</h3>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Título de Promoción</label>
-                    <input type="text" class="form-control" id="promoTitle" placeholder="¡OFERTA ESPECIAL!" value="¡20% DE DESCUENTO!">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Descripción</label>
-                    <input type="text" class="form-control" id="promoDescription" placeholder="Descripción de la oferta" value="En toda la tienda">
-                </div>
-                <div class="btn-group">
-                    <button class="btn btn-primary" onclick="savePromotion()">
-                        <i class="fas fa-save"></i> Guardar
                     </button>
                 </div>
             </div>
