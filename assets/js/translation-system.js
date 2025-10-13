@@ -89,8 +89,36 @@ class TranslationSystem {
         const toggle = document.createElement('div');
         toggle.className = 'language-toggle';
         toggle.setAttribute('aria-label', 'Language Selector');
+
+        // Create mobile-friendly single flag selector
+        const currentFlag = this.currentLanguage === 'es' ? 'flag-mx' : 'flag-us';
+        const currentCode = this.currentLanguage.toUpperCase();
+
         toggle.innerHTML = `
-            <div class="language-buttons">
+            <div class="language-selector-mobile">
+                <button class="lang-current" id="langCurrentBtn" aria-label="Change Language">
+                    <span class="flag-icon ${currentFlag}"></span>
+                    <span class="lang-code">${currentCode}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <button class="lang-option ${this.currentLanguage === 'es' ? 'active' : ''}"
+                            data-lang="es"
+                            aria-label="Español">
+                        <span class="flag-icon flag-mx"></span>
+                        <span class="lang-code">ES</span>
+                        <span class="lang-name">Español</span>
+                    </button>
+                    <button class="lang-option ${this.currentLanguage === 'en' ? 'active' : ''}"
+                            data-lang="en"
+                            aria-label="English">
+                        <span class="flag-icon flag-us"></span>
+                        <span class="lang-code">EN</span>
+                        <span class="lang-name">English</span>
+                    </button>
+                </div>
+            </div>
+            <div class="language-buttons desktop-only">
                 <button class="lang-btn ${this.currentLanguage === 'es' ? 'active' : ''}"
                         data-lang="es"
                         aria-label="Español"
@@ -108,12 +136,34 @@ class TranslationSystem {
             </div>
         `;
 
-        // Add event listeners
+        // Add event listeners for desktop buttons
         toggle.addEventListener('click', (e) => {
             const langBtn = e.target.closest('.lang-btn');
+            const langOption = e.target.closest('.lang-option');
+            const langCurrent = e.target.closest('.lang-current');
+
             if (langBtn) {
                 const newLanguage = langBtn.dataset.lang;
                 this.switchLanguage(newLanguage);
+            } else if (langOption) {
+                const newLanguage = langOption.dataset.lang;
+                this.switchLanguage(newLanguage);
+                // Close dropdown
+                const dropdown = document.getElementById('langDropdown');
+                if (dropdown) dropdown.classList.remove('active');
+            } else if (langCurrent) {
+                // Toggle dropdown
+                const dropdown = document.getElementById('langDropdown');
+                if (dropdown) dropdown.classList.toggle('active');
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('langDropdown');
+            const langToggle = e.target.closest('.language-toggle');
+            if (!langToggle && dropdown) {
+                dropdown.classList.remove('active');
             }
         });
 
@@ -232,7 +282,97 @@ class TranslationSystem {
                 font-weight: 500;
             }
 
-            /* Language Buttons Container */
+            /* Mobile Language Selector - Hidden on Desktop */
+            .language-selector-mobile {
+                display: none;
+                position: relative;
+            }
+
+            .lang-current {
+                background: rgba(44, 44, 44, 0.06);
+                border: 1px solid rgba(44, 44, 44, 0.08);
+                border-radius: 20px;
+                padding: 8px 12px;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 11px;
+                font-weight: 600;
+            }
+
+            .lang-current:hover {
+                background: rgba(192, 192, 192, 0.1);
+                border-color: rgba(192, 192, 192, 0.15);
+            }
+
+            .lang-current .fa-chevron-down {
+                font-size: 9px;
+                transition: transform 0.3s ease;
+            }
+
+            .lang-dropdown.active + .lang-current .fa-chevron-down,
+            .lang-current:has(+ .lang-dropdown.active) .fa-chevron-down {
+                transform: rotate(180deg);
+            }
+
+            .lang-dropdown {
+                position: absolute;
+                top: calc(100% + 8px);
+                right: 0;
+                background: white;
+                border: 1px solid rgba(44, 44, 44, 0.1);
+                border-radius: 12px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+                padding: 8px;
+                min-width: 140px;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 1002;
+            }
+
+            .lang-dropdown.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .lang-option {
+                width: 100%;
+                background: transparent;
+                border: none;
+                padding: 10px 12px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+                border-radius: 8px;
+                transition: all 0.2s ease;
+                font-size: 12px;
+                font-weight: 500;
+                color: rgba(44, 44, 44, 0.8);
+            }
+
+            .lang-option:hover {
+                background: rgba(192, 192, 192, 0.1);
+                color: rgba(44, 44, 44, 1);
+            }
+
+            .lang-option.active {
+                background: rgba(192, 192, 192, 0.15);
+                color: #000;
+                font-weight: 600;
+            }
+
+            .lang-option .lang-name {
+                flex: 1;
+                text-align: left;
+            }
+
+            /* Desktop Language Buttons Container */
             .language-buttons {
                 display: flex;
                 gap: 5px;
@@ -240,6 +380,10 @@ class TranslationSystem {
                 border-radius: 20px;
                 padding: 4px;
                 border: 1px solid rgba(44, 44, 44, 0.04);
+            }
+
+            .desktop-only {
+                display: flex;
             }
 
             .lang-btn {
@@ -380,29 +524,46 @@ class TranslationSystem {
                 .language-selector-container {
                     position: fixed;
                     top: 15px;
-                    right: 125px;
+                    right: 70px;
                     z-index: 1001;
                     margin-right: 0;
                 }
 
                 .language-toggle {
-                    background: rgba(0, 0, 0, 0.8);
-                    backdrop-filter: blur(20px);
-                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-                    border: 1px solid rgba(255, 255, 255, 0.2);
-                    padding: 8px 12px;
+                    background: transparent;
+                    backdrop-filter: none;
+                    box-shadow: none;
+                    border: none;
+                    padding: 0;
                 }
 
                 .language-label {
                     display: none;
                 }
 
-                .language-buttons {
-                    background: rgba(255, 255, 255, 0.1);
+                /* Hide desktop selector on mobile */
+                .desktop-only {
+                    display: none !important;
                 }
 
-                .lang-btn {
-                    padding: 5px 8px;
+                /* Show mobile selector */
+                .language-selector-mobile {
+                    display: block;
+                }
+
+                .lang-current {
+                    background: rgba(0, 0, 0, 0.8);
+                    backdrop-filter: blur(20px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    color: white;
+                }
+
+                .lang-current .flag-icon {
+                    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.3);
+                }
+
+                .lang-current .fa-chevron-down {
+                    color: rgba(255, 255, 255, 0.7);
                 }
 
                 /* Hide fallback navigation item on mobile */

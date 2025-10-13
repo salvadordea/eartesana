@@ -51,7 +51,36 @@ class HomeCategoriesLoader {
                     count: this.getProductCountForCategory(category.id),
                     slug: this.generateSlug(category.name)
                 }))
-                .filter(cat => cat.count > 0); // Solo categorías con productos
+                .filter(cat => cat.count > 0) // Solo categorías con productos
+                .sort((a, b) => {
+                    // Orden personalizado definido por el cliente
+                    const categoryOrder = [
+                        'Joyeria',
+                        'Accesorios',
+                        'Bolsas de mano',
+                        'Bolsas de Textil y Piel',
+                        'Bolsas Cruzadas',
+                        'Portacel',
+                        'Bolsas Grandes',
+                        'Backpacks',
+                        'Botelleras',
+                        'Hogar',
+                        'Vestimenta'
+                    ];
+
+                    const indexA = categoryOrder.indexOf(a.name);
+                    const indexB = categoryOrder.indexOf(b.name);
+
+                    // Si ambas categorías están en el orden, usar ese orden
+                    if (indexA !== -1 && indexB !== -1) {
+                        return indexA - indexB;
+                    }
+                    // Si solo una está en el orden, priorizarla
+                    if (indexA !== -1) return -1;
+                    if (indexB !== -1) return 1;
+                    // Si ninguna está en el orden, ordenar alfabéticamente
+                    return a.name.localeCompare(b.name);
+                });
             
             console.log('🏠 Categorías cargadas para inicio:', this.categories);
             

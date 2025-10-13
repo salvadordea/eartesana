@@ -289,27 +289,75 @@
 
 @media (max-width: 768px) {
     .universal-footer {
-        padding: 30px 0 0;
+        padding: 40px 0 0;
     }
-    
+
     .footer-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px 20px;
+        text-align: left;
+    }
+
+    /* Brand section takes full width on first row */
+    .footer-section.brand-section {
+        grid-column: 1 / -1;
         text-align: center;
     }
-    
-    .contact-item {
+
+    .footer-section.brand-section .social-links {
         justify-content: center;
     }
-    
+
+    /* Other sections in 2 columns */
+    .footer-section:not(.brand-section) h4 {
+        font-size: 1rem;
+    }
+
+    .footer-link {
+        font-size: 0.85rem;
+    }
+
+    .contact-item {
+        font-size: 0.85rem;
+    }
+
     .footer-bottom-content {
         flex-direction: column;
         text-align: center;
         gap: 15px;
     }
-    
-    .social-links {
-        justify-content: center;
+}
+
+@media (max-width: 580px) {
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px 15px;
+    }
+
+    .footer-section.brand-section {
+        grid-column: 1 / -1;
+    }
+
+    .footer-section h4 {
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+    }
+
+    .footer-link {
+        font-size: 0.8rem;
+    }
+
+    .footer-links li {
+        margin-bottom: 10px;
+    }
+
+    .contact-item {
+        font-size: 0.8rem;
+        gap: 10px;
+    }
+
+    .contact-item i {
+        font-size: 1rem;
     }
 }
 
@@ -317,19 +365,34 @@
     .universal-footer .container {
         padding: 0 15px;
     }
-    
+
     .footer-content {
+        grid-template-columns: 1fr;
         gap: 25px;
+        text-align: center;
     }
-    
+
+    .footer-section.brand-section {
+        grid-column: 1;
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+
     .contact-item {
+        justify-content: center;
         flex-direction: column;
         gap: 5px;
         align-items: center;
     }
-    
+
     .contact-item i {
         margin-top: 0;
+    }
+
+    .social-links {
+        justify-content: center;
     }
 }
 </style>

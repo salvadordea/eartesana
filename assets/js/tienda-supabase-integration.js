@@ -512,17 +512,17 @@ class TiendaSupabaseIntegration {
         
         // Filtrar categorías con productos y ordenar según el orden especificado
         const categoryOrder = [
-            'Joyería',
-            'Accesorios', 
-            'BOLSAS DE MANO',
-            'BOLSAS TEXTIL Y PIEL',
+            'Joyeria',
+            'Accesorios',
+            'Bolsas de mano',
+            'Bolsas de Textil y Piel',
             'Bolsas Cruzadas',
-            'PORTACEL',
-            'Bolsas grandes',
-            'BACKPACKS',
-            'BOTELLERAS',
-            'HOGAR',
-            'VESTIMENTA'
+            'Portacel',
+            'Bolsas Grandes',
+            'Backpacks',
+            'Botelleras',
+            'Hogar',
+            'Vestimenta'
         ];
         
         const categoriesWithProducts = this.allCategories
@@ -653,17 +653,17 @@ class TiendaSupabaseIntegration {
 
         // Aplicar el mismo orden para los filtros
         const categoryOrder = [
-            'Joyería',
-            'Accesorios', 
-            'BOLSAS DE MANO',
-            'BOLSAS TEXTIL Y PIEL',
+            'Joyeria',
+            'Accesorios',
+            'Bolsas de mano',
+            'Bolsas de Textil y Piel',
             'Bolsas Cruzadas',
-            'PORTACEL',
-            'Bolsas grandes',
-            'BACKPACKS',
-            'BOTELLERAS',
-            'HOGAR',
-            'VESTIMENTA'
+            'Portacel',
+            'Bolsas Grandes',
+            'Backpacks',
+            'Botelleras',
+            'Hogar',
+            'Vestimenta'
         ];
         
         const categoriesWithProducts = this.allCategories
