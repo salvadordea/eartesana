@@ -15,7 +15,8 @@
       "Bash(echo:*)",
       "Bash(fi)",
       "Bash(done)",
-      "Bash(for file in categorias.html sobre-nosotros.html)"
+      "Bash(for file in categorias.html sobre-nosotros.html)",
+      "Bash(for:*)"
     ],
     "deny": [],
     "ask": []
