@@ -705,14 +705,8 @@
             <a href="inventario.html" class="nav-item">
                 <i class="fas fa-boxes"></i> Inventario
             </a>
-            <a href="image-upload-assistant.html" class="nav-item">
-                <i class="fas fa-image"></i> Subir Imágenes
-            </a>
-            <a href="#" class="nav-item" data-section="ventas">
-                <i class="fas fa-chart-line"></i> Panel de Ventas
-            </a>
-            <a href="#" class="nav-item" data-section="mayoristas">
-                <i class="fas fa-users-cog"></i> Mayoristas
+            <a href="pedidos.html" class="nav-item">
+                <i class="fas fa-shopping-cart"></i> Pedidos
             </a>
             <a href="usuarios.html" class="nav-item">
                 <i class="fas fa-users"></i> Usuarios
@@ -722,9 +716,6 @@
             </a>
             <a href="#" class="nav-item" data-section="contacto">
                 <i class="fas fa-address-card"></i> Info Contacto
-            </a>
-            <a href="#" class="nav-item" data-section="setup">
-                <i class="fas fa-cog"></i> Configuración
             </a>
         </nav>
     </div>
@@ -763,30 +754,15 @@
                 <div class="dashboard-card">
                     <div class="card-header">
                         <div class="card-icon" style="background: linear-gradient(135deg, #28a745, #20c997);">
-                            <i class="fas fa-chart-line"></i>
+                            <i class="fas fa-shopping-cart"></i>
                         </div>
-                        <div class="card-title">Panel de Ventas</div>
+                        <div class="card-title">Gestión de Pedidos</div>
                     </div>
                     <div class="card-description">
-                        Monitorea ventas diarias, gestiona pedidos y carritos abandonados. Visualiza métricas de usuarios registrados.
+                        Visualiza y gestiona pedidos de clientes mayoristas y retail. Actualiza estados y envíos.
                     </div>
-                    <div class="card-action" onclick="showSection('ventas')">
-                        <i class="fas fa-arrow-right"></i> Ver Panel de Ventas
-                    </div>
-                </div>
-
-                <div class="dashboard-card">
-                    <div class="card-header">
-                        <div class="card-icon" style="background: linear-gradient(135deg, #3498db, #2980b9);">
-                            <i class="fas fa-users-cog"></i>
-                        </div>
-                        <div class="card-title">Usuarios Mayoristas</div>
-                    </div>
-                    <div class="card-description">
-                        Gestiona usuarios con permisos mayoristas, crea nuevas cuentas, modifica precios especiales.
-                    </div>
-                    <div class="card-action" onclick="showSection('mayoristas')">
-                        <i class="fas fa-arrow-right"></i> Gestionar Mayoristas
+                    <div class="card-action" onclick="window.location.href='pedidos.html'">
+                        <i class="fas fa-arrow-right"></i> Ver Pedidos
                     </div>
                 </div>
 
@@ -795,13 +771,28 @@
                         <div class="card-icon" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
                             <i class="fas fa-users"></i>
                         </div>
-                        <div class="card-title">Usuarios Regulares</div>
+                        <div class="card-title">Usuarios</div>
                     </div>
                     <div class="card-description">
-                        Administra usuarios regulares, modifica contraseñas, suspende o elimina cuentas.
+                        Administra todos los usuarios (regulares y mayoristas), modifica roles, contraseñas y permisos.
                     </div>
                     <div class="card-action" onclick="window.location.href='usuarios.html'">
                         <i class="fas fa-arrow-right"></i> Gestionar Usuarios
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #e91e63, #ad1457);">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <div class="card-title">Cupones y Descuentos</div>
+                    </div>
+                    <div class="card-description">
+                        Crea y gestiona cupones de descuento, promociones especiales y códigos para clientes.
+                    </div>
+                    <div class="card-action" onclick="window.location.href='cupones.html'">
+                        <i class="fas fa-arrow-right"></i> Gestionar Cupones
                     </div>
                 </div>
 
@@ -813,40 +804,10 @@
                         <div class="card-title">Info de Contacto</div>
                     </div>
                     <div class="card-description">
-                        Edita las tarjetas de contacto, banner promocional y elementos de confianza de la página principal.
+                        Edita la información de contacto, redes sociales y horarios de la página principal.
                     </div>
                     <div class="card-action" onclick="showSection('contacto')">
                         <i class="fas fa-arrow-right"></i> Editar Contacto
-                    </div>
-                </div>
-
-                <div class="dashboard-card">
-                    <div class="card-header">
-                        <div class="card-icon" style="background: linear-gradient(135deg, #e91e63, #ad1457);">
-                            <i class="fas fa-image"></i>
-                        </div>
-                        <div class="card-title">Asistente de Subida de Imágenes</div>
-                    </div>
-                    <div class="card-description">
-                        Gestiona las imágenes de productos, sube nuevas imágenes para productos con placeholders, y organiza la galería visual.
-                    </div>
-                    <div class="card-action" onclick="window.location.href='image-upload-assistant.html'">
-                        <i class="fas fa-arrow-right"></i> Subir Imágenes
-                    </div>
-                </div>
-
-                <div class="dashboard-card">
-                    <div class="card-header">
-                        <div class="card-icon" style="background: linear-gradient(135deg, #34495e, #2c3e50);">
-                            <i class="fas fa-cog"></i>
-                        </div>
-                        <div class="card-title">Configuración del Sistema</div>
-                    </div>
-                    <div class="card-description">
-                        Configura la conexión a Supabase, verifica tablas y administra el sistema.
-                    </div>
-                    <div class="card-action" onclick="showSection('setup')">
-                        <i class="fas fa-arrow-right"></i> Configurar Sistema
                     </div>
                 </div>
             </div>
@@ -1469,40 +1430,6 @@
                     </div>
                 </div>
                 -->
-
-                <!-- Promotional Banner Section -->
-                <div class="editor-section">
-                    <h3><i class="fas fa-percent"></i> Banner Promocional</h3>
-                    <p>Edita el descuento que aparece en el banner superior</p>
-
-                    <div class="promo-form">
-                        <div class="form-group">
-                            <label style="display: flex; align-items: center; gap: 10px;">
-                                <input type="checkbox" id="promoEnabled" style="width: auto; height: 20px; cursor: pointer;">
-                                <span>Activar Banner Promocional</span>
-                            </label>
-                            <small>Activa o desactiva el banner circular flotante</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Descuento Promocional</label>
-                            <input type="text" id="promoDiscount" placeholder="25% OFF" class="form-control">
-                            <small>Ej: 25% OFF, 50% DESCUENTO, OFERTA ESPECIAL</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Aclaración del Descuento <small style="color: #6c757d; font-weight: normal;">(opcional)</small></label>
-                            <input type="text" id="promoDisclaimer" placeholder="*en tu primera compra" class="form-control">
-                            <small>Texto pequeño que aparece debajo del descuento (ej: *en tu primera compra, *compras mayores a $500)</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Fecha de Expiración <small style="color: #6c757d; font-weight: normal;">(opcional)</small></label>
-                            <input type="datetime-local" id="promoExpirationDate" class="form-control">
-                            <small>El banner se ocultará automáticamente después de esta fecha. Dejar vacío = sin expiración</small>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Social Media Section -->
                 <div class="editor-section">
@@ -2369,17 +2296,6 @@
             console.log('📞 Auto-cargando información de contacto...');
 
             const defaultData = {
-                trustIcon1Text: 'Envío Gratis*',
-                trustIcon1Icon: 'fas fa-truck',
-                trustIcon2Text: 'Hecho a Mano',
-                trustIcon2Icon: 'fas fa-hand-holding-heart',
-                trustIcon3Text: 'Calidad Premium',
-                trustIcon3Icon: 'fas fa-shield-alt',
-                shippingDisclaimer: '*En compras superiores a $2,000.00',
-                promoEnabled: true,
-                promoDiscount: '25% OFF',
-                promoDisclaimer: '*en tu primera compra',
-                promoExpirationDate: null,
                 instagramUrl: '#',
                 facebookUrl: '#',
                 whatsappNumber: '+5212345678490',
@@ -2419,12 +2335,6 @@
 
             // Datos por defecto basados en index.html actual
             const defaultData = {
-                // Promotional Banner
-                promoEnabled: true,
-                promoDiscount: '25% OFF',
-                promoDisclaimer: '*en tu primera compra',
-                promoExpirationDate: null,
-
                 // Social Media
                 instagramUrl: '#',
                 facebookUrl: '#',
@@ -2476,12 +2386,6 @@
         // Guardar cambios - Aplicación automática
         async function saveContactInfo() {
             const contactData = {
-                // Promotional Banner
-                promoEnabled: document.getElementById('promoEnabled').checked,
-                promoDiscount: document.getElementById('promoDiscount').value || '25% OFF',
-                promoDisclaimer: document.getElementById('promoDisclaimer').value || '',
-                promoExpirationDate: document.getElementById('promoExpirationDate').value || null,
-
                 // Social Media
                 instagramUrl: document.getElementById('instagramUrl').value,
                 facebookUrl: document.getElementById('facebookUrl').value,
@@ -2513,10 +2417,6 @@
 🚀 APLICAR CAMBIOS AUTOMÁTICAMENTE
 
 📄 RESUMEN DE CAMBIOS:
-
-🎯 BANNER PROMOCIONAL:
-• Descuento: ${contactData.promoDiscount}
-• Disclaimer: ${contactData.promoDisclaimer}
 
 📱 REDES SOCIALES:
 • Instagram: ${contactData.instagramUrl || 'Sin cambios'}
@@ -3591,78 +3491,116 @@
             event.preventDefault();
             console.log('🔄 Saving mayorista...');
 
-            const formData = {
-                full_name: document.getElementById('mayoristaNombre').value,
-                email: document.getElementById('mayoristaEmail').value,
-                company_name: document.getElementById('mayoristaEmpresa').value,
-                phone: document.getElementById('mayoristaTelefono').value,
-                password: document.getElementById('mayoristaPassword').value,
-                wholesale_discount_percent: parseInt(document.getElementById('mayoristaDescuento').value),
-                is_active: (document.getElementById('mayoristaEstado').value === 'active'),
-                admin_notes: document.getElementById('mayoristaNotas').value,
-                role: 'Mayorista' // Siempre Mayorista
-            };
+            const email = document.getElementById('mayoristaEmail').value;
+            const password = document.getElementById('mayoristaPassword').value;
+            const full_name = document.getElementById('mayoristaNombre').value;
+            const company_name = document.getElementById('mayoristaEmpresa').value;
+            const phone = document.getElementById('mayoristaTelefono').value;
+            const wholesale_discount_percent = parseInt(document.getElementById('mayoristaDescuento').value);
+            const is_active = (document.getElementById('mayoristaEstado').value === 'active');
+            const admin_notes = document.getElementById('mayoristaNotas').value;
 
-            console.log('📋 Form data collected:', formData);
-            
             const editId = document.getElementById('editMayoristaId').value;
             const isEdit = editId !== '';
-            
+
             try {
                 if (!supabase) {
                     throw new Error('Supabase not initialized. Check your configuration.');
                 }
 
                 console.log('✏️ Edit mode:', isEdit, 'ID:', editId);
-                let result;
 
                 if (isEdit) {
                     // Actualizar mayorista existente
-                    const updateData = { ...formData };
-                    if (!updateData.password) {
-                        delete updateData.password; // No actualizar contraseña si está vacía
-                        console.log('🔑 Password empty, not updating');
-                    } else {
-                        // Hash password for demo (in production use proper bcrypt)
-                        updateData.password = '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+                    const updateData = {
+                        full_name,
+                        company_name,
+                        phone,
+                        wholesale_discount_percent,
+                        is_active,
+                        admin_notes
+                    };
+
+                    // Si hay nueva contraseña, actualizar en auth
+                    if (password) {
+                        console.log('🔑 Updating password in auth.users');
+                        // Esto requiere admin API - por ahora solo actualizamos el perfil
+                        alert('⚠️ Para cambiar contraseña use la función "Cambiar Contraseña" del botón de acciones');
                     }
 
-                    console.log('🔄 Updating mayorista with data:', updateData);
-                    result = await supabase
+                    console.log('🔄 Updating mayorista profile:', updateData);
+                    const { data, error } = await supabase
                         .from('user_profiles')
                         .update(updateData)
                         .eq('id', editId)
-                        .select(); // Return updated data
+                        .select();
+
+                    if (error) throw error;
+
+                    alert('✅ Mayorista actualizado exitosamente');
+
                 } else {
                     // Crear nuevo mayorista
-                    if (formData.password) {
-                        // Hash password for demo (in production use proper bcrypt)
-                        formData.password = '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+                    if (!password || password.length < 6) {
+                        throw new Error('La contraseña debe tener al menos 6 caracteres');
                     }
 
-                    console.log('🆕 Creating new mayorista with data:', formData);
-                    result = await supabase
+                    console.log('🆕 Creating new auth user');
+
+                    // 1. Crear usuario en auth.users
+                    const { data: authData, error: authError } = await supabase.auth.signUp({
+                        email: email,
+                        password: password,
+                        options: {
+                            data: {
+                                full_name: full_name,
+                                company_name: company_name
+                            }
+                        }
+                    });
+
+                    if (authError) throw authError;
+
+                    if (!authData.user) {
+                        throw new Error('No se pudo crear el usuario');
+                    }
+
+                    console.log('✅ Auth user created:', authData.user.id);
+
+                    // 2. Crear perfil en user_profiles
+                    const profileData = {
+                        id: authData.user.id,
+                        email: email,
+                        full_name: full_name,
+                        company_name: company_name,
+                        phone: phone,
+                        role: 'Mayorista',
+                        wholesale_discount_percent: wholesale_discount_percent,
+                        is_active: is_active,
+                        admin_notes: admin_notes
+                    };
+
+                    console.log('🆕 Creating user profile:', profileData);
+
+                    const { data: profileResult, error: profileError } = await supabase
                         .from('user_profiles')
-                        .insert([formData])
-                        .select(); // Return created data
+                        .insert([profileData])
+                        .select();
+
+                    if (profileError) {
+                        console.error('❌ Error creating profile, cleaning up auth user');
+                        // Idealmente aquí eliminaríamos el usuario de auth, pero eso requiere admin API
+                        throw profileError;
+                    }
+
+                    console.log('✅ Profile created:', profileResult);
+                    alert('✅ Mayorista creado exitosamente. Se ha enviado un email de confirmación.');
                 }
-
-                console.log('📤 Supabase operation result:', result);
-
-                if (result.error) {
-                    console.error('❌ Supabase error:', result.error);
-                    throw result.error;
-                }
-
-                // Éxito
-                const message = `✅ Mayorista ${isEdit ? 'actualizado' : 'creado'} exitosamente`;
-                console.log(message);
-                alert(message);
 
                 // Cerrar modal y actualizar tabla
                 closeMayoristasModal();
-                await loadMayoristasData(); // Wait for data reload
-                
+                await loadMayoristasData();
+
             } catch (error) {
                 console.error('Error guardando mayorista:', error);
                 alert(`❌ Error al ${isEdit ? 'actualizar' : 'crear'} mayorista: ${error.message}`);
