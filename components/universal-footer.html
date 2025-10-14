@@ -29,7 +29,7 @@
                 <ul class="footer-links">
                     <li><a href="/index.html" class="footer-link" data-translate="navigation.inicio">Inicio</a></li>
                     <li><a href="/tienda.html" class="footer-link" data-translate="navigation.tienda">Tienda</a></li>
-                    <li><a href="/mayoristas/index.html" class="footer-link" data-translate="navigation.mayoristas">Mayoristas</a></li>
+                    <li><a href="/mayoristas/login.html" class="footer-link" data-translate="navigation.mayoristas">Mayoristas</a></li>
                     <li><a href="#contacto" class="footer-link" data-translate="navigation.contacto">Contacto</a></li>
                 </ul>
             </div>
@@ -369,26 +369,27 @@
     .footer-content {
         grid-template-columns: 1fr;
         gap: 25px;
-        text-align: center;
+        text-align: left;
     }
 
     .footer-section.brand-section {
         grid-column: 1;
-    }
-
-    .footer-section {
         text-align: center;
     }
 
+    .footer-section:not(.brand-section) {
+        text-align: left;
+    }
+
     .contact-item {
-        justify-content: center;
-        flex-direction: column;
-        gap: 5px;
-        align-items: center;
+        justify-content: flex-start;
+        flex-direction: row;
+        gap: 15px;
+        align-items: flex-start;
     }
 
     .contact-item i {
-        margin-top: 0;
+        margin-top: 3px;
     }
 
     .social-links {

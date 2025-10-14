@@ -30,7 +30,7 @@ class CartUI {
 
         // Count directory depth to determine base path
         if (currentPath.includes('/sobre-nosotros/') ||
-            currentPath.includes('/pages/mayoristas/')) {
+            currentPath.includes('/mayoristas/')) {
             return '../../';
         } else if (currentPath.includes('/admin/')) {
             return '../';

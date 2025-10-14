@@ -136,8 +136,10 @@ class TranslationSystem {
             </div>
         `;
 
-        // Add event listeners for desktop buttons
+        // Add event listeners for desktop buttons and mobile dropdown
         toggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent event from bubbling
+
             const langBtn = e.target.closest('.lang-btn');
             const langOption = e.target.closest('.lang-option');
             const langCurrent = e.target.closest('.lang-current');
@@ -146,15 +148,20 @@ class TranslationSystem {
                 const newLanguage = langBtn.dataset.lang;
                 this.switchLanguage(newLanguage);
             } else if (langOption) {
+                e.preventDefault();
                 const newLanguage = langOption.dataset.lang;
                 this.switchLanguage(newLanguage);
                 // Close dropdown
                 const dropdown = document.getElementById('langDropdown');
                 if (dropdown) dropdown.classList.remove('active');
             } else if (langCurrent) {
+                e.preventDefault();
                 // Toggle dropdown
                 const dropdown = document.getElementById('langDropdown');
-                if (dropdown) dropdown.classList.toggle('active');
+                if (dropdown) {
+                    dropdown.classList.toggle('active');
+                    console.log('🔄 Dropdown toggled:', dropdown.classList.contains('active'));
+                }
             }
         });
 
@@ -329,14 +336,16 @@ class TranslationSystem {
                 min-width: 140px;
                 opacity: 0;
                 visibility: hidden;
+                pointer-events: none;
                 transform: translateY(-10px);
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                z-index: 1002;
+                z-index: 9999;
             }
 
             .lang-dropdown.active {
                 opacity: 1;
                 visibility: visible;
+                pointer-events: auto;
                 transform: translateY(0);
             }
 

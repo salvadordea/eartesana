@@ -34,6 +34,8 @@ class UniversalFooter {
             return '../components/universal-footer.html';
         } else if (path.includes('/pages/')) {
             return '../../components/universal-footer.html';
+        } else if (path.includes('/mayoristas/')) {
+            return '../components/universal-footer.html';
         } else {
             return 'components/universal-footer.html';
         }
@@ -45,7 +47,7 @@ class UniversalFooter {
     adjustPaths(footerHTML) {
         const path = window.location.pathname;
         let adjustedHTML = footerHTML;
-        
+
         if (path.includes('/admin/')) {
             // Desde admin, ajustar rutas
             adjustedHTML = adjustedHTML.replace(/href="([^"]*(?:index\.html|pages\/))/g, 'href="../$1');
@@ -54,8 +56,11 @@ class UniversalFooter {
             // Desde pages, ajustar rutas
             adjustedHTML = adjustedHTML.replace(/href="index\.html"/g, 'href="../index.html"');
             adjustedHTML = adjustedHTML.replace(/href="pages\//g, 'href="');
+        } else if (path.includes('/mayoristas/')) {
+            // Desde mayoristas, no necesita ajustes (usa rutas relativas desde la raíz con /)
+            // El footer ya tiene las rutas correctas con /
         }
-        
+
         return adjustedHTML;
     }
     

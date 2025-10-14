@@ -93,7 +93,7 @@ class UniversalFooter {
                             <li><a href="${basePath}/index.html" class="footer-link">Inicio</a></li>
                             <li><a href="${basePath}/tienda/index.html" class="footer-link">Tienda</a></li>
                             <li><a href="${basePath}/pages/sobre-nosotros/index.html" class="footer-link">Nosotros</a></li>
-                            <li><a href="${basePath}/pages/mayoristas/index.html" class="footer-link">Mayoristas</a></li>
+                            <li><a href="${basePath}/mayoristas/login.html" class="footer-link">Mayoristas</a></li>
                             <li><a href="#contacto" class="footer-link">Contacto</a></li>
                         </ul>
                     </div>

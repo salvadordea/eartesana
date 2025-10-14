@@ -29,10 +29,30 @@ class UniversalHeader {
         if (pathWithoutFile.includes('.html')) {
             pathWithoutFile = pathWithoutFile.substring(0, pathWithoutFile.lastIndexOf('/'));
         }
-        
-        // Contar las barras (menos 1 porque la primera siempre está)
-        const depth = (pathWithoutFile.match(/\//g) || []).length - 1;
-        return Math.max(0, depth);
+
+        // Normalizar el path (asegurar que empiece con /)
+        if (!pathWithoutFile.startsWith('/')) {
+            pathWithoutFile = '/' + pathWithoutFile;
+        }
+
+        // Remover trailing slash
+        if (pathWithoutFile.endsWith('/') && pathWithoutFile.length > 1) {
+            pathWithoutFile = pathWithoutFile.slice(0, -1);
+        }
+
+        // Contar las barras - depth es el número de segmentos después de la raíz
+        // Ejemplos: "/" = 0, "/mayoristas" = 1, "/pages/legal" = 2
+        const segments = pathWithoutFile.split('/').filter(s => s.length > 0);
+        const depth = segments.length;
+
+        console.log('🔍 Depth calculation:', {
+            original: this.currentPath,
+            pathWithoutFile,
+            segments,
+            depth
+        });
+
+        return depth;
     }
 
     /**
@@ -67,7 +87,7 @@ class UniversalHeader {
             HOMEPAGE_URL: `${this.baseUrl}index.html`,
             TIENDA_URL: `${this.baseUrl}tienda.html`,
             SOBRE_NOSOTROS_URL: `${this.baseUrl}pages/sobre-nosotros/index.html`,
-            MAYORISTAS_URL: `${this.baseUrl}pages/mayoristas/index.html`,
+            MAYORISTAS_URL: `${this.baseUrl}mayoristas/login.html`,
             CONTACTO_URL: `${this.baseUrl}index.html#contacto`,
             REGISTRO_URL: `${this.baseUrl}micuenta.html`,
             LOGO_URL: `${this.baseUrl}assets/images/logo.webp`

@@ -663,6 +663,11 @@
 
                 console.log('Order processed:', orderData);
 
+                // Save order to database first
+                const orderId = await saveOrderToDatabase(orderData);
+                orderData.id = orderId;
+                console.log(`✅ Order saved with ID: ${orderId}`);
+
                 // Process inventory deduction
                 await processInventoryDeduction(orderData.items);
 
@@ -683,6 +688,79 @@
                 // Reset button
                 processBtn.disabled = false;
                 processBtn.innerHTML = originalText;
+            }
+        }
+
+        // Save order to database
+        async function saveOrderToDatabase(orderData) {
+            console.log('💾 Saving order to database...');
+
+            if (!window.supabase) {
+                throw new Error('Supabase client not available');
+            }
+
+            const supabase = window.supabase;
+
+            try {
+                // Prepare order record for database
+                const orderRecord = {
+                    order_number: orderData.orderNumber,
+                    user_id: orderData.customer.id,
+                    customer_name: orderData.customer.name,
+                    customer_email: orderData.customer.email,
+                    customer_phone: orderData.customer.phone,
+                    company_name: orderData.customer.company,
+
+                    // Shipping address
+                    shipping_address: orderData.shipping.address,
+                    shipping_city: orderData.shipping.city,
+                    shipping_state: orderData.shipping.state,
+                    shipping_postal_code: orderData.shipping.postalCode,
+                    shipping_country: orderData.shipping.country,
+                    shipping_notes: orderData.shipping.notes,
+
+                    // Billing info
+                    billing_rfc: orderData.billing.rfc,
+                    billing_business_name: orderData.billing.businessName,
+
+                    // Order items (as JSONB)
+                    items: orderData.items,
+
+                    // Totals
+                    subtotal: orderData.subtotal,
+                    discount_amount: orderData.discount,
+                    tax_amount: orderData.tax,
+                    total: orderData.total,
+
+                    // Payment & status
+                    payment_method: orderData.paymentMethod,
+                    order_type: 'wholesale',
+                    status: orderData.paymentMethod === 'credit' ? 'pending' : 'processing',
+
+                    // Notes
+                    order_notes: orderData.orderNotes
+                };
+
+                console.log('📦 Order record to insert:', orderRecord);
+
+                // Insert order into database
+                const { data, error } = await supabase
+                    .from('orders')
+                    .insert([orderRecord])
+                    .select()
+                    .single();
+
+                if (error) {
+                    console.error('❌ Error saving order to database:', error);
+                    throw new Error(`Error guardando pedido: ${error.message}`);
+                }
+
+                console.log('✅ Order saved to database with ID:', data.id);
+                return data.id;
+
+            } catch (error) {
+                console.error('❌ Error in saveOrderToDatabase:', error);
+                throw error;
             }
         }
 
@@ -711,6 +789,12 @@
                     // Convert to number if it's a string
                     actualVariantId = typeof actualVariantId === 'string' ? parseInt(actualVariantId, 10) : actualVariantId;
 
+                    // Skip inventory deduction if variantId is 0 or invalid (product without variants)
+                    if (!actualVariantId || actualVariantId === 0 || isNaN(actualVariantId)) {
+                        console.log(`⚠️ Skipping inventory for ${item.name} - no valid variant ID (${actualVariantId})`);
+                        continue;
+                    }
+
                     console.log(`🔍 Processing item: ${item.name}, variantId: ${actualVariantId}`);
 
                     // Get current stock for the variant
@@ -722,11 +806,13 @@
 
                     if (fetchError) {
                         console.error('❌ Error fetching variant stock:', fetchError);
-                        throw new Error(`Error verificando stock del producto: ${item.name}`);
+                        console.log(`⚠️ Could not find variant ${actualVariantId} for ${item.name}, skipping inventory deduction`);
+                        continue; // Skip this item instead of throwing error
                     }
 
                     if (!variant) {
-                        throw new Error(`Variante no encontrada para: ${item.name}`);
+                        console.log(`⚠️ Variant not found for ${item.name}, skipping inventory deduction`);
+                        continue; // Skip this item instead of throwing error
                     }
 
                     // Check if we have enough stock

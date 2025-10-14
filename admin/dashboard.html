@@ -2768,26 +2768,23 @@
                 showMockOrdersData();
                 return;
             }
-            
+
             try {
                 const { data: orders, error } = await supabase
                     .from('orders')
-                    .select(`
-                        *,
-                        profiles:user_id(email, full_name)
-                    `)
+                    .select('*')
                     .order('created_at', { ascending: false })
                     .limit(50);
-                
+
                 if (error) {
                     console.error('Error cargando pedidos:', error);
                     showMockOrdersData();
                     return;
                 }
-                
+
                 allOrders = orders || [];
                 renderOrdersTable();
-                
+
             } catch (error) {
                 console.error('Error inesperado cargando pedidos:', error);
                 showMockOrdersData();
@@ -2803,28 +2800,39 @@
         // Renderizar tabla de pedidos
         function renderOrdersTable() {
             const tbody = document.getElementById('ordersTableBody');
-            
+
             if (allOrders.length === 0) {
                 tbody.innerHTML = `
                     <tr>
                         <td colspan="7" class="loading-row">
-                            <i class="fas fa-info-circle"></i> No hay pedidos para mostrar. 
+                            <i class="fas fa-info-circle"></i> No hay pedidos para mostrar.
                             <br><small style="color: #666;">Los pedidos aparecerán aquí una vez que los usuarios realicen compras.</small>
                         </td>
                     </tr>
                 `;
                 return;
             }
-            
+
             tbody.innerHTML = allOrders.map(order => {
                 const orderDate = new Date(order.created_at).toLocaleDateString();
-                const customerName = order.profiles?.full_name || order.profiles?.email || 'Usuario Invitado';
+                const customerName = order.customer_name || order.customer_email || 'Usuario Invitado';
+                const orderNumber = order.order_number || `#${order.id}`;
                 const statusBadge = getOrderStatusBadge(order.status);
-                
+
+                // Order type badge
+                const orderTypeBadge = order.order_type === 'wholesale'
+                    ? '<span class="status-badge" style="background: #2196F3; margin-left: 5px;">Mayorista</span>'
+                    : '<span class="status-badge" style="background: #4CAF50; margin-left: 5px;">Regular</span>';
+
+                // Display company name for wholesale orders
+                const customerDisplay = order.order_type === 'wholesale' && order.company_name
+                    ? `${customerName} <br><small style="color: #666;">${order.company_name}</small>`
+                    : customerName;
+
                 return `
                     <tr>
-                        <td><strong>#${order.id}</strong></td>
-                        <td>${customerName}</td>
+                        <td><strong>${orderNumber}</strong>${orderTypeBadge}</td>
+                        <td>${customerDisplay}</td>
                         <td>${orderDate}</td>
                         <td>$${parseFloat(order.total || 0).toFixed(2)}</td>
                         <td>${statusBadge}</td>
