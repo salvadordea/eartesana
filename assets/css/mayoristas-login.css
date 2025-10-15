@@ -15,6 +15,10 @@
     --login-success: #28a745;
     --login-warning: #ffc107;
     --login-danger: #dc3545;
+
+    /* Typography variables */
+    --font-primary: 'Crimson Text', serif;
+    --font-secondary: 'Lato', sans-serif;
 }
 
 /* ========================================
@@ -24,7 +28,7 @@
 .login-page {
     min-height: 100vh;
     background: linear-gradient(135deg, var(--login-bg), #e8f5e9);
-    font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: var(--font-secondary);
 }
 
 /* ========================================
@@ -113,7 +117,7 @@
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 10px;
-    font-family: 'Crimson Text', serif;
+    font-family: var(--font-primary);
 }
 
 .login-header-content p {
@@ -429,7 +433,7 @@
     font-weight: 700;
     margin-bottom: 30px;
     text-align: center;
-    font-family: 'Crimson Text', serif;
+    font-family: var(--font-primary);
 }
 
 .benefits-list {

@@ -358,7 +358,7 @@ body {
 }
 
 .modern-category-title {
-    font-family: var(--font-primary);
+    font-family: var(--font-secondary);
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--white);
@@ -444,7 +444,7 @@ body {
 }
 
 .featured-product-title {
-    font-family: var(--font-primary);
+    font-family: var(--font-secondary);
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--white);

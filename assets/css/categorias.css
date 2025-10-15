@@ -129,7 +129,7 @@
 }
 
 .category-name {
-    font-family: var(--font-primary);
+    font-family: var(--font-secondary);
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 8px;

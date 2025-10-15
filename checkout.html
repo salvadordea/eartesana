@@ -84,6 +84,7 @@
             font-size: 14px;
             transition: border-color 0.2s ease;
             background: white;
+            color: #333;
         }
 
         .form-input:focus {
@@ -501,16 +502,15 @@
                         <span id="orderDiscount">-$0.00</span>
                     </div>
                     <div class="total-row">
-                        <span>IVA (16%):</span>
-                        <span id="orderTax">$0.00</span>
-                    </div>
-                    <div class="total-row">
                         <span>Envío:</span>
                         <span id="orderShipping">Gratis</span>
                     </div>
                     <div class="total-row final">
                         <span>Total:</span>
                         <span id="orderTotal">$0.00</span>
+                    </div>
+                    <div style="margin-top: 8px; font-size: 12px; color: #6c757d; text-align: right;">
+                        <i class="fas fa-info-circle"></i> Precios con IVA incluido
                     </div>
                 </div>
 
@@ -675,9 +675,8 @@
                 }
 
                 const subtotalAfterDiscount = subtotal - discount;
-                const tax = subtotalAfterDiscount * 0.16; // IVA 16%
                 const shipping = 0; // Free shipping
-                const total = subtotalAfterDiscount + tax + shipping;
+                const total = subtotalAfterDiscount + shipping;
 
                 document.getElementById('orderSubtotal').textContent = this.formatPrice(subtotal);
 
@@ -690,7 +689,6 @@
                     discountRow.style.display = 'none';
                 }
 
-                document.getElementById('orderTax').textContent = this.formatPrice(tax);
                 document.getElementById('orderShipping').textContent = shipping > 0 ? this.formatPrice(shipping) : 'Gratis';
                 document.getElementById('orderTotal').textContent = this.formatPrice(total);
             }

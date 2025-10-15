@@ -899,7 +899,7 @@ body {
 }
 
 .category-name {
-    font-family: var(--font-primary);
+    font-family: var(--font-secondary);
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--white);
@@ -1172,7 +1172,7 @@ body {
 }
 
 .product-title {
-    font-family: var(--font-primary);
+    font-family: var(--font-secondary);
     font-size: 1.1rem;
     color: #fff;
     margin-bottom: 10px;

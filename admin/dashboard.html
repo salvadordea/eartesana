@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración - Estudio Artesana</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Import Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap">
     <style>
+        :root {
+            --font-primary: 'Crimson Text', serif;
+            --font-secondary: 'Lato', sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,7 +20,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: var(--font-secondary);
             background: #f8f9fa;
             color: #333;
         }
@@ -2509,7 +2516,7 @@
             
             // Crear ventana de vista previa
             const previewHTML = `
-                <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; max-width: 600px;">
+                <div style="font-family: 'Lato', sans-serif; padding: 20px; max-width: 600px;">
                     <h2 style="color: #2c3e50; margin-bottom: 20px;">👀 Vista Previa de Cambios</h2>
                     
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">

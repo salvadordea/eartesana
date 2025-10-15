@@ -64,12 +64,24 @@
         }
 
         .hero-logo {
-            margin-bottom: 60px;
+            margin-bottom: 30px;
             animation: fadeInDown 1s ease-out;
         }
 
         .hero-logo-img {
             max-width: 400px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
+        }
+
+        .hero-slogan {
+            margin-bottom: 50px;
+            animation: fadeInDown 1.2s ease-out;
+        }
+
+        .hero-slogan-img {
+            max-width: 550px;
             width: 100%;
             height: auto;
             filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
@@ -168,11 +180,19 @@
             }
 
             .hero-logo {
-                margin-bottom: 40px;
+                margin-bottom: 20px;
             }
 
             .hero-logo-img {
                 max-width: 280px;
+            }
+
+            .hero-slogan {
+                margin-bottom: 35px;
+            }
+
+            .hero-slogan-img {
+                max-width: 250px;
             }
 
             .hero-title-main {
@@ -244,9 +264,14 @@
                     <img src="assets/images/logo-hero.webp" alt="Estudio Artesana" class="hero-logo-img">
                 </div>
 
+                <!-- Slogan -->
+                <div class="hero-slogan">
+                    <img src="assets/images/slogan.png" alt="Legado ancestral transformado en diseño" class="hero-slogan-img">
+                </div>
+
                 <div class="hero-actions-redesigned">
                     <button onclick="scrollToCategories()" class="btn-hero-primary" data-translate="hero.cta_primary">Explorar Colección</button>
-                    <a href="pages/sobre-nosotros/index.html" class="btn-hero-secondary" data-translate="hero.cta_secondary">Nuestra Historia</a>
+                    <!-- <a href="pages/sobre-nosotros/index.html" class="btn-hero-secondary" data-translate="hero.cta_secondary">Nuestra Historia</a> -->
                 </div>
             </div>
         </div>
@@ -255,10 +280,9 @@
     <!-- Categories Section -->
     <section class="categories-section modern" id="categories-section">
         <div class="container">
-            <div class="section-header centered">
-                <h2 class="section-title" data-translate="sections.categories_title">Nuestras Categorías</h2>
-                <p class="section-subtitle" data-translate="sections.categories_subtitle">Explora nuestra colección de artesanías mexicanas contemporáneas</p>
-            </div>
+            <!-- <div class="section-header centered">
+                <h2 class="section-title" data-translate="sections.categories_title">Colecciones</h2>
+            </div> -->
 
             <!-- Loading State -->
             <div class="categories-loading" id="homeCategoriesLoading">

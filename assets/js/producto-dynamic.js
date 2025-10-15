@@ -13,6 +13,9 @@ class ProductoManager {
         this.currentImageIndex = 0;
         this.images = [];
 
+        // Supabase URL for image storage
+        this.supabaseUrl = window.EstudioArtesanaConfig?.supabase?.url || 'https://yrmfrfpyqctvwyhrhivl.supabase.co';
+
         // Mapeos para Supabase bucket - copiados desde admin logic
         this.CATEGORY_MAPPING = {
             'Joyeria': 'Joyeria',
@@ -489,25 +492,42 @@ class ProductoManager {
 
         console.log(`🎨 Renderizando ${this.product.variations.length} variantes:`, this.product.variations);
 
-        // Simplificar: tratar todas las variantes como variantes con imágenes
+        // Render variants with thumbnail images
         const variantsHTML = `
             <div class="variant-group">
                 <h4>Variantes</h4>
-                <div class="variant-options" data-variant-type="variant">
-                    ${this.product.variations.map(variant => `
-                        <div class="variant-option ${variant.inStock ? '' : 'unavailable'}"
-                             data-variant-id="${variant.id}"
-                             data-variant-name="${variant.name}"
-                             onclick="productoManager.selectVariant('${variant.id}', 'variant')">
-                            ${variant.name}
-                            ${!variant.inStock ? '<span class="unavailable-text">No disponible</span>' : ''}
-                        </div>
-                    `).join('')}
+                <div class="variant-options variant-thumbnails" data-variant-type="variant">
+                    ${this.product.variations.map(variant => {
+                        // Get variant image URL
+                        let imageUrl = variant.image || this.getVariantImageUrl(variant.name);
+
+                        return `
+                            <div class="variant-option variant-thumbnail ${variant.inStock ? '' : 'unavailable'}"
+                                 data-variant-id="${variant.id}"
+                                 data-variant-name="${variant.name}"
+                                 onclick="productoManager.selectVariant('${variant.id}', 'variant')">
+                                <div class="variant-img-container">
+                                    <img src="${imageUrl}" alt="${variant.name}" class="variant-img">
+                                    ${!variant.inStock ? '<span class="unavailable-overlay">No disponible</span>' : ''}
+                                </div>
+                                <span class="variant-label">${variant.name}</span>
+                            </div>
+                        `;
+                    }).join('')}
                 </div>
             </div>
         `;
 
         variantsContainer.innerHTML = variantsHTML;
+    }
+
+    getVariantImageUrl(variantName) {
+        // Construct variant image URL using the same logic as updateMainImageForVariant
+        const mappedCategory = this.getMappedCategory();
+        const mappedProduct = this.getMappedProduct();
+        const variantClean = this.normalizeText(variantName);
+
+        return `${this.supabaseUrl}/storage/v1/object/public/product-images/${encodeURIComponent(mappedCategory)}/${encodeURIComponent(mappedProduct)}/${encodeURIComponent(variantClean)}.jpg`;
     }
 
     // Eliminamos groupVariantsByType() ya que ahora manejamos las variantes directamente
