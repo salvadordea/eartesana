@@ -698,7 +698,7 @@
             
             // Verificar si ya está autenticado y redirigir
             if (window.authManager?.isAuthenticated()) {
-                const returnUrl = new URLSearchParams(window.location.search).get('return') || 'mi-cuenta.html';
+                const returnUrl = new URLSearchParams(window.location.search).get('return') || 'mi-cuenta-dashboard.html';
                 window.location.href = returnUrl;
             }
         });
@@ -712,7 +712,7 @@
             // Suscribirse a cambios de autenticación
             window.authManager.onAuthChange((isAuthenticated, user, profile) => {
                 if (isAuthenticated) {
-                    const returnUrl = new URLSearchParams(window.location.search).get('return') || 'mi-cuenta.html';
+                    const returnUrl = new URLSearchParams(window.location.search).get('return') || 'mi-cuenta-dashboard.html';
                     showAlert('¡Sesión iniciada exitosamente! Redirigiendo a tu cuenta...', 'success');
                     setTimeout(() => {
                         window.location.href = returnUrl;
