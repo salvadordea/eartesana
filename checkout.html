@@ -394,6 +394,19 @@
                             <i class="fas fa-truck"></i>
                             Información de Envío
                         </h2>
+
+                        <!-- Saved Addresses Selector (only shown if user is logged in) -->
+                        <div id="savedAddressesSection" class="form-group" style="display: none;">
+                            <label for="savedAddress">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Direcciones Guardadas
+                            </label>
+                            <select id="savedAddress" class="form-input" onchange="loadSavedAddress()">
+                                <option value="">Nueva dirección</option>
+                                <!-- Saved addresses will be loaded here -->
+                            </select>
+                        </div>
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">Nombre *</label>
@@ -411,6 +424,11 @@
                             <input type="text" id="address" name="address" class="form-input" required
                                    placeholder="Calle 123, Col. Centro">
                         </div>
+                        <div class="form-group">
+                            <label for="addressLine2">Dirección Línea 2 (opcional)</label>
+                            <input type="text" id="addressLine2" name="addressLine2" class="form-input"
+                                   placeholder="Depto, piso, etc.">
+                        </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="city">Ciudad *</label>
@@ -427,6 +445,14 @@
                             <label for="state">Estado *</label>
                             <input type="text" id="state" name="state" class="form-input" required
                                    placeholder="CDMX">
+                        </div>
+
+                        <!-- Save address checkbox (only for logged in users) -->
+                        <div id="saveAddressCheckbox" class="form-group" style="display: none;">
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                <input type="checkbox" id="saveAddress" name="saveAddress">
+                                <span>Guardar esta dirección para futuras compras</span>
+                            </label>
                         </div>
                     </div>
 
@@ -553,12 +579,21 @@
             constructor() {
                 this.cartData = null;
                 this.orderData = {};
+                this.supabase = null;
+                this.currentUser = null;
+                this.savedAddresses = [];
 
                 console.log('🛒 CheckoutManager inicializado');
                 this.initialize();
             }
 
             async initialize() {
+                // Initialize Supabase
+                await this.initSupabase();
+
+                // Check user authentication
+                await this.checkAuth();
+
                 // Wait for CartManager
                 await this.waitForCartManager();
 
@@ -567,6 +602,93 @@
 
                 // Setup event listeners
                 this.setupEventListeners();
+            }
+
+            async initSupabase() {
+                if (window.EstudioArtesanaConfig && window.EstudioArtesanaConfig.supabase) {
+                    const { url, anonKey } = window.EstudioArtesanaConfig.supabase;
+                    this.supabase = supabase.createClient(url, anonKey);
+                    console.log('✅ Supabase initialized');
+                } else {
+                    console.warn('⚠️ Supabase config not found');
+                }
+            }
+
+            async checkAuth() {
+                if (!this.supabase) return;
+
+                try {
+                    const { data: { user } } = await this.supabase.auth.getUser();
+
+                    if (user) {
+                        this.currentUser = user;
+                        console.log('👤 User authenticated:', user.email);
+
+                        // Load saved addresses
+                        await this.loadSavedAddresses();
+                    } else {
+                        console.log('👤 No user authenticated');
+                    }
+                } catch (error) {
+                    console.error('Error checking auth:', error);
+                }
+            }
+
+            async loadSavedAddresses() {
+                if (!this.supabase || !this.currentUser) return;
+
+                try {
+                    const { data, error } = await this.supabase
+                        .from('user_addresses')
+                        .select('*')
+                        .eq('user_id', this.currentUser.id)
+                        .order('is_default', { ascending: false })
+                        .order('created_at', { ascending: false });
+
+                    if (error) throw error;
+
+                    this.savedAddresses = data || [];
+                    console.log(`📍 Loaded ${this.savedAddresses.length} saved addresses`);
+
+                    // Populate address selector
+                    this.populateAddressSelector();
+                } catch (error) {
+                    console.error('Error loading saved addresses:', error);
+                }
+            }
+
+            populateAddressSelector() {
+                if (this.savedAddresses.length === 0) return;
+
+                const selector = document.getElementById('savedAddress');
+                const section = document.getElementById('savedAddressesSection');
+                const saveCheckbox = document.getElementById('saveAddressCheckbox');
+
+                if (!selector || !section) return;
+
+                // Show the selector and save checkbox
+                section.style.display = 'block';
+                if (saveCheckbox) saveCheckbox.style.display = 'block';
+
+                // Clear existing options except "Nueva dirección"
+                selector.innerHTML = '<option value="">Nueva dirección</option>';
+
+                // Add saved addresses
+                this.savedAddresses.forEach(address => {
+                    const option = document.createElement('option');
+                    option.value = address.id;
+                    const label = address.address_name ||
+                                  `${address.recipient_name} - ${address.city}`;
+                    option.textContent = label + (address.is_default ? ' (Predeterminada)' : '');
+                    selector.appendChild(option);
+                });
+
+                // Auto-select default address
+                const defaultAddress = this.savedAddresses.find(addr => addr.is_default);
+                if (defaultAddress) {
+                    selector.value = defaultAddress.id;
+                    this.fillFormWithAddress(defaultAddress);
+                }
             }
 
             async waitForCartManager() {
@@ -728,6 +850,61 @@
                 return isValid;
             }
 
+            fillFormWithAddress(address) {
+                if (!address) return;
+
+                // Split recipient_name into first and last name
+                const nameParts = (address.recipient_name || '').split(' ');
+                const firstName = nameParts[0] || '';
+                const lastName = nameParts.slice(1).join(' ') || '';
+
+                document.getElementById('firstName').value = firstName;
+                document.getElementById('lastName').value = lastName;
+                document.getElementById('address').value = address.address_line1 || '';
+                document.getElementById('addressLine2').value = address.address_line2 || '';
+                document.getElementById('city').value = address.city || '';
+                document.getElementById('postalCode').value = address.postal_code || '';
+                document.getElementById('state').value = address.state || '';
+                document.getElementById('phone').value = address.phone || '';
+            }
+
+            clearAddressForm() {
+                document.getElementById('firstName').value = '';
+                document.getElementById('lastName').value = '';
+                document.getElementById('address').value = '';
+                document.getElementById('addressLine2').value = '';
+                document.getElementById('city').value = '';
+                document.getElementById('postalCode').value = '';
+                document.getElementById('state').value = '';
+            }
+
+            async saveNewAddress(addressData) {
+                if (!this.supabase || !this.currentUser) return;
+
+                try {
+                    const { error } = await this.supabase
+                        .from('user_addresses')
+                        .insert([{
+                            user_id: this.currentUser.id,
+                            recipient_name: `${addressData.firstName} ${addressData.lastName}`,
+                            phone: addressData.phone,
+                            address_line1: addressData.address,
+                            address_line2: addressData.addressLine2 || '',
+                            city: addressData.city,
+                            postal_code: addressData.postalCode,
+                            state: addressData.state,
+                            country: 'México',
+                            is_default: this.savedAddresses.length === 0 // First address is default
+                        }]);
+
+                    if (error) throw error;
+
+                    console.log('✅ Address saved successfully');
+                } catch (error) {
+                    console.error('Error saving address:', error);
+                }
+            }
+
             async placeOrder() {
                 if (!this.validateForm()) {
                     alert('Por favor, completa todos los campos requeridos.');
@@ -742,6 +919,12 @@
                     // Collect form data
                     const formData = new FormData(document.getElementById('orderForm'));
                     this.orderData = Object.fromEntries(formData);
+
+                    // Save address if checkbox is checked
+                    const saveAddress = document.getElementById('saveAddress');
+                    if (saveAddress && saveAddress.checked && this.currentUser) {
+                        await this.saveNewAddress(this.orderData);
+                    }
 
                     // Add cart data
                     this.orderData.items = this.cartData.items;
@@ -896,6 +1079,29 @@
                 window.CouponService.removeCoupon();
                 window.checkoutManager.hideAppliedCoupon();
                 window.checkoutManager.updateTotals();
+            }
+        }
+
+        // Global function for address selection
+        function loadSavedAddress() {
+            if (!window.checkoutManager) return;
+
+            const selector = document.getElementById('savedAddress');
+            const addressId = selector.value;
+
+            if (!addressId) {
+                // "Nueva dirección" selected - clear form
+                window.checkoutManager.clearAddressForm();
+                return;
+            }
+
+            // Find the selected address
+            const address = window.checkoutManager.savedAddresses.find(
+                addr => addr.id === addressId
+            );
+
+            if (address) {
+                window.checkoutManager.fillFormWithAddress(address);
             }
         }
 

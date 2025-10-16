@@ -135,7 +135,24 @@ CREATE TABLE IF NOT EXISTS public.wholesalers (
     status TEXT DEFAULT 'active' CHECK (status IN ('active', 'suspended', 'inactive')),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
-    notes TEXT
+    notes TEXT,
+    -- Contact information
+    contact_name TEXT,
+    contact_phone TEXT,
+    -- Shipping address
+    shipping_address TEXT,
+    shipping_city TEXT,
+    shipping_state TEXT,
+    shipping_zipcode TEXT,
+    shipping_country TEXT DEFAULT 'México',
+    -- Billing information
+    rfc TEXT,
+    business_name TEXT,
+    billing_address TEXT,
+    billing_city TEXT,
+    billing_state TEXT,
+    billing_zipcode TEXT,
+    billing_country TEXT DEFAULT 'México'
 );
 
 -- Create indexes

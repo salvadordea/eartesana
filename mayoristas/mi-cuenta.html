@@ -345,7 +345,7 @@
                     return false;
                 }
 
-                currentUser = sessionData.user;
+                currentUser = sessionData;
                 return true;
             } catch (error) {
                 console.error('Error parsing session:', error);

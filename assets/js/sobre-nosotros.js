@@ -61,18 +61,6 @@ class AboutUsManager {
                 title: 'Productos Únicos'
             },
             {
-                id: 'about-7',
-                src: '../../assets/images/SobreNosotros/7.jpg',
-                alt: 'Estudio Artesana - Diseño y creatividad',
-                title: 'Diseño y Creatividad'
-            },
-            {
-                id: 'about-8',
-                src: '../../assets/images/SobreNosotros/8.jpg',
-                alt: 'Estudio Artesana - Calidad y detalle',
-                title: 'Calidad y Detalle'
-            },
-            {
                 id: 'about-9',
                 src: '../../assets/images/SobreNosotros/9.jpg',
                 alt: 'Estudio Artesana - Tradición mexicana',
@@ -87,7 +75,7 @@ class AboutUsManager {
             if (stored) {
                 const parsed = JSON.parse(stored);
                 // Validate stored images
-                if (Array.isArray(parsed) && parsed.length === 9) {
+                if (Array.isArray(parsed) && parsed.length === 7) {
                     this.images = parsed;
                 } else {
                     this.images = this.defaultImages;
@@ -263,7 +251,7 @@ class AboutUsManager {
     
     // Admin methods for updating images
     updateImage(index, imageData) {
-        if (index >= 0 && index < 9) {
+        if (index >= 0 && index < 7) {
             this.images[index] = {
                 ...this.images[index],
                 ...imageData
@@ -297,7 +285,7 @@ class AboutUsManager {
     
     importConfiguration(configData) {
         try {
-            if (configData.images && Array.isArray(configData.images) && configData.images.length === 9) {
+            if (configData.images && Array.isArray(configData.images) && configData.images.length === 7) {
                 this.images = configData.images;
                 this.saveImages();
                 this.renderImages();
