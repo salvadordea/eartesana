@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Navbar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <h1 style="text-align: center; margin-top: 100px;">Test Navbar Mayoristas</h1>
+    <p style="text-align: center;">Si ves el navbar arriba, está funcionando correctamente.</p>
+
+    <!-- Scripts at the end -->
+    <script>
+        // Create fake session for testing
+        const testSession = {
+            id: 'test-123',
+            name: 'Usuario Test',
+            company: 'Empresa Test',
+            email: 'test@test.com',
+            isLoggedIn: true,
+            expires: Date.now() + 86400000, // 24 hours from now
+            status: 'active'
+        };
+        localStorage.setItem('wholesaleSession', JSON.stringify(testSession));
+        console.log('✅ Test session created');
+    </script>
+
+    <!-- Universal Mayorista Navbar -->
+    <script src="mayoristas-navbar.js"></script>
+
+    <!-- Initialize Navbar -->
+    <script>
+        console.log('🔍 Checking if functions are available...');
+        console.log('initMayoristaNavbar:', typeof window.initMayoristaNavbar);
+        console.log('detectActivePage:', typeof window.detectActivePage);
+
+        if (window.initMayoristaNavbar) {
+            console.log('🚀 Initializing navbar...');
+            window.initMayoristaNavbar('tienda');
+            console.log('✅ Navbar should be initialized now');
+        } else {
+            console.error('❌ initMayoristaNavbar not found!');
+        }
+    </script>
+</body>
+</html>

@@ -138,33 +138,46 @@
                         <!-- Shipping Address -->
                         <div class="form-section">
                             <h3><i class="fas fa-truck"></i> Dirección de Envío</h3>
+
+                            <!-- Saved Addresses Selector -->
                             <div class="form-group">
-                                <label for="shippingAddress">Dirección Completa *</label>
-                                <input type="text" id="shippingAddress" placeholder="Calle, número, colonia" required>
+                                <label for="savedAddresses">Direcciones Guardadas</label>
+                                <select id="savedAddresses" style="width: 100%; background: var(--dark-surface-light); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.75rem; color: var(--text-primary);">
+                                    <option value="">Usar dirección guardada o agregar nueva</option>
+                                    <option value="new">+ Agregar nueva dirección</option>
+                                </select>
                             </div>
-                            <div class="form-row">
+
+                            <!-- Address Fields -->
+                            <div id="shippingAddressFields">
                                 <div class="form-group">
-                                    <label for="city">Ciudad *</label>
-                                    <input type="text" id="city" required>
+                                    <label for="shippingAddress">Dirección Completa *</label>
+                                    <input type="text" id="shippingAddress" placeholder="Calle, número, colonia" required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="shippingCity">Ciudad *</label>
+                                        <input type="text" id="shippingCity" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="shippingState">Estado *</label>
+                                        <input type="text" id="shippingState" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="shippingZipcode">Código Postal *</label>
+                                        <input type="text" id="shippingZipcode" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country">País</label>
+                                        <input type="text" id="country" value="México" readonly>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="state">Estado *</label>
-                                    <input type="text" id="state" required>
+                                    <label for="shippingNotes">Notas de Envío</label>
+                                    <textarea id="shippingNotes" placeholder="Instrucciones especiales para el envío (opcional)" rows="3"></textarea>
                                 </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="postalCode">Código Postal *</label>
-                                    <input type="text" id="postalCode" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="country">País</label>
-                                    <input type="text" id="country" value="México" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="shippingNotes">Notas de Envío</label>
-                                <textarea id="shippingNotes" placeholder="Instrucciones especiales para el envío (opcional)" rows="3"></textarea>
                             </div>
                         </div>
 
@@ -191,6 +204,12 @@
                                     <div class="form-group">
                                         <label for="billingState">Estado</label>
                                         <input type="text" id="billingState">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="billingZipcode">Código Postal</label>
+                                        <input type="text" id="billingZipcode">
                                     </div>
                                 </div>
                             </div>
@@ -252,14 +271,10 @@
                             </div>
                         </div>
 
-                        <!-- Terms -->
+                        <!-- Terms Notice -->
                         <div class="form-section">
-                            <div class="form-checkbox-group">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" id="acceptTerms" required>
-                                    <span class="checkmark"></span>
-                                    Acepto los <a href="../pages/politicas/mayoristas.html" target="_blank">términos y condiciones mayoristas</a>
-                                </label>
+                            <div style="background: var(--dark-surface-light); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; text-align: center; color: var(--text-secondary); font-size: 14px;">
+                                Al hacer clic en "Procesar Pedido" acepto los <a href="../pages/politicas/mayoristas.html" target="_blank" style="color: var(--silver-accent); text-decoration: underline;">términos y condiciones mayoristas</a>
                             </div>
                         </div>
                     </form>
@@ -370,6 +385,49 @@
                             <span>5-7 días hábiles</span>
                         </div>
                     </div>
+
+                    <!-- Payment Reference and Bank Info (shown only for transferencia) -->
+                    <div id="paymentReferenceSection" style="display: none; margin-top: 25px; background: var(--dark-surface-light); border: 2px solid var(--silver-accent); border-radius: 10px; padding: 25px;">
+                        <h4 style="color: var(--silver-accent); margin: 0 0 20px 0; font-size: 1.1rem; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-university"></i> Información para tu Transferencia
+                        </h4>
+
+                        <!-- Payment Reference Code -->
+                        <div style="background: var(--dark-bg); border: 2px dashed var(--silver-accent); border-radius: 8px; padding: 20px; margin-bottom: 20px; text-align: center;">
+                            <p style="margin: 0 0 10px 0; color: var(--text-secondary); font-size: 0.9rem;">
+                                <i class="fas fa-barcode"></i> Código de Referencia para tu Pago:
+                            </p>
+                            <p id="paymentReferenceCode" style="margin: 0; font-size: 1.8rem; font-weight: 700; color: var(--silver-accent); font-family: 'Courier New', monospace; letter-spacing: 2px;">
+                                ESTUD-0001
+                            </p>
+                            <p style="margin: 10px 0 0 0; color: var(--text-secondary); font-size: 0.85rem; font-style: italic;">
+                                Incluye este código en la referencia de tu transferencia
+                            </p>
+                        </div>
+
+                        <!-- Bank Information -->
+                        <div id="bankInfoDetails" style="background: var(--dark-bg); border-radius: 8px; padding: 20px;">
+                            <p style="margin: 0 0 15px 0; color: var(--text-secondary); font-weight: 600;">
+                                <i class="fas fa-building"></i> Datos Bancarios:
+                            </p>
+                            <div style="font-family: 'Courier New', monospace; font-size: 0.95rem; line-height: 1.8;">
+                                <p style="margin: 5px 0;"><strong style="color: var(--silver-accent); display: inline-block; width: 140px;">Banco:</strong> <span id="bankName">-</span></p>
+                                <p style="margin: 5px 0;"><strong style="color: var(--silver-accent); display: inline-block; width: 140px;">Titular:</strong> <span id="accountHolder">-</span></p>
+                                <p style="margin: 5px 0;"><strong style="color: var(--silver-accent); display: inline-block; width: 140px;">Cuenta:</strong> <span id="accountNumber">-</span></p>
+                                <p style="margin: 5px 0;"><strong style="color: var(--silver-accent); display: inline-block; width: 140px;">CLABE:</strong> <span id="clabe">-</span></p>
+                                <p id="swiftRow" style="margin: 5px 0; display: none;"><strong style="color: var(--silver-accent); display: inline-block; width: 140px;">SWIFT:</strong> <span id="swift">-</span></p>
+                                <p style="margin: 5px 0;"><strong style="color: var(--silver-accent); display: inline-block; width: 140px;">Moneda:</strong> <span id="currency">MXN</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Important Notice -->
+                        <div style="margin-top: 15px; padding: 15px; background: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107; border-radius: 5px;">
+                            <p style="margin: 0; color: var(--text-secondary); font-size: 0.9rem;">
+                                <strong style="color: #ffc107;"><i class="fas fa-exclamation-triangle"></i> Importante:</strong>
+                                <span id="referenceInstructions">Incluye el código de referencia en tu transferencia</span>
+                            </p>
+                        </div>
+                    </div>
                     <div class="next-steps">
                         <h4>📋 Próximos pasos:</h4>
                         <ul>
@@ -453,9 +511,9 @@
 
             try {
                 const { data, error } = await supabase
-                    .from('wholesalers')
+                    .from('user_profiles')
                     .select('*')
-                    .eq('email', currentUser.email)
+                    .eq('id', currentUser.id)
                     .single();
 
                 if (error) {
@@ -467,10 +525,10 @@
                     console.log('✅ Wholesaler profile loaded, auto-filling form');
 
                     // Pre-fill contact information
-                    document.getElementById('contactName').value = data.contact_name || data.name || '';
+                    document.getElementById('contactName').value = data.full_name || '';
                     document.getElementById('contactEmail').value = data.email || '';
                     document.getElementById('contactPhone').value = data.contact_phone || data.phone || '';
-                    document.getElementById('company').value = data.company || '';
+                    document.getElementById('company').value = data.company_name || '';
 
                     // Pre-fill shipping address
                     if (data.shipping_address) {
@@ -481,9 +539,9 @@
                     }
 
                     // Pre-fill billing information
-                    if (data.rfc) {
-                        document.getElementById('rfc').value = data.rfc || '';
-                        document.getElementById('businessName').value = data.business_name || data.company || '';
+                    if (data.tax_id) {
+                        document.getElementById('rfc').value = data.tax_id || '';
+                        document.getElementById('businessName').value = data.company_name || '';
                         document.getElementById('billingAddress').value = data.billing_address || data.shipping_address || '';
                         document.getElementById('billingCity').value = data.billing_city || data.shipping_city || '';
                         document.getElementById('billingState').value = data.billing_state || data.shipping_state || '';
@@ -540,27 +598,37 @@
         // Render checkout cart
         function renderCheckoutCart() {
             const container = document.getElementById('checkoutCartItems');
-            
+
             if (checkoutCart.length === 0) {
                 showEmptyCart();
                 return;
             }
 
-            container.innerHTML = checkoutCart.map(item => `
-                <div class="checkout-item">
-                    <div class="item-info">
-                        <h4>${item.name}</h4>
-                        <div class="item-quantity">Cantidad: ${item.quantity} piezas</div>
-                        <div class="item-pricing">
-                            <span class="regular-price">Precio regular: $${item.regularPrice.toFixed(2)}</span>
-                            <span class="wholesale-price">Precio mayorista: $${item.wholesalePrice.toFixed(2)}</span>
+            container.innerHTML = checkoutCart.map(item => {
+                // Handle both old and new cart formats
+                const itemPrice = item.price || item.wholesalePrice || 0;
+                const itemName = item.name || 'Producto';
+                const itemQuantity = item.quantity || 0;
+                const itemImage = item.image || '../assets/images/categories/backpacks.jpg';
+
+                return `
+                    <div class="checkout-item" style="display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid var(--border-color);">
+                        <div class="item-image" style="width: 60px; height: 60px; border-radius: 6px; overflow: hidden; flex-shrink: 0;">
+                            <img src="${itemImage}" alt="${itemName}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='../assets/images/categories/backpacks.jpg'">
+                        </div>
+                        <div class="item-info" style="flex: 1;">
+                            <h4 style="margin: 0 0 8px 0; font-size: 14px;">${itemName}</h4>
+                            <div class="item-quantity" style="font-size: 12px; color: var(--text-secondary);">Cantidad: ${itemQuantity} pieza${itemQuantity !== 1 ? 's' : ''}</div>
+                            <div class="item-pricing" style="margin-top: 5px;">
+                                <span class="wholesale-price" style="color: var(--silver-accent); font-weight: 600;">$${itemPrice.toFixed(2)} c/u</span>
+                            </div>
+                        </div>
+                        <div class="item-total" style="font-size: 16px; font-weight: 700; color: var(--silver-accent); text-align: right; flex-shrink: 0;">
+                            $${(itemPrice * itemQuantity).toFixed(2)}
                         </div>
                     </div>
-                    <div class="item-total">
-                        $${(item.wholesalePrice * item.quantity).toFixed(2)}
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         // Calculate order total
@@ -573,14 +641,19 @@
                 return;
             }
 
-            const subtotal = checkoutCart.reduce((sum, item) => sum + (item.regularPrice * item.quantity), 0);
-            const discount = subtotal * WHOLESALE_DISCOUNT;
-            const discountedTotal = subtotal - discount;
-            const tax = discountedTotal * TAX_RATE;
-            orderTotal = discountedTotal + tax;
+            // The cart already has wholesale prices (item.price is already discounted)
+            const subtotal = checkoutCart.reduce((sum, item) => {
+                const itemPrice = item.price || item.wholesalePrice || 0;
+                return sum + (itemPrice * item.quantity);
+            }, 0);
+
+            // No additional discount needed - prices are already wholesale
+            const discount = 0;
+            const tax = subtotal * TAX_RATE;
+            orderTotal = subtotal + tax;
 
             document.getElementById('checkoutSubtotal').textContent = `$${subtotal.toFixed(2)}`;
-            document.getElementById('checkoutDiscount').textContent = `-$${discount.toFixed(2)}`;
+            document.getElementById('checkoutDiscount').textContent = `Ya aplicado`;
             document.getElementById('checkoutTax').textContent = `$${tax.toFixed(2)}`;
             document.getElementById('checkoutTotal').textContent = `$${orderTotal.toFixed(2)}`;
         }
@@ -635,9 +708,9 @@
                     // Shipping address
                     shipping: {
                         address: document.getElementById('shippingAddress').value,
-                        city: document.getElementById('city').value,
-                        state: document.getElementById('state').value,
-                        postalCode: document.getElementById('postalCode').value,
+                        city: document.getElementById('shippingCity').value,
+                        state: document.getElementById('shippingState').value,
+                        postalCode: document.getElementById('shippingZipcode').value,
                         country: document.getElementById('country').value,
                         notes: document.getElementById('shippingNotes').value
                     },
@@ -972,20 +1045,81 @@
         }
 
         // Show order confirmation
-        function showOrderConfirmation(orderData) {
+        async function showOrderConfirmation(orderData) {
             document.getElementById('orderNumber').textContent = orderData.orderNumber;
             document.getElementById('orderTotal').textContent = `$${orderData.total.toFixed(2)}`;
-            
+
             const paymentMethods = {
                 'transferencia': 'Transferencia bancaria (crédito 30 días)',
                 'efectivo_contra_entrega': 'Efectivo contra entrega'
             };
             document.getElementById('orderPaymentMethod').textContent = paymentMethods[orderData.paymentMethod];
-            
+
+            // Show payment reference and bank info if payment method is transferencia
+            if (orderData.paymentMethod === 'transferencia') {
+                await displayPaymentReference(orderData);
+            } else {
+                document.getElementById('paymentReferenceSection').style.display = 'none';
+            }
+
             document.getElementById('confirmationModal').classList.add('show');
-            
+
             // Update checkout steps
             updateCheckoutStep(3);
+        }
+
+        // Display payment reference code and bank info
+        async function displayPaymentReference(orderData) {
+            try {
+                // Get the full order from database to retrieve payment_reference
+                const { data: fullOrder, error: orderError } = await supabase
+                    .from('orders')
+                    .select('payment_reference')
+                    .eq('id', orderData.id)
+                    .single();
+
+                if (orderError) {
+                    console.error('Error fetching order:', orderError);
+                } else if (fullOrder && fullOrder.payment_reference) {
+                    // Display payment reference code
+                    document.getElementById('paymentReferenceCode').textContent = fullOrder.payment_reference;
+                }
+
+                // Fetch bank information from payment_config
+                const { data: bankConfig, error: bankError } = await supabase
+                    .from('payment_config')
+                    .select('config_value')
+                    .eq('config_key', 'bank_info')
+                    .single();
+
+                if (bankError) {
+                    console.error('Error fetching bank info:', bankError);
+                } else if (bankConfig && bankConfig.config_value) {
+                    const bankInfo = bankConfig.config_value;
+
+                    // Populate bank details
+                    document.getElementById('bankName').textContent = bankInfo.bank_name || '-';
+                    document.getElementById('accountHolder').textContent = bankInfo.account_holder || '-';
+                    document.getElementById('accountNumber').textContent = bankInfo.account_number || '-';
+                    document.getElementById('clabe').textContent = bankInfo.clabe || '-';
+                    document.getElementById('currency').textContent = bankInfo.currency || 'MXN';
+                    document.getElementById('referenceInstructions').textContent = bankInfo.reference_instructions || 'Incluye el código de referencia en tu transferencia';
+
+                    // Show SWIFT if available
+                    if (bankInfo.swift) {
+                        document.getElementById('swift').textContent = bankInfo.swift;
+                        document.getElementById('swiftRow').style.display = 'block';
+                    } else {
+                        document.getElementById('swiftRow').style.display = 'none';
+                    }
+                }
+
+                // Show the payment reference section
+                document.getElementById('paymentReferenceSection').style.display = 'block';
+
+            } catch (error) {
+                console.error('Error displaying payment reference:', error);
+            }
         }
 
         // Update checkout step
@@ -1131,7 +1265,28 @@
         });
     </script>
 
+    <!-- Universal Mayorista Navbar (must load before auth-guard) -->
+    <script src="mayoristas-navbar.js"></script>
+
+    <!-- Initialize Navbar first -->
+    <script>
+        if (window.initMayoristaNavbar && window.detectActivePage) {
+            const activePage = window.detectActivePage();
+            if (activePage) {
+                window.initMayoristaNavbar(activePage);
+                console.log('✅ Navbar initialized for page:', activePage);
+            }
+        }
+    </script>
+
     <!-- Mayoristas Authentication Guard -->
     <script src="mayoristas-auth-guard.js"></script>
+
+    <!-- Initialize Auth Guard after navbar -->
+    <script>
+        if (window.MayoristasAuthGuard) {
+            window.MayoristasAuthGuard.initialize();
+        }
+    </script>
 </body>
 </html>

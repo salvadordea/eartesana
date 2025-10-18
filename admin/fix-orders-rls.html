@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix Orders RLS - Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .fix-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .sql-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+        .btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .btn:hover { background: #c82333; }
+        .btn-primary {
+            background: #007bff;
+        }
+        .btn-primary:hover { background: #0056b3; }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        h1 { color: #2c3e50; text-align: center; }
+        h2 { color: #34495e; margin-top: 30px; }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .info {
+            background: #d1ecf1;
+            border: 1px solid #17a2b8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        ol {
+            text-align: left;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="fix-box">
+        <h1>🔧 Fix RLS para Tabla Orders</h1>
+
+        <div class="warning">
+            <strong>⚠️ Problema Detectado:</strong><br>
+            El admin panel no puede cargar pedidos porque la tabla <code>orders</code> tiene Row Level Security (RLS) activado,
+            pero no hay políticas que permitan al admin leer todos los pedidos.
+        </div>
+
+        <div class="info">
+            <strong>💡 Solución:</strong><br>
+            Hay dos opciones para solucionar esto. Elige la que prefieras:
+        </div>
+
+        <h2>Opción 1: Deshabilitar RLS Completamente (Más Simple) ⭐</h2>
+        <p>Esta es la solución más directa si el admin panel es la única forma de acceder a los pedidos.</p>
+
+        <div class="sql-box">-- Deshabilitar RLS en la tabla orders
+ALTER TABLE public.orders DISABLE ROW LEVEL SECURITY;</div>
+
+        <button class="btn" onclick="copySQL1()">📋 Copiar SQL Opción 1</button>
+
+        <h2>Opción 2: Mantener RLS y Crear Políticas de Admin (Más Seguro)</h2>
+        <p>Esta opción mantiene RLS activo pero permite acceso completo a usuarios autenticados (admin panel).</p>
+
+        <div class="sql-box">-- Primero, verificar que RLS esté habilitado
+ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
+
+-- Crear política para permitir SELECT a todos los usuarios autenticados
+DROP POLICY IF EXISTS "Allow admin to read all orders" ON public.orders;
+CREATE POLICY "Allow admin to read all orders"
+ON public.orders
+FOR SELECT
+TO authenticated
+USING (true);
+
+-- Crear política para permitir INSERT a todos los usuarios autenticados
+DROP POLICY IF EXISTS "Allow users to insert orders" ON public.orders;
+CREATE POLICY "Allow users to insert orders"
+ON public.orders
+FOR INSERT
+TO authenticated
+WITH CHECK (true);
+
+-- Crear política para permitir UPDATE a todos los usuarios autenticados
+DROP POLICY IF EXISTS "Allow admin to update orders" ON public.orders;
+CREATE POLICY "Allow admin to update orders"
+ON public.orders
+FOR UPDATE
+TO authenticated
+USING (true)
+WITH CHECK (true);
+
+-- Crear política para permitir DELETE a todos los usuarios autenticados
+DROP POLICY IF EXISTS "Allow admin to delete orders" ON public.orders;
+CREATE POLICY "Allow admin to delete orders"
+ON public.orders
+FOR DELETE
+TO authenticated
+USING (true);</div>
+
+        <button class="btn btn-primary" onclick="copySQL2()">📋 Copiar SQL Opción 2</button>
+
+        <hr style="margin: 40px 0;">
+
+        <h2>📝 Pasos para Aplicar el Fix:</h2>
+        <ol>
+            <li>Elige una de las dos opciones de arriba (recomiendo <strong>Opción 1</strong> para empezar)</li>
+            <li>Haz clic en el botón "Copiar SQL" correspondiente</li>
+            <li>Ve a <a href="https://supabase.com/dashboard" target="_blank">Supabase Dashboard</a></li>
+            <li>Abre <strong>SQL Editor</strong> en el menú lateral</li>
+            <li>Pega el SQL copiado y haz clic en <strong>Run</strong></li>
+            <li>Si ves "Success. No rows returned", significa que funcionó ✅</li>
+            <li>Vuelve a <a href="pedidos.html">pedidos.html</a> y recarga la página</li>
+            <li>Abre la consola del navegador (F12) para ver los mensajes de debug</li>
+        </ol>
+
+        <div class="info" style="margin-top: 30px;">
+            <strong>🔍 Después de aplicar el fix:</strong><br>
+            Abre la consola del navegador en pedidos.html (F12) y busca:<br>
+            - ✅ "Loaded X orders" (si funciona)<br>
+            - ❌ Mensajes de error con detalles (si aún falla)
+        </div>
+
+        <div class="warning" style="margin-top: 20px;">
+            <strong>📌 Nota Importante:</strong><br>
+            La <strong>Opción 1</strong> es perfecta para un panel de administración interno donde confías en todos los usuarios autenticados.
+            Si en el futuro necesitas que los mayoristas solo vean sus propios pedidos, usa la <strong>Opción 2</strong>
+            y ajusta las políticas para filtrar por user_id.
+        </div>
+    </div>
+
+    <script>
+        function copySQL1() {
+            const sql = "ALTER TABLE public.orders DISABLE ROW LEVEL SECURITY;";
+            navigator.clipboard.writeText(sql).then(() => {
+                alert('✅ SQL Opción 1 copiado!\n\nVe a Supabase Dashboard > SQL Editor y ejecútalo.\n\nDespués recarga pedidos.html para ver los pedidos.');
+            }).catch(() => {
+                alert('❌ Error copiando. Copia manualmente:\n\nALTER TABLE public.orders DISABLE ROW LEVEL SECURITY;');
+            });
+        }
+
+        function copySQL2() {
+            const sql = `-- Verificar que RLS esté habilitado
+ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
+
+-- Crear política para permitir SELECT a todos los usuarios autenticados
+DROP POLICY IF EXISTS "Allow admin to read all orders" ON public.orders;
+CREATE POLICY "Allow admin to read all orders"
+ON public.orders
+FOR SELECT
+TO authenticated
+USING (true);
+
+-- Crear política para permitir INSERT a todos los usuarios autenticados
+DROP POLICY IF EXISTS "Allow users to insert orders" ON public.orders;
+CREATE POLICY "Allow users to insert orders"
+ON public.orders
+FOR INSERT
+TO authenticated
+WITH CHECK (true);
+
+-- Crear política para permitir UPDATE a todos los usuarios autenticados
+DROP POLICY IF EXISTS "Allow admin to update orders" ON public.orders;
+CREATE POLICY "Allow admin to update orders"
+ON public.orders
+FOR UPDATE
+TO authenticated
+USING (true)
+WITH CHECK (true);
+
+-- Crear política para permitir DELETE a todos los usuarios autenticados
+DROP POLICY IF EXISTS "Allow admin to delete orders" ON public.orders;
+CREATE POLICY "Allow admin to delete orders"
+ON public.orders
+FOR DELETE
+TO authenticated
+USING (true);`;
+
+            navigator.clipboard.writeText(sql).then(() => {
+                alert('✅ SQL Opción 2 copiado!\n\nVe a Supabase Dashboard > SQL Editor y ejecútalo.\n\nDespués recarga pedidos.html para ver los pedidos.');
+            }).catch(() => {
+                alert('❌ Error copiando. Copia manualmente el SQL de la página.');
+            });
+        }
+    </script>
+</body>
+</html>

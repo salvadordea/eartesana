@@ -537,6 +537,127 @@
             opacity: 0.3;
         }
 
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+            max-width: 400px;
+            animation: slideIn 0.3s ease;
+            border-left: 4px solid #28a745;
+        }
+
+        .toast.success {
+            border-left-color: #28a745;
+        }
+
+        .toast.info {
+            border-left-color: #17a2b8;
+        }
+
+        .toast.warning {
+            border-left-color: #ffc107;
+        }
+
+        .toast.error {
+            border-left-color: #dc3545;
+        }
+
+        .toast-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .toast.success .toast-icon {
+            color: #28a745;
+        }
+
+        .toast.info .toast-icon {
+            color: #17a2b8;
+        }
+
+        .toast.warning .toast-icon {
+            color: #ffc107;
+        }
+
+        .toast.error .toast-icon {
+            color: #dc3545;
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: #2c3e50;
+        }
+
+        .toast-message {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: #999;
+            cursor: pointer;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toast-close:hover {
+            color: #666;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        .toast.removing {
+            animation: slideOut 0.3s ease forwards;
+        }
+
         @media (max-width: 768px) {
             .main-content {
                 margin-left: 0;
@@ -562,6 +683,17 @@
             .modal-content {
                 width: 95%;
                 margin: 5% auto;
+            }
+
+            .toast-container {
+                right: 10px;
+                left: 10px;
+                top: 10px;
+            }
+
+            .toast {
+                min-width: auto;
+                max-width: 100%;
             }
         }
     </style>
@@ -727,15 +859,31 @@
         </div>
     </div>
 
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Supabase Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Config File -->
+    <script src="../assets/js/config.js"></script>
+
     <script>
-        // Initialize Supabase
-        const SUPABASE_URL = 'https://rkuiswpyzddqxuemzojz.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJrdWlzd3B5emRkcXh1ZW16b2p6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAwNjIyMDMsImV4cCI6MjA1NTYzODIwM30.0oRv_vz4CL-2cJDz7Lg3h_RIZjEJn6oL3DUDIUAeLac';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        // Initialize Supabase using config from config.js
+        let supabase = null;
+
+        if (window.SUPABASE_CONFIG) {
+            supabase = window.supabase.createClient(
+                window.SUPABASE_CONFIG.url,
+                window.SUPABASE_CONFIG.anonKey
+            );
+            console.log('✅ Supabase initialized with URL:', window.SUPABASE_CONFIG.url);
+        } else {
+            console.error('❌ SUPABASE_CONFIG not found in config.js');
+        }
 
         let allOrders = [];
         let filteredOrders = [];
+        let realtimeChannel = null;
 
         // Check authentication
         function checkAuth() {
@@ -764,27 +912,41 @@
         // Load orders from database
         async function loadOrders() {
             try {
+                console.log('🔄 Loading orders from Supabase...');
+
                 const { data: orders, error } = await supabase
                     .from('orders')
                     .select('*')
                     .order('created_at', { ascending: false });
 
                 if (error) {
-                    console.error('Error loading orders:', error);
-                    showEmptyState('Error al cargar pedidos');
+                    console.error('❌ Error loading orders:', error);
+                    console.error('Error details:', {
+                        message: error.message,
+                        details: error.details,
+                        hint: error.hint,
+                        code: error.code
+                    });
+                    showEmptyState(`Error al cargar pedidos: ${error.message}`);
                     return;
                 }
+
+                console.log(`✅ Loaded ${orders?.length || 0} orders`);
 
                 allOrders = orders || [];
                 filteredOrders = [...allOrders];
 
-                updateStats();
-                renderOrders();
-                updatePendingBadge();
+                if (allOrders.length === 0) {
+                    showEmptyState('No hay pedidos aún');
+                } else {
+                    updateStats();
+                    renderOrders();
+                    updatePendingBadge();
+                }
 
             } catch (error) {
-                console.error('Unexpected error loading orders:', error);
-                showEmptyState('Error inesperado al cargar pedidos');
+                console.error('❌ Unexpected error loading orders:', error);
+                showEmptyState('Error inesperado al cargar pedidos: ' + error.message);
             }
         }
 
@@ -853,12 +1015,20 @@
                         <td>${statusBadge}</td>
                         <td>
                             <div class="action-btns">
-                                <button class="action-btn view" onclick="viewOrder(${order.id})">
+                                <button class="action-btn view" onclick="viewOrder(${order.id})" title="Ver detalles">
                                     <i class="fas fa-eye"></i> Ver
                                 </button>
-                                <button class="action-btn status" onclick="updateOrderStatus(${order.id})">
+                                <button class="action-btn status" onclick="updateOrderStatus(${order.id})" title="Cambiar estado">
                                     <i class="fas fa-edit"></i> Estado
                                 </button>
+                                <button class="action-btn" onclick="printRemision(${order.id})" title="Imprimir remisión" style="background: #28a745; color: white;">
+                                    <i class="fas fa-print"></i>
+                                </button>
+                                ${order.status === 'pending' || order.status === 'processing' ? `
+                                    <button class="action-btn" onclick="quickUpdateStatus(${order.id}, 'paid')" title="Marcar como pagado" style="background: #17a2b8; color: white;">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                ` : ''}
                             </div>
                         </td>
                     </tr>
@@ -930,6 +1100,22 @@
 
             filteredOrders = [...allOrders];
             renderOrders();
+        }
+
+        // Print delivery note (remision)
+        function printRemision(orderId) {
+            const order = allOrders.find(o => o.id === orderId);
+            if (!order) {
+                alert('No se encontró el pedido');
+                return;
+            }
+
+            // Encode order data for URL
+            const orderData = encodeURIComponent(JSON.stringify(order));
+            const url = `../remision.html?data=${orderData}`;
+
+            // Open in new window
+            window.open(url, '_blank', 'width=1000,height=800');
         }
 
         // View order details
@@ -1102,6 +1288,12 @@
                     <h3>Notas de Envío</h3>
                     <div class="detail-value">${order.shipping_notes}</div>
                 </div>` : ''}
+
+                <div class="order-detail-section" style="text-align: center; padding-top: 20px; border-top: 2px solid #e9ecef;">
+                    <button class="btn btn-primary" onclick="printRemision(${order.id})" style="padding: 12px 30px; font-size: 1rem;">
+                        <i class="fas fa-print"></i> Imprimir Nota de Remisión
+                    </button>
+                </div>
             `;
 
             document.getElementById('orderModalBody').innerHTML = modalContent;
@@ -1111,6 +1303,48 @@
         // Close order modal
         function closeOrderModal() {
             document.getElementById('orderModal').style.display = 'none';
+        }
+
+        // Quick update status (for action buttons)
+        async function quickUpdateStatus(orderId, newStatus) {
+            const order = allOrders.find(o => o.id === orderId);
+            if (!order) return;
+
+            const statusNames = {
+                'paid': 'Pagado',
+                'processing': 'En Proceso',
+                'shipped': 'Enviado',
+                'completed': 'Completado'
+            };
+
+            if (!confirm(`¿Marcar pedido ${order.order_number || '#' + order.id} como "${statusNames[newStatus]}"?`)) {
+                return;
+            }
+
+            try {
+                const { error } = await supabase
+                    .from('orders')
+                    .update({
+                        status: newStatus,
+                        updated_at: new Date().toISOString()
+                    })
+                    .eq('id', orderId);
+
+                if (error) throw error;
+
+                showToast(
+                    'Estado Actualizado',
+                    `Pedido marcado como ${statusNames[newStatus]}`,
+                    'success',
+                    3000
+                );
+
+                loadOrders();
+
+            } catch (error) {
+                console.error('Error updating status:', error);
+                showToast('Error', 'No se pudo actualizar el estado', 'error', 3000);
+            }
         }
 
         // Update order status
@@ -1168,11 +1402,247 @@
             }
         };
 
-        // Initialize
+        // ============================================
+        // NOTIFICATION SYSTEM
+        // ============================================
+
+        // Show toast notification
+        function showToast(title, message, type = 'info', duration = 5000) {
+            const container = document.getElementById('toastContainer');
+
+            const icons = {
+                success: 'fas fa-check-circle',
+                info: 'fas fa-info-circle',
+                warning: 'fas fa-exclamation-triangle',
+                error: 'fas fa-times-circle'
+            };
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="${icons[type]} toast-icon"></i>
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    <div class="toast-message">${message}</div>
+                </div>
+                <button class="toast-close" onclick="this.parentElement.remove()">&times;</button>
+            `;
+
+            container.appendChild(toast);
+
+            // Auto remove after duration
+            setTimeout(() => {
+                toast.classList.add('removing');
+                setTimeout(() => toast.remove(), 300);
+            }, duration);
+        }
+
+        // Request notification permission
+        async function requestNotificationPermission() {
+            if (!('Notification' in window)) {
+                console.log('Este navegador no soporta notificaciones de escritorio');
+                return false;
+            }
+
+            if (Notification.permission === 'granted') {
+                return true;
+            }
+
+            if (Notification.permission !== 'denied') {
+                const permission = await Notification.requestPermission();
+                return permission === 'granted';
+            }
+
+            return false;
+        }
+
+        // Show browser notification
+        function showBrowserNotification(title, body, icon = '📦') {
+            if (Notification.permission === 'granted') {
+                const notification = new Notification(title, {
+                    body: body,
+                    icon: '/admin/favicon.ico', // Puedes cambiar esto por tu logo
+                    badge: '/admin/favicon.ico',
+                    tag: 'order-notification',
+                    requireInteraction: false,
+                    silent: false
+                });
+
+                notification.onclick = function() {
+                    window.focus();
+                    this.close();
+                };
+
+                // Auto close after 10 seconds
+                setTimeout(() => notification.close(), 10000);
+            }
+        }
+
+        // Play notification sound
+        function playNotificationSound() {
+            try {
+                // Simple beep using Web Audio API
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator.frequency.value = 800;
+                oscillator.type = 'sine';
+
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.5);
+            } catch (error) {
+                console.log('No se pudo reproducir el sonido de notificación');
+            }
+        }
+
+        // Subscribe to realtime changes
+        function subscribeToOrders() {
+            if (!supabase) {
+                console.error('❌ Supabase not initialized');
+                return;
+            }
+
+            console.log('🔔 Subscribing to realtime order changes...');
+
+            // Unsubscribe from previous channel if exists
+            if (realtimeChannel) {
+                supabase.removeChannel(realtimeChannel);
+            }
+
+            // Subscribe to INSERT events on orders table
+            realtimeChannel = supabase
+                .channel('orders_changes')
+                .on(
+                    'postgres_changes',
+                    {
+                        event: 'INSERT',
+                        schema: 'public',
+                        table: 'orders'
+                    },
+                    (payload) => {
+                        console.log('🆕 New order received:', payload.new);
+                        handleNewOrder(payload.new);
+                    }
+                )
+                .on(
+                    'postgres_changes',
+                    {
+                        event: 'UPDATE',
+                        schema: 'public',
+                        table: 'orders'
+                    },
+                    (payload) => {
+                        console.log('✏️ Order updated:', payload.new);
+                        handleOrderUpdate(payload.new);
+                    }
+                )
+                .subscribe((status) => {
+                    if (status === 'SUBSCRIBED') {
+                        console.log('✅ Subscribed to realtime order changes');
+                    } else if (status === 'CHANNEL_ERROR') {
+                        console.error('❌ Error subscribing to realtime changes');
+                    } else if (status === 'TIMED_OUT') {
+                        console.error('⏱️ Realtime subscription timed out');
+                    }
+                });
+        }
+
+        // Handle new order
+        function handleNewOrder(newOrder) {
+            // Add to orders array
+            allOrders.unshift(newOrder);
+            filteredOrders = [...allOrders];
+
+            // Update UI
+            updateStats();
+            renderOrders();
+            updatePendingBadge();
+
+            // Show notifications
+            const orderNumber = newOrder.order_number || `#${newOrder.id}`;
+            const customerName = newOrder.customer_name || newOrder.customer_email || 'Cliente';
+            const orderType = newOrder.order_type === 'wholesale' ? 'Mayorista' : 'Retail';
+            const total = parseFloat(newOrder.total || 0).toFixed(2);
+
+            // Toast notification
+            showToast(
+                '🎉 Nuevo Pedido Recibido',
+                `${orderNumber} - ${customerName} (${orderType}) - $${total}`,
+                'success',
+                8000
+            );
+
+            // Browser notification
+            showBrowserNotification(
+                '🎉 Nuevo Pedido - Estudio Artesana',
+                `${orderNumber} - ${customerName}\n${orderType} - $${total}`,
+                '📦'
+            );
+
+            // Play sound
+            playNotificationSound();
+
+            console.log('✅ New order notification displayed');
+        }
+
+        // Handle order update
+        function handleOrderUpdate(updatedOrder) {
+            // Find and update the order in the array
+            const index = allOrders.findIndex(o => o.id === updatedOrder.id);
+            if (index !== -1) {
+                const oldStatus = allOrders[index].status;
+                allOrders[index] = updatedOrder;
+                filteredOrders = [...allOrders];
+
+                // Update UI
+                updateStats();
+                renderOrders();
+                updatePendingBadge();
+
+                // Show notification only if status changed
+                if (oldStatus !== updatedOrder.status) {
+                    const orderNumber = updatedOrder.order_number || `#${updatedOrder.id}`;
+                    const statusMap = {
+                        'pending': 'Pendiente',
+                        'processing': 'En Proceso',
+                        'paid': 'Pagado',
+                        'shipped': 'Enviado',
+                        'completed': 'Completado',
+                        'cancelled': 'Cancelado'
+                    };
+
+                    showToast(
+                        'Pedido Actualizado',
+                        `${orderNumber} cambió a: ${statusMap[updatedOrder.status]}`,
+                        'info',
+                        5000
+                    );
+                }
+
+                console.log('✅ Order updated in UI');
+            }
+        }
+
+        // ============================================
+        // INITIALIZE
+        // ============================================
         if (checkAuth()) {
             loadOrders();
 
-            // Auto-refresh every 30 seconds
+            // Subscribe to realtime changes
+            subscribeToOrders();
+
+            // Request notification permission
+            requestNotificationPermission();
+
+            // Auto-refresh every 30 seconds (backup to realtime)
             setInterval(loadOrders, 30000);
         }
     </script>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Columnas Mayorista a user_profiles - Estudio Artesana</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .migration-card {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .btn:hover { background: #0056b3; }
+        .btn-success { background: #28a745; }
+        .btn-success:hover { background: #1e7e34; }
+        .btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .alert {
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border: 1px solid #e9ecef;
+            font-size: 13px;
+        }
+        .step {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #495057;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Agregar Columnas Mayorista a user_profiles</h1>
+    <p>Esta herramienta agregará las columnas necesarias para la funcionalidad completa de mayoristas en la tabla <code>user_profiles</code>.</p>
+
+    <div class="alert alert-info">
+        <strong>ℹ️ Información:</strong> Este script agregará columnas para información de contacto, direcciones de envío y facturación, y descuentos mayoristas.
+    </div>
+
+    <div class="step">
+        <h3>Paso 1: Verificar Conexión a Supabase</h3>
+        <button class="btn" onclick="checkConnection()" id="checkBtn">🔌 Verificar Conexión</button>
+        <div id="connectionStatus"></div>
+    </div>
+
+    <div class="step">
+        <h3>Paso 2: Ejecutar Migración</h3>
+        <p>Esto agregará las nuevas columnas a la tabla <code>user_profiles</code>. Es seguro ejecutar este script múltiples veces.</p>
+        <button class="btn btn-success" onclick="runMigration()" id="migrateBtn" disabled>🚀 Ejecutar Migración</button>
+        <div id="migrationStatus"></div>
+    </div>
+
+    <div class="migration-card">
+        <h3>📋 Script SQL de Migración</h3>
+        <p>Si prefieres ejecutar esto manualmente en Supabase Dashboard > SQL Editor:</p>
+        <pre id="sqlScript">-- Loading script...</pre>
+        <button class="btn" onclick="copySQLScript()">📋 Copiar Script</button>
+    </div>
+
+    <div class="migration-card">
+        <h3>📝 Columnas que se Agregarán</h3>
+        <ul>
+            <li><strong>Descuento Mayorista:</strong> wholesale_discount_percent (ya debería existir)</li>
+            <li><strong>Contacto:</strong> contact_phone</li>
+            <li><strong>Dirección de Envío:</strong> shipping_address, shipping_city, shipping_state, shipping_zipcode, shipping_country</li>
+            <li><strong>Facturación:</strong> billing_address, billing_city, billing_state, billing_zipcode, billing_country</li>
+            <li><strong>Notas Admin:</strong> admin_notes</li>
+        </ul>
+    </div>
+
+    <script src="../assets/js/config.js"></script>
+    <script>
+        let supabase = null;
+
+        // SQL migration script
+        const MIGRATION_SCRIPT = `-- Migration: Add mayorista-specific columns to user_profiles
+-- Safe to run multiple times (uses IF NOT EXISTS)
+
+DO $$
+BEGIN
+    -- Wholesale discount (might already exist from user-profiles-table.sql)
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                   WHERE table_name = 'user_profiles' AND column_name = 'wholesale_discount_percent') THEN
+        ALTER TABLE user_profiles ADD COLUMN wholesale_discount_percent INTEGER DEFAULT 20;
+        RAISE NOTICE 'Added column: wholesale_discount_percent';
+    END IF;
+
+    -- Contact phone
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                   WHERE table_name = 'user_profiles' AND column_name = 'contact_phone') THEN
+        ALTER TABLE user_profiles ADD COLUMN contact_phone TEXT;
+        RAISE NOTICE 'Added column: contact_phone';
+    END IF;
+
+    -- Shipping address fields
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                   WHERE table_name = 'user_profiles' AND column_name = 'shipping_address') THEN
+        ALTER TABLE user_profiles ADD COLUMN shipping_address TEXT;
+        RAISE NOTICE 'Added column: shipping_address';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                   WHERE table_name = 'user_profiles' AND column_name = 'shipping_city') THEN
+        ALTER TABLE user_profiles ADD COLUMN shipping_city TEXT;
+        RAISE NOTICE 'Added column: shipping_city';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                   WHERE table_name = 'user_profiles' AND column_name = 'shipping_state') THEN
+        ALTER TABLE user_profiles ADD COLUMN shipping_state TEXT;
+        RAISE NOTICE 'Added column: shipping_state';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                   WHERE table_name = 'user_profiles' AND column_name = 'shipping_zipcode') THEN
+        ALTER TABLE user_profiles ADD COLUMN shipping_zipcode TEXT;
+        RAISE NOTICE 'Added column: shipping_zipcode';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                   WHERE table_name = 'user_profiles' AND column_name = 'shipping_country') THEN
+        ALTER TABLE user_profiles ADD COLUMN shipping_country TEXT DEFAULT 'México';
+        RAISE NOTICE 'Added column: shipping_country';
+    END IF;
+
+    -- Billing address fields
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                   WHERE table_name = 'user_profiles' AND column_name = 'billing_address') THEN
+        ALTER TABLE user_profiles ADD COLUMN billing_address TEXT;
+        RAISE NOTICE 'Added column: billing_address';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                   WHERE table_name = 'user_profiles' AND column_name = 'billing_city') THEN
+        ALTER TABLE user_profiles ADD COLUMN billing_city TEXT;
+        RAISE NOTICE 'Added column: billing_city';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                   WHERE table_name = 'user_profiles' AND column_name = 'billing_state') THEN
+        ALTER TABLE user_profiles ADD COLUMN billing_state TEXT;
+        RAISE NOTICE 'Added column: billing_state';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                   WHERE table_name = 'user_profiles' AND column_name = 'billing_zipcode') THEN
+        ALTER TABLE user_profiles ADD COLUMN billing_zipcode TEXT;
+        RAISE NOTICE 'Added column: billing_zipcode';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                   WHERE table_name = 'user_profiles' AND column_name = 'billing_country') THEN
+        ALTER TABLE user_profiles ADD COLUMN billing_country TEXT DEFAULT 'México';
+        RAISE NOTICE 'Added column: billing_country';
+    END IF;
+
+    -- Admin notes for internal use
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                   WHERE table_name = 'user_profiles' AND column_name = 'admin_notes') THEN
+        ALTER TABLE user_profiles ADD COLUMN admin_notes TEXT;
+        RAISE NOTICE 'Added column: admin_notes';
+    END IF;
+
+END $$;
+
+-- Update table comment
+COMMENT ON TABLE user_profiles IS 'Extended user profiles with mayorista (wholesale) support - includes contact, shipping, and billing information';`;
+
+        // Initialize Supabase
+        function initSupabase() {
+            if (window.SUPABASE_CONFIG) {
+                supabase = window.supabase.createClient(
+                    window.SUPABASE_CONFIG.url,
+                    window.SUPABASE_CONFIG.serviceRoleKey
+                );
+                return true;
+            }
+            return false;
+        }
+
+        // Initialize on page load
+        window.onload = function() {
+            initSupabase();
+            document.getElementById('sqlScript').textContent = MIGRATION_SCRIPT;
+        };
+
+        async function checkConnection() {
+            const statusDiv = document.getElementById('connectionStatus');
+            const checkBtn = document.getElementById('checkBtn');
+
+            checkBtn.disabled = true;
+            statusDiv.innerHTML = '<p>🔄 Verificando conexión...</p>';
+
+            try {
+                if (!supabase) {
+                    throw new Error('Supabase client not initialized. Check your config.js file.');
+                }
+
+                // Test connection
+                const { data, error } = await supabase
+                    .from('user_profiles')
+                    .select('count', { count: 'exact', head: true });
+
+                if (error) throw error;
+
+                statusDiv.innerHTML = `
+                    <div class="alert alert-success">
+                        ✅ <strong>Conexión exitosa!</strong><br>
+                        Conectado a Supabase con service role. Tabla user_profiles encontrada.
+                    </div>
+                `;
+
+                // Enable migration button
+                document.getElementById('migrateBtn').disabled = false;
+
+            } catch (error) {
+                statusDiv.innerHTML = `
+                    <div class="alert alert-error">
+                        ❌ <strong>Error de conexión:</strong><br>
+                        ${error.message}
+                    </div>
+                `;
+            } finally {
+                checkBtn.disabled = false;
+            }
+        }
+
+        async function runMigration() {
+            const statusDiv = document.getElementById('migrationStatus');
+            const migrateBtn = document.getElementById('migrateBtn');
+
+            migrateBtn.disabled = true;
+            statusDiv.innerHTML = '<p>🔄 Ejecutando migración...</p>';
+
+            try {
+                if (!supabase) {
+                    throw new Error('Supabase client not initialized.');
+                }
+
+                // Execute using Supabase SQL query
+                const { data, error } = await supabase.rpc('exec_sql', {
+                    sql: MIGRATION_SCRIPT
+                });
+
+                if (error) {
+                    throw new Error('RPC method not available. Please run the SQL script manually in Supabase Dashboard.');
+                }
+
+                statusDiv.innerHTML = `
+                    <div class="alert alert-success">
+                        ✅ <strong>¡Migración completada exitosamente!</strong><br><br>
+                        Se han agregado todas las columnas necesarias a la tabla <code>user_profiles</code>.<br><br>
+                        <strong>Próximos pasos:</strong><br>
+                        • La tabla user_profiles ahora soporta toda la funcionalidad de mayoristas<br>
+                        • Los archivos mayoristas se actualizarán para usar esta tabla<br>
+                        • La tabla wholesalers ya no será necesaria<br><br>
+                        Puedes cerrar esta ventana
+                    </div>
+                `;
+
+            } catch (error) {
+                statusDiv.innerHTML = `
+                    <div class="alert alert-warning">
+                        ⚠️ <strong>Método automático no disponible</strong><br>
+                        ${error.message}<br><br>
+                        <strong>Solución:</strong> Copia el script SQL de abajo y ejecútalo manualmente:<br>
+                        1. Ve a <a href="https://supabase.com/dashboard" target="_blank">Supabase Dashboard</a><br>
+                        2. Selecciona tu proyecto<br>
+                        3. Abre el <strong>SQL Editor</strong><br>
+                        4. Pega y ejecuta el script completo<br>
+                        5. Verifica que no haya errores
+                    </div>
+                `;
+            } finally {
+                migrateBtn.disabled = false;
+            }
+        }
+
+        function copySQLScript() {
+            navigator.clipboard.writeText(MIGRATION_SCRIPT).then(() => {
+                alert('✅ Script SQL copiado al portapapeles!\n\nAhora ve a Supabase Dashboard > SQL Editor y pégalo.');
+            }).catch(() => {
+                alert('❌ No se pudo copiar automáticamente. Selecciona y copia el texto manualmente.');
+            });
+        }
+    </script>
+</body>
+</html>

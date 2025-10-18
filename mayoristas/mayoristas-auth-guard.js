@@ -103,25 +103,25 @@ class MayoristasAuthGuard {
     }
 
     /**
-     * Redirect unauthorized users to the public homepage
-     * Uses absolute path to prevent loops and provides better UX
+     * Redirect unauthorized users to the login page
+     * Uses replace to prevent back button issues
      */
     static redirectToPublic() {
         try {
-            console.log('🏠 MayoristasAuthGuard: Redirecting unauthorized user to homepage');
+            console.log('🔑 MayoristasAuthGuard: Redirecting unauthorized user to login');
 
             // Log unauthorized access attempt (optional)
             this.logUnauthorizedAccess();
 
             // Use replace to prevent back button issues
-            // Redirect to homepage, not login page, to prevent loops
-            window.location.replace('../index.html');
+            // Redirect to login page within mayoristas area
+            window.location.replace('login.html');
 
         } catch (error) {
             console.error('❌ MayoristasAuthGuard: Error during redirect:', error);
             // Fallback redirect
             try {
-                window.location.href = '../index.html';
+                window.location.href = 'login.html';
             } catch (fallbackError) {
                 console.error('❌ MayoristasAuthGuard: Fallback redirect failed:', fallbackError);
             }
@@ -300,16 +300,8 @@ class MayoristasAuthGuard {
     }
 }
 
-// Auto-initialize if DOM is already loaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        MayoristasAuthGuard.initialize();
-    });
-} else {
-    MayoristasAuthGuard.initialize();
-}
-
-// Make available globally
+// Make available globally but DO NOT auto-initialize
+// Each page will call MayoristasAuthGuard.initialize() manually after loading navbar
 window.MayoristasAuthGuard = MayoristasAuthGuard;
 
-console.log('🛡️ MayoristasAuthGuard: Script loaded successfully');
+console.log('🛡️ MayoristasAuthGuard: Script loaded successfully (manual init required)');

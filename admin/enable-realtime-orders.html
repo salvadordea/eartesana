@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habilitar Realtime para Orders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+        .step {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .step-number {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .sql-box {
+            background: #2c3e50;
+            color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 15px 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: background 0.3s ease;
+        }
+        .btn:hover {
+            background: #2980b9;
+        }
+        .info-box {
+            background: #e7f3ff;
+            border: 1px solid #3498db;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #28a745;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        ul {
+            line-height: 1.8;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .feature-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid #28a745;
+        }
+        .feature-item i {
+            color: #28a745;
+            margin-right: 8px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔔 Habilitar Notificaciones en Tiempo Real</h1>
+        <p class="subtitle">Configura Supabase Realtime para recibir notificaciones de pedidos nuevos</p>
+
+        <div class="success-box">
+            <strong>✨ Sistema de Notificaciones Implementado</strong><br>
+            El código ya está listo en el admin panel. Solo necesitas habilitar Realtime en Supabase.
+        </div>
+
+        <div class="feature-list">
+            <div class="feature-item">
+                <i class="fas fa-bell"></i>
+                <strong>Notificaciones Toast</strong><br>
+                <small>Alertas visuales en pantalla</small>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-desktop"></i>
+                <strong>Notificaciones del Navegador</strong><br>
+                <small>Alertas del sistema operativo</small>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-volume-up"></i>
+                <strong>Sonido de Alerta</strong><br>
+                <small>Beep cuando llega un pedido</small>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-sync-alt"></i>
+                <strong>Actualización Automática</strong><br>
+                <small>La tabla se actualiza sola</small>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">1</span> Ve a Supabase Dashboard</h3>
+            <p>Abre tu proyecto en: <a href="https://supabase.com/dashboard" target="_blank">https://supabase.com/dashboard</a></p>
+            <p>Proyecto: <strong>yrmfrfpyqctvwyhrhivl</strong></p>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">2</span> Habilita Realtime en la tabla "orders"</h3>
+            <p>Hay dos formas de hacer esto:</p>
+
+            <h4>Opción A: Desde la interfaz (Más Fácil)</h4>
+            <ol>
+                <li>Ve a <strong>Database</strong> → <strong>Tables</strong> en el menú lateral</li>
+                <li>Busca y haz clic en la tabla <strong>orders</strong></li>
+                <li>Haz clic en el ícono de configuración (⚙️) o en la pestaña <strong>Settings</strong></li>
+                <li>Busca la sección <strong>Enable Realtime</strong></li>
+                <li>Activa el switch para habilitar Realtime</li>
+                <li>Guarda los cambios</li>
+            </ol>
+
+            <h4>Opción B: Usando SQL</h4>
+            <ol>
+                <li>Ve a <strong>SQL Editor</strong> en el menú lateral</li>
+                <li>Copia y pega el siguiente SQL:</li>
+            </ol>
+
+            <div class="sql-box">-- Habilitar Realtime para la tabla orders
+ALTER PUBLICATION supabase_realtime ADD TABLE orders;
+
+-- Verificar que se habilitó correctamente
+SELECT * FROM pg_publication_tables
+WHERE pubname = 'supabase_realtime'
+AND schemaname = 'public'
+AND tablename = 'orders';</div>
+
+            <button class="btn" onclick="copySQL()">📋 Copiar SQL</button>
+
+            <ol start="3">
+                <li>Haz clic en <strong>Run</strong> o presiona <kbd>Ctrl+Enter</kbd></li>
+                <li>Deberías ver un resultado confirmando que se habilitó</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">3</span> Verifica la Configuración</h3>
+            <p>Para verificar que Realtime está habilitado:</p>
+
+            <div class="sql-box">-- Ver todas las tablas con Realtime habilitado
+SELECT * FROM pg_publication_tables
+WHERE pubname = 'supabase_realtime';</div>
+
+            <button class="btn" onclick="copyVerifySQL()">📋 Copiar SQL de Verificación</button>
+
+            <p style="margin-top: 15px;">Deberías ver la tabla <code>orders</code> en los resultados.</p>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">4</span> Prueba las Notificaciones</h3>
+            <ol>
+                <li>Abre el admin panel: <a href="pedidos.html" target="_blank">pedidos.html</a></li>
+                <li>Abre la consola del navegador (F12)</li>
+                <li>Deberías ver: <code>✅ Subscribed to realtime order changes</code></li>
+                <li>El navegador te pedirá permiso para mostrar notificaciones - <strong>acepta</strong></li>
+                <li>Crea un pedido de prueba desde <a href="../mayoristas/checkout.html" target="_blank">checkout.html</a></li>
+                <li>Verás aparecer automáticamente:
+                    <ul>
+                        <li>🎉 Una notificación toast en la esquina superior derecha</li>
+                        <li>📢 Una notificación del navegador (si diste permiso)</li>
+                        <li>🔊 Un sonido de alerta</li>
+                        <li>📊 La tabla se actualiza automáticamente</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="info-box">
+            <strong>💡 Importante:</strong>
+            <ul style="margin: 10px 0;">
+                <li>Las notificaciones del navegador requieren HTTPS o localhost</li>
+                <li>El usuario debe dar permiso para las notificaciones del navegador</li>
+                <li>Las notificaciones solo aparecen si el admin panel está abierto</li>
+                <li>Si no funciona, revisa la consola del navegador para ver errores</li>
+            </ul>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ Troubleshooting:</strong>
+            <ul style="margin: 10px 0;">
+                <li>Si no ves notificaciones, verifica que Realtime esté habilitado en Supabase</li>
+                <li>Si ves errores en la consola, verifica las políticas RLS de la tabla orders</li>
+                <li>Las políticas RLS deben permitir SELECT, INSERT y UPDATE a usuarios autenticados</li>
+                <li>Si el sonido no funciona, algunos navegadores requieren interacción del usuario primero</li>
+            </ul>
+        </div>
+
+        <div class="success-box">
+            <strong>🎯 ¿Qué pasará cuando funcione?</strong>
+            <p>Cuando alguien cree un pedido:</p>
+            <ol>
+                <li>Aparecerá una notificación verde en la esquina con los detalles</li>
+                <li>Sonará un beep corto</li>
+                <li>Si permitiste notificaciones del navegador, verás una alerta del sistema</li>
+                <li>El pedido aparecerá automáticamente en la tabla sin recargar la página</li>
+                <li>El badge de pedidos pendientes se actualizará automáticamente</li>
+                <li>Las estadísticas se recalcularán en tiempo real</li>
+            </ol>
+        </div>
+
+        <hr style="margin: 40px 0;">
+
+        <h3>📚 Recursos Adicionales</h3>
+        <ul>
+            <li><a href="https://supabase.com/docs/guides/realtime" target="_blank">Supabase Realtime Documentation</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API" target="_blank">Web Notifications API</a></li>
+            <li><a href="pedidos.html" target="_blank">Ir al Admin Panel</a></li>
+        </ul>
+    </div>
+
+    <script>
+        function copySQL() {
+            const sql = `-- Habilitar Realtime para la tabla orders
+ALTER PUBLICATION supabase_realtime ADD TABLE orders;
+
+-- Verificar que se habilitó correctamente
+SELECT * FROM pg_publication_tables
+WHERE pubname = 'supabase_realtime'
+AND schemaname = 'public'
+AND tablename = 'orders';`;
+
+            navigator.clipboard.writeText(sql).then(() => {
+                alert('✅ SQL copiado!\n\nVe a Supabase Dashboard > SQL Editor y ejecútalo.');
+            }).catch(() => {
+                alert('❌ Error copiando. Copia manualmente el SQL de arriba.');
+            });
+        }
+
+        function copyVerifySQL() {
+            const sql = `-- Ver todas las tablas con Realtime habilitado
+SELECT * FROM pg_publication_tables
+WHERE pubname = 'supabase_realtime';`;
+
+            navigator.clipboard.writeText(sql).then(() => {
+                alert('✅ SQL de verificación copiado!');
+            }).catch(() => {
+                alert('❌ Error copiando. Copia manualmente el SQL de arriba.');
+            });
+        }
+    </script>
+</body>
+</html>

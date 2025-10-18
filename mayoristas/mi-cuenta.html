@@ -14,6 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
 
     <style>
+        /* Navbar styles removed - using universal navbar from mayoristas-navbar.js */
+
         .account-page {
             padding: 40px 0;
             min-height: calc(100vh - 200px);
@@ -160,29 +162,7 @@
     </style>
 </head>
 <body>
-    <!-- Simple Header -->
-    <header class="checkout-header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="tienda.html">
-                        <img src="../assets/images/logo.webp" alt="Estudio Artesana Logo" style="height: 50px;">
-                    </a>
-                </div>
-                <nav style="display: flex; gap: 20px; align-items: center;">
-                    <a href="tienda.html" style="color: #2c2c2c; text-decoration: none; font-weight: 600;">
-                        <i class="fas fa-store"></i> Tienda
-                    </a>
-                    <a href="mi-cuenta.html" style="color: #C0C0C0; text-decoration: none; font-weight: 600;">
-                        <i class="fas fa-user"></i> Mi Cuenta
-                    </a>
-                    <button id="logoutBtn" style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
-                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                    </button>
-                </nav>
-            </div>
-        </div>
-    </header>
+    <!-- Universal navbar will be injected here by mayoristas-navbar.js -->
 
     <!-- Account Header -->
     <div class="account-header">
@@ -265,6 +245,9 @@
         <!-- Billing Information -->
         <div class="account-section">
             <h2><i class="fas fa-file-invoice"></i> Información de Facturación</h2>
+            <button type="button" id="copyAddressBtn" class="btn-save" style="background: #6c757d; margin-bottom: 20px;">
+                <i class="fas fa-copy"></i> Usar misma dirección que envío
+            </button>
             <form id="billingForm">
                 <div class="form-row">
                     <div class="form-group">
@@ -361,9 +344,9 @@
 
             try {
                 const { data, error } = await supabase
-                    .from('wholesalers')
+                    .from('user_profiles')
                     .select('*')
-                    .eq('email', currentUser.email)
+                    .eq('id', currentUser.id)
                     .single();
 
                 if (error) throw error;
@@ -371,12 +354,16 @@
                 if (data) {
                     // Display account info
                     document.getElementById('displayEmail').textContent = data.email;
-                    document.getElementById('displayCompany').textContent = data.company;
-                    document.getElementById('displayDiscount').textContent = data.discount_percentage || 20;
-                    document.getElementById('welcomeMessage').textContent = `Bienvenido, ${data.name}`;
+                    document.getElementById('displayCompany').textContent = data.company_name || '-';
+                    document.getElementById('displayDiscount').textContent = data.wholesale_discount_percent || 20;
+                    document.getElementById('welcomeMessage').textContent = `Bienvenido, ${data.full_name || data.email}`;
+
+                    // Update navbar user info
+                    document.getElementById('navUserName').textContent = data.full_name || data.email;
+                    document.getElementById('navUserCompany').textContent = data.company_name || 'Sin empresa';
 
                     // Fill contact form
-                    document.getElementById('contactName').value = data.contact_name || data.name || '';
+                    document.getElementById('contactName').value = data.full_name || '';
                     document.getElementById('contactPhone').value = data.contact_phone || data.phone || '';
 
                     // Fill shipping form
@@ -387,8 +374,8 @@
                     document.getElementById('shippingCountry').value = data.shipping_country || 'México';
 
                     // Fill billing form
-                    document.getElementById('rfc').value = data.rfc || '';
-                    document.getElementById('businessName').value = data.business_name || data.company || '';
+                    document.getElementById('rfc').value = data.tax_id || '';
+                    document.getElementById('businessName').value = data.company_name || '';
                     document.getElementById('billingAddress').value = data.billing_address || '';
                     document.getElementById('billingCity').value = data.billing_city || '';
                     document.getElementById('billingState').value = data.billing_state || '';
@@ -407,9 +394,9 @@
 
             try {
                 const { error } = await supabase
-                    .from('wholesalers')
+                    .from('user_profiles')
                     .update(fields)
-                    .eq('email', currentUser.email);
+                    .eq('id', currentUser.id);
 
                 if (error) throw error;
 
@@ -454,7 +441,7 @@
                 btn.disabled = true;
 
                 await updateUserData({
-                    contact_name: document.getElementById('contactName').value,
+                    full_name: document.getElementById('contactName').value,
                     contact_phone: document.getElementById('contactPhone').value
                 });
 
@@ -485,8 +472,8 @@
                 btn.disabled = true;
 
                 await updateUserData({
-                    rfc: document.getElementById('rfc').value.toUpperCase(),
-                    business_name: document.getElementById('businessName').value,
+                    tax_id: document.getElementById('rfc').value.toUpperCase(),
+                    company_name: document.getElementById('businessName').value,
                     billing_address: document.getElementById('billingAddress').value,
                     billing_city: document.getElementById('billingCity').value,
                     billing_state: document.getElementById('billingState').value,
@@ -502,15 +489,44 @@
                 this.value = this.value.toUpperCase();
             });
 
-            // Logout
-            document.getElementById('logoutBtn').addEventListener('click', function() {
-                localStorage.removeItem('wholesaleSession');
-                window.location.href = 'login.html';
+            // Copy shipping address to billing address
+            document.getElementById('copyAddressBtn').addEventListener('click', function() {
+                document.getElementById('billingAddress').value = document.getElementById('shippingAddress').value;
+                document.getElementById('billingCity').value = document.getElementById('shippingCity').value;
+                document.getElementById('billingState').value = document.getElementById('shippingState').value;
+                document.getElementById('billingZipcode').value = document.getElementById('shippingZipcode').value;
+                document.getElementById('billingCountry').value = document.getElementById('shippingCountry').value;
+
+                showSuccess('Dirección de envío copiada a facturación');
             });
+
+            // Navbar events (logout, mobile menu) are handled by mayoristas-navbar.js
         });
+    </script>
+
+    <!-- Universal Mayorista Navbar (must load before auth-guard) -->
+    <script src="mayoristas-navbar.js"></script>
+
+    <!-- Initialize Navbar and Auth Guard -->
+    <script>
+        // Initialize navbar first
+        if (window.initMayoristaNavbar && window.detectActivePage) {
+            const activePage = window.detectActivePage();
+            if (activePage) {
+                window.initMayoristaNavbar(activePage);
+                console.log('✅ Navbar initialized for page:', activePage);
+            }
+        }
     </script>
 
     <!-- Mayoristas Authentication Guard -->
     <script src="mayoristas-auth-guard.js"></script>
+
+    <!-- Initialize Auth Guard after navbar -->
+    <script>
+        if (window.MayoristasAuthGuard) {
+            window.MayoristasAuthGuard.initialize();
+        }
+    </script>
 </body>
 </html>

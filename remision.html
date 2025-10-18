@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nota de Remisión - Estudio Artesana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .remision-header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+        }
+
+        .company-info h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .company-info p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .remision-number {
+            text-align: right;
+        }
+
+        .remision-number h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .remision-number .date {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Content */
+        .remision-content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            padding: 12px 0;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 1rem;
+            color: #2c3e50;
+        }
+
+        /* Products Table */
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .products-table thead {
+            background: #f8f9fa;
+        }
+
+        .products-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #2c3e50;
+            border-bottom: 2px solid #dee2e6;
+            font-size: 0.9rem;
+        }
+
+        .products-table th:last-child,
+        .products-table td:last-child {
+            text-align: right;
+        }
+
+        .products-table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+            color: #495057;
+        }
+
+        .products-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .product-name {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .product-variant {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 3px;
+        }
+
+        /* Totals */
+        .totals-section {
+            margin-top: 30px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .totals-box {
+            min-width: 350px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .total-row:last-child {
+            border-bottom: none;
+            padding-top: 15px;
+            margin-top: 10px;
+            border-top: 2px solid #2c3e50;
+        }
+
+        .total-label {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .total-value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .total-row:last-child .total-label,
+        .total-row:last-child .total-value {
+            font-size: 1.3rem;
+            color: #28a745;
+            font-weight: 700;
+        }
+
+        /* Notes */
+        .notes-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        .notes-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        .notes-content {
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        /* Signatures */
+        .signatures {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .signature-box {
+            text-align: center;
+        }
+
+        .signature-line {
+            border-top: 2px solid #2c3e50;
+            margin-top: 60px;
+            padding-top: 10px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .signature-label {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        /* Footer */
+        .remision-footer {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-top: 1px solid #dee2e6;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+
+        /* Print Button */
+        .print-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .print-button i {
+            margin-right: 8px;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: 100%;
+            }
+
+            .print-button {
+                display: none;
+            }
+
+            .remision-header {
+                background: #2c3e50 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .products-table thead {
+                background: #f8f9fa !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .totals-box {
+                background: #f8f9fa !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .notes-box {
+                background: #fff3cd !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .signature-line {
+                page-break-inside: avoid;
+            }
+
+            /* Prevent page breaks in critical sections */
+            .section,
+            .info-grid,
+            .totals-section {
+                page-break-inside: avoid;
+            }
+        }
+
+        @page {
+            margin: 1cm;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="remision-header">
+            <div class="company-info">
+                <h1>✨ Estudio Artesana</h1>
+                <p>Legado ancestral transformado en diseño</p>
+                <p style="margin-top: 10px;">
+                    <i class="fas fa-envelope"></i> info@estudioartesana.com<br>
+                    <i class="fas fa-phone"></i> +52 123 456 7890<br>
+                    <i class="fas fa-map-marker-alt"></i> Ciudad de México, México
+                </p>
+            </div>
+            <div class="remision-number">
+                <h2 id="remisionNumber">REMISIÓN #0000</h2>
+                <div class="date">
+                    <i class="fas fa-calendar"></i>
+                    <span id="remisionDate">01/01/2024</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="remision-content">
+            <!-- Cliente Info -->
+            <div class="section">
+                <h3 class="section-title">📋 Información del Cliente</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Nombre / Empresa</div>
+                        <div class="info-value" id="customerName">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value" id="customerEmail">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Teléfono</div>
+                        <div class="info-value" id="customerPhone">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">RFC</div>
+                        <div class="info-value" id="customerRFC">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shipping Address -->
+            <div class="section">
+                <h3 class="section-title">🚚 Dirección de Entrega</h3>
+                <div class="info-item">
+                    <div class="info-value" id="shippingAddress" style="line-height: 1.6;">
+                        -
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products -->
+            <div class="section">
+                <h3 class="section-title">📦 Productos</h3>
+                <table class="products-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">Cant.</th>
+                            <th style="width: 50%;">Descripción</th>
+                            <th style="width: 20%;">Precio Unit.</th>
+                            <th style="width: 20%;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTableBody">
+                        <!-- Products will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Totals -->
+            <div class="totals-section">
+                <div class="totals-box">
+                    <div class="total-row">
+                        <span class="total-label">Subtotal:</span>
+                        <span class="total-value" id="subtotal">$0.00</span>
+                    </div>
+                    <div class="total-row" id="discountRow" style="display: none;">
+                        <span class="total-label">Descuento:</span>
+                        <span class="total-value" id="discount">-$0.00</span>
+                    </div>
+                    <div class="total-row" id="taxRow" style="display: none;">
+                        <span class="total-label">IVA (16%):</span>
+                        <span class="total-value" id="tax">$0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span class="total-label">TOTAL:</span>
+                        <span class="total-value" id="total">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notes -->
+            <div id="notesSection" style="display: none;">
+                <div class="notes-box">
+                    <div class="notes-title">📝 Notas del Pedido</div>
+                    <div class="notes-content" id="orderNotes">-</div>
+                </div>
+            </div>
+
+            <!-- Payment Info -->
+            <div class="section" style="margin-top: 30px;">
+                <h3 class="section-title">💳 Información de Pago</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Método de Pago</div>
+                        <div class="info-value" id="paymentMethod">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Estado del Pedido</div>
+                        <div class="info-value" id="orderStatus">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signatures -->
+            <div class="signatures">
+                <div class="signature-box">
+                    <div class="signature-line">
+                        Entrega
+                    </div>
+                    <div class="signature-label">Nombre y Firma</div>
+                </div>
+                <div class="signature-box">
+                    <div class="signature-line">
+                        Recibe
+                    </div>
+                    <div class="signature-label">Nombre y Firma</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="remision-footer">
+            <p><strong>Estudio Artesana</strong> - Artesanías de Alta Calidad</p>
+            <p>www.estudioartesana.com | Síguenos en redes sociales @estudioartesana</p>
+        </div>
+    </div>
+
+    <!-- Print Button -->
+    <button class="print-button" onclick="window.print()">
+        <i class="fas fa-print"></i>
+        Imprimir Remisión
+    </button>
+
+    <script>
+        // Get order data from URL parameters
+        function getOrderData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderData = urlParams.get('data');
+
+            if (orderData) {
+                try {
+                    return JSON.parse(decodeURIComponent(orderData));
+                } catch (error) {
+                    console.error('Error parsing order data:', error);
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            if (!dateString) return new Date().toLocaleDateString('es-MX');
+            return new Date(dateString).toLocaleDateString('es-MX', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Format currency
+        function formatCurrency(amount) {
+            return '$' + parseFloat(amount || 0).toFixed(2);
+        }
+
+        // Get status text
+        function getStatusText(status) {
+            const statusMap = {
+                'pending': 'Pendiente',
+                'processing': 'En Proceso',
+                'paid': 'Pagado',
+                'shipped': 'Enviado',
+                'completed': 'Completado',
+                'cancelled': 'Cancelado'
+            };
+            return statusMap[status] || status || 'Pendiente';
+        }
+
+        // Populate remision with order data
+        function populateRemision(order) {
+            if (!order) {
+                alert('No se encontraron datos del pedido');
+                return;
+            }
+
+            // Header
+            document.getElementById('remisionNumber').textContent = `REMISIÓN ${order.order_number || '#' + order.id}`;
+            document.getElementById('remisionDate').textContent = formatDate(order.created_at);
+
+            // Customer Info
+            document.getElementById('customerName').textContent = order.company_name || order.customer_name || 'N/A';
+            document.getElementById('customerEmail').textContent = order.customer_email || 'N/A';
+            document.getElementById('customerPhone').textContent = order.customer_phone || 'N/A';
+            document.getElementById('customerRFC').textContent = order.billing_rfc || 'N/A';
+
+            // Shipping Address
+            const addressParts = [
+                order.shipping_address,
+                order.shipping_city,
+                order.shipping_state,
+                order.shipping_postal_code,
+                order.shipping_country
+            ].filter(Boolean);
+            document.getElementById('shippingAddress').textContent = addressParts.join(', ') || 'No especificada';
+
+            // Products
+            const productsBody = document.getElementById('productsTableBody');
+            const items = order.items || [];
+
+            productsBody.innerHTML = items.map(item => `
+                <tr>
+                    <td style="text-align: center; font-weight: 600;">${item.quantity || 0}</td>
+                    <td>
+                        <div class="product-name">${item.name || 'Producto'}</div>
+                        ${item.variant ? `<div class="product-variant">${item.variant}</div>` : ''}
+                    </td>
+                    <td style="text-align: right;">${formatCurrency(item.price)}</td>
+                    <td style="text-align: right; font-weight: 600;">${formatCurrency((item.price || 0) * (item.quantity || 0))}</td>
+                </tr>
+            `).join('');
+
+            // Totals
+            document.getElementById('subtotal').textContent = formatCurrency(order.subtotal || order.total);
+
+            if (order.discount_amount && order.discount_amount > 0) {
+                document.getElementById('discountRow').style.display = 'flex';
+                document.getElementById('discount').textContent = '-' + formatCurrency(order.discount_amount);
+            }
+
+            if (order.tax_amount && order.tax_amount > 0) {
+                document.getElementById('taxRow').style.display = 'flex';
+                document.getElementById('tax').textContent = formatCurrency(order.tax_amount);
+            }
+
+            document.getElementById('total').textContent = formatCurrency(order.total);
+
+            // Notes
+            if (order.order_notes || order.shipping_notes) {
+                document.getElementById('notesSection').style.display = 'block';
+                const notes = [order.order_notes, order.shipping_notes].filter(Boolean).join('\n\n');
+                document.getElementById('orderNotes').textContent = notes;
+            }
+
+            // Payment Info
+            const paymentMethodMap = {
+                'transferencia': 'Transferencia Bancaria',
+                'efectivo_contra_entrega': 'Efectivo Contra Entrega',
+                'credit': 'Crédito 30 días'
+            };
+            document.getElementById('paymentMethod').textContent = paymentMethodMap[order.payment_method] || order.payment_method || 'No especificado';
+            document.getElementById('orderStatus').textContent = getStatusText(order.status);
+
+            // Set page title
+            document.title = `Remisión ${order.order_number || '#' + order.id} - Estudio Artesana`;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const orderData = getOrderData();
+            populateRemision(orderData);
+
+            // Auto-print if requested
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('autoprint') === 'true') {
+                setTimeout(() => window.print(), 500);
+            }
+        });
+    </script>
+</body>
+</html>
