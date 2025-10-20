@@ -371,6 +371,30 @@
             background: #218838;
         }
 
+        .status-dropdown {
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+            color: #2c3e50;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .status-dropdown:hover {
+            border-color: #3498db;
+            box-shadow: 0 2px 4px rgba(52, 152, 219, 0.2);
+        }
+
+        .status-dropdown:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -1016,19 +1040,20 @@
                         <td>
                             <div class="action-btns">
                                 <button class="action-btn view" onclick="viewOrder(${order.id})" title="Ver detalles">
-                                    <i class="fas fa-eye"></i> Ver
+                                    <i class="fas fa-eye"></i>
                                 </button>
-                                <button class="action-btn status" onclick="updateOrderStatus(${order.id})" title="Cambiar estado">
-                                    <i class="fas fa-edit"></i> Estado
-                                </button>
+                                <select class="status-dropdown" onchange="quickUpdateStatusFromDropdown(${order.id}, this.value); this.blur();" title="Cambiar estado">
+                                    <option value="${order.status}" selected>${getStatusTextForDropdown(order.status)}</option>
+                                    ${order.status !== 'pending' ? '<option value="pending">Pendiente</option>' : ''}
+                                    ${order.status !== 'processing' ? '<option value="processing">En Proceso</option>' : ''}
+                                    ${order.status !== 'paid' ? '<option value="paid">Pagado</option>' : ''}
+                                    ${order.status !== 'shipped' ? '<option value="shipped">Enviado</option>' : ''}
+                                    ${order.status !== 'completed' ? '<option value="completed">Completado</option>' : ''}
+                                    ${order.status !== 'cancelled' ? '<option value="cancelled">Cancelado</option>' : ''}
+                                </select>
                                 <button class="action-btn" onclick="printRemision(${order.id})" title="Imprimir remisión" style="background: #28a745; color: white;">
                                     <i class="fas fa-print"></i>
                                 </button>
-                                ${order.status === 'pending' || order.status === 'processing' ? `
-                                    <button class="action-btn" onclick="quickUpdateStatus(${order.id}, 'paid')" title="Marcar como pagado" style="background: #17a2b8; color: white;">
-                                        <i class="fas fa-check"></i>
-                                    </button>
-                                ` : ''}
                             </div>
                         </td>
                     </tr>
@@ -1344,6 +1369,63 @@
             } catch (error) {
                 console.error('Error updating status:', error);
                 showToast('Error', 'No se pudo actualizar el estado', 'error', 3000);
+            }
+        }
+
+        // Get status text for dropdown
+        function getStatusTextForDropdown(status) {
+            const statusMap = {
+                'pending': '🔴 Pendiente',
+                'processing': '🟡 En Proceso',
+                'paid': '🟢 Pagado',
+                'shipped': '🔵 Enviado',
+                'completed': '✅ Completado',
+                'cancelled': '❌ Cancelado'
+            };
+            return statusMap[status] || status;
+        }
+
+        // Quick update status from dropdown
+        async function quickUpdateStatusFromDropdown(orderId, newStatus) {
+            const order = allOrders.find(o => o.id === orderId);
+            if (!order || newStatus === order.status) {
+                loadOrders(); // Refresh to reset dropdown
+                return;
+            }
+
+            const statusNames = {
+                'pending': 'Pendiente',
+                'processing': 'En Proceso',
+                'paid': 'Pagado',
+                'shipped': 'Enviado',
+                'completed': 'Completado',
+                'cancelled': 'Cancelado'
+            };
+
+            try {
+                const { error } = await supabase
+                    .from('orders')
+                    .update({
+                        status: newStatus,
+                        updated_at: new Date().toISOString()
+                    })
+                    .eq('id', orderId);
+
+                if (error) throw error;
+
+                showToast(
+                    '✅ Estado Actualizado',
+                    `Pedido ${order.order_number || '#' + order.id} → ${statusNames[newStatus]}`,
+                    'success',
+                    3000
+                );
+
+                loadOrders();
+
+            } catch (error) {
+                console.error('Error updating status:', error);
+                showToast('❌ Error', 'No se pudo actualizar el estado', 'error', 3000);
+                loadOrders(); // Refresh to reset dropdown
             }
         }
 

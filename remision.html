@@ -31,22 +31,28 @@
         .remision-header {
             background: linear-gradient(135deg, #2c3e50, #3498db);
             color: white;
-            padding: 30px;
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
-            align-items: start;
+            align-items: center;
         }
 
-        .company-info h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
+        .company-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .company-info p {
-            font-size: 0.9rem;
+        .company-logo {
+            height: 50px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .company-details {
+            font-size: 0.75rem;
             opacity: 0.9;
-            line-height: 1.6;
+            line-height: 1.4;
         }
 
         .remision-number {
@@ -54,54 +60,54 @@
         }
 
         .remision-number h2 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
         }
 
         .remision-number .date {
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             opacity: 0.9;
         }
 
         /* Content */
         .remision-content {
-            padding: 40px;
+            padding: 25px 30px;
         }
 
         .section {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .section-title {
-            font-size: 1.1rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e9ecef;
+            margin-bottom: 8px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e9ecef;
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
         }
 
         .info-item {
-            padding: 12px 0;
+            padding: 0;
         }
 
         .info-label {
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             font-weight: 600;
             color: #666;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 5px;
+            letter-spacing: 0.3px;
+            margin-bottom: 3px;
         }
 
         .info-value {
-            font-size: 1rem;
+            font-size: 0.85rem;
             color: #2c3e50;
         }
 
@@ -345,13 +351,12 @@
         <!-- Header -->
         <div class="remision-header">
             <div class="company-info">
-                <h1>✨ Estudio Artesana</h1>
-                <p>Legado ancestral transformado en diseño</p>
-                <p style="margin-top: 10px;">
-                    <i class="fas fa-envelope"></i> info@estudioartesana.com<br>
-                    <i class="fas fa-phone"></i> +52 123 456 7890<br>
-                    <i class="fas fa-map-marker-alt"></i> Ciudad de México, México
-                </p>
+                <img src="assets/images/logo.webp" alt="Estudio Artesana" class="company-logo">
+                <div class="company-details">
+                    <strong>Estudio Artesana</strong><br>
+                    info@estudioartesana.com | +52 123 456 7890<br>
+                    Ciudad de México, México
+                </div>
             </div>
             <div class="remision-number">
                 <h2 id="remisionNumber">REMISIÓN #0000</h2>
@@ -366,11 +371,15 @@
         <div class="remision-content">
             <!-- Cliente Info -->
             <div class="section">
-                <h3 class="section-title">📋 Información del Cliente</h3>
+                <h3 class="section-title">INFORMACIÓN DEL CLIENTE</h3>
                 <div class="info-grid">
                     <div class="info-item">
-                        <div class="info-label">Nombre / Empresa</div>
+                        <div class="info-label">Cliente</div>
                         <div class="info-value" id="customerName">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">RFC</div>
+                        <div class="info-value" id="customerRFC">-</div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Email</div>
@@ -380,26 +389,18 @@
                         <div class="info-label">Teléfono</div>
                         <div class="info-value" id="customerPhone">-</div>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label">RFC</div>
-                        <div class="info-value" id="customerRFC">-</div>
-                    </div>
                 </div>
             </div>
 
             <!-- Shipping Address -->
             <div class="section">
-                <h3 class="section-title">🚚 Dirección de Entrega</h3>
-                <div class="info-item">
-                    <div class="info-value" id="shippingAddress" style="line-height: 1.6;">
-                        -
-                    </div>
-                </div>
+                <h3 class="section-title">DIRECCIÓN DE ENTREGA</h3>
+                <div class="info-value" id="shippingAddress" style="font-size: 0.85rem; line-height: 1.4;">-</div>
             </div>
 
             <!-- Products -->
             <div class="section">
-                <h3 class="section-title">📦 Productos</h3>
+                <h3 class="section-title">PRODUCTOS</h3>
                 <table class="products-table">
                     <thead>
                         <tr>
@@ -440,14 +441,14 @@
             <!-- Notes -->
             <div id="notesSection" style="display: none;">
                 <div class="notes-box">
-                    <div class="notes-title">📝 Notas del Pedido</div>
+                    <div class="notes-title">NOTAS DEL PEDIDO</div>
                     <div class="notes-content" id="orderNotes">-</div>
                 </div>
             </div>
 
             <!-- Payment Info -->
-            <div class="section" style="margin-top: 30px;">
-                <h3 class="section-title">💳 Información de Pago</h3>
+            <div class="section" style="margin-top: 20px;">
+                <h3 class="section-title">INFORMACIÓN DE PAGO</h3>
                 <div class="info-grid">
                     <div class="info-item">
                         <div class="info-label">Método de Pago</div>

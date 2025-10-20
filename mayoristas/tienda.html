@@ -3272,7 +3272,11 @@
 
                 showSuccess(`Cantidad actualizada en el carrito`);
             } else {
-                showError('Este producto no está en el carrito');
+                // Si no está en el carrito, solo actualizar el input
+                const newValue = currentValue - 1;
+                if (newValue >= minValue) {
+                    input.value = newValue;
+                }
             }
         }
 
@@ -3303,29 +3307,23 @@
             const existingItem = cart.find(item => item.variantId === variantId);
 
             if (existingItem) {
-                // Increase quantity
+                // Increase quantity in cart
                 existingItem.quantity += 1;
+                input.value = existingItem.quantity;
+                showSuccess(`Cantidad actualizada en el carrito`);
             } else {
-                // Add new item with quantity 1
-                cart.push({
-                    variantId: variantId,
-                    productId: variant.productId,
-                    name: variant.fullName,
-                    price: wholesalePrice,
-                    quantity: 1,
-                    stock: maxStock,
-                    image: variant.image
-                });
+                // Si no está en carrito, solo incrementar el input
+                const newValue = currentValue + 1;
+                if (newValue <= maxStock) {
+                    input.value = newValue;
+                }
             }
 
-            // Update cart
-            saveCart(cart);
-            updateCompactCart();
-
-            // Update input
-            input.value = existingItem ? existingItem.quantity : 1;
-
-            showSuccess(`${variant.fullName} agregado al carrito`);
+            // Update cart if item exists
+            if (existingItem) {
+                saveCart(cart);
+                updateCompactCart();
+            }
         }
 
         // Add variant to cart with quantity from input
@@ -3451,7 +3449,7 @@
                     </div>
                     <div class="variant-card-controls">
                         <button class="variant-card-qty-btn" onclick="decreaseVariantQty('${variant.id}')"
-                                ${variant.stock < MIN_QUANTITY || !cartItem ? 'disabled' : ''}>
+                                ${variant.stock < MIN_QUANTITY ? 'disabled' : ''}>
                             <i class="fas fa-minus"></i>
                         </button>
                         <input type="number" id="variant-qty-${variant.id}" class="variant-card-qty-input"
