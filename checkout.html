@@ -305,6 +305,252 @@
             gap: 8px;
         }
 
+        /* Login Link and Account Section */
+        .account-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .account-link {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s ease;
+        }
+
+        .account-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .user-info-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .user-info-badge i {
+            color: #28a745;
+        }
+
+        .logout-link {
+            color: #dc3545;
+            text-decoration: none;
+            font-size: 13px;
+            margin-left: 10px;
+        }
+
+        .logout-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Login Modal */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .login-modal.active {
+            display: flex;
+        }
+
+        .login-modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            padding: 30px;
+            position: relative;
+        }
+
+        .login-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #6c757d;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .login-modal-title {
+            margin: 0 0 20px 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .login-form-group {
+            margin-bottom: 15px;
+        }
+
+        .login-form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .login-form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: #0056b3;
+        }
+
+        .login-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .login-error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #6c757d;
+        }
+
+        .login-footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Create Account Checkbox */
+        .create-account-section {
+            background: #e7f3ff;
+            border: 1px solid #b8daff;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 20px 0;
+        }
+
+        .create-account-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .create-account-label input[type="checkbox"] {
+            margin-top: 2px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .create-account-benefits {
+            margin-top: 10px;
+            padding-left: 28px;
+            font-size: 13px;
+            color: #6c757d;
+            display: none;
+        }
+
+        .create-account-benefits.show {
+            display: block;
+        }
+
+        .create-account-benefits li {
+            margin-bottom: 5px;
+        }
+
+        /* Password Modal for Account Creation */
+        .password-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .password-modal.active {
+            display: flex;
+        }
+
+        .password-modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            padding: 30px;
+        }
+
+        .password-modal-title {
+            margin: 0 0 15px 0;
+            font-size: 1.3rem;
+            color: #333;
+        }
+
+        .password-modal-subtitle {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
         @media (max-width: 768px) {
             .checkout-content {
                 grid-template-columns: 1fr;
@@ -322,6 +568,11 @@
 
             .checkout-container {
                 padding: 20px 0;
+            }
+
+            .account-section {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
@@ -368,6 +619,24 @@
                     <i class="fas fa-arrow-left"></i>
                     Volver al carrito
                 </a>
+
+                <!-- Account Section (Guest vs Logged In) -->
+                <div class="account-section">
+                    <!-- Guest Mode: Show login link -->
+                    <div id="guestMode" class="account-link-container">
+                        <a href="#" id="showLoginLink" class="account-link">
+                            <i class="fas fa-user"></i>
+                            ¿Ya tienes cuenta? Inicia sesión
+                        </a>
+                    </div>
+
+                    <!-- Authenticated Mode: Show user info -->
+                    <div id="authenticatedMode" class="user-info-badge" style="display: none;">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Continuar como <strong id="userEmailDisplay"></strong></span>
+                        <a href="#" id="logoutLink" class="logout-link">Cerrar sesión</a>
+                    </div>
+                </div>
 
                 <form id="orderForm">
                     <!-- Customer Information -->
@@ -431,14 +700,17 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group">
+                                <label for="postalCode">Código Postal *</label>
+                                <input type="text" id="postalCode" name="postalCode" class="form-input" required
+                                       placeholder="01000" maxlength="5" pattern="[0-9]{5}">
+                                <small style="color: #6c757d; font-size: 12px; display: block; margin-top: 4px;">
+                                    <i class="fas fa-info-circle"></i> 5 dígitos
+                                </small>
+                            </div>
+                            <div class="form-group">
                                 <label for="city">Ciudad *</label>
                                 <input type="text" id="city" name="city" class="form-input" required
                                        placeholder="Ciudad de México">
-                            </div>
-                            <div class="form-group">
-                                <label for="postalCode">Código Postal *</label>
-                                <input type="text" id="postalCode" name="postalCode" class="form-input" required
-                                       placeholder="12345">
                             </div>
                         </div>
                         <div class="form-group">
@@ -540,6 +812,21 @@
                     </div>
                 </div>
 
+                <!-- Create Account Option (only for guests) -->
+                <div id="createAccountSection" class="create-account-section">
+                    <label class="create-account-label">
+                        <input type="checkbox" id="createAccountCheckbox">
+                        <div>
+                            <strong>Crear cuenta para checkout más rápido en el futuro</strong>
+                            <ul class="create-account-benefits" id="accountBenefits">
+                                <li><i class="fas fa-check"></i> Guarda direcciones de envío</li>
+                                <li><i class="fas fa-check"></i> Ve tu historial de pedidos</li>
+                                <li><i class="fas fa-check"></i> Checkout más rápido</li>
+                            </ul>
+                        </div>
+                    </label>
+                </div>
+
                 <button id="placeOrderBtn" class="checkout-btn" type="button">
                     <i class="fas fa-credit-card"></i>
                     Realizar Pedido
@@ -550,6 +837,68 @@
                     Al realizar tu pedido, recibirás un email de confirmación con los detalles y opciones de pago.
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-modal-content">
+            <button class="login-modal-close" id="closeLoginModal">&times;</button>
+            <h3 class="login-modal-title">Iniciar Sesión</h3>
+
+            <div id="loginError" class="login-error"></div>
+
+            <form id="loginForm">
+                <div class="login-form-group">
+                    <label class="login-form-label" for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="login-form-input" required placeholder="tu@email.com">
+                </div>
+
+                <div class="login-form-group">
+                    <label class="login-form-label" for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" class="login-form-input" required placeholder="••••••••">
+                </div>
+
+                <button type="submit" id="loginSubmitBtn" class="login-btn">
+                    Iniciar Sesión
+                </button>
+            </form>
+
+            <div class="login-footer">
+                ¿No tienes cuenta? <a href="auth.html">Regístrate aquí</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Modal for Account Creation -->
+    <div id="passwordModal" class="password-modal">
+        <div class="password-modal-content">
+            <h3 class="password-modal-title">Crear Cuenta</h3>
+            <p class="password-modal-subtitle">Establece una contraseña para tu nueva cuenta</p>
+
+            <form id="passwordForm">
+                <div class="login-form-group">
+                    <label class="login-form-label" for="newPassword">Contraseña</label>
+                    <input type="password" id="newPassword" class="login-form-input" required
+                           placeholder="Mínimo 6 caracteres" minlength="6">
+                </div>
+
+                <div class="login-form-group">
+                    <label class="login-form-label" for="confirmPassword">Confirmar Contraseña</label>
+                    <input type="password" id="confirmPassword" class="login-form-input" required
+                           placeholder="Confirma tu contraseña">
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" id="cancelPasswordBtn" class="login-btn"
+                            style="background: #6c757d;">
+                        Cancelar
+                    </button>
+                    <button type="submit" id="submitPasswordBtn" class="login-btn">
+                        Crear Cuenta y Realizar Pedido
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -605,12 +954,30 @@
             }
 
             async initSupabase() {
-                if (window.EstudioArtesanaConfig && window.EstudioArtesanaConfig.supabase) {
-                    const { url, anonKey } = window.EstudioArtesanaConfig.supabase;
-                    this.supabase = supabase.createClient(url, anonKey);
-                    console.log('✅ Supabase initialized');
+                // Wait for Supabase library to load
+                let attempts = 0;
+                while (typeof window.supabase === 'undefined' && attempts < 50) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    attempts++;
+                }
+
+                if (typeof window.supabase === 'undefined') {
+                    console.error('❌ Supabase library failed to load');
+                    return;
+                }
+
+                if (window.SUPABASE_CONFIG) {
+                    try {
+                        this.supabase = window.supabase.createClient(
+                            window.SUPABASE_CONFIG.url,
+                            window.SUPABASE_CONFIG.anonKey
+                        );
+                        console.log('✅ Supabase initialized for checkout');
+                    } catch (error) {
+                        console.error('❌ Error initializing Supabase:', error);
+                    }
                 } else {
-                    console.warn('⚠️ Supabase config not found');
+                    console.warn('⚠️ SUPABASE_CONFIG not found');
                 }
             }
 
@@ -624,14 +991,54 @@
                         this.currentUser = user;
                         console.log('👤 User authenticated:', user.email);
 
-                        // Load saved addresses
+                        // Show authenticated mode UI
+                        this.showAuthenticatedMode();
+
+                        // Load saved addresses (but don't populate yet)
                         await this.loadSavedAddresses();
                     } else {
-                        console.log('👤 No user authenticated');
+                        console.log('👤 No user authenticated - Guest mode');
+                        // Show guest mode UI
+                        this.showGuestMode();
                     }
                 } catch (error) {
                     console.error('Error checking auth:', error);
+                    this.showGuestMode();
                 }
+            }
+
+            showGuestMode() {
+                // Show guest mode elements
+                const guestMode = document.getElementById('guestMode');
+                const authenticatedMode = document.getElementById('authenticatedMode');
+                const createAccountSection = document.getElementById('createAccountSection');
+
+                if (guestMode) guestMode.style.display = 'block';
+                if (authenticatedMode) authenticatedMode.style.display = 'none';
+                if (createAccountSection) createAccountSection.style.display = 'block';
+            }
+
+            showAuthenticatedMode() {
+                // Show authenticated mode elements
+                const guestMode = document.getElementById('guestMode');
+                const authenticatedMode = document.getElementById('authenticatedMode');
+                const createAccountSection = document.getElementById('createAccountSection');
+                const userEmailDisplay = document.getElementById('userEmailDisplay');
+
+                if (guestMode) guestMode.style.display = 'none';
+                if (authenticatedMode) authenticatedMode.style.display = 'flex';
+                if (createAccountSection) createAccountSection.style.display = 'none';
+
+                if (userEmailDisplay && this.currentUser) {
+                    userEmailDisplay.textContent = this.currentUser.email;
+                }
+
+                // Show saved address elements
+                const savedAddressesSection = document.getElementById('savedAddressesSection');
+                const saveAddressCheckbox = document.getElementById('saveAddressCheckbox');
+
+                if (savedAddressesSection) savedAddressesSection.style.display = 'block';
+                if (saveAddressCheckbox) saveAddressCheckbox.style.display = 'block';
             }
 
             async loadSavedAddresses() {
@@ -740,6 +1147,129 @@
                 if (form) {
                     form.addEventListener('input', () => this.validateForm());
                 }
+
+                // Show login modal
+                const showLoginLink = document.getElementById('showLoginLink');
+                if (showLoginLink) {
+                    showLoginLink.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.showLoginModal();
+                    });
+                }
+
+                // Close login modal
+                const closeLoginModal = document.getElementById('closeLoginModal');
+                const loginModal = document.getElementById('loginModal');
+                if (closeLoginModal) {
+                    closeLoginModal.addEventListener('click', () => this.closeLoginModal());
+                }
+                if (loginModal) {
+                    loginModal.addEventListener('click', (e) => {
+                        if (e.target === loginModal) this.closeLoginModal();
+                    });
+                }
+
+                // Login form submit
+                const loginForm = document.getElementById('loginForm');
+                if (loginForm) {
+                    loginForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.handleInlineLogin();
+                    });
+                }
+
+                // Logout link
+                const logoutLink = document.getElementById('logoutLink');
+                if (logoutLink) {
+                    logoutLink.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.handleLogout();
+                    });
+                }
+
+                // Create account checkbox - show benefits
+                const createAccountCheckbox = document.getElementById('createAccountCheckbox');
+                const accountBenefits = document.getElementById('accountBenefits');
+                if (createAccountCheckbox && accountBenefits) {
+                    createAccountCheckbox.addEventListener('change', () => {
+                        if (createAccountCheckbox.checked) {
+                            accountBenefits.classList.add('show');
+                        } else {
+                            accountBenefits.classList.remove('show');
+                        }
+                    });
+                }
+
+                // Password modal for account creation
+                const cancelPasswordBtn = document.getElementById('cancelPasswordBtn');
+                if (cancelPasswordBtn) {
+                    cancelPasswordBtn.addEventListener('click', () => this.closePasswordModal());
+                }
+
+                const passwordForm = document.getElementById('passwordForm');
+                if (passwordForm) {
+                    passwordForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.handleAccountCreationWithPassword();
+                    });
+                }
+
+                // Postal code validation and auto-fill
+                const postalCodeInput = document.getElementById('postalCode');
+                if (postalCodeInput) {
+                    postalCodeInput.addEventListener('blur', () => this.validatePostalCode());
+                    postalCodeInput.addEventListener('input', (e) => {
+                        // Only allow numbers
+                        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+                    });
+                }
+            }
+
+            async validatePostalCode() {
+                const postalCodeInput = document.getElementById('postalCode');
+                const cityInput = document.getElementById('city');
+                const stateInput = document.getElementById('state');
+                const postalCode = postalCodeInput.value.trim();
+
+                if (!postalCode || postalCode.length !== 5) {
+                    return;
+                }
+
+                try {
+                    console.log(`🔍 Validating postal code: ${postalCode}`);
+
+                    // Using free Mexican Postal Code API
+                    const response = await fetch(`https://api.copomex.com/query/info_cp/${postalCode}?token=pruebas`);
+
+                    if (!response.ok) {
+                        throw new Error('CP no encontrado');
+                    }
+
+                    const data = await response.json();
+
+                    if (data.error === false && data.response && data.response.municipio) {
+                        // Auto-fill city and state
+                        const municipio = data.response.municipio;
+                        const estado = data.response.estado;
+
+                        cityInput.value = municipio;
+                        stateInput.value = estado;
+
+                        console.log(`✅ CP válido: ${municipio}, ${estado}`);
+
+                        // Visual feedback
+                        postalCodeInput.style.borderColor = '#28a745';
+                        setTimeout(() => {
+                            postalCodeInput.style.borderColor = '';
+                        }, 2000);
+                    } else {
+                        throw new Error('CP no encontrado');
+                    }
+                } catch (error) {
+                    console.warn('⚠️ Error validating postal code:', error);
+                    // Don't show error to user, just don't auto-fill
+                    // They can enter city/state manually
+                }
             }
 
             showEmptyCart() {
@@ -753,6 +1283,17 @@
                 document.getElementById('orderSummary').style.display = 'block';
 
                 this.populateOrderSummary();
+
+                // Ensure correct mode is displayed based on auth state
+                if (this.currentUser) {
+                    this.showAuthenticatedMode();
+                    // Only populate selector if we have addresses
+                    if (this.savedAddresses && this.savedAddresses.length > 0) {
+                        this.populateAddressSelector();
+                    }
+                } else {
+                    this.showGuestMode();
+                }
             }
 
             populateOrderSummary() {
@@ -911,6 +1452,22 @@
                     return;
                 }
 
+                // Check if user wants to create an account
+                const createAccountCheckbox = document.getElementById('createAccountCheckbox');
+                const shouldCreateAccount = createAccountCheckbox && createAccountCheckbox.checked && !this.currentUser;
+
+                if (shouldCreateAccount) {
+                    // Show password modal to get password
+                    this.showPasswordModal();
+                    // The flow continues in handleAccountCreationWithPassword() and processOrderWithAccountCreation()
+                    return;
+                }
+
+                // Process order normally (without account creation)
+                await this.processOrder();
+            }
+
+            async processOrder() {
                 const placeOrderBtn = document.getElementById('placeOrderBtn');
                 placeOrderBtn.disabled = true;
                 placeOrderBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
@@ -918,17 +1475,40 @@
                 try {
                     // Collect form data
                     const formData = new FormData(document.getElementById('orderForm'));
-                    this.orderData = Object.fromEntries(formData);
+                    const formFields = Object.fromEntries(formData);
 
-                    // Save address if checkbox is checked
+                    // Prepare order data
+                    const orderNumber = `RT-${new Date().getFullYear()}-${String(Date.now()).slice(-4)}`;
+
+                    this.orderData = {
+                        orderNumber: orderNumber,
+                        customer: {
+                            name: `${formFields.firstName} ${formFields.lastName}`,
+                            email: formFields.email,
+                            phone: formFields.phone
+                        },
+                        shipping: {
+                            address: formFields.address,
+                            addressLine2: formFields.addressLine2 || '',
+                            city: formFields.city,
+                            state: formFields.state,
+                            postalCode: formFields.postalCode,
+                            country: 'México'
+                        },
+                        items: this.cartData.items,
+                        totals: this.cartData.totals,
+                        orderNotes: formFields.orderNotes || '',
+                        orderDate: new Date().toISOString()
+                    };
+
+                    // Save address if checkbox is checked (for authenticated users)
                     const saveAddress = document.getElementById('saveAddress');
                     if (saveAddress && saveAddress.checked && this.currentUser) {
-                        await this.saveNewAddress(this.orderData);
+                        await this.saveNewAddress(formFields);
                     }
 
-                    // Add cart data
-                    this.orderData.items = this.cartData.items;
-                    this.orderData.totals = this.cartData.totals;
+                    // Save order to database
+                    const orderId = await this.saveOrderToDatabase();
 
                     // Process inventory deduction
                     await this.processInventoryDeduction();
@@ -939,7 +1519,7 @@
                     }
 
                     // Show success message
-                    alert('¡Pedido realizado exitosamente! Recibirás un email de confirmación pronto.');
+                    alert(`¡Pedido #${orderNumber} realizado exitosamente! Recibirás un email de confirmación pronto.`);
 
                     // Redirect to success page or home
                     window.location.href = 'index.html';
@@ -947,26 +1527,136 @@
                 } catch (error) {
                     console.error('❌ Error placing order:', error);
                     alert('Error procesando el pedido. Por favor, inténtalo de nuevo.');
-                } finally {
                     placeOrderBtn.disabled = false;
                     placeOrderBtn.innerHTML = '<i class="fas fa-credit-card"></i> Realizar Pedido';
+                }
+            }
+
+            async processOrderWithAccountCreation() {
+                const placeOrderBtn = document.getElementById('placeOrderBtn');
+                placeOrderBtn.disabled = true;
+                placeOrderBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creando cuenta y procesando pedido...';
+
+                try {
+                    // Collect form data
+                    const formData = new FormData(document.getElementById('orderForm'));
+                    const formFields = Object.fromEntries(formData);
+
+                    const customerData = {
+                        name: `${formFields.firstName} ${formFields.lastName}`,
+                        email: formFields.email,
+                        phone: formFields.phone
+                    };
+
+                    // Create account first
+                    await this.createAccountFromCheckout(
+                        formFields.email,
+                        this.pendingAccountPassword,
+                        customerData
+                    );
+
+                    // Now process the order
+                    await this.processOrder();
+
+                } catch (error) {
+                    console.error('❌ Error creating account and placing order:', error);
+
+                    if (error.message && error.message.includes('already registered')) {
+                        alert('Este email ya está registrado. Por favor inicia sesión o usa otro email.');
+                    } else {
+                        alert('Error creando la cuenta. El pedido no se pudo procesar. Por favor, inténtalo de nuevo.');
+                    }
+
+                    placeOrderBtn.disabled = false;
+                    placeOrderBtn.innerHTML = '<i class="fas fa-credit-card"></i> Realizar Pedido';
+                }
+            }
+
+            async saveOrderToDatabase() {
+                console.log('💾 Saving retail order to database...');
+
+                if (!this.supabase) {
+                    throw new Error('Supabase client not available');
+                }
+
+                try {
+                    // Calculate discount from coupon
+                    let discountAmount = 0;
+                    if (window.CouponService) {
+                        const appliedCoupon = window.CouponService.getAppliedCoupon();
+                        if (appliedCoupon) {
+                            discountAmount = appliedCoupon.discount;
+                        }
+                    }
+
+                    // Prepare order record for database
+                    const orderRecord = {
+                        order_number: this.orderData.orderNumber,
+                        user_id: this.currentUser?.id || null,
+                        customer_name: this.orderData.customer.name,
+                        customer_email: this.orderData.customer.email,
+                        customer_phone: this.orderData.customer.phone,
+
+                        // Shipping address
+                        shipping_address: this.orderData.shipping.address,
+                        shipping_city: this.orderData.shipping.city,
+                        shipping_state: this.orderData.shipping.state,
+                        shipping_postal_code: this.orderData.shipping.postalCode,
+                        shipping_country: this.orderData.shipping.country,
+
+                        // Order items (as JSONB)
+                        items: this.orderData.items,
+
+                        // Totals
+                        subtotal: this.orderData.totals.subtotal,
+                        discount_amount: discountAmount,
+                        tax_amount: 0, // IVA already included in prices
+                        total: this.orderData.totals.subtotal - discountAmount,
+
+                        // Payment & status
+                        payment_method: 'pending', // Will be paid via payment gateway
+                        order_type: 'retail',
+                        status: 'pending',
+
+                        // Notes
+                        order_notes: this.orderData.orderNotes
+                    };
+
+                    console.log('📦 Retail order record to insert:', orderRecord);
+
+                    // Insert order into database
+                    const { data, error } = await this.supabase
+                        .from('orders')
+                        .insert([orderRecord])
+                        .select()
+                        .single();
+
+                    if (error) {
+                        console.error('❌ Error saving order to database:', error);
+                        throw new Error(`Error guardando pedido: ${error.message}`);
+                    }
+
+                    console.log('✅ Retail order saved to database with ID:', data.id);
+                    return data.id;
+
+                } catch (error) {
+                    console.error('❌ Error in saveOrderToDatabase:', error);
+                    throw error;
                 }
             }
 
             async processInventoryDeduction() {
                 console.log('🔄 Processing inventory deduction...');
 
-                if (!window.supabase) {
+                if (!this.supabase) {
                     throw new Error('Supabase client not available');
                 }
-
-                const supabase = window.supabase;
 
                 // Process each cart item
                 for (const item of this.cartData.items) {
                     try {
                         // Get current stock for the variant
-                        const { data: variant, error: fetchError } = await supabase
+                        const { data: variant, error: fetchError } = await this.supabase
                             .from('product_variants')
                             .select('stock, variant_name')
                             .eq('id', item.variant_id)
@@ -992,7 +1682,7 @@
                         console.log(`📦 Deducting ${item.quantity} from ${variant.variant_name || 'default'}: ${variant.stock} → ${newStock}`);
 
                         // Update stock in database
-                        const { error: updateError } = await supabase
+                        const { error: updateError } = await this.supabase
                             .from('product_variants')
                             .update({ stock: newStock })
                             .eq('id', item.variant_id);
@@ -1011,6 +1701,218 @@
                 }
 
                 console.log('✅ Inventory deduction completed successfully');
+            }
+
+            // Login Modal Methods
+            showLoginModal() {
+                const modal = document.getElementById('loginModal');
+                const loginError = document.getElementById('loginError');
+
+                if (modal) modal.classList.add('active');
+                if (loginError) loginError.style.display = 'none';
+
+                // Clear form
+                document.getElementById('loginEmail').value = '';
+                document.getElementById('loginPassword').value = '';
+            }
+
+            closeLoginModal() {
+                const modal = document.getElementById('loginModal');
+                if (modal) modal.classList.remove('active');
+            }
+
+            async handleInlineLogin() {
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                const loginError = document.getElementById('loginError');
+                const loginBtn = document.getElementById('loginSubmitBtn');
+
+                if (!email || !password) {
+                    loginError.textContent = 'Por favor ingresa email y contraseña';
+                    loginError.style.display = 'block';
+                    return;
+                }
+
+                // Disable button
+                loginBtn.disabled = true;
+                loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando sesión...';
+
+                try {
+                    const { data, error } = await this.supabase.auth.signInWithPassword({
+                        email: email,
+                        password: password
+                    });
+
+                    if (error) {
+                        throw error;
+                    }
+
+                    console.log('✅ Login successful');
+
+                    // Set current user
+                    this.currentUser = data.user;
+
+                    // Load saved addresses
+                    await this.loadSavedAddresses();
+
+                    // Switch to authenticated mode
+                    this.showAuthenticatedMode();
+
+                    // Populate address selector
+                    this.populateAddressSelector();
+
+                    // Close modal
+                    this.closeLoginModal();
+
+                } catch (error) {
+                    console.error('❌ Login error:', error);
+                    loginError.textContent = error.message === 'Invalid login credentials'
+                        ? 'Email o contraseña incorrectos'
+                        : 'Error al iniciar sesión. Intenta de nuevo.';
+                    loginError.style.display = 'block';
+                } finally {
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'Iniciar Sesión';
+                }
+            }
+
+            async handleLogout() {
+                if (!confirm('¿Cerrar sesión? Tus datos no se guardarán.')) {
+                    return;
+                }
+
+                try {
+                    await this.supabase.auth.signOut();
+                    this.currentUser = null;
+                    this.savedAddresses = [];
+
+                    // Switch to guest mode
+                    this.showGuestMode();
+
+                    // Clear form
+                    this.clearAddressForm();
+
+                    console.log('✅ Logged out successfully');
+                } catch (error) {
+                    console.error('❌ Logout error:', error);
+                }
+            }
+
+            // Password Modal for Account Creation
+            showPasswordModal() {
+                const modal = document.getElementById('passwordModal');
+                if (modal) modal.classList.add('active');
+
+                // Clear form
+                document.getElementById('newPassword').value = '';
+                document.getElementById('confirmPassword').value = '';
+            }
+
+            closePasswordModal() {
+                const modal = document.getElementById('passwordModal');
+                if (modal) modal.classList.remove('active');
+            }
+
+            async handleAccountCreationWithPassword() {
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (newPassword !== confirmPassword) {
+                    alert('Las contraseñas no coinciden');
+                    return;
+                }
+
+                if (newPassword.length < 6) {
+                    alert('La contraseña debe tener al menos 6 caracteres');
+                    return;
+                }
+
+                // Store password for later use
+                this.pendingAccountPassword = newPassword;
+
+                // Close password modal
+                this.closePasswordModal();
+
+                // Continue with order placement
+                await this.processOrderWithAccountCreation();
+            }
+
+            async createAccountFromCheckout(email, password, customerData) {
+                try {
+                    console.log('🔐 Creating account from checkout...');
+
+                    // Sign up the user
+                    const { data, error } = await this.supabase.auth.signUp({
+                        email: email,
+                        password: password,
+                        options: {
+                            data: {
+                                full_name: customerData.name
+                            },
+                            emailRedirectTo: window.location.origin
+                        }
+                    });
+
+                    if (error) {
+                        console.error('❌ Error creating account:', error);
+                        throw error;
+                    }
+
+                    if (!data.user) {
+                        throw new Error('No se pudo crear la cuenta');
+                    }
+
+                    console.log('✅ Account created successfully:', email);
+
+                    // IMPORTANT: Wait for session to be fully established
+                    // After signUp, the user should be automatically logged in
+                    // but we need to verify the session is active
+                    let sessionAttempts = 0;
+                    let session = data.session;
+
+                    while (!session && sessionAttempts < 10) {
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                        const { data: sessionData } = await this.supabase.auth.getSession();
+                        session = sessionData.session;
+                        sessionAttempts++;
+                    }
+
+                    if (!session) {
+                        console.warn('⚠️ Session not established after signup, trying to sign in...');
+                        // Try to sign in explicitly
+                        const { data: signInData, error: signInError } = await this.supabase.auth.signInWithPassword({
+                            email: email,
+                            password: password
+                        });
+
+                        if (signInError) {
+                            throw new Error('Cuenta creada pero no se pudo iniciar sesión automáticamente');
+                        }
+
+                        session = signInData.session;
+                    }
+
+                    console.log('✅ Session established:', session ? 'YES' : 'NO');
+
+                    // Set current user from session
+                    this.currentUser = session.user;
+
+                    // Refresh the Supabase client to use the new session
+                    await this.supabase.auth.refreshSession();
+
+                    // Save the address to the new account (NOW with active session)
+                    if (this.currentUser) {
+                        const formData = new FormData(document.getElementById('orderForm'));
+                        const formFields = Object.fromEntries(formData);
+                        await this.saveNewAddress(formFields);
+                    }
+
+                    return this.currentUser;
+
+                } catch (error) {
+                    console.error('❌ Error in createAccountFromCheckout:', error);
+                    throw error;
+                }
             }
 
             formatPrice(price) {
@@ -1118,9 +2020,6 @@
             }
         });
     </script>
-
-    <!-- Supabase Client -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <!-- Site Settings Service (for contact info from Supabase) -->
     <script src="assets/js/site-settings-service.js"></script>

@@ -10,22 +10,73 @@
     let supabaseClient = null;
     let realtimeChannel = null;
     let pendingOrdersCount = 0;
+    let retryCount = 0;
+    const MAX_RETRIES = 10; // Stop after 10 retries (20 seconds max)
+    let isInitialized = false;
 
     // Initialize the notification system
     function init() {
-        console.log('🔔 Inicializando sistema de notificaciones admin...');
-
-        // Initialize Supabase client
-        if (window.SUPABASE_CONFIG && window.supabase) {
-            supabaseClient = window.supabase.createClient(
-                window.SUPABASE_CONFIG.url,
-                window.SUPABASE_CONFIG.anonKey
-            );
-            console.log('✅ Supabase client initialized for notifications');
-        } else {
-            console.warn('⚠️ Supabase not available for notifications');
+        // Don't initialize twice
+        if (isInitialized) {
+            console.log('🔔 Notification system already initialized');
             return;
         }
+        console.log('🔔 Inicializando sistema de notificaciones admin...');
+
+        // Check if Supabase library is loaded
+        if (!window.supabase) {
+            if (retryCount < MAX_RETRIES) {
+                retryCount++;
+                console.warn(`⚠️ Supabase library not loaded yet, retry ${retryCount}/${MAX_RETRIES}...`);
+                setTimeout(init, 1000);
+            } else {
+                console.error('❌ Supabase library failed to load after max retries');
+            }
+            return;
+        }
+
+        // Try different methods to get Supabase client
+
+        // Method 1: Check if there's a global supabase client instance (from pedidos.html, inventario.html, etc)
+        if (window.supabase.from && typeof window.supabase.from === 'function') {
+            supabaseClient = window.supabase;
+            console.log('✅ Using existing global Supabase client');
+        }
+        // Method 2: Check for SUPABASE_CONFIG object (from config.js)
+        else if (window.SUPABASE_CONFIG && typeof window.supabase.createClient === 'function') {
+            supabaseClient = window.supabase.createClient(
+                window.SUPABASE_CONFIG.url,
+                window.SUPABASE_CONFIG.anonKey || window.SUPABASE_CONFIG.serviceRoleKey
+            );
+            console.log('✅ Supabase client initialized from SUPABASE_CONFIG');
+        }
+        // Method 3: Check for hardcoded constants (like in inventario.html)
+        else if (window.SUPABASE_URL && window.SUPABASE_KEY && typeof window.supabase.createClient === 'function') {
+            supabaseClient = window.supabase.createClient(
+                window.SUPABASE_URL,
+                window.SUPABASE_KEY
+            );
+            console.log('✅ Supabase client initialized from global constants');
+        }
+        else {
+            if (retryCount < MAX_RETRIES) {
+                retryCount++;
+                console.warn(`⚠️ Supabase configuration not found, retry ${retryCount}/${MAX_RETRIES} in 2s...`);
+                setTimeout(init, 2000);
+            } else {
+                console.error('❌ Supabase configuration not found after max retries. Notifications disabled.');
+            }
+            return;
+        }
+
+        // Verify client is working
+        if (!supabaseClient || !supabaseClient.from) {
+            console.error('❌ Supabase client initialization failed');
+            return;
+        }
+
+        // Mark as initialized
+        isInitialized = true;
 
         // Load initial pending count
         loadPendingCount();
@@ -334,10 +385,12 @@
         init();
     }
 
-    // Expose functions globally if needed
+    // Expose functions globally
     window.AdminNotifications = {
+        init,  // Allow manual initialization
         showToast,
-        refresh: loadPendingCount
+        refresh: loadPendingCount,
+        isInitialized: () => isInitialized
     };
 
 })();

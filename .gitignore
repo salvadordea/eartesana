@@ -83,6 +83,8 @@ config-local.js
 
 # Admin setup files - database configuration scripts
 admin/setup/*.html
+# Except the RLS policies documentation (important for debugging)
+!admin/setup/fix-checkout-rls-policies.html
 
 # Images that are uploaded via admin (keeping the structure but not specific images)
 assets/images/uploads/

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix Checkout RLS Policies - Estudio Artesana</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #D4AF37;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #28a745;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .info {
+            background: #d1ecf1;
+            border: 1px solid #17a2b8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            position: relative;
+        }
+        .code-block pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #D4AF37;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s;
+        }
+        .copy-btn:hover {
+            background: #B8941F;
+        }
+        .step {
+            background: #f8f9fa;
+            border-left: 4px solid #D4AF37;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .step-number {
+            display: inline-block;
+            background: #D4AF37;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        ul {
+            line-height: 2;
+        }
+        strong {
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Arreglar Políticas RLS para Checkout Público</h1>
+
+        <div class="warning">
+            <strong>⚠️ IMPORTANTE:</strong> Este archivo contiene políticas de seguridad (RLS) que deben ejecutarse en Supabase para permitir que el checkout público funcione correctamente.
+        </div>
+
+        <div class="info">
+            <strong>📋 Problemas que resuelve este archivo:</strong>
+            <ol>
+                <li>Al crear una cuenta durante el checkout → Error 401 al guardar pedidos y direcciones</li>
+                <li>El panel de admin no muestra ningún pedido → Las políticas RLS bloquean acceso admin</li>
+                <li>Al intentar actualizar estado de pedidos en admin → Error 401 al actualizar</li>
+            </ol>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ IMPORTANTE - Dos Opciones de Configuración:</strong>
+            <p><strong>OPCIÓN 1 (Recomendada para proyectos pequeños):</strong></p>
+            <ul>
+                <li>✅ Permite a CUALQUIER usuario autenticado ver y actualizar TODOS los pedidos</li>
+                <li>✅ Más simple - usa las políticas con <code>USING (true)</code></li>
+                <li>✅ El admin puede ver todos los pedidos sin configuración adicional</li>
+                <li>⚠️ Los clientes retail también podrían ver todos los pedidos SI se autentican (pero no lo harán desde la UI)</li>
+            </ul>
+
+            <p><strong>OPCIÓN 2 (Más segura - requiere configuración):</strong></p>
+            <ul>
+                <li>✅ Solo usuarios con rol "admin" pueden ver/actualizar todos los pedidos</li>
+                <li>✅ Los clientes solo ven sus propios pedidos</li>
+                <li>⚠️ Requiere configurar roles en Supabase Auth y metadata de usuario</li>
+                <li>⚠️ Más complejo de implementar</li>
+            </ul>
+
+            <p><strong>👉 USAR OPCIÓN 1</strong> por defecto. Si más adelante necesitas OPCIÓN 2, descomenta las políticas alternativas.</p>
+        </div>
+
+        <h2>Paso 1: Políticas para tabla <code>orders</code></h2>
+
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Política INSERT para pedidos retail y wholesale</strong>
+        </div>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this, 'code1')">Copiar</button>
+            <pre id="code1">-- Primero, eliminar política anterior si existe
+DROP POLICY IF EXISTS "Users can insert their own orders" ON orders;
+DROP POLICY IF EXISTS "Users can insert retail orders" ON orders;
+
+-- Política para INSERT de pedidos
+-- Permite:
+-- 1. Usuarios autenticados insertar pedidos wholesale (con su user_id)
+-- 2. Usuarios autenticados insertar pedidos retail (con su user_id o NULL para invitados)
+-- 3. Clientes anónimos insertar pedidos retail (user_id = NULL)
+CREATE POLICY "Allow insert orders for authenticated and retail"
+ON orders FOR INSERT
+TO public
+WITH CHECK (
+  -- Usuarios autenticados pueden crear cualquier tipo de pedido con su ID
+  (auth.uid() IS NOT NULL AND (user_id = auth.uid() OR (order_type = 'retail' AND user_id IS NULL)))
+  OR
+  -- Pedidos retail pueden crearse sin autenticación (user_id = NULL)
+  (order_type = 'retail' AND user_id IS NULL)
+);</pre>
+        </div>
+
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>Política SELECT para ver pedidos - ⚠️ CRÍTICA PARA ADMIN</strong>
+        </div>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this, 'code2')">Copiar</button>
+            <pre id="code2">-- Eliminar política anterior si existe
+DROP POLICY IF EXISTS "Users can view their own orders" ON orders;
+DROP POLICY IF EXISTS "Allow all authenticated users to read all orders" ON orders;
+
+-- Política para SELECT de pedidos
+-- OPCIÓN 1: Permitir a TODOS los usuarios autenticados ver TODOS los pedidos (para admin)
+-- Usar esta si el admin se autentica con email/password normal
+CREATE POLICY "Allow all authenticated users to read all orders"
+ON orders FOR SELECT
+TO authenticated
+USING (true);
+
+-- OPCIÓN 2 (comentada): Si quieres restringir solo a admin con rol específico
+-- Descomenta esto y comenta la política anterior si tu admin tiene un rol específico
+-- CREATE POLICY "Admin can view all orders, users view own"
+-- ON orders FOR SELECT
+-- TO authenticated
+-- USING (
+--   -- Admin puede ver todos
+--   (auth.jwt() ->> 'role')::text = 'admin'
+--   OR
+--   -- Usuarios normales solo ven los suyos
+--   (user_id = auth.uid())
+-- );</pre>
+        </div>
+
+        <div class="step">
+            <span class="step-number">3</span>
+            <strong>Política UPDATE para actualizar estado de pedidos - ⚠️ CRÍTICA PARA ADMIN</strong>
+        </div>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this, 'code3')">Copiar</button>
+            <pre id="code3">-- Eliminar política anterior si existe
+DROP POLICY IF EXISTS "Users can update their own orders" ON orders;
+DROP POLICY IF EXISTS "Allow all authenticated users to update orders" ON orders;
+
+-- Política para UPDATE de pedidos
+-- OPCIÓN 1: Permitir a TODOS los usuarios autenticados actualizar TODOS los pedidos (para admin)
+CREATE POLICY "Allow all authenticated users to update orders"
+ON orders FOR UPDATE
+TO authenticated
+USING (true)
+WITH CHECK (true);
+
+-- OPCIÓN 2 (comentada): Si quieres restringir solo a admin con rol específico
+-- Descomenta esto y comenta la política anterior si tu admin tiene un rol específico
+-- CREATE POLICY "Admin can update all orders, users update own"
+-- ON orders FOR UPDATE
+-- TO authenticated
+-- USING (
+--   (auth.jwt() ->> 'role')::text = 'admin'
+--   OR
+--   (user_id = auth.uid())
+-- )
+-- WITH CHECK (
+--   (auth.jwt() ->> 'role')::text = 'admin'
+--   OR
+--   (user_id = auth.uid())
+-- );</pre>
+        </div>
+
+        <h2>Paso 2: Políticas para tabla <code>user_addresses</code></h2>
+
+        <div class="step">
+            <span class="step-number">4</span>
+            <strong>Política INSERT para direcciones de usuario</strong>
+        </div>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this, 'code4')">Copiar</button>
+            <pre id="code4">-- Eliminar política anterior si existe
+DROP POLICY IF EXISTS "Users can insert their own addresses" ON user_addresses;
+
+-- Política para INSERT de direcciones
+-- Solo usuarios autenticados pueden insertar direcciones con su user_id
+CREATE POLICY "Users can insert their own addresses"
+ON user_addresses FOR INSERT
+TO authenticated
+WITH CHECK (user_id = auth.uid());</pre>
+        </div>
+
+        <div class="step">
+            <span class="step-number">5</span>
+            <strong>Política SELECT para ver direcciones propias</strong>
+        </div>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this, 'code5')">Copiar</button>
+            <pre id="code5">-- Eliminar política anterior si existe
+DROP POLICY IF EXISTS "Users can view their own addresses" ON user_addresses;
+
+-- Política para SELECT de direcciones
+CREATE POLICY "Users can view their own addresses"
+ON user_addresses FOR SELECT
+TO authenticated
+USING (user_id = auth.uid());</pre>
+        </div>
+
+        <div class="step">
+            <span class="step-number">6</span>
+            <strong>Política UPDATE/DELETE para gestionar direcciones</strong>
+        </div>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this, 'code6')">Copiar</button>
+            <pre id="code6">-- Eliminar políticas anteriores si existen
+DROP POLICY IF EXISTS "Users can update their own addresses" ON user_addresses;
+DROP POLICY IF EXISTS "Users can delete their own addresses" ON user_addresses;
+
+-- Política para UPDATE de direcciones
+CREATE POLICY "Users can update their own addresses"
+ON user_addresses FOR UPDATE
+TO authenticated
+USING (user_id = auth.uid())
+WITH CHECK (user_id = auth.uid());
+
+-- Política para DELETE de direcciones
+CREATE POLICY "Users can delete their own addresses"
+ON user_addresses FOR DELETE
+TO authenticated
+USING (user_id = auth.uid());</pre>
+        </div>
+
+        <h2>Paso 3: Verificar RLS está habilitado</h2>
+
+        <div class="step">
+            <span class="step-number">7</span>
+            <strong>Asegurar que RLS está habilitado en ambas tablas</strong>
+        </div>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this, 'code7')">Copiar</button>
+            <pre id="code7">-- Habilitar RLS en ambas tablas (si no está ya habilitado)
+ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_addresses ENABLE ROW LEVEL SECURITY;</pre>
+        </div>
+
+        <h2>Instrucciones de Uso</h2>
+
+        <div class="success">
+            <strong>✅ Pasos para ejecutar:</strong>
+            <ol>
+                <li>Ve a tu proyecto en <a href="https://supabase.com/dashboard" target="_blank">Supabase Dashboard</a></li>
+                <li>Navega a <strong>SQL Editor</strong></li>
+                <li>Crea una nueva query</li>
+                <li>Copia y pega TODOS los códigos SQL de arriba (uno por uno o todos juntos)</li>
+                <li>Haz clic en <strong>Run</strong></li>
+                <li>Verifica que no haya errores en la consola</li>
+            </ol>
+        </div>
+
+        <h2>¿Qué hacen estas políticas?</h2>
+
+        <div class="info">
+            <strong>Tabla <code>orders</code>:</strong>
+            <ul>
+                <li><strong>INSERT:</strong> Permite a usuarios autenticados crear pedidos con su user_id, Y permite pedidos retail con user_id NULL (invitados)</li>
+                <li><strong>SELECT:</strong> Los usuarios solo pueden ver sus propios pedidos</li>
+                <li><strong>UPDATE:</strong> Los usuarios pueden actualizar el estado de sus pedidos</li>
+            </ul>
+
+            <strong>Tabla <code>user_addresses</code>:</strong>
+            <ul>
+                <li><strong>INSERT:</strong> Solo usuarios autenticados pueden guardar direcciones (con su user_id)</li>
+                <li><strong>SELECT:</strong> Los usuarios solo pueden ver sus propias direcciones</li>
+                <li><strong>UPDATE/DELETE:</strong> Los usuarios pueden editar/eliminar sus propias direcciones</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Nota de Seguridad:</strong>
+            <p>Estas políticas permiten que los pedidos retail se creen sin autenticación (user_id = NULL) para el checkout como invitado. Esto es seguro porque:</p>
+            <ul>
+                <li>Los invitados NO pueden ver pedidos de otros usuarios</li>
+                <li>Los invitados NO pueden guardar direcciones</li>
+                <li>Solo usuarios autenticados pueden acceder al historial de pedidos</li>
+                <li>El admin tiene acceso completo para gestionar todos los pedidos</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        function copyCode(button, codeId) {
+            const code = document.getElementById(codeId).textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '¡Copiado!';
+                button.style.background = '#28a745';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#D4AF37';
+                }, 2000);
+            }).catch(err => {
+                alert('Error al copiar: ' + err);
+            });
+        }
+    </script>
+</body>
+</html>

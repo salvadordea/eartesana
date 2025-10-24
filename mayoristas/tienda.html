@@ -784,36 +784,174 @@
             padding: 20px;
         }
 
-        /* Category Header (Sticky) */
-        .category-header {
-            background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+        /* Category Navigation Sidebar */
+        .category-nav-sidebar {
+            position: fixed;
+            left: 0;
+            top: 120px;
+            width: 220px;
+            height: calc(100vh - 120px);
+            background: var(--dark-surface);
+            border-right: 2px solid rgba(192, 192, 192, 0.1);
+            overflow-y: auto;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-nav-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
             color: var(--silver-accent);
-            padding: 15px 20px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
-            position: sticky;
-            top: 80px;
-            z-index: 50;
-            border-left: 4px solid var(--silver-accent);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 12px;
-            border-radius: 8px 8px 0 0;
-            box-shadow: var(--shadow-dark);
             display: flex;
             align-items: center;
             gap: 12px;
+            border-bottom: 2px solid var(--silver-accent);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .category-nav-list {
+            padding: 10px 0;
+            flex: 1;
+        }
+
+        .category-nav-item {
+            display: block;
+            padding: 14px 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .category-nav-item:hover {
+            background: rgba(192, 192, 192, 0.05);
+            color: var(--silver-accent);
+            border-left-color: var(--silver-accent);
+            padding-left: 24px;
+        }
+
+        .category-nav-item.active {
+            background: rgba(192, 192, 192, 0.15);
+            color: var(--silver-accent);
+            border-left-color: var(--silver-accent);
+            border-left-width: 4px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .category-nav-item.active::before {
+            content: '';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--silver-accent);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--silver-accent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 8px var(--silver-accent);
+            }
+            50% {
+                opacity: 0.6;
+                box-shadow: 0 0 15px var(--silver-accent);
+            }
+        }
+
+        .category-nav-item i {
+            margin-right: 10px;
+            width: 16px;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        .category-nav-item.active i {
+            opacity: 1;
+        }
+
+        /* Adjust products grid to account for sidebar */
+        .products-grid {
+            margin-left: 220px;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .category-nav-sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .category-nav-sidebar.mobile-open {
+                transform: translateX(0);
+            }
+
+            .products-grid {
+                margin-left: 0;
+            }
+        }
+
+        /* Category Header (Sticky) */
+        .category-header {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            color: white;
+            padding: 20px 30px;
+            font-size: 22px;
+            font-weight: 700;
+            position: sticky;
+            top: 120px;
+            z-index: 50;
+            border-left: 6px solid var(--silver-accent);
+            border-bottom: 2px solid var(--silver-accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(192, 192, 192, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            scroll-margin-top: 140px;
+        }
+
+        .category-header:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--silver-accent);
+            transform: translateY(-2px);
         }
 
         .category-header-icon {
-            font-size: 20px;
+            font-size: 26px;
+            color: var(--silver-accent);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 
         .category-header-count {
             margin-left: auto;
-            font-size: 14px;
-            opacity: 0.8;
-            font-weight: 400;
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 600;
+            background: rgba(192, 192, 192, 0.15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            color: var(--silver-accent);
         }
 
         /* Products Category Grid */
@@ -1832,6 +1970,28 @@
             color: var(--silver-accent);
         }
 
+        .cart-sidebar-clear-btn {
+            background: transparent;
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .cart-sidebar-clear-btn:hover {
+            background: rgba(231, 76, 60, 0.1);
+            border-color: #e74c3c;
+            transform: translateY(-1px);
+        }
+
         .cart-empty {
             text-align: center;
             padding: 60px 20px;
@@ -2531,9 +2691,10 @@
 
             /* Grid View Mobile Styles */
             .category-header {
-                font-size: 16px;
-                padding: 12px 15px;
+                font-size: 18px;
+                padding: 16px 20px;
                 top: 60px;
+                margin-top: 20px;
             }
 
             .products-category-grid {
@@ -2615,8 +2776,10 @@
 
         @media (max-width: 480px) {
             .category-header {
-                font-size: 14px;
-                padding: 10px 12px;
+                font-size: 16px;
+                padding: 14px 16px;
+                margin-top: 16px;
+                letter-spacing: 1px;
             }
 
             .products-category-grid {
@@ -2736,6 +2899,17 @@
                             </button>
                         </div>
                     </div>
+                </div>
+
+                <!-- Category Navigation Sidebar -->
+                <div class="category-nav-sidebar" id="categoryNavSidebar">
+                    <div class="category-nav-header">
+                        <i class="fas fa-bars"></i>
+                        <span>Categorías</span>
+                    </div>
+                    <nav class="category-nav-list" id="categoryNavList">
+                        <!-- Category links will be inserted here -->
+                    </nav>
                 </div>
 
                 <!-- Products Grid (Card View) -->
@@ -3228,7 +3402,7 @@
             }
         }
 
-        // Decrease variant quantity and add to cart immediately
+        // Decrease variant quantity and update cart immediately
         function decreaseVariantQty(variantId) {
             const input = document.getElementById(`variant-qty-${variantId}`);
             if (!input) return;
@@ -3236,46 +3410,42 @@
             const currentValue = parseInt(input.value) || 0;
             const minValue = parseInt(input.min) || MIN_QUANTITY;
 
-            // Can't go below minimum
-            if (currentValue <= minValue) {
-                showError(`La cantidad mínima es ${MIN_QUANTITY}`);
-                return;
-            }
-
-            // Find the variant
-            const variant = allVariants.find(v => v.id === variantId);
-            if (!variant) {
-                showError('Variante no encontrada');
-                return;
-            }
-
             // Get cart and find existing item
             const cart = loadCart();
             const existingItem = cart.find(item => item.variantId === variantId);
 
-            if (existingItem && existingItem.quantity > 0) {
+            if (existingItem && existingItem.quantity > minValue) {
                 // Decrease in cart
                 existingItem.quantity -= 1;
 
-                // Remove if quantity is 0
-                if (existingItem.quantity === 0) {
-                    const index = cart.indexOf(existingItem);
-                    cart.splice(index, 1);
-                }
+                // Update input
+                input.value = existingItem.quantity;
 
                 // Update cart
                 saveCart(cart);
                 updateCompactCart();
 
-                // Update input
-                input.value = Math.max(existingItem.quantity || 0, minValue);
-
                 showSuccess(`Cantidad actualizada en el carrito`);
+            } else if (existingItem && existingItem.quantity === minValue) {
+                // If at minimum, remove from cart
+                const index = cart.indexOf(existingItem);
+                cart.splice(index, 1);
+
+                // Reset input to minimum
+                input.value = minValue;
+
+                // Update cart
+                saveCart(cart);
+                updateCompactCart();
+
+                showSuccess(`Producto eliminado del carrito`);
             } else {
-                // Si no está en el carrito, solo actualizar el input
+                // No está en el carrito, solo actualizar el input
                 const newValue = currentValue - 1;
                 if (newValue >= minValue) {
                     input.value = newValue;
+                } else {
+                    showError(`La cantidad mínima es ${minValue}`);
                 }
             }
         }
@@ -3300,6 +3470,12 @@
                 return;
             }
 
+            // Validate price
+            if (!variant.regularPrice || isNaN(variant.regularPrice)) {
+                showError('Error: Producto sin precio definido');
+                return;
+            }
+
             const wholesalePrice = calculateWholesalePrice(variant.regularPrice);
 
             // Get cart and find existing item
@@ -3310,26 +3486,38 @@
                 // Increase quantity in cart
                 existingItem.quantity += 1;
                 input.value = existingItem.quantity;
-                showSuccess(`Cantidad actualizada en el carrito`);
             } else {
-                // Si no está en carrito, solo incrementar el input
-                const newValue = currentValue + 1;
-                if (newValue <= maxStock) {
-                    input.value = newValue;
-                }
+                // Agregar al carrito si no existe
+                const newQty = currentValue + 1;
+                cart.push({
+                    variantId: variantId,
+                    productId: variant.productId,
+                    name: variant.fullName,
+                    price: wholesalePrice,
+                    quantity: newQty,
+                    stock: maxStock,
+                    image: variant.image
+                });
+                input.value = newQty;
             }
 
-            // Update cart if item exists
-            if (existingItem) {
-                saveCart(cart);
-                updateCompactCart();
-            }
+            // Always update cart
+            saveCart(cart);
+            updateCompactCart();
+            showSuccess(`Cantidad actualizada en el carrito`);
         }
 
         // Add variant to cart with quantity from input
         function addVariantToCart(variantId, variantName, price, stock) {
             const qtyInput = document.getElementById(`variant-qty-${variantId}`);
             const quantity = qtyInput ? parseInt(qtyInput.value) : MIN_QUANTITY;
+
+            // Validate price
+            if (!price || isNaN(price)) {
+                console.error('Invalid price for variant:', { variantId, variantName, price });
+                showError('Error: Producto sin precio definido');
+                return;
+            }
 
             if (quantity < MIN_QUANTITY) {
                 showError(`La cantidad mínima es ${MIN_QUANTITY}`);
@@ -3560,18 +3748,37 @@
                 totalStock.textContent = `${total} piezas disponibles`;
             }
 
-            // Clear the grid
+            // Clear the grid and navigation
             productsGrid.innerHTML = '';
+            const categoryNavList = document.getElementById('categoryNavList');
+            if (categoryNavList) {
+                categoryNavList.innerHTML = '';
+            }
 
             // Render each category
             Object.keys(categoryGroups).sort().forEach(categoryName => {
                 const categoryProducts = categoryGroups[categoryName];
+                const categoryId = `category-${categoryName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`;
 
                 // Create category header
                 const categoryHeader = document.createElement('div');
                 categoryHeader.className = 'category-header';
+                categoryHeader.id = categoryId;
                 categoryHeader.innerHTML = `<i class="fas fa-box"></i> ${categoryName} (${categoryProducts.length})`;
                 productsGrid.appendChild(categoryHeader);
+
+                // Add category to navigation sidebar
+                if (categoryNavList) {
+                    const navItem = document.createElement('a');
+                    navItem.className = 'category-nav-item';
+                    navItem.dataset.category = categoryId;
+                    navItem.innerHTML = `<i class="fas fa-box"></i>${categoryName}`;
+                    navItem.onclick = (e) => {
+                        e.preventDefault();
+                        scrollToCategory(categoryId);
+                    };
+                    categoryNavList.appendChild(navItem);
+                }
 
                 // Create grid container for this category
                 const categoryGrid = document.createElement('div');
@@ -4314,8 +4521,15 @@
             // Implement search functionality
         }
 
-        function saveCart() {
-            try { localStorage.setItem('wholesaleCart', JSON.stringify(wholesalerCart)); } catch (e) { console.warn('No se pudo guardar el carrito', e); }
+        function saveCart(cart) {
+            if (cart) {
+                wholesalerCart = cart;
+            }
+            try {
+                localStorage.setItem('wholesaleCart', JSON.stringify(wholesalerCart));
+            } catch (e) {
+                console.warn('No se pudo guardar el carrito', e);
+            }
         }
         function loadCart() {
             try {
@@ -4614,6 +4828,90 @@
             showSuccess('Producto eliminado del carrito');
         }
 
+        // Clear entire cart
+        function clearCart() {
+            if (!confirm('¿Estás seguro de que deseas vaciar todo el carrito?')) {
+                return;
+            }
+
+            wholesalerCart = [];
+            saveCart([]);
+            updateCompactCart();
+
+            showSuccess('Carrito vaciado');
+        }
+
+        // Clean corrupted cart items (items with invalid prices)
+        function cleanCorruptedCartItems() {
+            const cart = loadCart();
+            const validItems = cart.filter(item => {
+                return item.price && !isNaN(item.price) && item.price > 0;
+            });
+
+            if (validItems.length < cart.length) {
+                const removedCount = cart.length - validItems.length;
+                console.log(`Removed ${removedCount} corrupted cart items`);
+                saveCart(validItems);
+                updateCompactCart();
+                console.log(`Se eliminaron ${removedCount} productos con errores del carrito`);
+                return true;
+            }
+
+            return false;
+        }
+
+        // Simple notification functions
+        function showSuccess(message) {
+            console.log('✅', message);
+        }
+
+        function showError(message) {
+            console.error('❌', message);
+            alert(message);
+        }
+
+        // Scroll to category
+        function scrollToCategory(categoryId) {
+            const categoryElement = document.getElementById(categoryId);
+            if (categoryElement) {
+                const offset = 100; // Account for sticky header
+                const elementPosition = categoryElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Update active category in navigation
+        function updateActiveCategoryNav() {
+            const categoryHeaders = document.querySelectorAll('.category-header');
+            const navItems = document.querySelectorAll('.category-nav-item');
+
+            let activeCategory = null;
+            const scrollPosition = window.scrollY + 150; // Account for header offset
+
+            categoryHeaders.forEach(header => {
+                const headerTop = header.offsetTop;
+                const headerBottom = headerTop + header.offsetHeight;
+
+                if (scrollPosition >= headerTop && scrollPosition < headerBottom + 300) {
+                    activeCategory = header.id;
+                }
+            });
+
+            // Update navigation items
+            navItems.forEach(item => {
+                if (item.dataset.category === activeCategory) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
         // Decrease card quantity
         function decreaseCardQuantity(productId) {
             const input = document.getElementById(`card-qty-${productId}`);
@@ -4691,19 +4989,40 @@
 
             if (!selectedVariant) {
                 console.error('Variant not found:', variantId);
+                showError('Producto no encontrado');
                 return;
             }
 
-            // Add to cart
+            // Validate price
+            if (!selectedVariant.regularPrice || isNaN(selectedVariant.regularPrice)) {
+                console.error('Invalid price for variant:', selectedVariant);
+                showError('Error: Producto sin precio definido');
+                return;
+            }
+
+            // Calculate wholesale price
             const wholesalePrice = calculateWholesalePrice(selectedVariant.regularPrice);
-            addToCart({
-                id: variantId,
-                name: selectedVariant.fullName,
-                price: wholesalePrice,
-                quantity: quantity,
-                image: selectedVariant.image,
-                sku: selectedVariant.sku
-            });
+
+            // Add to cart
+            const cart = loadCart();
+            const existingItem = cart.find(item => item.variantId === variantId);
+
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    variantId: variantId,
+                    productId: selectedVariant.productId,
+                    name: selectedVariant.fullName,
+                    price: wholesalePrice,
+                    quantity: quantity,
+                    stock: selectedVariant.stock,
+                    image: selectedVariant.image
+                });
+            }
+
+            saveCart(cart);
+            updateCompactCart();
 
             // Visual feedback
             button.classList.add('added');
@@ -4714,16 +5033,25 @@
                 button.innerHTML = '<i class="fas fa-shopping-cart"></i><span>Agregar al Carrito</span>';
             }, 2000);
 
-            // Update compact cart
-            updateCompactCart();
+            showSuccess('Producto agregado al carrito');
         }
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             if (!checkWholesaleAuth()) return;
-            
+
             console.log('🏦 Tienda Mayoristas inicializada');
-            
+
+            // Clean corrupted cart items on page load
+            cleanCorruptedCartItems();
+
+            // Add scroll listener for category navigation
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(updateActiveCategoryNav, 100);
+            });
+
             // Initialize Supabase first
             if (initializeSupabase()) {
                 loadWholesaleProducts();
@@ -4848,6 +5176,10 @@
                 </button>
                 <button class="cart-sidebar-continue-btn" onclick="toggleCartSidebar()">
                     Continuar Comprando
+                </button>
+                <button class="cart-sidebar-clear-btn" onclick="clearCart()" title="Vaciar carrito completo">
+                    <i class="fas fa-trash-alt"></i>
+                    Vaciar Carrito
                 </button>
             </div>
         </div>

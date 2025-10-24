@@ -19,6 +19,9 @@
 ### Almacenamiento
 - **`setup-storage.html`** - Configuración de Supabase Storage para imágenes de productos
 
+### Seguridad y Políticas RLS
+- **`fix-checkout-rls-policies.html`** - ⚠️ **IMPORTANTE** - Políticas de seguridad para checkout público y autenticación
+
 ## Uso
 
 1. **Una sola vez:** Abre cada archivo HTML relevante en tu navegador
@@ -35,6 +38,23 @@
 5. `add-saved-addresses-table.html` - Sistema de direcciones
 6. `setup-payment-config.html` - Sistema de pagos y referencias
 7. `enable-realtime-orders.html` - Notificaciones en tiempo real
+8. `fix-checkout-rls-policies.html` - **CRÍTICO** - Políticas RLS para checkout público
+
+## ⚠️ Archivo Crítico
+
+### `fix-checkout-rls-policies.html`
+Este archivo es **ESENCIAL** si experimentas errores 401 al:
+- Crear una cuenta durante el checkout
+- Guardar direcciones de envío
+- Procesar pedidos como invitado
+
+**Síntomas de que necesitas ejecutar estas políticas:**
+- Error: "new row violates row-level security policy for table 'orders'"
+- Error: "Failed to load resource: the server responded with a status of 401"
+- Los pedidos no se guardan en la base de datos
+
+**Solución:**
+Abre `fix-checkout-rls-policies.html` y ejecuta TODAS las políticas SQL en Supabase SQL Editor.
 
 ## Seguridad
 

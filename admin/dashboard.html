@@ -59,6 +59,7 @@
             text-decoration: none;
             transition: background-color 0.3s ease;
             border-left: 3px solid transparent;
+            position: relative;
         }
 
         .nav-item:hover, .nav-item.active {
@@ -69,6 +70,21 @@
         .nav-item i {
             width: 20px;
             margin-right: 10px;
+        }
+
+        .notification-badge {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #e74c3c;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 3px 7px;
+            border-radius: 10px;
+            min-width: 20px;
+            text-align: center;
         }
 
         .main-content {
@@ -695,6 +711,8 @@
     </style>
     <!-- Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Supabase Configuration -->
+    <script src="../assets/js/config.js"></script>
     <!-- Site Settings Service -->
     <script src="../assets/js/site-settings-service.js"></script>
 </head>
@@ -714,6 +732,7 @@
             </a>
             <a href="pedidos.html" class="nav-item">
                 <i class="fas fa-shopping-cart"></i> Pedidos
+                <span class="notification-badge" id="pendingOrdersBadge" style="display: none;">0</span>
             </a>
             <a href="usuarios.html" class="nav-item">
                 <i class="fas fa-users"></i> Usuarios
@@ -903,7 +922,7 @@
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <h3 style="margin: 0; color: #28a745; font-size: 0.9rem;">VENTAS HOY</h3>
-                            <p style="font-size: 1.8rem; font-weight: bold; margin: 5px 0; color: #2c3e50;">$0.00</p>
+                            <p id="salesToday" style="font-size: 1.8rem; font-weight: bold; margin: 5px 0; color: #2c3e50;">$0.00</p>
                         </div>
                         <i class="fas fa-chart-line" style="font-size: 2rem; color: #28a745; opacity: 0.7;"></i>
                     </div>
@@ -913,7 +932,7 @@
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <h3 style="margin: 0; color: #17a2b8; font-size: 0.9rem;">PEDIDOS PENDIENTES</h3>
-                            <p style="font-size: 1.8rem; font-weight: bold; margin: 5px 0; color: #2c3e50;">0</p>
+                            <p id="pendingOrders" style="font-size: 1.8rem; font-weight: bold; margin: 5px 0; color: #2c3e50;">0</p>
                         </div>
                         <i class="fas fa-clock" style="font-size: 2rem; color: #17a2b8; opacity: 0.7;"></i>
                     </div>
@@ -923,7 +942,7 @@
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <h3 style="margin: 0; color: #ffc107; font-size: 0.9rem;">CARRITOS ABANDONADOS</h3>
-                            <p style="font-size: 1.8rem; font-weight: bold; margin: 5px 0; color: #2c3e50;">0</p>
+                            <p id="abandonedCarts" style="font-size: 1.8rem; font-weight: bold; margin: 5px 0; color: #2c3e50;">0</p>
                         </div>
                         <i class="fas fa-shopping-cart" style="font-size: 2rem; color: #ffc107; opacity: 0.7;"></i>
                     </div>
@@ -933,7 +952,7 @@
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <h3 style="margin: 0; color: #6f42c1; font-size: 0.9rem;">USUARIOS REGISTRADOS</h3>
-                            <p style="font-size: 1.8rem; font-weight: bold; margin: 5px 0; color: #2c3e50;">0</p>
+                            <p id="registeredUsers" style="font-size: 1.8rem; font-weight: bold; margin: 5px 0; color: #2c3e50;">0</p>
                         </div>
                         <i class="fas fa-users" style="font-size: 2rem; color: #6f42c1; opacity: 0.7;"></i>
                     </div>
@@ -1935,6 +1954,12 @@
             script.onload = function() {
                 if (initSupabase()) {
                     console.log('✅ Supabase inicializado para inventario');
+
+                    // Intentar inicializar el sistema de notificaciones si está disponible
+                    if (window.AdminNotifications && !window.AdminNotifications.isInitialized()) {
+                        console.log('🔔 Inicializando notificaciones después de cargar config...');
+                        window.AdminNotifications.init();
+                    }
                 } else {
                     console.error('❌ No se pudo inicializar Supabase');
                 }
@@ -2660,13 +2685,16 @@
         
         // Actualizar resumen de ventas en la interfaz
         function updateSalesSummary() {
-            const salesElements = document.querySelectorAll('.sales-summary p');
-            if (salesElements.length >= 4) {
-                salesElements[0].textContent = `$${salesData.today.toFixed(2)}`;
-                salesElements[1].textContent = salesData.pendingOrders;
-                salesElements[2].textContent = salesData.abandonedCarts;
-                salesElements[3].textContent = salesData.registeredUsers;
-            }
+            // Usar IDs específicos para cada elemento
+            const salesTodayEl = document.getElementById('salesToday');
+            const pendingOrdersEl = document.getElementById('pendingOrders');
+            const abandonedCartsEl = document.getElementById('abandonedCarts');
+            const registeredUsersEl = document.getElementById('registeredUsers');
+
+            if (salesTodayEl) salesTodayEl.textContent = `$${salesData.today.toFixed(2)}`;
+            if (pendingOrdersEl) pendingOrdersEl.textContent = salesData.pendingOrders;
+            if (abandonedCartsEl) abandonedCartsEl.textContent = salesData.abandonedCarts;
+            if (registeredUsersEl) registeredUsersEl.textContent = salesData.registeredUsers;
         }
         
         // Cargar datos de pedidos
@@ -2864,13 +2892,18 @@
         // Actualizar datos de ventas
         function refreshSalesData() {
             console.log('🔄 Actualizando datos del panel de ventas...');
-            
-            // Mostrar indicadores de carga
-            const salesCards = document.querySelectorAll('.sales-summary p');
-            salesCards.forEach(card => {
-                card.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            });
-            
+
+            // Mostrar indicadores de carga usando IDs específicos
+            const salesTodayEl = document.getElementById('salesToday');
+            const pendingOrdersEl = document.getElementById('pendingOrders');
+            const abandonedCartsEl = document.getElementById('abandonedCarts');
+            const registeredUsersEl = document.getElementById('registeredUsers');
+
+            if (salesTodayEl) salesTodayEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            if (pendingOrdersEl) pendingOrdersEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            if (abandonedCartsEl) abandonedCartsEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            if (registeredUsersEl) registeredUsersEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
             setTimeout(() => {
                 loadSalesData();
                 loadOrdersData();
@@ -3807,6 +3840,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             if (!checkAuth()) return;
 
+            // Config.js ya está cargado en el head, inicializar Supabase directamente
+            if (window.SUPABASE_CONFIG && !supabase) {
+                initSupabase();
+                console.log('✅ Supabase inicializado desde config.js en head');
+            }
+
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.addEventListener('click', function(e) {
                     const sectionId = this.dataset.section;
@@ -4153,5 +4192,8 @@
             if (sectionId === 'usuarios') setTimeout(initUsersPanel, 100);
         };
     </script>
+
+    <!-- Admin Notifications System -->
+    <script src="js/admin-notifications.js"></script>
 </body>
 </html>

@@ -992,42 +992,55 @@
                         position: fixed;
                         top: 20px;
                         right: 20px;
-                        background: #fff;
-                        border: 1px solid #ddd;
+                        background: #2c3e50;
+                        border: 1px solid rgba(192, 192, 192, 0.2);
                         border-radius: 8px;
-                        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                        box-shadow: 0 6px 16px rgba(0,0,0,0.4);
                         z-index: 10000;
                         min-width: 300px;
                         max-width: 500px;
                         animation: slideIn 0.3s ease;
+                        color: #fff;
                     }
                     .notification.success {
                         border-left: 4px solid #28a745;
+                        background: linear-gradient(135deg, #1e5128, #2a3e2a);
                     }
                     .notification.warning {
                         border-left: 4px solid #ffc107;
+                        background: linear-gradient(135deg, #664d03, #4a3900);
                     }
                     .notification.error {
                         border-left: 4px solid #dc3545;
+                        background: linear-gradient(135deg, #5a1f1f, #3d1414);
                     }
                     .notification-content {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
-                        padding: 15px;
+                        padding: 16px 20px;
                         font-size: 14px;
+                        color: #fff;
+                        font-weight: 500;
                     }
                     .notification-content button {
-                        background: none;
+                        background: rgba(255, 255, 255, 0.1);
                         border: none;
                         font-size: 16px;
                         cursor: pointer;
-                        color: #666;
-                        padding: 0;
-                        margin-left: 10px;
+                        color: #fff;
+                        padding: 4px 8px;
+                        margin-left: 12px;
+                        border-radius: 4px;
+                        opacity: 0.9;
+                        transition: all 0.2s;
+                    }
+                    .notification-content button:hover {
+                        opacity: 1;
+                        background: rgba(255, 255, 255, 0.2);
                     }
                     @keyframes slideIn {
-                        from { transform: translateX(100%); opacity: 0; }
+                        from { transform: translateX(400px); opacity: 0; }
                         to { transform: translateX(0); opacity: 1; }
                     }
                 `;
