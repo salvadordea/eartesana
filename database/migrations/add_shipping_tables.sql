@@ -11,10 +11,10 @@
 -- Stores information about each shipment created through Envia.com
 
 CREATE TABLE IF NOT EXISTS shipments (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id BIGSERIAL PRIMARY KEY,
 
     -- Order reference
-    order_id UUID REFERENCES orders(id) ON DELETE CASCADE,
+    order_id BIGINT REFERENCES orders(id) ON DELETE CASCADE,
 
     -- Envia.com specific data
     envia_shipment_id VARCHAR(100) UNIQUE,
@@ -78,7 +78,7 @@ COMMENT ON TABLE shipments IS 'Stores shipping information and tracking data for
 -- Caches shipping rate quotes to reduce API calls and improve performance
 
 CREATE TABLE IF NOT EXISTS shipping_rates_cache (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id BIGSERIAL PRIMARY KEY,
 
     -- Route information
     origin_zip VARCHAR(10) NOT NULL,

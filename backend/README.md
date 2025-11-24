@@ -1,319 +1,344 @@
-# 📧 Servicio de Notificaciones por Email - Estudio Artesana
+# 🚀 Backend Services - Estudio Artesana
 
-Este servicio backend maneja el envío automático de notificaciones por email cuando se procesa un pedido mayorista en la plataforma de Estudio Artesana.
-
-## 🚀 Características
-
-- ✅ Notificaciones automáticas de pedidos mayoristas
-- ✅ Plantillas HTML profesionales para emails
-- ✅ Rate limiting para prevenir spam
-- ✅ Soporte para múltiples servicios de email (Gmail, SendGrid, etc.)
-- ✅ Configuración fácil con variables de entorno
-- ✅ Modo de desarrollo con Ethereal Email
-- ✅ Validación de datos robusta
-- ✅ Manejo de errores completo
-
-## 📋 Requisitos Previos
-
-- Node.js >= 16.0.0
-- npm >= 8.0.0
-- Una cuenta de email para envío (Gmail recomendado)
-
-## ⚡ Instalación Rápida
-
-1. **Clonar y navegar al directorio:**
-   ```bash
-   cd backend
-   ```
-
-2. **Instalar dependencias:**
-   ```bash
-   npm install
-   ```
-
-3. **Configurar variables de entorno:**
-   ```bash
-   cp .env.example .env
-   ```
-
-4. **Editar `.env` con tus credenciales:**
-   ```env
-   EMAIL_USER=tu-email@gmail.com
-   EMAIL_PASS=tu-app-password
-   ADMIN_EMAIL=admin@estudioartesana.com
-   ```
-
-5. **Iniciar el servidor:**
-   ```bash
-   npm run dev
-   ```
-
-## 🔧 Configuración Detallada
-
-### Gmail (Recomendado para Producción)
-
-1. **Habilitar 2FA en tu cuenta Gmail**
-2. **Generar App Password:**
-   - Ve a [Configuración de Google](https://myaccount.google.com/security)
-   - Selecciona "Verificación en 2 pasos"
-   - En la parte inferior, selecciona "Contraseñas de aplicaciones"
-   - Genera una nueva contraseña para "Mail"
-
-3. **Configurar `.env`:**
-   ```env
-   NODE_ENV=production
-   EMAIL_SERVICE=gmail
-   EMAIL_USER=tu-email@gmail.com
-   EMAIL_PASS=tu-app-password-de-16-caracteres
-   EMAIL_FROM=sistema@estudioartesana.com
-   ADMIN_EMAIL=admin@estudioartesana.com
-   ```
-
-### Ethereal Email (Para Desarrollo)
-
-Para testing sin enviar emails reales:
-
-```env
-NODE_ENV=development
-EMAIL_HOST=smtp.ethereal.email
-EMAIL_PORT=587
-EMAIL_USER=ethereal.user@ethereal.email
-EMAIL_PASS=ethereal.pass
-```
-
-## 📡 API Endpoints
-
-### POST `/api/sendOrderEmail`
-
-Envía una notificación de pedido mayorista.
-
-**Headers:**
-```
-Content-Type: application/json
-```
-
-**Body Example:**
-```json
-{
-  "to": "admin@estudioartesana.com",
-  "subject": "Nuevo Pedido Mayorista #WS-2024-1234",
-  "orderNumber": "WS-2024-1234",
-  "customer": {
-    "name": "Juan Pérez",
-    "email": "juan@empresa.com",
-    "phone": "+52 555 123 4567",
-    "company": "Empresa Ejemplo SA"
-  },
-  "items": [
-    {
-      "name": "Producto Ejemplo",
-      "quantity": 10,
-      "regularPrice": 100.00,
-      "wholesalePrice": 80.00
-    }
-  ],
-  "totals": {
-    "subtotal": 1000.00,
-    "discount": 200.00,
-    "tax": 128.00,
-    "total": 928.00
-  },
-  "shipping": {
-    "address": "Calle Principal 123",
-    "city": "Ciudad de México",
-    "state": "CDMX",
-    "postalCode": "12345",
-    "country": "México"
-  },
-  "billing": {
-    "rfc": "XAXX010101000",
-    "businessName": "Empresa Ejemplo SA"
-  },
-  "paymentMethod": "credit_30",
-  "orderDate": "2024-01-15T10:30:00Z"
-}
-```
-
-**Response Success (200):**
-```json
-{
-  "success": true,
-  "messageId": "email-message-id",
-  "message": "Notificación de pedido enviada exitosamente"
-}
-```
-
-**Response Error (400/500):**
-```json
-{
-  "success": false,
-  "error": "Descripción del error"
-}
-```
-
-### GET `/api/health`
-
-Verificación de salud del servicio.
-
-**Response (200):**
-```json
-{
-  "status": "ok",
-  "timestamp": "2024-01-15T10:30:00Z",
-  "service": "Email Service - Estudio Artesana"
-}
-```
-
-## 🛡️ Seguridad
-
-- **Rate Limiting:** Máximo 10 emails por IP cada 15 minutos
-- **CORS:** Configurado para permitir solo dominios autorizados
-- **Helmet:** Headers de seguridad aplicados
-- **Validación:** Datos de entrada validados estrictamente
-
-## 📊 Monitoreo y Logs
-
-El servicio registra:
-
-- ✅ Emails enviados exitosamente
-- ❌ Errores de envío
-- 🔒 Intentos de acceso no autorizados
-- 📈 Métricas de uso
-
-Ejemplo de logs:
-```
-📧 Recibida solicitud de envío de email: {...}
-✅ Email enviado exitosamente: message-id-123
-❌ Error enviando email: Connection timeout
-```
-
-## 🧪 Testing
-
-### Testing Manual
-
-1. **Iniciar servidor en modo desarrollo:**
-   ```bash
-   npm run dev
-   ```
-
-2. **Enviar request de prueba:**
-   ```bash
-   curl -X POST http://localhost:3000/api/sendOrderEmail \
-     -H "Content-Type: application/json" \
-     -d @test-order.json
-   ```
-
-### Testing Automatizado
-
-```bash
-npm test
-```
-
-## 🚀 Despliegue
-
-### Opción 1: Servidor VPS/Dedicado
-
-```bash
-# Clonar repositorio
-git clone https://github.com/estudio-artesana/email-service.git
-cd email-service
-
-# Instalar dependencias de producción
-npm install --only=production
-
-# Configurar variables de entorno
-cp .env.example .env
-nano .env
-
-# Iniciar con PM2
-npm install -g pm2
-pm2 start email-service.js --name "email-service"
-pm2 save
-pm2 startup
-```
-
-### Opción 2: Docker
-
-```dockerfile
-FROM node:18-alpine
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm install --only=production
-
-COPY . .
-
-EXPOSE 3000
-
-USER node
-
-CMD ["npm", "start"]
-```
-
-### Opción 3: Heroku
-
-1. **Crear aplicación en Heroku**
-2. **Configurar variables de entorno en dashboard**
-3. **Desplegar:**
-   ```bash
-   git add .
-   git commit -m "Deploy email service"
-   git push heroku main
-   ```
-
-## 🔧 Troubleshooting
-
-### Error: "Invalid login"
-- Verificar que la autenticación 2FA esté habilitada
-- Usar App Password, no la contraseña regular
-- Verificar que EMAIL_USER y EMAIL_PASS sean correctos
-
-### Error: "Connection timeout"
-- Verificar configuración de firewall
-- Probar diferentes puertos (587, 465, 25)
-- Verificar que el servicio de email permita conexiones externas
-
-### Error: "Rate limit exceeded"
-- El límite es de 10 emails por 15 minutos por IP
-- Esperar o ajustar la configuración en `emailLimiter`
-
-### Error: "CORS policy"
-- Verificar que FRONTEND_URL en .env coincida con tu dominio
-- Agregar dominios adicionales si es necesario
-
-## 📝 Variables de Entorno
-
-| Variable | Descripción | Ejemplo | Requerida |
-|----------|-------------|---------|-----------|
-| `NODE_ENV` | Entorno de ejecución | `production` | No |
-| `PORT` | Puerto del servidor | `3000` | No |
-| `EMAIL_SERVICE` | Servicio de email | `gmail` | No |
-| `EMAIL_USER` | Usuario del email | `tu-email@gmail.com` | Sí |
-| `EMAIL_PASS` | Contraseña/App Password | `abcd efgh ijkl mnop` | Sí |
-| `EMAIL_FROM` | Email remitente | `sistema@estudioartesana.com` | No |
-| `ADMIN_EMAIL` | Email destinatario | `admin@estudioartesana.com` | No |
-| `FRONTEND_URL` | URL del frontend | `https://estudioartesana.com` | No |
-
-## 🤝 Contribución
-
-1. Fork el proyecto
-2. Crear branch para feature (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit cambios (`git commit -am 'Agregar nueva funcionalidad'`)
-4. Push al branch (`git push origin feature/nueva-funcionalidad`)
-5. Crear Pull Request
-
-## 📄 Licencia
-
-Este proyecto está bajo la licencia MIT. Ver `LICENSE` para más detalles.
-
-## 📞 Soporte
-
-Para soporte técnico:
-- 📧 Email: soporte@estudioartesana.com
-- 📞 Teléfono: +52 555 123 4567
-- 🐛 Issues: [GitHub Issues](https://github.com/estudio-artesana/email-service/issues)
+Servicios backend para Estudio Artesana: notificaciones por email y gestión de envíos con Envia.com.
 
 ---
 
-**Desarrollado con ❤️ por Estudio Artesana**
+## 📦 Servicios Incluidos
+
+### 1. **Email Service** (Puerto 3000)
+- Envío de notificaciones por email para pedidos mayoristas
+- Integración con Nodemailer
+- Rate limiting para prevenir spam
+
+### 2. **Shipping Service** (Puerto 3001)
+- Integración completa con Envia.com API
+- Cotización de envíos en tiempo real
+- Generación de guías de envío
+- Seguimiento de paquetes
+- Webhooks para actualizaciones automáticas
+
+---
+
+## 🚀 Inicio Rápido
+
+### Opción 1: Usar el archivo .bat (Windows - Recomendado)
+
+```bash
+cd backend
+start-backend.bat
+```
+
+Este script automáticamente:
+- ✅ Verifica que Node.js esté instalado
+- ✅ Instala dependencias si es necesario
+- ✅ Crea archivo `.env` desde `.env.example`
+- ✅ Inicia ambos servicios simultáneamente
+
+### Opción 2: Usar NPM
+
+```bash
+cd backend
+
+# Instalar dependencias
+npm install
+
+# Iniciar ambos servicios
+npm start
+
+# O en modo desarrollo (con auto-reload)
+npm run dev
+```
+
+### Opción 3: Iniciar servicios individualmente
+
+```bash
+# Solo Email Service
+npm run start:email
+
+# Solo Shipping Service
+npm run start:shipping
+
+# Modo desarrollo individual
+npm run dev:email
+npm run dev:shipping
+```
+
+---
+
+## ⚙️ Configuración
+
+### 1. Copiar archivo de ejemplo
+
+```bash
+cp .env.example .env
+```
+
+### 2. Configurar variables de entorno
+
+Edita el archivo `.env` con tus credenciales:
+
+#### **Servidor**
+```env
+NODE_ENV=development
+PORT=3000
+FRONTEND_URL=http://localhost:8080
+```
+
+#### **Email (Nodemailer)**
+```env
+EMAIL_SERVICE=gmail
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=tu-email@gmail.com
+EMAIL_PASS=tu-app-password
+EMAIL_FROM=sistema@estudioartesana.com
+ADMIN_EMAIL=admin@estudioartesana.com
+```
+
+#### **Supabase**
+```env
+SUPABASE_URL=https://tu-proyecto.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=tu-service-role-key-aqui
+```
+
+#### **Envia.com**
+```env
+ENVIA_API_KEY=tu-envia-api-key-aqui
+ENVIA_BASE_URL=https://queries.envia.com/api/1.0
+ORIGIN_ZIP_CODE=01000
+ORIGIN_COUNTRY=MX
+```
+
+### 3. Obtener API Key de Envia.com
+
+1. Regístrate en https://ship.envia.com
+2. Ve a **Configuración** → **API**
+3. Copia tu API Key
+4. Pégala en `.env` como `ENVIA_API_KEY`
+
+---
+
+## 🌐 Endpoints Disponibles
+
+### **Email Service** (http://localhost:3000)
+
+#### `POST /api/email/send-wholesale-notification`
+Envía notificación de pedido mayorista al admin.
+
+**Request Body:**
+```json
+{
+  "orderNumber": "WHS-2024-001",
+  "customerName": "Juan Pérez",
+  "customerEmail": "juan@example.com",
+  "items": [
+    {
+      "name": "Botella Decorada",
+      "quantity": 50,
+      "price": 120
+    }
+  ],
+  "total": 6000,
+  "notes": "Pedido urgente"
+}
+```
+
+---
+
+### **Shipping Service** (http://localhost:3001)
+
+#### `POST /api/shipping/quote`
+Obtiene cotizaciones de envío.
+
+**Request Body:**
+```json
+{
+  "originZipCode": "01000",
+  "destinationZipCode": "64000",
+  "weight": 500,
+  "dimensions": {
+    "length": 30,
+    "width": 20,
+    "height": 15
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "rates": [
+    {
+      "carrier": "Estafeta",
+      "service": "Express",
+      "cost": 120.50,
+      "deliveryDays": 2,
+      "serviceDisplayName": "Estafeta Express"
+    }
+  ]
+}
+```
+
+#### `POST /api/shipping/create`
+Genera guía de envío.
+
+**Request Body:**
+```json
+{
+  "orderId": 123,
+  "carrier": "estafeta",
+  "service": "express",
+  "destination": {
+    "name": "Juan Pérez",
+    "email": "juan@example.com",
+    "phone": "5512345678",
+    "street": "Av. Reforma 123",
+    "city": "CDMX",
+    "state": "Ciudad de México",
+    "zipCode": "01000",
+    "country": "MX"
+  },
+  "package": {
+    "weight": 500,
+    "length": 30,
+    "width": 20,
+    "height": 15
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "shipmentId": 456,
+  "trackingNumber": "EST-123456789",
+  "labelUrl": "https://envia.com/labels/EST-123456789.pdf",
+  "trackingUrl": "https://envia.com/track/EST-123456789",
+  "cost": 120.50
+}
+```
+
+#### `GET /api/shipping/track/:trackingNumber`
+Obtiene información de seguimiento.
+
+**Response:**
+```json
+{
+  "success": true,
+  "trackingNumber": "EST-123456789",
+  "status": "in_transit",
+  "trackingEvents": [
+    {
+      "timestamp": "2025-01-23T10:00:00Z",
+      "status": "En tránsito",
+      "location": "CDMX, México",
+      "description": "Paquete en ruta"
+    }
+  ]
+}
+```
+
+#### `POST /api/shipping/webhook`
+Recibe actualizaciones de Envia.com (configurado en su panel).
+
+#### `GET /api/shipping/carriers`
+Lista de paqueterías disponibles.
+
+---
+
+## 🧪 Testing
+
+```bash
+# Ejecutar tests
+npm test
+
+# Test del Email Service
+curl -X POST http://localhost:3000/api/email/send-wholesale-notification \
+  -H "Content-Type: application/json" \
+  -d '{"orderNumber":"TEST-001","customerName":"Test","total":100}'
+
+# Test del Shipping Service - Quote
+curl -X POST http://localhost:3001/api/shipping/quote \
+  -H "Content-Type: application/json" \
+  -d '{"originZipCode":"01000","destinationZipCode":"64000","weight":500}'
+
+# Test del Shipping Service - Tracking
+curl http://localhost:3001/api/shipping/track/EST-123456789
+```
+
+---
+
+## 📁 Estructura de Archivos
+
+```
+backend/
+├── email-service.js          # Servicio de email
+├── shipping-service.js       # Servicio de envíos
+├── package.json              # Dependencias y scripts
+├── .env.example              # Plantilla de variables de entorno
+├── .env                      # Configuración local (no commitear)
+├── start-backend.bat         # Script para iniciar servicios (Windows)
+└── README.md                 # Esta documentación
+```
+
+---
+
+## 🔧 Troubleshooting
+
+### Error: "EADDRINUSE" (Puerto en uso)
+
+**Solución:** Otro proceso está usando el puerto. Cambia el puerto en `.env`:
+```env
+PORT=3002  # Para email service
+```
+
+Para shipping service, edita `shipping-service.js` línea del puerto.
+
+### Error: "Cannot find module"
+
+**Solución:** Instala dependencias:
+```bash
+npm install
+```
+
+### Error: "EAUTH" (Email authentication failed)
+
+**Solución:**
+1. Verifica que `EMAIL_USER` y `EMAIL_PASS` sean correctos
+2. Para Gmail, usa una **App Password** (no tu contraseña normal)
+3. Habilita "Acceso de apps menos seguras" si es necesario
+
+### Error: "ENVIA API KEY invalid"
+
+**Solución:**
+1. Verifica tu API key en https://ship.envia.com/settings/api
+2. Asegúrate de que esté en modo **sandbox** si estás probando
+3. Actualiza `ENVIA_API_KEY` en `.env`
+
+---
+
+## 📚 Recursos
+
+- [Envia.com API Docs](https://docs.envia.com)
+- [Nodemailer Documentation](https://nodemailer.com)
+- [Express.js Guide](https://expressjs.com)
+- [Supabase Documentation](https://supabase.com/docs)
+
+---
+
+## 📞 Soporte
+
+Si tienes problemas, verifica:
+1. ✅ Node.js instalado (v16+)
+2. ✅ Archivo `.env` configurado correctamente
+3. ✅ Dependencias instaladas (`npm install`)
+4. ✅ Puertos 3000 y 3001 libres
+5. ✅ Conexión a internet (para APIs de Envia.com)
+
+---
+
+**Autor:** Estudio Artesana Development Team
+**Última actualización:** Enero 2025

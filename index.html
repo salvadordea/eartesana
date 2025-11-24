@@ -234,14 +234,25 @@
     </style>
 </head>
 <body>
-    <!-- Monthly Promotion Banner -->
-    <div class="monthly-promo-banner" id="monthlyPromoBanner" style="display: none;">
-        <div class="promo-content">
-            <span class="promo-discount" id="promoDiscount">25% OFF</span>
-            <span class="promo-code" id="promoCode" onclick="copyPromoCode()" title="Click para copiar">CODIGO</span>
-            <span class="promo-disclaimer" id="promoDisclaimer">*en tu primera compra</span>
+    <!-- Promo Toast Minimalista -->
+    <div id="promoToast" class="promo-toast minimized">
+        <!-- Contenido expandido del toast -->
+        <div class="toast-content">
+            <span class="toast-discount" id="promoDiscount">25% OFF</span>
+            <span class="toast-divider">|</span>
+            <span class="toast-code" id="promoCode" data-code="PRIMERA20" title="Click para copiar">PRIMERA20</span>
+            <button class="toast-copy-btn" onclick="copyPromoToast()">
+                <i class="fas fa-copy"></i> Copiar
+            </button>
+            <button class="toast-close-btn" onclick="closePromoToast()">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-        <button class="promo-close" onclick="closePromoBanner()">&times;</button>
+
+        <!-- Badge minimizado -->
+        <div class="toast-badge">
+            <i class="fas fa-gem"></i>
+        </div>
     </div>
 
     <!-- Header -->
@@ -577,6 +588,7 @@
     <!-- Promotional System -->
     <script src="assets/js/promo-manager.js"></script>
     <script src="assets/js/ribbon-banner.js"></script>
+    <script src="assets/js/promo-toast.js"></script>
     
     <!-- Dynamic Carousel System -->
     <script src="assets/js/dynamic-carousel.js"></script>

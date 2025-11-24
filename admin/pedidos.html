@@ -888,8 +888,12 @@
 
     <!-- Supabase Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Backend Configuration -->
+    <script src="../assets/js/backend-config.js"></script>
     <!-- Config File -->
     <script src="../assets/js/config.js"></script>
+    <!-- Mobile Fixes -->
+    <script src="js/mobile-fixes.js"></script>
 
     <script>
         // Initialize Supabase using config from config.js
@@ -1051,6 +1055,14 @@
                                     ${order.status !== 'completed' ? '<option value="completed">Completado</option>' : ''}
                                     ${order.status !== 'cancelled' ? '<option value="cancelled">Cancelado</option>' : ''}
                                 </select>
+                                ${order.carrier && order.tracking_number ?
+                                    `<button class="action-btn" onclick="viewTracking('${order.tracking_number}')" title="Ver seguimiento" style="background: #17a2b8; color: white;">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </button>` :
+                                    `<button class="action-btn" onclick="generateShippingLabel(${order.id})" title="Generar guía de envío" style="background: #fd7e14; color: white;">
+                                        <i class="fas fa-shipping-fast"></i>
+                                    </button>`
+                                }
                                 <button class="action-btn" onclick="printRemision(${order.id})" title="Imprimir remisión" style="background: #28a745; color: white;">
                                     <i class="fas fa-print"></i>
                                 </button>
@@ -1710,6 +1722,93 @@
 
                 console.log('✅ Order updated in UI');
             }
+        }
+
+        // ============================================
+        // SHIPPING LABEL FUNCTIONS
+        // ============================================
+
+        async function generateShippingLabel(orderId) {
+            try {
+                // Get order details
+                const { data: order, error: orderError } = await supabase
+                    .from('orders')
+                    .select('*')
+                    .eq('id', orderId)
+                    .single();
+
+                if (orderError) throw orderError;
+
+                if (!order.shipping_postal_code) {
+                    showToast('Error', 'Este pedido no tiene dirección de envío', 'error');
+                    return;
+                }
+
+                // Confirm before generating
+                if (!confirm(`¿Generar guía de envío para el pedido ${order.order_number}?`)) {
+                    return;
+                }
+
+                showToast('Generando Guía', 'Generando guía de envío con Envia.com...', 'info', 3000);
+
+                // Call backend to create shipping label
+                const backendUrl = window.BACKEND_CONFIG?.shippingServiceUrl || 'http://localhost:3001';
+                const response = await fetch(`${backendUrl}/api/shipping/create`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        orderId: order.id,
+                        carrier: order.carrier || 'estafeta',
+                        service: order.carrier_service || 'express',
+                        destination: {
+                            name: order.customer_name,
+                            company: '',
+                            email: order.customer_email,
+                            phone: order.customer_phone || '',
+                            street: order.shipping_address,
+                            city: order.shipping_city,
+                            state: order.shipping_state,
+                            zipCode: order.shipping_postal_code,
+                            country: order.shipping_country || 'MX'
+                        },
+                        package: {
+                            weight: 500, // Default weight, should be calculated from items
+                            length: 30,
+                            width: 20,
+                            height: 15
+                        },
+                        reference: order.order_number
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok || !data.success) {
+                    throw new Error(data.error || 'Error al generar la guía');
+                }
+
+                // Success! Show label URL
+                showToast('Guía Generada', 'La guía de envío se generó correctamente', 'success', 5000);
+
+                // Open label PDF in new tab
+                if (data.labelUrl) {
+                    window.open(data.labelUrl, '_blank');
+                }
+
+                // Reload orders to show updated tracking info
+                await loadOrders();
+
+            } catch (error) {
+                console.error('Error generating shipping label:', error);
+                showToast('Error', error.message || 'No se pudo generar la guía de envío', 'error');
+            }
+        }
+
+        function viewTracking(trackingNumber) {
+            // Open tracking page in new tab
+            window.open(`tracking.html?tracking=${trackingNumber}`, '_blank');
         }
 
         // ============================================

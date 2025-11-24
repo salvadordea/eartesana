@@ -16,7 +16,10 @@
       "Bash(fi)",
       "Bash(done)",
       "Bash(for file in categorias.html sobre-nosotros.html)",
-      "Bash(for:*)"
+      "Bash(for:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)"
     ],
     "deny": [],
     "ask": []

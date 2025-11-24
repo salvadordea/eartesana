@@ -1,0 +1,278 @@
+/* =====================================================
+   SHIPPING CALCULATOR STYLES
+   ===================================================== */
+
+/* Contenedor principal de opciones de envío */
+.shipping-options-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Opciones de envío individuales */
+.shipping-option {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+.shipping-option:hover {
+    border-color: #007bff;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+}
+
+/* Label clickeable */
+.shipping-option-label {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    cursor: pointer;
+    margin: 0;
+    width: 100%;
+}
+
+/* Radio button */
+.shipping-option input[type="radio"] {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Contenido de la opción */
+.shipping-option-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Header con carrier y badge */
+.shipping-option-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.shipping-carrier {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Detalles del servicio */
+.shipping-option-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.shipping-service {
+    font-size: 14px;
+    color: #666;
+}
+
+.shipping-delivery {
+    font-size: 13px;
+    color: #999;
+}
+
+.shipping-delivery i {
+    margin-right: 4px;
+}
+
+/* Precio */
+.shipping-option-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    margin-left: 15px;
+}
+
+.shipping-cost {
+    font-size: 20px;
+    font-weight: 700;
+    color: #28a745;
+}
+
+.shipping-currency {
+    font-size: 12px;
+    color: #999;
+    margin-top: -2px;
+}
+
+/* Estado seleccionado */
+.shipping-option:has(input:checked) {
+    border-color: #28a745;
+    background-color: #f8fff9;
+    box-shadow: 0 2px 12px rgba(40, 167, 69, 0.15);
+}
+
+.shipping-option:has(input:checked) .shipping-carrier {
+    color: #28a745;
+}
+
+/* Badge de recomendado */
+.badge-success {
+    background-color: #28a745;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Estado de carga */
+.shipping-loading {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.shipping-loading p {
+    color: #666;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/* Sin opciones disponibles */
+.shipping-no-options {
+    text-align: center;
+    padding: 30px 20px;
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+}
+
+.shipping-no-options p:first-child {
+    font-weight: 600;
+    color: #856404;
+    margin-bottom: 8px;
+}
+
+.shipping-no-options .text-muted {
+    font-size: 14px;
+    color: #856404 !important;
+    opacity: 0.8;
+}
+
+/* Sección de cálculo de envío */
+.shipping-calculator-section {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.shipping-calculator-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Input de código postal */
+.shipping-zip-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.shipping-zip-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.shipping-zip-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.shipping-calculate-btn {
+    padding: 10px 25px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    white-space: nowrap;
+}
+
+.shipping-calculate-btn:hover {
+    background: #0056b3;
+}
+
+.shipping-calculate-btn:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
+/* Spinner de Bootstrap */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.3rem;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .shipping-option-label {
+        flex-wrap: wrap;
+        padding: 12px;
+    }
+
+    .shipping-option-price {
+        margin-left: 35px;
+        width: 100%;
+        align-items: flex-start;
+        margin-top: 10px;
+    }
+
+    .shipping-cost {
+        font-size: 18px;
+    }
+
+    .shipping-zip-input-group {
+        flex-direction: column;
+    }
+
+    .shipping-calculate-btn {
+        width: 100%;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.shipping-option {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Alert personalizado */
+.alert {
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.alert i {
+    font-size: 16px;
+}

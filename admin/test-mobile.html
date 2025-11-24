@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Mobile Fixes - Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .status-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+
+        .test-section {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .test-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .test-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .test-section p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .test-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            touch-action: manipulation;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-info {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #000;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        select {
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            min-width: 200px;
+            touch-action: manipulation;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            width: 100%;
+            max-width: 300px;
+            touch-action: manipulation;
+        }
+
+        .result {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 12px;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .device-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .device-info strong {
+            color: #333;
+        }
+
+        .device-info div {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .icon-good {
+            color: #4caf50;
+        }
+
+        .icon-test {
+            color: #17a2b8;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin-left: 0 !important;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <script src="js/mobile-fixes.js"></script>
+</head>
+<body>
+    <!-- Sidebar de Prueba -->
+    <div class="sidebar">
+        <h3>Menu de Prueba</h3>
+        <a href="#" class="nav-item"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="#" class="nav-item"><i class="fas fa-boxes"></i> Inventario</a>
+        <a href="#" class="nav-item"><i class="fas fa-shopping-cart"></i> Pedidos</a>
+        <a href="#" class="nav-item"><i class="fas fa-users"></i> Usuarios</a>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Test Mobile Fixes</h1>
+            <p>Página de prueba para verificar que todas las mejoras móviles funcionan correctamente</p>
+        </div>
+
+        <div class="device-info">
+            <strong>Información del Dispositivo:</strong>
+            <div id="deviceInfo">Cargando...</div>
+        </div>
+
+        <div class="status-card">
+            <div class="test-section">
+                <h3>
+                    <i class="fas fa-bars icon-test"></i>
+                    1. Menú Hamburguesa
+                </h3>
+                <p>En dispositivos móviles (ancho < 768px), deberías ver un botón de menú hamburguesa en la esquina superior izquierda.</p>
+                <p><strong>Instrucciones:</strong></p>
+                <ul style="margin-left: 20px; color: #666; line-height: 1.8;">
+                    <li>Si estás en móvil, toca el botón ☰ arriba a la izquierda</li>
+                    <li>El menú lateral debería aparecer</li>
+                    <li>Puedes cerrarlo tocando fuera, deslizando o presionando ESC</li>
+                </ul>
+            </div>
+
+            <div class="test-section">
+                <h3>
+                    <i class="fas fa-hand-pointer icon-test"></i>
+                    2. Touch Events en Botones
+                </h3>
+                <p>Estos botones deberían responder instantáneamente al toque, sin delay de 300ms.</p>
+                <div class="test-buttons">
+                    <button class="btn btn-primary" onclick="showResult('btn1')">
+                        <i class="fas fa-check"></i> Test Primario
+                    </button>
+                    <button class="btn btn-success" onclick="showResult('btn2')">
+                        <i class="fas fa-star"></i> Test Éxito
+                    </button>
+                    <button class="btn btn-info" onclick="showResult('btn3')">
+                        <i class="fas fa-info-circle"></i> Test Info
+                    </button>
+                    <button class="btn btn-warning" onclick="showResult('btn4')">
+                        <i class="fas fa-exclamation-triangle"></i> Test Advertencia
+                    </button>
+                    <button class="btn btn-danger" onclick="showResult('btn5')">
+                        <i class="fas fa-times"></i> Test Peligro
+                    </button>
+                </div>
+                <div id="btnResult" class="result">
+                    <i class="fas fa-check-circle icon-good"></i>
+                    <strong>¡Perfecto! El botón funcionó correctamente.</strong>
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h3>
+                    <i class="fas fa-list icon-test"></i>
+                    3. Dropdowns / Selects
+                </h3>
+                <p>Los selectores deberían funcionar sin problemas y no causar zoom en iOS.</p>
+                <select onchange="showResult('select')">
+                    <option value="">Selecciona un estado...</option>
+                    <option value="pending">Pendiente</option>
+                    <option value="processing">En Proceso</option>
+                    <option value="completed">Completado</option>
+                    <option value="cancelled">Cancelado</option>
+                </select>
+                <div id="selectResult" class="result">
+                    <i class="fas fa-check-circle icon-good"></i>
+                    <strong>¡El dropdown funciona! Cambio detectado correctamente.</strong>
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h3>
+                    <i class="fas fa-keyboard icon-test"></i>
+                    4. Inputs (Sin Zoom en iOS)
+                </h3>
+                <p>Al hacer focus en estos inputs, no debería haber zoom automático en iOS.</p>
+                <input type="text" placeholder="Escribe tu nombre..." onfocus="showResult('input1')">
+                <br><br>
+                <input type="email" placeholder="Escribe tu email..." onfocus="showResult('input2')">
+                <div id="inputResult" class="result">
+                    <i class="fas fa-check-circle icon-good"></i>
+                    <strong>¡Input en focus! No debería haber zoom automático.</strong>
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h3>
+                    <i class="fas fa-table icon-test"></i>
+                    5. Tabla Scrolleable
+                </h3>
+                <p>Esta tabla debería ser scrolleable horizontalmente en móvil.</p>
+                <table style="width: 100%; border-collapse: collapse; background: white; margin-top: 10px;">
+                    <thead>
+                        <tr style="background: #f8f9fa;">
+                            <th style="padding: 12px; border: 1px solid #dee2e6;">Columna 1</th>
+                            <th style="padding: 12px; border: 1px solid #dee2e6;">Columna 2</th>
+                            <th style="padding: 12px; border: 1px solid #dee2e6;">Columna 3</th>
+                            <th style="padding: 12px; border: 1px solid #dee2e6;">Columna 4</th>
+                            <th style="padding: 12px; border: 1px solid #dee2e6;">Columna 5</th>
+                            <th style="padding: 12px; border: 1px solid #dee2e6;">Columna 6</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #dee2e6;">Dato 1</td>
+                            <td style="padding: 12px; border: 1px solid #dee2e6;">Dato 2</td>
+                            <td style="padding: 12px; border: 1px solid #dee2e6;">Dato 3</td>
+                            <td style="padding: 12px; border: 1px solid #dee2e6;">Dato 4</td>
+                            <td style="padding: 12px; border: 1px solid #dee2e6;">Dato 5</td>
+                            <td style="padding: 12px; border: 1px solid #dee2e6;">Dato 6</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="test-section">
+                <h3>
+                    <i class="fas fa-check-circle icon-good"></i>
+                    Resultado del Test
+                </h3>
+                <p><strong>Verifica lo siguiente:</strong></p>
+                <ul style="margin-left: 20px; color: #666; line-height: 1.8;">
+                    <li>✅ Los botones responden al instante (sin delay)</li>
+                    <li>✅ Los botones tienen feedback visual al tocar</li>
+                    <li>✅ Los dropdowns funcionan correctamente</li>
+                    <li>✅ Los inputs no causan zoom en iOS</li>
+                    <li>✅ Las tablas son scrolleables horizontalmente</li>
+                    <li>✅ El menú hamburguesa aparece en móvil</li>
+                    <li>✅ La consola muestra "Mobile fixes initialized successfully"</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="status-card" style="text-align: center;">
+            <h3 style="margin-bottom: 15px;">Siguiente Paso</h3>
+            <p style="margin-bottom: 20px;">Si todas las pruebas funcionan aquí, ve a probar las páginas reales del admin:</p>
+            <div class="test-buttons" style="justify-content: center;">
+                <a href="pedidos.html" class="btn btn-primary" style="text-decoration: none;">
+                    <i class="fas fa-shopping-cart"></i> Probar Pedidos
+                </a>
+                <a href="dashboard.html" class="btn btn-info" style="text-decoration: none;">
+                    <i class="fas fa-tachometer-alt"></i> Probar Dashboard
+                </a>
+                <a href="inventario.html" class="btn btn-success" style="text-decoration: none;">
+                    <i class="fas fa-boxes"></i> Probar Inventario
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Show device info
+        function updateDeviceInfo() {
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+
+            const info = `
+                <div><strong>Es móvil:</strong> ${isMobile ? '✅ Sí' : '❌ No'}</div>
+                <div><strong>Tiene touch:</strong> ${isTouch ? '✅ Sí' : '❌ No'}</div>
+                <div><strong>Ancho de pantalla:</strong> ${screenWidth}px</div>
+                <div><strong>Alto de pantalla:</strong> ${screenHeight}px</div>
+                <div><strong>User Agent:</strong> ${navigator.userAgent.substring(0, 50)}...</div>
+            `;
+
+            document.getElementById('deviceInfo').innerHTML = info;
+        }
+
+        // Show result feedback
+        function showResult(type) {
+            const results = document.querySelectorAll('.result');
+            results.forEach(r => r.classList.remove('show'));
+
+            let resultId = '';
+            if (type.startsWith('btn')) {
+                resultId = 'btnResult';
+            } else if (type === 'select') {
+                resultId = 'selectResult';
+            } else if (type.startsWith('input')) {
+                resultId = 'inputResult';
+            }
+
+            if (resultId) {
+                const result = document.getElementById(resultId);
+                result.classList.add('show');
+
+                setTimeout(() => {
+                    result.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Initialize
+        updateDeviceInfo();
+
+        // Update on resize
+        window.addEventListener('resize', updateDeviceInfo);
+
+        // Log test
+        console.log('🧪 Test page loaded. Check the console for mobile-fixes logs.');
+    </script>
+</body>
+</html>

@@ -9,6 +9,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./assets/css/styles.css">
     <link rel="stylesheet" href="./assets/css/cart.css">
+    <link rel="stylesheet" href="./assets/css/shipping-calculator.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Checkout Styles -->
@@ -728,6 +729,46 @@
                         </div>
                     </div>
 
+                    <!-- Shipping Calculator -->
+                    <div class="form-section">
+                        <h2>
+                            <i class="fas fa-calculator"></i>
+                            Opciones de Envío
+                        </h2>
+
+                        <div class="shipping-calculator-section">
+                            <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                                Ingresa tu código postal para calcular el costo de envío
+                            </p>
+
+                            <div class="shipping-zip-input-group">
+                                <input
+                                    type="text"
+                                    id="shippingZipCode"
+                                    class="shipping-zip-input"
+                                    placeholder="Código postal (ej: 01000)"
+                                    maxlength="5"
+                                    pattern="[0-9]{5}"
+                                >
+                                <button
+                                    type="button"
+                                    id="calculateShippingBtn"
+                                    class="shipping-calculate-btn"
+                                    onclick="calculateShipping()"
+                                >
+                                    <i class="fas fa-calculator"></i> Calcular
+                                </button>
+                            </div>
+
+                            <small style="color: #6c757d; font-size: 12px; display: block; margin-top: 8px;">
+                                <i class="fas fa-info-circle"></i> El código postal debe tener 5 dígitos
+                            </small>
+                        </div>
+
+                        <!-- Shipping Options Container -->
+                        <div id="shippingOptionsContainer" class="shipping-options-container"></div>
+                    </div>
+
                     <!-- Order Notes -->
                     <div class="form-section">
                         <h2>
@@ -911,6 +952,9 @@
     <!-- Supabase Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- Backend Configuration -->
+    <script src="assets/js/backend-config.js"></script>
+
     <!-- Coupon Service -->
     <script src="assets/js/coupon-service.js"></script>
 
@@ -922,6 +966,9 @@
     <script src="assets/js/stock-validator.js"></script>
     <script src="assets/js/cart-ui.js"></script>
 
+    <!-- Shipping Calculator -->
+    <script src="assets/js/shipping-calculator.js"></script>
+
     <!-- Checkout Script -->
     <script>
         class CheckoutManager {
@@ -931,6 +978,8 @@
                 this.supabase = null;
                 this.currentUser = null;
                 this.savedAddresses = [];
+                this.shippingCalculator = null;
+                this.selectedShipping = null;
 
                 console.log('🛒 CheckoutManager inicializado');
                 this.initialize();
@@ -948,6 +997,9 @@
 
                 // Load cart data
                 this.loadCartData();
+
+                // Initialize Shipping Calculator
+                this.initShippingCalculator();
 
                 // Setup event listeners
                 this.setupEventListeners();
@@ -1120,6 +1172,37 @@
                     } else {
                         this.showCheckout();
                     }
+                }
+            }
+
+            initShippingCalculator() {
+                if (typeof ShippingCalculator !== 'undefined') {
+                    this.shippingCalculator = new ShippingCalculator({
+                        backendUrl: window.BACKEND_CONFIG?.shippingServiceUrl || 'http://localhost:3001',
+                        originZipCode: '01000'
+                    });
+
+                    // Listen for shipping option selection
+                    document.addEventListener('shippingOptionSelected', (e) => {
+                        this.selectedShipping = e.detail;
+                        console.log('📦 Envío seleccionado:', this.selectedShipping);
+                        this.updateTotals();
+                    });
+
+                    // Auto-fill shipping zip code from form
+                    const postalCodeInput = document.getElementById('postalCode');
+                    if (postalCodeInput) {
+                        postalCodeInput.addEventListener('blur', () => {
+                            const zipCode = postalCodeInput.value.trim();
+                            if (zipCode.length === 5) {
+                                document.getElementById('shippingZipCode').value = zipCode;
+                            }
+                        });
+                    }
+
+                    console.log('✅ Shipping calculator inicializado');
+                } else {
+                    console.warn('⚠️ ShippingCalculator no está disponible');
                 }
             }
 
@@ -1338,7 +1421,10 @@
                 }
 
                 const subtotalAfterDiscount = subtotal - discount;
-                const shipping = 0; // Free shipping
+
+                // Get shipping cost from selected option
+                const shipping = this.selectedShipping ? this.selectedShipping.cost : 0;
+
                 const total = subtotalAfterDiscount + shipping;
 
                 document.getElementById('orderSubtotal').textContent = this.formatPrice(subtotal);
@@ -1352,7 +1438,7 @@
                     discountRow.style.display = 'none';
                 }
 
-                document.getElementById('orderShipping').textContent = shipping > 0 ? this.formatPrice(shipping) : 'Gratis';
+                document.getElementById('orderShipping').textContent = shipping > 0 ? this.formatPrice(shipping) : 'Calculando...';
                 document.getElementById('orderTotal').textContent = this.formatPrice(total);
             }
 
@@ -1589,6 +1675,9 @@
                         }
                     }
 
+                    // Calculate shipping cost
+                    const shippingCost = this.selectedShipping ? this.selectedShipping.cost : 0;
+
                     // Prepare order record for database
                     const orderRecord = {
                         order_number: this.orderData.orderNumber,
@@ -1604,6 +1693,11 @@
                         shipping_postal_code: this.orderData.shipping.postalCode,
                         shipping_country: this.orderData.shipping.country,
 
+                        // Shipping details
+                        carrier: this.selectedShipping?.carrier || null,
+                        carrier_service: this.selectedShipping?.service || null,
+                        shipping_cost: shippingCost,
+
                         // Order items (as JSONB)
                         items: this.orderData.items,
 
@@ -1611,7 +1705,7 @@
                         subtotal: this.orderData.totals.subtotal,
                         discount_amount: discountAmount,
                         tax_amount: 0, // IVA already included in prices
-                        total: this.orderData.totals.subtotal - discountAmount,
+                        total: this.orderData.totals.subtotal - discountAmount + shippingCost,
 
                         // Payment & status
                         payment_method: 'pending', // Will be paid via payment gateway
@@ -1932,6 +2026,58 @@
         document.addEventListener('DOMContentLoaded', () => {
             window.checkoutManager = new CheckoutManager();
         });
+
+        // Global function for shipping calculation
+        async function calculateShipping() {
+            const zipCodeInput = document.getElementById('shippingZipCode');
+            const zipCode = zipCodeInput.value.trim();
+            const calculateBtn = document.getElementById('calculateShippingBtn');
+            const container = 'shippingOptionsContainer';
+
+            // Validate zip code
+            if (!window.isValidMexicanZipCode(zipCode)) {
+                alert('Por favor ingresa un código postal válido de 5 dígitos');
+                zipCodeInput.focus();
+                return;
+            }
+
+            if (!window.checkoutManager || !window.checkoutManager.shippingCalculator) {
+                console.error('❌ Shipping calculator no está inicializado');
+                return;
+            }
+
+            try {
+                // Show loading
+                calculateBtn.disabled = true;
+                calculateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Calculando...';
+                window.checkoutManager.shippingCalculator.showLoading(container);
+
+                // Calculate weight from cart
+                const cartItems = window.checkoutManager.cartData.items;
+                const totalWeight = window.checkoutManager.shippingCalculator.calculateTotalWeight(cartItems);
+
+                // Get quote
+                const rates = await window.checkoutManager.shippingCalculator.getQuote({
+                    destinationZipCode: zipCode,
+                    weight: totalWeight
+                });
+
+                // Render options
+                window.checkoutManager.shippingCalculator.renderShippingOptions(rates, container);
+
+                console.log('✅ Cotización completada');
+
+            } catch (error) {
+                console.error('❌ Error al calcular envío:', error);
+                window.checkoutManager.shippingCalculator.showError(
+                    container,
+                    error.message || 'No se pudo calcular el envío. Intenta de nuevo.'
+                );
+            } finally {
+                calculateBtn.disabled = false;
+                calculateBtn.innerHTML = '<i class="fas fa-calculator"></i> Calcular';
+            }
+        }
 
         // Global functions for coupon management
         async function applyCoupon() {

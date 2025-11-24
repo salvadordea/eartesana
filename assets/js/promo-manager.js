@@ -38,7 +38,13 @@ class PromoManager {
         });
     }
     
-    async loadPromotion() {
+    async loadPromotion(force = false) {
+        // Force reload clears cache
+        if (force) {
+            localStorage.removeItem('promoCache');
+            console.log('🔄 PromoManager: Force reload - cache cleared');
+        }
+
         // Try to load coupon from database first
         if (this.initialized) {
             const couponPromo = await this.loadCouponFromDatabase();
@@ -50,7 +56,11 @@ class PromoManager {
             }
         }
 
-        // Fallback to config.js promotion
+        // Fallback to config.js promotion (with cache bust on force)
+        if (force) {
+            await this.reloadConfig();
+        }
+
         if (!this.config || !this.config.active) {
             this.hidePromoBanner();
             return;
@@ -63,6 +73,39 @@ class PromoManager {
             this.renderPromotion(this.currentPromo);
             this.applyTheme(this.currentPromo.theme || 'default');
         }
+    }
+
+    /**
+     * Force reload configuration from config.js
+     */
+    async reloadConfig() {
+        console.log('🔄 PromoManager: Reloading config.js with cache bust...');
+
+        // Reload config.js with timestamp to bypass cache
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = `assets/js/config.js?v=${Date.now()}`;
+            script.onload = () => {
+                if (window.EstudioArtesanaConfig) {
+                    this.config = window.EstudioArtesanaConfig.promotion;
+                    console.log('✅ PromoManager: Config reloaded from config.js');
+                }
+                resolve();
+            };
+            script.onerror = () => {
+                console.error('❌ PromoManager: Failed to reload config.js');
+                reject();
+            };
+            document.head.appendChild(script);
+        });
+    }
+
+    /**
+     * Public method to force update
+     */
+    async forceReload() {
+        console.log('🔄 PromoManager: Force reload requested');
+        await this.loadPromotion(true);
     }
     
     /**
@@ -219,35 +262,42 @@ class PromoManager {
     }
     
     renderPromotion(promo) {
-        // Update monthly-promo-banner content
-        const banner = document.getElementById('monthlyPromoBanner');
+        // Update promo toast content (new design)
+        const toast = document.getElementById('promoToast');
         const discount = document.getElementById('promoDiscount');
         const code = document.getElementById('promoCode');
-        const disclaimer = document.getElementById('promoDisclaimer');
 
-        if (!banner) return;
+        if (!toast) {
+            console.warn('⚠️ PromoManager: Toast element not found');
+            return;
+        }
 
         // Update discount text
         if (discount) {
             discount.textContent = promo.discount || promo.description;
         }
 
-        // Update code
+        // Update code with validation for length
         if (code) {
-            code.textContent = promo.code;
-            code.setAttribute('data-code', promo.code); // Store for copy function
+            let displayCode = promo.code;
+
+            // Truncate very long codes
+            if (promo.code.length > 20) {
+                displayCode = promo.code.substring(0, 17) + '...';
+                console.log('ℹ️ PromoManager: Code truncated for display');
+            }
+
+            code.textContent = displayCode;
+            code.setAttribute('data-code', promo.code); // Store full code
+            code.setAttribute('title', promo.code); // Tooltip shows full code
         }
 
-        // Update disclaimer
-        if (disclaimer) {
-            disclaimer.textContent = promo.expiry || '';
-            disclaimer.style.display = promo.expiry ? 'block' : 'none';
+        // Update toast instance if available
+        if (window.promoToastInstance) {
+            window.promoToastInstance.updateContent(promo);
         }
 
-        // Show banner
-        banner.style.display = 'flex';
-
-        console.log('✅ Banner rendered with coupon:', promo.code);
+        console.log('✅ PromoManager: Toast rendered with promo:', promo.code);
     }
     
     applyTheme(theme) {
@@ -299,10 +349,17 @@ class PromoManager {
     }
     
     hidePromoBanner() {
-        const banner = document.getElementById('monthlyPromoBanner');
-        if (banner) {
-            banner.style.display = 'none';
+        const toast = document.getElementById('promoToast');
+        if (toast) {
+            toast.style.display = 'none';
         }
+
+        // Also hide via toast instance if available
+        if (window.promoToastInstance) {
+            window.promoToastInstance.hidePermanently();
+        }
+
+        console.log('ℹ️ PromoManager: Toast hidden (no active promotion)');
     }
     
     // Utility method to manually switch promotion (for admin use)
