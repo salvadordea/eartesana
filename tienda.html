@@ -19,8 +19,32 @@
 
     <!-- Image Format Detection -->
     <script src="./assets/js/image-detector-jpg-only.js"></script>
+
+    <!-- Modern Home CSS for Toast -->
+    <link rel="stylesheet" href="assets/css/modern-home.css">
 </head>
 <body>
+    <!-- Promo Toast Minimalista -->
+    <div id="promoToast" class="promo-toast minimized">
+        <!-- Contenido expandido del toast -->
+        <div class="toast-content">
+            <span class="toast-discount" id="promoDiscount">25% OFF</span>
+            <span class="toast-divider">|</span>
+            <span class="toast-code" id="promoCode" data-code="PRIMERA20" title="Click para copiar">PRIMERA20</span>
+            <button class="toast-copy-btn" onclick="copyPromoToast()">
+                <i class="fas fa-copy"></i> Copiar
+            </button>
+            <button class="toast-close-btn" onclick="closePromoToast()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Badge minimizado -->
+        <div class="toast-badge">
+            <i class="fas fa-gem"></i>
+        </div>
+    </div>
+
     <!-- Header Universal Container -->
     <div id="universal-header-container">
         <!-- El header se carga dinámicamente aquí -->
@@ -303,5 +327,8 @@
 
     <!-- Translation System -->
     <script src="assets/js/translation-system.js"></script>
+
+    <!-- Promo Toast Manager -->
+    <script src="assets/js/promo-toast.js"></script>
 </body>
 </html>

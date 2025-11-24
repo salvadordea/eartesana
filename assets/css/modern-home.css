@@ -722,235 +722,305 @@ body {
     }
 }
 
-/* Monthly Promotion Card - Elegant Circular Design */
-.monthly-promo-banner {
+/* ========================================
+   PROMO TOAST - Minimalista y Elegante
+   ======================================== */
+
+/* Toast Container */
+.promo-toast {
     position: fixed;
-    top: 140px; /* Más abajo del header fijo */
-    right: 25px;
-    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
-    color: var(--white);
-    border: 2px solid var(--secondary-color);
-    padding: 20px;
-    border-radius: 50%; /* Forma circular */
-    width: 120px;
-    height: 120px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 
-                0 0 0 1px rgba(255, 255, 255, 0.05);
-    z-index: 999; /* Debajo del header pero por encima del contenido */
+    top: 120px;
+    right: 20px;
+    z-index: 999;
     font-family: var(--font-secondary);
-    font-weight: 500;
-    font-size: 0.8rem;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    text-align: center;
-    opacity: 0;
-    transform: translateX(20px);
-    animation: slideInPromo 0.6s ease-out 1s forwards;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
-.monthly-promo-banner:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35),
-                0 0 0 1px rgba(192, 192, 192, 0.2);
+/* Toast Expandido */
+.promo-toast.expanded {
+    display: flex !important;
+}
+
+.promo-toast.expanded .toast-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(192, 192, 192, 0.3);
+    border-radius: 12px;
+    padding: 15px 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    color: var(--white);
+    min-height: 60px;
+}
+
+.promo-toast.expanded .toast-badge {
+    display: none;
+}
+
+/* Toast Minimizado (Badge) */
+.promo-toast.minimized .toast-content {
+    display: none;
+}
+
+.promo-toast.minimized .toast-badge {
+    display: flex;
+}
+
+/* Badge Minimalista (Estado minimizado) */
+.toast-badge {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+    border: 2px solid #C0C0C0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toast-badge:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     border-color: rgba(192, 192, 192, 0.8);
 }
 
-.monthly-promo-banner .promo-text {
-    display: block;
-    margin-bottom: 6px;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.8);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    font-weight: 400;
+.toast-badge i {
+    font-size: 1.3rem;
+    color: #C0C0C0;
+    transition: transform 0.3s ease;
 }
 
-.monthly-promo-banner .promo-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
+.toast-badge:hover i {
+    transform: scale(1.1);
 }
 
-.monthly-promo-banner .promo-icon {
-    font-size: 1.2rem;
-    color: var(--secondary-color);
-    margin-bottom: 2px;
-}
-
-.monthly-promo-banner .promo-discount {
-    display: block;
+/* Elementos del Toast */
+.toast-discount {
     font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    text-shadow: none;
-    margin: 4px 0;
-    background: linear-gradient(45deg, #C0C0C0, #ffffff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-weight: 600;
+    color: #C0C0C0;
+    white-space: nowrap;
 }
 
-.monthly-promo-banner .promo-code {
-    display: block;
-    font-size: 0.65rem;
+.toast-divider {
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 300;
+}
+
+.toast-code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
     font-weight: 600;
-    color: var(--secondary-color);
+    color: var(--white);
     background: rgba(192, 192, 192, 0.15);
-    padding: 3px 8px;
-    border-radius: 4px;
-    margin: 2px 0;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(192, 192, 192, 0.3);
     cursor: pointer;
     transition: all 0.3s ease;
-    border: 1px solid rgba(192, 192, 192, 0.3);
+    letter-spacing: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }
 
-.monthly-promo-banner .promo-code:hover {
+.toast-code:hover {
     background: rgba(192, 192, 192, 0.25);
     border-color: rgba(192, 192, 192, 0.5);
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
-.monthly-promo-banner .promo-disclaimer {
-    display: block;
-    font-size: 0.55rem;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.6);
-    text-align: center;
-    line-height: 1.2;
-    margin-top: 2px;
-    font-style: italic;
+.toast-copy-btn {
+    background: rgba(192, 192, 192, 0.15);
+    border: 1px solid rgba(192, 192, 192, 0.3);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
 }
 
-.monthly-promo-banner .promo-close {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    background: rgba(255, 255, 255, 0.15);
+.toast-copy-btn:hover {
+    background: rgba(192, 192, 192, 0.25);
+    border-color: rgba(192, 192, 192, 0.5);
+    transform: scale(1.02);
+}
+
+.toast-copy-btn i {
+    font-size: 0.9rem;
+}
+
+.toast-close-btn {
+    background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--white);
-    width: 22px;
-    height: 22px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
+    margin-left: auto;
 }
 
-.monthly-promo-banner .promo-close:hover {
-    background: rgba(255, 255, 255, 0.25);
+.toast-close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.4);
     transform: scale(1.1);
 }
 
-/* Animación de entrada */
-@keyframes slideInPromo {
+/* Animaciones */
+@keyframes toastSlideIn {
     from {
         opacity: 0;
-        transform: translateX(20px);
+        transform: translateY(-20px);
     }
     to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0);
     }
 }
 
-/* Responsive adjustments for promo card */
+@keyframes toastSlideOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+}
+
+/* Responsive - Tablet */
 @media (max-width: 768px) {
-    .monthly-promo-banner {
-        top: 120px;
+    .promo-toast {
+        top: 100px;
         right: 15px;
-        padding: 16px;
-        font-size: 0.75rem;
-        width: 100px;
-        height: 100px;
+        left: 15px;
     }
 
-    .monthly-promo-banner .promo-text {
-        font-size: 0.65rem;
+    .promo-toast.expanded .toast-content {
+        gap: 10px;
+        padding: 12px 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .toast-discount {
+        font-size: 1rem;
+    }
+
+    .toast-code {
+        font-size: 0.85rem;
+        padding: 5px 10px;
+        max-width: 150px;
+    }
+
+    .toast-copy-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .toast-badge {
+        width: 48px;
+        height: 48px;
+    }
+
+    .toast-badge i {
+        font-size: 1.2rem;
+    }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 480px) {
+    .promo-toast {
+        top: 90px;
+        right: 10px;
+        left: 10px;
+    }
+
+    .promo-toast.expanded .toast-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 12px;
+        text-align: center;
+    }
+
+    .toast-discount {
+        font-size: 1.1rem;
         margin-bottom: 4px;
     }
 
-    .monthly-promo-banner .promo-discount {
-        font-size: 0.95rem;
+    .toast-divider {
+        display: none;
     }
 
-    .monthly-promo-banner .promo-code {
-        font-size: 0.55rem;
-        padding: 2px 6px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 70px;
+    .toast-code {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        max-width: 100%;
+        margin: 0 auto;
     }
 
-    .monthly-promo-banner .promo-disclaimer {
-        font-size: 0.42rem;
-        line-height: 1.1;
-        max-width: 85px;
-        word-wrap: break-word;
+    .toast-copy-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 10px;
+        font-size: 0.9rem;
+        min-height: 44px;
     }
 
-    .monthly-promo-banner .promo-close {
-        width: 18px;
-        height: 18px;
-        font-size: 10px;
-        top: -4px;
-        right: -4px;
+    .toast-close-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+    .toast-badge {
+        width: 44px;
+        height: 44px;
+    }
+
+    .toast-badge i {
+        font-size: 1.1rem;
     }
 }
 
-@media (max-width: 480px) {
-    .monthly-promo-banner {
-        top: 100px;
-        right: 10px;
-        padding: 12px;
-        width: 85px;
-        height: 85px;
+/* Muy pequeño - iPhone SE */
+@media (max-width: 375px) {
+    .toast-discount {
+        font-size: 1rem;
     }
 
-    .monthly-promo-banner .promo-text {
-        font-size: 0.6rem;
-    }
-
-    .monthly-promo-banner .promo-discount {
+    .toast-code {
         font-size: 0.85rem;
-        margin: 2px 0;
     }
 
-    .monthly-promo-banner .promo-code {
-        font-size: 0.5rem;
-        padding: 2px 5px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 60px;
-    }
-
-    .monthly-promo-banner .promo-disclaimer {
-        font-size: 0.38rem;
-        line-height: 1.1;
-        max-width: 70px;
-        word-wrap: break-word;
-    }
-
-    .monthly-promo-banner .promo-close {
-        width: 16px;
-        height: 16px;
-        font-size: 9px;
-        top: -3px;
-        right: -3px;
+    .toast-copy-btn {
+        font-size: 0.85rem;
+        padding: 10px;
     }
 }
 
