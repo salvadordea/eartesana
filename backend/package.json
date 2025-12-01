@@ -1,15 +1,17 @@
 {
   "name": "estudio-artesana-backend-services",
   "version": "1.0.0",
-  "description": "Servicios backend para Estudio Artesana: email notifications y shipping integration",
+  "description": "Servicios backend para Estudio Artesana: email notifications, shipping integration y payment processing",
   "main": "email-service.js",
   "scripts": {
-    "start": "concurrently -n \"EMAIL,SHIPPING\" -c \"green,cyan\" \"node email-service.js\" \"node shipping-service.js\"",
+    "start": "concurrently -n \"EMAIL,SHIPPING,PAYMENT\" -c \"green,cyan,magenta\" \"node email-service.js\" \"node shipping-service.js\" \"node payment-service.js\"",
     "start:email": "node email-service.js",
     "start:shipping": "node shipping-service.js",
-    "dev": "concurrently -n \"EMAIL,SHIPPING\" -c \"green,cyan\" \"nodemon email-service.js\" \"nodemon shipping-service.js\"",
+    "start:payment": "node payment-service.js",
+    "dev": "concurrently -n \"EMAIL,SHIPPING,PAYMENT\" -c \"green,cyan,magenta\" \"nodemon email-service.js\" \"nodemon shipping-service.js\" \"nodemon payment-service.js\"",
     "dev:email": "nodemon email-service.js",
     "dev:shipping": "nodemon shipping-service.js",
+    "dev:payment": "nodemon payment-service.js",
     "test": "jest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
@@ -19,6 +21,9 @@
     "notifications",
     "shipping",
     "envia",
+    "payment",
+    "openpay",
+    "bbva",
     "wholesale",
     "ecommerce",
     "artesania"

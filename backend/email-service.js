@@ -11,6 +11,16 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const { createClient } = require('@supabase/supabase-js');
+
+// Initialize Supabase client
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+);
+
+// Load email templates
+const emailTemplates = require('./email-templates');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -47,16 +57,72 @@ const createEmailTransporter = () => {
             }
         });
     }
-    
+
     // Para producción - usando un servicio real como Gmail, SendGrid, etc.
     return nodemailer.createTransporter({
-        service: 'gmail', // o tu servicio preferido
+        service: process.env.EMAIL_SERVICE || 'gmail',
+        host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+        port: process.env.EMAIL_PORT || 587,
+        secure: false,
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS // usar App Password para Gmail
         }
     });
 };
+
+// Función para enviar email con reintentos
+async function sendEmailWithRetry(mailOptions, maxRetries = 3) {
+    let lastError;
+
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+            const transporter = createEmailTransporter();
+            const info = await transporter.sendMail(mailOptions);
+            console.log(`✅ Email enviado (intento ${attempt}/${maxRetries}):`, info.messageId);
+
+            return {
+                success: true,
+                messageId: info.messageId,
+                previewUrl: process.env.NODE_ENV !== 'production' ?
+                    nodemailer.getTestMessageUrl(info) : null
+            };
+        } catch (error) {
+            lastError = error;
+            console.warn(`⚠️ Intento ${attempt}/${maxRetries} falló:`, error.message);
+
+            if (attempt < maxRetries) {
+                // Espera exponencial: 1s, 2s, 3s
+                await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+            }
+        }
+    }
+
+    throw new Error(`Failed after ${maxRetries} attempts: ${lastError.message}`);
+}
+
+// Función para obtener datos de orden desde Supabase
+async function getOrderData(orderId) {
+    try {
+        const { data, error } = await supabase
+            .from('orders')
+            .select('*')
+            .eq('id', orderId)
+            .single();
+
+        if (error) throw new Error('Order not found: ' + error.message);
+
+        // Parse items if stored as string
+        if (data.items && typeof data.items === 'string') {
+            data.items = JSON.parse(data.items);
+        }
+
+        return data;
+    } catch (error) {
+        console.error('❌ Error fetching order data:', error);
+        throw error;
+    }
+}
 
 // Función para generar el HTML del email
 function generateOrderEmailHTML(orderData) {
@@ -284,6 +350,195 @@ Ver detalles completos en el panel de administración.
         res.status(500).json({
             success: false,
             error: 'Error interno del servidor enviando email',
+            details: process.env.NODE_ENV !== 'production' ? error.message : undefined
+        });
+    }
+});
+
+// NEW ENDPOINTS FOR EMAIL NOTIFICATIONS
+
+// 1. Welcome email endpoint
+app.post('/api/email/welcome', emailLimiter, async (req, res) => {
+    try {
+        console.log('📧 Enviando email de bienvenida:', req.body);
+
+        const { email, fullName } = req.body;
+
+        if (!email || !fullName) {
+            return res.status(400).json({
+                success: false,
+                error: 'Email y fullName son requeridos'
+            });
+        }
+
+        // Generate verification URL (Supabase handles this automatically)
+        const verificationUrl = `${process.env.FRONTEND_URL || 'http://localhost:8080'}/auth-callback.html`;
+
+        const mailOptions = {
+            from: process.env.EMAIL_FROM || '"Estudio Artesana" <noreply@estudioartesana.com>',
+            to: email,
+            subject: '¡Bienvenido a Estudio Artesana!',
+            html: emailTemplates.welcome({
+                fullName,
+                email,
+                verificationUrl
+            })
+        };
+
+        const result = await sendEmailWithRetry(mailOptions);
+
+        console.log('✅ Email de bienvenida enviado exitosamente');
+
+        res.json({
+            success: true,
+            message: 'Email de bienvenida enviado',
+            messageId: result.messageId,
+            previewUrl: result.previewUrl
+        });
+
+    } catch (error) {
+        console.error('❌ Error enviando email de bienvenida:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Error enviando email de bienvenida',
+            details: process.env.NODE_ENV !== 'production' ? error.message : undefined
+        });
+    }
+});
+
+// 2. Order confirmation email endpoint
+app.post('/api/email/order-confirmation', emailLimiter, async (req, res) => {
+    try {
+        console.log('📧 Enviando confirmación de pedido:', req.body);
+
+        const { orderId, customerEmail } = req.body;
+
+        if (!orderId || !customerEmail) {
+            return res.status(400).json({
+                success: false,
+                error: 'orderId y customerEmail son requeridos'
+            });
+        }
+
+        // Fetch order data from Supabase
+        const order = await getOrderData(orderId);
+
+        const mailOptions = {
+            from: process.env.EMAIL_FROM || '"Estudio Artesana" <noreply@estudioartesana.com>',
+            to: customerEmail,
+            subject: `Confirmación de Pedido #${order.order_number || order.id}`,
+            html: emailTemplates.orderConfirmation(order)
+        };
+
+        const result = await sendEmailWithRetry(mailOptions);
+
+        console.log('✅ Email de confirmación de pedido enviado exitosamente');
+
+        res.json({
+            success: true,
+            message: 'Email de confirmación enviado',
+            messageId: result.messageId,
+            previewUrl: result.previewUrl
+        });
+
+    } catch (error) {
+        console.error('❌ Error enviando confirmación de pedido:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Error enviando confirmación de pedido',
+            details: process.env.NODE_ENV !== 'production' ? error.message : undefined
+        });
+    }
+});
+
+// 3. Admin notification email endpoint
+app.post('/api/email/admin-notification', emailLimiter, async (req, res) => {
+    try {
+        console.log('📧 Enviando notificación al admin:', req.body);
+
+        const { orderId } = req.body;
+
+        if (!orderId) {
+            return res.status(400).json({
+                success: false,
+                error: 'orderId es requerido'
+            });
+        }
+
+        // Fetch order data from Supabase
+        const order = await getOrderData(orderId);
+
+        const mailOptions = {
+            from: process.env.EMAIL_FROM || '"Estudio Artesana" <noreply@estudioartesana.com>',
+            to: process.env.ADMIN_EMAIL || 'admin@estudioartesana.com',
+            subject: `🚨 Nuevo Pedido #${order.order_number || order.id}`,
+            html: emailTemplates.adminNotification(order)
+        };
+
+        const result = await sendEmailWithRetry(mailOptions);
+
+        console.log('✅ Email de notificación al admin enviado exitosamente');
+
+        res.json({
+            success: true,
+            message: 'Notificación al admin enviada',
+            messageId: result.messageId,
+            previewUrl: result.previewUrl
+        });
+
+    } catch (error) {
+        console.error('❌ Error enviando notificación al admin:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Error enviando notificación al admin',
+            details: process.env.NODE_ENV !== 'production' ? error.message : undefined
+        });
+    }
+});
+
+// 4. Payment confirmed email endpoint
+app.post('/api/email/payment-confirmed', emailLimiter, async (req, res) => {
+    try {
+        console.log('📧 Enviando confirmación de pago:', req.body);
+
+        const { orderNumber, customerEmail, customerName, amount, paymentMethod, transactionId } = req.body;
+
+        if (!orderNumber || !customerEmail || !customerName || !amount) {
+            return res.status(400).json({
+                success: false,
+                error: 'Todos los campos son requeridos'
+            });
+        }
+
+        const mailOptions = {
+            from: process.env.EMAIL_FROM || '"Estudio Artesana" <noreply@estudioartesana.com>',
+            to: customerEmail,
+            subject: `Pago Confirmado - Pedido #${orderNumber}`,
+            html: emailTemplates.paymentConfirmed({
+                orderNumber,
+                customerName,
+                amount,
+                paymentMethod,
+                transactionId
+            })
+        };
+
+        const result = await sendEmailWithRetry(mailOptions);
+
+        console.log('✅ Email de confirmación de pago enviado exitosamente');
+
+        res.json({
+            success: true,
+            message: 'Email de confirmación de pago enviado',
+            messageId: result.messageId,
+            previewUrl: result.previewUrl
+        });
+
+    } catch (error) {
+        console.error('❌ Error enviando confirmación de pago:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Error enviando confirmación de pago',
             details: process.env.NODE_ENV !== 'production' ? error.message : undefined
         });
     }

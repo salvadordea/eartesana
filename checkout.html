@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./assets/css/styles.css">
     <link rel="stylesheet" href="./assets/css/cart.css">
     <link rel="stylesheet" href="./assets/css/shipping-calculator.css">
+    <link rel="stylesheet" href="./assets/css/payment-methods.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Checkout Styles -->
@@ -781,6 +782,53 @@
                                       placeholder="Instrucciones especiales para la entrega..."></textarea>
                         </div>
                     </div>
+
+                    <!-- Payment Method Selection -->
+                    <div class="form-section payment-method-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-credit-card"></i>
+                            Método de Pago
+                        </h2>
+                        <div class="payment-methods">
+                            <label class="payment-method-option">
+                                <input type="radio" name="paymentMethod" value="card" checked>
+                                <div class="payment-method-card">
+                                    <div class="payment-method-icon">
+                                        <i class="fas fa-credit-card"></i>
+                                    </div>
+                                    <div class="payment-method-info">
+                                        <strong>Tarjeta de Crédito/Débito</strong>
+                                        <small>Visa, Mastercard, American Express</small>
+                                    </div>
+                                    <div class="payment-method-badges">
+                                        <i class="fab fa-cc-visa"></i>
+                                        <i class="fab fa-cc-mastercard"></i>
+                                        <i class="fab fa-cc-amex"></i>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="payment-method-option">
+                                <input type="radio" name="paymentMethod" value="store">
+                                <div class="payment-method-card">
+                                    <div class="payment-method-icon">
+                                        <i class="fas fa-store"></i>
+                                    </div>
+                                    <div class="payment-method-info">
+                                        <strong>Pago en Tienda</strong>
+                                        <small>OXXO, 7-Eleven (válido 3 días)</small>
+                                    </div>
+                                    <div class="payment-method-badge-store">
+                                        <span class="store-badge">OXXO</span>
+                                        <span class="store-badge">7-Eleven</span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="payment-method-notice">
+                            <i class="fas fa-lock"></i>
+                            <span>Tus datos están protegidos con encriptación SSL</span>
+                        </div>
+                    </div>
                 </form>
             </div>
 
@@ -954,6 +1002,9 @@
 
     <!-- Backend Configuration -->
     <script src="assets/js/backend-config.js"></script>
+
+    <!-- Openpay Integration (load after backend-config) -->
+    <script src="assets/js/openpay-integration.js"></script>
 
     <!-- Coupon Service -->
     <script src="assets/js/coupon-service.js"></script>
@@ -1599,16 +1650,43 @@
                     // Process inventory deduction
                     await this.processInventoryDeduction();
 
-                    // Clear cart
-                    if (window.cartManager) {
-                        await window.cartManager.clearCart();
+                    // INTEGRACIÓN OPENPAY: Iniciar proceso de pago
+                    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+                    // Preparar datos del cliente para Openpay
+                    const customerData = {
+                        name: this.orderData.customer.name,
+                        email: this.orderData.customer.email,
+                        phone: this.orderData.customer.phone
+                    };
+
+                    try {
+                        // Iniciar pago con Openpay
+                        const paymentResult = await window.openpayIntegration.startPayment({
+                            order_id: orderId,
+                            amount: this.cartData.totals.final,
+                            customer: customerData,
+                            method: paymentMethod
+                        });
+
+                        if (paymentResult.success && paymentResult.redirect_url) {
+                            // Limpiar carrito antes de redirigir
+                            if (window.cartManager) {
+                                await window.cartManager.clearCart();
+                            }
+
+                            // Redirigir a Openpay o a página de confirmación
+                            window.location.href = paymentResult.redirect_url;
+                        } else {
+                            throw new Error(paymentResult.message || 'Error iniciando el pago');
+                        }
+                    } catch (paymentError) {
+                        console.error('❌ Error procesando pago:', paymentError);
+                        alert('Error procesando el pago: ' + paymentError.message);
+                        placeOrderBtn.disabled = false;
+                        placeOrderBtn.innerHTML = '<i class="fas fa-credit-card"></i> Realizar Pedido';
+                        return;
                     }
-
-                    // Show success message
-                    alert(`¡Pedido #${orderNumber} realizado exitosamente! Recibirás un email de confirmación pronto.`);
-
-                    // Redirect to success page or home
-                    window.location.href = 'index.html';
 
                 } catch (error) {
                     console.error('❌ Error placing order:', error);

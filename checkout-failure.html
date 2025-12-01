@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error en el Pago - Estudio Artesana</title>
+    <meta name="description" content="Hubo un problema procesando tu pago">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        .failure-container {
+            max-width: 700px;
+            margin: 80px auto 60px;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .failure-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: shake 0.5s ease;
+        }
+
+        .failure-icon i {
+            font-size: 60px;
+            color: white;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+
+        .failure-title {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .failure-subtitle {
+            font-size: 18px;
+            color: #6c757d;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .error-details {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .error-title {
+            font-size: 18px;
+            color: #721c24;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .error-message {
+            color: #721c24;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .order-info-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .order-info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .order-info-row:last-child {
+            border-bottom: none;
+        }
+
+        .order-info-label {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .order-info-value {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .help-section {
+            background: #fff;
+            border: 2px solid #D4AF37;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .help-title {
+            font-size: 20px;
+            color: #8B4513;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .help-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .help-list li {
+            padding: 10px 0;
+            color: #495057;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .help-list li i {
+            color: #0d6efd;
+            margin-top: 3px;
+            font-size: 18px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #D4AF37 0%, #C9A035 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #C9A035 0%, #B8932E 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #8B4513;
+            border: 2px solid #8B4513;
+        }
+
+        .btn-secondary:hover {
+            background: #8B4513;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
+        }
+
+        .btn-danger {
+            background: white;
+            color: #dc3545;
+            border: 2px solid #dc3545;
+        }
+
+        .btn-danger:hover {
+            background: #dc3545;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+        }
+
+        .contact-notice {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin: 30px 0;
+            text-align: left;
+            color: #0c5460;
+        }
+
+        .contact-notice i {
+            margin-right: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .failure-container {
+                margin: 40px auto 40px;
+                padding: 30px 20px;
+            }
+
+            .failure-icon {
+                width: 100px;
+                height: 100px;
+            }
+
+            .failure-icon i {
+                font-size: 50px;
+            }
+
+            .failure-title {
+                font-size: 26px;
+            }
+
+            .failure-subtitle {
+                font-size: 16px;
+            }
+
+            .error-details, .order-info-card, .help-section {
+                padding: 20px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Universal Container -->
+    <div id="universal-header-container"></div>
+
+    <!-- Failure Container -->
+    <div class="failure-container">
+        <div class="failure-icon">
+            <i class="fas fa-times"></i>
+        </div>
+
+        <h1 class="failure-title">Error en el Pago</h1>
+        <p class="failure-subtitle">
+            No pudimos procesar tu pago en este momento.<br>
+            Por favor, verifica la información e intenta nuevamente.
+        </p>
+
+        <!-- Error Details -->
+        <div class="error-details">
+            <h2 class="error-title">
+                <i class="fas fa-exclamation-circle"></i>
+                ¿Qué salió mal?
+            </h2>
+            <p class="error-message" id="errorMessage">
+                Hubo un problema al procesar tu tarjeta. Esto puede ocurrir por fondos insuficientes,
+                datos incorrectos, o restricciones de tu banco.
+            </p>
+        </div>
+
+        <!-- Order Information -->
+        <div class="order-info-card" id="orderInfo" style="display: none;">
+            <div class="order-info-row">
+                <span class="order-info-label">Número de Pedido:</span>
+                <span class="order-info-value" id="orderNumber">-</span>
+            </div>
+            <div class="order-info-row">
+                <span class="order-info-label">Monto Total:</span>
+                <span class="order-info-value" id="orderAmount">-</span>
+            </div>
+            <div class="order-info-row">
+                <span class="order-info-label">Estado del Pago:</span>
+                <span class="order-info-value" style="color: #dc3545; font-weight: 700;">
+                    <i class="fas fa-times-circle"></i> Rechazado
+                </span>
+            </div>
+        </div>
+
+        <!-- Help Section -->
+        <div class="help-section">
+            <h2 class="help-title">
+                <i class="fas fa-lightbulb"></i>
+                ¿Qué puedo hacer?
+            </h2>
+            <ul class="help-list">
+                <li>
+                    <i class="fas fa-credit-card"></i>
+                    <span>Verifica que los datos de tu tarjeta sean correctos (número, fecha, CVV)</span>
+                </li>
+                <li>
+                    <i class="fas fa-wallet"></i>
+                    <span>Asegúrate de tener fondos suficientes en tu cuenta</span>
+                </li>
+                <li>
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Contacta a tu banco para verificar que no haya restricciones de pago en línea</span>
+                </li>
+                <li>
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Intenta con otro método de pago (otra tarjeta o pago en tienda OXXO/7-Eleven)</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Contact Notice -->
+        <div class="contact-notice">
+            <i class="fas fa-headset"></i>
+            <strong>¿Necesitas ayuda?</strong>
+            <p style="margin: 8px 0 0 0; font-size: 14px;">
+                Nuestro equipo está disponible para asistirte. Contáctanos por WhatsApp o email y
+                con gusto te ayudaremos a completar tu pedido.
+            </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="checkout.html" class="btn btn-primary">
+                <i class="fas fa-redo"></i>
+                Reintentar Pago
+            </a>
+            <a href="index.html" class="btn btn-secondary">
+                <i class="fas fa-home"></i>
+                Volver al Inicio
+            </a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./assets/js/universal-header.js"></script>
+    <script src="assets/js/site-settings-service.js"></script>
+    <script src="assets/js/footer-universal.js"></script>
+
+    <script>
+        // Initialize Supabase
+        const supabaseUrl = window.CONFIG?.supabaseUrl;
+        const supabaseKey = window.CONFIG?.supabaseAnonKey;
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function loadErrorDetails() {
+            try {
+                // Get parameters from URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const orderId = urlParams.get('order_id') || urlParams.get('id');
+                const errorCode = urlParams.get('error');
+                const errorDescription = urlParams.get('error_description');
+
+                // Show custom error message if available
+                if (errorDescription) {
+                    document.getElementById('errorMessage').textContent = decodeURIComponent(errorDescription);
+                } else if (errorCode) {
+                    const errorMessages = {
+                        'insufficient_funds': 'Tu tarjeta no tiene fondos suficientes para completar la compra.',
+                        'card_declined': 'Tu tarjeta fue rechazada. Contacta a tu banco para más información.',
+                        'invalid_card': 'Los datos de tu tarjeta son inválidos. Verifica el número, fecha de expiración y CVV.',
+                        'expired_card': 'Tu tarjeta ha expirado. Por favor usa otra tarjeta.',
+                        'processing_error': 'Hubo un error al procesar el pago. Por favor intenta nuevamente.',
+                        'timeout': 'La transacción tardó demasiado. Por favor intenta nuevamente.',
+                        'cancelled': 'La transacción fue cancelada.'
+                    };
+
+                    const message = errorMessages[errorCode] || 'Hubo un problema al procesar tu pago. Por favor intenta nuevamente.';
+                    document.getElementById('errorMessage').textContent = message;
+                }
+
+                // Load order details if available
+                if (orderId) {
+                    const { data: order, error } = await supabase
+                        .from('orders')
+                        .select('*')
+                        .eq('id', orderId)
+                        .single();
+
+                    if (!error && order) {
+                        document.getElementById('orderNumber').textContent = order.order_number || `#${orderId}`;
+                        document.getElementById('orderAmount').textContent = `$${order.total_amount.toFixed(2)} MXN`;
+                        document.getElementById('orderInfo').style.display = 'block';
+                    }
+                }
+
+                console.log('❌ Payment failed:', { errorCode, errorDescription });
+
+            } catch (error) {
+                console.error('❌ Error loading failure details:', error);
+            }
+        }
+
+        // Load error details on page load
+        document.addEventListener('DOMContentLoaded', loadErrorDetails);
+    </script>
+</body>
+</html>

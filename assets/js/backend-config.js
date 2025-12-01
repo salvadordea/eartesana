@@ -21,14 +21,19 @@
 
     // Configuración de backend
     window.BACKEND_CONFIG = {
-        // Email Service
+        // Email Service (puerto 3000)
         emailServiceUrl: isLocalhost
             ? 'http://localhost:3000'
             : PRODUCTION_BACKEND_URL,
 
-        // Shipping Service
+        // Shipping Service (puerto 3001)
         shippingServiceUrl: isLocalhost
             ? 'http://localhost:3001'
+            : PRODUCTION_BACKEND_URL,
+
+        // Payment Service - Openpay (puerto 3002)
+        PAYMENT_URL: isLocalhost
+            ? 'http://localhost:3002'
             : PRODUCTION_BACKEND_URL,
 
         // Flags

@@ -96,10 +96,17 @@ class AuthManager {
             }
 
             console.log('✅ Usuario registrado exitosamente');
-            
+
+            // Enviar email de bienvenida (no bloqueante)
+            if (window.BACKEND_CONFIG?.emailServiceUrl) {
+                this.sendWelcomeEmail(email, userData.fullName || email.split('@')[0])
+                    .catch(err => console.warn('⚠️ Email de bienvenida falló (no crítico):', err));
+            }
+
             return {
                 success: true,
-                message: 'Usuario registrado exitosamente. Revisa tu email para confirmar tu cuenta.',
+                message: 'Cuenta creada exitosamente. Verifica tu email para continuar.',
+                requiresVerification: true,
                 user: result.user,
                 session: result.session
             };
@@ -140,9 +147,14 @@ class AuthManager {
                 throw new Error(result.msg || result.message || 'Credenciales incorrectas');
             }
 
+            // Verificar email confirmado
+            if (result.user && !result.user.email_confirmed_at) {
+                throw new Error('Debes verificar tu email antes de iniciar sesión. Revisa tu bandeja de entrada.');
+            }
+
             // Establecer sesión
             await this.setSession(result);
-            
+
             console.log('✅ Sesión iniciada exitosamente');
             
             return {
@@ -410,6 +422,41 @@ class AuthManager {
                 message: error.message,
                 error: error
             };
+        }
+    }
+
+    // ==========================================
+    // EMAIL NOTIFICATIONS
+    // ==========================================
+
+    /**
+     * Enviar email de bienvenida
+     */
+    async sendWelcomeEmail(email, fullName) {
+        try {
+            const emailServiceUrl = window.BACKEND_CONFIG?.emailServiceUrl || 'http://localhost:3000';
+
+            const response = await fetch(`${emailServiceUrl}/api/email/welcome`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    fullName
+                })
+            });
+
+            if (response.ok) {
+                console.log('✅ Email de bienvenida enviado');
+                return { success: true };
+            } else {
+                throw new Error('Email service error');
+            }
+        } catch (error) {
+            console.warn('⚠️ No se pudo enviar email de bienvenida:', error.message);
+            // No lanzar error - el email es opcional
+            return { success: false, error: error.message };
         }
     }
 

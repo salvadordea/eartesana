@@ -1,0 +1,329 @@
+/**
+ * Payment Methods Styles - Openpay Integration
+ * Estilos para selector de métodos de pago en checkout
+ */
+
+/* ===================================
+   PAYMENT METHOD SECTION
+   =================================== */
+
+.payment-method-section {
+    margin-top: 30px;
+    padding: 25px;
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+}
+
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Payment Method Option */
+.payment-method-option {
+    cursor: pointer;
+    display: block;
+    position: relative;
+}
+
+.payment-method-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.payment-method-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    background: #fff;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.payment-method-option:hover .payment-method-card {
+    border-color: #D4AF37;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.1);
+    transform: translateY(-2px);
+}
+
+.payment-method-option input[type="radio"]:checked + .payment-method-card {
+    border-color: #D4AF37;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.02) 100%);
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+}
+
+/* Radio indicator personalizado */
+.payment-method-option input[type="radio"]:checked + .payment-method-card::before {
+    content: '\f058'; /* fa-check-circle */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #D4AF37;
+    font-size: 24px;
+    animation: checkPulse 0.3s ease;
+}
+
+@keyframes checkPulse {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Icon Container */
+.payment-method-icon {
+    font-size: 32px;
+    color: #8B4513;
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-method-option input[type="radio"]:checked + .payment-method-card .payment-method-icon {
+    color: #D4AF37;
+}
+
+/* Info Container */
+.payment-method-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.payment-method-info strong {
+    font-size: 16px;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.payment-method-info small {
+    font-size: 13px;
+    color: #6c757d;
+}
+
+/* Card Badges (Visa, Mastercard, Amex) */
+.payment-method-badges {
+    display: flex;
+    gap: 8px;
+    font-size: 28px;
+    color: #6c757d;
+}
+
+.payment-method-badges i {
+    transition: transform 0.2s ease;
+}
+
+.payment-method-option:hover .payment-method-badges i {
+    transform: scale(1.1);
+}
+
+.payment-method-badges .fa-cc-visa {
+    color: #1A1F71;
+}
+
+.payment-method-badges .fa-cc-mastercard {
+    color: #EB001B;
+}
+
+.payment-method-badges .fa-cc-amex {
+    color: #006FCF;
+}
+
+/* Store Badges (OXXO, 7-Eleven) */
+.payment-method-badge-store {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.store-badge {
+    padding: 4px 10px;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #495057;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.payment-method-option input[type="radio"]:checked + .payment-method-card .store-badge {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: #D4AF37;
+    color: #8B4513;
+}
+
+/* Security Notice */
+.payment-method-notice {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-left: 4px solid #28a745;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #495057;
+}
+
+.payment-method-notice i {
+    color: #28a745;
+    font-size: 18px;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
+@media (max-width: 768px) {
+    .payment-method-section {
+        padding: 20px;
+    }
+
+    .payment-method-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 15px;
+    }
+
+    .payment-method-icon {
+        font-size: 28px;
+        min-width: auto;
+    }
+
+    .payment-method-badges {
+        font-size: 24px;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .payment-method-badge-store {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .payment-method-option input[type="radio"]:checked + .payment-method-card::before {
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+    }
+
+    .payment-method-notice {
+        padding: 12px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .payment-method-section {
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    .payment-method-card {
+        padding: 12px;
+    }
+
+    .payment-method-info strong {
+        font-size: 15px;
+    }
+
+    .payment-method-info small {
+        font-size: 12px;
+    }
+
+    .store-badge {
+        font-size: 11px;
+        padding: 3px 8px;
+    }
+}
+
+/* ===================================
+   ANIMATIONS
+   =================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.payment-method-section {
+    animation: fadeInUp 0.4s ease;
+}
+
+.payment-method-option {
+    animation: fadeInUp 0.4s ease;
+    animation-fill-mode: both;
+}
+
+.payment-method-option:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.payment-method-option:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+/* ===================================
+   DARK MODE SUPPORT (future)
+   =================================== */
+
+@media (prefers-color-scheme: dark) {
+    .payment-method-section {
+        background: #1a1a1a;
+        border-color: #333;
+    }
+
+    .payment-method-card {
+        background: #2a2a2a;
+        border-color: #444;
+    }
+
+    .payment-method-option:hover .payment-method-card {
+        border-color: #D4AF37;
+        background: #333;
+    }
+
+    .payment-method-option input[type="radio"]:checked + .payment-method-card {
+        background: rgba(212, 175, 55, 0.1);
+        border-color: #D4AF37;
+    }
+
+    .payment-method-info strong {
+        color: #f8f9fa;
+    }
+
+    .payment-method-info small {
+        color: #adb5bd;
+    }
+
+    .store-badge {
+        background: #333;
+        border-color: #444;
+        color: #adb5bd;
+    }
+
+    .payment-method-notice {
+        background: #2a2a2a;
+        color: #adb5bd;
+    }
+}
